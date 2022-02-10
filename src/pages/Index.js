@@ -427,7 +427,7 @@ export default () => {
                 let combinations  = {};
                 combinations.combination = []
                 const combinations_query = await api.contractQuery(
-                    state.loterraTestnetContractAddress,
+                    state.loterraContractAddress,
                     {
                         combination: {
                             lottery_id: state.config.lottery_counter,
