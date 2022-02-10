@@ -85,6 +85,21 @@ export default function ConnectWallet() {
             message: latestBlocks.data.block.header.height,
         })
 
+        
+        // VALKYRIE START
+        const vkrRef = new URLSearchParams(window.location.search);
+        const referrerCode = vkrRef.get('vkr')
+        if(referrerCode){          
+            dispatch({
+                type: 'setVkrReferrer',
+                message: {status:true,code:referrerCode},
+            })
+
+            console.log('vkr referrer detected',state.vkrReferrer)
+        }
+
+        // VALKYRIE END
+
         const contractConfigInfo = await api.contractQuery(
             state.loterraContractAddress,
             {

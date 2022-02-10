@@ -318,7 +318,7 @@ export default () => {
         const addToGas = 5000 * cart.length
         // const obj = new Fee(1_000_000, { uusd: 30000 + addToGas })
         //const obj = new Fee(200_000, { uusd: 340000 + addToGas })
-        const obj = new Fee(5000, { uusd: 30000 + addToGas  })
+        const obj = new Fee(10_000, { uusd: 4500 })
         let exec_msg = {
             register: {
                 combination: cart,
@@ -350,14 +350,15 @@ export default () => {
         if (giftFriend.active && giftFriend.wallet != '') {
             exec_msg.register.address = giftFriend.wallet
         }
-        let msg
+        let msgs = []
         if (payWith == 'ust') {
-            msg = new MsgExecuteContract(
+            const msg = new MsgExecuteContract(
                 connectedWallet.walletAddress,
                 loterra_contract_address,
                 exec_msg,
                 coins_msg,
             )
+            msgs.push(msg)
         } else {
             //Altered of message
             let alteMsg
@@ -377,7 +378,7 @@ export default () => {
                 }
             }
 
-            msg = new MsgExecuteContract(
+            const msg = new MsgExecuteContract(
                 connectedWallet.walletAddress,
                 state.alteredContractAddress,
                 {
@@ -393,20 +394,108 @@ export default () => {
                     },
                 },
             )
+            msgs.push(msg)
         }
+        
+        if(state.config.lottery_counter > 48){
+            try{
+                ////////////////////////////
+                //  VALKYRIE START
+                ////////////////////////////
+                //Validate if user is eligible
+                const vkrEligible = await api.contractQuery(
+                    state.vkrQualifierContract,
+                    {
+                        qualify_preview: {
+                            lottery_id: state.config.lottery_counter,
+                            player: connectedWallet.walletAddress,   
+                            preview_play_count: cart.length                         
+                        },
+                    },
+                )
+                //If user is eligible go further
+                if(vkrEligible && vkrEligible.continue_option == 'eligible') {
+                    //Get participation count qualifier contract
+                    const participationCount = await api.contractQuery(
+                        state.vkrQualifierContract,
+                        {
+                            participation_count: {
+                                lottery_id: state.config.lottery_counter,
+                                player: connectedWallet.walletAddress,                            
+                            },
+                        },
+                    )
+                    //Get total tickets bought by lottery_id
+                    let combinations  = {};
+                    combinations.combination = []
+                    const combinations_query = await api.contractQuery(
+                        state.loterraContractAddress,
+                        {
+                            combination: {
+                                lottery_id: state.config.lottery_counter,
+                                address: state.wallet.walletAddress,
+                            },
+                        },
+                    ).then((a) => { 
+                        combinations = a
+                    }).catch(error => {
+                        console.log('no combinations yet')
+                    })
+    
+                    //Do the C - Q * 10 formula
+                    const participationTimes = (combinations.combination.length + cart.length - (participationCount.participation_count * 10)) / 10;
+                    console.log(Math.floor(participationTimes), combinations.combination.length, cart.length, participationCount.participation_count)
+    
+                    for (let index = 0; index < Math.floor(participationTimes); index++) {
+                        if(state.vkrReferrer.status && state.vkrReferrer.code !== ''){
+                            //Valkyrie referrer detected
+                            const msg = new MsgExecuteContract(
+                                connectedWallet.walletAddress,
+                                state.vkrContract,
+                                {
+                                    participate: {
+                                        actor: connectedWallet.walletAddress,
+                                        referrer: {
+                                            compressed: state.vkrReferrer.code
+                                        }
+                                    },
+                                }
+                            )
+    
+                            msgs.push(msg)
+    
+                        } else {
+                            //Check normal valkyrie participator
+                            const msg = new MsgExecuteContract(
+                                connectedWallet.walletAddress,
+                                state.vkrContract, 
+                                {
+                                    participate: {
+                                        actor: connectedWallet.walletAddress
+                                    },
+                                },
+                            )
+                            msgs.push(msg)
+                        }
+                    }
+                }
+            }catch(e){
+                console.log(e)
+            }
+        }
+        ////////////////////////////
+        //  VALKYRIE END
+        ////////////////////////////
 
         ///Make good fee           
      
-        // const addGas = 6000 * cart.length      
-        const fee = new Fee(10_000, { uusd: 4500 })
         connectedWallet
-            .post({                                
-                msgs: [msg],        
-                feeDenoms: ['uusd'],
-                gasPrices: fee.gasPrices(),
+            .post({
+                msgs: msgs,
+                // fee: obj,
+                // gasPrices: obj.gasPrices(),
+                gasPrices: obj.gasPrices(),
                 gasAdjustment: 1.7,
-                // fee:new Fee(1_000_000, 150000 + addGas + 'uusd'),
-                // gasAdjustment: 1.6      
             })
             .then((e) => {
                 if (e.success) {
@@ -419,7 +508,6 @@ export default () => {
                     multiplier(amount)
                     setAlteBonus(false)
                     setBuyLoader(false)
-                        document.querySelector('.amount-block .toggle').click();
                 } else {
                     //setResult("register combination error")
                     showNotification(
@@ -432,6 +520,7 @@ export default () => {
             })
             .catch((e) => {
                 //setResult(e.message)
+                console.log(e)
                 showNotification(e.message, 'error', 4000)
                 setBuyLoader(false)
             })
