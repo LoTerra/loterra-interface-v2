@@ -95,7 +95,7 @@ export default function ConnectWallet() {
                 message: {status:true,code:referrerCode},
             })
 
-            console.log('vkr referrer detected',state.vkrReferrer)
+            console.log('vkr referrer detected')
         }
 
         // VALKYRIE END

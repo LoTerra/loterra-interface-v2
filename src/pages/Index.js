@@ -254,7 +254,7 @@ export default () => {
     }, [])
 
     useEffect(() => {
-        fetchContractQuery()
+        fetchContractQuery()   
     }, [fetchContractQuery])
     let connectedWallet = ''
     if (typeof document !== 'undefined') {
