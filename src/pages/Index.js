@@ -396,89 +396,92 @@ export default () => {
             )
             msgs.push(msg)
         }
-        try{
-            ////////////////////////////
-            //  VALKYRIE START
-            ////////////////////////////
-            //Validate if user is eligible
-            const vkrEligible = await api.contractQuery(
-                state.vkrQualifierContract,
-                {
-                    qualify_preview: {
-                        lottery_id: state.config.lottery_counter,
-                        player: connectedWallet.walletAddress,   
-                        preview_play_count: cart.length                         
-                    },
-                },
-            )
-            //If user is eligible go further
-            if(vkrEligible && vkrEligible.continue_option == 'eligible') {
-                //Get participation count qualifier contract
-                const participationCount = await api.contractQuery(
+        
+        if(state.config.lottery_counter > 48){
+            try{
+                ////////////////////////////
+                //  VALKYRIE START
+                ////////////////////////////
+                //Validate if user is eligible
+                const vkrEligible = await api.contractQuery(
                     state.vkrQualifierContract,
                     {
-                        participation_count: {
+                        qualify_preview: {
                             lottery_id: state.config.lottery_counter,
-                            player: connectedWallet.walletAddress,                            
+                            player: connectedWallet.walletAddress,   
+                            preview_play_count: cart.length                         
                         },
                     },
                 )
-                //Get total tickets bought by lottery_id
-                let combinations  = {};
-                combinations.combination = []
-                const combinations_query = await api.contractQuery(
-                    state.loterraContractAddress,
-                    {
-                        combination: {
-                            lottery_id: state.config.lottery_counter,
-                            address: state.wallet.walletAddress,
-                        },
-                    },
-                ).then((a) => { 
-                    combinations = a
-                }).catch(error => {
-                    console.log('no combinations yet')
-                })
-
-                //Do the C - Q * 10 formula
-                const participationTimes = (combinations.combination.length + cart.length - (participationCount.participation_count * 10)) / 10;
-                console.log(Math.floor(participationTimes), combinations.combination.length, cart.length, participationCount.participation_count)
-
-                for (let index = 0; index < Math.floor(participationTimes); index++) {
-                    if(state.vkrReferrer.status && state.vkrReferrer.code !== ''){
-                        //Valkyrie referrer detected
-                        const msg = new MsgExecuteContract(
-                            connectedWallet.walletAddress,
-                            state.vkrContract,
-                            {
-                                participate: {
-                                    actor: connectedWallet.walletAddress,
-                                    referrer: {
-                                        compressed: state.vkrReferrer.code
-                                    }
-                                },
-                            }
-                        )
-
-                        msgs.push(msg)
-
-                    } else {
-                        //Check normal valkyrie participator
-                        const msg = new MsgExecuteContract(
-                            connectedWallet.walletAddress,
-                            state.vkrContract, 
-                            {
-                                participate: {
-                                    actor: connectedWallet.walletAddress
-                                },
+                //If user is eligible go further
+                if(vkrEligible && vkrEligible.continue_option == 'eligible') {
+                    //Get participation count qualifier contract
+                    const participationCount = await api.contractQuery(
+                        state.vkrQualifierContract,
+                        {
+                            participation_count: {
+                                lottery_id: state.config.lottery_counter,
+                                player: connectedWallet.walletAddress,                            
                             },
-                        )
-                        msgs.push(msg)
+                        },
+                    )
+                    //Get total tickets bought by lottery_id
+                    let combinations  = {};
+                    combinations.combination = []
+                    const combinations_query = await api.contractQuery(
+                        state.loterraContractAddress,
+                        {
+                            combination: {
+                                lottery_id: state.config.lottery_counter,
+                                address: state.wallet.walletAddress,
+                            },
+                        },
+                    ).then((a) => { 
+                        combinations = a
+                    }).catch(error => {
+                        console.log('no combinations yet')
+                    })
+    
+                    //Do the C - Q * 10 formula
+                    const participationTimes = (combinations.combination.length + cart.length - (participationCount.participation_count * 10)) / 10;
+                    console.log(Math.floor(participationTimes), combinations.combination.length, cart.length, participationCount.participation_count)
+    
+                    for (let index = 0; index < Math.floor(participationTimes); index++) {
+                        if(state.vkrReferrer.status && state.vkrReferrer.code !== ''){
+                            //Valkyrie referrer detected
+                            const msg = new MsgExecuteContract(
+                                connectedWallet.walletAddress,
+                                state.vkrContract,
+                                {
+                                    participate: {
+                                        actor: connectedWallet.walletAddress,
+                                        referrer: {
+                                            compressed: state.vkrReferrer.code
+                                        }
+                                    },
+                                }
+                            )
+    
+                            msgs.push(msg)
+    
+                        } else {
+                            //Check normal valkyrie participator
+                            const msg = new MsgExecuteContract(
+                                connectedWallet.walletAddress,
+                                state.vkrContract, 
+                                {
+                                    participate: {
+                                        actor: connectedWallet.walletAddress
+                                    },
+                                },
+                            )
+                            msgs.push(msg)
+                        }
                     }
                 }
+            }catch(e){
+                console.log(e)
             }
-        }catch(e){
-            console.log(e)
         }
         ////////////////////////////
         //  VALKYRIE END
