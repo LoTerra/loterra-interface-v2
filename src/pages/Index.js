@@ -16,6 +16,7 @@ import {
     Gift,
     MonitorPlay,
     Info,
+    Check,
 } from 'phosphor-react'
 // import Jackpot from "../components/Jackpot";
 import {
@@ -792,7 +793,18 @@ export default () => {
                                                     <strong>UST</strong> and{' '}
                                                     <strong>ALTE</strong>
                                                 </small>
-                                            </div>        
+                                            </div>    
+                                            <a href="https://app.valkyrieprotocol.com/campaigns/terra143kpwsuu82rtdy8jkyagmvn426q9amqsk7ftrw" target="_blank" className="card grey-card text-center mb-3">
+                                    <div className="card-body">
+                                        <span className="badge">Active</span>
+                                    <img src="/logo-vkr.png"/>
+                                    <ul className="text-start">
+                                        <li><Check size={16} color={'#fdf500'} weight={'bold'}/> Participate 10 tickets and get 2 $LOTA</li>
+                                        <li><Check size={16} color={'#fdf500'} weight={'bold'}/> Share your Referral link and get 24 $VKR</li>
+                                    </ul>
+                                    <button className="btn btn-grey mt-3 w-100 fw-bold">Join Campaign</button>
+                                    </div>
+                                </a>    
                                 </div>
                                 <div className="col-xl-6 d-flex">
                                             <div className="align-self-center w-100">
