@@ -1,0 +1,17 @@
+.luna-price {
+
+    h2 {
+        &.up {
+            color:green;
+        }
+        &.down {
+            color:red;
+        }
+    }
+
+}
+
+.spacewager-card {
+    color:#000;
+    text-align:center;
+}
