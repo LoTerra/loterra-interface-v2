@@ -61,9 +61,6 @@ export default () => {
         }, duration)
     }
 
-    
-    
-
     function getTotalStakedLP() {
         if (state.poolInfo.total_share && state.stateLPStaking.total_balance) {
             const ratio =
