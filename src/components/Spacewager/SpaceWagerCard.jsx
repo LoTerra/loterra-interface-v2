@@ -5,7 +5,7 @@ import { ThermometerSimple } from 'phosphor-react';
 export default function SpaceWagerCard(props) {
 
     const [percentageStatus, setPercentageStatus] = useState('')
-    const {obj,bettingOddsOnUp, price, percentage, lockedPrice, prizesPool, bettingOddsOnDown, click} = props;
+    const {obj, roundAmount, bettingOddsOnUp, price, percentage, lockedPrice, prizesPool, bettingOddsOnDown, click} = props;
     const [amount,setAmount] = useState(0)
     const [bidType, setBidType] = useState('');
     const [bidScreen, setBidScreen] = useState(false)
