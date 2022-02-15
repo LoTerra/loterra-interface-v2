@@ -18,11 +18,12 @@ import { Link, NavLink } from 'react-router-dom'
 
 export default function NormalNav() {
 //Nav link active settings
-let homeClass, stakingClass, daoClass
+let homeClass, stakingClass, daoClass,spaceWagerClass
 if (typeof location !== 'undefined') {
     homeClass = location.pathname === '/' ? 'active' : ''
     stakingClass = location.pathname.match(/^\/staking/) ? 'active' : ''
     daoClass = location.pathname.match(/^\/dao/) ? 'active' : ''
+    spaceWagerClass = location.pathname.match(/^\/spacewager/) ? 'active' : ''
 }
     return (
         <>
@@ -120,10 +121,11 @@ if (typeof location !== 'undefined') {
                             </span>
                         </NavLink>
                     </li>
-                    <li className="nav-item" style={{opacity:0.5}}>
-                        <a                      
+                    <li className="nav-item">
+                        <NavLink exact                     
+                            to="/spacewager"
                             className="nav-link"
-                            className={'nav-link '}
+                            className={'nav-link ' + spaceWagerClass}
                         >
                             <Planet
                                 size={24}
@@ -136,24 +138,8 @@ if (typeof location !== 'undefined') {
                             Spacewager
                             <span className="item-label">
                                 Predict the next price
-                            </span>
-                            <span
-                                className="badge"
-                                style={{
-                                    position: 'absolute',
-                                    right: 0,
-                                    top: '-9px',
-                                    fontSize: '10px',
-                                    lineHeight: '10px',
-                                    padding: '3px',
-                                    textTransform: 'uppercase',
-                                    color: '#10003b',
-                                    background: '#8bf6c2',
-                                }}
-                            >
-                                COMING SOON
-                            </span>
-                        </a>
+                            </span>                            
+                        </NavLink>
                     </li>
                     
                     <span className="sub-heading">LoTerra projects</span>

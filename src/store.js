@@ -98,6 +98,7 @@ const comboTextOne = [
 ]
 
 const initialState = {
+    lunaPoolAddress: 'terra1tndcaqxkpc5ce9qee5ggqf430mr2z3pefe5wj6',
     loterraContractAddress: 'terra1q2k29wwcz055q4ftx4eucsq6tg9wtulprjg75w',
     loterraContractAddressCw20: 'terra1ez46kxtulsdv07538fh5ra5xj8l68mu8eg24vr',
     loterraPoolAddress: 'terra1pn20mcwnmeyxf68vpt3cyel3n57qm9mp289jta',
