@@ -20,6 +20,7 @@ export default () => {
     const [amountBetOnDown, setAmountBetOnDown] = useState(0)
     const [bettingOddsOnUp, setBettingOdssOnUp] = useState(0)
     const [bettingOddsOnDown, setBettingOdssOnDown] = useState(0)
+    const [round, setRound] = useState(0)
 
     const api = new WasmAPI(terra.apiRequester)
 
@@ -27,6 +28,10 @@ export default () => {
         var percentageVariation = (currentPrice - lockedPrice) / lockedPrice * 100
 
         return percentageVariation
+    }
+
+    function getRound(){
+
     }
 
     function getBetsAmount() {
@@ -125,6 +130,7 @@ export default () => {
                         <SpaceWagerCard 
                         key={k} 
                         obj={obj}
+                        roundAmount={round}
                         bettingOddsOnUp={bettingOddsOnUp}
                         price={lunaPrice}
                         percentage={lunaPricePercentage}
