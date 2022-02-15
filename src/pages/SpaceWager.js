@@ -3,6 +3,7 @@ import React, { useEffect,useState } from 'react'
 import numeral from 'numeral';
 import { useStore } from '../store'
 import SpaceWagerCard from '../components/Spacewager/SpaceWagerCard';
+import { Clock } from 'phosphor-react';
 
 export default () => {
 
@@ -14,13 +15,34 @@ export default () => {
     const [lunaPricePercentage, setLunaPricePercentage] = useState(0)
     const [lunaStatus, setLunaStatus] = useState('')
     const [lunaPriceCounter, setLunaPriceCountdown] = useState(0)
+    const [prizesPoolAmount, setPrizesPoolAmount] = useState(0)
+    const [amountBetOnUp, setAmountBetOnUp] = useState(0)
+    const [amountBetOnDown, setAmountBetOnDown] = useState(0)
+    const [bettingOddsOnUp, setBettingOdssOnUp] = useState(0)
+    const [bettingOddsOnDown, setBettingOdssOnDown] = useState(0)
 
     const api = new WasmAPI(terra.apiRequester)
 
-    function getPercentage(currentPrice) {
-        var percentageVariation = (numeral(currentPrice).format('0,0.000') - 55.910) / 55.910 * 100
+    function getPercentage(currentPrice, lockedPrcie) {
+        var percentageVariation = (currentPrice - lockedPrice) / lockedPrice * 100
 
         return percentageVariation
+    }
+
+    function getBetsAmount() {
+
+    }
+
+    function getBettingOdds(amountBetOnUp, amountBetOnDown) {
+
+    }
+
+    function getLockedPrice() {
+
+    }
+
+    function getPrizesPoolAmount() {
+
     }
 
     const getLunaPrice = async (price) => {
@@ -48,7 +70,9 @@ export default () => {
                 setLunaStatus('')
             }
             console.log(luna_base_price)
-            setLunaPricePercentage(getPercentage(luna_base_price))
+
+            setLunaLockedPrice(55.910)
+            setLunaPricePercentage(getPercentage(luna_base_price, lunaLockedPrice))
         } catch(e){
             console.log(e)
         }
@@ -70,13 +94,45 @@ export default () => {
     
     return (
         <>
-            <div className="luna-price">
-                <p>Luna price</p>
-                <h2 className={lunaStatus}>{numeral(lunaPrice).format('0,0.000')}</h2> 
+            <div className="container">
+                <div className="w-100 py-5 text-center">
+                    <h1 className="mb-0 fw-bold">Spacewager</h1>
+                </div>
+            <div className="luna-price mb-3">
                 <div className="row">
-                {[1,2,2].map((obj,k) => {
+                    <div className="col-6 text-start">
+                        <p className="mb-0 text-muted">Luna price</p>
+                        <h2 className={lunaStatus}>{numeral(lunaPrice).format('0,0.000')}</h2> 
+                    </div>
+                    <div className="col-6 text-end">
+                        <p className="mb-0 text-muted">Predictions?</p>
+                        <h2 className={lunaStatus}>0000</h2> 
+                    </div>
+                </div>
+                
+                
+            </div>
+            <div className="w-100 my-2 mb-5 text-center">
+                <p className="mb-0 text-white fs-1 fw-bold"><Clock size={36} style={{position:'relative',top:-4}} weight={'bold'}/> 00:00</p>
+            </div>
+            <div className="row">
+                {[
+                    {active: false},
+                    {active: true},
+                    {active: false}
+                ].map((obj,k) => {
                     return (
-                        <SpaceWagerCard key={k} price={lunaPrice} percentage={lunaPricePercentage} click={(a) => triggerClick(a)}/>
+                        <SpaceWagerCard 
+                        key={k} 
+                        obj={obj}
+                        bettingOddsOnUp={bettingOddsOnUp}
+                        price={lunaPrice}
+                        percentage={lunaPricePercentage}
+                        lockedPrice={lunaLockedPrice}
+                        prizesPool={prizesPoolAmount}
+                        bettingOddsOnDown={bettingOddsOnDown}
+                        click={(a) => triggerClick(a)}
+                        />
                     )
                 })}
                 </div>

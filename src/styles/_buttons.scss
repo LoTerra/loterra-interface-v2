@@ -11,6 +11,10 @@
             #20ff93;        
         border-radius: 7px;
     }
+    &.btn-red {
+        background:linear-gradient(45deg, #930b0b, #d31818);
+        color:#fff;
+    }
     &.btn-special {
         background: #ff0dff;
         border-radius: 10px;

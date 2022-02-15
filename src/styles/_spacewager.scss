@@ -12,6 +12,15 @@
 }
 
 .spacewager-card {
-    color:#000;
+    color:#fff;
     text-align:center;
+    background:linear-gradient(180deg, #331093, #0f0332);
+    border:0;
+    box-shadow: 0px 15px 20px #0000004d;
+    opacity:0.5;
+        &.active {
+            opacity:1;
+            transform:scale(1.15);
+            z-index:99;
+        }
 }
