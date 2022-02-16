@@ -3,7 +3,8 @@ import React, { useEffect,useState } from 'react'
 import numeral from 'numeral';
 import { useStore } from '../store'
 import SpaceWagerCard from '../components/Spacewager/SpaceWagerCard';
-import { Clock } from 'phosphor-react';
+import { Clock, Info } from 'phosphor-react'
+
 
 export default () => {
 
@@ -24,7 +25,7 @@ export default () => {
 
     const api = new WasmAPI(terra.apiRequester)
 
-    function getPercentage(currentPrice, lockedPrcie) {
+    function getPercentage(currentPrice, lockedPrice) {
         var percentageVariation = (currentPrice - lockedPrice) / lockedPrice * 100
 
         return percentageVariation
@@ -102,17 +103,31 @@ export default () => {
             <div className="container">
                 <div className="w-100 py-5 text-center">
                     <h1 className="mb-0 fw-bold">Spacewager</h1>
+                    <h2 className="my-2 fw-regular fs-6 mb-0">Bets on the price of LUNA</h2>
                 </div>
             <div className="luna-price mb-3">
                 <div className="row">
                     <div className="col-6 text-start">
-                        <p className="mb-0 text-muted">Luna price</p>
-                        <h2 className={lunaStatus}>{numeral(lunaPrice).format('0,0.000')}</h2> 
+                        <span
+                            className="info"
+                            style={{
+                                color: '#ffffff',
+                                borderColor: '#44377e',
+                            }}
+                        >
+                            <p className="mb-0 text-bold">LUNA/UST price</p>
+                            <h2 className={lunaStatus}>${numeral(lunaPrice).format('0,0.000')}</h2>
+                        </span>
                     </div>
                     <div className="col-6 text-end">
                         <p className="mb-0 text-muted">Predictions?</p>
-                        <h2 className={lunaStatus}>0000</h2> 
+                        <h2 className={lunaStatus}>0000</h2>
+                            <button className="btn btn-plain fw-bold w-20"
+                                onClick={() => makeBid('up')}>Rules</button>
+                            <button className="btn btn-plain fw-bold w-20"
+                                onClick={() => makeBid('up')}>LeaderBoard</button>
                     </div>
+                
                 </div>
                 
                 

@@ -5,14 +5,24 @@ import { ThermometerSimple } from 'phosphor-react';
 export default function SpaceWagerCard(props) {
 
     const [percentageStatus, setPercentageStatus] = useState('')
-    const {obj, roundAmount, bettingOddsOnUp, price, percentage, lockedPrice, prizesPool, bettingOddsOnDown, click} = props;
+    const {
+        obj, 
+        roundAmount, 
+        bettingOddsOnUp, 
+        price, 
+        percentage,
+        lockedPrice, 
+        prizesPool, 
+        bettingOddsOnDown, 
+        click
+    } = props;
     const [amount,setAmount] = useState(0)
     const [bidType, setBidType] = useState('');
     const [bidScreen, setBidScreen] = useState(false)
     const [formattedPercentage, setFormattedPercentage] = useState(0)
 
     const getPercentage = async (price) => {
-        
+
         try {
             if (percentage != 0) {
                 let status = ''
@@ -22,7 +32,7 @@ export default function SpaceWagerCard(props) {
                     setPercentageStatus(status)
                 } else if (percentage < 0) {
                     status = 'down'
-                    setFormattedPercentage('⬇ -' + numeral(percentage).format('0,0.00') + '%')
+                    setFormattedPercentage('⬇ ' + numeral(percentage).format('0,0.00') + '%')
                     setPercentageStatus(status)
                 }     
             } else {
@@ -87,7 +97,7 @@ export default function SpaceWagerCard(props) {
                         <p className="mb-0 fw-bold fs-2">{numeral(price).format('0,0.000')}</p>
                         </div>
                         <div className="col-6 text-end fs-2">
-                        <p className={'mb-0'}>{formattedPercentage &&
+                        <p className={'my-2 fw-bold fs-6 mb-0'}>{formattedPercentage &&
                          (formattedPercentage)
                         }</p>
                         </div>
