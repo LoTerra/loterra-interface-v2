@@ -121,6 +121,10 @@ export default () => {
                                 top: '-2px',
                             }}
                         >
+                            <img
+                                src="/terraLogo.svg"
+                                className="img-fluid terraLogo"
+                            />
                             <p className="mb-0 text-bold">LUNA/UST price</p>
                             
                             <h2 className={lunaStatus}>${numeral(lunaPrice).format('0,0.000')}</h2>
