@@ -5,6 +5,16 @@ import { useStore } from '../store'
 import SpaceWagerCard from '../components/Spacewager/SpaceWagerCard';
 import { Clock, Question, Trophy, Info } from 'phosphor-react'
 
+import SwiperCore, { Navigation, Pagination ,Autoplay,EffectFade } from 'swiper';
+
+SwiperCore.use([Navigation, Pagination,Autoplay,EffectFade ]);
+
+import { Swiper, SwiperSlide } from "swiper/react";
+import 'swiper/swiper-bundle.min.css'
+import 'swiper/swiper.min.css'
+
+
+
 export default () => {
 
     const {state,dispatch} = useStore();
@@ -157,26 +167,65 @@ export default () => {
                 </p>
             </div>
             <div className="row">
+            <Swiper
+      spaceBetween={30}
+    //   modules={[Navigation, Pagination, A11y]}                           
+      initialSlide={3}
+      pagination={{ clickable: true }}
+      navigation={true}
+      observeParents={true}
+      observer={true}
+      slidesPerView={1}         
+      breakpoints={{
+        // when window width is >= 640px
+        1: {
+            slidesPerView: 1,
+        },
+        // when window width is >= 768px
+        768: {
+            slidesPerView: 1,
+        },
+        1000: {
+            slidesPerView: 1,
+        },
+        1500: {
+            slidesPerView: 1,
+        },
+    }}
+      onSlideChange={() => console.log('slide change')}
+      onSwiper={(swiper) => console.log(swiper)}
+    >
                 {[
                     {active: false},
-                    {active: true},
+                    {active: false},
+                    {active: false},
+                    {active: false},
+                    {active: false},
+                    {active: false},
+                    {active: false},
+                    {active: false},
+                    {active: false},
+                    {active: false},
                     {active: false}
                 ].map((obj,k) => {
                     return (
-                        <SpaceWagerCard 
-                        key={k} 
-                        obj={obj}
-                        roundAmount={round}
-                        bettingOddsOnUp={bettingOddsOnUp}
-                        price={lunaPrice}
-                        variation={lunaPriceVariation}
-                        lockedPrice={lunaLockedPrice}
-                        prizesPool={prizesPoolAmount}
-                        bettingOddsOnDown={bettingOddsOnDown}
-                        click={(a) => triggerClick(a)}
-                        />
+                        <SwiperSlide>
+                            <SpaceWagerCard 
+                            key={k} 
+                            obj={obj}
+                            roundAmount={round}
+                            bettingOddsOnUp={bettingOddsOnUp}
+                            price={lunaPrice}
+                            variation={lunaPriceVariation}
+                            lockedPrice={lunaLockedPrice}
+                            prizesPool={prizesPoolAmount}
+                            bettingOddsOnDown={bettingOddsOnDown}
+                            click={(a) => triggerClick(a)}
+                            />
+                        </SwiperSlide>
                     )
                 })}
+                </Swiper>   
                 </div>
             </div>
         </>

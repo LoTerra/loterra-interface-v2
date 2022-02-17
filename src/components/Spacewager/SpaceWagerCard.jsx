@@ -90,7 +90,7 @@ export default function SpaceWagerCard(props) {
     },[price])
 
     return (
-       <div className="col-md-4">
+       <div className="col-9 mx-auto">
            <div className={"card spacewager-card h-100 "+(obj.active ? ' active' : '')}>                
                 <div className="card-header p-0">
                 <button className="btn btn-green fw-bold w-100" 
