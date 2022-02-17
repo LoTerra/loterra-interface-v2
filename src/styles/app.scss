@@ -450,14 +450,15 @@ h4,
 }
 
 .terraLogo {
-    width: 30%;
+    width: 10%;
     margin: 0 auto;
     display: block;
     position: relative;
   
-    margin-bottom: 0px;
+    margin-top: 10px;
+    margin-bottom: 10px;
     z-index: 9;
-    @media (max-width: 100px) {
+    @media (max-width: 10px) {
     }
 }
 
@@ -465,7 +466,7 @@ h4,
     margin: 0 auto;
     display: block;
     position: relative;
-  
+    
     margin-bottom: -31px;
     z-index: 9;
     @media (max-width: 768px) {

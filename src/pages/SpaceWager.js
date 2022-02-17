@@ -128,7 +128,7 @@ export default () => {
                             }}
                         >
                             <img
-                                src="/terraLogo.svg"
+                                src="/terra-luna-Logo.png"
                                 className="img-fluid terraLogo"
                             />
                             <p className="mb-0 text-bold">LUNA/UST price</p>
@@ -151,7 +151,10 @@ export default () => {
                 </div>
             </div>
             <div className="w-100 my-2 mb-5 text-center">
-                <p className="mb-0 text-white fs-1 fw-bold"><Clock size={36} style={{position:'relative',top:-4}} weight={'bold'}/> 00:00</p>
+                <p className="mb-0 text-white fs-1 fw-bold">
+                    <Clock size={36} style={{position:'relative',top:-4}} weight={'bold'}/> 
+                    00:00
+                </p>
             </div>
             <div className="row">
                 {[
