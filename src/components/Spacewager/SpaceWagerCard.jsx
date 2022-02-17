@@ -4,13 +4,13 @@ import { ThermometerSimple } from 'phosphor-react';
 
 export default function SpaceWagerCard(props) {
 
-    const [percentageStatus, setPercentageStatus] = useState('')
+    const [variationStatus, setVariationStatus] = useState('')
     const {
         obj, 
         roundAmount, 
         bettingOddsOnUp, 
         price, 
-        percentage,
+        variation,
         lockedPrice, 
         prizesPool, 
         bettingOddsOnDown, 
@@ -19,26 +19,26 @@ export default function SpaceWagerCard(props) {
     const [amount,setAmount] = useState(0)
     const [bidType, setBidType] = useState('');
     const [bidScreen, setBidScreen] = useState(false)
-    const [formattedPercentage, setFormattedPercentage] = useState(0)
+    const [formattedVariation, setFormattedVariation] = useState(0)
 
-    const getPercentage = async (price) => {
+    const getVariation = async (price) => {
 
         try {
-            if (percentage != 0) {
+            if (variation != 0) {
                 let status = ''
-                if (percentage > 0) {
+                if (variation > 0) {
                     status = 'up'
-                    setFormattedPercentage('⬆ +' + numeral(percentage).format('0,0.00') + '%')
-                    setPercentageStatus(status)
+                    setFormattedVariation('⬇ $' + numeral(variation).format('0,0.000'))
+                    setVariationStatus(status)
                 } else if (percentage < 0) {
                     status = 'down'
-                    setFormattedPercentage('⬇ ' + numeral(percentage).format('0,0.00') + '%')
-                    setPercentageStatus(status)
+                    setFormattedVariation('⬆ $' + numeral(variation).format('0,0.000'))
+                    setVariationStatus(status)
                 }     
             } else {
                 status = ''
-                setFormattedPercentage(numeral(percentage).format('0,0.00') + '%')
-                setPercentageStatus('')
+                setFormattedVariation('$' + numeral(variation).format('0,0.000'))
+                setVariationStatus('')
             }
             
             return 
@@ -68,12 +68,12 @@ export default function SpaceWagerCard(props) {
     //Load on mount
     useEffect(() =>  {       
         const interval = setInterval(() => {
-            getPercentage(percentage)    
-            console.log('formatted',formattedPercentage,percentage,numeral(price).format('0,0.000'))
+            getVariation(variation)    
+            console.log('formatted',formattedVariation,variation,numeral(price).format('0,0.000'))
           }, 1000);
           return () => clearInterval(interval); 
             
-    },[percentage])
+    },[variation])
 
     return (
        <div className="col-md-4">
@@ -83,7 +83,7 @@ export default function SpaceWagerCard(props) {
                 style={{borderBottomLeftRadius:0,borderBottomRightRadius:0}}
                 onClick={() => makeBid('up')}>
                     Up
-                    <span className="small fw-normal d-block">{numeral(bettingOddsOnUp).format('0,0.00') + '%'}</span>    
+                    <span className="small fw-normal d-block">{numeral(bettingOddsOnUp).format('0,0.00') + 'x Payout'}</span>    
                 </button>
                 </div>
                <div className="card-body">
@@ -107,8 +107,8 @@ export default function SpaceWagerCard(props) {
                                     top: '-2px',
                                 }}
                             >
-                                <p className={'my-2 fw-bold fs-6 mb-0'}>{formattedPercentage &&
-                                (formattedPercentage)}</p>
+                                <p className={'my-2 fw-bold fs-6 mb-0'}>{formattedVariation &&
+                                (formattedVariation)}</p>
                             </span>
                         </div>
                     </div>
@@ -144,7 +144,7 @@ export default function SpaceWagerCard(props) {
                 <button className="btn btn-red w-100 fw-bold"
                 style={{borderTopLeftRadius:0,borderTopRightRadius:0}}
                 onClick={() => makeBid('down')}>
-                <span className="small d-block fw-normal">{numeral(bettingOddsOnDown).format('0,0.00') + '%'}</span>
+                <span className="small d-block fw-normal">{numeral(bettingOddsOnDown).format('0,0.00') + 'x Payout'}</span>
                     Down</button>
                 </div>
            </div>

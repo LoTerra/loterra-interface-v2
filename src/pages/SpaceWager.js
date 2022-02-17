@@ -12,7 +12,7 @@ export default () => {
 
     const [lunaPrice, setLunaPrice] = useState(0)
     const [lunaLockedPrice, setLunaLockedPrice] = useState(0)
-    const [lunaPricePercentage, setLunaPricePercentage] = useState(0)
+    const [lunaPriceVariation, setLunaPriceVariation] = useState(0)
     const [lunaStatus, setLunaStatus] = useState('')
     const [lunaPriceCounter, setLunaPriceCountdown] = useState(0)
     const [prizesPoolAmount, setPrizesPoolAmount] = useState(0)
@@ -28,10 +28,10 @@ export default () => {
         href="https://app.alteredprotocol.com"
     }
 
-    function getPercentage(currentPrice, lockedPrice) {
-        var percentageVariation = (currentPrice - lockedPrice) / lockedPrice * 100
+    function getVariation(lockedPrice, currentPrice) {
+        var variation = lockedPrice - currentPrice
 
-        return percentageVariation
+        return variation
     }
 
     function getRound(){
@@ -81,7 +81,7 @@ export default () => {
             console.log(luna_base_price)
 
             setLunaLockedPrice(55.910)
-            setLunaPricePercentage(getPercentage(luna_base_price, lunaLockedPrice))
+            setLunaPriceVariation(getVariation(lunaLockedPrice, luna_base_price))
         } catch(e){
             console.log(e)
         }
@@ -138,10 +138,7 @@ export default () => {
                         <button className="btn btn-plain fw-bold w-20 ms-2"
                             onClick={() => makeBid('up')}>LeaderBoard</button>
                     </div>
-                
                 </div>
-                
-                
             </div>
             <div className="w-100 my-2 mb-5 text-center">
                 <p className="mb-0 text-white fs-1 fw-bold"><Clock size={36} style={{position:'relative',top:-4}} weight={'bold'}/> 00:00</p>
@@ -159,7 +156,7 @@ export default () => {
                         roundAmount={round}
                         bettingOddsOnUp={bettingOddsOnUp}
                         price={lunaPrice}
-                        percentage={lunaPricePercentage}
+                        variation={lunaPriceVariation}
                         lockedPrice={lunaLockedPrice}
                         prizesPool={prizesPoolAmount}
                         bettingOddsOnDown={bettingOddsOnDown}
