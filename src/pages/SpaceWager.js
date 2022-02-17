@@ -5,7 +5,6 @@ import { useStore } from '../store'
 import SpaceWagerCard from '../components/Spacewager/SpaceWagerCard';
 import { Clock, Info } from 'phosphor-react'
 
-
 export default () => {
 
     const {state,dispatch} = useStore();
@@ -24,6 +23,10 @@ export default () => {
     const [round, setRound] = useState(0)
 
     const api = new WasmAPI(terra.apiRequester)
+
+    function openSpaceWagerDocs() {
+        href="https://app.alteredprotocol.com"
+    }
 
     function getPercentage(currentPrice, lockedPrice) {
         var percentageVariation = (currentPrice - lockedPrice) / lockedPrice * 100
@@ -109,13 +112,17 @@ export default () => {
                 <div className="row">
                     <div className="col-6 text-start">
                         <span
-                            className="info"
+                            className="badge"
                             style={{
+                                background: '#44377e',
                                 color: '#ffffff',
-                                borderColor: '#44377e',
+                                marginLeft: '7px',
+                                position: 'relative',
+                                top: '-2px',
                             }}
                         >
                             <p className="mb-0 text-bold">LUNA/UST price</p>
+                            
                             <h2 className={lunaStatus}>${numeral(lunaPrice).format('0,0.000')}</h2>
                         </span>
                     </div>
@@ -123,7 +130,7 @@ export default () => {
                         <p className="mb-0 text-muted">Predictions?</p>
                         <h2 className={lunaStatus}>0000</h2>
                             <button className="btn btn-plain fw-bold w-20"
-                                onClick={() => makeBid('up')}>Rules</button>
+                                onClick={() => window.open("https://docs.loterra.io/upcoming/roadmap/spacewager", "_blank")}>Rules</button>
                             <button className="btn btn-plain fw-bold w-20"
                                 onClick={() => makeBid('up')}>LeaderBoard</button>
                     </div>
