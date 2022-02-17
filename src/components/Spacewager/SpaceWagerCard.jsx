@@ -21,26 +21,36 @@ export default function SpaceWagerCard(props) {
     const [bidScreen, setBidScreen] = useState(false)
     const [formattedVariation, setFormattedVariation] = useState(0)
 
+    const equalStyle = {
+        background: '#44377e',
+        color: '#ffffff'
+    }
+
+    const downStyle = {
+        background: '#ff0dff',
+        color: '#ffffff'
+    }
+
+    const upStyle = {
+        background: '#20ff93',
+        color: '#ffffff'
+    }
+
     const getVariation = async (price) => {
 
         try {
-            if (variation != 0) {
-                let status = ''
-                if (variation > 0) {
-                    status = 'up'
-                    setFormattedVariation('⬇ $' + numeral(variation).format('0,0.000'))
-                    setVariationStatus(status)
-                } else if (percentage < 0) {
-                    status = 'down'
+            if (price != lockedPrice) {
+                if (price > lockedPrice) {
                     setFormattedVariation('⬆ $' + numeral(variation).format('0,0.000'))
-                    setVariationStatus(status)
+                    setVariationStatus('up')
+                } else if (price < lockedPrice) {
+                    setFormattedVariation('⬇ $' + numeral(variation).format('0,0.000'))
+                    setVariationStatus('down')
                 }     
             } else {
-                status = ''
                 setFormattedVariation('$' + numeral(variation).format('0,0.000'))
-                setVariationStatus('')
+                setVariationStatus('equal')
             }
-            
             return 
         } catch(e){
             console.log(e)
@@ -70,7 +80,7 @@ export default function SpaceWagerCard(props) {
         const interval = setInterval(() => {
             getVariation(variation)    
             console.log('formatted',formattedVariation,variation,numeral(price).format('0,0.000'))
-          }, 1000);
+        }, 1000);
           return () => clearInterval(interval); 
             
     },[variation])
@@ -99,16 +109,11 @@ export default function SpaceWagerCard(props) {
                         <div className="col-6 text-end fs-2">
                             <span
                                 className="badge"
-                                style={{
-                                    background: '#44377e',
-                                    color: '#ffffff',
-                                    marginLeft: '7px',
-                                    position: 'relative',
-                                    top: '-2px',
-                                }}
+                                style={
+                                    variationStatus == 'equal' ? equalStyle : variationStatus == 'up' ? upStyle : downStyle
+                                }
                             >
-                                <p className={'my-2 fw-bold fs-6 mb-0'}>{formattedVariation &&
-                                (formattedVariation)}</p>
+                                <p className={'my-2 fw-bold fs-6 mb-0'}>{formattedVariation &&(formattedVariation)}</p>
                             </span>
                         </div>
                     </div>

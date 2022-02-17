@@ -9,6 +9,15 @@
         }
     }
 
+    span {
+        &.up {
+            background-color:green;
+        }
+        &.down {
+            background-color:red;
+        }
+    }
+
 }
 
 .spacewager-card {

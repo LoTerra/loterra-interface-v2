@@ -79,8 +79,7 @@ export default () => {
                 setLunaStatus('')
             }
             console.log(luna_base_price)
-
-            setLunaLockedPrice(55.910)
+            setLunaLockedPrice(55.199)
             setLunaPriceVariation(getVariation(lunaLockedPrice, luna_base_price))
         } catch(e){
             console.log(e)
