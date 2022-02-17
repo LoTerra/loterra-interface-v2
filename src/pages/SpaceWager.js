@@ -133,10 +133,10 @@ export default () => {
                     <div className="col-6 text-end">
                         <p className="mb-0 text-muted">Predictions?</p>
                         <h2 className={lunaStatus}>0000</h2>
-                            <button className="btn btn-plain fw-bold w-20"
-                                onClick={() => window.open("https://docs.loterra.io/upcoming/roadmap/spacewager", "_blank")}>Rules</button>
-                            <button className="btn btn-plain fw-bold w-20"
-                                onClick={() => makeBid('up')}>LeaderBoard</button>
+                        <button className="btn btn-plain fw-bold w-20 ms-2"
+                            onClick={() => window.open("https://docs.loterra.io/upcoming/roadmap/spacewager", "_blank")}>Rules</button>
+                        <button className="btn btn-plain fw-bold w-20 ms-2"
+                            onClick={() => makeBid('up')}>LeaderBoard</button>
                     </div>
                 
                 </div>

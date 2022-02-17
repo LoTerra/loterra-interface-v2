@@ -91,15 +91,25 @@ export default function SpaceWagerCard(props) {
                     <>                
                     <div className="row">
                         <div className="col-12 text-start">
-                            <p className="mt-2 mb-0 fw-regular fs-5 text-muted">Last price</p>
+                            <p className="my-2 fw-regular fs-6 mb-0">Last price</p>
                         </div>
                         <div className="col-6 text-start">
-                        <p className="mb-0 fw-bold fs-2">{numeral(price).format('0,0.000')}</p>
+                        <p className="mb-0 fw-bold fs-2">${numeral(price).format('0,0.000')}</p>
                         </div>
                         <div className="col-6 text-end fs-2">
-                        <p className={'my-2 fw-bold fs-6 mb-0'}>{formattedPercentage &&
-                         (formattedPercentage)
-                        }</p>
+                            <span
+                                className="badge"
+                                style={{
+                                    background: '#44377e',
+                                    color: '#ffffff',
+                                    marginLeft: '7px',
+                                    position: 'relative',
+                                    top: '-2px',
+                                }}
+                            >
+                                <p className={'my-2 fw-bold fs-6 mb-0'}>{formattedPercentage &&
+                                (formattedPercentage)}</p>
+                            </span>
                         </div>
                     </div>
                     <div className="row">
@@ -107,7 +117,7 @@ export default function SpaceWagerCard(props) {
                             <p className="my-2 fw-regular fs-6 mb-0">Locked Price</p>                    
                         </div>
                         <div className="col-6 text-end">
-                            <p className="my-2 fw-bold fs-6 mb-0">{numeral(lockedPrice).format('0,0.000')}</p>
+                            <p className="my-2 fw-bold fs-6 mb-0">${numeral(lockedPrice).format('0,0.000')}</p>
                         </div>
                     </div>
                     
@@ -116,7 +126,7 @@ export default function SpaceWagerCard(props) {
                         <p className="my-2 fw-regular fs-6 mb-0">Prizes Pool</p>
                         </div>
                         <div className="col-6 text-end">
-                        <p className="my-2 fw-bold fs-6 mb-0">{numeral(prizesPool).format('0,0.000')}</p>
+                        <p className="my-2 fw-bold fs-6 mb-0">{numeral(prizesPool).format('0,0.000')} {' '} LUNA</p>
                         </div>
                     </div>
                     
