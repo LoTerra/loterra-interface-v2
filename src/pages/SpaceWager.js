@@ -3,7 +3,7 @@ import React, { useEffect,useState } from 'react'
 import numeral from 'numeral';
 import { useStore } from '../store'
 import SpaceWagerCard from '../components/Spacewager/SpaceWagerCard';
-import { Clock, Info } from 'phosphor-react'
+import { Clock, Question, Trophy, Info } from 'phosphor-react'
 
 export default () => {
 
@@ -29,8 +29,17 @@ export default () => {
     }
 
     function getVariation(lockedPrice, currentPrice) {
-        var variation = lockedPrice - currentPrice
-
+        let variation = 0.000
+        if (lockedPrice != 0) {
+            if (lockedPrice > currentPrice) {
+                variation = currentPrice - lockedPrice
+            } else if (lockedPrice < currentPrice){
+                variation = currentPrice - lockedPrice
+            } else {
+                variation = 0
+            }
+        }
+        
         return variation
     }
 
@@ -55,7 +64,6 @@ export default () => {
     }
 
     const getLunaPrice = async (price) => {
-        console.log('price')
         try {
             const contractConfigInfo = await api.contractQuery(state.lunaPoolAddress, {
                 pool: {},
@@ -78,8 +86,7 @@ export default () => {
                 setLunaPrice(luna_base_price)
                 setLunaStatus('')
             }
-            console.log(luna_base_price)
-            setLunaLockedPrice(55.199)
+            setLunaLockedPrice(56.199)
             setLunaPriceVariation(getVariation(lunaLockedPrice, luna_base_price))
         } catch(e){
             console.log(e)
@@ -133,9 +140,13 @@ export default () => {
                         <p className="mb-0 text-muted">Predictions?</p>
                         <h2 className={lunaStatus}>0000</h2>
                         <button className="btn btn-plain fw-bold w-20 ms-2"
-                            onClick={() => window.open("https://docs.loterra.io/upcoming/roadmap/spacewager", "_blank")}>Rules</button>
+                            onClick={() => window.open("https://docs.loterra.io/upcoming/roadmap/spacewager", "_blank")}>
+                            <Question size={36} style={{position:'relative',top:0}} weight={'bold'}/>
+                        </button>
                         <button className="btn btn-plain fw-bold w-20 ms-2"
-                            onClick={() => makeBid('up')}>LeaderBoard</button>
+                            onClick={() => makeBid('up')}>
+                            <Trophy size={36} style={{position:'relative',top:0}} weight={'bold'}/>
+                        </button>
                     </div>
                 </div>
             </div>

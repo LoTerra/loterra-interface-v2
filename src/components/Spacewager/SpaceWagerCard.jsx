@@ -40,16 +40,21 @@ export default function SpaceWagerCard(props) {
 
         try {
             if (price != lockedPrice) {
+                console.log('lockedPrice', lockedPrice)
+                console.log('Price', price)
                 if (price > lockedPrice) {
                     setFormattedVariation('⬆ $' + numeral(variation).format('0,0.000'))
                     setVariationStatus('up')
+                    console.log('up')
                 } else if (price < lockedPrice) {
                     setFormattedVariation('⬇ $' + numeral(variation).format('0,0.000'))
                     setVariationStatus('down')
+                    console.log('down')
                 }     
             } else {
                 setFormattedVariation('$' + numeral(variation).format('0,0.000'))
                 setVariationStatus('equal')
+                console.log('equal')
             }
             return 
         } catch(e){
@@ -78,12 +83,11 @@ export default function SpaceWagerCard(props) {
     //Load on mount
     useEffect(() =>  {       
         const interval = setInterval(() => {
-            getVariation(variation)    
-            console.log('formatted',formattedVariation,variation,numeral(price).format('0,0.000'))
+            getVariation(price)    
         }, 1000);
           return () => clearInterval(interval); 
             
-    },[variation])
+    },[price])
 
     return (
        <div className="col-md-4">
@@ -110,7 +114,7 @@ export default function SpaceWagerCard(props) {
                             <span
                                 className="badge"
                                 style={
-                                    variationStatus == 'equal' ? equalStyle : variationStatus == 'up' ? upStyle : downStyle
+                                    variationStatus == 'down' ? downStyle : upStyle
                                 }
                             >
                                 <p className={'my-2 fw-bold fs-6 mb-0'}>{formattedVariation &&(formattedVariation)}</p>
