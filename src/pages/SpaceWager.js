@@ -198,10 +198,7 @@ export default () => {
       }
                
     },[lunaPrice,config])
-
-
-
-    
+ 
     return (
         <>
             <div className="container">
@@ -222,7 +219,6 @@ export default () => {
                                 top: '-2px',
                             }}
                         >
-                          
                             <img
                                 src="/terra-luna-Logo.png"
                                 className="img-fluid terraLogo"
@@ -254,33 +250,33 @@ export default () => {
             </div>
             <div className="row">
             <Swiper
-      spaceBetween={30}
-    //   modules={[Navigation, Pagination, A11y]}                           
-      initialSlide={3}
-      pagination={{ clickable: true }}
-      navigation={true}
-      observeParents={true}
-      observer={true}
-      slidesPerView={1}         
-      breakpoints={{
-        // when window width is >= 640px
-        1: {
-            slidesPerView: 1,
-        },
-        // when window width is >= 768px
-        768: {
-            slidesPerView: 1,
-        },
-        1000: {
-            slidesPerView: 1,
-        },
-        1500: {
-            slidesPerView: 1,
-        },
-    }}
-      onSlideChange={() => console.log('slide change')}
-      onSwiper={(swiper) => console.log(swiper)}
-    >
+                spaceBetween={30}
+                //   modules={[Navigation, Pagination, A11y]}                           
+                initialSlide={3}
+                pagination={{ clickable: true }}
+                navigation={true}
+                observeParents={true}
+                observer={true}
+                slidesPerView={1}
+                breakpoints={{
+                    // when window width is >= 640px
+                    1: {
+                        slidesPerView: 1,
+                    },
+                    // when window width is >= 768px
+                    768: {
+                        slidesPerView: 1,
+                    },
+                    1000: {
+                        slidesPerView: 1,
+                    },
+                    1500: {
+                        slidesPerView: 1,
+                    },
+                }}
+                onSlideChange={() => console.log('slide change')}
+                onSwiper={(swiper) => console.log(swiper)}
+            >
                 {[
                     {active: false},
                     {active: false},
@@ -311,7 +307,7 @@ export default () => {
                         </SwiperSlide>
                     )
                 })}
-                </Swiper>   
+            </Swiper> 
                 </div>
             </div>
         </>
