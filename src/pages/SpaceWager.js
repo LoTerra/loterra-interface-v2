@@ -1,5 +1,5 @@
-import { WasmAPI } from '@terra-money/terra.js';
-import React, { useEffect,useState } from 'react'
+import { LCDClient, WasmAPI } from '@terra-money/terra.js';
+import React, { useEffect,useMemo,useState } from 'react'
 import numeral from 'numeral';
 import { useStore } from '../store'
 import SpaceWagerCard from '../components/Spacewager/SpaceWagerCard';
@@ -12,6 +12,7 @@ SwiperCore.use([Navigation, Pagination,Autoplay,EffectFade ]);
 import { Swiper, SwiperSlide } from "swiper/react";
 import 'swiper/swiper-bundle.min.css'
 import 'swiper/swiper.min.css'
+import { useConnectedWallet, useWallet } from '@terra-money/wallet-provider';
 
 
 
@@ -19,6 +20,10 @@ export default () => {
 
     const {state,dispatch} = useStore();
     const terra = state.lcd_client
+
+    //Basedata spacewager
+    const [config,setConfig] = useState();
+    const [spacewagerState, setSpacewagerState] = useState()
 
     const [lunaPrice, setLunaPrice] = useState(0)
     const [lunaLockedPrice, setLunaLockedPrice] = useState(0)
@@ -32,7 +37,22 @@ export default () => {
     const [bettingOddsOnDown, setBettingOdssOnDown] = useState(0)
     const [round, setRound] = useState(0)
 
-    const api = new WasmAPI(terra.apiRequester)
+    //Testnet settings now api
+
+    const lcd = new LCDClient({
+        URL: 'https://bombay-lcd.terra.dev/',
+        chainID: 'bombay-12'
+    });
+
+    const api = new WasmAPI(lcd.apiRequester)
+
+
+    let wallet = ''
+    let connectedWallet = ''
+    if (typeof document !== 'undefined') {
+        wallet = useWallet()
+        connectedWallet = useConnectedWallet()
+    }
 
     function openSpaceWagerDocs() {
         href="https://app.alteredprotocol.com"
@@ -51,6 +71,57 @@ export default () => {
         }
         
         return variation
+    }
+
+    async function getSpacewagerState(){
+        try {
+            let spacewager_state = await api.contractQuery(
+                state.spaceWagerAddress,
+                {
+                    state: {
+                       
+                    }
+                }
+            );
+            console.log('state',spacewager_state)
+            setSpacewagerState(spacewager_state)
+        } catch(e) {
+            console.log(e)
+        }        
+    }
+
+    async function getSpacewagerConfig(){
+        try {
+            let spacewager_config = await api.contractQuery(
+                state.spaceWagerAddress,
+                {
+                    config: {
+                       
+                    }
+                }
+            );
+            console.log('config',spacewager_config)
+            setConfig(spacewager_config)
+        } catch(e) {
+            console.log(e)
+        }        
+    }
+
+    async function getSpacewagerPredictions(){
+        try {
+            let spacewager_predictions = await api.contractQuery(
+                state.spaceWagerAddress,
+                {
+                    predictions: {
+                       
+                    }
+                }
+            );
+            console.log('predictions',spacewager_predictions)
+            
+        } catch(e) {
+            console.log(e)
+        }        
     }
 
     function getRound(){
@@ -75,7 +146,7 @@ export default () => {
 
     const getLunaPrice = async (price) => {
         try {
-            const contractConfigInfo = await api.contractQuery(state.lunaPoolAddress, {
+            const contractConfigInfo = await api.contractQuery(config.pool_address, {
                 pool: {},
             }) 
             let ust = parseInt(contractConfigInfo.assets[1].amount)
@@ -108,14 +179,28 @@ export default () => {
         console.log('you just clicked me')
     }
 
-    //Load on mount
+
+        //Load on mount
+        useEffect(() =>{
+            getSpacewagerState()
+            getSpacewagerConfig()
+            getSpacewagerPredictions()
+        },[])
+
+
+    //Change on lunaprice state change
     useEffect(() =>  {       
+      if(config){
         const interval = setInterval(() => {
             getLunaPrice(lunaPrice)    
           }, 1000);
           return () => clearInterval(interval); 
+      }
                
-    },[lunaPrice])
+    },[lunaPrice,config])
+
+
+
     
     return (
         <>

@@ -70,21 +70,21 @@ export default function SpaceWagerCard(props) {
 
         try {
             if (price != lockedPrice) {
-                console.log('lockedPrice', lockedPrice)
-                console.log('Price', price)
+                //console.log('lockedPrice', lockedPrice)
+                //console.log('Price', price)
                 if (price > lockedPrice) {
                     setFormattedVariation('⬆ $' + numeral(variation).format('0,0.000'))
                     setVariationStatus('up')
-                    console.log('up')
+                    //console.log('up')
                 } else if (price < lockedPrice) {
                     setFormattedVariation('⬇ $' + numeral(variation).format('0,0.000'))
                     setVariationStatus('down')
-                    console.log('down')
+                    //console.log('down')
                 }     
             } else {
                 setFormattedVariation('$' + numeral(variation).format('0,0.000'))
                 setVariationStatus('equal')
-                console.log('equal')
+                //console.log('equal')
             }
             return 
         } catch(e){
