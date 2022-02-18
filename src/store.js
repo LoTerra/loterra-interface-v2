@@ -100,7 +100,9 @@ const comboTextOne = [
 const initialState = {
     lunaPoolAddress: 'terra1tndcaqxkpc5ce9qee5ggqf430mr2z3pefe5wj6',
     loterraContractAddress: 'terra1q2k29wwcz055q4ftx4eucsq6tg9wtulprjg75w',
+    loterraTestnetContractAddress: 'terra1a353y4fa24fv99jh5cqr6xpg68ffn04yxptccp',
     loterraContractAddressCw20: 'terra1ez46kxtulsdv07538fh5ra5xj8l68mu8eg24vr',
+    loterraTestnetContractAddressCw20: 'terra1udwh63czgtnpqdfzzmvz0v8flskuqyd0892khy',
     loterraPoolAddress: 'terra1pn20mcwnmeyxf68vpt3cyel3n57qm9mp289jta',
     loterraStakingAddress: 'terra1342fp86c3z3q0lksq92lncjxpkfl9hujwh6xfn',
     alteredContractAddress: 'terra15tztd7v9cmv0rhyh37g843j8vfuzp8kw0k5lqv',
@@ -145,8 +147,8 @@ const initialState = {
     ustBalance: 0,
     daoFunds: 0,
     lcd_client: new LCDClient({
-        URL: 'https://lcd.terra.dev/',
-        chainID: 'columbus-5',
+        URL: 'https://bombay-lcd.terra.dev/',
+        chainID: 'bombay-12',
         feeDenoms:['uusd'],
         gasPrices: { uusd: 0.15 },
         gasAdjustment: 1.4,
