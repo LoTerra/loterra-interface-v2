@@ -1,6 +1,7 @@
 import React, { useEffect,useState } from 'react'
 import numeral from 'numeral';
 import { ThermometerSimple } from 'phosphor-react';
+import SpaceWagerCardHeader from './SpaceWagerCardHeader';
 
 export default function SpaceWagerCard(props) {
 
@@ -122,23 +123,7 @@ export default function SpaceWagerCard(props) {
     return (
        <div className="col-9 mx-auto">
             <div className={"card spacewager-card h-100 "+(obj.active ? ' active' : '')}>                
-                    <div className="card-header p-3">
-                        
-                        <div className="row">
-                            <div className="col-6 text-start">
-                                <p>LIVE</p>
-                            </div>
-                            <div className="col-6 text-end">
-                                <p>02:30 #6188</p>
-                            </div>
-                            <div className="col-12">
-                                <div className="progress">
-                                    <div className="progress-bar" role="progressbar" style={{width:'25%'}} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
-                        </div>
-                        
-                    </div>
+                    <SpaceWagerCardHeader obj={obj}/>
                 <div className="card-body">
                     {/* {setWagerBox("green", "1", "pink", "1", "pink", "1")} */}
                     <button className="btn btn-green fw-bold w-100"

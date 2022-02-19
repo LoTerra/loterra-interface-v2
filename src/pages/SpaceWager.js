@@ -24,6 +24,7 @@ export default () => {
     //Basedata spacewager
     const [config,setConfig] = useState();
     const [spacewagerState, setSpacewagerState] = useState()
+    const [predictions,setPredictions] = useState([]);
 
     const [lunaPrice, setLunaPrice] = useState(0)
     const [lunaLockedPrice, setLunaLockedPrice] = useState(0)
@@ -118,6 +119,7 @@ export default () => {
                 }
             );
             console.log('predictions',spacewager_predictions)
+            setPredictions(spacewager_predictions)
             
         } catch(e) {
             console.log(e)
@@ -277,19 +279,7 @@ export default () => {
                 onSlideChange={() => console.log('slide change')}
                 onSwiper={(swiper) => console.log(swiper)}
             >
-                {[
-                    {active: false},
-                    {active: false},
-                    {active: false},
-                    {active: false},
-                    {active: false},
-                    {active: false},
-                    {active: false},
-                    {active: false},
-                    {active: false},
-                    {active: false},
-                    {active: false}
-                ].map((obj,k) => {
+                {predictions.length > 0 && predictions.map((obj,k) => {
                     return (
                         <SwiperSlide>
                             <SpaceWagerCard 
