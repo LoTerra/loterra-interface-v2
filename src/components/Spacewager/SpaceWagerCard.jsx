@@ -2,6 +2,8 @@ import React, { useEffect,useState } from 'react'
 import numeral from 'numeral';
 import { ThermometerSimple } from 'phosphor-react';
 import SpaceWagerCardHeader from './SpaceWagerCardHeader';
+import { MsgExecuteContract } from '@terra-money/terra.js';
+import { useStore } from '../../store';
 
 export default function SpaceWagerCard(props) {
 
@@ -17,6 +19,9 @@ export default function SpaceWagerCard(props) {
         bettingOddsOnDown, 
         click
     } = props;
+
+    const {state,dispatch} = useStore()
+
     const [amount,setAmount] = useState(0)
     const [bidType, setBidType] = useState('');
     const [bidScreen, setBidScreen] = useState(false)
@@ -109,6 +114,35 @@ export default function SpaceWagerCard(props) {
             return;
         }
         alert('you bid on '+ bidType +': '+ amount + 'UST on round: '+round) 
+
+        if (amount <= 0) return
+
+        let type = bidType == 'up' ? true : false
+
+        let msg = new MsgExecuteContract(
+            state.wallet.walletAddress,
+            state.spaceWagerAddress,
+            {
+                make_prediction: {up :type},
+                resolve_game: { address: state.wallet.walletAddress, round: round }
+            },
+            { uusd: parseFloat(amount) * 1000000 },
+        )
+        state.wallet
+            .post({
+                msgs: [msg],
+            })
+            .then((e) => {
+                if (e.success) {
+                    alert('success!')
+                } else {
+                    console.log(e)
+                }
+            })
+            .catch((e) => {
+                console.log(e)
+                
+            })
     }
 
     //Load on mount
