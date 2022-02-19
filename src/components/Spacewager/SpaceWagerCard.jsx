@@ -103,12 +103,12 @@ export default function SpaceWagerCard(props) {
         setBidScreen(!bidScreen)
     }
 
-    const makeBidFinal = () => {
+    const makeBidFinal = (round) => {
         if(amount == 0 || amount == ''){
             alert('please fill a amount you want to bid')
             return;
         }
-        alert('you bid on '+ bidType +': '+ amount) 
+        alert('you bid on '+ bidType +': '+ amount + 'UST on round: '+round) 
     }
 
     //Load on mount
@@ -180,7 +180,7 @@ export default function SpaceWagerCard(props) {
                         <>
                             <label>Your bid amount ({bidType})</label>
                             <input className="form-control" type="number" value={amount} onChange={(e) => setAmount(e.target.value)}/>
-                            <button onClick={() => makeBidFinal() } className="btn btn-primary w-100 mt-3">Place bid</button>
+                            <button onClick={() => makeBidFinal(obj[0]) } className="btn btn-primary w-100 mt-3">Place bid</button>
                         </>
                     }
                     </div>
