@@ -57,7 +57,7 @@ export default function SpaceWagerCardBody(props) {
             <div className="col-6 text-start">
                 <p className="mb-0 fw-bold fs-3"
                     style={
-                        variationStatus == 'down' ? upStylePrice : upStylePrice
+                        variationStatus == 'down' ? downStylePrice : upStylePrice
                     }
                 >${numeral(last_price()).format('0,0.000')}</p>
             </div>
