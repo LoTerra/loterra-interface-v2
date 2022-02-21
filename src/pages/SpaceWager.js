@@ -324,11 +324,11 @@ export default () => {
             <div className="row">
                     {spacewagerState.round > 0 &&
                     <Swiper
-                    spaceBetween={30}
+                    spaceBetween={-50}
                     //   modules={[Navigation, Pagination, A11y]}                           
                     initialSlide={spacewagerState.round}
                     pagination={{ clickable: true }}
-                    navigation={true}
+                    navigation={false}
                     observeParents={true}
                     observer={true}
                     slidesPerView={1}
