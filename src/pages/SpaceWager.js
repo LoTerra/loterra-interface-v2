@@ -23,12 +23,12 @@ export default () => {
 
     //Basedata spacewager
     const [config,setConfig] = useState({
-        pool_address: "terra1e49fv4xm3c2znzpxmxs0z2z6y74xlwxspxt38s",
-        collector_address: "terra196ydjey9lep0f3fl3k8f7t45fklqs7svvjutwd",
-        round_time: 300,
-        limit_time: 90,
-        denom: "uusd",
-        collector_fee: "0.05"
+        pool_address: "",
+        collector_address: "",
+        round_time: 0,
+        limit_time: 0,
+        denom: "",
+        collector_fee: ""
     });
     const [spacewagerState, setSpacewagerState] = useState({round:0})
     const [predictions,setPredictions] = useState([]);
@@ -116,15 +116,16 @@ export default () => {
 
     async function getSpacewagerPredictions(){
         try {
+            let query = {
+                predictions: {}
+            }
+            if (spacewagerState.round + 5 > 10){
+                query.start_after = spacewagerState.round - 5
+            }
 
             let spacewager_predictions = await api.contractQuery(
                 state.spaceWagerAddress,
-                {
-                    predictions: {
-                        start_after: spacewagerState.round,
-                        limit: 20
-                    }
-                }
+                query
             );
             console.log('predictions',spacewager_predictions)
             setPredictions(spacewager_predictions)
@@ -190,16 +191,12 @@ export default () => {
     }
 
 
-        //Load on mount
-        useEffect(() =>{
-            getSpacewagerState()
-            getSpacewagerConfig()
-            if (spacewagerState){
-                getSpacewagerPredictions()
-            }
-
-        },[])
-
+    //Load on mount
+    useEffect(() =>{
+        getSpacewagerState()
+        getSpacewagerConfig()
+        getSpacewagerPredictions()
+    },[])
 
     //Change on lunaprice state change
     useEffect(() =>  {       
@@ -315,7 +312,7 @@ export default () => {
                             bettingOddsOnUp={bettingOddsOnUp}
                             price={lunaPrice}
                             variation={lunaPriceVariation}
-                            lockedPrice={lunaLockedPrice}
+                            lockedPrice={obj[0].locked_price}
                             prizesPool={prizesPoolAmount}
                             bettingOddsOnDown={bettingOddsOnDown}
                             click={(a) => triggerClick(a)}

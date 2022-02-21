@@ -148,7 +148,8 @@ export default function SpaceWagerCard(props) {
     }
 
     //Load on mount
-    useEffect(() =>  {       
+    useEffect(() =>  {
+
         const interval = setInterval(() => {
             getVariation(price)    
         }, 1000);
@@ -197,7 +198,7 @@ export default function SpaceWagerCard(props) {
                                 <p className="my-2 fw-regular fs-6 mb-0">Locked Price:</p>                    
                             </div>
                             <div className="col-6 text-end">
-                                <p className="my-2 fw-bold fs-6 mb-0">${numeral(lockedPrice).format('0,0.000')}</p>
+                                <p className="my-2 fw-bold fs-6 mb-0">${numeral(lockedPrice / 1000000).format('0,0.000')}</p>
                             </div>
                         </div>
                         
