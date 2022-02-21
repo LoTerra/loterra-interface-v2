@@ -270,7 +270,6 @@ export default () => {
     },[config, spacewagerState.round])
  
     return (
-        <div className="spacewager-wrapper">
             <div className="container">
                 <div className="w-100 py-5 text-center">
                     <h1 className="mb-0 fw-bold">Spacewager</h1>
@@ -385,6 +384,5 @@ export default () => {
                     }
                 </div>
             </div>
-        </div>
     )
 }

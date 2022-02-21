@@ -28,24 +28,6 @@ export default function SpaceWagerCard(props) {
     const [bidScreen, setBidScreen] = useState(false)
     const [formattedVariation, setFormattedVariation] = useState(0)
 
-    const equalStyle = {
-        background: '#44377e',
-        color: '#ffffff'
-    }
-
-    const downStyle = {
-        background: 'transparent',
-        border:'2px solid red',
-        color: '#ffffff'
-    }
-
-    const upStyle = {
-        background: 'transparent',
-        border:'2px solid green',
-        color: '#ffffff'
-    }
-
-
     function upButtonShape(upColor, upColorOpacity, boxBorderColor, boxBorderColorOpacity, downColor, downColorOpacity){
         return (
             <svg width="265" xmlns="http://www.w3.org/2000/svg" viewBox="24.3139 0 270.6231 68">

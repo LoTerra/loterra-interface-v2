@@ -6,7 +6,8 @@ export default function SpaceWagerCardBody(props) {
     const {obj,price,variationStatus,formattedVariation,lockedPrice,prizesPool} = props;
 
     const equalStyle = {
-        background: '#44377e',
+        background: '#6B6B6B',
+        opacity: '37%',
         color: '#ffffff'
     }
 
@@ -30,7 +31,7 @@ export default function SpaceWagerCardBody(props) {
             
         <div className="row">            
             <div className="col-12 text-start">
-                <p className="my-2 fw-muted fs-6 mb-0">Last price:</p>
+                <p className="my-2 fs-6 mb-0">Last price:</p>
             </div>
             <div className="col-6 text-start">
                 <p className="mb-0 fw-bold fs-3">${numeral(obj[1].resolved_price / 1000000).format('0,0.000')}</p>
