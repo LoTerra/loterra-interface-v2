@@ -20,10 +20,18 @@ export default function SpaceWagerCardBody(props) {
         background: '#18ab64',
         color: '#ffffff'
     }
+    function last_price(){
+        if (obj[1].closing_time * 1000 < Date.now() && obj[1].closing_time * 1000 > Date.now() - 300000){
+            return price
+        }else{
+            return obj[1].resolved_price / 1000000
+        }
+    }
    
 
     return (
  <>
+
         { 
         //When not active round
         obj[1].closing_time * 1000 < Date.now() &&       
@@ -34,7 +42,7 @@ export default function SpaceWagerCardBody(props) {
                 <p className="my-2 fs-6 mb-0">Last price:</p>
             </div>
             <div className="col-6 text-start">
-                <p className="mb-0 fw-bold fs-3">${numeral(obj[1].resolved_price / 1000000).format('0,0.000')}</p>
+                <p className="mb-0 fw-bold fs-3">${numeral(last_price()).format('0,0.000')}</p>
             </div>
             <div className="col-6 text-end">
                 <span

@@ -238,7 +238,7 @@ export default () => {
             let format_minutes = minutes < 10 ? "0" + minutes : minutes;
             let format_seconds = seconds < 10 ? "0" + seconds : seconds;
 
-            return `${format_minutes} : ${format_seconds}`
+            return `${format_minutes < 0 ? "00": format_minutes } : ${format_seconds < 0 ? "00" : format_seconds}`
 
             //   console.log(currentTime, expiryTimestamp)
 
