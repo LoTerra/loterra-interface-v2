@@ -160,7 +160,7 @@ export default function SpaceWagerCard(props) {
     useEffect(() =>  {
 
         const interval = setInterval(() => {
-            getVariation(price)    
+            getVariation(price)
         }, 1000);
           return () => clearInterval(interval); 
             
@@ -180,7 +180,7 @@ export default function SpaceWagerCard(props) {
                             {upButtonShape()}
                         <div className="btn-content">
                         Up
-                        <span className="small fw-normal d-block">{numeral(bettingOddsOnUp).format('0,0.00') + 'x Payout'}</span>    
+                        <span className="small fw-normal d-block">{ + 'x Payout'}</span>   
                         </div>
                     </button>
                 }
@@ -199,6 +199,7 @@ export default function SpaceWagerCard(props) {
                         <>
                             <label>Your bid amount ({bidType})</label>
                             <input className="form-control" type="number" value={amount} onChange={(e) => setAmount(e.target.value)}/>
+
                             <button onClick={() => makeBidFinal(obj[0]) } className="btn btn-plain w-100 mt-3">Place bid</button>
                         </>
                     }
@@ -211,7 +212,7 @@ export default function SpaceWagerCard(props) {
                         onClick={() => makeBid('down')}>
                             {downButtonShape()}
                             <div className="btn-content">
-                                <span className="small d-block fw-normal">{numeral(bettingOddsOnDown).format('0,0.00') + 'x Payout'}</span>
+                                <span className="small d-block fw-normal">{ + 'x Payout'}</span>
                                 Down
                             </div>
                         </button>

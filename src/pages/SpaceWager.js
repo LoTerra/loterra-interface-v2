@@ -138,7 +138,6 @@ export default () => {
             );
             // Set the array of predictions
             setPredictions(spacewager_predictions)
-
             /*
                 TODO: dismiss the prediction loader here
              */
@@ -153,10 +152,6 @@ export default () => {
     }
 
     function getBetsAmount() {
-
-    }
-
-    function getBettingOdds(amountBetOnUp, amountBetOnDown) {
 
     }
 
@@ -358,12 +353,12 @@ export default () => {
                                 key={k} 
                                 obj={obj}
                                 roundAmount={spacewagerState.round}
-                                bettingOddsOnUp={bettingOddsOnUp}
+                                bettingOddsOnUp={obj[1]['up']}
                                 price={lunaPrice}
                                 variation={lunaPriceVariation}
                                 lockedPrice={lunaLockedPrice}
                                 prizesPool={prizesPoolAmount}
-                                bettingOddsOnDown={bettingOddsOnDown}
+                                bettingOddsOnDown={obj[1]['down']}
                                 click={(a) => triggerClick(a)}                        
                                 />
                             </SwiperSlide>

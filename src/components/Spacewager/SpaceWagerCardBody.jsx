@@ -12,14 +12,12 @@ export default function SpaceWagerCardBody(props) {
     }
 
     const downStyle = {
-        background: 'transparent',
-        border:'2px solid red',
+        background: '#f038f0',
         color: '#ffffff'
     }
 
     const upStyle = {
-        background: 'transparent',
-        border:'2px solid green',
+        background: '#18ab64',
         color: '#ffffff'
     }
    
@@ -44,6 +42,7 @@ export default function SpaceWagerCardBody(props) {
                     style={
                         variationStatus == 'down' ? downStyle : upStyle
                     }
+
                 >
                     <p className={'fw-bold fs-6 mb-0'}>{formattedVariation &&(formattedVariation)}</p>
                 </span>
@@ -61,10 +60,10 @@ export default function SpaceWagerCardBody(props) {
         
         <div className="row">
             <div className="col-6 text-start">
-            <p className="my-2 fw-regular fs-6 mb-0">Prizes Pool:</p>
+                <p className="my-2 fw-regular fs-6 mb-0">Prizes Pool:</p>
             </div>
             <div className="col-6 text-end">
-            <p className="my-2 fw-bold fs-6 mb-0">{numeral((parseInt(obj[1]['up']) + parseInt(obj[1]['down']))/ 1_000_000 ).format('0,0.00')} {' '} UST</p>
+                <p className="my-2 fw-bold fs-6 mb-0">{numeral((parseInt(obj[1]['up']) + parseInt(obj[1]['down']))/ 1_000_000 ).format('0,0.00')} {' '} UST</p>
             </div>
         </div>  
                     
@@ -74,9 +73,12 @@ export default function SpaceWagerCardBody(props) {
       //When active round
       obj[1].closing_time * 1000 > Date.now() &&
         <div className="row">
-            <div className="col-12 text-cent">
-        <p className="mb-0 fw-bold fs-3">${numeral(price).format('0,0.000')}</p>
-        </div>
+            <div className="col-6 text-start">
+                <p className="my-2 fw-regular fs-6 mb-0">Prizes Pool:</p>
+            </div>
+            <div className="col-6 text-end">
+                <p className="my-2 fw-bold fs-6 mb-0">{numeral((parseInt(obj[1]['up']) + parseInt(obj[1]['down']))/ 1_000_000 ).format('0,0.00')} {' '} UST</p>
+            </div>
         </div>
     }
  </>
