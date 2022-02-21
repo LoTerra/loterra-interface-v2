@@ -211,7 +211,7 @@ export default () => {
 
     //Change on lunaprice state change
     useEffect(() =>  {       
-      // if(config){
+      // if(config) {
       //   const interval = setInterval(() => {
       //       getLunaPrice(lunaPrice)
       //     }, 1000);
