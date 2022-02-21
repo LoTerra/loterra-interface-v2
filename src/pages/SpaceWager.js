@@ -14,6 +14,10 @@ import 'swiper/swiper-bundle.min.css'
 import 'swiper/swiper.min.css'
 import { useConnectedWallet, useWallet } from '@terra-money/wallet-provider';
 
+import Pusher from 'pusher-js';
+
+// Enable pusher logging - don't include this in production
+// Pusher.logToConsole = true;
 
 
 export default () => {
@@ -199,12 +203,44 @@ export default () => {
         console.log('you just clicked me')
     }
 
+    async function pusher_price(){
+        const pusher = new Pusher('8aa328a021ba69c9198a', {
+            cluster: 'eu'
+        });
+        //console.log(window.sessionStorage.getItem("liveFeed"))
+
+        // if (typeof(Storage) !== "undefined") {
+        //     dispatch({ type: 'setLiveFeed', message: [...state.liveFeed, window.sessionStorage.getItem("liveFeed")] })
+        // }
+
+        const channel = pusher.subscribe('space-wager')
+        channel.bind('price-feed', function (data) {
+            console.log(data)
+            console.log("price-feed websocket")
+            setLunaPrice(parseFloat(data.message))
+
+            //setLiveFeed(liveFeed => [...liveFeed, {obj:JSON.parse(JSON.stringify(data.message)),type:'bid'}])
+            // dispatch({
+            //     type: 'setLiveFeed',
+            //     message: [
+            //         ...state.liveFeed,
+            //         { auction: JSON.parse(parsed_data), type: 'bid' },
+            //     ],
+            // })
+            //window.sessionStorage.setItem('liveFeed', liveFeed );
+        })
+
+        return () => {
+            pusher.unsubscribe('space-wager')
+        }
+    }
+
 
     //Load on mount
     useEffect(() =>{
         getSpacewagerState()
         getSpacewagerConfig()
-        
+        pusher_price()
         /*
             TODO: show the prediction loader here
          */
