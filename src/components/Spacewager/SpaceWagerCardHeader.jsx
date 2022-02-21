@@ -29,10 +29,10 @@ export default function SpaceWagerCardHeader(props) {
         <div className="card-header p-3">
                         { obj[1].closing_time * 1000 > Date.now() &&
                             <div className="row">
-                            <div className="col-6 text-start">
-                                <p>NEXT</p>
+                                <div className="col-6 text-start">
+                                    <p>NEXT</p>
+                                </div>
                             </div>
-                        </div>
                         }
                         { obj[1].closing_time * 1000 < Date.now() && obj[1].closing_time * 1000 > Date.now() - 300000 &&
                             <div className="row">
@@ -51,15 +51,14 @@ export default function SpaceWagerCardHeader(props) {
                         }
                         { obj[1].closing_time * 1000 < Date.now() && obj[1].closing_time * 1000 < Date.now() - 300000 &&
                             <div className="row">
-                            <div className="col-6 text-start">
-                                <p>FINISHED</p>
+                                <div className="col-6 text-start">
+                                    <p>FINISHED</p>
+                                </div>
+                                <div className="col-6 text-end">
+                                    <p>#{obj[0]}</p>
+                                </div>
                             </div>
-                            <div className="col-6 text-end">
-                                <p>#{obj[0]}</p>
-                            </div>
-                        </div>
                         }
-                        
                     </div>
     </>
     )
