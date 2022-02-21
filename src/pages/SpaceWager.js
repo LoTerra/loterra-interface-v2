@@ -22,8 +22,15 @@ export default () => {
     const terra = state.lcd_client
 
     //Basedata spacewager
-    const [config,setConfig] = useState();
-    const [spacewagerState, setSpacewagerState] = useState()
+    const [config,setConfig] = useState({
+        pool_address: "terra1e49fv4xm3c2znzpxmxs0z2z6y74xlwxspxt38s",
+        collector_address: "terra196ydjey9lep0f3fl3k8f7t45fklqs7svvjutwd",
+        round_time: 300,
+        limit_time: 90,
+        denom: "uusd",
+        collector_fee: "0.05"
+    });
+    const [spacewagerState, setSpacewagerState] = useState({round:0})
     const [predictions,setPredictions] = useState([]);
 
     const [lunaPrice, setLunaPrice] = useState(0)
@@ -36,7 +43,6 @@ export default () => {
     const [amountBetOnDown, setAmountBetOnDown] = useState(0)
     const [bettingOddsOnUp, setBettingOdssOnUp] = useState(0)
     const [bettingOddsOnDown, setBettingOdssOnDown] = useState(0)
-    const [round, setRound] = useState(0)
 
     //Testnet settings now api
 
@@ -110,11 +116,13 @@ export default () => {
 
     async function getSpacewagerPredictions(){
         try {
+
             let spacewager_predictions = await api.contractQuery(
                 state.spaceWagerAddress,
                 {
                     predictions: {
-                       
+                        start_after: spacewagerState.round,
+                        limit: 20
                     }
                 }
             );
@@ -186,7 +194,10 @@ export default () => {
         useEffect(() =>{
             getSpacewagerState()
             getSpacewagerConfig()
-            getSpacewagerPredictions()
+            if (spacewagerState){
+                getSpacewagerPredictions()
+            }
+
         },[])
 
 
@@ -300,7 +311,7 @@ export default () => {
                             <SpaceWagerCard 
                             key={k} 
                             obj={obj}
-                            roundAmount={round}
+                            roundAmount={spacewagerState.round}
                             bettingOddsOnUp={bettingOddsOnUp}
                             price={lunaPrice}
                             variation={lunaPriceVariation}
