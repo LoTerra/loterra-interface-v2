@@ -20,6 +20,19 @@ export default function SpaceWagerCardBody(props) {
         background: '#18ab64',
         color: '#ffffff'
     }
+
+    const equalStylePrice = {
+        color: '#ffffff'
+    }
+
+    const downStylePrice = {
+        color: '#f038f0'
+    }
+
+    const upStylePrice = {
+        color: '#18ab64'
+    }
+
     function last_price(){
         if (obj[1].closing_time * 1000 < Date.now() && obj[1].closing_time * 1000 > Date.now() - 300000){
             return price
@@ -42,7 +55,11 @@ export default function SpaceWagerCardBody(props) {
                 <p className="my-2 fs-6 mb-0">Last price:</p>
             </div>
             <div className="col-6 text-start">
-                <p className="mb-0 fw-bold fs-3">${numeral(last_price()).format('0,0.000')}</p>
+                <p className="mb-0 fw-bold fs-3"
+                    style={
+                        variationStatus == 'down' ? upStylePrice : upStylePrice
+                    }
+                >${numeral(last_price()).format('0,0.000')}</p>
             </div>
             <div className="col-6 text-end">
                 <span
