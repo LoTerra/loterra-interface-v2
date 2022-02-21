@@ -180,7 +180,7 @@ export default function SpaceWagerCard(props) {
                             {upButtonShape()}
                         <div className="btn-content">
                         Up
-                        <span className="small fw-normal d-block">{ + 'x Payout'}</span>   
+                        <span className="small fw-normal d-block">{obj[1]['up'] == '0' && obj[1]['down'] != '0' ? 1 : obj[1]['up'] != '0' && obj[1]['down'] == '0' || obj[1]['up'] == '0' && obj[1]['down'] == '0'? 0 : numeral(parseInt(obj[1]['up']) / parseInt(obj[1]['down'])).format("0,0.00")}x Payout</span>
                         </div>
                     </button>
                 }
@@ -212,7 +212,7 @@ export default function SpaceWagerCard(props) {
                         onClick={() => makeBid('down')}>
                             {downButtonShape()}
                             <div className="btn-content">
-                                <span className="small d-block fw-normal">{ + 'x Payout'}</span>
+                                <span className="small d-block fw-normal">{obj[1]['down'] == '0' && obj[1]['up'] != '0' ? 1 : obj[1]['down'] != '0' && obj[1]['up'] == '0' || obj[1]['down'] == '0' && obj[1]['up'] == '0'? 0 : numeral(parseInt(obj[1]['down']) / parseInt(obj[1]['up'])).format("0,0.00") }x Payout</span>
                                 Down
                             </div>
                         </button>
