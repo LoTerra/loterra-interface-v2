@@ -314,7 +314,7 @@ export default () => {
                     }}
                     >Current rounds ends in:</span>
                     <Clock size={36} style={{position:'relative',top:-4, marginRight:5}} weight={'bold'}/>
-                    {state.spaceWagerCurrentTimeRound && formatTime()}
+                    {state.spaceWagerCurrentTimeRound && formatTime() || "00:00"}
                 </p>
             </div>
                     <div className="col-md-4 text-end">
