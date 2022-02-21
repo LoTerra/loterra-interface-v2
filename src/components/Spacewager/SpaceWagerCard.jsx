@@ -4,6 +4,7 @@ import { ThermometerSimple } from 'phosphor-react';
 import SpaceWagerCardHeader from './SpaceWagerCardHeader';
 import { MsgExecuteContract } from '@terra-money/terra.js';
 import { useStore } from '../../store';
+import SpaceWagerCardBody from './SpaceWagerCardBody';
 
 export default function SpaceWagerCard(props) {
 
@@ -161,7 +162,9 @@ export default function SpaceWagerCard(props) {
             <div className={"card spacewager-card h-100 "+(obj.active ? ' active' : '')}>                
                     <SpaceWagerCardHeader obj={obj}/>
                 <div className="card-body">
-                    {/* {setWagerBox("green", "1", "pink", "1", "pink", "1")} */}
+                { 
+                    //Only show button when live
+                    obj[1].closing_time * 1000 > Date.now() &&
                     <button className="btn btn-green fw-bold w-100"
                         style={{borderBottomLeftRadius:0,borderBottomRightRadius:0}}
                         onClick={() => makeBid('up')}>
@@ -171,46 +174,17 @@ export default function SpaceWagerCard(props) {
                         <span className="small fw-normal d-block">{numeral(bettingOddsOnUp).format('0,0.00') + 'x Payout'}</span>    
                         </div>
                     </button>
+                }
                     <div className="card-content">
                     { !bidScreen &&
-                        <>                
-                        <div className="row">
-                            <div className="col-12 text-start">
-                                <p className="my-2 fw-muted fs-6 mb-0">Last price:</p>
-                            </div>
-                            <div className="col-6 text-start">
-                                <p className="mb-0 fw-bold fs-3">${numeral(price).format('0,0.000')}</p>
-                            </div>
-                            <div className="col-6 text-end">
-                                <span
-                                    className="badge"
-                                    style={
-                                        variationStatus == 'down' ? downStyle : upStyle
-                                    }
-                                >
-                                    <p className={'fw-bold fs-6 mb-0'}>{formattedVariation &&(formattedVariation)}</p>
-                                </span>
-                            </div>
-                        </div>
-                        <div className="row">
-                            <div className="col-6 text-start">
-                                <p className="my-2 fw-regular fs-6 mb-0">Locked Price:</p>                    
-                            </div>
-                            <div className="col-6 text-end">
-                                <p className="my-2 fw-bold fs-6 mb-0">${numeral(lockedPrice).format('0,0.000')}</p>
-                            </div>
-                        </div>
-                        
-                        <div className="row">
-                            <div className="col-6 text-start">
-                            <p className="my-2 fw-regular fs-6 mb-0">Prizes Pool:</p>
-                            </div>
-                            <div className="col-6 text-end">
-                            <p className="my-2 fw-bold fs-6 mb-0">{numeral(prizesPool).format('0,0.000')} {' '} LUNA</p>
-                            </div>
-                        </div>
-                        
-                        </>
+                        <SpaceWagerCardBody 
+                        obj={obj}
+                        price={price}
+                        variationStatus={variationStatus}
+                        formattedVariation={formattedVariation}
+                        lockedPrice={lockedPrice}
+                        prizesPool={prizesPool}
+                        />
                     }
                     { bidScreen &&
                         <>
@@ -220,6 +194,9 @@ export default function SpaceWagerCard(props) {
                         </>
                     }
                     </div>
+                    { 
+                    //Only show button when live
+                    obj[1].closing_time * 1000 > Date.now() &&
                         <button className="btn btn-red w-100 fw-bold"
                         style={{borderTopLeftRadius:0,borderTopRightRadius:0}}
                         onClick={() => makeBid('down')}>
@@ -229,6 +206,7 @@ export default function SpaceWagerCard(props) {
                                 Down
                             </div>
                         </button>
+                    }
                 </div>
                     <div className="card-footer p-0">                      
                     </div>

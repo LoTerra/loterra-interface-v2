@@ -120,7 +120,7 @@ export default () => {
             let spacewager_predictions = await api.contractQuery(
                 state.spaceWagerAddress,
                 {
-                    predictions: {
+                    predictions: {                        
                         start_after: spacewagerState.round,
                         limit: 20
                     }
@@ -277,53 +277,55 @@ export default () => {
             </div>
             
             <div className="row">
-            <Swiper
-                spaceBetween={30}
-                //   modules={[Navigation, Pagination, A11y]}                           
-                initialSlide={3}
-                pagination={{ clickable: true }}
-                navigation={true}
-                observeParents={true}
-                observer={true}
-                slidesPerView={1}
-                breakpoints={{
-                    // when window width is >= 640px
-                    1: {
-                        slidesPerView: 1,
-                    },
-                    // when window width is >= 768px
-                    768: {
-                        slidesPerView: 1,
-                    },
-                    1000: {
-                        slidesPerView: 1,
-                    },
-                    1500: {
-                        slidesPerView: 1,
-                    },
-                }}
-                onSlideChange={() => console.log('slide change')}
-                onSwiper={(swiper) => console.log(swiper)}
-            >
-                {predictions.length > 0 && predictions.map((obj,k) => {
-                    return (
-                        <SwiperSlide>
-                            <SpaceWagerCard 
-                            key={k} 
-                            obj={obj}
-                            roundAmount={spacewagerState.round}
-                            bettingOddsOnUp={bettingOddsOnUp}
-                            price={lunaPrice}
-                            variation={lunaPriceVariation}
-                            lockedPrice={lunaLockedPrice}
-                            prizesPool={prizesPoolAmount}
-                            bettingOddsOnDown={bettingOddsOnDown}
-                            click={(a) => triggerClick(a)}
-                            />
-                        </SwiperSlide>
-                    )
-                })}
-            </Swiper> 
+                    {spacewagerState.round > 0 &&
+                    <Swiper
+                    spaceBetween={30}
+                    //   modules={[Navigation, Pagination, A11y]}                           
+                    initialSlide={spacewagerState.round}
+                    pagination={{ clickable: true }}
+                    navigation={true}
+                    observeParents={true}
+                    observer={true}
+                    slidesPerView={1}
+                    breakpoints={{
+                        // when window width is >= 640px
+                        1: {
+                            slidesPerView: 1,
+                        },
+                        // when window width is >= 768px
+                        768: {
+                            slidesPerView: 1,
+                        },
+                        1000: {
+                            slidesPerView: 1,
+                        },
+                        1500: {
+                            slidesPerView: 1,
+                        },
+                    }}
+                    onSlideChange={() => console.log('slide change')}
+                    onSwiper={(swiper) => console.log(swiper)}
+                >
+                    {predictions.length > 0 && predictions.map((obj,k) => {
+                        return (
+                            <SwiperSlide>
+                                <SpaceWagerCard 
+                                key={k} 
+                                obj={obj}
+                                roundAmount={spacewagerState.round}
+                                bettingOddsOnUp={bettingOddsOnUp}
+                                price={lunaPrice}
+                                variation={lunaPriceVariation}
+                                lockedPrice={lunaLockedPrice}
+                                prizesPool={prizesPoolAmount}
+                                bettingOddsOnDown={bettingOddsOnDown}
+                                click={(a) => triggerClick(a)}
+                                />
+                            </SwiperSlide>
+                        )
+                    })}
+                </Swiper> 
+                    }
                 </div>
             </div>
         </>
