@@ -214,7 +214,7 @@ export default function SpaceWagerCard(props) {
                         <>
                             <label>Your bid amount ({bidType})</label>
                             <input className="form-control" type="number" value={amount} onChange={(e) => setAmount(e.target.value)}/>
-                            <button onClick={() => makeBidFinal(obj[0]) } className="btn btn-primary w-100 mt-3">Place bid</button>
+                            <button onClick={() => makeBidFinal(obj[0]) } className="btn btn-plain w-100 mt-3">Place bid</button>
                         </>
                     }
                     </div>
