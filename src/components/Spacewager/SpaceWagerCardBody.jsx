@@ -64,7 +64,7 @@ export default function SpaceWagerCardBody(props) {
             <p className="my-2 fw-regular fs-6 mb-0">Prizes Pool:</p>
             </div>
             <div className="col-6 text-end">
-            <p className="my-2 fw-bold fs-6 mb-0">{numeral(prizesPool).format('0,0.000')} {' '} LUNA</p>
+            <p className="my-2 fw-bold fs-6 mb-0">{numeral((parseInt(obj[1]['up']) + parseInt(obj[1]['down']))/ 1_000_000 ).format('0,0.00')} {' '} UST</p>
             </div>
         </div>  
                     

@@ -137,8 +137,7 @@ export default function SpaceWagerCard(props) {
             state.wallet.walletAddress,
             state.spaceWagerAddress,
             {
-                make_prediction: {up :type},
-                resolve_game: { address: state.wallet.walletAddress, round: round }
+                make_prediction: {up :type}
             },
             { uusd: parseFloat(amount) * 1000000 },
         )
