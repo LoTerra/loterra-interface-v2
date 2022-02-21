@@ -87,14 +87,11 @@ export default function SpaceWagerCard(props) {
     const getVariation = async (price) => {
 
         try {
-            if (price != lockedPrice) {
-                //console.log('lockedPrice', lockedPrice)
-                //console.log('Price', price)
-                if (price > lockedPrice) {
+            if (variation != 0) {
+                if (variation > 0) {
                     setFormattedVariation('⬆ $' + numeral(variation).format('0,0.000'))
                     setVariationStatus('up')
-                    //console.log('up')
-                } else if (price < lockedPrice) {
+                } else if (variation < 0) {
                     setFormattedVariation('⬇ $' + numeral(variation).format('0,0.000'))
                     setVariationStatus('down')
                     //console.log('down')

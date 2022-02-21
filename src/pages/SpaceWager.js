@@ -73,11 +73,11 @@ export default () => {
         let variation = 0.000
         if (lockedPrice != 0) {
             if (lockedPrice > currentPrice) {
-                variation = currentPrice - lockedPrice
+                variation = (currentPrice - lockedPrice) / 1_000_000
             } else if (lockedPrice < currentPrice){
-                variation = currentPrice - lockedPrice
+                variation = (currentPrice - lockedPrice) / 1_000_000
             } else {
-                variation = 0
+                variation = 0.000
             }
         }
         
@@ -355,7 +355,7 @@ export default () => {
                                 roundAmount={spacewagerState.round}
                                 bettingOddsOnUp={obj[1]['up']}
                                 price={lunaPrice}
-                                variation={lunaPriceVariation}
+                                variation={getVariation(obj[1]['locked_price'], obj[1].resolved_price)}
                                 lockedPrice={lunaLockedPrice}
                                 prizesPool={prizesPoolAmount}
                                 bettingOddsOnDown={obj[1]['down']}

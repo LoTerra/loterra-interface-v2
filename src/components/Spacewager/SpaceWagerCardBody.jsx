@@ -5,7 +5,6 @@ export default function SpaceWagerCardBody(props) {
 
     const {obj,price,variationStatus,formattedVariation,lockedPrice,prizesPool} = props;
 
-    
     const equalStyle = {
         background: '#44377e',
         color: '#ffffff'
