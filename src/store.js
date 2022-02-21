@@ -171,11 +171,17 @@ const initialState = {
     balanceStakeOnDogether: 0,
     holderClaimsDogether: [],
     totalBalancePoolDogether: 0,
-    dogetherState: {}
+    dogetherState: {},
+    spaceWagerCurrentTimeRound: 0
 }
 
 const reducer = (state, action) => {
     switch (action.type) {
+        case "setSpaceWagerCurrentTimeRound":
+            return {
+                ...state,
+                spaceWagerCurrentTimeRound: action.message,
+            }
         case "setDogetherState":
             return {
                 ...state,

@@ -15,6 +15,7 @@ import 'swiper/swiper.min.css'
 import { useConnectedWallet, useWallet } from '@terra-money/wallet-provider';
 
 import Pusher from 'pusher-js';
+import {min} from "@popperjs/core/lib/utils/math";
 
 // Enable pusher logging - don't include this in production
 // Pusher.logToConsole = true;
@@ -229,6 +230,19 @@ export default () => {
             pusher.unsubscribe('space-wager')
         }
     }
+    function formatTime(){
+
+            let timeBetween = state.spaceWagerCurrentTimeRound * 1000  - (Date.now() - 300000)
+            const seconds = Math.floor((timeBetween / 1000) % 60)
+            const minutes = Math.floor((timeBetween / 1000 / 60) % 60)
+            let format_minutes = minutes < 10 ? "0" + minutes : minutes;
+            let format_seconds = seconds < 10 ? "0" + seconds : seconds;
+
+            return `${format_minutes} : ${format_seconds}`
+
+            //   console.log(currentTime, expiryTimestamp)
+
+    }
 
 
     //Load on mount
@@ -236,6 +250,9 @@ export default () => {
         getSpacewagerState()
         getSpacewagerConfig()
         pusher_price()
+        setInterval(() => {
+            formatTime()
+        }, 1000)
         /*
             TODO: show the prediction loader here
          */
@@ -297,8 +314,8 @@ export default () => {
                         opacity: 0.5
                     }}
                     >Current rounds ends in:</span>
-                    <Clock size={36} style={{position:'relative',top:-4, marginRight:5}} weight={'bold'}/> 
-                    00:00
+                    <Clock size={36} style={{position:'relative',top:-4, marginRight:5}} weight={'bold'}/>
+                    {state.spaceWagerCurrentTimeRound && formatTime()}
                 </p>
             </div>
                     <div className="col-md-4 text-end">

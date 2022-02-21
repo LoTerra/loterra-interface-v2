@@ -1,7 +1,9 @@
 import React, { useState, useEffect } from 'react'
+import {useStore} from "../../store";
 
 export default function SpaceWagerCardHeader(props) {
 
+    const { state, dispatch } = useStore()
     const {obj} = props;
 
     const [currentTime, setCurrentTime] = useState(Date.now())
@@ -9,15 +11,26 @@ export default function SpaceWagerCardHeader(props) {
     const timeBetween = obj[1].closing_time * 1000  - (currentTime - 300000)
     const seconds = Math.floor((timeBetween / 1000) % 60)
     const minutes = Math.floor((timeBetween / 1000 / 60) % 60)
+    let format_minutes = minutes < 10 ? "0" + minutes : minutes;
+    let format_seconds = seconds < 10 ? "0" + seconds : seconds;
+
     const hours = Math.floor((timeBetween / (1000 * 60 * 60)) % 24)
     const days = Math.floor(timeBetween / (1000 * 60 * 60 * 24))
 
     const one_percent = parseInt(obj[1].closing_time * 1000) / 100
     const percentage = parseInt(currentTime / one_percent);
 
+    function setGlobalState(){
+
+        if (obj[1].closing_time * 1000 < Date.now() && obj[1].closing_time * 1000 > Date.now() - 300000) {
+            dispatch({ type: 'setSpaceWagerCurrentTimeRound', message: obj[1].closing_time })
+        }
+    }
+
     useEffect(() => {
         const interval = setInterval(() => {
             setCurrentTime(Date.now())
+            setGlobalState()
             //   console.log(currentTime, expiryTimestamp)
         }, 1000)
 
@@ -40,7 +53,7 @@ export default function SpaceWagerCardHeader(props) {
                                     <p>LIVE</p>
                                 </div>
                                 <div className="col-6 text-end">
-                                    <p>{minutes}:{seconds} #{obj[0]}</p>
+                                    <p>{format_minutes}:{format_seconds} #{obj[0]}</p>
                                 </div>
                                 <div className="col-12">
                                     <div className="progress">
