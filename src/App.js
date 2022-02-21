@@ -121,7 +121,7 @@ class App extends Component {
                         <div id="sidebar-wrapper" className="sticky-top">
                             <NormalNav />
                         </div>
-                        <div id="page-content-wrapper" >
+                        <div id="page-content-wrapper">
                         <nav className="navbar navbar-expand navbar-light sticky-top" id="smallNav">
                     <div className="container-fluid px-0">
                         <button className="btn btn-default" id="sidebarToggle"> <List size={26} /></button>

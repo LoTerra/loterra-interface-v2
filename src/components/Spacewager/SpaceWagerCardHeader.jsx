@@ -12,7 +12,7 @@ export default function SpaceWagerCardHeader(props) {
     const hours = Math.floor((timeBetween / (1000 * 60 * 60)) % 24)
     const days = Math.floor(timeBetween / (1000 * 60 * 60 * 24))
 
-    const one_percent = obj[1].closing_time * 1000 / 100
+    const one_percent = parseInt(obj[1].closing_time * 1000) / 100
     const percentage = parseInt(currentTime / one_percent);
 
     useEffect(() => {

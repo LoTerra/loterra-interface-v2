@@ -204,6 +204,7 @@ export default () => {
     useEffect(() =>{
         getSpacewagerState()
         getSpacewagerConfig()
+        
         /*
             TODO: show the prediction loader here
          */
@@ -217,11 +218,11 @@ export default () => {
       //     }, 1000);
       //     return () => clearInterval(interval);
       // }
-        getSpacewagerPredictions()
-    },[lunaPrice,config, spacewagerState.round])
+      getSpacewagerPredictions()
+    },[config, spacewagerState.round])
  
     return (
-        <>
+        <div className="spacewager-wrapper">
             <div className="container">
                 <div className="w-100 py-5 text-center">
                     <h1 className="mb-0 fw-bold">Spacewager</h1>
@@ -233,7 +234,7 @@ export default () => {
                         <span
                             className="badge"
                             style={{
-                                background: '#44377e',
+                                background: '#0b012499',
                                 color: '#ffffff',
                                 marginLeft: '7px',
                                 position: 'relative',
@@ -252,7 +253,7 @@ export default () => {
                     <div className="col-md-4 d-flex text-center">
                 <p className="align-self-center w-100 mb-0 text-white fs-1 fw-bold"
                 style={{
-                    background: '#16073e',
+                    background: '#0b012499',
                     borderRadius: 5,
                     padding: 15
                 }}
@@ -327,7 +328,7 @@ export default () => {
                                 lockedPrice={lunaLockedPrice}
                                 prizesPool={prizesPoolAmount}
                                 bettingOddsOnDown={bettingOddsOnDown}
-                                click={(a) => triggerClick(a)}
+                                click={(a) => triggerClick(a)}                        
                                 />
                             </SwiperSlide>
                         )
@@ -336,6 +337,6 @@ export default () => {
                     }
                 </div>
             </div>
-        </>
+        </div>
     )
 }
