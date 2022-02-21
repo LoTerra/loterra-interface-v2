@@ -284,6 +284,8 @@ export default () => {
                                 background: '#0b012499',
                                 color: '#ffffff',
                                 marginLeft: '7px',
+                                borderRadius: 20,
+                                padding: 20,
                                 position: 'relative',
                                 top: '-2px',
                             }}
@@ -301,7 +303,7 @@ export default () => {
                 <p className="align-self-center w-100 mb-0 text-white fs-1 fw-bold"
                 style={{
                     background: '#0b012499',
-                    borderRadius: 5,
+                    borderRadius: 20,
                     padding: 15
                 }}
                 >
