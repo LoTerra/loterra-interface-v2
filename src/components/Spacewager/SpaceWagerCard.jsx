@@ -33,12 +33,14 @@ export default function SpaceWagerCard(props) {
     }
 
     const downStyle = {
-        background: '#ff0dff',
+        background: 'transparent',
+        border:'2px solid red',
         color: '#ffffff'
     }
 
     const upStyle = {
-        background: '#20ff93',
+        background: 'transparent',
+        border:'2px solid green',
         color: '#ffffff'
     }
 
@@ -179,14 +181,14 @@ export default function SpaceWagerCard(props) {
                             <div className="col-6 text-start">
                                 <p className="mb-0 fw-bold fs-3">${numeral(price).format('0,0.000')}</p>
                             </div>
-                            <div className="col-6 text-end fs-2">
+                            <div className="col-6 text-end">
                                 <span
                                     className="badge"
                                     style={
                                         variationStatus == 'down' ? downStyle : upStyle
                                     }
                                 >
-                                    <p className={'my-2 fw-bold fs-6 mb-0'}>{formattedVariation &&(formattedVariation)}</p>
+                                    <p className={'fw-bold fs-6 mb-0'}>{formattedVariation &&(formattedVariation)}</p>
                                 </span>
                             </div>
                         </div>
