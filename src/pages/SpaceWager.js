@@ -208,9 +208,9 @@ export default () => {
                     <h1 className="mb-0 fw-bold">Spacewager</h1>
                     <h2 className="my-2 fw-regular fs-6 mb-0">Bets on the price of LUNA</h2>
                 </div>
-            <div className="luna-price mb-3">
+            <div className="luna-price mb-5">
                 <div className="row">
-                    <div className="col-6 text-start">
+                    <div className="col-md-4 text-start">
                         <span
                             className="badge"
                             style={{
@@ -230,7 +230,27 @@ export default () => {
                             <h2 className={lunaStatus}>${numeral(lunaPrice).format('0,0.000')}</h2>
                         </span>
                     </div>
-                    <div className="col-6 text-end">
+                    <div className="col-md-4 d-flex text-center">
+                <p className="align-self-center w-100 mb-0 text-white fs-1 fw-bold"
+                style={{
+                    background: '#16073e',
+                    borderRadius: 5,
+                    padding: 15
+                }}
+                >
+                    <span 
+                    className="d-block"
+                    style={{
+                        fontSize: 16,
+                        fontWeight: 400,
+                        opacity: 0.5
+                    }}
+                    >Current rounds ends in:</span>
+                    <Clock size={36} style={{position:'relative',top:-4, marginRight:5}} weight={'bold'}/> 
+                    00:00
+                </p>
+            </div>
+                    <div className="col-md-4 text-end">
                         <p className="mb-0 text-muted">Predictions?</p>
                         <h2 className={lunaStatus}>0000</h2>
                         <button className="btn btn-plain fw-bold w-20 ms-2"
@@ -244,12 +264,7 @@ export default () => {
                     </div>
                 </div>
             </div>
-            <div className="w-100 my-2 mb-5 text-center">
-                <p className="mb-0 text-white fs-1 fw-bold">
-                    <Clock size={36} style={{position:'relative',top:-4}} weight={'bold'}/> 
-                    00:00
-                </p>
-            </div>
+            
             <div className="row">
             <Swiper
                 spaceBetween={30}
