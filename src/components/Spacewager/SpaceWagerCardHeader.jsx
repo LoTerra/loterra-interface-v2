@@ -6,7 +6,7 @@ export default function SpaceWagerCardHeader(props) {
 
     const [currentTime, setCurrentTime] = useState(Date.now())
 
-    const timeBetween = obj[1].closing_time * 1000 - currentTime
+    const timeBetween = obj[1].closing_time * 1000  - (currentTime - 300000)
     const seconds = Math.floor((timeBetween / 1000) % 60)
     const minutes = Math.floor((timeBetween / 1000 / 60) % 60)
     const hours = Math.floor((timeBetween / (1000 * 60 * 60)) % 24)
@@ -32,14 +32,6 @@ export default function SpaceWagerCardHeader(props) {
                             <div className="col-6 text-start">
                                 <p>NEXT</p>
                             </div>
-                            <div className="col-6 text-end">
-                                <p>{minutes}:{seconds} #{obj[0]}</p>
-                            </div>
-                            <div className="col-12">
-                                <div className="progress">
-                                    <div className="progress-bar" role="progressbar" style={{width:percentage+'%'}} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
-                            </div>
                         </div>
                         }
                         { obj[1].closing_time * 1000 < Date.now() && obj[1].closing_time * 1000 > Date.now() - 300000 &&
@@ -48,7 +40,7 @@ export default function SpaceWagerCardHeader(props) {
                                     <p>LIVE</p>
                                 </div>
                                 <div className="col-6 text-end">
-                                    <p>#{obj[0]}</p>
+                                    <p>{minutes}:{seconds} #{obj[0]}</p>
                                 </div>
                                 <div className="col-12">
                                     <div className="progress">
@@ -64,11 +56,6 @@ export default function SpaceWagerCardHeader(props) {
                             </div>
                             <div className="col-6 text-end">
                                 <p>#{obj[0]}</p>
-                            </div>
-                            <div className="col-12">
-                                <div className="progress">
-                                <div className="progress-bar" role="progressbar" style={{width:'100%'}} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                                </div>
                             </div>
                         </div>
                         }
