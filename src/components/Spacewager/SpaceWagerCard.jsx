@@ -37,6 +37,7 @@ export default function SpaceWagerCard(props) {
     const [bidScreen, setBidScreen] = useState(false)
     const [formattedVariation, setFormattedVariation] = useState(0)
     const [personalBidInfo, setPersonalBidInfo] = useState()
+    const [ustBalance, setUstBalance] = useState()
 
     //Testnet settings now api
 
@@ -98,6 +99,22 @@ export default function SpaceWagerCard(props) {
     const upStyle = {
         borderColor: '#17B96B'
     }
+
+    function getUserBalance() {
+        if (connectedWallet) {
+            lcd.bank.balance(connectedWallet.walletAddress).then(([coins]) => {
+                coins = coins;
+              // console.log(coins ? coins.get('uusd').amount / 1000000 : '')              
+               const ustBalance = coins.get('uusd').toData()         
+               
+              setUstBalance(ustBalance.amount / 1000000)
+              dispatch({ type: 'setUstBalance', message: ustBalance.amount / 1000000 })
+            });
+        } else {
+            setUstBalance(null);
+        }
+    }
+    
 
     const getVariation = async (lockedPrice, currentPrice) => {
 
@@ -263,7 +280,7 @@ export default function SpaceWagerCard(props) {
                             variationStatus == 'DOWN' ? downStyle : upStyle
                         }
                     >
-                    { !bidScreen &&
+                    { !bidScreen && 
                         <SpaceWagerCardBody 
                         obj={obj}
                         price={price}
@@ -293,7 +310,7 @@ export default function SpaceWagerCard(props) {
                             </div>
                             <input className="form-control" type="number" value={amount} onChange={(e) => setAmount(e.target.value)}/>
                             <h6 className='mt-2 text-muted text-end'>
-                                Balance: {state.wallet.amount}UST
+                                Balance: {ustBalance()} UST
                             </h6>
                             <button onClick={() => makeBidFinal(obj[0]) } className="btn btn-plain w-100 mt-1">Enter {bidType}</button>
                             <h6 className='mt-2 text-muted'>
