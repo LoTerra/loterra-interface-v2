@@ -15,7 +15,8 @@ export default function SpaceWagerCard(props) {
         id,
         obj,
         dataLength,
-        roundAmount, 
+        roundAmount,
+        currentTimeRound, 
         bettingOddsOnUp, 
         price, 
         variation,
@@ -185,7 +186,7 @@ export default function SpaceWagerCard(props) {
                     borderTopRightRadius: 20
                 }}
             >                
-                <SpaceWagerCardHeader obj={obj} isLivePrediction={isLivePrediction} isNextPrediction={isNextPrediction} isPastPrediction={isPastPrediction}/>
+                <SpaceWagerCardHeader obj={obj} currentTimeRound={currentTimeRound} isLivePrediction={isLivePrediction} isNextPrediction={isNextPrediction} isPastPrediction={isPastPrediction}/>
 
                 <div className="card-body">
                 { 
