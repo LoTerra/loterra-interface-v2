@@ -200,7 +200,7 @@ export default function SpaceWagerCard(props) {
                                 </div>
                             </div>
                             <input className="form-control" type="number" value={amount} onChange={(e) => setAmount(e.target.value)}/>
-                            <button onClick={() => makeBidFinal(obj[0]) } className="btn btn-plain w-100 mt-3">Place bid on {bidType}</button>
+                            <button onClick={() => makeBidFinal(obj[0]) } className="btn btn-plain w-100 mt-3">Enter {bidType}</button>
                             <h6 className='mt-2 text-muted'>
                                 You won’t be able to remove or change your position once you enter it.
                             </h6>
