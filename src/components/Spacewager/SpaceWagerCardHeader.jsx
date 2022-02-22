@@ -85,13 +85,17 @@ export default function SpaceWagerCardHeader(props) {
                             <div className="row">
                                 <div className="col-6 text-start">
                                     <p>
-                                        { obj[1].success && <CheckCircle size={23} /> ||  <WarningCircle size={23} /> }
                                         FINISHED
                                     </p>
-
                                 </div>
                                 <div className="col-6 text-end">
                                     <p>#{obj[0]}</p>
+                                </div>
+                                <div className="col-12 text-start">
+                                    <p>
+                                        Success:
+                                        { obj[1].success && <CheckCircle size={23} /> ||  <WarningCircle size={23} /> }
+                                    </p>
                                 </div>
                             </div>
                         }
