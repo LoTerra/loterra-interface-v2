@@ -68,8 +68,11 @@ export default function SpaceWagerCardHeader(props) {
                             <div className="row">
                                 <div className="col-6 text-start">
                                     <div>
-                                        <PlayCircle size={23} style={{position:'relative', top:-1, marginRight:5}} weight={'bold'}/>
-                                        <p>NEXT</p>
+                                        <p>
+                                            <PlayCircle size={23} style={{position:'relative', top:-1, marginRight:5}} weight={'bold'}/>
+
+                                            NEXT
+                                        </p>
                                     </div>
                                 </div>
                                 <div className="col-6 text-end">
@@ -80,7 +83,10 @@ export default function SpaceWagerCardHeader(props) {
                         { isLivePrediction &&
                             <div className="row">
                                 <div className="col-6 text-start">
-                                    <p>LIVE</p>
+                                    <p>
+                                        <PlayCircle size={23} style={{position:'relative', top:-1, marginRight:5}} weight={'bold'}/>
+                                        LIVE
+                                    </p>
                                 </div>
                                 <div className="col-6 text-end">
                                     <p>{format_minutes}:{format_seconds} #{obj[0]}</p>
@@ -103,6 +109,7 @@ export default function SpaceWagerCardHeader(props) {
                             <div className="row">
                                 <div className="col-6 text-start">
                                     <p>
+                                        <Prohibit size={23} style={{position:'relative', top:-1, marginRight:5}} weight={'bold'}/>
                                         FINISHED
                                     </p>
                                 </div>
