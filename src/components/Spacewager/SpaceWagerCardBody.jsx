@@ -42,7 +42,6 @@ export default function SpaceWagerCardBody(props) {
             return obj[1].resolved_price / 1000000
         }
     }
-   
 
     return (
  <>

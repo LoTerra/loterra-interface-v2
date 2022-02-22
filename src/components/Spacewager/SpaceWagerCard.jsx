@@ -10,8 +10,11 @@ import { registerables } from 'chart.js';
 export default function SpaceWagerCard(props) {
 
     const [variationStatus, setVariationStatus] = useState('')
+
     const {
-        obj, 
+        id,
+        obj,
+        dataLength,
         roundAmount, 
         bettingOddsOnUp, 
         price, 
@@ -69,9 +72,20 @@ export default function SpaceWagerCard(props) {
         borderColor: '#18ab64'
     }
 
-    const getVariation = async (price) => {
+    const getVariation = async (lockedPrice, currentPrice) => {
 
         try {
+            let variation = 0.000
+            if (currentPrice != 0) {
+                if (lockedPrice > currentPrice) {
+                    variation = (currentPrice - lockedPrice) / 1_000_000
+                } else if (lockedPrice < currentPrice){
+                    variation = (currentPrice - lockedPrice) / 1_000_000
+                } else {
+                    variation = 0.000
+                }
+            }
+
             if (variation != 0) {
                 if (variation > 0) {
                     setFormattedVariation('⬆ $' + numeral(variation).format('0,0.000'))
@@ -138,16 +152,30 @@ export default function SpaceWagerCard(props) {
             })
     }
 
+    // function getVariationRatio(lockedPrice, currentPrice) {
+    //     let variation = 0.000
+    //     if (lockedPrice != 0) {
+    //         if (lockedPrice > currentPrice) {
+    //             variation = (currentPrice - lockedPrice) / 1_000_000
+    //         } else if (lockedPrice < currentPrice){
+    //             variation = (currentPrice - lockedPrice) / 1_000_000
+    //         } else {
+    //             variation = 0.000
+    //         }
+    //     }
+    //
+    //     return variation
+    // }
 
     //Load on mount
     useEffect(() =>  {
 
-        const interval = setInterval(() => {
-            getVariation(price)
-        }, 1000);
-          return () => clearInterval(interval); 
-            
-    },[price])
+        if (obj[1].resolved_price != "0"){
+            getVariation(obj[1].locked_price, obj[1].resolved_price)
+        }else{
+            getVariation(obj[1].locked_price, state.spaceWagerLastPrice * 1000000)
+        }
+    },[state.spaceWagerLastPrice])
 
     return (
        <div className="col-9 mx-auto">
@@ -162,7 +190,7 @@ export default function SpaceWagerCard(props) {
                 <div className="card-body">
                 { 
                     //Only show button when live
-                    isNextPrediction &&
+                    isNextPrediction && !state.spaceWagerResolving &&
                     <button className="btn btn-green fw-bold w-100"
                         style={{borderBottomLeftRadius:0,borderBottomRightRadius:0}}
                         onClick={() => makeBid('UP')}>
@@ -217,7 +245,7 @@ export default function SpaceWagerCard(props) {
                     </div>
                     { 
                     //Only show button when live
-                    isNextPrediction &&
+                    isNextPrediction && !state.spaceWagerResolving &&
                         <button className="btn btn-red w-100 fw-bold"
                         style={{borderTopLeftRadius:0,borderTopRightRadius:0}}
                         onClick={() => makeBid('DOWN')}>

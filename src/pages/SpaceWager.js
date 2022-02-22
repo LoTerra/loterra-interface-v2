@@ -206,12 +206,13 @@ export default () => {
 
         const channel = pusher.subscribe('space-wager')
         channel.bind('price-feed', function (data) {
+            dispatch({ type: 'setSpaceWagerLastPrice', message: parseFloat(data.message) })
             setLunaPrice(parseFloat(data.message))
         })
 
         channel.bind('new-prediction', function (data) {
-            console.log(data)
             setSpacewagerState({round: parseFloat(data.message)})
+            dispatch({ type: 'setSpaceWagerResolving', message: false })
         })
 
         return () => {
@@ -220,14 +221,14 @@ export default () => {
     }
     function formatTime(){
 
-            let timeBetween = state.spaceWagerCurrentTimeRound * 1000  - (Date.now() - 300000)
+            let timeBetween = state.spaceWagerCurrentTimeRound * 1000 - Date.now()
             const seconds = Math.floor((timeBetween / 1000) % 60)
             const minutes = Math.floor((timeBetween / 1000 / 60) % 60)
             let format_minutes = minutes < 10 ? "0" + minutes : minutes;
             let format_seconds = seconds < 10 ? "0" + seconds : seconds;
 
-            let format_message = "Resolving..."
-            if (state.spaceWagerCurrentTimeRound * 1000 < Date.now() &&  state.spaceWagerCurrentTimeRound * 1000 > Date.now() - 300000){
+            let format_message = "Closing..."
+            if (state.spaceWagerCurrentTimeRound * 1000 > Date.now()){
                 format_message = format_minutes + ":" +format_seconds
             }
 
@@ -356,17 +357,19 @@ export default () => {
                     onSlideChange={() => console.log('slide change')}
                     onSwiper={(swiper) => console.log(swiper)}
                 >
-                    {predictions.length > 0 && predictions.map((obj,k) => {
+                    {predictions.length > 0 && predictions.map((obj, k) => {
                         return (
-                            <SwiperSlide>
+                            <SwiperSlide key={k} >
                                 <SpaceWagerCard 
-                                key={k} 
+                                key={k}
+                                id={k}
+                                dataLength={predictions.length}
                                 obj={obj}
                                 roundAmount={spacewagerState.round}
                                 bettingOddsOnUp={obj[1]['up']}
                                 price={lunaPrice}
-                                variation={getVariation(obj[1]['locked_price'], obj[1].resolved_price)}
-                                lockedPrice={lunaLockedPrice}
+                                variation={getVariation(obj[1]['locked_price'], obj[1].resolved_price )}
+                                lockedPrice={obj[1]['locked_price']}
                                 prizesPool={prizesPoolAmount}
                                 bettingOddsOnDown={obj[1]['down']}
                                 isLivePrediction={obj[1].closing_time * 1000 < Date.now() && obj[1].closing_time * 1000 > Date.now() - 300000}

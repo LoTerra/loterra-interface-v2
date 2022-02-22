@@ -23,16 +23,16 @@ export default function SpaceWagerCardHeader(props) {
 
     function setGlobalState(){
 
-        if (isLivePrediction) {
-            console.log("obj[1].closing_time dispatch")
-            console.log(obj[1].closing_time )
+        if (isNextPrediction) {
             dispatch({ type: 'setSpaceWagerCurrentTimeRound', message: obj[1].closing_time })
         }
+
     }
 
     useEffect(() => {
         const interval = setInterval(() => {
             setCurrentTime(Date.now())
+
             //   console.log(currentTime, expiryTimestamp)
             setGlobalState()
         }, 1000)
@@ -76,7 +76,7 @@ export default function SpaceWagerCardHeader(props) {
                                 </div>
                                 <div className="col-12">
                                     <div className="progress">
-                                        <div className="progress-bar" role="progressbar" style={{width:'100%'}} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                        <div className="progress-bar" role="progressbar" style={{width:'10%'}} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
                                     </div>
                                 </div>
                             </div>
