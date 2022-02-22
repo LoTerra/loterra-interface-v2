@@ -94,7 +94,7 @@ export default function SpaceWagerCardHeader(props) {
                                 <div className="col-12 text-start">
                                     <p>
                                         Success:
-                                        { obj[1].success && <CheckCircle size={23} /> ||  <WarningCircle size={23} /> }
+                                        { obj[1].success && " true" ||  " false" }
                                     </p>
                                 </div>
                             </div>
