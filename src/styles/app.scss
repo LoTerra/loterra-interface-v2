@@ -853,9 +853,14 @@ h4,
     }
 }
 
-.progress-bar {
-    background-color:#ff0dff;
+.progress {
+    background: #352a52;
+    .progress-bar {
+        background-color:#fff;
+    }
 }
+
+
 
 .badge {
     &.progress-badge {

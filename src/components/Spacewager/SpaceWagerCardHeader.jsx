@@ -1,7 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import {useStore} from "../../store";
 import { Prohibit, PlayCircle } from 'phosphor-react';
-import { Progress } from 'bootstrap';
 
 export default function SpaceWagerCardHeader(props) {
 
@@ -88,13 +87,14 @@ export default function SpaceWagerCardHeader(props) {
                                 </div>
                                 <div className="col-12">
                                     <div className="progress">
-                                        <progress
+                                        <div
                                             className='progress-bar'
                                             color='#000000'
                                             value={remainingTime()}
                                             max={100}
-                                            style={{width:'100%'}}
-                                        />
+                                            style={{width:remainingTime()+'%'}}
+                                        >
+                                            </div>
                                     </div>
                                 </div>
                             </div>

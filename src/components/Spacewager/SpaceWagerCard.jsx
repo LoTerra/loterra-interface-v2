@@ -2,10 +2,11 @@ import React, { useEffect,useState } from 'react'
 import numeral from 'numeral';
 import { ThermometerSimple, ArrowUp, ArrowDown } from 'phosphor-react';
 import SpaceWagerCardHeader from './SpaceWagerCardHeader';
-import { MsgExecuteContract } from '@terra-money/terra.js';
+import { LCDClient, MsgExecuteContract, WasmAPI } from '@terra-money/terra.js';
 import { useStore } from '../../store';
 import SpaceWagerCardBody from './SpaceWagerCardBody';
 import { registerables } from 'chart.js';
+
 
 export default function SpaceWagerCard(props) {
 
@@ -35,6 +36,16 @@ export default function SpaceWagerCard(props) {
     const [bidType, setBidType] = useState('');
     const [bidScreen, setBidScreen] = useState(false)
     const [formattedVariation, setFormattedVariation] = useState(0)
+    const [personalBidInfo, setPersonalBidInfo] = useState()
+
+    //Testnet settings now api
+
+    const lcd = new LCDClient({
+        URL: 'https://bombay-lcd.terra.dev/',
+        chainID: 'bombay-12'
+    });
+
+    const api = new WasmAPI(lcd.apiRequester)
 
     function upButtonShape(){
         return (
@@ -117,6 +128,24 @@ export default function SpaceWagerCard(props) {
         setBidScreen(!bidScreen)
     }
 
+    const getPersonalBids = async (round) => {
+        try {
+            let personal_bid_info = await api.contractQuery(
+                state.spaceWagerAddress,
+                {
+                    game: {
+                       address:state.wallet.walletAddress,
+                       round: round
+                    }
+                }
+            );
+            console.log('getPersonalBids',personal_bid_info)
+            setPersonalBidInfo(personal_bid_info)
+        } catch(e) {
+            console.log(e)
+        }
+    }
+
     const makeBidFinal = (round) => {
         if(amount == 0 || amount == ''){
             alert('please fill a amount you want to bid')
@@ -167,6 +196,12 @@ export default function SpaceWagerCard(props) {
     //
     //     return variation
     // }
+
+    useEffect(() => {
+        if(state.wallet && obj[0]){
+            getPersonalBids(obj[0])
+        }
+    },[obj[0],state.wallet,roundAmount])
 
     //Load on mount
     useEffect(() =>  {
@@ -258,7 +293,22 @@ export default function SpaceWagerCard(props) {
                         </button>
                     }
                 </div>
-                    <div className="card-footer p-0">                      
+                    <div className="card-footer p-0">          
+                        { personalBidInfo && (personalBidInfo.up > 0 || personalBidInfo.down > 0) &&
+                            <div className="row">
+                                <div className="col-12 text-center">
+                                    <p className="text-center">Your stats</p>
+                                </div>
+                                <div className="col-md-6">
+                                    <strong>UP VOTE</strong>
+                                    <p>{numeral(personalBidInfo.up / 1000000).format('0,0.000') }</p>                              
+                                </div>
+                                <div className="col-md-6">
+                                    <strong>DOWN VOTE</strong>
+                                    <p>{numeral(personalBidInfo.down / 1000000).format('0,0.000') }</p>  
+                                </div>
+                            </div>          
+                        }
                     </div>
                 </div>
        </div>

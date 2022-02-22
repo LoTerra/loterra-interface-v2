@@ -49,9 +49,9 @@ export default function SpaceWagerCardBody(props) {
              //When not active round
              isPastPrediction && obj[1].success == null  &&
              <>
-                 <div>
+                 <p className="small">
                      This round’s closing transaction has been submitted to the blockchain, and is awaiting confirmation.
-                 </div>
+                 </p>
              </>
          }
         { 
