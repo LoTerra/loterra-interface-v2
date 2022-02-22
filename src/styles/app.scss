@@ -854,7 +854,8 @@ h4,
 }
 
 .progress {
-    background: #352a52;
+    background: rgba(0, 0, 0, 0.37);
+    border-color: rgba(0, 0, 0, 0.0);
     .progress-bar {
         background-color:#fff;
     }

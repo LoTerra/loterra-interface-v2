@@ -68,8 +68,11 @@ export default function SpaceWagerCardHeader(props) {
                             <div className="row">
                                 <div className="col-6 text-start">
                                     <div>
-                                        <PlayCircle size={23} style={{position:'relative', top:-1, marginRight:5}} weight={'bold'}/>
-                                        <p>NEXT</p>
+                                        <p>
+                                            <PlayCircle size={23} style={{position:'relative', top:-1, marginRight:5}} weight={'bold'}/>
+
+                                            NEXT
+                                        </p>
                                     </div>
                                 </div>
                                 <div className="col-6 text-end">
