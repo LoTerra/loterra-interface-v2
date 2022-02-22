@@ -307,6 +307,18 @@ export default function SpaceWagerCard(props) {
                                     <strong>DOWN VOTE</strong>
                                     <p>{numeral(personalBidInfo.down / 1000000).format('0,0.000') }</p>  
                                 </div>
+                                { obj[1].success && obj[1].is_up && personalBidInfo.up > 0 &&
+                                    <div className="col-12">
+                                        <p>YOU WON WITH UP</p>
+                                        <button className="btn btn-plain">Collect prize</button>
+                                    </div>
+                                }
+                                { obj[1].success && !obj[1].is_up && personalBidInfo.down > 0 &&
+                                    <div className="col-12">
+                                    <p>YOU WON WITH DOWN</p>
+                                    <button className="btn btn-plain">Collect prize</button>
+                                </div>
+                                }
                             </div>          
                         }
                     </div>
