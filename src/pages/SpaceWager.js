@@ -366,6 +366,7 @@ export default () => {
                                 dataLength={predictions.length}
                                 obj={obj}
                                 roundAmount={spacewagerState.round}
+                                currentTimeRound={state.spaceWagerCurrentTimeRound}
                                 bettingOddsOnUp={obj[1]['up']}
                                 price={lunaPrice}
                                 variation={getVariation(obj[1]['locked_price'], obj[1].resolved_price )}

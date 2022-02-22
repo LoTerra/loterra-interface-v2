@@ -1,11 +1,12 @@
 import React, { useState, useEffect } from 'react'
 import {useStore} from "../../store";
-import { Prohibit, PlayCircle, WarningCircle, CheckCircle } from 'phosphor-react';
+import { Prohibit, PlayCircle } from 'phosphor-react';
+import { Progress } from 'bootstrap';
 
 export default function SpaceWagerCardHeader(props) {
 
     const { state, dispatch } = useStore()
-    const {obj, isLivePrediction, isNextPrediction, isPastPrediction} = props;
+    const {obj, currentTimeRound} = props;
 
     const [currentTime, setCurrentTime] = useState(Date.now())
 
@@ -23,22 +24,33 @@ export default function SpaceWagerCardHeader(props) {
 
     function setGlobalState(){
 
-        if (isNextPrediction) {
+        if (obj[1].closing_time * 1000 < Date.now() && obj[1].closing_time * 1000 > Date.now() - 300000) {
             dispatch({ type: 'setSpaceWagerCurrentTimeRound', message: obj[1].closing_time })
         }
+    }
 
+    function remainingTime(currentTimeRound) {
+        let timeBetween = currentTimeRound * 1000  - (Date.now() - 300000)
+            const seconds = Math.floor((timeBetween / 1000))
+            const minutes = Math.floor((timeBetween / 1000 / 60) % 60)
+            let remainingTime = (parseInt(minutes) / 60) + seconds
+
+            let percentage = ((parseInt(remainingTime) * 100) / 300)
+            
+            return percentage
+            
     }
 
     useEffect(() => {
         const interval = setInterval(() => {
             setCurrentTime(Date.now())
-
-            //   console.log(currentTime, expiryTimestamp)
             setGlobalState()
+            remainingTime(currentTimeRound)
+            //   console.log(currentTime, expiryTimestamp)
         }, 1000)
 
         return () => clearInterval(interval)
-    }, [isLivePrediction])
+    }, [])
 
     return (
         <>
