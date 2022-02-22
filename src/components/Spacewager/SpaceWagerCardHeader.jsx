@@ -6,7 +6,7 @@ import { Progress } from 'bootstrap';
 export default function SpaceWagerCardHeader(props) {
 
     const { state, dispatch } = useStore()
-    const {obj, currentTimeRound} = props;
+    const {obj, currentTimeRound, isLivePrediction, isNextPrediction, isPastPrediction} = props;
 
     const [currentTime, setCurrentTime] = useState(Date.now())
 
@@ -23,8 +23,7 @@ export default function SpaceWagerCardHeader(props) {
     const percentage = parseInt(currentTime / one_percent);
 
     function setGlobalState(){
-
-        if (obj[1].closing_time * 1000 < Date.now() && obj[1].closing_time * 1000 > Date.now() - 300000) {
+        if (isNextPrediction) {
             dispatch({ type: 'setSpaceWagerCurrentTimeRound', message: obj[1].closing_time })
         }
     }
