@@ -51,12 +51,7 @@ export default () => {
 
     //Testnet settings now api
 
-    const lcd = new LCDClient({
-        URL: 'https://bombay-lcd.terra.dev/',
-        chainID: 'bombay-12'
-    });
-
-    const api = new WasmAPI(lcd.apiRequester)
+    const api = new WasmAPI(state.lcd_client.apiRequester)
 
 
     let wallet = ''
@@ -213,6 +208,14 @@ export default () => {
         channel.bind('new-prediction', function (data) {
             setSpacewagerState({round: parseFloat(data.message)})
             dispatch({ type: 'setSpaceWagerResolving', message: false })
+        })
+
+        channel.bind('latest-prediction', function (data) {
+            let prediction = JSON.parse(data.message);
+            if (state.latestPrediction.up != prediction.up || state.latestPrediction.down != prediction.down){
+                dispatch({ type: 'setIsUserMakingPrediction', message: false })
+            }
+            dispatch({ type: 'setLatestPrediction', message: JSON.parse(data.message) })
         })
 
         return () => {

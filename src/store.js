@@ -174,11 +174,23 @@ const initialState = {
     dogetherState: {},
     spaceWagerCurrentTimeRound: 0,
     spaceWagerLastPrice: 0,
-    spaceWagerResolving: false
+    spaceWagerResolving: false,
+    latestPrediction: {up: '0', down: '0'},
+    isUserMakingPrediction: false,
 }
 
 const reducer = (state, action) => {
     switch (action.type) {
+        case "setIsUserMakingPrediction":
+            return {
+                ...state,
+                isUserMakingPrediction: action.message,
+            }
+        case "setLatestPrediction":
+            return {
+                ...state,
+                latestPrediction: action.message,
+            }
         case "setSpaceWagerResolving":
             return {
                 ...state,

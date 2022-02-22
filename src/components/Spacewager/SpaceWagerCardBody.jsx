@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import numeral from 'numeral';
 import {useStore} from "../../store";
+import PriceLoader from "../PriceLoader";
 
 export default function SpaceWagerCardBody(props) {
     const { state, dispatch } = useStore()
@@ -110,7 +111,10 @@ export default function SpaceWagerCardBody(props) {
                 <p className="my-2 fw-regular fs-6 mb-0">Prizes Pool:</p>
             </div>
             <div className="col-6 text-end">
-                <p className="my-2 fw-bold fs-6 mb-0">{numeral((parseInt(obj[1]['up']) + parseInt(obj[1]['down']))/ 1_000_000 ).format('0,0.00')} {' '} UST</p>
+                {!state.isUserMakingPrediction && (
+                    <p className="my-2 fw-bold fs-6 mb-0">{ numeral((parseInt(state.latestPrediction.up) + parseInt(state.latestPrediction.down))/ 1_000_000 ).format('0,0.00')} {' '} UST</p>)
+                || <div className="spinner-border text-light" role="status"><span className="sr-only"></span></div>
+                }
             </div>
         </div>
     }
