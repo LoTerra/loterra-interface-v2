@@ -49,7 +49,7 @@ export default function SpaceWagerCardHeader(props) {
         }, 1000)
 
         return () => clearInterval(interval)
-    }, [])
+    }, [isLivePrediction])
 
     return (
         <>
