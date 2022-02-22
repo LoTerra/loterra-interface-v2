@@ -190,12 +190,12 @@ export default function SpaceWagerCard(props) {
                                     <p className="fw-regular fs-6 mb-0">Commit:</p>                    
                                 </div>
                                 <div className="col-6 text-end">
+                                    
+                                    <p className={'fw-bold fs-6 mb-1'}>
                                     <img
                                         src="/terra-luna-Logo.png"
                                         className="img-fluid terraLogoSmall"
-                                    />
-                                    <p className={'fw-bold fs-6 mb-1'}>
-                                        LUNA
+                                    /> LUNA
                                     </p>
                                 </div>
                             </div>
