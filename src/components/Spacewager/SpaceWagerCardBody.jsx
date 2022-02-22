@@ -19,7 +19,7 @@ export default function SpaceWagerCardBody(props) {
     }
 
     const upStyle = {
-        background: '#18ab64',
+        background: '#17B96B',
         color: '#ffffff'
     }
 
@@ -32,7 +32,7 @@ export default function SpaceWagerCardBody(props) {
     }
 
     const upStylePrice = {
-        color: '#18ab64'
+        color: '#17B96B'
     }
 
     function last_price(){
