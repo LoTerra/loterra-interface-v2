@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import {useStore} from "../../store";
-import { Prohibit, PlayCircle } from 'phosphor-react';
+import { Prohibit, PlayCircle, WarningCircle, CheckCircle } from 'phosphor-react';
 
 export default function SpaceWagerCardHeader(props) {
 
@@ -84,7 +84,11 @@ export default function SpaceWagerCardHeader(props) {
                         { isPastPrediction && obj[1].success != null &&
                             <div className="row">
                                 <div className="col-6 text-start">
-                                    <p>FINISHED</p>
+                                    <p>
+                                        { obj[1].success && <CheckCircle size={23} /> ||  <WarningCircle size={23} /> }
+                                        FINISHED
+                                    </p>
+
                                 </div>
                                 <div className="col-6 text-end">
                                     <p>#{obj[0]}</p>
