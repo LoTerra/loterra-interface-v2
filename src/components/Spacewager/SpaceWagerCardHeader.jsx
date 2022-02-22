@@ -97,6 +97,7 @@ export default function SpaceWagerCardHeader(props) {
                                 {/*        { obj[1].success && " true" ||  " false" }*/}
                                 {/*    </p>*/}
                                 {/*</div>*/}
+
                             </div>
                         }
         </div>
