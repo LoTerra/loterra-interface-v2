@@ -29,7 +29,7 @@ export default function SpaceWagerCard(props) {
     const [bidScreen, setBidScreen] = useState(false)
     const [formattedVariation, setFormattedVariation] = useState(0)
 
-    function upButtonShape(upColor, upColorOpacity, boxBorderColor, boxBorderColorOpacity, downColor, downColorOpacity){
+    function upButtonShape(){
         return (
             <svg width="265" xmlns="http://www.w3.org/2000/svg" viewBox="24.3139 0 270.6231 68">
             
@@ -39,16 +39,15 @@ export default function SpaceWagerCard(props) {
         )
     }
 
-    function downButtonShape(upColor, upColorOpacity, boxBorderColor, boxBorderColorOpacity, downColor, downColorOpacity){
+    function downButtonShape(){
         return(
             <svg width="265" xmlns="http://www.w3.org/2000/svg" viewBox="24.3139 251 270.6231 68">
 
-
                 <path d="M24.7723 266.366C20.5385 259.709 25.3209 251 33.2105 251H286.474C294.81 251 299.486 260.6 294.348 267.164L285.632 278.3C282.841 281.866 282.795 286.862 285.519 290.48L294.937 302.984C299.9 309.574 295.199 319 286.949 319H32.8434C25.0314 319 20.2361 310.444 24.3139 303.78L32.9501 289.668C34.9431 286.411 34.9077 282.304 32.8587 279.082L24.7723 266.366Z" fill="#6B6B6B" fill-opacity="0.37"/>
                 <defs>
-                <linearGradient id="MyGradient">
-                <stop offset="0.37%" stop-color="#6B6B6B" />
-                </linearGradient>
+                    <linearGradient id="MyGradient">
+                    <stop offset="0.37%" stop-color="#6B6B6B" />
+                    </linearGradient>
                 </defs>
             </svg>
         )
