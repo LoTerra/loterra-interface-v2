@@ -466,6 +466,18 @@ h4,
     }
 }
 
+.terraLogoSmall {
+    width: 30px;
+    margin: 10 auto;
+    display: inline-block;
+  
+    margin-top: 0px;
+    margin-bottom: 0px;
+    z-index: 9;
+    @media (max-width: 10px) {
+    }
+}
+
 .dogether-logo {
     margin: 0 auto;
     display: block;
