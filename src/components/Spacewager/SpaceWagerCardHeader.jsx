@@ -6,7 +6,7 @@ import { Progress } from 'bootstrap';
 export default function SpaceWagerCardHeader(props) {
 
     const { state, dispatch } = useStore()
-    const {obj, currentTimeRound, isLivePrediction, isNextPrediction, isPastPrediction} = props;
+    const {obj, isLivePrediction, isNextPrediction, isPastPrediction} = props;
 
     const [currentTime, setCurrentTime] = useState(Date.now())
 
@@ -28,23 +28,24 @@ export default function SpaceWagerCardHeader(props) {
         }
     }
 
-    function remainingTime(currentTimeRound) {
-        let timeBetween = currentTimeRound * 1000  - (Date.now() - 300000)
+    function remainingTime() {
+        if (isLivePrediction || isPastPrediction && obj[1].success == null){
+            let timeBetween = obj[1].closing_time * 1000  - (Date.now() - 300000)
             const seconds = Math.floor((timeBetween / 1000))
             const minutes = Math.floor((timeBetween / 1000 / 60) % 60)
             let remainingTime = (parseInt(minutes) / 60) + seconds
 
             let percentage = ((parseInt(remainingTime) * 100) / 300)
-            
+
             return percentage
-            
+        }
     }
 
     useEffect(() => {
         const interval = setInterval(() => {
             setCurrentTime(Date.now())
             setGlobalState()
-            remainingTime(currentTimeRound)
+            remainingTime()
             //   console.log(currentTime, expiryTimestamp)
         }, 1000)
 
@@ -87,7 +88,13 @@ export default function SpaceWagerCardHeader(props) {
                                 </div>
                                 <div className="col-12">
                                     <div className="progress">
-                                        <div className="progress-bar" role="progressbar" style={{width:'10%'}} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                                        <progress
+                                            className='progress-bar'
+                                            color='#000000'
+                                            value={remainingTime()}
+                                            max={100}
+                                            style={{width:'100%'}}
+                                        />
                                     </div>
                                 </div>
                             </div>
