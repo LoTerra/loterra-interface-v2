@@ -68,7 +68,7 @@ export default function SpaceWagerCardBody(props) {
                         variationStatus == 'down' ? downStyle : upStyle
                     }
                 >
-                    <p className={'fw-bold fs-6 mb-0'}>{formattedVariation &&(formattedVariation)}</p>
+                    <p className={'fw-bold fs-6 mb-0'}>{formattedVariation}</p>
                 </span>
             </div>
         </div>

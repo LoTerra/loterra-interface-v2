@@ -1,6 +1,6 @@
 import React, { useEffect,useState } from 'react'
 import numeral from 'numeral';
-import { ThermometerSimple } from 'phosphor-react';
+import { ThermometerSimple, ArrowUp, ArrowDown } from 'phosphor-react';
 import SpaceWagerCardHeader from './SpaceWagerCardHeader';
 import { MsgExecuteContract } from '@terra-money/terra.js';
 import { useStore } from '../../store';

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import {useStore} from "../../store";
+import { Prohibit, PlayCircle } from 'phosphor-react';
 
 export default function SpaceWagerCardHeader(props) {
 
@@ -39,40 +40,54 @@ export default function SpaceWagerCardHeader(props) {
 
     return (
         <>
-        <div className="card-header p-3">
-                        { obj[1].closing_time * 1000 > Date.now() &&
-                            <div className="row">
-                                <div className="col-6 text-start">
-                                    <p>NEXT</p>
-                                </div>
-                            </div>
-                        }
-                        { obj[1].closing_time * 1000 < Date.now() && obj[1].closing_time * 1000 > Date.now() - 300000 &&
-                            <div className="row">
-                                <div className="col-6 text-start">
-                                    <p>LIVE</p>
-                                </div>
-                                <div className="col-6 text-end">
-                                    <p>{format_minutes}:{format_seconds} #{obj[0]}</p>
-                                </div>
-                                <div className="col-12">
-                                    <div className="progress">
-                                        <div className="progress-bar" role="progressbar" style={{width:'100%'}} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                                    </div>
-                                </div>
-                            </div>
-                        }
-                        { obj[1].closing_time * 1000 < Date.now() && obj[1].closing_time * 1000 < Date.now() - 300000 &&
-                            <div className="row">
-                                <div className="col-6 text-start">
-                                    <p>FINISHED</p>
-                                </div>
-                                <div className="col-6 text-end">
-                                    <p>#{obj[0]}</p>
-                                </div>
-                            </div>
-                        }
+        <div className="card-header p-3"
+            style={{
+                borderTopLeftRadius: 20,
+                borderTopRightRadius: 20
+            }}
+        >
+            { obj[1].closing_time * 1000 > Date.now() &&
+                <div className="row">
+                    <div className="col-6 text-start">
+                        <p>
+                            <PlayCircle size={23} style={{position:'relative', top:-1, marginRight:5}} weight={'bold'}/> 
+                            NEXT
+                        </p>
                     </div>
+                </div>
+            }
+            { obj[1].closing_time * 1000 < Date.now() && obj[1].closing_time * 1000 > Date.now() - 300000 &&
+                <div className="row">
+                    <div className="col-6 text-start">
+                        <p>
+                            <PlayCircle size={23} style={{position:'relative', top:-1, marginRight:5}} weight={'bold'}/> 
+                            LIVE
+                        </p>
+                    </div>
+                    <div className="col-6 text-end">
+                        <p>{format_minutes}:{format_seconds} #{obj[0]}</p>
+                    </div>
+                    <div className="col-12">
+                        <div className="progress">
+                            <div className="progress-bar" role="progressbar" style={{width:'100%'}} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                        </div>
+                    </div>
+                </div>
+            }
+            { obj[1].closing_time * 1000 < Date.now() && obj[1].closing_time * 1000 < Date.now() - 300000 &&
+                <div className="row">
+                    <div className="col-6 text-start">
+                        <p>
+                            <Prohibit size={23} style={{position:'relative', top:-1, marginRight:5}} weight={'bold'}/> 
+                            FINISHED
+                        </p>
+                    </div>
+                    <div className="col-6 text-end">
+                        <p>#{obj[0]}</p>
+                    </div>
+                </div>
+            }
+        </div>
     </>
     )
 }
