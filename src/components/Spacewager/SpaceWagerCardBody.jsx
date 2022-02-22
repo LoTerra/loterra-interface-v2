@@ -35,7 +35,7 @@ export default function SpaceWagerCardBody(props) {
     }
 
     function last_price(){
-        if (isLivePrediction){
+        if (isLivePrediction || isPastPrediction && obj[1].success == null){
             //dispatch({ type: 'setSpaceWagerLastPrice', message: price })
             return price
         }else{
