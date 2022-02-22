@@ -314,8 +314,6 @@ export default () => {
                 </p>
             </div>
                     <div className="col-md-4 text-end">
-                        <p className="mb-0 text-muted">Predictions?</p>
-                        <h2 className={lunaStatus}>0000</h2>
                         <button className="btn btn-plain fw-bold w-20 ms-2"
                             onClick={() => window.open("https://docs.loterra.io/upcoming/roadmap/spacewager", "_blank")}>
                             <Question size={36} style={{position:'relative',top:0}} weight={'bold'}/>
