@@ -203,27 +203,15 @@ export default () => {
         const pusher = new Pusher('8aa328a021ba69c9198a', {
             cluster: 'eu'
         });
-        //console.log(window.sessionStorage.getItem("liveFeed"))
-
-        // if (typeof(Storage) !== "undefined") {
-        //     dispatch({ type: 'setLiveFeed', message: [...state.liveFeed, window.sessionStorage.getItem("liveFeed")] })
-        // }
 
         const channel = pusher.subscribe('space-wager')
         channel.bind('price-feed', function (data) {
-            console.log(data)
-            console.log("price-feed websocket")
             setLunaPrice(parseFloat(data.message))
+        })
 
-            //setLiveFeed(liveFeed => [...liveFeed, {obj:JSON.parse(JSON.stringify(data.message)),type:'bid'}])
-            // dispatch({
-            //     type: 'setLiveFeed',
-            //     message: [
-            //         ...state.liveFeed,
-            //         { auction: JSON.parse(parsed_data), type: 'bid' },
-            //     ],
-            // })
-            //window.sessionStorage.setItem('liveFeed', liveFeed );
+        channel.bind('new-prediction', function (data) {
+            console.log(data)
+            setSpacewagerState({round: parseFloat(data.message)})
         })
 
         return () => {
@@ -238,7 +226,12 @@ export default () => {
             let format_minutes = minutes < 10 ? "0" + minutes : minutes;
             let format_seconds = seconds < 10 ? "0" + seconds : seconds;
 
-            return `${format_minutes < 0 ? "00": format_minutes } : ${format_seconds < 0 ? "00" : format_seconds}`
+            let format_message = "Resolving..."
+            if (state.spaceWagerCurrentTimeRound * 1000 < Date.now() &&  state.spaceWagerCurrentTimeRound * 1000 > Date.now() - 300000){
+                format_message = format_minutes + ":" +format_seconds
+            }
+
+            return format_message
 
             //   console.log(currentTime, expiryTimestamp)
 

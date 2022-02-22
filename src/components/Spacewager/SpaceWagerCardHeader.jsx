@@ -24,6 +24,8 @@ export default function SpaceWagerCardHeader(props) {
     function setGlobalState(){
 
         if (isLivePrediction) {
+            console.log("obj[1].closing_time dispatch")
+            console.log(obj[1].closing_time )
             dispatch({ type: 'setSpaceWagerCurrentTimeRound', message: obj[1].closing_time })
         }
     }
@@ -31,12 +33,12 @@ export default function SpaceWagerCardHeader(props) {
     useEffect(() => {
         const interval = setInterval(() => {
             setCurrentTime(Date.now())
-            setGlobalState()
             //   console.log(currentTime, expiryTimestamp)
+            setGlobalState()
         }, 1000)
 
         return () => clearInterval(interval)
-    }, [])
+    }, [isLivePrediction])
 
     return (
         <>
@@ -44,7 +46,7 @@ export default function SpaceWagerCardHeader(props) {
                         {isPastPrediction && obj[1].success == null &&
                             <div className="row">
                                 <div className="col-6 text-start">
-                                    <p>Resolving</p>
+                                    <p>Resolving...</p>
                                 </div>
                                 <div className="col-6 text-end">
                                     <p>#{obj[0]}</p>
@@ -58,6 +60,9 @@ export default function SpaceWagerCardHeader(props) {
                                         <PlayCircle size={23} style={{position:'relative', top:-1, marginRight:5}} weight={'bold'}/>
                                         <p>NEXT</p>
                                     </div>
+                                </div>
+                                <div className="col-6 text-end">
+                                    <p>#{obj[0]}</p>
                                 </div>
                             </div>
                         }

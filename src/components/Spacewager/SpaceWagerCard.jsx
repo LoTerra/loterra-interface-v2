@@ -138,6 +138,7 @@ export default function SpaceWagerCard(props) {
             })
     }
 
+
     //Load on mount
     useEffect(() =>  {
 
