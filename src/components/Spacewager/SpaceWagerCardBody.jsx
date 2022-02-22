@@ -10,12 +10,55 @@ export default function SpaceWagerCardBody(props) {
     const [bidScreen, setBidScreen] = useState(false)
     const [bidType, setBidType] = useState('');
     const [amount,setAmount] = useState(0)
+    const [ustBalance, setUstBalance] = useState(0)
 
+    function svgShape(color, opacity) {
+        return(
+            <svg width="265" xmlns="http://www.w3.org/2000/svg" viewBox="24.3139 251 270.6231 68">
+
+                <path d="M24.7723 266.366C20.5385 259.709 25.3209 251 33.2105 251H286.474C294.81 251 299.486 260.6 294.348 267.164L285.632 278.3C282.841 281.866 282.795 286.862 285.519 290.48L294.937 302.984C299.9 309.574 295.199 319 286.949 319H32.8434C25.0314 319 20.2361 310.444 24.3139 303.78L32.9501 289.668C34.9431 286.411 34.9077 282.304 32.8587 279.082L24.7723 266.366Z" fill={color} fillOpacity={opacity}/>
+
+            </svg>
+        )
+    }
+
+    function upTextColor() {
+        if (bidType == 'UP') {
+            return '#ffffff'
+        } else {
+            return '#17B96B'
+        }
+
+    }
+
+    function downTextColor() {
+        if (bidType == 'DOWN') {
+            return '#ffffff'
+        } else {
+            return '#f038f0'
+        }
+
+    }
+
+    function upButtonShape(){
+        if (bidType == 'UP') {
+            return svgShape('#17B96B', '1')
+        } else {
+            return svgShape('#6b6b6b', '0.37')
+        }
+    }
+
+    function downButtonShape(){
+        if (bidType == 'DOWN') {
+            return svgShape('#f038f0', '1')
+        } else {
+            return svgShape('#6b6b6b', '0.37')
+        }
+    }
 
     const equalStyle = {
-        background: '#6B6B6B',
         opacity: '37%',
-        color: '#ffffff'
+        borderColor: '#6B6B6B'
     }
 
     const downStyle = {
@@ -24,7 +67,7 @@ export default function SpaceWagerCardBody(props) {
     }
 
     const upStyle = {
-        background: '#18ab64',
+        background: '#17B96B',
         color: '#ffffff'
     }
 
@@ -38,7 +81,7 @@ export default function SpaceWagerCardBody(props) {
     }
 
     const upStylePrice = {
-        color: '#18ab64'
+        color: '#17B96B'
     }
 
 
@@ -124,6 +167,21 @@ export default function SpaceWagerCardBody(props) {
         }
     }
 
+    // function getUserBalance() {
+    //     if (connectedWallet) {
+    //         lcd.bank.balance(connectedWallet.walletAddress).then(([coins]) => {
+    //             coins = coins;
+    //             // console.log(coins ? coins.get('uusd').amount / 1000000 : '')
+    //             const ustBalance = coins.get('uusd').toData()
+    //
+    //             setUstBalance(ustBalance.amount / 1000000)
+    //             dispatch({ type: 'setUstBalance', message: ustBalance.amount / 1000000 })
+    //         });
+    //     } else {
+    //         setUstBalance(null);
+    //     }
+    // }
+
     return (
  <>
          {
@@ -189,9 +247,10 @@ export default function SpaceWagerCardBody(props) {
           <div>
               <button className="btn btn-green fw-bold w-100"
                       style={{borderBottomLeftRadius:0,borderBottomRightRadius:0}}
-                      onClick={() => makeBid('UP')}>
+                      onClick={() => makeBid('UP')}
+              >
                   {upButtonShape()}
-                  <div className="btn-content">
+                  <div className="btn-content" style={{color: upTextColor()}}>
                       UP
                       <span className="small fw-normal d-block">{state.latestPrediction.up == '0' && state.latestPrediction.down != '0' ? 1 : state.latestPrediction.up != '0' && state.latestPrediction.down == '0' || state.latestPrediction.up == '0' && state.latestPrediction.down == '0'? 0 : numeral(parseInt(state.latestPrediction.up) / parseInt(state.latestPrediction.down)).format("0,0.00")}x Payout</span>
                   </div>
@@ -199,25 +258,27 @@ export default function SpaceWagerCardBody(props) {
 
               {
                   bidScreen ? <div>
-                      <div className="row">
-                          <div className="col-6 text-start">
-                              <p className="fw-regular fs-6 mb-0">Commit:</p>
+                          <div className="row">
+                              <div className="col-6 text-start">
+                                  <p className="fw-regular fs-6 mb-0">Commit:</p>
+                              </div>
+                              <div className="col-6 text-end">
+                                  <p className={'fw-bold fs-6 mb-1'}>
+                                      <img
+                                          src="/UST-Logo.png"
+                                          className="img-fluid terraLogoSmall"
+                                      /> UST
+                                  </p>
+                              </div>
                           </div>
-                          <div className="col-6 text-end">
-
-                              <p className={'fw-bold fs-6 mb-1'}>
-                                  <img
-                                      src="/terra-luna-Logo.png"
-                                      className="img-fluid terraLogoSmall"
-                                  /> LUNA
-                              </p>
-                          </div>
-                      </div>
-                      <input className="form-control" type="number" value={amount} onChange={(e) => setAmount(e.target.value)}/>
-                      <button onClick={() => makeBidFinal(obj[0]) } className="btn btn-plain w-100 mt-3">Enter {bidType}</button>
-                      <h6 className='mt-2 text-muted'>
-                          You won’t be able to remove or change your position once you enter it.
-                      </h6>
+                          <input className="form-control" type="number" value={amount} onChange={(e) => setAmount(e.target.value)}/>
+                          <h6 className='mt-2 text-muted text-end'>
+                              Balance: 0 UST
+                          </h6>
+                          <button onClick={() => makeBidFinal(obj[0]) } className="btn btn-plain w-100 mt-1">Enter {bidType}</button>
+                          <h6 className='mt-2 text-muted'>
+                              You won’t be able to remove or change your position once you enter it.
+                          </h6>
                   </div>
                       :
                   <div className="row">
@@ -233,15 +294,16 @@ export default function SpaceWagerCardBody(props) {
                   </div>
               }
 
-                 <button className="btn btn-red w-100 fw-bold"
-                     style={{borderTopLeftRadius:0,borderTopRightRadius:0}}
-                     onClick={() => makeBid('DOWN')}>
-                    {downButtonShape()}
-                     <div className="btn-content">
-                     <span className="small d-block fw-normal">{state.latestPrediction.down == '0' && state.latestPrediction.up != '0' ? 1 : state.latestPrediction.down != '0' && state.latestPrediction.up == '0' || state.latestPrediction.down == '0' && state.latestPrediction.up == '0'? 0 : numeral(parseInt(state.latestPrediction.down) / parseInt(state.latestPrediction.up)).format("0,0.00") }x Payout</span>
-                     DOWN
-                     </div>
-                 </button>
+                  <button className="btn btn-red w-100 fw-bold"
+                          style={{borderTopLeftRadius:0,borderTopRightRadius:0}}
+                          onClick={() => makeBid('DOWN')}
+                  >
+                      {downButtonShape()}
+                      <div className="btn-content" style={{color: downTextColor()}}>
+                          <span className="small d-block fw-normal">{state.latestPrediction.down == '0' && state.latestPrediction.up != '0' ? 1 : state.latestPrediction.down != '0' && state.latestPrediction.up == '0' || state.latestPrediction.down == '0' && state.latestPrediction.up == '0'? 0 : numeral(parseInt(state.latestPrediction.down) / parseInt(state.latestPrediction.up)).format("0,0.00") }x Payout</span>
+                          DOWN
+                      </div>
+                  </button>
           </div>
     }
  </>

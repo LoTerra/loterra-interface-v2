@@ -36,6 +36,7 @@ export default function SpaceWagerCard(props) {
     const [formattedVariation, setFormattedVariation] = useState(0)
     const [personalBidInfo, setPersonalBidInfo] = useState()
 
+
     //Testnet settings now api
 
     const api = new WasmAPI(state.lcd_client.apiRequester)
@@ -45,7 +46,7 @@ export default function SpaceWagerCard(props) {
     }
 
     const upStyle = {
-        borderColor: '#18ab64'
+        borderColor: '#17B96B'
     }
 
     const getVariation = async (lockedPrice, currentPrice) => {
@@ -152,6 +153,7 @@ export default function SpaceWagerCard(props) {
                         }
                     >
 
+
                         <SpaceWagerCardBody
                         obj={obj}
                         price={price}
@@ -163,6 +165,7 @@ export default function SpaceWagerCard(props) {
                         isPastPrediction = {isPastPrediction}
                         isNextPrediction = {isNextPrediction}
                         />
+
 
                     </div>
 
