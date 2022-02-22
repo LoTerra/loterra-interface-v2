@@ -73,15 +73,15 @@ export default function SpaceWagerCard(props) {
             if (variation != 0) {
                 if (variation > 0) {
                     setFormattedVariation('⬆ $' + numeral(variation).format('0,0.000'))
-                    setVariationStatus('up')
+                    setVariationStatus('UP')
                 } else if (variation < 0) {
                     setFormattedVariation('⬇ $' + numeral(variation).format('0,0.000'))
-                    setVariationStatus('down')
+                    setVariationStatus('DOWN')
                     //console.log('down')
                 }     
             } else {
                 setFormattedVariation('$' + numeral(variation).format('0,0.000'))
-                setVariationStatus('equal')
+                setVariationStatus('EQUAL')
                 //console.log('equal')
             }
             return 
@@ -109,7 +109,7 @@ export default function SpaceWagerCard(props) {
 
         if (amount <= 0) return
 
-        let type = bidType == 'up' ? true : false
+        let type = bidType == 'UP' ? true : false
 
         let msg = new MsgExecuteContract(
             state.wallet.walletAddress,
@@ -148,25 +148,30 @@ export default function SpaceWagerCard(props) {
 
     return (
        <div className="col-9 mx-auto">
-            <div className={"card spacewager-card h-100 "+(obj.active ? ' active' : '')}>                
-                    <SpaceWagerCardHeader obj={obj}/>
+            <div className={"card spacewager-card h-100 "+(obj.active ? ' active' : '')}
+                style={{
+                    borderTopLeftRadius: 20,
+                    borderTopRightRadius: 20
+                }}
+            >                
+                <SpaceWagerCardHeader obj={obj}/>
                 <div className="card-body">
                 { 
                     //Only show button when live
                     obj[1].closing_time * 1000 > Date.now() &&
                     <button className="btn btn-green fw-bold w-100"
                         style={{borderBottomLeftRadius:0,borderBottomRightRadius:0}}
-                        onClick={() => makeBid('up')}>
+                        onClick={() => makeBid('UP')}>
                             {upButtonShape()}
                         <div className="btn-content">
-                        Up
-                        <span className="small fw-normal d-block">{obj[1]['up'] == '0' && obj[1]['down'] != '0' ? 1 : obj[1]['up'] != '0' && obj[1]['down'] == '0' || obj[1]['up'] == '0' && obj[1]['down'] == '0'? 0 : numeral(parseInt(obj[1]['up']) / parseInt(obj[1]['down'])).format("0,0.00")}x Payout</span>
+                            UP
+                            <span className="small fw-normal d-block">{obj[1]['up'] == '0' && obj[1]['down'] != '0' ? 1 : obj[1]['up'] != '0' && obj[1]['down'] == '0' || obj[1]['up'] == '0' && obj[1]['down'] == '0'? 0 : numeral(parseInt(obj[1]['up']) / parseInt(obj[1]['down'])).format("0,0.00")}x Payout</span>
                         </div>
                     </button>
                 }
                     <div className="card-content" 
                         style={
-                            variationStatus == 'down' ? downStyle : upStyle
+                            variationStatus == 'DOWN' ? downStyle : upStyle
                         }
                     >
                     { !bidScreen &&
@@ -181,10 +186,25 @@ export default function SpaceWagerCard(props) {
                     }
                     { bidScreen &&
                         <>
-                            <label>Your bid amount ({bidType})</label>
+                            <div className="row">
+                                <div className="col-6 text-start">
+                                    <p className="fw-regular fs-6 mb-0">Commit:</p>                    
+                                </div>
+                                <div className="col-6 text-end">
+                                    <img
+                                        src="/terra-luna-Logo.png"
+                                        className="img-fluid terraLogoSmall"
+                                    />
+                                    <p className={'fw-bold fs-6 mb-1'}>
+                                        LUNA
+                                    </p>
+                                </div>
+                            </div>
                             <input className="form-control" type="number" value={amount} onChange={(e) => setAmount(e.target.value)}/>
-
-                            <button onClick={() => makeBidFinal(obj[0]) } className="btn btn-plain w-100 mt-3">Place bid</button>
+                            <button onClick={() => makeBidFinal(obj[0]) } className="btn btn-plain w-100 mt-3">Place bid on {bidType}</button>
+                            <h6 className='mt-2 text-muted'>
+                                You won’t be able to remove or change your position once you enter it.
+                            </h6>
                         </>
                     }
                     </div>
@@ -193,11 +213,11 @@ export default function SpaceWagerCard(props) {
                     obj[1].closing_time * 1000 > Date.now() &&
                         <button className="btn btn-red w-100 fw-bold"
                         style={{borderTopLeftRadius:0,borderTopRightRadius:0}}
-                        onClick={() => makeBid('down')}>
+                        onClick={() => makeBid('DOWN')}>
                             {downButtonShape()}
                             <div className="btn-content">
                                 <span className="small d-block fw-normal">{obj[1]['down'] == '0' && obj[1]['up'] != '0' ? 1 : obj[1]['down'] != '0' && obj[1]['up'] == '0' || obj[1]['down'] == '0' && obj[1]['up'] == '0'? 0 : numeral(parseInt(obj[1]['down']) / parseInt(obj[1]['up'])).format("0,0.00") }x Payout</span>
-                                Down
+                                DOWN
                             </div>
                         </button>
                     }

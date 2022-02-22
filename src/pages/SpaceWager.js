@@ -301,11 +301,11 @@ export default () => {
                     </div>
                     <div className="col-md-4 d-flex text-center">
                 <p className="align-self-center w-100 mb-0 text-white fs-1 fw-bold"
-                style={{
-                    background: '#0b012499',
-                    borderRadius: 20,
-                    padding: 15
-                }}
+                    style={{
+                        background: '#0b012499',
+                        borderRadius: 20,
+                        padding: 15
+                    }}
                 >
                     <span 
                     className="d-block"
