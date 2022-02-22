@@ -258,6 +258,7 @@ export default () => {
          */
     },[])
 
+
     //Change on lunaprice state change
     useEffect(() =>  {       
       // if(config) {
@@ -266,8 +267,8 @@ export default () => {
       //     }, 1000);
       //     return () => clearInterval(interval);
       // }
-      getSpacewagerPredictions()
-    },[config, spacewagerState.round])
+        getSpacewagerPredictions()
+    },[spacewagerState.round])
  
     return (
             <div className="container">
@@ -377,6 +378,9 @@ export default () => {
                                 lockedPrice={lunaLockedPrice}
                                 prizesPool={prizesPoolAmount}
                                 bettingOddsOnDown={obj[1]['down']}
+                                isLivePrediction={obj[1].closing_time * 1000 < Date.now() && obj[1].closing_time * 1000 > Date.now() - 300000}
+                                isNextPrediction={obj[1].closing_time * 1000 > Date.now()}
+                                isPastPrediction={obj[1].closing_time * 1000 < Date.now() && obj[1].closing_time * 1000 < Date.now() - 300000 }
                                 click={(a) => triggerClick(a)}                        
                                 />
                             </SwiperSlide>

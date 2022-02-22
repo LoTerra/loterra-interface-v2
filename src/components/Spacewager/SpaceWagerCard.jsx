@@ -19,6 +19,9 @@ export default function SpaceWagerCard(props) {
         prizesPool, 
         bettingOddsOnDown, 
         click,
+        isLivePrediction,
+        isNextPrediction,
+        isPastPrediction
     } = props;
 
     const {state,dispatch} = useStore()
@@ -148,11 +151,11 @@ export default function SpaceWagerCard(props) {
     return (
        <div className="col-9 mx-auto">
             <div className={"card spacewager-card h-100 "+(obj.active ? ' active' : '')}>                
-                    <SpaceWagerCardHeader obj={obj}/>
+                    <SpaceWagerCardHeader obj={obj} isLivePrediction={isLivePrediction} isNextPrediction={isNextPrediction} isPastPrediction={isPastPrediction}/>
                 <div className="card-body">
                 { 
                     //Only show button when live
-                    obj[1].closing_time * 1000 > Date.now() &&
+                    isNextPrediction &&
                     <button className="btn btn-green fw-bold w-100"
                         style={{borderBottomLeftRadius:0,borderBottomRightRadius:0}}
                         onClick={() => makeBid('up')}>
@@ -172,6 +175,9 @@ export default function SpaceWagerCard(props) {
                         formattedVariation={formattedVariation}
                         lockedPrice={lockedPrice}
                         prizesPool={prizesPool}
+                        isLivePrediction = {isLivePrediction}
+                        isPastPrediction = {isPastPrediction}
+                        isNextPrediction = {isNextPrediction}
                         />
                     }
                     { bidScreen &&
@@ -185,7 +191,7 @@ export default function SpaceWagerCard(props) {
                     </div>
                     { 
                     //Only show button when live
-                    obj[1].closing_time * 1000 > Date.now() &&
+                    isNextPrediction &&
                         <button className="btn btn-red w-100 fw-bold"
                         style={{borderTopLeftRadius:0,borderTopRightRadius:0}}
                         onClick={() => makeBid('down')}>

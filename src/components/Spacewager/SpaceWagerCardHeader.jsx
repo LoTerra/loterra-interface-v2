@@ -4,7 +4,7 @@ import {useStore} from "../../store";
 export default function SpaceWagerCardHeader(props) {
 
     const { state, dispatch } = useStore()
-    const {obj} = props;
+    const {obj, isLivePrediction, isNextPrediction, isPastPrediction} = props;
 
     const [currentTime, setCurrentTime] = useState(Date.now())
 
@@ -22,7 +22,7 @@ export default function SpaceWagerCardHeader(props) {
 
     function setGlobalState(){
 
-        if (obj[1].closing_time * 1000 < Date.now() && obj[1].closing_time * 1000 > Date.now() - 300000) {
+        if (isLivePrediction) {
             dispatch({ type: 'setSpaceWagerCurrentTimeRound', message: obj[1].closing_time })
         }
     }
@@ -40,14 +40,24 @@ export default function SpaceWagerCardHeader(props) {
     return (
         <>
         <div className="card-header p-3">
-                        { obj[1].closing_time * 1000 > Date.now() &&
+                        {isPastPrediction && obj[1].success == null &&
+                            <div className="row">
+                                <div className="col-6 text-start">
+                                    <p>Resolving</p>
+                                </div>
+                                <div className="col-6 text-end">
+                                    <p>#{obj[0]}</p>
+                                </div>
+                            </div>
+                        }
+                        { isNextPrediction &&
                             <div className="row">
                                 <div className="col-6 text-start">
                                     <p>NEXT</p>
                                 </div>
                             </div>
                         }
-                        { obj[1].closing_time * 1000 < Date.now() && obj[1].closing_time * 1000 > Date.now() - 300000 &&
+                        { isLivePrediction &&
                             <div className="row">
                                 <div className="col-6 text-start">
                                     <p>LIVE</p>
@@ -62,7 +72,7 @@ export default function SpaceWagerCardHeader(props) {
                                 </div>
                             </div>
                         }
-                        { obj[1].closing_time * 1000 < Date.now() && obj[1].closing_time * 1000 < Date.now() - 300000 &&
+                        { isPastPrediction && obj[1].success != null &&
                             <div className="row">
                                 <div className="col-6 text-start">
                                     <p>FINISHED</p>
