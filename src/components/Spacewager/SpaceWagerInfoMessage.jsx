@@ -6,7 +6,7 @@ export default function SpaceWagerInfoMessage(props) {
 
 
     return (
-        <div className="spacewager-notice">
+        <div className="spacewager-notice my-2">
             <p className="m-0"><Info size={16}/> {props.children}</p>        
         </div>
     )

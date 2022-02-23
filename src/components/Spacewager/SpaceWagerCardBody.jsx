@@ -235,25 +235,27 @@ export default function SpaceWagerCardBody(props) {
                   bidScreen ? <div>
                           <div className="row">
                               <div className="col-6 text-start">
-                                  <p className="fw-regular fs-6 mb-0">Commit:</p>
-                              </div>
-                              <div className="col-6 text-end">
-                                  <p className={'fw-bold fs-6 mb-1'}>
-                                      <img
-                                          src="/UST-Logo.png"
-                                          className="img-fluid terraLogoSmall"
-                                      /> UST
-                                  </p>
-                              </div>
+                                  <p className="fw-regular fs-6 mb-0 mt-2">Your bid:</p>
+                              </div>                              
                           </div>
-                          <input className="form-control" type="number" value={amount} onChange={(e) => setAmount(e.target.value)}/>
-                          <h6 className='mt-2 text-muted text-end'>
+                          <div className="input-group">
+                          <span className="input-group-text" id="basic-addon1">
+                            <img
+                                src="/UST.svg"
+                                width="30px"
+                                className="img-fluid"
+                            />
+                        </span>
+                        <input className="form-control" type="number" value={amount} onChange={(e) => setAmount(e.target.value)}/>
+                          </div>
+                          
+                          <h6 className='mt-2 text-muted text-end small'>
                               Balance: 0 UST
                           </h6>
                           <button onClick={() => makeBidFinal(obj[0]) } className="btn btn-plain w-100 mt-1">Enter {bidType}</button>
-                          <h6 className='mt-2 text-muted'>
+                          <SpaceWagerInfoMessage>
                               You won’t be able to remove or change your position once you enter it.
-                          </h6>
+                          </SpaceWagerInfoMessage>
                   </div>
                       :
                   <div className="row">
@@ -265,6 +267,10 @@ export default function SpaceWagerCardBody(props) {
                               <p className="my-2 fw-bold fs-6 mb-0">{ numeral((parseInt(state.latestPrediction.up) + parseInt(state.latestPrediction.down))/ 1_000_000 ).format('0,0.00')} {' '} UST</p>)
                           || <div className="spinner-border text-light" role="status"><span className="sr-only"></span></div>
                           }
+                      </div>
+                      <div className="col-12 my-3">
+                          <button className="btn btn-up mb-2" onClick={() => makeBid('UP')}>Enter up</button>
+                          <button className="btn btn-down" onClick={() => makeBid('DOWN')}>Enter down</button>
                       </div>
                   </div>
               }

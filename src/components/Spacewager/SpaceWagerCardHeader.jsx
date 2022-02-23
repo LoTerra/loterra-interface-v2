@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react'
 import {useStore} from "../../store";
-import { Prohibit, PlayCircle } from 'phosphor-react';
+import { Prohibit, PlayCircle, SkipForward } from 'phosphor-react';
 
 export default function SpaceWagerCardHeader(props) {
 
@@ -68,8 +68,8 @@ export default function SpaceWagerCardHeader(props) {
                             <div className="row">
                                 <div className="col-6 text-start">
                                     <div>
-                                        <p>
-                                            <PlayCircle size={23} style={{position:'relative', top:-1, marginRight:5}} weight={'bold'}/>
+                                        <p>                                            
+                                            <SkipForward size={23} style={{position:'relative', top:-1, marginRight:5}} weight={'bold'}/>
 
                                             NEXT
                                         </p>
