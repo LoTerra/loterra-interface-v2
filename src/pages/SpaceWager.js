@@ -1,11 +1,11 @@
 import { LCDClient, WasmAPI } from '@terra-money/terra.js';
-import React, { useEffect,useMemo,useState } from 'react'
+import React, { createRef, useEffect,useMemo,useState } from 'react'
 import numeral from 'numeral';
 import { useStore } from '../store'
 import SpaceWagerCard from '../components/Spacewager/SpaceWagerCard';
 import SpaceWagerGameView from '../components/Spacewager/SpaceWagerGameView';
 
-import { Clock, Question, Trophy, Info } from 'phosphor-react'
+import { Clock, Question, Trophy, Info, ArrowLeft, ArrowRight } from 'phosphor-react'
 
 import SwiperCore, { Navigation, Pagination ,Autoplay,EffectFade } from 'swiper';
 
@@ -54,6 +54,9 @@ export default () => {
     //Testnet settings now api
 
     const api = new WasmAPI(state.lcd_client.apiRequester)
+
+    const swiperRef = createRef()
+
 
 
     let wallet = ''
@@ -330,6 +333,16 @@ export default () => {
                             <Trophy size={36} style={{position:'relative',top:0}} weight={'bold'}/>
                         </button>
                     </div>
+                    <div className="col-md-12">
+                        <div className="row">
+                            <div className="col-6 text-end">
+                                <button className="swiper-prev btn btn-plain pb-2"><ArrowLeft size={24} /></button>
+                            </div>  
+                            <div className="col-6 text-start">
+                                <button className="swiper-next btn btn-plain pb-2"><ArrowRight size={24} /></button>
+                            </div>
+                        </div>
+                    </div>
                 </div>
             </div>
             
@@ -337,6 +350,10 @@ export default () => {
                     {spacewagerState.round > 0 &&
                     <Swiper
                     spaceBetween={-50}
+                    navigation={{
+                        nextEl: '.swiper-next',
+                        prevEl: '.swiper-prev',
+                      }}
                     //   modules={[Navigation, Pagination, A11y]}                           
                     initialSlide={spacewagerState.round}
                     slidesPerView={1}
