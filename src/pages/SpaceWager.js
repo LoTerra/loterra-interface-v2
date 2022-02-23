@@ -17,7 +17,6 @@ import 'swiper/swiper.min.css'
 import { useConnectedWallet, useWallet } from '@terra-money/wallet-provider';
 
 import Pusher from 'pusher-js';
-import {min} from "@popperjs/core/lib/utils/math";
 
 // Enable pusher logging - don't include this in production
 // Pusher.logToConsole = true;

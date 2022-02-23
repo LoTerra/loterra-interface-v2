@@ -4,8 +4,6 @@ import { ThermometerSimple, ArrowUp, ArrowDown } from 'phosphor-react';
 import SpaceWagerCardHeader from './SpaceWagerCardHeader';
 import { LCDClient, MsgExecuteContract, WasmAPI } from '@terra-money/terra.js';
 import { useStore } from '../../store';
-import SpaceWagerCardBody from './SpaceWagerCardBody';
-import { registerables } from 'chart.js';
 
 
 export default function SpaceWagerCard(props) {
