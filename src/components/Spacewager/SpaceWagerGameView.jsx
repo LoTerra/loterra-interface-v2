@@ -34,44 +34,53 @@ export default function SpaceWagerCardHeader(props) {
 
     let player_address = state.wallet.walletAddress
 
+    let connectedWallet = ''
+    if (typeof document !== 'undefined') {
+        connectedWallet = useConnectedWallet()
+    }
+
     async function gameUser(start_after){
-        let offset_limit = 6;
+        if (connectedWallet){
 
-        let query = {
-            games: {
-                player: player_address,
-                limit: offset_limit
+
+            let offset_limit = 6;
+
+            let query = {
+                games: {
+                    player: player_address,
+                    limit: offset_limit
+                }
             }
-        }
-        // Pagination
-        if (start_after >= 0){
-            query.games.start_after = start_after
-        }
-
-
-        try {
-            setIsLoadingMore(true)
-            let res = await api.contractQuery(state.spaceWagerAddress, query);
-
-            if (res.length == offset_limit){
-                setPaginationLastElementRound(res[res.length - 1][0])
-                setIsActivePagination(true)
-            }else {
-                setIsActivePagination(false)
+            // Pagination
+            if (start_after >= 0){
+                query.games.start_after = start_after
             }
 
-            if (res.length > 0){
-                const new_array = games;
-                res.forEach(elem => {
-                    new_array.push(elem)
-                });
-                setGames(games)
 
+            try {
+                setIsLoadingMore(true)
+                let res = await api.contractQuery(state.spaceWagerAddress, query);
+
+                if (res.length == offset_limit){
+                    setPaginationLastElementRound(res[res.length - 1][0])
+                    setIsActivePagination(true)
+                }else {
+                    setIsActivePagination(false)
+                }
+
+                if (res.length > 0){
+                    const new_array = games;
+                    res.forEach(elem => {
+                        new_array.push(elem)
+                    });
+                    setGames(games)
+
+                }
+
+                setIsLoadingMore(false)
+            }catch (e) {
+                console.log(e)
             }
-
-            setIsLoadingMore(false)
-        }catch (e) {
-            console.log(e)
         }
     }
 
