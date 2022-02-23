@@ -35,7 +35,7 @@ export default function SpaceWagerCardHeader(props) {
     let player_address =/*state.wallet.walletAddress*/ "terra1umd70qd4jv686wjrsnk92uxgewca3805dxd46p"
 
     async function gameUser(start_after){
-        let offset_limit = 5;
+        let offset_limit = 10;
 
         let query = {
             games: {
@@ -44,7 +44,7 @@ export default function SpaceWagerCardHeader(props) {
             }
         }
         // Pagination
-        if (start_after){
+        if (start_after >= 0){
             query.games.start_after = start_after
         }
 
@@ -60,11 +60,14 @@ export default function SpaceWagerCardHeader(props) {
                 setIsActivePagination(false)
             }
 
-            const new_array = games;
-            res.forEach(elem => {
-                new_array.push(elem)
-            });
-            setGames(games)
+            if (res.length > 0){
+                const new_array = games;
+                res.forEach(elem => {
+                    new_array.push(elem)
+                });
+                setGames(games)
+
+            }
 
             setIsLoadingMore(false)
         }catch (e) {
