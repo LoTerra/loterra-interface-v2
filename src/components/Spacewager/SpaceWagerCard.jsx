@@ -189,7 +189,7 @@ export default function SpaceWagerCard(props) {
                 <SpaceWagerCardHeader obj={obj} currentTimeRound={currentTimeRound} isLivePrediction={isLivePrediction} isNextPrediction={isNextPrediction} isPastPrediction={isPastPrediction}/> 
 
                 <div className="card-body">
-                    { !isNextPrediction &&
+                    
                         <div className="btn-green fw-bold w-100"
                         style={{borderBottomLeftRadius:0,borderBottomRightRadius:0}}
                     >
@@ -199,7 +199,7 @@ export default function SpaceWagerCard(props) {
                             <span className="small fw-normal d-block">{state.latestPrediction.up == '0' && state.latestPrediction.down != '0' ? 1 : state.latestPrediction.up != '0' && state.latestPrediction.down == '0' || state.latestPrediction.up == '0' && state.latestPrediction.down == '0'? 0 : numeral(parseInt(state.latestPrediction.up) / parseInt(state.latestPrediction.down)).format("0,0.00")}x Payout</span>
                         </div>
                     </div>
-                    }
+                    
                     
                     <div className="card-content" 
                         style={
@@ -222,7 +222,6 @@ export default function SpaceWagerCard(props) {
 
                     </div>
 
-                    { !isNextPrediction &&
                         <div className="btn-red w-100 fw-bold"
                             style={{borderTopLeftRadius:0,borderTopRightRadius:0}}
                         >
@@ -232,7 +231,7 @@ export default function SpaceWagerCard(props) {
                             DOWN
                             </div>
                         </div>
-                    }
+                    
 
                 </div>
                     {/*<div className="card-footer p-0">          */}
