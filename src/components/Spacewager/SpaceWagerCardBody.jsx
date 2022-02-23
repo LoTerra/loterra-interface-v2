@@ -193,8 +193,8 @@ export default function SpaceWagerCardBody(props) {
                   bidScreen ? <div>
                           <div className="row">
                               <div className="col-12">
-                                  <button className={'btn btn-secondary float-start'} onClick={() => makeBid()}>
-                                        <ArrowLeft size={'24'} /> 
+                                  <button className={'btn btn-secondary float-start p-1 px-2'} onClick={() => makeBid()}>
+                                        <ArrowLeft size={'18'} /> 
                                   </button>
                               </div>
                               <div className="col-6 text-start">
@@ -215,7 +215,12 @@ export default function SpaceWagerCardBody(props) {
                           <h6 className='mt-2 text-muted text-end small'>
                               Balance: 0 UST
                           </h6>
-                          <button onClick={() => makeBidFinal(obj[0]) } className={"btn w-100 mt-1" + (bidType == 'UP' ? ' btn-up' : ' btn-down')}>Enter {bidType}</button>
+                          { state.wallet && state.wallet.hasOwnProperty('walletAddress') &&
+                            <button onClick={() => makeBidFinal(obj[0]) } className={"btn w-100 mt-1" + (bidType == 'UP' ? ' btn-up' : ' btn-down')}>Enter {bidType}</button>
+                          }
+                          { state.wallet && !state.wallet.hasOwnProperty('walletAddress') &&
+                            <button className={"btn w-100 mt-1" + (bidType == 'UP' ? ' btn-up' : ' btn-down')}>Connect wallet</button>
+                          }
                           <SpaceWagerInfoMessage>
                               You won’t be able to remove or change your position once you enter it.
                           </SpaceWagerInfoMessage>
@@ -245,8 +250,8 @@ export default function SpaceWagerCardBody(props) {
                       </div>
                       
                       <div className="col-12 my-3">
-                          <button className="btn btn-up mb-2" onClick={() => makeBid('UP')}>Enter up</button>
-                          <button className="btn btn-down" onClick={() => makeBid('DOWN')}>Enter down</button>
+                          <button className="btn btn-up btn-lg mb-2" onClick={() => makeBid('UP')}>Enter UP</button>
+                          <button className="btn btn-down btn-lg" onClick={() => makeBid('DOWN')}>Enter DOWN</button>
                       </div>
                   </div>
               }
