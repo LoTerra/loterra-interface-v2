@@ -27,7 +27,9 @@ export default function SpaceWagerCard(props) {
         click,
         isLivePrediction,
         isNextPrediction,
-        isPastPrediction
+        isPastPrediction,
+        upPrediction,
+        downPrediction
     } = props;
 
     const {state,dispatch} = useStore()
@@ -196,7 +198,14 @@ export default function SpaceWagerCard(props) {
                         {upButtonShape()}
                         <div className="btn-content" style={{ color: upTextColor()}}>
                             UP
-                            <span className="small fw-normal d-block">{state.latestPrediction.up == '0' && state.latestPrediction.down != '0' ? 1 : state.latestPrediction.up != '0' && state.latestPrediction.down == '0' || state.latestPrediction.up == '0' && state.latestPrediction.down == '0'? 0 : numeral(parseInt(state.latestPrediction.up) / parseInt(state.latestPrediction.down)).format("0,0.00")}x Payout</span>
+                            <span className="small fw-normal d-block">
+                                {
+                                    isNextPrediction ?
+                                        state.latestPrediction.up == '0' && state.latestPrediction.down != '0' ? 1 : state.latestPrediction.up != '0' && state.latestPrediction.down == '0' || state.latestPrediction.up == '0' && state.latestPrediction.down == '0'? 0 : numeral(parseInt(state.latestPrediction.up) / parseInt(state.latestPrediction.down)).format("0,0.00")
+                                        : upPrediction == '0' && downPrediction != '0' ? 1 : upPrediction != '0' && downPrediction == '0' || upPrediction == '0' && downPrediction == '0'? 0 : numeral(parseInt(upPrediction) / parseInt(downPrediction)).format("0,0.00")
+                                }
+                                x Payout
+                            </span>
                         </div>
                     </div>
                     
@@ -227,7 +236,12 @@ export default function SpaceWagerCard(props) {
                         >
                             {downButtonShape()}
                             <div className="btn-content" style={{ color: downTextColor()}}>
-                            <span className="small d-block fw-normal">{state.latestPrediction.down == '0' && state.latestPrediction.up != '0' ? 1 : state.latestPrediction.down != '0' && state.latestPrediction.up == '0' || state.latestPrediction.down == '0' && state.latestPrediction.up == '0'? 0 : numeral(parseInt(state.latestPrediction.down) / parseInt(state.latestPrediction.up)).format("0,0.00") }x Payout</span>
+                            <span className="small d-block fw-normal">
+                                {isNextPrediction ?
+                                    state.latestPrediction.down == '0' && state.latestPrediction.up != '0' ? 1 : state.latestPrediction.down != '0' && state.latestPrediction.up == '0' || state.latestPrediction.down == '0' && state.latestPrediction.up == '0'? 0 : numeral(parseInt(state.latestPrediction.down) / parseInt(state.latestPrediction.up)).format("0,0.00")
+                                    : downPrediction  == '0' && upPrediction != '0' ? 1 : downPrediction != '0' && upPrediction || downPrediction == '0' && upPrediction == '0'? 0 : numeral(parseInt(downPrediction) / parseInt(upPrediction)).format("0,0.00")
+                                }x Payout
+                            </span>
                             DOWN
                             </div>
                         </div>
