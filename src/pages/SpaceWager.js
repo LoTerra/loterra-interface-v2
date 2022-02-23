@@ -350,7 +350,7 @@ export default () => {
                             <Trophy size={36} style={{position:'relative',top:0}} weight={'bold'}/>
                         </button> */}
                     </div>
-                    <div className="col-md-12 my-3">
+                    <div className="col-md-12 order-4 my-3">
                         <div className="row">
                             <div className="col-6 text-end">
                                 <button className="swiper-prev btn btn-plain pb-2"><ArrowLeft size={24} /></button>
