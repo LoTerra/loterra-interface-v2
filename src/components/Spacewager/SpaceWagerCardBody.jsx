@@ -4,6 +4,7 @@ import {useStore} from "../../store";
 import PriceLoader from "../PriceLoader";
 import {MsgExecuteContract} from "@terra-money/terra.js";
 import SpaceWagerInfoMessage from './SpaceWagerInfoMessage';
+import { ArrowLeft } from 'phosphor-react';
 
 export default function SpaceWagerCardBody(props) {
     const { state, dispatch } = useStore()
@@ -44,7 +45,7 @@ export default function SpaceWagerCardBody(props) {
 
     const makeBid = (type) => {
         setBidType(type);
-        if(bidScreen == true){
+        if(bidScreen == true || type == null){
             //Reset values for clean new bid
             setBidType('')
             setAmount(0)
@@ -191,6 +192,11 @@ export default function SpaceWagerCardBody(props) {
               {
                   bidScreen ? <div>
                           <div className="row">
+                              <div className="col-12">
+                                  <button className={'btn btn-secondary float-start'} onClick={() => makeBid()}>
+                                        <ArrowLeft size={'24'} /> 
+                                  </button>
+                              </div>
                               <div className="col-6 text-start">
                                   <p className="fw-regular fs-6 mb-0 mt-2">Commit:</p>
                               </div>                              
@@ -203,13 +209,13 @@ export default function SpaceWagerCardBody(props) {
                                 className="img-fluid"
                             />
                         </span>
-                        <input className="form-control" type="number" value={amount} onChange={(e) => setAmount(e.target.value)}/>
+                        <input className="form-control" type="number" min="1" value={amount} onChange={(e) => setAmount(e.target.value)}/>
                           </div>
                           
                           <h6 className='mt-2 text-muted text-end small'>
                               Balance: 0 UST
                           </h6>
-                          <button onClick={() => makeBidFinal(obj[0]) } className="btn btn-plain w-100 mt-1">Enter {bidType}</button>
+                          <button onClick={() => makeBidFinal(obj[0]) } className={"btn w-100 mt-1" + (bidType == 'UP' ? ' btn-up' : ' btn-down')}>Enter {bidType}</button>
                           <SpaceWagerInfoMessage>
                               You won’t be able to remove or change your position once you enter it.
                           </SpaceWagerInfoMessage>
