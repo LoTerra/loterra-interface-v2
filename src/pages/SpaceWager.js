@@ -401,6 +401,8 @@ export default () => {
                                 isLivePrediction={obj[1].closing_time * 1000 < Date.now() && obj[1].closing_time * 1000 > Date.now() - 300000}
                                 isNextPrediction={obj[1].closing_time * 1000 > Date.now()}
                                 isPastPrediction={obj[1].closing_time * 1000 < Date.now() && obj[1].closing_time * 1000 < Date.now() - 300000 }
+                                upPrediction = {obj[1].up}
+                                downPrediction = {obj[1].down}
                                 click={(a) => triggerClick(a)}                        
                                 />
                             </SwiperSlide>
