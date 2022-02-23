@@ -235,7 +235,7 @@ export default function SpaceWagerCardBody(props) {
                   bidScreen ? <div>
                           <div className="row">
                               <div className="col-6 text-start">
-                                  <p className="fw-regular fs-6 mb-0 mt-2">Your bid:</p>
+                                  <p className="fw-regular fs-6 mb-0 mt-2">Commit:</p>
                               </div>                              
                           </div>
                           <div className="input-group">
