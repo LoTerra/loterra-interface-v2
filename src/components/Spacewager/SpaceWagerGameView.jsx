@@ -32,7 +32,7 @@ export default function SpaceWagerCardHeader(props) {
 
     const api = new WasmAPI(state.lcd_client.apiRequester)
 
-    let player_address =/*state.wallet.walletAddress*/ "terra1umd70qd4jv686wjrsnk92uxgewca3805dxd46p"
+    let player_address = state.wallet.walletAddress
 
     async function gameUser(start_after){
         let offset_limit = 6;
