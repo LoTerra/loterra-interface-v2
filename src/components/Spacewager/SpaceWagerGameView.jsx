@@ -32,8 +32,8 @@ export default function SpaceWagerCardHeader(props) {
 
     const api = new WasmAPI(state.lcd_client.apiRequester)
 
-    let player_address = state.wallet.walletAddress
 
+    let player_address = state.wallet.walletAddress
     let connectedWallet = ''
     if (typeof document !== 'undefined') {
         connectedWallet = useConnectedWallet()
@@ -41,7 +41,6 @@ export default function SpaceWagerCardHeader(props) {
 
     async function gameUser(start_after){
         if (connectedWallet){
-
 
             let offset_limit = 6;
 
@@ -138,7 +137,7 @@ export default function SpaceWagerCardHeader(props) {
 
     useMemo(() => {
         gameUser()
-    },[])
+    },[state.wallet.walletAddress, state.spaceWagerResolving])
 
 
     useEffect(() => {
