@@ -7,11 +7,12 @@ import SpaceWagerInfoMessage from './SpaceWagerInfoMessage';
 
 export default function SpaceWagerCardBody(props) {
     const { state, dispatch } = useStore()
-    const {obj,price,variationStatus,formattedVariation,lockedPrice,prizesPool, isLivePrediction, isPastPrediction, isNextPrediction} = props;
+    const {obj,price, currentTimeRound, variationStatus,formattedVariation,lockedPrice,prizesPool, isLivePrediction, isPastPrediction, isNextPrediction} = props;
     const [bidScreen, setBidScreen] = useState(false)
     const [bidType, setBidType] = useState('');
     const [amount,setAmount] = useState(0)
     const [ustBalance, setUstBalance] = useState(0)
+    const [currentTime, setCurrentTime] = useState(Date.now())
 
     const equalStyle = {
         opacity: '37%',
@@ -98,6 +99,17 @@ export default function SpaceWagerCardBody(props) {
         }else{
             return obj[1].resolved_price / 1000000
         }
+    }
+
+    function remainingTime() {
+        let timeBetween = currentTimeRound * 1000 - Date.now()
+        const seconds = Math.floor((timeBetween / 1000))
+        const minutes = Math.floor((timeBetween / 1000 / 60) % 60)
+        let remainingTime = (parseInt(minutes) / 60) + seconds
+
+        let percentage = ((parseInt(remainingTime) * 100) / 300)
+
+        return percentage
     }
 
     // function getUserBalance() {
@@ -211,8 +223,21 @@ export default function SpaceWagerCardBody(props) {
                           {!state.isUserMakingPrediction && (
                               <p className="my-2 fw-bold fs-6 mb-0">{ numeral((parseInt(state.latestPrediction.up) + parseInt(state.latestPrediction.down))/ 1_000_000 ).format('0,0.00')} {' '} UST</p>)
                           || <div className="spinner-border text-light" role="status"><span className="sr-only"></span></div>
-                          }
+                          }  
                       </div>
+                      <div className="col-12 mt-2">
+                        <div className="progress">
+                                <div
+                                    className='progress-bar'
+                                    color='#000000'
+                                    value={remainingTime()}
+                                    max={100}
+                                    style={{width: remainingTime()+'%'}}
+                                >
+                                </div>
+                            </div>
+                      </div>
+                      
                       <div className="col-12 my-3">
                           <button className="btn btn-up mb-2" onClick={() => makeBid('UP')}>Enter up</button>
                           <button className="btn btn-down" onClick={() => makeBid('DOWN')}>Enter down</button>

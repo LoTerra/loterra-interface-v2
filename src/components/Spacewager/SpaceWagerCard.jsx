@@ -212,6 +212,7 @@ export default function SpaceWagerCard(props) {
                         obj={obj}
                         price={price}
                         variationStatus={variationStatus}
+                        currentTimeRound={currentTimeRound}
                         formattedVariation={formattedVariation}
                         lockedPrice={lockedPrice}
                         prizesPool={prizesPool}

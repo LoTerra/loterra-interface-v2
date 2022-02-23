@@ -100,7 +100,7 @@ export default function SpaceWagerCardHeader(props) {
                                             max={100}
                                             style={{width:remainingTime()+'%'}}
                                         >
-                                            </div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
