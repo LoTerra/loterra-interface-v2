@@ -7,55 +7,12 @@ import SpaceWagerInfoMessage from './SpaceWagerInfoMessage';
 
 export default function SpaceWagerCardBody(props) {
     const { state, dispatch } = useStore()
-    const {obj,price,variationStatus,formattedVariation,lockedPrice,prizesPool, isLivePrediction, isPastPrediction, isNextPrediction} = props;
+    const {obj,price, currentTimeRound, variationStatus,formattedVariation,lockedPrice,prizesPool, isLivePrediction, isPastPrediction, isNextPrediction} = props;
     const [bidScreen, setBidScreen] = useState(false)
     const [bidType, setBidType] = useState('');
     const [amount,setAmount] = useState(0)
     const [ustBalance, setUstBalance] = useState(0)
-
-    function svgShape(color, opacity) {
-        return(
-            <svg width="265" xmlns="http://www.w3.org/2000/svg" viewBox="24.3139 251 270.6231 68">
-
-                <path d="M24.7723 266.366C20.5385 259.709 25.3209 251 33.2105 251H286.474C294.81 251 299.486 260.6 294.348 267.164L285.632 278.3C282.841 281.866 282.795 286.862 285.519 290.48L294.937 302.984C299.9 309.574 295.199 319 286.949 319H32.8434C25.0314 319 20.2361 310.444 24.3139 303.78L32.9501 289.668C34.9431 286.411 34.9077 282.304 32.8587 279.082L24.7723 266.366Z" fill={color} fillOpacity={opacity}/>
-
-            </svg>
-        )
-    }
-
-    function upTextColor() {
-        if (bidType == 'UP') {
-            return '#ffffff'
-        } else {
-            return '#17B96B'
-        }
-
-    }
-
-    function downTextColor() {
-        if (bidType == 'DOWN') {
-            return '#ffffff'
-        } else {
-            return '#f038f0'
-        }
-
-    }
-
-    function upButtonShape(){
-        if (bidType == 'UP') {
-            return svgShape('#17B96B', '1')
-        } else {
-            return svgShape('#6b6b6b', '0.37')
-        }
-    }
-
-    function downButtonShape(){
-        if (bidType == 'DOWN') {
-            return svgShape('#f038f0', '1')
-        } else {
-            return svgShape('#6b6b6b', '0.37')
-        }
-    }
+    const [currentTime, setCurrentTime] = useState(Date.now())
 
     const equalStyle = {
         opacity: '37%',
@@ -144,6 +101,17 @@ export default function SpaceWagerCardBody(props) {
         }
     }
 
+    function remainingTime() {
+        let timeBetween = currentTimeRound * 1000 - Date.now()
+        const seconds = Math.floor((timeBetween / 1000))
+        const minutes = Math.floor((timeBetween / 1000 / 60) % 60)
+        let remainingTime = (parseInt(minutes) / 60) + seconds
+
+        let percentage = ((parseInt(remainingTime) * 100) / 300)
+
+        return percentage
+    }
+
     // function getUserBalance() {
     //     if (connectedWallet) {
     //         lcd.bank.balance(connectedWallet.walletAddress).then(([coins]) => {
@@ -220,17 +188,6 @@ export default function SpaceWagerCardBody(props) {
       //When active round
       isNextPrediction &&
           <div>
-              <button className="btn btn-green fw-bold w-100"
-                      style={{borderBottomLeftRadius:0,borderBottomRightRadius:0}}
-                      onClick={() => makeBid('UP')}
-              >
-                  {upButtonShape()}
-                  <div className="btn-content" style={{color: upTextColor()}}>
-                      UP
-                      <span className="small fw-normal d-block">{state.latestPrediction.up == '0' && state.latestPrediction.down != '0' ? 1 : state.latestPrediction.up != '0' && state.latestPrediction.down == '0' || state.latestPrediction.up == '0' && state.latestPrediction.down == '0'? 0 : numeral(parseInt(state.latestPrediction.up) / parseInt(state.latestPrediction.down)).format("0,0.00")}x Payout</span>
-                  </div>
-              </button>
-
               {
                   bidScreen ? <div>
                           <div className="row">
@@ -266,25 +223,27 @@ export default function SpaceWagerCardBody(props) {
                           {!state.isUserMakingPrediction && (
                               <p className="my-2 fw-bold fs-6 mb-0">{ numeral((parseInt(state.latestPrediction.up) + parseInt(state.latestPrediction.down))/ 1_000_000 ).format('0,0.00')} {' '} UST</p>)
                           || <div className="spinner-border text-light" role="status"><span className="sr-only"></span></div>
-                          }
+                          }  
                       </div>
+                      <div className="col-12 mt-2">
+                        <div className="progress">
+                                <div
+                                    className='progress-bar'
+                                    color='#000000'
+                                    value={remainingTime()}
+                                    max={100}
+                                    style={{width: remainingTime()+'%'}}
+                                >
+                                </div>
+                            </div>
+                      </div>
+                      
                       <div className="col-12 my-3">
                           <button className="btn btn-up mb-2" onClick={() => makeBid('UP')}>Enter up</button>
                           <button className="btn btn-down" onClick={() => makeBid('DOWN')}>Enter down</button>
                       </div>
                   </div>
               }
-
-                  <button className="btn btn-red w-100 fw-bold"
-                          style={{borderTopLeftRadius:0,borderTopRightRadius:0}}
-                          onClick={() => makeBid('DOWN')}
-                  >
-                      {downButtonShape()}
-                      <div className="btn-content" style={{color: downTextColor()}}>
-                          <span className="small d-block fw-normal">{state.latestPrediction.down == '0' && state.latestPrediction.up != '0' ? 1 : state.latestPrediction.down != '0' && state.latestPrediction.up == '0' || state.latestPrediction.down == '0' && state.latestPrediction.up == '0'? 0 : numeral(parseInt(state.latestPrediction.down) / parseInt(state.latestPrediction.up)).format("0,0.00") }x Payout</span>
-                          DOWN
-                      </div>
-                  </button>
           </div>
     }
  </>
