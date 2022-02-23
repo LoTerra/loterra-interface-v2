@@ -280,11 +280,11 @@ export default () => {
                     <h1 className="mb-0 fw-bold">Spacewager</h1>
                     <h2 className="my-2 fw-regular fs-6 mb-0">Bets on the price of LUNA</h2>
                 </div>
-            <div className="luna-price mb-5">
-                <div className="row">
+        
+                <div className="row mb-2">
                     <div className="col-6 col-md-4 text-start">
                         <span
-                            className="badge"
+                            className="badge "
                             style={{
                                 background: '#0b012499',
                                 color: '#ffffff',
@@ -295,46 +295,51 @@ export default () => {
                                 top: '-2px',
                             }}
                         >
-                            <img
+                            <div className="row">
+                                <div className="col-2 col-md-3 d-flex h-100 text-center d-none d-md-inline-block">
+                                <img
                                 src="/terra-luna-Logo.png"
-                                className="img-fluid terraLogo"
+                                className="img-fluid align-self-center"
+                                style={{width:130}}
                             />
-                            <p className="mb-0 text-bold">LUNA/UST price</p>
-                            
-                            <h2 className={lunaStatus}>${numeral(lunaPrice).format('0,0.000')}</h2>
+                                </div>
+                                <div className="col-10 col-md-6 d-flex h-100 text-start">
+                                    <div className="align-self-center w-100">
+                                    <p className="mb-1 text-normal text-muted">LUNA/UST price</p>
+                                    <h2 className={'mb-0'}>${numeral(lunaPrice).format('0,0.000')}</h2>
+                                    </div>
+                                </div>
+                            </div>
+                           
+                           
                         </span>
                     </div>
                     <div className="col-6 col-md-4 d-flex text-center">
-                <p className="align-self-center w-100 mb-0 text-white fs-1 fw-bold"
+                <div className="align-self-center w-100 mb-0 text-white"
                     style={{
                         background: '#0b012499',
                         borderRadius: 20,
                         padding: 15
                     }}
                 >
-                    <span 
-                    className="d-block"
-                    style={{
-                        fontSize: 16,
-                        fontWeight: 400,
-                        opacity: 0.5
-                    }}
-                    >Current rounds ends in:</span>
-                    <Clock size={36} style={{position:'relative',top:-4, marginRight:5}} weight={'bold'}/>
-                    {state.spaceWagerCurrentTimeRound && formatTime() || "00:00"}
-                </p>
+                    <p className="mb-0 text-normal text-muted">
+                    Current rounds ends in:
+                    </p>
+                    <Clock size={36} style={{position:'relative',top:-12, marginRight:5}} weight={'bold'}/>
+                    <span className="fs-1 fw-bold">{state.spaceWagerCurrentTimeRound && formatTime() || "00:00"}</span>
+                </div>
             </div>
-                    <div className="col-md-12 text-center text-md-end">
+                    <div className="col-2 col-md-4 text-center text-md-end">
                         <button className="btn btn-plain fw-bold w-20 ms-2"
                             onClick={() => window.open("https://docs.loterra.io/upcoming/roadmap/spacewager", "_blank")}>
-                            <Question size={36} style={{position:'relative',top:0}} weight={'bold'}/>
+                            <Question size={24} style={{position:'relative',top:-4}} weight={'bold'}/>
                         </button>
-                        <button className="btn btn-plain fw-bold w-20 ms-2"
+                        {/* <button className="btn btn-plain fw-bold w-20 ms-2"
                             onClick={() => makeBid('up')}>
                             <Trophy size={36} style={{position:'relative',top:0}} weight={'bold'}/>
-                        </button>
+                        </button> */}
                     </div>
-                    <div className="col-md-12">
+                    <div className="col-md-12 my-3">
                         <div className="row">
                             <div className="col-6 text-end">
                                 <button className="swiper-prev btn btn-plain pb-2"><ArrowLeft size={24} /></button>
@@ -345,9 +350,9 @@ export default () => {
                         </div>
                     </div>
                 </div>
-            </div>
+           
             
-            <div className="row">
+            <div className="row mb-2">
                     {spacewagerState.round > 0 &&
                     <Swiper
                     spaceBetween={-50}

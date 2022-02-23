@@ -62,7 +62,7 @@ export default function SpaceWagerCard(props) {
     }
 
     function upTextColor() {
-        if (variation == 'UP') {
+        if (variationStatus == 'UP' && !isNextPrediction) {
             return '#ffffff'
         } else {
             return '#17B96B'
@@ -70,7 +70,7 @@ export default function SpaceWagerCard(props) {
     }
 
     function downTextColor() {
-        if (variation == 'DOWN') {
+        if (variationStatus == 'DOWN' && !isNextPrediction) {
             return '#ffffff'
         } else {
             return '#f038f0'
@@ -79,7 +79,7 @@ export default function SpaceWagerCard(props) {
     }
 
     function upButtonShape(){
-        if (variation == 'UP') {
+        if (variationStatus == 'UP' && !isNextPrediction) {
             return svgShape('#17B96B', '1')
         } else {
             return svgShape('#6b6b6b', '0.37')
@@ -87,7 +87,7 @@ export default function SpaceWagerCard(props) {
     }
 
     function downButtonShape(){
-        if (variation == 'DOWN') {
+        if (variationStatus == 'DOWN' && !isNextPrediction) {
             return svgShape('#f038f0', '1')
         } else {
             return svgShape('#6b6b6b', '0.37')
@@ -205,6 +205,7 @@ export default function SpaceWagerCard(props) {
                                         : bettingOddsOnUp == '0' && bettingOddsOnDown != '0' ? 1 : bettingOddsOnUp != '0' && bettingOddsOnDown == '0' || bettingOddsOnUp == '0' && bettingOddsOnDown == '0'? 0 : numeral(parseInt(bettingOddsOnUp) / parseInt(bettingOddsOnDown)).format("0,0.00")
                                 }
                                 x Payout
+
                             </span>
                         </div>
                     </div>
@@ -212,7 +213,7 @@ export default function SpaceWagerCard(props) {
                     
                     <div className="card-content" 
                         style={
-                            variationStatus == 'DOWN' && !isNextPrediction ? downStyle : !isNextPrediction ? upStyle : {border:''}
+                            variationStatus == 'DOWN' && !isNextPrediction ? downStyle : variationStatus == 'UP' && !isNextPrediction ? upStyle : {border:''}
                         }
                     >
 
