@@ -2,6 +2,7 @@ import React, { useEffect,useState } from 'react'
 import numeral from 'numeral';
 import { ThermometerSimple, ArrowUp, ArrowDown } from 'phosphor-react';
 import SpaceWagerCardHeader from './SpaceWagerCardHeader';
+import SpaceWagerCardBody from './SpaceWagerCardBody';
 import { LCDClient, MsgExecuteContract, WasmAPI } from '@terra-money/terra.js';
 import { useStore } from '../../store';
 
