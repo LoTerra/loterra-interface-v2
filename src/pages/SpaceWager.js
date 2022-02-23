@@ -281,7 +281,7 @@ export default () => {
                 </div>
             <div className="luna-price mb-5">
                 <div className="row">
-                    <div className="col-md-4 text-start">
+                    <div className="col-6 col-md-4 text-start">
                         <span
                             className="badge"
                             style={{
@@ -303,7 +303,7 @@ export default () => {
                             <h2 className={lunaStatus}>${numeral(lunaPrice).format('0,0.000')}</h2>
                         </span>
                     </div>
-                    <div className="col-md-4 d-flex text-center">
+                    <div className="col-6 col-md-4 d-flex text-center">
                 <p className="align-self-center w-100 mb-0 text-white fs-1 fw-bold"
                     style={{
                         background: '#0b012499',
@@ -323,7 +323,7 @@ export default () => {
                     {state.spaceWagerCurrentTimeRound && formatTime() || "00:00"}
                 </p>
             </div>
-                    <div className="col-md-4 text-end">
+                    <div className="col-md-12 text-center text-md-end">
                         <button className="btn btn-plain fw-bold w-20 ms-2"
                             onClick={() => window.open("https://docs.loterra.io/upcoming/roadmap/spacewager", "_blank")}>
                             <Question size={36} style={{position:'relative',top:0}} weight={'bold'}/>
