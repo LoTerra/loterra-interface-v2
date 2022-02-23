@@ -55,14 +55,6 @@ export default () => {
 
     const api = new WasmAPI(state.lcd_client.apiRequester)
 
-
-    let wallet = ''
-    let connectedWallet = ''
-    if (typeof document !== 'undefined') {
-        wallet = useWallet()
-        connectedWallet = useConnectedWallet()
-    }
-
     function openSpaceWagerDocs() {
         href="https://app.alteredprotocol.com"
     }
