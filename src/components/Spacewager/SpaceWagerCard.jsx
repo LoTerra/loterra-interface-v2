@@ -60,7 +60,7 @@ export default function SpaceWagerCard(props) {
     }
 
     function upTextColor() {
-        if (variation == 'UP') {
+        if (variationStatus == 'UP' && !isNextPrediction) {
             return '#ffffff'
         } else {
             return '#17B96B'
@@ -68,7 +68,7 @@ export default function SpaceWagerCard(props) {
     }
 
     function downTextColor() {
-        if (variation == 'DOWN') {
+        if (variationStatus == 'DOWN' && !isNextPrediction) {
             return '#ffffff'
         } else {
             return '#f038f0'
@@ -77,7 +77,7 @@ export default function SpaceWagerCard(props) {
     }
 
     function upButtonShape(){
-        if (variation == 'UP') {
+        if (variationStatus == 'UP' && !isNextPrediction) {
             return svgShape('#17B96B', '1')
         } else {
             return svgShape('#6b6b6b', '0.37')
@@ -85,7 +85,7 @@ export default function SpaceWagerCard(props) {
     }
 
     function downButtonShape(){
-        if (variation == 'DOWN') {
+        if (variationStatus == 'DOWN' && !isNextPrediction) {
             return svgShape('#f038f0', '1')
         } else {
             return svgShape('#6b6b6b', '0.37')
@@ -196,14 +196,16 @@ export default function SpaceWagerCard(props) {
                         {upButtonShape()}
                         <div className="btn-content" style={{ color: upTextColor()}}>
                             UP
-                            <span className="small fw-normal d-block">{state.latestPrediction.up == '0' && state.latestPrediction.down != '0' ? 1 : state.latestPrediction.up != '0' && state.latestPrediction.down == '0' || state.latestPrediction.up == '0' && state.latestPrediction.down == '0'? 0 : numeral(parseInt(state.latestPrediction.up) / parseInt(state.latestPrediction.down)).format("0,0.00")}x Payout</span>
+                            <span className="small fw-normal d-block">
+                                {state.latestPrediction.up == '0' && state.latestPrediction.down != '0' ? 1 : state.latestPrediction.up != '0' && state.latestPrediction.down == '0' || state.latestPrediction.up == '0' && state.latestPrediction.down == '0'? 0 : numeral(parseInt(state.latestPrediction.up) / parseInt(state.latestPrediction.down)).format("0,0.00")}x Payout
+                            </span>
                         </div>
                     </div>
                     
                     
                     <div className="card-content" 
                         style={
-                            variationStatus == 'DOWN' && !isNextPrediction ? downStyle : !isNextPrediction ? upStyle : {border:''}
+                            variationStatus == 'DOWN' && !isNextPrediction ? downStyle : variationStatus == 'UP' && !isNextPrediction ? upStyle : {border:''}
                         }
                     >
 
