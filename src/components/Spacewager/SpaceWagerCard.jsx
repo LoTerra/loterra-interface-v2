@@ -190,7 +190,7 @@ export default function SpaceWagerCard(props) {
 
                 <div className="card-body">
                     { !isNextPrediction &&
-                        <div className="btn btn-green fw-bold w-100"
+                        <div className="btn-green fw-bold w-100"
                         style={{borderBottomLeftRadius:0,borderBottomRightRadius:0}
                     }
                     >
@@ -224,7 +224,7 @@ export default function SpaceWagerCard(props) {
                     </div>
 
                     { !isNextPrediction &&
-                        <div className="btn btn-red w-100 fw-bold"
+                        <div className="btn-red w-100 fw-bold"
                             style={{borderTopLeftRadius:0,borderTopRightRadius:0}}
                         >
                             {downButtonShape()}

@@ -4,6 +4,7 @@ import {useStore} from "../../store";
 import PriceLoader from "../PriceLoader";
 import {MsgExecuteContract} from "@terra-money/terra.js";
 import SpaceWagerInfoMessage from './SpaceWagerInfoMessage';
+import { ArrowLeft } from 'phosphor-react';
 
 export default function SpaceWagerCardBody(props) {
     const { state, dispatch } = useStore()
@@ -44,7 +45,7 @@ export default function SpaceWagerCardBody(props) {
 
     const makeBid = (type) => {
         setBidType(type);
-        if(bidScreen == true){
+        if(bidScreen == true || type == null){
             //Reset values for clean new bid
             setBidType('')
             setAmount(0)
@@ -191,6 +192,11 @@ export default function SpaceWagerCardBody(props) {
               {
                   bidScreen ? <div>
                           <div className="row">
+                              <div className="col-12">
+                                  <button className={'btn btn-secondary float-start'} onClick={() => makeBid()}>
+                                        <ArrowLeft size={'24'} /> 
+                                  </button>
+                              </div>
                               <div className="col-6 text-start">
                                   <p className="fw-regular fs-6 mb-0 mt-2">Commit:</p>
                               </div>                              
