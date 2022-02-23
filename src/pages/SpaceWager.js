@@ -239,9 +239,18 @@ export default () => {
             let format_message = "Closing..."
             if (state.spaceWagerCurrentTimeRound * 1000 > Date.now()){
                 format_message = format_minutes + ":" +format_seconds
+
+                return(
+                <>
+                    <Clock size={32} style={{position:'relative',top:-10, marginRight:5}} weight={'bold'}/>
+                <span className="fs-1 fw-bold">{format_message}</span>
+                </>
+                )
             }
 
-            return format_message
+            return (
+                <span className="fs-6">{format_message}</span>
+            )
 
             //   console.log(currentTime, expiryTimestamp)
 
@@ -276,21 +285,21 @@ export default () => {
     return (
         <>
             <div className="container">
-                <div className="w-100 py-5 text-center">
+                <div className="w-100 py-3 py-md-5 text-center">
                     <h1 className="mb-0 fw-bold">Spacewager</h1>
                     <h2 className="my-2 fw-regular fs-6 mb-0">Bets on the price of LUNA</h2>
                 </div>
         
                 <div className="row mb-2">
-                    <div className="col-6 col-md-4 text-start">
-                        <span
-                            className="badge "
+                    <div className="col-6 col-md-4 order-2 order-md-1 text-start">
+                        <div
+                            className="w-100"
                             style={{
                                 background: '#0b012499',
                                 color: '#ffffff',
                                 marginLeft: '7px',
                                 borderRadius: 20,
-                                padding: 20,
+                                padding: 15,
                                 position: 'relative',
                                 top: '-2px',
                             }}
@@ -305,16 +314,18 @@ export default () => {
                                 </div>
                                 <div className="col-10 col-md-6 d-flex h-100 text-start">
                                     <div className="align-self-center w-100">
-                                    <p className="mb-1 text-normal text-muted">LUNA/UST price</p>
-                                    <h2 className={'mb-0'}>${numeral(lunaPrice).format('0,0.000')}</h2>
+                                        <p className="mb-0 text-normal text-muted">
+                                        Luna/UST Price
+                                        </p>
+                                    <h2 className={'fs-1 fw-bold mb-0'}>${numeral(lunaPrice).format('0,0.000')}</h2>
                                     </div>
                                 </div>
                             </div>
                            
                            
-                        </span>
+                        </div>
                     </div>
-                    <div className="col-6 col-md-4 d-flex text-center">
+                    <div className="col-6 col-md-4 order-3 order-md-2 d-flex text-center">
                 <div className="align-self-center w-100 mb-0 text-white"
                     style={{
                         background: '#0b012499',
@@ -323,23 +334,23 @@ export default () => {
                     }}
                 >
                     <p className="mb-0 text-normal text-muted">
-                    Current rounds ends in:
+                    Round ends in
                     </p>
-                    <Clock size={36} style={{position:'relative',top:-12, marginRight:5}} weight={'bold'}/>
-                    <span className="fs-1 fw-bold">{state.spaceWagerCurrentTimeRound && formatTime() || "00:00"}</span>
+                    
+                    {state.spaceWagerCurrentTimeRound && formatTime() || "00:00"}
                 </div>
             </div>
-                    <div className="col-2 col-md-4 text-center text-md-end">
+                    <div className="col-12 col-md-4 text-center text-md-end order-1 order-md-2">
                         <button className="btn btn-plain fw-bold w-20 ms-2"
                             onClick={() => window.open("https://docs.loterra.io/upcoming/roadmap/spacewager", "_blank")}>
-                            <Question size={24} style={{position:'relative',top:-4}} weight={'bold'}/>
+                            <Question size={24} style={{position:'relative',top:-2}} weight={'bold'}/>
                         </button>
                         {/* <button className="btn btn-plain fw-bold w-20 ms-2"
                             onClick={() => makeBid('up')}>
                             <Trophy size={36} style={{position:'relative',top:0}} weight={'bold'}/>
                         </button> */}
                     </div>
-                    <div className="col-md-12 my-3">
+                    <div className="col-md-12 order-4 my-3">
                         <div className="row">
                             <div className="col-6 text-end">
                                 <button className="swiper-prev btn btn-plain pb-2"><ArrowLeft size={24} /></button>
