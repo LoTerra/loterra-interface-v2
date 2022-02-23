@@ -137,7 +137,7 @@ export default function SpaceWagerCard(props) {
 
     return (
        <div className="col-9 mx-auto">
-            <div className={"card spacewager-card h-100 "+(obj.active ? ' active' : '')}
+            <div className={"card spacewager-card h-100 "+(isPastPrediction && obj[1].success != null ? ' finished' : '')}
                 style={{
                     borderTopLeftRadius: 20,
                     borderTopRightRadius: 20

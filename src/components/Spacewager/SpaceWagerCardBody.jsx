@@ -3,6 +3,7 @@ import numeral from 'numeral';
 import {useStore} from "../../store";
 import PriceLoader from "../PriceLoader";
 import {MsgExecuteContract} from "@terra-money/terra.js";
+import SpaceWagerInfoMessage from './SpaceWagerInfoMessage';
 
 export default function SpaceWagerCardBody(props) {
     const { state, dispatch } = useStore()
@@ -163,11 +164,9 @@ export default function SpaceWagerCardBody(props) {
          {
              //When not active round
              isPastPrediction && obj[1].success == null  &&
-             <>
-                 <p className="small">
+            <SpaceWagerInfoMessage>
                      This round’s closing transaction has been submitted to the blockchain, and is awaiting confirmation.
-                 </p>
-             </>
+             </SpaceWagerInfoMessage>
          }
         { 
         //When not active round
