@@ -101,7 +101,7 @@ export default function SpaceWagerCardHeader(props) {
                 <td>Resolved: { game[1].resolved }</td>
                 {/* display a collect button if resolved is false*/}
                 <td>
-                    <button hidden={game[1].resolved} onClick={() => collectPrize(game[0])}>Collect</button>
+                    <button className="btn btn-outline-primary w-100 btn-sm" hidden={game[1].resolved} onClick={() => collectPrize(game[0])}>Collect</button>
                 </td>
             </tr>
         )
@@ -123,20 +123,26 @@ export default function SpaceWagerCardHeader(props) {
     }, [])
 
     return (
-        <>
-            <div>
-                <table>
+        <div className="container-fluid mt-4">
+            <div className="w-100 py-4">
+                <h3 className="fw-bold">Player history</h3>
+                <table className="table text-white">
                     <thead>
                     <tr>
-                        <th colSpan="2">History</th>
+                        <th>Round</th>
+                        <th>Wager UP</th>
+                        <th>Wager DOWN</th>
+                        <th>Total prize</th>
+                        <th>Resolved</th>
+                        <th className="text-end">Actions</th>
                     </tr>
                     </thead>
                     <tbody>
                     {gameData()}
                     </tbody>
                 </table>
-                <button disabled={!isActivePagination} onClick={() => gameUser(paginationLastElementRound)}>Load more</button>
+                <button className="btn btn-plain" disabled={!isActivePagination} onClick={() => gameUser(paginationLastElementRound)}>Load more</button>
             </div>
-        </>
+        </div>
     )
 }
