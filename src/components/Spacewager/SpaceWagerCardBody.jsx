@@ -209,13 +209,13 @@ export default function SpaceWagerCardBody(props) {
                                 className="img-fluid"
                             />
                         </span>
-                        <input className="form-control" type="number" value={amount} onChange={(e) => setAmount(e.target.value)}/>
+                        <input className="form-control" type="number" min="1" value={amount} onChange={(e) => setAmount(e.target.value)}/>
                           </div>
                           
                           <h6 className='mt-2 text-muted text-end small'>
                               Balance: 0 UST
                           </h6>
-                          <button onClick={() => makeBidFinal(obj[0]) } className="btn btn-plain w-100 mt-1">Enter {bidType}</button>
+                          <button onClick={() => makeBidFinal(obj[0]) } className={"btn w-100 mt-1" + (bidType == 'UP' ? ' btn-up' : ' btn-down')}>Enter {bidType}</button>
                           <SpaceWagerInfoMessage>
                               You won’t be able to remove or change your position once you enter it.
                           </SpaceWagerInfoMessage>
