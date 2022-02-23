@@ -32,12 +32,14 @@ export default function SpaceWagerCardHeader(props) {
 
     const api = new WasmAPI(state.lcd_client.apiRequester)
 
+    let player_address =/*state.wallet.walletAddress*/ "terra1umd70qd4jv686wjrsnk92uxgewca3805dxd46p"
+
     async function gameUser(start_after){
         let offset_limit = 5;
 
         let query = {
             games: {
-                player: /*state.wallet.walletAddress*/ "terra1umd70qd4jv686wjrsnk92uxgewca3805dxd46p",
+                player: player_address,
                 limit: offset_limit
             }
         }
@@ -75,7 +77,10 @@ export default function SpaceWagerCardHeader(props) {
             state.wallet.walletAddress,
             state.spaceWagerAddress,
             {
-                resolve_game: {round: round }
+                resolve_game: {
+                    address: player_address,
+                    round: round
+                }
             }
         )
 
