@@ -8,7 +8,9 @@ export default function SpaceWagerCardHeader(props) {
     const { state, dispatch } = useStore()
     const {} = props;
     const [games,setGames] = useState([]);
-    /*[
+    /*
+        ----------GAMES SAMPLE--------
+      [
         [0, {
             up: "1",
             down: "",
@@ -44,7 +46,6 @@ export default function SpaceWagerCardHeader(props) {
         try {
             let res = await api.contractQuery(state.spaceWagerAddress, query);
 
-            setGames(res)
             if (res.length == offset_limit){
                 setPaginationLastElementRound(res[res.length - 1][0])
                 setIsActivePagination(true)
@@ -52,6 +53,12 @@ export default function SpaceWagerCardHeader(props) {
                 setIsActivePagination(false)
             }
 
+            const new_array = games;
+            res.forEach(elem => {
+                new_array.push(elem)
+            });
+
+            setGames(games)
         }catch (e) {
             console.log(e)
         }
@@ -85,15 +92,17 @@ export default function SpaceWagerCardHeader(props) {
 
     function gameData(){
 
-        let render = games.map(game =>
-            <tr>
+        let render = games.map((game, key) =>
+            <tr key={key}>
                 <td>Round: { game[0] }</td>
                 <td>Wager Up: { game[1].up }</td>
                 <td>Wager Down: { game[1].down }</td>
                 <td>Total Prize: { game[1].prize }</td>
                 <td>Resolved: { game[1].resolved }</td>
                 {/* display a collect button if resolved is false*/}
-                <button hidden={game[1].resolved} onClick={() => collectPrize(game[0])}>Collect</button>
+                <td>
+                    <button hidden={game[1].resolved} onClick={() => collectPrize(game[0])}>Collect</button>
+                </td>
             </tr>
         )
 
