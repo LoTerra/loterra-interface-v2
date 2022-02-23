@@ -32,7 +32,7 @@ export default function SpaceWagerCardHeader(props) {
 
     const api = new WasmAPI(state.lcd_client.apiRequester)
 
-    let player_address =/*state.wallet.walletAddress*/ "terra1umd70qd4jv686wjrsnk92uxgewca3805dxd46p"
+    let player_address = state.wallet.walletAddress
 
     async function gameUser(start_after){
         let offset_limit = 6;
@@ -109,13 +109,13 @@ export default function SpaceWagerCardHeader(props) {
         let render = games.map((game, key) =>
             <tr key={key}>
                 <td>#{ game[0] }</td>
-                <td>{ numeral(game[1].up / 1000000).format("0,0.00") }UST</td>
-                <td>{ numeral(game[1].down / 1000000).format("0,0.00") }UST</td>
-                <td>{ numeral(game[1].prize / 1000000).format("0,0.00") }UST</td>
+                <td>{ game[1].up != "0" ? numeral(game[1].up / 1000000).format("0,0.00") + 'UST':  '-'}</td>
+                <td>{ game[1].down != "0" ? numeral(game[1].down / 1000000).format("0,0.00") + 'UST': '-'}</td>
+                <td>{ game[1].prize != "0" ?  numeral(game[1].prize / 1000000).format("0,0.00") + 'UST': '-'}</td>
                 <td>{ game[1].resolved ? <Check size={23} /> : <X size={23} /> }</td>
                 {/* display a collect button if resolved is false*/}
                 <td>
-                    <button className="btn btn-outline-primary w-100 btn-sm" hidden={game[1].resolved} onClick={() => collectPrize(game[0])}>Collect</button>
+                    <button className="btn btn-outline-primary w-100 btn-sm" hidden={game[1].resolved} onClick={() => collectPrize(game[0])}>Resolve</button>
                 </td>
             </tr>
         )
