@@ -79,7 +79,7 @@ export default function SpaceWagerCardHeader(props) {
             {
                 resolve_game: {
                     address: player_address,
-                    round: round
+                    round: [round]
                 }
             }
         )
