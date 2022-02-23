@@ -181,7 +181,7 @@ export default function SpaceWagerCard(props) {
         },[state.spaceWagerLastPrice])
 
     return (
-       <div className="col-9 mx-auto">
+       <div className="col-10 col-md-9 mx-auto">
             <div className={"card spacewager-card h-100 "+(isPastPrediction && obj[1].success != null ? ' finished' : '')}
                 style={{
                     borderTopLeftRadius: 20,
