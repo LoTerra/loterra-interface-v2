@@ -35,7 +35,7 @@ export default function SpaceWagerCardHeader(props) {
     let player_address =/*state.wallet.walletAddress*/ "terra1umd70qd4jv686wjrsnk92uxgewca3805dxd46p"
 
     async function gameUser(start_after){
-        let offset_limit = 10;
+        let offset_limit = 6;
 
         let query = {
             games: {
