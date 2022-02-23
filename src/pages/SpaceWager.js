@@ -3,6 +3,8 @@ import React, { useEffect,useMemo,useState } from 'react'
 import numeral from 'numeral';
 import { useStore } from '../store'
 import SpaceWagerCard from '../components/Spacewager/SpaceWagerCard';
+import SpaceWagerGameView from '../components/Spacewager/SpaceWagerGameView';
+
 import { Clock, Question, Trophy, Info } from 'phosphor-react'
 
 import SwiperCore, { Navigation, Pagination ,Autoplay,EffectFade } from 'swiper';
@@ -268,6 +270,7 @@ export default () => {
     },[spacewagerState.round])
  
     return (
+        <>
             <div className="container">
                 <div className="w-100 py-5 text-center">
                     <h1 className="mb-0 fw-bold">Spacewager</h1>
@@ -336,10 +339,6 @@ export default () => {
                     spaceBetween={-50}
                     //   modules={[Navigation, Pagination, A11y]}                           
                     initialSlide={spacewagerState.round}
-                    pagination={{ clickable: true }}
-                    navigation={false}
-                    observeParents={true}
-                    observer={true}
                     slidesPerView={1}
                     breakpoints={{
                         // when window width is >= 640px
@@ -387,5 +386,9 @@ export default () => {
                     }
                 </div>
             </div>
+        <div>
+            <SpaceWagerGameView/>
+        </div>
+    </>
     )
 }
