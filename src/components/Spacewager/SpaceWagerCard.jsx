@@ -176,7 +176,7 @@ export default function SpaceWagerCard(props) {
             getVariation(obj[1].locked_price, state.spaceWagerLastPrice * 1000000)
         }
 
-        },[state.spaceWagerLastPrice])
+        },[state.spaceWagerLastPrice, state.spaceWagerCurrentRound])
 
     return (
        <div className="col-10 col-md-9 mx-auto">

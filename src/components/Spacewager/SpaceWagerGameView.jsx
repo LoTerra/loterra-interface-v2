@@ -151,8 +151,8 @@ export default function SpaceWagerCardHeader(props) {
 
     function gameData(){
 
-        let render = games.map((game, key) =>
-            <tr key={key}>
+        let render = games.map((game) =>
+            <tr key={game[0]}>
                 <td>#{ game[0] }</td>
                 <td>{ game[1].up != "0" ? numeral(game[1].up / 1000000).format("0,0.00") + 'UST':  '-'}</td>
                 <td>{ game[1].down != "0" ? numeral(game[1].down / 1000000).format("0,0.00") + 'UST': '-'}</td>

@@ -213,6 +213,7 @@ export default () => {
         channel.bind('new-prediction', function (data) {
             setSpacewagerState({round: parseFloat(data.message)})
             dispatch({ type: 'setSpaceWagerResolving', message: false })
+            dispatch({ type: 'setSpaceWagerCurrentRound', message: parseFloat(data.message) })
         })
 
         channel.bind('latest-prediction', function (data) {
@@ -396,9 +397,9 @@ export default () => {
                 >
                     {predictions.length > 0 && predictions.map((obj, k) => {
                         return (
-                            <SwiperSlide key={k} >
+                            <SwiperSlide key={obj[0]} >
                                 <SpaceWagerCard 
-                                key={k}
+                                key={obj[0]}
                                 id={k}
                                 dataLength={predictions.length}
                                 obj={obj}

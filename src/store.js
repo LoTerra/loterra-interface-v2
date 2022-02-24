@@ -177,10 +177,16 @@ const initialState = {
     spaceWagerResolving: false,
     latestPrediction: {up: '0', down: '0'},
     isUserMakingPrediction: false,
+    spaceWagerCurrentRound: 0
 }
 
 const reducer = (state, action) => {
     switch (action.type) {
+        case "setSpaceWagerCurrentRound":
+            return {
+                ...state,
+                spaceWagerCurrentRound: action.message,
+            }
         case "setIsUserMakingPrediction":
             return {
                 ...state,
