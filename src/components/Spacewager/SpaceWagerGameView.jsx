@@ -136,8 +136,9 @@ export default function SpaceWagerCardHeader(props) {
     }
 
     useMemo(() => {
+        setGames([])
         gameUser()
-    },[state.wallet.walletAddress, state.spaceWagerResolving])
+    },[state.wallet.walletAddress])
 
 
     useEffect(() => {
