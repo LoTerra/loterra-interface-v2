@@ -9,8 +9,6 @@ import { useStore } from '../../store';
 
 export default function SpaceWagerCard(props) {
 
-    const [variationStatus, setVariationStatus] = useState('')
-
     const {
         id,
         obj,
@@ -35,6 +33,7 @@ export default function SpaceWagerCard(props) {
 
 
     const [formattedVariation, setFormattedVariation] = useState(0)
+    const [variationStatus, setVariationStatus] = useState('')
     const [personalBidInfo, setPersonalBidInfo] = useState()
 
 
@@ -177,7 +176,7 @@ export default function SpaceWagerCard(props) {
             getVariation(obj[1].locked_price, state.spaceWagerLastPrice * 1000000)
         }
 
-        },[state.spaceWagerLastPrice])
+        },[state.spaceWagerLastPrice, formattedVariation, variationStatus])
 
     return (
        <div className="col-10 col-md-9 mx-auto">

@@ -169,8 +169,8 @@ export default function SpaceWagerCardHeader(props) {
                             parseInt(game[1].up) + parseInt(game[1].down) == parseInt(game[1].prize) ?
                                 <><Swap size={23} /> Refund</> :
                                 parseInt(game[1].up) + parseInt(game[1].down) < parseInt(game[1].prize) ?
-                                    <><TrendUp size={23} /> +{numeral((parseInt(game[1].prize) - (parseInt(game[1].up) + parseInt(game[1].down))) / 1000000).format("0.0,00")}UST</>
-                                    : <><TrendDown size={23} /> {numeral((parseInt(game[1].prize) - (parseInt(game[1].up) + parseInt(game[1].down))) / 1000000).format("0.0,00")}UST</>
+                                    <><TrendUp size={23} /> +{numeral((parseInt(game[1].prize) - (parseInt(game[1].up) + parseInt(game[1].down))) / 1000000).format("0,0.00")}UST</>
+                                    : <><TrendDown size={23} /> {numeral((parseInt(game[1].prize) - (parseInt(game[1].up) + parseInt(game[1].down))) / 1000000).format("0,0.00")}UST</>
 
                     }
 
