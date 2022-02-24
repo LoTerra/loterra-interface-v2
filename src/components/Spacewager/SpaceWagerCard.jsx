@@ -97,7 +97,7 @@ export default function SpaceWagerCard(props) {
 
         try {
             let variation = 0.000
-            if (currentPrice != 0) {
+            if (currentPrice != 0 && lockedPrice != 0) {
                 if (lockedPrice > currentPrice) {
                     variation = (currentPrice - lockedPrice) / 1_000_000
                 } else if (lockedPrice < currentPrice){
