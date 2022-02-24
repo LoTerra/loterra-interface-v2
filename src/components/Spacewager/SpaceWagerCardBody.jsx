@@ -45,23 +45,7 @@ export default function SpaceWagerCardBody(props) {
     const upStylePrice = {
         color: '#17B96B'
     }
-    // const getPersonalBids = async (round) => {
-    //         try {
-    //             let personal_bid_info = await api.contractQuery(
-    //                 state.spaceWagerAddress,
-    //                 {
-    //                     game: {
-    //                        address:state.wallet.walletAddress,
-    //                        round: round
-    //                     }
-    //                 }
-    //             );
-    //             console.log('getPersonalBids',personal_bid_info)
-    //             setPersonalBidInfo(personal_bid_info)
-    //         } catch(e) {
-    //             console.log(e)
-    //         }
-    //     }
+
     const makeBid = (type) => {
         setBidType(type);
         if(bidScreen == true || type == null){
@@ -292,35 +276,6 @@ export default function SpaceWagerCardBody(props) {
               }
           </div>
     }
-     {/*<div className="card-footer p-0">*/}
-     {/*    { personalBidInfo && (parseInt(personalBidInfo.up) > 0 || parseInt(personalBidInfo.down) > 0) &&*/}
-     {/*        <div className="row">*/}
-     {/*            <div className="col-12 text-center">*/}
-     {/*                <p className="text-center">Your stats</p>*/}
-     {/*            </div>*/}
-     {/*            <div className="col-md-6">*/}
-     {/*                <strong>UP VOTE</strong>*/}
-     {/*                <p>{numeral(personalBidInfo.up / 1000000).format('0,0.000') }</p>*/}
-     {/*            </div>*/}
-     {/*            <div className="col-md-6">*/}
-     {/*                <strong>DOWN VOTE</strong>*/}
-     {/*                <p>{numeral(personalBidInfo.down / 1000000).format('0,0.000') }</p>*/}
-     {/*            </div>*/}
-     {/*            { obj[1].success && obj[1].is_up && parseInt(personalBidInfo.up) > 0 &&*/}
-     {/*                <div className="col-12">*/}
-     {/*                    <p>YOU WON WITH UP</p>*/}
-     {/*                    <button className="btn btn-plain">Collect prize</button>*/}
-     {/*                </div>*/}
-     {/*            }*/}
-     {/*            { obj[1].success && !obj[1].is_up && parseInt(personalBidInfo.down) > 0 &&*/}
-     {/*                <div className="col-12">*/}
-     {/*                <p>YOU WON WITH DOWN</p>*/}
-     {/*                <button className="btn btn-plain">Collect prize</button>*/}
-     {/*            </div>*/}
-     {/*            }*/}
-     {/*        </div>*/}
-     {/*    }*/}
-     {/*</div>*/}
  </>
     )
 

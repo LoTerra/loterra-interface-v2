@@ -5,6 +5,7 @@ import SpaceWagerCardHeader from './SpaceWagerCardHeader';
 import SpaceWagerCardBody from './SpaceWagerCardBody';
 import { LCDClient, MsgExecuteContract, WasmAPI } from '@terra-money/terra.js';
 import { useStore } from '../../store';
+import {CheckCircle} from 'phosphor-react';
 
 
 export default function SpaceWagerCard(props) {
@@ -34,6 +35,7 @@ export default function SpaceWagerCard(props) {
 
     const [formattedVariation, setFormattedVariation] = useState(0)
     const [variationStatus, setVariationStatus] = useState('')
+    const [personalBidInfo, setPersonalBidInfo] = useState('')
 
 
 
@@ -126,6 +128,23 @@ export default function SpaceWagerCard(props) {
         }
     }
 
+    const getPersonalBids = async (round) => {
+        try {
+           let personal_bid_info = await api.contractQuery(
+            state.spaceWagerAddress,
+                {
+                    game: {
+                        address:state.wallet.walletAddress,
+                        round: round
+                    }
+                }
+            );
+            setPersonalBidInfo(personal_bid_info)
+        } catch(e) {
+            console.log(e)
+        }
+    }
+
 
     // function getVariationRatio(lockedPrice, currentPrice) {
     //     let variation = 0.000
@@ -144,7 +163,10 @@ export default function SpaceWagerCard(props) {
 
     //Load on mount
     useEffect(() =>  {
-
+        if(state.wallet && obj[0]){
+            getPersonalBids(obj[0])
+        }
+        
         if (parseInt(obj[1].resolved_price) != 0){
             getVariation(obj[1].locked_price, obj[1].resolved_price)
         }else{
@@ -221,10 +243,58 @@ export default function SpaceWagerCard(props) {
                             DOWN
                             </div>
                         </div>
-                    
+                </div>
+                <div className="card-footer p-0">
+                    { personalBidInfo && (parseInt(personalBidInfo.up) > 0 || parseInt(personalBidInfo.down) > 0) &&
+                        <div className="row">
+                            <div className="col-12 text-center">
+                            <span className="badge" 
+                                style={{
+                                    background:'rgb(51 42 77)'
+                                }}
+                            >
+                                <p className="fw-bold fs-6 mt-1 mb-0">
+                                    <CheckCircle size={23} style={{position:'relative', top:-1, marginRight:5}} weight={'bold'}/>
 
-                </div>
-                </div>
+                                    Entered
+                                </p>
+                            </span>
+                                
+                            </div>
+                            <div className="col-md-6 mt-2">
+                                <strong
+                                    style={{color: '#17b96b'}}
+                                >
+                                    UP
+                                </strong>
+                                <p>{numeral(personalBidInfo.up / 1000000).format('0,0')} UST</p>
+                            </div>
+                            <div className="col-md-6 mt-2">
+                                <strong
+                                    style={{
+                                        color: '#f038f0'
+                                    }}
+                                >
+                                    DOWN
+                                </strong>
+                                <p>{numeral(personalBidInfo.down / 1000000).format('0,0')} UST</p>
+                            </div>
+                            {/* { obj[1].success && obj[1].is_up && parseInt(personalBidInfo.up) > 0 &&
+                                <div className="col-12">
+                                    <p>YOU WON WITH UP</p>
+                                    <button className="btn btn-plain">Collect prize</button>
+                                </div>
+                            }
+                            { obj[1].success && !obj[1].is_up && parseInt(personalBidInfo.down) > 0 &&
+                                <div className="col-12">
+                                <p>YOU WON WITH DOWN</p>
+                                <button className="btn btn-plain">Collect prize</button>
+                            </div>
+                            } */}
+                        </div>
+                    }
+                </div> 
+            </div>
        </div>
     )
 }
