@@ -369,6 +369,7 @@ export default () => {
             <div className="row mb-2 position-relative">
                     {spacewagerState.round > 0 &&
                     <Swiper
+                        shortSwipes= {false}
                     spaceBetween={-50}
                     navigation={{
                         nextEl: '.swiper-next',
