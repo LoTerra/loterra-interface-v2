@@ -5,8 +5,7 @@ import PriceLoader from "../PriceLoader";
 import {MsgExecuteContract} from "@terra-money/terra.js";
 import SpaceWagerInfoMessage from './SpaceWagerInfoMessage';
 import { ArrowLeft } from 'phosphor-react';
-let date = new Date()
-date.setSeconds( date.getSeconds() + 20)
+
 export default function SpaceWagerCardBody(props) {
     const { state, dispatch } = useStore()
     const {obj,price, currentTimeRound, counterOneMinute, variationStatus,formattedVariation,lockedPrice,prizesPool, isLivePrediction, isPastPrediction, isNextPrediction} = props;
