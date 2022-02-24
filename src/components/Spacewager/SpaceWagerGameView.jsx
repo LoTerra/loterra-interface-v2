@@ -143,6 +143,7 @@ export default function SpaceWagerCardHeader(props) {
 
             })
             .catch((e) => {
+                setLoaderPendingToResolve({resolving: false, id: null})
                 console.log(e)
 
             })
@@ -183,15 +184,17 @@ export default function SpaceWagerCardHeader(props) {
         )
     }
 
-    useMemo(() => {
+    useEffect(() => {
         setGames([])
+        setPaginationLastElementRound(null)
+        setLoaderPendingToResolve({ resolving: false, id: null})
+        setIsActivePagination(false)
+        setIsLoadingMore(false)
+
         gameUser()
     },[state.wallet.walletAddress])
 
 
-    useEffect(() => {
-
-    }, [])
 
     return (
         <div className="container-fluid mt-4">
