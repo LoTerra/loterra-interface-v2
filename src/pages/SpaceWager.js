@@ -283,7 +283,7 @@ export default () => {
       // }
 
         getSpacewagerPredictions()
-    },[spacewagerState.round, state.spaceWagerCurrentRound])
+    },[state.spaceWagerCurrentRound])
  
     return (
         <>
