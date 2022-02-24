@@ -109,14 +109,14 @@ export default function SpaceWagerCard(props) {
             let format_variation = split_variation.length == 1 ? <>{split_variation[0]}<span style={{fontSize: '0.7em'}}>.000000</span></>  : <>{split_variation[0]}<span style={{fontSize: '0.7em'}}>.{split_variation[1]}</span></>
 
             if (variation > 0) {
-                setFormattedVariation(<><TrendUp size={23} />${format_variation}</>)
+                setFormattedVariation(<><TrendUp size={23} /> ${format_variation}</>)
                 setVariationStatus('UP')
             } else if (variation < 0) {
-                setFormattedVariation(<><TrendDown size={23} />⬇$ {format_variation}</>)
+                setFormattedVariation(<><TrendDown size={23} /> ${format_variation}</>)
                 setVariationStatus('DOWN')
                 //console.log('down')
             } else {
-                setFormattedVariation(<><Equals size={23} />${format_variation}</>)
+                setFormattedVariation(<><Equals size={23} /> ${format_variation}</>)
                 setVariationStatus('EQUAL')
             }
 
