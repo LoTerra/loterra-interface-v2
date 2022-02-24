@@ -34,7 +34,7 @@ export default function SpaceWagerCard(props) {
 
     const [formattedVariation, setFormattedVariation] = useState(0)
     const [variationStatus, setVariationStatus] = useState('')
-    const [personalBidInfo, setPersonalBidInfo] = useState()
+
 
 
     //Testnet settings now api
@@ -127,25 +127,6 @@ export default function SpaceWagerCard(props) {
     }
 
 
-    // const getPersonalBids = async (round) => {
-    //     try {
-    //         let personal_bid_info = await api.contractQuery(
-    //             state.spaceWagerAddress,
-    //             {
-    //                 game: {
-    //                    address:state.wallet.walletAddress,
-    //                    round: round
-    //                 }
-    //             }
-    //         );
-    //         console.log('getPersonalBids',personal_bid_info)
-    //         setPersonalBidInfo(personal_bid_info)
-    //     } catch(e) {
-    //         console.log(e)
-    //     }
-    // }
-
-
     // function getVariationRatio(lockedPrice, currentPrice) {
     //     let variation = 0.000
     //     if (lockedPrice != 0) {
@@ -160,12 +141,6 @@ export default function SpaceWagerCard(props) {
     //
     //     return variation
     // }
-
-    // useEffect(() => {
-    //     if(state.wallet && obj[0]){
-    //         getPersonalBids(obj[0])
-    //     }
-    // },[isLivePrediction, isPastPrediction, isNextPrediction])
 
     //Load on mount
     useEffect(() =>  {
@@ -249,35 +224,6 @@ export default function SpaceWagerCard(props) {
                     
 
                 </div>
-                    {/*<div className="card-footer p-0">          */}
-                    {/*    { personalBidInfo && (parseInt(personalBidInfo.up) > 0 || parseInt(personalBidInfo.down) > 0) &&*/}
-                    {/*        <div className="row">*/}
-                    {/*            <div className="col-12 text-center">*/}
-                    {/*                <p className="text-center">Your stats</p>*/}
-                    {/*            </div>*/}
-                    {/*            <div className="col-md-6">*/}
-                    {/*                <strong>UP VOTE</strong>*/}
-                    {/*                <p>{numeral(personalBidInfo.up / 1000000).format('0,0.000') }</p>                              */}
-                    {/*            </div>*/}
-                    {/*            <div className="col-md-6">*/}
-                    {/*                <strong>DOWN VOTE</strong>*/}
-                    {/*                <p>{numeral(personalBidInfo.down / 1000000).format('0,0.000') }</p>  */}
-                    {/*            </div>*/}
-                    {/*            { obj[1].success && obj[1].is_up && parseInt(personalBidInfo.up) > 0 &&*/}
-                    {/*                <div className="col-12">*/}
-                    {/*                    <p>YOU WON WITH UP</p>*/}
-                    {/*                    <button className="btn btn-plain">Collect prize</button>*/}
-                    {/*                </div>*/}
-                    {/*            }*/}
-                    {/*            { obj[1].success && !obj[1].is_up && parseInt(personalBidInfo.down) > 0 &&*/}
-                    {/*                <div className="col-12">*/}
-                    {/*                <p>YOU WON WITH DOWN</p>*/}
-                    {/*                <button className="btn btn-plain">Collect prize</button>*/}
-                    {/*            </div>*/}
-                    {/*            }*/}
-                    {/*        </div>          */}
-                    {/*    }*/}
-                    {/*</div>*/}
                 </div>
        </div>
     )

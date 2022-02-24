@@ -69,12 +69,14 @@ export default function SpaceWagerCardHeader(props) {
                 }
 
                 if (res.length > 0){
-                    const new_array = games;
-                    res.forEach(elem => {
+
+                    const new_array = res;
+                    games.forEach(elem => {
                         new_array.push(elem)
                     });
-                    setGames(games)
+                    new_array.sort((a,b) => b[0] - a[0]);
 
+                    setGames(new_array)
                 }
 
                 setIsLoadingMore(false)
@@ -85,6 +87,7 @@ export default function SpaceWagerCardHeader(props) {
     }
 
     async function gameUserRefreshElement(start_after){
+
         if (connectedWallet){
 
             let offset_limit = 1;
@@ -100,14 +103,18 @@ export default function SpaceWagerCardHeader(props) {
             try {
                 let res = await api.contractQuery(state.spaceWagerAddress, query);
                 let data = res;
-                games.map((game) => {
-                    if (game[0] != res[0][0]) {
-                        data.push(game)
-                    }
-                })
 
-                data.sort((a,b) => b[0] - a[0]);
-                setGames(data)
+                if (res.length > 0){
+                    games.map((game) => {
+                        if (game[0] != res[0][0]) {
+                            data.push(game)
+                        }
+                    })
+
+                    data.sort((a,b) => b[0] - a[0]);
+                    setGames(data)
+                }
+
             }catch (e) {
                 console.log(e)
             }
@@ -194,6 +201,11 @@ export default function SpaceWagerCardHeader(props) {
 
         gameUser()
     },[state.wallet.walletAddress])
+
+    // useEffect(() => {
+    //     gameUserRefreshElement(state.spaceWagerCurrentRound - 2)
+    // },[state.spaceWagerCurrentRound])
+
 
 
 
