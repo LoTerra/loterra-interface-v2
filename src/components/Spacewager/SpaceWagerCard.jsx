@@ -96,7 +96,7 @@ export default function SpaceWagerCard(props) {
 
         try {
             let variation = 0.000
-            if (currentPrice != 0 && lockedPrice != 0) {
+            if (parseInt(currentPrice) != 0 && parseInt(lockedPrice) != 0) {
                 if (lockedPrice > currentPrice) {
                     variation = (currentPrice - lockedPrice) / 1_000_000
                 } else if (lockedPrice < currentPrice){
@@ -170,13 +170,13 @@ export default function SpaceWagerCard(props) {
     //Load on mount
     useEffect(() =>  {
 
-        if (obj[1].resolved_price != "0"){
+        if (parseInt(obj[1].resolved_price) != 0){
             getVariation(obj[1].locked_price, obj[1].resolved_price)
         }else{
             getVariation(obj[1].locked_price, state.spaceWagerLastPrice * 1000000)
         }
 
-        },[state.spaceWagerLastPrice, formattedVariation, variationStatus])
+        },[state.spaceWagerLastPrice])
 
     return (
        <div className="col-10 col-md-9 mx-auto">

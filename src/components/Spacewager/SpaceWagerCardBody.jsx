@@ -130,6 +130,9 @@ export default function SpaceWagerCardBody(props) {
     //         setUstBalance(null);
     //     }
     // }
+    // useEffect(() => {
+    //
+    // }, [ isLivePrediction, isNextPrediction, isPastPrediction])
 
     return (
  <>
