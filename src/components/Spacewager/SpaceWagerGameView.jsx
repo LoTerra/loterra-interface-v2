@@ -3,7 +3,7 @@ import {useStore} from "../../store";
 import {MsgExecuteContract, WasmAPI} from "@terra-money/terra.js";
 import {useConnectedWallet, useWallet} from "@terra-money/wallet-provider";
 import numeral from "numeral";
-import { Check, X } from 'phosphor-react';
+import {Check, X, Swap, Money, TrendUp, TrendDown} from 'phosphor-react';
 
 export default function SpaceWagerCardHeader(props) {
 
@@ -29,6 +29,7 @@ export default function SpaceWagerCardHeader(props) {
     const [isActivePagination, setIsActivePagination] = useState(false)
     const [paginationLastElementRound, setPaginationLastElementRound] = useState(null)
     const [isLoadingMore, setIsLoadingMore] = useState(false)
+    const [loaderPendingToResolve, setLoaderPendingToResolve] = useState({ resolving: false, id: null})
 
     const api = new WasmAPI(state.lcd_client.apiRequester)
 
@@ -83,7 +84,39 @@ export default function SpaceWagerCardHeader(props) {
         }
     }
 
+    async function gameUserRefreshElement(start_after){
+        if (connectedWallet){
+
+            let offset_limit = 1;
+
+            let query = {
+                games: {
+                    player: player_address,
+                    limit: offset_limit,
+                    start_after: start_after + 1
+                }
+            }
+
+            try {
+                let res = await api.contractQuery(state.spaceWagerAddress, query);
+                let data = res;
+                games.map((game) => {
+                    if (game[0] != res[0][0]) {
+                        data.push(game)
+                    }
+                })
+
+                data.sort((a,b) => b[0] - a[0]);
+                setGames(data)
+            }catch (e) {
+                console.log(e)
+            }
+            setLoaderPendingToResolve({resolving: false, id: null})
+        }
+    }
     async function collectPrize(round){
+        setLoaderPendingToResolve({resolving: true, id: round})
+
         let msg = new MsgExecuteContract(
             state.wallet.walletAddress,
             state.spaceWagerAddress,
@@ -101,15 +134,21 @@ export default function SpaceWagerCardHeader(props) {
             })
             .then((e) => {
                 if (e.success) {
+
                     alert('success!')
                 } else {
                     console.log(e)
                 }
+                setTimeout(() => {
+                    gameUserRefreshElement(round)
+                }, 20000)
+
             })
             .catch((e) => {
                 console.log(e)
 
             })
+
     }
 
     function gameData(){
@@ -121,9 +160,20 @@ export default function SpaceWagerCardHeader(props) {
                 <td>{ game[1].down != "0" ? numeral(game[1].down / 1000000).format("0,0.00") + 'UST': '-'}</td>
                 <td>{ game[1].prize != "0" ?  numeral(game[1].prize / 1000000).format("0,0.00") + 'UST': '-'}</td>
                 <td>{ game[1].resolved ? <Check size={23} /> : <X size={23} /> }</td>
-                {/* display a collect button if resolved is false*/}
+                {/* display a collect button if resolved is false  <Money size={23} />*/}
                 <td>
-                    <button className="btn btn-outline-primary w-100 btn-sm" hidden={game[1].resolved} onClick={() => collectPrize(game[0])}>Resolve</button>
+                    {
+                        !game[1].resolved ?
+                            <button className="btn btn-outline-primary w-100 btn-sm" hidden={game[1].resolved} disabled={loaderPendingToResolve.id == game[0]} onClick={() => collectPrize(game[0])}>Resolve</button>
+                            :
+                            parseInt(game[1].up) + parseInt(game[1].down) == parseInt(game[1].prize) ?
+                                <><Swap size={23} /> Refund</> :
+                                parseInt(game[1].up) + parseInt(game[1].down) < parseInt(game[1].prize) ?
+                                    <><TrendUp size={23} /> +{numeral((parseInt(game[1].prize) - (parseInt(game[1].up) + parseInt(game[1].down))) / 1000000).format("0.0,00")}UST</>
+                                    : <><TrendDown size={23} /> {numeral((parseInt(game[1].prize) - (parseInt(game[1].up) + parseInt(game[1].down))) / 1000000).format("0.0,00")}UST</>
+
+                    }
+
                 </td>
             </tr>
         )
