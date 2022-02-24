@@ -90,6 +90,7 @@ export default function SpaceWagerCardBody(props) {
                 }
             })
             .catch((e) => {
+                dispatch({ type: 'setIsUserMakingPrediction', message: false })
                 console.log(e)
 
             })
