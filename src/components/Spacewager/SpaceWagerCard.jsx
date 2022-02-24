@@ -116,7 +116,7 @@ export default function SpaceWagerCard(props) {
                 setVariationStatus('DOWN')
                 //console.log('down')
             } else {
-                setFormattedVariation(<><Equals size={23} /> ${format_variation}</>)
+                setFormattedVariation(<>${format_variation}</>)
                 setVariationStatus('EQUAL')
             }
 
