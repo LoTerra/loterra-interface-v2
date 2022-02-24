@@ -57,7 +57,6 @@ export default () => {
     const swiperRef = createRef()
 
 
-
     let wallet = ''
     let connectedWallet = ''
     if (typeof document !== 'undefined') {
@@ -278,6 +277,7 @@ export default () => {
       //     }, 1000);
       //     return () => clearInterval(interval);
       // }
+
         getSpacewagerPredictions()
     },[spacewagerState.round])
  
