@@ -3,7 +3,7 @@ import {useStore} from "../../store";
 import {MsgExecuteContract, WasmAPI} from "@terra-money/terra.js";
 import {useConnectedWallet, useWallet} from "@terra-money/wallet-provider";
 import numeral from "numeral";
-import {Check, X, Swap, Money, TrendUp, TrendDown} from 'phosphor-react';
+import {Check, X, Swap, Money, TrendUp, TrendDown, Hourglass} from 'phosphor-react';
 
 export default function SpaceWagerCardHeader(props) {
 
@@ -145,7 +145,6 @@ export default function SpaceWagerCardHeader(props) {
             .catch((e) => {
                 setLoaderPendingToResolve({resolving: false, id: null})
                 console.log(e)
-
             })
 
     }
@@ -163,7 +162,9 @@ export default function SpaceWagerCardHeader(props) {
                 <td>
                     {
                         !game[1].resolved ?
-                            <button className="btn btn-outline-primary w-100 btn-sm" hidden={game[1].resolved} disabled={loaderPendingToResolve.id == game[0]} onClick={() => collectPrize(game[0])}>Resolve</button>
+                                game[0] + 1 < state.spaceWagerCurrentRound ?
+                                <button className="btn btn-outline-primary w-100 btn-sm" hidden={game[1].resolved} disabled={loaderPendingToResolve.id == game[0]} onClick={() => collectPrize(game[0])}>Resolve</button>
+                                    : <><Hourglass size={23} /> In progress</>
                             :
                             parseInt(game[1].up) + parseInt(game[1].down) == parseInt(game[1].prize) ?
                                 <><Swap size={23} /> Refund</> :
