@@ -59,10 +59,9 @@ export default function SpaceWagerCardBody(props) {
 
     const makeBidFinal = (round) => {
         if(amount == 0 || amount == ''){
-            alert('please fill a amount you want to bid')
             return;
         }
-        alert('you bid on '+ bidType +': '+ amount + 'UST on round: '+round)
+        //alert('you bid on '+ bidType +': '+ amount + 'UST on round: '+round)
         //LOADING
         dispatch({ type: 'setIsUserMakingPrediction', message: true })
         //Set bidscreen false
@@ -86,7 +85,7 @@ export default function SpaceWagerCardBody(props) {
             })
             .then((e) => {
                 if (e.success) {
-                    alert('success!')
+                    //alert('success!')
                 } else {
                     console.log(e)
                 }
