@@ -134,8 +134,6 @@ export default function SpaceWagerCardHeader(props) {
             })
             .then((e) => {
                 if (e.success) {
-
-                    alert('success!')
                 } else {
                     console.log(e)
                 }

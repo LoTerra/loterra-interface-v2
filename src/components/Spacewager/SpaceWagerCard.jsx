@@ -105,21 +105,21 @@ export default function SpaceWagerCard(props) {
                     variation = 0.000
                 }
             }
+            let split_variation = String(variation).split('.');
+            let format_variation = split_variation.length == 1 ? <>{split_variation[0]}<span style={{fontSize: '0.7em'}}>.000000</span></>  : <>{split_variation[0]}<span style={{fontSize: '0.7em'}}>.{split_variation[1]}</span></>
 
-            if (variation != 0) {
-                if (variation > 0) {
-                    setFormattedVariation('⬆ $' + numeral(variation).format('0,0.000'))
-                    setVariationStatus('UP')
-                } else if (variation < 0) {
-                    setFormattedVariation('⬇ $' + numeral(variation).format('0,0.000'))
-                    setVariationStatus('DOWN')
-                    //console.log('down')
-                }     
+            if (variation > 0) {
+                setFormattedVariation(<>⬆${format_variation}</>)
+                setVariationStatus('UP')
+            } else if (variation < 0) {
+                setFormattedVariation(<>⬇$ {format_variation}</>)
+                setVariationStatus('DOWN')
+                //console.log('down')
             } else {
-                setFormattedVariation('$' + numeral(variation).format('0,0.000'))
+                setFormattedVariation(<>${format_variation}</>)
                 setVariationStatus('EQUAL')
-                //console.log('equal')
             }
+
             return 
         } catch(e){
             console.log(e)

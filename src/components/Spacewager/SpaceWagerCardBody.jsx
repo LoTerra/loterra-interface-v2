@@ -96,18 +96,17 @@ export default function SpaceWagerCardBody(props) {
     }
 
     function format_number(number){
-        let format_price = String(number).split('.')
-        return format_price
+        let split_variation = String(number).split('.')
+        let format_variation = split_variation.length == 1 ? <>{split_variation[0]}<span style={{fontSize: '0.7em'}}>.000000</span></>  : <>{split_variation[0]}<span style={{fontSize: '0.7em'}}>.{split_variation[1]}</span></>
+        return format_variation
     }
 
     function last_price(){
         if (isLivePrediction || isPastPrediction && obj[1].success == null){
             //dispatch({ type: 'setSpaceWagerLastPrice', message: price })
-            let format_price = String(price).split('.')
-            return format_price
+            return price
         }else{
-            let format_price = String(obj[1].resolved_price / 1000000).split('.')
-            return format_price
+            return obj[1].resolved_price / 1000000
         }
     }
 
@@ -163,7 +162,7 @@ export default function SpaceWagerCardBody(props) {
                     style={
                         variationStatus == 'DOWN' ? downStylePrice : variationStatus == 'UP' ? upStylePrice : {color:'#fff'}
                     }
-                >${last_price()[0]}.<span style={{fontSize: '0.6em'}}>{last_price()[1]}</span></p>
+                >${format_number(last_price())}</p>
             </div>
             <div className="col-6 text-end">
                 <span
@@ -183,7 +182,7 @@ export default function SpaceWagerCardBody(props) {
             </div>
             <div className="col-6 text-end">
                 <p className="my-2 fw-bold fs-6 mb-0">
-                    ${format_number(obj[1].locked_price / 1000000)[0]}.<span style={{fontSize: '0.8em'}}>{format_number(obj[1].locked_price / 1000000)[1]}</span></p>
+                    ${format_number(obj[1].locked_price / 1000000)}</p>
             </div>
         </div>
         
