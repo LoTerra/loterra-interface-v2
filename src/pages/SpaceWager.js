@@ -4,6 +4,7 @@ import numeral from 'numeral';
 import { useStore } from '../store'
 import SpaceWagerCard from '../components/Spacewager/SpaceWagerCard';
 import SpaceWagerGameView from '../components/Spacewager/SpaceWagerGameView';
+import { Head } from 'react-static'
 
 import { Clock, Question, Trophy, Info, ArrowLeft, ArrowRight } from 'phosphor-react'
 
@@ -286,6 +287,36 @@ export default () => {
  
     return (
         <>
+        <Head>
+                <meta charSet="UTF-8" />
+                <title>
+                    Spacewager | Predict LUNA/UST price prediction!
+                </title>
+                <meta
+                    property="og:title"
+                    content="Spacewager | Predict LUNA/UST price prediction!"
+                />
+                <meta
+                    property="og:description"
+                    content="LoTerra Spacewager is a decentralized prediction game on Terra Blockchain. Predict whether LUNA's price will rise or fall – guess correctly to win!"
+                />
+                <meta
+                    property="og:image"
+                    content="https://drive.google.com/file/d/1G6HMrcU05YhfTeAJpmz7sVUvbyOp_kuB/view?usp=sharing"
+                />
+                <meta
+                    property="twitter:title"
+                    content="Spacewager | Predict LUNA/UST price prediction!"
+                />
+                <meta
+                    property="twitter:image"
+                    content="https://drive.google.com/file/d/1G6HMrcU05YhfTeAJpmz7sVUvbyOp_kuB/view?usp=sharing"
+                />
+                <meta
+                    property="twitter:description"
+                    content="LoTerra Spacewager is a decentralized prediction game on Terra Blockchain. Predict whether LUNA's price will rise or fall – guess correctly to win!"
+                />
+            </Head>
             <div className="container">
                 <div className="w-100 py-3 py-md-5 text-center">
                     <h1 className="mb-0 fw-bold" style={{textShadow:'1px 1px 10px #14053b'}}>Spacewager</h1>
