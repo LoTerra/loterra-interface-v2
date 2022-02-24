@@ -17,6 +17,7 @@ import 'swiper/swiper.min.css'
 import { useConnectedWallet, useWallet } from '@terra-money/wallet-provider';
 
 import Pusher from 'pusher-js';
+import SpaceWagerIcon from '../components/Spacewager/SpaceWagerIcon';
 
 // Enable pusher logging - don't include this in production
 // Pusher.logToConsole = true;
@@ -285,8 +286,8 @@ export default () => {
         <>
             <div className="container">
                 <div className="w-100 py-3 py-md-5 text-center">
-                    <h1 className="mb-0 fw-bold">Spacewager</h1>
-                    <h2 className="my-2 fw-regular fs-6 mb-0">Bets on the price of LUNA</h2>
+                    <h1 className="mb-0 fw-bold" style={{textShadow:'1px 1px 10px #14053b'}}>Spacewager</h1>
+                    <h2 className="my-2 fw-regular fs-6 mb-0">Predict the future LUNA price</h2>
                 </div>
         
                 <div className="row mb-2">
@@ -339,11 +340,12 @@ export default () => {
                     {state.spaceWagerCurrentTimeRound && formatTime() || "00:00"}
                 </div>
             </div>
-                    <div className="col-12 col-md-4 text-center text-md-end order-1 order-md-2">
+                    <div className="col-12 col-md-4 text-center text-md-end order-1 order-md-2 position-relative">
                         <button className="btn btn-plain fw-bold w-20 ms-2"
                             onClick={() => window.open("https://docs.loterra.io/upcoming/roadmap/spacewager", "_blank")}>
                             <Question size={24} style={{position:'relative',top:-2}} weight={'bold'}/>
                         </button>
+                        <SpaceWagerIcon />
                         {/* <button className="btn btn-plain fw-bold w-20 ms-2"
                             onClick={() => makeBid('up')}>
                             <Trophy size={36} style={{position:'relative',top:0}} weight={'bold'}/>
@@ -362,7 +364,7 @@ export default () => {
                 </div>
            
             
-            <div className="row mb-2">
+            <div className="row mb-2 position-relative">
                     {spacewagerState.round > 0 &&
                     <Swiper
                     spaceBetween={-50}
@@ -418,6 +420,7 @@ export default () => {
                     })}
                 </Swiper> 
                     }
+         
                 </div>
             </div>
         <div>

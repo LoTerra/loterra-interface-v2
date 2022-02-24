@@ -98,6 +98,30 @@
 
 }
 
+//Spacewager icon
+
+.spacewager-icon {
+ svg {
+    position: absolute;
+    right: 70px;
+    top: -250px;
+    width: 268px;
+    animation-name: floating;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+    @media(max-width:768px){
+        z-index:-1;
+    }
+ }
+}
+
+@keyframes floating {
+    0% { transform: rotate(45deg) translate(0,  0px); }
+    50%  { transform: rotate(45deg) translate(0, 15px); }
+    100%   { transform: rotate(45deg)  translate(0, -0px); }   
+}
+
 
 //Swiper settings 
 
