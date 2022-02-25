@@ -104,18 +104,26 @@ export default function SpaceWagerCardHeader(props) {
 
             try {
                 let res = await api.contractQuery(state.spaceWagerAddress, query);
-                let data = res;
 
                 if (res.length > 0){
-                    games.map((game) => {
-                        if (game.game_id != res[0].game_id) {
-                            data.push(game)
-                        }
-                    })
+                    const index = games.findIndex(object => {
+                        return object.game_id == res[0].game_id;
+                    });
 
-                    data.sort((a,b) => b[0] - a[0]);
+                    const newGame = [...games];
+                    newGame[index] = res[0];
+                    setGames(newGame);
 
-                    setGames([...data])
+                    // games.map((game) => {
+                    //
+                    //     if (game.game_id != res[0].game_id) {
+                    //         data.push(game)
+                    //     }
+                    // })
+                    //
+                    // data.sort((a,b) => b[0] - a[0]);
+                    //
+                    // setGames([...data])
                 }
 
             }catch (e) {
