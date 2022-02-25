@@ -126,12 +126,13 @@ export default function SpaceWagerCardHeader(props) {
         }
     }
     async function collectPrize(round){
-        setLoaderPendingToResolve({resolving: true, id: round})
+
         let array = []
 
         if (Array.isArray(round)) {
             array = round
         }else {
+            setLoaderPendingToResolve({resolving: true, id: round})
             array.push(round)
         }
 
@@ -171,11 +172,14 @@ export default function SpaceWagerCardHeader(props) {
         let array = [];
         games.map(game => {
             if (!game.resolved && (game.game_id + 2) < state.spaceWagerCurrentRound ) {
-                array.push(game.game_id)
+                if (!array.includes(game.game_id)) {
+                    array.push(game.game_id)
+                }
+
             }
         })
 
-        if (array.length) {
+        if (array.length != 0) {
             collectPrize(array)
         }
     }
