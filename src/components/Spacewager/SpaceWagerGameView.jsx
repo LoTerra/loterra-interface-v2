@@ -212,6 +212,7 @@ export default function SpaceWagerCardHeader(props) {
         <div className="container-fluid mt-4">
             <div className="w-100 py-4 table-responsive">
                 <h3 className="fw-bold">Player history</h3>
+                <div class="table-responsive">
                 <table className="table text-white">
                     <thead>
                     <tr>
@@ -227,6 +228,7 @@ export default function SpaceWagerCardHeader(props) {
                     {gameData()}
                     </tbody>
                 </table>
+                </div>
                 <button className="btn btn-plain" disabled={!isActivePagination || isLoadingMore} onClick={() => gameUser(paginationLastElementRound)}>
                     {
                         isLoadingMore ?
