@@ -238,6 +238,7 @@ export default function SpaceWagerCardHeader(props) {
     }
 
     useEffect(() => {
+        setGames([])
         setPaginationLastElementRound(null)
         setLoaderPendingToResolve({ resolving: false, id: null})
         setIsActivePagination(false)
