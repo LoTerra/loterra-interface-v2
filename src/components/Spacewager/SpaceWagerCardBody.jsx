@@ -101,7 +101,7 @@ export default function SpaceWagerCardBody(props) {
     }
 
     function format_number(number, size){
-        let split_variation = String(number).split('.')
+        let split_variation = numeral(number).format("0,0.000000").split('.');
         let format_variation = split_variation.length == 1 ? <>{split_variation[0]}<span style={{fontSize: size}}>.000000</span></>  : <>{split_variation[0]}<span style={{fontSize: size}}>.{split_variation[1]}</span></>
         return format_variation
     }
