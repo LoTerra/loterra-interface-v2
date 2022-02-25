@@ -5,6 +5,8 @@ import PriceLoader from "../PriceLoader";
 import {MsgExecuteContract} from "@terra-money/terra.js";
 import SpaceWagerInfoMessage from './SpaceWagerInfoMessage';
 import { ArrowLeft } from 'phosphor-react';
+import toast, { Toaster } from 'react-hot-toast';
+
 
 export default function SpaceWagerCardBody(props) {
     const { state, dispatch } = useStore()
@@ -58,6 +60,7 @@ export default function SpaceWagerCardBody(props) {
 
     const makeBidFinal = (round) => {
         if(amount == 0 || amount == ''){
+            toast.error('please fill a amount to bid')
             return;
         }
         //alert('you bid on '+ bidType +': '+ amount + 'UST on round: '+round)
@@ -84,8 +87,9 @@ export default function SpaceWagerCardBody(props) {
             })
             .then((e) => {
                 if (e.success) {
-                    //alert('success!')
+                    toast.success('Bid succesfull!')
                 } else {
+                    toast.error('Something went wrong, please try again')
                     console.log(e)
                 }
             })
@@ -148,6 +152,7 @@ export default function SpaceWagerCardBody(props) {
 
     return (
  <>
+
          {
              //When not active round
              isPastPrediction && obj[1].success == null  &&
@@ -238,7 +243,7 @@ export default function SpaceWagerCardBody(props) {
                             <button onClick={() => makeBidFinal(obj[0]) } className={"btn w-100 mt-1" + (bidType == 'UP' ? ' btn-up' : ' btn-down')}>Enter {bidType}</button>
                           }
                           { state.wallet && !state.wallet.hasOwnProperty('walletAddress') &&
-                            <button className={"btn w-100 mt-1" + (bidType == 'UP' ? ' btn-up' : ' btn-down')}>Connect wallet</button>
+                            <button className={"btn w-100 mt-1" + (bidType == 'UP' ? ' btn-up' : ' btn-down')} onClick={() => toast.error('Please connect your wallet')}>Connect wallet</button>
                           }
                           <SpaceWagerInfoMessage>
                               You won’t be able to remove or change your position once you enter it.
@@ -274,8 +279,10 @@ export default function SpaceWagerCardBody(props) {
                       </div>
                   </div>
               }
+            
           </div>
     }
+
  </>
     )
 

@@ -19,6 +19,7 @@ import { useConnectedWallet, useWallet } from '@terra-money/wallet-provider';
 
 import Pusher from 'pusher-js';
 import SpaceWagerIcon from '../components/Spacewager/SpaceWagerIcon';
+import { Toaster } from 'react-hot-toast';
 
 // Enable pusher logging - don't include this in production
 // Pusher.logToConsole = true;
@@ -464,6 +465,10 @@ export default () => {
             </div>
         <div>
             <SpaceWagerGameView/>
+            <Toaster
+         position="top-center"
+         reverseOrder={false}
+       />
         </div>
     </>
     )
