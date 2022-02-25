@@ -111,7 +111,7 @@ const initialState = {
     alteredStakingLPAddress: 'terra1augyqytpq9klph5egx99m5ufrcjx5f7xgrcqck',
     dogetherAddress: 'terra19h4xk8xxxew0ne6fuw0mvuf7ltmjmxjxssj5ts',
     dogetherStakingAddress: 'terra1z2vgthmdy5qlz4cnj9d9d3ajtqeq7uzc0acxrp',
-    spaceWagerAddress: 'terra1t8zj09gvp388lsksj7w0usk2f09ltz767ej685',
+    spaceWagerAddress: /*'terra1t8zj09gvp388lsksj7w0usk2f09ltz767ej685' */ "terra1zwx80xz75s7dqkly7hmwrpe47r9f43kvwyw0jc",
     vkrContract: 'terra143kpwsuu82rtdy8jkyagmvn426q9amqsk7ftrw',
     vkrQualifierContract:'terra1xme735w8y8hamfvlyeh924puazfclrec2ka8fh',
     vkrReferrer: {status:false,code:''},
