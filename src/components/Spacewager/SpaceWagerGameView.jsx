@@ -75,7 +75,6 @@ export default function SpaceWagerCardHeader(props) {
                         new_array.push(elem)
                     });
                     new_array.sort((a,b) => b[0] - a[0]);
-
                     setGames(new_array)
                 }
 

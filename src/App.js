@@ -150,10 +150,10 @@ class App extends Component {
                         <Switch>
                   
                         <Route exact path="/" component={Index} />
-                        <Route exact path="/dogether" component={Dogether} />
+                            <Route exact path="/spacewager" component={SpaceWager} />
+                            <Route exact path="/dogether" component={Dogether} />
                         <Route exact path="/staking" component={Staking} />
-                        <Route exact path="/dao" component={Dao} />         
-                        <Route exact path="/spacewager" component={SpaceWager} />                        
+                        <Route exact path="/dao" component={Dao} />
                         <Route render={() => <Routes/>} />
                      
                         </Switch>

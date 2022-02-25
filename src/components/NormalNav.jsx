@@ -47,6 +47,42 @@ if (typeof location !== 'undefined') {
                         </NavLink>
                     </li>
                     <li className="nav-item">
+                        <NavLink exact
+                                 to="/spacewager"
+                                 className="nav-link"
+                                 className={'nav-link ' + spaceWagerClass}
+                        >
+                            <Planet
+                                size={24}
+                                style={{
+                                    marginRight: '3px',
+                                    position: 'relative',
+                                    top: '-1px',
+                                }}
+                            />{' '}
+                            Spacewager
+                            <span className="item-label">
+                                        Predict the next price
+                                    </span>
+                            <span
+                                className="badge"
+                                style={{
+                                    position: 'absolute',
+                                    right: 0,
+                                    top: '-9px',
+                                    fontSize: '10px',
+                                    lineHeight: '10px',
+                                    padding: '3px',
+                                    textTransform: 'uppercase',
+                                    color: '#10003b',
+                                    background: '#8bf6c2',
+                                }}
+                            >
+                                BETA
+                            </span>
+                        </NavLink>
+                    </li>
+                    <li className="nav-item">
                         <NavLink exact 
                             to="/dogether"
                             className="nav-link"
@@ -121,27 +157,6 @@ if (typeof location !== 'undefined') {
                             </span>
                         </NavLink>
                     </li>
-                    <li className="nav-item">
-                        <NavLink exact                     
-                            to="/spacewager"
-                            className="nav-link"
-                            className={'nav-link ' + spaceWagerClass}
-                        >
-                            <Planet
-                                size={24}
-                                style={{
-                                    marginRight: '3px',
-                                    position: 'relative',
-                                    top: '-1px',
-                                }}
-                            />{' '}
-                            Spacewager
-                            <span className="item-label">
-                                Predict the next price
-                            </span>                            
-                        </NavLink>
-                    </li>
-                    
                     <span className="sub-heading">LoTerra projects</span>
                     <li className="nav-item">
                         <a
