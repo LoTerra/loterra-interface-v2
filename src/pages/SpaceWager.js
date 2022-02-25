@@ -229,7 +229,6 @@ export default () => {
 
         channel.bind('latest-prediction', function (data) {
             let prediction = JSON.parse(data.message);
-            console.log(prediction)
             dispatch({ type: 'setLatestPrediction', message: prediction })
         })
 
