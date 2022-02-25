@@ -19,6 +19,8 @@ import { useConnectedWallet, useWallet } from '@terra-money/wallet-provider';
 
 import Pusher from 'pusher-js';
 import SpaceWagerIcon from '../components/Spacewager/SpaceWagerIcon';
+import { Toaster } from 'react-hot-toast';
+import Footer from '../components/Footer';
 
 // Enable pusher logging - don't include this in production
 // Pusher.logToConsole = true;
@@ -352,7 +354,7 @@ export default () => {
                                 style={{width:130}}
                             />
                                 </div>
-                                <div className="col-10 col-md-6 d-flex h-100 text-start">
+                                <div className="col-10 col-md-6 d-flex h-100 text-start luna-price-card">
                                     <div className="align-self-center w-100">
                                         <p className="mb-0 text-normal text-muted">
                                         Luna/UST Price
@@ -365,7 +367,7 @@ export default () => {
                            
                         </div>
                     </div>
-                    <div className="col-6 col-md-4 order-3 order-md-2 d-flex text-center">
+                    <div className="col-6 col-md-4 order-3 order-md-2 d-flex text-center countdown-card">
                 <div className="align-self-center w-100 mb-0 text-white"
                     style={{
                         background: '#0b012499',
@@ -381,7 +383,7 @@ export default () => {
                 </div>
             </div>
                     <div className="col-12 col-md-4 text-center text-md-end order-1 order-md-2 position-relative">
-                        <button className="btn btn-plain fw-bold w-20 ms-2"
+                        <button className="btn btn-plain fw-bold w-20 ms-2 docs-btn"
                             onClick={() => window.open("https://docs.loterra.io/upcoming/roadmap/spacewager", "_blank")}>
                             <Question size={24} style={{position:'relative',top:-2}} weight={'bold'}/>
                         </button>
@@ -464,7 +466,12 @@ export default () => {
             </div>
         <div>
             <SpaceWagerGameView/>
+            <Toaster
+         position="top-center"
+         reverseOrder={false}
+       />
         </div>
+        <Footer />
     </>
     )
 }
