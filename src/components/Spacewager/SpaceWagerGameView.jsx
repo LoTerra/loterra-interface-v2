@@ -70,12 +70,15 @@ export default function SpaceWagerCardHeader(props) {
 
                 if (res.length > 0){
 
-                    const new_array = res;
-                    games.forEach(elem => {
-                        new_array.push(elem)
-                    });
-                    new_array.sort((a,b) => b[0] - a[0]);
-                    setGames(new_array)
+                    // const new_array = res;
+                    // games.forEach(elem => {
+                    //     new_array.push(elem)
+                    // });
+                    // new_array.sort((a,b) => b[0] - a[0]);
+
+
+                    //console.log(data)
+                    setGames((d) => [...d, ...res])
                 }
 
                 setIsLoadingMore(false)
@@ -111,7 +114,8 @@ export default function SpaceWagerCardHeader(props) {
                     })
 
                     data.sort((a,b) => b[0] - a[0]);
-                    setGames(data)
+
+                    setGames([...data])
                 }
 
             }catch (e) {
@@ -168,7 +172,7 @@ export default function SpaceWagerCardHeader(props) {
                 <td>
                     {
                         !game.resolved ?
-                                game.game_id + 1 < state.spaceWagerCurrentRound ?
+                                game.game_id + 2 < state.spaceWagerCurrentRound ?
                                 <button className="btn btn-outline-primary w-100 btn-sm" hidden={game.resolved} disabled={loaderPendingToResolve.id == game.game_id} onClick={() => collectPrize(game.game_id)}>Resolve</button>
                                     : <><Hourglass size={23} /> In progress</>
                             :
@@ -199,7 +203,7 @@ export default function SpaceWagerCardHeader(props) {
         setIsLoadingMore(false)
 
         gameUser()
-    },[state.wallet.walletAddress])
+    },[state.wallet.walletAddress, state.isUserMakingPrediction, state.spaceWagerCurrentRound])
 
     // useEffect(() => {
     //     gameUserRefreshElement(state.spaceWagerCurrentRound - 2)
