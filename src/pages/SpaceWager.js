@@ -51,6 +51,8 @@ export default () => {
     const [amountBetOnDown, setAmountBetOnDown] = useState(0)
     const [bettingOddsOnUp, setBettingOdssOnUp] = useState(0)
     const [bettingOddsOnDown, setBettingOdssOnDown] = useState(0)
+    const [currentUp, setCurrentUp] = useState(0)
+    const [currentDown, setCurrentDown] = useState(0)
 
     //Testnet settings now api
 
@@ -213,17 +215,18 @@ export default () => {
         })
 
         channel.bind('new-prediction', function (data) {
-            setSpacewagerState({round: parseFloat(data.message)})
+            setSpacewagerState({round: parseInt(data.message)})
             dispatch({ type: 'setSpaceWagerResolving', message: false })
-            dispatch({ type: 'setSpaceWagerCurrentRound', message: parseFloat(data.message) })
+            dispatch({ type: 'setSpaceWagerCurrentRound', message: parseInt(data.message) })
         })
 
         channel.bind('latest-prediction', function (data) {
             let prediction = JSON.parse(data.message);
-            if (state.latestPrediction.up != prediction.up || state.latestPrediction.down != prediction.down){
+            if (currentUp != parseInt(prediction.up) || currentDown != parseInt(prediction.down)){
+
                 dispatch({ type: 'setIsUserMakingPrediction', message: false })
             }
-            dispatch({ type: 'setLatestPrediction', message: JSON.parse(data.message) })
+            dispatch({ type: 'setLatestPrediction', message: {...prediction} })
         })
 
         return () => {
@@ -283,7 +286,7 @@ export default () => {
       // }
 
         getSpacewagerPredictions()
-    },[state.spaceWagerCurrentRound])
+    },[spacewagerState.round, state.spaceWagerCurrentRound, state.latestPrediction])
  
     return (
         <>
