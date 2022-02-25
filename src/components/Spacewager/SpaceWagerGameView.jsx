@@ -172,7 +172,10 @@ export default function SpaceWagerCardHeader(props) {
         let array = [];
         games.map(game => {
             if (!game.resolved && (game.game_id + 2) < state.spaceWagerCurrentRound ) {
-                array.push(game.game_id)
+                if (!array.includes(game.game_id)) {
+                    array.push(game.game_id)
+                }
+
             }
         })
 
