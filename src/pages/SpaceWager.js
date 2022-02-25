@@ -407,7 +407,7 @@ export default () => {
            
             
             <div className="row mb-2 position-relative">
-                    {spacewagerState.round > 0 &&
+                    {predictions.length > 0 &&
                     <Swiper
                     spaceBetween={-50}
                     navigation={{
