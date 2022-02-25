@@ -175,7 +175,7 @@ export default function SpaceWagerCard(props) {
         if(state.wallet && obj[0]){
             getPersonalBids(obj[0])
         }
-    }, [state.isUserMakingPrediction])
+    }, [state.isUserMakingPrediction, isLivePrediction, isNextPrediction, isPastPrediction])
 
     return (
        <div className="col-10 col-md-9 mx-auto">
