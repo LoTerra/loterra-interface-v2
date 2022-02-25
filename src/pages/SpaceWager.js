@@ -198,11 +198,6 @@ export default () => {
         }
     }
 
-    const triggerClick = (status) => {
-        alert(status)
-        console.log('you just clicked me')
-    }
-
     function is_equal(prediction){
         if (state.latestPrediction.up != parseInt(state.previousPrediction.up) || state.latestPrediction.down != parseInt(state.previousPrediction.down)){
             dispatch({ type: 'setPreviousPrediction', message: prediction })
@@ -458,7 +453,6 @@ export default () => {
                                 isLivePrediction={obj[1].closing_time * 1000 < Date.now() && obj[1].closing_time * 1000 > Date.now() - 300000}
                                 isNextPrediction={obj[1].closing_time * 1000 > Date.now()}
                                 isPastPrediction={obj[1].closing_time * 1000 < Date.now() && obj[1].closing_time * 1000 < Date.now() - 300000 }
-                                click={(a) => triggerClick(a)}                        
                                 />
                             </SwiperSlide>
                         )
