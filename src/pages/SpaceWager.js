@@ -222,7 +222,9 @@ export default () => {
 
         channel.bind('latest-prediction', function (data) {
             let prediction = JSON.parse(data.message);
-            if (currentUp != parseInt(prediction.up) || currentDown != parseInt(prediction.down)){
+            console.log(prediction)
+            console.log(state.latestPrediction)
+            if (state.latestPrediction.up != parseInt(prediction.up) || state.latestPrediction.down != parseInt(prediction.down)){
 
                 dispatch({ type: 'setIsUserMakingPrediction', message: false })
             }
@@ -266,7 +268,6 @@ export default () => {
     useEffect(() =>{
         getSpacewagerState()
         getSpacewagerConfig()
-        pusher_price()
         setInterval(() => {
             formatTime()
         }, 1000)
@@ -274,6 +275,10 @@ export default () => {
             TODO: show the prediction loader here
          */
     },[])
+
+    useEffect(() => {
+        pusher_price()
+    }, [])
 
 
     //Change on lunaprice state change
@@ -287,7 +292,7 @@ export default () => {
 
         getSpacewagerPredictions()
     },[spacewagerState.round, state.spaceWagerCurrentRound, state.latestPrediction])
- 
+
     return (
         <>
         <Head>
