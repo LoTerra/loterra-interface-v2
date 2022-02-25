@@ -176,7 +176,7 @@ export default function SpaceWagerCardHeader(props) {
                                     <>
                                         <button className="btn btn-outline-primary w-100 btn-sm" hidden={game.resolved} disabled={loaderPendingToResolve.id == game.game_id} onClick={() => collectPrize(game.game_id)}>Resolve</button>
                                     </>
-                                    : <><Hourglass size={23} /> In progress <span>{game.game_id > state.spaceWagerCurrentRound - 2 ? <>open in {((game.game_id + 2) - state.spaceWagerCurrentRound)} rounds</>: ''}</span></>
+                                    : <><Hourglass size={23} /> In progress <span>{game.game_id > state.spaceWagerCurrentRound - 2 ? <>open in {((game.game_id + 3) - state.spaceWagerCurrentRound)} rounds</>: ''}</span></>
                             :
                             parseInt(game.up) + parseInt(game.down) == parseInt(game.prize) ?
                                 <><Swap size={23} /> Refund</> :
