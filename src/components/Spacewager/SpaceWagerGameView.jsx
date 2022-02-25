@@ -30,6 +30,7 @@ export default function SpaceWagerCardHeader(props) {
     const [paginationLastElementRound, setPaginationLastElementRound] = useState(null)
     const [isLoadingMore, setIsLoadingMore] = useState(false)
     const [loaderPendingToResolve, setLoaderPendingToResolve] = useState({ resolving: false, id: null})
+    const [isSomeResolvable, setIsSomeResolvable] = useState(false)
 
     const api = new WasmAPI(state.lcd_client.apiRequester)
 
@@ -67,17 +68,20 @@ export default function SpaceWagerCardHeader(props) {
                 }else {
                     setIsActivePagination(false)
                 }
+                let amount_pending_to_resolve = 0;
+                res.map(game => {
+                    if (!game.resolved){
+                        amount_pending_to_resolve++
+                    }
+                })
+
+                if (amount_pending_to_resolve){
+                    setIsSomeResolvable(true)
+                }else{
+                    setIsSomeResolvable(false)
+                }
 
                 if (res.length > 0){
-
-                    // const new_array = res;
-                    // games.forEach(elem => {
-                    //     new_array.push(elem)
-                    // });
-                    // new_array.sort((a,b) => b[0] - a[0]);
-
-
-                    //console.log(data)
                     setGames((d) => [...d, ...res])
                 }
 
@@ -113,17 +117,6 @@ export default function SpaceWagerCardHeader(props) {
                     const newGame = [...games];
                     newGame[index] = res[0];
                     setGames(newGame);
-
-                    // games.map((game) => {
-                    //
-                    //     if (game.game_id != res[0].game_id) {
-                    //         data.push(game)
-                    //     }
-                    // })
-                    //
-                    // data.sort((a,b) => b[0] - a[0]);
-                    //
-                    // setGames([...data])
                 }
 
             }catch (e) {
@@ -134,6 +127,13 @@ export default function SpaceWagerCardHeader(props) {
     }
     async function collectPrize(round){
         setLoaderPendingToResolve({resolving: true, id: round})
+        let array = []
+
+        if (Array.isArray(round)) {
+            array = round
+        }else {
+            array.push(round)
+        }
 
         let msg = new MsgExecuteContract(
             state.wallet.walletAddress,
@@ -141,7 +141,7 @@ export default function SpaceWagerCardHeader(props) {
             {
                 resolve_game: {
                     address: player_address,
-                    round: [round]
+                    round: array
                 }
             }
         )
@@ -165,6 +165,19 @@ export default function SpaceWagerCardHeader(props) {
                 console.log(e)
             })
 
+    }
+
+    function resolve_multiples() {
+        let array = [];
+        games.map(game => {
+            if (!game.resolved && (game.game_id + 2) < state.spaceWagerCurrentRound ) {
+                array.push(game.game_id)
+            }
+        })
+
+        if (array.length) {
+            collectPrize(array)
+        }
     }
 
     function gameData(){
@@ -226,6 +239,13 @@ export default function SpaceWagerCardHeader(props) {
         <div className="container-fluid mt-4">
             <div className="w-100 py-4 table-responsive">
                 <h3 className="fw-bold">Player history</h3>
+                <div className="row">
+                    <div className="col-9"></div>
+                    <div className="col-3">
+                        <button className="btn btn-outline-primary w-100 btn-sm" disabled={!isSomeResolvable} onClick={() => resolve_multiples()}>Resolve all</button>
+                    </div>
+                </div>
+
                 <div class="table-responsive">
                 <table className="table text-white">
                     <thead>
