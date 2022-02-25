@@ -436,23 +436,23 @@ export default () => {
                 >
                     {predictions.length > 0 && predictions.map((obj, k) => {
                         return (
-                            <SwiperSlide key={obj[0]} >
+                            <SwiperSlide key={obj.prediction_id} >
                                 <SpaceWagerCard 
-                                key={obj[0]}
+                                key={obj.prediction_id}
                                 id={k}
                                 dataLength={predictions.length}
                                 obj={obj}
                                 roundAmount={spacewagerState.round}
                                 currentTimeRound={state.spaceWagerCurrentTimeRound}
-                                bettingOddsOnUp={obj[1]['up']}
+                                bettingOddsOnUp={obj['up']}
                                 price={lunaPrice}
-                                variation={getVariation(obj[1]['locked_price'], obj[1].resolved_price )}
-                                lockedPrice={obj[1]['locked_price']}
+                                variation={getVariation(obj['locked_price'], obj.resolved_price )}
+                                lockedPrice={obj['locked_price']}
                                 prizesPool={prizesPoolAmount}
-                                bettingOddsOnDown={obj[1]['down']}
-                                isLivePrediction={obj[1].closing_time * 1000 < Date.now() && obj[1].closing_time * 1000 > Date.now() - 300000}
-                                isNextPrediction={obj[1].closing_time * 1000 > Date.now()}
-                                isPastPrediction={obj[1].closing_time * 1000 < Date.now() && obj[1].closing_time * 1000 < Date.now() - 300000 }
+                                bettingOddsOnDown={obj['down']}
+                                isLivePrediction={obj.closing_time * 1000 < Date.now() && obj.closing_time * 1000 > Date.now() - 300000}
+                                isNextPrediction={obj.closing_time * 1000 > Date.now()}
+                                isPastPrediction={obj.closing_time * 1000 < Date.now() && obj.closing_time * 1000 < Date.now() - 300000 }
                                 />
                             </SwiperSlide>
                         )

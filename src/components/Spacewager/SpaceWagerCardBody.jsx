@@ -103,11 +103,11 @@ export default function SpaceWagerCardBody(props) {
     }
 
     function last_price(){
-        if (isLivePrediction || isPastPrediction && obj[1].success == null){
+        if (isLivePrediction || isPastPrediction && obj.success == null){
             //dispatch({ type: 'setSpaceWagerLastPrice', message: price })
             return price
         }else{
-            return obj[1].resolved_price / 1000000
+            return obj.resolved_price / 1000000
         }
     }
 
@@ -150,7 +150,7 @@ export default function SpaceWagerCardBody(props) {
  <>
          {
              //When not active round
-             isPastPrediction && obj[1].success == null  &&
+             isPastPrediction && obj.success == null  &&
             <SpaceWagerInfoMessage>
                      This round’s closing transaction has been submitted to the blockchain, and is awaiting confirmation.
              </SpaceWagerInfoMessage>
@@ -189,7 +189,7 @@ export default function SpaceWagerCardBody(props) {
             </div>
             <div className="col-6 text-end">
                 <p className="my-2 fw-bold fs-6 mb-0">
-                    ${format_number(obj[1].locked_price / 1000000)}</p>
+                    ${format_number(obj.locked_price / 1000000)}</p>
             </div>
         </div>
         
@@ -198,7 +198,7 @@ export default function SpaceWagerCardBody(props) {
                 <p className="my-2 fw-regular fs-6 mb-0">Prizes Pool:</p>
             </div>
             <div className="col-6 text-end">
-                <p className="my-2 fw-bold fs-6 mb-0">{numeral((parseInt(obj[1]['up']) + parseInt(obj[1]['down']))/ 1_000_000 ).format('0,0.00')} {' '} UST</p>
+                <p className="my-2 fw-bold fs-6 mb-0">{numeral((parseInt(obj['up']) + parseInt(obj['down']))/ 1_000_000 ).format('0,0.00')} {' '} UST</p>
             </div>
         </div>  
                     
@@ -235,7 +235,7 @@ export default function SpaceWagerCardBody(props) {
                               Balance: 0 UST
                           </h6>
                           { state.wallet && state.wallet.hasOwnProperty('walletAddress') &&
-                            <button onClick={() => makeBidFinal(obj[0]) } className={"btn w-100 mt-1" + (bidType == 'UP' ? ' btn-up' : ' btn-down')}>Enter {bidType}</button>
+                            <button onClick={() => makeBidFinal(obj.prediction_id) } className={"btn w-100 mt-1" + (bidType == 'UP' ? ' btn-up' : ' btn-down')}>Enter {bidType}</button>
                           }
                           { state.wallet && !state.wallet.hasOwnProperty('walletAddress') &&
                             <button className={"btn w-100 mt-1" + (bidType == 'UP' ? ' btn-up' : ' btn-down')}>Connect wallet</button>

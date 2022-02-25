@@ -62,7 +62,7 @@ export default function SpaceWagerCardHeader(props) {
                 let res = await api.contractQuery(state.spaceWagerAddress, query);
 
                 if (res.length == offset_limit){
-                    setPaginationLastElementRound(res[res.length - 1][0])
+                    setPaginationLastElementRound(res[res.length - 1].game_id)
                     setIsActivePagination(true)
                 }else {
                     setIsActivePagination(false)
@@ -105,7 +105,7 @@ export default function SpaceWagerCardHeader(props) {
 
                 if (res.length > 0){
                     games.map((game) => {
-                        if (game[0] != res[0][0]) {
+                        if (game.game_id != res[0].game_id) {
                             data.push(game)
                         }
                     })
@@ -158,25 +158,25 @@ export default function SpaceWagerCardHeader(props) {
     function gameData(){
 
         let render = games.map((game) =>
-            <tr key={game[0]}>
-                <td>#{ game[0] }</td>
-                <td>{ game[1].up != "0" ? numeral(game[1].up / 1000000).format("0,0.00") + 'UST':  '-'}</td>
-                <td>{ game[1].down != "0" ? numeral(game[1].down / 1000000).format("0,0.00") + 'UST': '-'}</td>
-                <td>{ game[1].prize != "0" ?  numeral(game[1].prize / 1000000).format("0,0.00") + 'UST': '-'}</td>
-                <td>{ game[1].resolved ? <Check size={23} /> : <X size={23} /> }</td>
+            <tr key={game.game_id}>
+                <td>#{ game.game_id }</td>
+                <td>{ game.up != "0" ? numeral(game.up / 1000000).format("0,0.00") + 'UST':  '-'}</td>
+                <td>{ game.down != "0" ? numeral(game.down / 1000000).format("0,0.00") + 'UST': '-'}</td>
+                <td>{ game.prize != "0" ?  numeral(game.prize / 1000000).format("0,0.00") + 'UST': '-'}</td>
+                <td>{ game.resolved ? <Check size={23} /> : <X size={23} /> }</td>
                 {/* display a collect button if resolved is false  <Money size={23} />*/}
                 <td>
                     {
-                        !game[1].resolved ?
-                                game[0] + 1 < state.spaceWagerCurrentRound ?
-                                <button className="btn btn-outline-primary w-100 btn-sm" hidden={game[1].resolved} disabled={loaderPendingToResolve.id == game[0]} onClick={() => collectPrize(game[0])}>Resolve</button>
+                        !game.resolved ?
+                                game.game_id + 1 < state.spaceWagerCurrentRound ?
+                                <button className="btn btn-outline-primary w-100 btn-sm" hidden={game.resolved} disabled={loaderPendingToResolve.id == game.game_id} onClick={() => collectPrize(game.game_id)}>Resolve</button>
                                     : <><Hourglass size={23} /> In progress</>
                             :
-                            parseInt(game[1].up) + parseInt(game[1].down) == parseInt(game[1].prize) ?
+                            parseInt(game.up) + parseInt(game.down) == parseInt(game.prize) ?
                                 <><Swap size={23} /> Refund</> :
-                                parseInt(game[1].up) + parseInt(game[1].down) < parseInt(game[1].prize) ?
-                                    <><TrendUp size={23} /> +{numeral((parseInt(game[1].prize) - (parseInt(game[1].up) + parseInt(game[1].down))) / 1000000).format("0,0.00")}UST</>
-                                    : <><TrendDown size={23} /> {numeral((parseInt(game[1].prize) - (parseInt(game[1].up) + parseInt(game[1].down))) / 1000000).format("0,0.00")}UST</>
+                                parseInt(game.up) + parseInt(game.down) < parseInt(game.prize) ?
+                                    <><TrendUp size={23} /> +{numeral((parseInt(game.prize) - (parseInt(game.up) + parseInt(game.down))) / 1000000).format("0,0.00")}UST</>
+                                    : <><TrendDown size={23} /> {numeral((parseInt(game.prize) - (parseInt(game.up) + parseInt(game.down))) / 1000000).format("0,0.00")}UST</>
 
                     }
 

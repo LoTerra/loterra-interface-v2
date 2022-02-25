@@ -9,7 +9,7 @@ export default function SpaceWagerCardHeader(props) {
 
     const [currentTime, setCurrentTime] = useState(Date.now())
 
-    const timeBetween = obj[1].closing_time * 1000  - (currentTime - 300000)
+    const timeBetween = obj.closing_time * 1000  - (currentTime - 300000)
     const seconds = Math.floor((timeBetween / 1000) % 60)
     const minutes = Math.floor((timeBetween / 1000 / 60) % 60)
     let format_minutes = minutes < 10 ? "0" + minutes : minutes;
@@ -18,18 +18,18 @@ export default function SpaceWagerCardHeader(props) {
     const hours = Math.floor((timeBetween / (1000 * 60 * 60)) % 24)
     const days = Math.floor(timeBetween / (1000 * 60 * 60 * 24))
 
-    const one_percent = parseInt(obj[1].closing_time * 1000) / 100
+    const one_percent = parseInt(obj.closing_time * 1000) / 100
     const percentage = parseInt(currentTime / one_percent);
 
     function setGlobalState(){
         if (isNextPrediction) {
-            dispatch({ type: 'setSpaceWagerCurrentTimeRound', message: obj[1].closing_time })
+            dispatch({ type: 'setSpaceWagerCurrentTimeRound', message: obj.closing_time })
         }
     }
 
     function remainingTime() {
-        if (isLivePrediction || isPastPrediction && obj[1].success == null){
-            let timeBetween = obj[1].closing_time * 1000  - (Date.now() - 300000)
+        if (isLivePrediction || isPastPrediction && obj.success == null){
+            let timeBetween = obj.closing_time * 1000  - (Date.now() - 300000)
             const seconds = Math.floor((timeBetween / 1000))
             const minutes = Math.floor((timeBetween / 1000 / 60) % 60)
             let remainingTime = (parseInt(minutes) / 60) + seconds
@@ -54,13 +54,13 @@ export default function SpaceWagerCardHeader(props) {
     return (
         <>
         <div className="card-header p-3">
-                        {isPastPrediction && obj[1].success == null &&
+                        {isPastPrediction && obj.success == null &&
                             <div className="row">
                                 <div className="col-6 text-start">
                                     <p>Resolving...</p>
                                 </div>
                                 <div className="col-6 text-end">
-                                    <p>#{obj[0]}</p>
+                                    <p>#{obj.prediction_id}</p>
                                 </div>
                             </div>
                         }
@@ -76,7 +76,7 @@ export default function SpaceWagerCardHeader(props) {
                                     </div>
                                 </div>
                                 <div className="col-6 text-end">
-                                    <p>#{obj[0]}</p>
+                                    <p>#{obj.prediction_id}</p>
                                 </div>
                             </div>
                         }
@@ -89,7 +89,7 @@ export default function SpaceWagerCardHeader(props) {
                                     </p>
                                 </div>
                                 <div className="col-6 text-end">
-                                    <p>{format_minutes}:{format_seconds} #{obj[0]}</p>
+                                    <p>{format_minutes}:{format_seconds} #{obj.prediction_id}</p>
                                 </div>
                                 <div className="col-12">
                                     <div className="progress">
@@ -105,7 +105,7 @@ export default function SpaceWagerCardHeader(props) {
                                 </div>
                             </div>
                         }
-                        { isPastPrediction && obj[1].success != null &&
+                        { isPastPrediction && obj.success != null &&
                             <div className="row">
                                 <div className="col-6 text-start">
                                     <p>
@@ -114,12 +114,12 @@ export default function SpaceWagerCardHeader(props) {
                                     </p>
                                 </div>
                                 <div className="col-6 text-end">
-                                    <p>#{obj[0]}</p>
+                                    <p>#{obj.prediction_id}</p>
                                 </div>
                                 {/*<div className="col-12 text-start">*/}
                                 {/*    <p>*/}
                                 {/*        Success:*/}
-                                {/*        { obj[1].success && " true" ||  " false" }*/}
+                                {/*        { obj.success && " true" ||  " false" }*/}
                                 {/*    </p>*/}
                                 {/*</div>*/}
 

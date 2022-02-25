@@ -164,22 +164,22 @@ export default function SpaceWagerCard(props) {
     //Load on mount
     useEffect(() =>  {
         
-        if (parseInt(obj[1].resolved_price) != 0){
-            getVariation(obj[1].locked_price, obj[1].resolved_price)
+        if (parseInt(obj.resolved_price) != 0){
+            getVariation(obj.locked_price, obj.resolved_price)
         }else{
-            getVariation(obj[1].locked_price, state.spaceWagerLastPrice * 1000000)
+            getVariation(obj.locked_price, state.spaceWagerLastPrice * 1000000)
         }
         },[state.spaceWagerLastPrice, state.spaceWagerCurrentRound])
 
     useEffect(() => {
-        if(state.wallet && obj[0]){
-            getPersonalBids(obj[0])
+        if(state.wallet && obj.prediction_id){
+            getPersonalBids(obj.prediction_id)
         }
     }, [state.isUserMakingPrediction, isLivePrediction, isNextPrediction, isPastPrediction])
 
     return (
        <div className="col-10 col-md-9 mx-auto">
-            <div className={"card spacewager-card h-100 "+(isPastPrediction && obj[1].success != null ? ' finished' : '')}
+            <div className={"card spacewager-card h-100 "+(isPastPrediction && obj.success != null ? ' finished' : '')}
                 style={{
                     borderTopLeftRadius: 20,
                     borderTopRightRadius: 20
