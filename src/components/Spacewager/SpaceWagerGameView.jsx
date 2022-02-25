@@ -179,7 +179,7 @@ export default function SpaceWagerCardHeader(props) {
             }
         })
 
-        if (array.length) {
+        if (array.length != 0) {
             collectPrize(array)
         }
     }
