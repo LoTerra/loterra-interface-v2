@@ -102,7 +102,7 @@ export default () => {
             );
             console.log('state',spacewager_state)
             setSpacewagerState(spacewager_state)
-            dispatch({ type: 'setSpaceWagerCurrentRound', message: spacewager_state.round })
+            //dispatch({ type: 'setSpaceWagerCurrentRound', message: spacewager_state.round })
         } catch(e) {
             console.log(e)
         }        
