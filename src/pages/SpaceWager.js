@@ -203,6 +203,13 @@ export default () => {
         console.log('you just clicked me')
     }
 
+    function is_equal(prediction){
+        if (state.latestPrediction.up != parseInt(state.previousPrediction.up) || state.latestPrediction.down != parseInt(state.previousPrediction.down)){
+            dispatch({ type: 'setPreviousPrediction', message: prediction })
+            dispatch({ type: 'setIsUserMakingPrediction', message: false })
+        }
+    }
+
     async function pusher_price(){
         const pusher = new Pusher('8aa328a021ba69c9198a', {
             cluster: 'eu'
@@ -223,12 +230,7 @@ export default () => {
         channel.bind('latest-prediction', function (data) {
             let prediction = JSON.parse(data.message);
             console.log(prediction)
-            console.log(state.latestPrediction)
-            if (state.latestPrediction.up != parseInt(prediction.up) || state.latestPrediction.down != parseInt(prediction.down)){
-
-                dispatch({ type: 'setIsUserMakingPrediction', message: false })
-            }
-            dispatch({ type: 'setLatestPrediction', message: {...prediction} })
+            dispatch({ type: 'setLatestPrediction', message: prediction })
         })
 
         return () => {
@@ -280,6 +282,9 @@ export default () => {
         pusher_price()
     }, [])
 
+    useEffect(() => {
+        is_equal(state.latestPrediction)
+    }, [state.latestPrediction])
 
     //Change on lunaprice state change
     useEffect(() =>  {       

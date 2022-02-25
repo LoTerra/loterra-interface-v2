@@ -176,6 +176,7 @@ const initialState = {
     spaceWagerLastPrice: 0,
     spaceWagerResolving: false,
     latestPrediction: {up: '0', down: '0'},
+    previousPrediction: {up: '0', down: '0'},
     isUserMakingPrediction: false,
     spaceWagerCurrentRound: 0
 }
@@ -191,6 +192,11 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 isUserMakingPrediction: action.message,
+            }
+        case "setPreviousPrediction":
+            return {
+                ...state,
+                previousPrediction: action.message,
             }
         case "setLatestPrediction":
             return {
