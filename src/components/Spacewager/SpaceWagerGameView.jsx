@@ -126,12 +126,13 @@ export default function SpaceWagerCardHeader(props) {
         }
     }
     async function collectPrize(round){
-        setLoaderPendingToResolve({resolving: true, id: round})
+
         let array = []
 
         if (Array.isArray(round)) {
             array = round
         }else {
+            setLoaderPendingToResolve({resolving: true, id: round})
             array.push(round)
         }
 
