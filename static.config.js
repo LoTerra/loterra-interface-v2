@@ -39,6 +39,10 @@ export default {
             path: 'dogether',
             template: 'src/pages/Dogether',
         },
+        {
+            path: 'spacewager',
+            template: 'src/pages/SpaceWager',
+        },
         // A 404 component
         {
             path: '404',
