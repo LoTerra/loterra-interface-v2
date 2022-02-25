@@ -101,7 +101,7 @@ export default function ConnectWallet() {
         // VALKYRIE END
 
         const contractConfigInfo = await api.contractQuery(
-            state.loterraTestnetContractAddress,
+            state.loterraContractAddress,
             {
                 config: {},
             },
@@ -118,7 +118,7 @@ export default function ConnectWallet() {
         })
 
         const { winners } = await api.contractQuery(
-            state.loterraTestnetContractAddress,
+            state.loterraContractAddress,
             {
                 winner: {
                     lottery_id: contractConfigInfo.lottery_counter - 1,
@@ -127,9 +127,9 @@ export default function ConnectWallet() {
         )
         dispatch({ type: 'setAllRecentWinners', message: winners })
 
-        if(connectedWallet && connectedWallet.network.name !== 'testnet'){
+        if(connectedWallet){
             const contractDaoBalance = await api.contractQuery(
-                state.loterraTestnetContractAddressCw20,
+                state.loterraContractAddressCw20,
                 {
                     balance: {
                         address: state.loterraContractAddress,
@@ -150,7 +150,7 @@ export default function ConnectWallet() {
             })
     
             const contractLPLoterraBalance = await api.contractQuery(
-                state.loterraTestnetContractAddressCw20,
+                state.loterraContractAddressCw20,
                 {
                     balance: {
                         address: state.loterraStakingLPAddress,
@@ -162,7 +162,7 @@ export default function ConnectWallet() {
                 message: contractLPLoterraBalance.balance,
             })
             const contractLPAlteredBalance = await api.contractQuery(
-                state.loterraTestnetContractAddressCw20,
+                state.loterraContractAddressCw20,
                 {
                     balance: {
                         address: state.alteredStakingLPAddress,
@@ -228,7 +228,7 @@ export default function ConnectWallet() {
         //console.log('staking',staking)
 
         const token_info = await api.contractQuery(
-            state.loterraTestnetContractAddressCw20,
+            state.loterraContractAddressCw20,
             {
                 token_info: {},
             },
@@ -331,14 +331,14 @@ export default function ConnectWallet() {
                   }
 
                 const contractConfigInfo = await api.contractQuery(
-                    state.loterraTestnetContractAddress,
+                    state.loterraContractAddress,
                     {
                         config: {},
                     },
                 )
                 setConnected(true)
                 const lastDrawnJackpot = await api.contractQuery(
-                    state.loterraTestnetContractAddress,
+                    state.loterraContractAddress,
                     {
                         jackpot: {
                             lottery_id: contractConfigInfo.lottery_counter - 1,
@@ -474,7 +474,7 @@ export default function ConnectWallet() {
                
 
                 const token = await api.contractQuery(
-                    state.loterraTestnetContractAddressCw20,
+                    state.loterraContractAddressCw20,
                     {
                         balance: { address: connectedWallet.walletAddress },
                     },

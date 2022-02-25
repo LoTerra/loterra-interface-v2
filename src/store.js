@@ -111,7 +111,7 @@ const initialState = {
     alteredStakingLPAddress: 'terra1augyqytpq9klph5egx99m5ufrcjx5f7xgrcqck',
     dogetherAddress: 'terra19h4xk8xxxew0ne6fuw0mvuf7ltmjmxjxssj5ts',
     dogetherStakingAddress: 'terra1z2vgthmdy5qlz4cnj9d9d3ajtqeq7uzc0acxrp',
-    spaceWagerAddress: /*'terra1t8zj09gvp388lsksj7w0usk2f09ltz767ej685' */ "terra13mtpcd27mzzllhrth4mcer0xcgfhkjkh39jj4c",
+    spaceWagerAddress: /*'terra1t8zj09gvp388lsksj7w0usk2f09ltz767ej685' */ "terra1whe6adg8dlw4xsvlc0yax0r8ksaum5fuaaldg3",
     vkrContract: 'terra143kpwsuu82rtdy8jkyagmvn426q9amqsk7ftrw',
     vkrQualifierContract:'terra1xme735w8y8hamfvlyeh924puazfclrec2ka8fh',
     vkrReferrer: {status:false,code:''},
@@ -147,6 +147,13 @@ const initialState = {
     ustBalance: 0,
     daoFunds: 0,
     lcd_client: new LCDClient({
+        URL: 'https://lcd.terra.dev/',
+        chainID: 'columbus-5',
+        feeDenoms:['uusd'],
+        gasPrices: { uusd: 0.15 },
+        gasAdjustment: 1.4,
+    }),
+    lcd_client_testnet: new LCDClient({
         URL: 'https://bombay-lcd.terra.dev/',
         chainID: 'bombay-12',
         feeDenoms:['uusd'],
