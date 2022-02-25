@@ -98,8 +98,11 @@ const comboTextOne = [
 ]
 
 const initialState = {
+    lunaPoolAddress: 'terra1tndcaqxkpc5ce9qee5ggqf430mr2z3pefe5wj6',
     loterraContractAddress: 'terra1q2k29wwcz055q4ftx4eucsq6tg9wtulprjg75w',
+    loterraTestnetContractAddress: 'terra1a353y4fa24fv99jh5cqr6xpg68ffn04yxptccp',
     loterraContractAddressCw20: 'terra1ez46kxtulsdv07538fh5ra5xj8l68mu8eg24vr',
+    loterraTestnetContractAddressCw20: 'terra1udwh63czgtnpqdfzzmvz0v8flskuqyd0892khy',
     loterraPoolAddress: 'terra1pn20mcwnmeyxf68vpt3cyel3n57qm9mp289jta',
     loterraStakingAddress: 'terra1342fp86c3z3q0lksq92lncjxpkfl9hujwh6xfn',
     alteredContractAddress: 'terra15tztd7v9cmv0rhyh37g843j8vfuzp8kw0k5lqv',
@@ -108,7 +111,7 @@ const initialState = {
     alteredStakingLPAddress: 'terra1augyqytpq9klph5egx99m5ufrcjx5f7xgrcqck',
     dogetherAddress: 'terra19h4xk8xxxew0ne6fuw0mvuf7ltmjmxjxssj5ts',
     dogetherStakingAddress: 'terra1z2vgthmdy5qlz4cnj9d9d3ajtqeq7uzc0acxrp',
-
+    spaceWagerAddress: /*'terra1t8zj09gvp388lsksj7w0usk2f09ltz767ej685' */ "terra1whe6adg8dlw4xsvlc0yax0r8ksaum5fuaaldg3",
     vkrContract: 'terra143kpwsuu82rtdy8jkyagmvn426q9amqsk7ftrw',
     vkrQualifierContract:'terra1xme735w8y8hamfvlyeh924puazfclrec2ka8fh',
     vkrReferrer: {status:false,code:''},
@@ -150,6 +153,13 @@ const initialState = {
         gasPrices: { uusd: 0.15 },
         gasAdjustment: 1.4,
     }),
+    lcd_client_testnet: new LCDClient({
+        URL: 'https://bombay-lcd.terra.dev/',
+        chainID: 'bombay-12',
+        feeDenoms:['uusd'],
+        gasPrices: { uusd: 0.15 },
+        gasAdjustment: 1.4,
+    }),
     blockHeight: 0,
     stateLPStaking: {},
     poolInfo: { assets: [] },
@@ -168,11 +178,53 @@ const initialState = {
     balanceStakeOnDogether: 0,
     holderClaimsDogether: [],
     totalBalancePoolDogether: 0,
-    dogetherState: {}
+    dogetherState: {},
+    spaceWagerCurrentTimeRound: 0,
+    spaceWagerLastPrice: 0,
+    spaceWagerResolving: false,
+    latestPrediction: {up: '0', down: '0'},
+    previousPrediction: {up: '0', down: '0'},
+    isUserMakingPrediction: false,
+    spaceWagerCurrentRound: 0
 }
 
 const reducer = (state, action) => {
     switch (action.type) {
+        case "setSpaceWagerCurrentRound":
+            return {
+                ...state,
+                spaceWagerCurrentRound: action.message,
+            }
+        case "setIsUserMakingPrediction":
+            return {
+                ...state,
+                isUserMakingPrediction: action.message,
+            }
+        case "setPreviousPrediction":
+            return {
+                ...state,
+                previousPrediction: action.message,
+            }
+        case "setLatestPrediction":
+            return {
+                ...state,
+                latestPrediction: action.message,
+            }
+        case "setSpaceWagerResolving":
+            return {
+                ...state,
+                spaceWagerResolving: action.message,
+            }
+        case "setSpaceWagerLastPrice":
+            return {
+                ...state,
+                spaceWagerLastPrice: action.message,
+            }
+        case "setSpaceWagerCurrentTimeRound":
+            return {
+                ...state,
+                spaceWagerCurrentTimeRound: action.message,
+            }
         case "setDogetherState":
             return {
                 ...state,

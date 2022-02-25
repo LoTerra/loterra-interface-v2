@@ -1,0 +1,204 @@
+.luna-price {
+
+    h2 {
+        &.up {
+            color:green;
+        }
+        &.down {
+            color:red;
+        }
+    }
+
+    span {
+        &.up {
+            background-color:green;
+        }
+        &.down {
+            background-color:red;
+        }
+    }
+
+}
+
+.spacewager-beta {
+    background:linear-gradient(45deg, #f13af126, transparent);
+    color:#ffd400;
+    font-weight:bold;
+    padding:6px 10px;
+    font-size:13px;
+    white-space: nowrap;
+    display: block!important;
+    flex-wrap: nowrap;
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
+.spacewager-wrapper {
+    width: 100%;
+    min-height: 100vh;
+    max-height: 100%;
+    background: linear-gradient(45deg, #16073e, #16073e3d), url('/spacewagerbg.jpg');
+    background-size: cover;
+    background-position: center center;
+    
+    .card-body {
+        button {
+            path{fill:url(#MyGradient)}
+        }
+    }
+    
+}
+
+.spacewager-notice {
+    border: 1px solid #7a5ec740;
+    padding: 5px;
+    font-size: 13px;
+    border-radius: 5px;
+    color: #7a5ec7;
+    background: #16073e;
+}
+
+.spacewager-card {
+    color:#fff;
+    text-align:center;
+    background:linear-gradient(180deg, #331093, #0f0332);
+    border:0;
+    box-shadow: 0px 15px 20px #0000004d;
+    border-bottom-left-radius: 20px;     
+    border-bottom-right-radius: 20px;
+    opacity:1;     
+    .card-content {
+        border: 3px solid rgba($color: #6B6B6B, $alpha: 0.37);
+        color: #ffffff;
+        padding: 10px;
+        border-radius: 14px;
+        margin: 0px 0;
+    }
+    .btn-green,.btn-red {
+        position: relative;
+        background: transparent;
+        border: 0;
+        padding:0;
+        .btn-content {
+            position: absolute;
+            top: 0;
+            text-align: center;
+            width: 100%;
+            left: 0;
+            right: 0;
+            padding: 17px 0;
+            line-height: 17px;
+        }
+    }
+
+    .btn-up,.btn-down {
+        width: 100%;
+        color:#fff;
+        font-weight:600;
+    }
+
+    .btn-up {
+        background:#17b96b;
+    }
+
+    .btn-down {
+        background:#f038f0;
+    }
+
+    &.finished {
+        opacity:0.5;
+    }
+
+}
+
+.docs-btn {
+    @media(max-width:620px){
+        position: absolute;
+        right: 14px;
+        top: -65px;
+    }
+}
+
+.luna-price-card {
+    @media(max-width:620px){
+        .fs-1 {
+            font-size:24px !important;
+        }
+        .text-muted {
+            font-size: 13px !important;
+        }
+    }
+}
+
+.countdown-card {
+    @media(max-width:620px){
+        .fs-1 {
+            font-size:24px !important;
+        }
+        svg {            
+            top: -6px !important;
+            width: 26px !important;
+        }
+        .text-muted {
+            margin-bottom: -8px !important;
+            font-size: 13px !important;
+        }
+    }
+}
+
+//Spacewager icon
+
+.spacewager-icon {
+ svg {
+    position: absolute;
+    right: 70px;
+    top: -250px;
+    width: 268px;
+    animation-name: floating;
+    animation-duration: 3s;
+    animation-iteration-count: infinite;
+    animation-timing-function: ease-in-out;
+    @media(max-width:768px){
+        z-index:-1;
+    }
+ }
+}
+
+@keyframes floating {
+    0% { transform: rotate(45deg) translate(0,  0px); }
+    50%  { transform: rotate(45deg) translate(0, 15px); }
+    100%   { transform: rotate(45deg)  translate(0, -0px); }   
+}
+
+
+//Swiper settings 
+
+.swiper-container {
+    min-height: 300px;
+    overflow: visible !important;
+    width: 450px;
+    @media(max-width:650px){
+        width:100%;
+    }
+}
+
+.swiper-slide-active {
+    .spacewager-card {
+        opacity:1;
+    }
+}
+
+.swiper-container-horizontal>.swiper-pagination-bullets, .swiper-pagination-custom, .swiper-pagination-fraction {
+    bottom: -75px !important;
+}
+
+.swiper-button-next, .swiper-container-rtl .swiper-button-prev {
+ opacity:0.5;
+ transition:all 200ms linear;
+ &:hover {
+     opacity:1;
+ }
+}
+
+

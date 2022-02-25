@@ -9,6 +9,10 @@ body {
     overflow-x: hidden;
 }
 
+:root {
+    --swiper-theme-color: white !important;
+}
+
 body {
     margin: 0;
     padding: 0;
@@ -449,11 +453,35 @@ h4,
     }
 }
 
-.dogether-logo {
+.terraLogo {
+    width: 65px;
     margin: 0 auto;
     display: block;
     position: relative;
   
+    margin-top: 10px;
+    margin-bottom: 10px;
+    z-index: 9;
+    @media (max-width: 10px) {
+    }
+}
+
+.terraLogoSmall {
+    width: 20px;
+    margin: 10 auto;
+    display: inline-block;
+  
+    margin-top: -5px;
+    z-index: 9;
+    @media (max-width: 10px) {
+    }
+}
+
+.dogether-logo {
+    margin: 0 auto;
+    display: block;
+    position: relative;
+    
     margin-bottom: -31px;
     z-index: 9;
     @media (max-width: 768px) {
@@ -824,6 +852,16 @@ h4,
         }
     }
 }
+
+.progress {
+    background: rgba(0, 0, 0, 0.37);
+    border-color: rgba(0, 0, 0, 0.0);
+    .progress-bar {
+        background-color:#fff;
+    }
+}
+
+
 
 .badge {
     &.progress-badge {

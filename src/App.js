@@ -28,6 +28,7 @@ import { StoreProvider } from './store'
 import ConnectWallet from './components/ConnectWallet'
 import NormalNav from './components/NormalNav'
 import { List } from 'phosphor-react'
+import SpaceWager from './pages/SpaceWager';
 
 
 
@@ -55,8 +56,6 @@ if(typeof window !== 'undefined'){
 
 
 class App extends Component {
-
-
 
     render() {
         return (
@@ -122,7 +121,7 @@ class App extends Component {
                         <div id="sidebar-wrapper" className="sticky-top">
                             <NormalNav />
                         </div>
-                        <div id="page-content-wrapper" >
+                        <div id="page-content-wrapper">
                         <nav className="navbar navbar-expand navbar-light sticky-top" id="smallNav">
                     <div className="container-fluid px-0">
                         <button className="btn btn-default" id="sidebarToggle"> <List size={26} /></button>
@@ -151,9 +150,10 @@ class App extends Component {
                         <Switch>
                   
                         <Route exact path="/" component={Index} />
-                        <Route exact path="/dogether" component={Dogether} />
+                            <Route exact path="/spacewager" component={SpaceWager} />
+                            <Route exact path="/dogether" component={Dogether} />
                         <Route exact path="/staking" component={Staking} />
-                        <Route exact path="/dao" component={Dao} />                        
+                        <Route exact path="/dao" component={Dao} />
                         <Route render={() => <Routes/>} />
                      
                         </Switch>

@@ -127,77 +127,79 @@ export default function ConnectWallet() {
         )
         dispatch({ type: 'setAllRecentWinners', message: winners })
 
-        const contractDaoBalance = await api.contractQuery(
-            state.loterraContractAddressCw20,
-            {
-                balance: {
-                    address: state.loterraContractAddress,
+        if(connectedWallet){
+            const contractDaoBalance = await api.contractQuery(
+                state.loterraContractAddressCw20,
+                {
+                    balance: {
+                        address: state.loterraContractAddress,
+                    },
                 },
-            },
-        )
-        dispatch({ type: 'setDaoFunds', message: contractDaoBalance.balance })
-
-        const contractDogetherState = await api.contractQuery(
-            state.dogetherAddress,
-            {
-                state: {}
-            },
-        )
-        dispatch({
-            type: 'setDogetherState',
-            message: contractDogetherState,
-        })
-
-        const contractLPLoterraBalance = await api.contractQuery(
-            state.loterraContractAddressCw20,
-            {
-                balance: {
-                    address: state.loterraStakingLPAddress,
+            )
+            dispatch({ type: 'setDaoFunds', message: contractDaoBalance.balance })
+    
+            const contractDogetherState = await api.contractQuery(
+                state.dogetherAddress,
+                {
+                    state: {}
                 },
-            },
-        )
-        dispatch({
-            type: 'setStakingLoterraFunds',
-            message: contractLPLoterraBalance.balance,
-        })
-        const contractLPAlteredBalance = await api.contractQuery(
-            state.loterraContractAddressCw20,
-            {
-                balance: {
-                    address: state.alteredStakingLPAddress,
+            )
+            dispatch({
+                type: 'setDogetherState',
+                message: contractDogetherState,
+            })
+    
+            const contractLPLoterraBalance = await api.contractQuery(
+                state.loterraContractAddressCw20,
+                {
+                    balance: {
+                        address: state.loterraStakingLPAddress,
+                    },
                 },
-            },
-        )
-        dispatch({
-            type: 'setStakingAlteredFunds',
-            message: contractLPAlteredBalance.balance,
-        })
-
-        // Get total pool in Dogether
-        const total_pool_dogether = await api.contractQuery(
-            'terra19h4xk8xxxew0ne6fuw0mvuf7ltmjmxjxssj5ts',
-            {
-                state: {},
-            },
-        )
-        dispatch({
-            type: 'setTotalBalancePoolDogether',
-            message: total_pool_dogether.total_ust_pool,
-        })
-
-        const jackpotAltered = await api.contractQuery(
-            state.alteredContractAddress,
-            {
-                balance: {
-                    address: state.loterraContractAddress,
+            )
+            dispatch({
+                type: 'setStakingLoterraFunds',
+                message: contractLPLoterraBalance.balance,
+            })
+            const contractLPAlteredBalance = await api.contractQuery(
+                state.loterraContractAddressCw20,
+                {
+                    balance: {
+                        address: state.alteredStakingLPAddress,
+                    },
                 },
-            },
-        )
-        dispatch({
-            type: 'setAlteredJackpot',
-            message: jackpotAltered.balance,
-        })
+            )
+            dispatch({
+                type: 'setStakingAlteredFunds',
+                message: contractLPAlteredBalance.balance,
+            })
+    
+            // Get total pool in Dogether
+            const total_pool_dogether = await api.contractQuery(
+                'terra19h4xk8xxxew0ne6fuw0mvuf7ltmjmxjxssj5ts',
+                {
+                    state: {},
+                },
+            )
+            dispatch({
+                type: 'setTotalBalancePoolDogether',
+                message: total_pool_dogether.total_ust_pool,
+            })
+    
+            const jackpotAltered = await api.contractQuery(
+                state.alteredContractAddress,
+                {
+                    balance: {
+                        address: state.loterraContractAddress,
+                    },
+                },
+            )
+            dispatch({
+                type: 'setAlteredJackpot',
+                message: jackpotAltered.balance,
+            })
 
+            
         //console.log('config',contractConfigInfo)
 
         if (window.location.href.indexOf('dao') > -1) {
@@ -246,6 +248,10 @@ export default function ConnectWallet() {
         //console.log('pool_info')
        // console.log(pool_info)
         dispatch({ type: 'setPoolInfo', message: pool_info })
+        }
+
+    
+
     }
 
     //const installChrome = useInstallChromeExtension();
@@ -344,52 +350,128 @@ export default function ConnectWallet() {
                     message: parseInt(lastDrawnJackpot) / 1000000,
                 })
 
-                // Get balance to staked on Dogether
-                const balance_stake_on_dogether = await api.contractQuery(
-                    state.dogetherStakingAddress,
-                    {
-                        holder: { address: connectedWallet.walletAddress },
-                    },
-                )
-                dispatch({
-                    type: 'setBalanceStakeOnDogether',
-                    message: balance_stake_on_dogether.balance,
-                })
+                if(connectedWallet.network.name !== 'testnet'){
+ // Get balance to staked on Dogether
+//  const balance_stake_on_dogether = await api.contractQuery(
+//     state.dogetherStakingAddress,
+//     {
+//         holder: { address: connectedWallet.walletAddress },
+//     },
+// )
+// dispatch({
+//     type: 'setBalanceStakeOnDogether',
+//     message: balance_stake_on_dogether.balance,
+// })
 
-                // Get balance pending to claim on Dogether
-                const claims_unstake_dogether = await api.contractQuery(
-                    state.dogetherStakingAddress,
-                    {
-                        claims: { address: connectedWallet.walletAddress },
-                    },
-                )
-                dispatch({
-                    type: 'setHolderClaimsDogether',
-                    message: claims_unstake_dogether.claims,
-                })
+// // Get balance pending to claim on Dogether
+// const claims_unstake_dogether = await api.contractQuery(
+//     state.dogetherStakingAddress,
+//     {
+//         claims: { address: connectedWallet.walletAddress },
+//     },
+// )
+// dispatch({
+//     type: 'setHolderClaimsDogether',
+//     message: claims_unstake_dogether.claims,
+// })
 
-                const holder = await api.contractQuery(
-                    state.loterraStakingAddress,
-                    {
-                        holder: { address: connectedWallet.walletAddress },
-                    },
-                )
-                dispatch({ type: 'setAllHolder', message: holder })
-                //console.log(holder)
+// const holder = await api.contractQuery(
+//     state.loterraStakingAddress,
+//     {
+//         holder: { address: connectedWallet.walletAddress },
+//     },
+// )
+// dispatch({ type: 'setAllHolder', message: holder })
+// //console.log(holder)
 
-                const holderAccruedRewards = await api.contractQuery(
-                    state.loterraStakingAddress,
-                    {
-                        accrued_rewards: {
-                            address: connectedWallet.walletAddress,
-                        },
-                    },
-                )
-                dispatch({
-                    type: 'setHolderAccruedRewards',
-                    message: holderAccruedRewards.rewards,
-                })
-                //console.log(holder)
+// const holderAccruedRewards = await api.contractQuery(
+//     state.loterraStakingAddress,
+//     {
+//         accrued_rewards: {
+//             address: connectedWallet.walletAddress,
+//         },
+//     },
+// )
+// dispatch({
+//     type: 'setHolderAccruedRewards',
+//     message: holderAccruedRewards.rewards,
+// })
+// //console.log(holder)
+// const claims = await api.contractQuery(
+//     state.loterraStakingAddress,
+//     {
+//         claims: { address: connectedWallet.walletAddress }, 
+//     },
+// )
+// //console.log("claims")
+// //console.log(claims)
+// dispatch({ type: 'setHolderClaims', message: claims.claims })
+
+// const tokenLP = await api.contractQuery(
+//     state.loterraLPAddress,
+//     {
+//         balance: { address: connectedWallet.walletAddress },
+//     },
+// )
+// dispatch({ type: 'setLPBalance', message: tokenLP })
+// //console.log(tokenLP)
+// const LPHolderAccruedRewards = await api.contractQuery(
+//     state.loterraStakingLPAddress,
+//     {
+//         accrued_rewards: {
+//             address: connectedWallet.walletAddress,
+//         },
+//     },
+// )
+// dispatch({
+//     type: 'setLPHolderAccruedRewards',
+//     message: LPHolderAccruedRewards.rewards,
+// })
+
+// const holderLP = await api.contractQuery(
+//     state.loterraStakingLPAddress,
+//     {
+//         holder: { address: connectedWallet.walletAddress },
+//     },
+// )
+// dispatch({ type: 'setAllHolderLP', message: holderLP })
+
+// const claimsLP = await api.contractQuery(
+//     state.loterraStakingLPAddress,
+//     {
+//         claims: { address: connectedWallet.walletAddress },
+//     },
+// )
+
+// dispatch({
+//     type: 'setHolderClaimsLP',
+//     message: claimsLP.claims,
+// })
+
+
+
+// alteTokens = await api.contractQuery(
+//     state.alteredContractAddress,
+//     {
+//         balance: {
+//             address: connectedWallet.walletAddress,
+//         },
+//     },
+// )
+
+// // Better to keep it at the end
+// // This one can generate an error on try catch if no combination played
+
+//    //Store coins global state
+// dispatch({ type: 'setAllNativeCoins', message: coins })
+// // console.log(coins)
+// let alte = parseInt(alteTokens.balance) / 1000000
+// //  console.log(alte)
+// setAlteBank(numeral(alte).format('0,0.00'))
+
+
+                }
+               
 
                 const token = await api.contractQuery(
                     state.loterraContractAddressCw20,
@@ -400,92 +482,22 @@ export default function ConnectWallet() {
                 dispatch({ type: 'setLotaBalance', message: token })
                 //console.log(token)
 
-                const claims = await api.contractQuery(
-                    state.loterraStakingAddress,
-                    {
-                        claims: { address: connectedWallet.walletAddress }, 
-                    },
-                )
-                //console.log("claims")
-                //console.log(claims)
-                dispatch({ type: 'setHolderClaims', message: claims.claims })
-
-                const tokenLP = await api.contractQuery(
-                    state.loterraLPAddress,
-                    {
-                        balance: { address: connectedWallet.walletAddress },
-                    },
-                )
-                dispatch({ type: 'setLPBalance', message: tokenLP })
-                //console.log(tokenLP)
-                const LPHolderAccruedRewards = await api.contractQuery(
-                    state.loterraStakingLPAddress,
-                    {
-                        accrued_rewards: {
-                            address: connectedWallet.walletAddress,
-                        },
-                    },
-                )
-                dispatch({
-                    type: 'setLPHolderAccruedRewards',
-                    message: LPHolderAccruedRewards.rewards,
-                })
-
-                const holderLP = await api.contractQuery(
-                    state.loterraStakingLPAddress,
-                    {
-                        holder: { address: connectedWallet.walletAddress },
-                    },
-                )
-                dispatch({ type: 'setAllHolderLP', message: holderLP })
-
-                const claimsLP = await api.contractQuery(
-                    state.loterraStakingLPAddress,
-                    {
-                        claims: { address: connectedWallet.walletAddress },
-                    },
-                )
-
-                dispatch({
-                    type: 'setHolderClaimsLP',
-                    message: claimsLP.claims,
-                })
-
               
 
-                alteTokens = await api.contractQuery(
-                    state.alteredContractAddress,
-                    {
-                        balance: {
-                            address: connectedWallet.walletAddress,
-                        },
-                    },
-                )
-
-                // Better to keep it at the end
-                // This one can generate an error on try catch if no combination played
-           
-                   //Store coins global state
-            dispatch({ type: 'setAllNativeCoins', message: coins })
-            // console.log(coins)
-            let alte = parseInt(alteTokens.balance) / 1000000
-          //  console.log(alte)
-            setAlteBank(numeral(alte).format('0,0.00'))
-
                  // Because if error others query will not be triggered right after the error
-                 const combinations = await api.contractQuery(
-                    state.loterraContractAddress,
-                    {
-                        combination: {
-                            lottery_id: contractConfigInfo.lottery_counter,
-                            address: connectedWallet.walletAddress,
-                        },
-                    },
-                ).then((a) => { 
-                    dispatch({ type: 'setAllCombinations', message: a })
-                }).catch(error => {
-                    console.log('no combinations found')
-                })
+                //  const combinations = await api.contractQuery(
+                //     state.loterraTestnetContractAddress,
+                //     {
+                //         combination: {
+                //             lottery_id: contractConfigInfo.lottery_counter,
+                //             address: connectedWallet.walletAddress,
+                //         },
+                //     },
+                // ).then((a) => { 
+                //     dispatch({ type: 'setAllCombinations', message: a })
+                // }).catch(error => {
+                //     console.log('no combinations found')
+                // })
             
            
             } catch (e) {
