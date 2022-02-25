@@ -20,6 +20,20 @@
 
 }
 
+.spacewager-beta {
+    background:linear-gradient(45deg, #f13af126, transparent);
+    color:#ffd400;
+    font-weight:bold;
+    padding:6px 10px;
+    font-size:13px;
+    white-space: nowrap;
+    display: block!important;
+    flex-wrap: nowrap;
+    max-width: 100%;
+    overflow-x: auto;
+    overflow-y: hidden;
+}
+
 .spacewager-wrapper {
     width: 100%;
     min-height: 100vh;

@@ -6,7 +6,7 @@ import SpaceWagerCard from '../components/Spacewager/SpaceWagerCard';
 import SpaceWagerGameView from '../components/Spacewager/SpaceWagerGameView';
 import { Head } from 'react-static'
 
-import { Clock, Question, Trophy, Info, ArrowLeft, ArrowRight } from 'phosphor-react'
+import { Clock, Question, Trophy, Info, ArrowLeft, ArrowRight, Warning } from 'phosphor-react'
 
 import SwiperCore, { Navigation, Pagination ,Autoplay,EffectFade } from 'swiper';
 
@@ -326,6 +326,9 @@ export default () => {
                     content="LoTerra Spacewager is a decentralized prediction game on Terra Blockchain. Predict whether LUNA's price will rise or fall – guess correctly to win!"
                 />
             </Head>
+            <div className="spacewager-beta">
+                <p className="mb-0"><Warning size={'13px'} weight="fill" style={{position:'relative',top:'-1px', marginRight:4}} />Spacewager is currently in BETA, any losses inccured due your actions are your own responsibilty.</p>
+            </div>
             <div className="container">
                 <div className="w-100 py-3 py-md-5 text-center">
                     <h1 className="mb-0 fw-bold" style={{textShadow:'1px 1px 10px #14053b'}}>Spacewager</h1>
