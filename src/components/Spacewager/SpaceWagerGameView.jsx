@@ -239,16 +239,15 @@ export default function SpaceWagerCardHeader(props) {
 
     useEffect(() => {
 
-        if (!state.isUserMakingPrediction){
-            setGames([])
-            setPaginationLastElementRound(null)
-            setLoaderPendingToResolve({ resolving: false, id: null})
-            setIsActivePagination(false)
-            setIsLoadingMore(false)
-            gameUser()
-        }
+        setGames([])
+        setPaginationLastElementRound(null)
+        setLoaderPendingToResolve({ resolving: false, id: null})
+        setIsActivePagination(false)
+        setIsLoadingMore(false)
+        gameUser()
 
-    },[state.wallet.walletAddress, state.isUserMakingPrediction])
+
+    },[state.wallet.walletAddress])
 
     // useEffect(() => {
     //     gameUserRefreshElement(state.spaceWagerCurrentRound - 2)
