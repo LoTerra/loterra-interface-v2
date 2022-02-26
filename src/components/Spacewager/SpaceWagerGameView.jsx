@@ -250,7 +250,7 @@ export default function SpaceWagerCardHeader(props) {
 
     return (
         <div className="container-fluid mt-4">
-            <div className="w-100 py-4 table-responsive">
+            <div className="w-100 py-4">
                 <h3 className="fw-bold">Player history</h3>
                 <div className="row">
                     <div className="col-9"></div>
