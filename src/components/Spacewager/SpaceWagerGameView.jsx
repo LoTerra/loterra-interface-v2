@@ -82,21 +82,28 @@ export default function SpaceWagerCardHeader(props) {
                 }
 
                 if (res.length > 0){
-                    const newGames = [...games];
-                    let array = []
-                    res.map(game2 => {
-                        let exist = false;
-                        newGames.map(game1 => {
-                            if (game2.prediction_id != game1.prediction_id){
-                                exist = true
-                            }
-                        })
-                        if (!exist){
-                            array.push(game2)
-                        }
-                    })
+                    let newGames = [];
+                    if (start_after >= 0){
+                        newGames = [...games];
+                        newGames.push(...res)
+                    }else{
+                        newGames.push(...res)
+                    }
 
-                    newGames.push(...array)
+                    // let array = []
+                    // res.map(game2 => {
+                    //     let exist = false;
+                    //     newGames.map(game1 => {
+                    //         if (game2.prediction_id != game1.prediction_id){
+                    //             exist = true
+                    //         }
+                    //     })
+                    //     if (!exist){
+                    //         array.push(game2)
+                    //     }
+                    // })
+                    //
+                    // newGames.push(...array)
                     setGames(newGames)
                 }
 
@@ -104,6 +111,39 @@ export default function SpaceWagerCardHeader(props) {
             }catch (e) {
                 console.log(e)
             }
+        }else {
+            setGames([])
+        }
+    }
+
+    async function gameLatestGame(){
+
+        if (connectedWallet){
+
+            let offset_limit = 1;
+
+            let query = {
+                games: {
+                    player: player_address,
+                    limit: offset_limit,
+                    start_after: state.spaceWagerCurrentRound - 1
+                }
+            }
+
+            try {
+                let res = await api.contractQuery(state.spaceWagerAddress, query);
+
+                if (res.length > 0){
+
+                    const newGame = [...games];
+                    newGame.push(res[0]);
+                    setGames(newGame);
+                }
+
+            }catch (e) {
+                console.log(e)
+            }
+
         }
     }
 
@@ -238,16 +278,14 @@ export default function SpaceWagerCardHeader(props) {
     }
 
     useEffect(() => {
-
-        setGames([])
         setPaginationLastElementRound(null)
         setLoaderPendingToResolve({ resolving: false, id: null})
         setIsActivePagination(false)
         setIsLoadingMore(false)
+
         gameUser()
 
-
-    },[state.wallet.walletAddress])
+    },[state.wallet.walletAddress, state.isUserMakingPrediction])
 
     // useEffect(() => {
     //     gameUserRefreshElement(state.spaceWagerCurrentRound - 2)
