@@ -9,28 +9,29 @@ export default function SpaceWagerCardHeader(props) {
 
     const { state, dispatch } = useStore()
     const {} = props;
-    const [games,setGames] = useState([]);
     /*
-        ----------GAMES SAMPLE--------
-      [
-        [0, {
-            up: "1",
-            down: "",
-            prize: "",
-            resolved: false
-        }],
-        [1, {
-            up: "",
-            down: "",
-            prize: "",
-            resolved: true
-        }]
-    ]*/
+       ----------GAMES SAMPLE--------
+     [
+       [0, {
+           up: "1",
+           down: "",
+           prize: "",
+           resolved: false
+       }],
+       [1, {
+           up: "",
+           down: "",
+           prize: "",
+           resolved: true
+       }]
+   ]*/
+    const [games,setGames] = useState([]);
     const [isActivePagination, setIsActivePagination] = useState(false)
     const [paginationLastElementRound, setPaginationLastElementRound] = useState(null)
     const [isLoadingMore, setIsLoadingMore] = useState(false)
     const [loaderPendingToResolve, setLoaderPendingToResolve] = useState({ resolving: false, id: null})
     const [isSomeResolvable, setIsSomeResolvable] = useState(false)
+    const [isResolvingAll, setIsResolvingAll] = useState(false)
 
     const api = new WasmAPI(state.lcd_client.apiRequester)
 
@@ -99,6 +100,8 @@ export default function SpaceWagerCardHeader(props) {
         }else {
             setGames([])
         }
+        setLoaderPendingToResolve({resolving: false, id: null})
+        setIsResolvingAll(false)
     }
 
     async function gameUserRefreshElement(start_after){
@@ -137,8 +140,10 @@ export default function SpaceWagerCardHeader(props) {
     async function collectPrize(round){
 
         let array = []
-
+        let defaultResolving = false
         if (Array.isArray(round)) {
+            defaultResolving = true
+            setIsResolvingAll(true)
             array = round
         }else {
             setLoaderPendingToResolve({resolving: true, id: round})
@@ -165,19 +170,28 @@ export default function SpaceWagerCardHeader(props) {
                 } else {
                     console.log(e)
                 }
-                setTimeout(() => {
-                    gameUserRefreshElement(round)
-                }, 20000)
+                if (defaultResolving){
+                    setTimeout(() => {
+                        gameUser()
+                    }, 15000)
+                }else {
+                    setTimeout(() => {
+                        gameUserRefreshElement(round)
+                    }, 15000)
+                }
+
 
             })
             .catch((e) => {
                 setLoaderPendingToResolve({resolving: false, id: null})
+                setIsResolvingAll(false)
                 console.log(e)
             })
 
     }
 
     function resolve_multiples() {
+
         let array = [];
         games.map(game => {
             if (!game.resolved && (game.game_id + 2) < state.spaceWagerCurrentRound ) {
@@ -208,7 +222,7 @@ export default function SpaceWagerCardHeader(props) {
                         !game.resolved ?
                                 game.game_id + 2 < state.spaceWagerCurrentRound ?
                                     <>
-                                        <button className="btn btn-outline-primary w-100 btn-sm" hidden={game.resolved} disabled={loaderPendingToResolve.id == game.game_id} onClick={() => collectPrize(game.game_id)}>Resolve</button>
+                                        <button className="btn btn-outline-primary w-100 btn-sm" hidden={game.resolved} disabled={loaderPendingToResolve.id == game.game_id || isResolvingAll} onClick={() => collectPrize(game.game_id)}>Resolve { isResolvingAll || loaderPendingToResolve.id == game.game_id ? <div className="spinner-grow spinner-grow-sm" role="status"><span className="sr-only"></span></div> : ''} </button>
                                     </>
                                     : <><Hourglass size={23} /> In progress <span>{game.game_id > state.spaceWagerCurrentRound - 3 ? <>open in {((game.game_id + 3) - state.spaceWagerCurrentRound)} rounds</>: ''}</span></>
                             :
@@ -255,7 +269,7 @@ export default function SpaceWagerCardHeader(props) {
                 <div className="row">
                     <div className="col-9"></div>
                     <div className="col-3">
-                        <button className="btn btn-outline-primary w-100 btn-sm" disabled={!isSomeResolvable} onClick={() => resolve_multiples()}>Resolve all</button>
+                        <button className="btn btn-outline-primary w-100 btn-sm" disabled={!isSomeResolvable || isResolvingAll} onClick={() => resolve_multiples()}>Resolve all { isResolvingAll ? <div className="spinner-grow spinner-grow-sm" role="status"><span className="sr-only"></span></div> : ''} </button>
                     </div>
                 </div>
 

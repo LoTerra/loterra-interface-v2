@@ -108,7 +108,7 @@ export default function SpaceWagerCard(props) {
                 }
             }
             let split_variation = numeral(variation).format("0,0.000000").split('.');
-            let format_variation = split_variation.length == 1 ? <>{split_variation[0]}<span style={{fontSize: '0.7em'}}>.000000</span></>  : <>{split_variation[0]}<span style={{fontSize: '0.7em'}}>.{split_variation[1]}</span></>
+            let format_variation = split_variation.length == 1 ? <>{split_variation[0]}<span style={{fontSize: '0.8em'}}>.000000</span></>  : <>{split_variation[0]}<span style={{fontSize: '0.8em'}}>.{split_variation[1]}</span></>
 
             if (variation > 0) {
                 setFormattedVariation(<><TrendUp size={23} /> ${format_variation}</>)

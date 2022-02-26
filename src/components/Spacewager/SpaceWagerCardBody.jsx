@@ -100,9 +100,9 @@ export default function SpaceWagerCardBody(props) {
             })
     }
 
-    function format_number(number, size){
+    function format_number(number, sizeOne, sizeTwo){
         let split_variation = numeral(number).format("0,0.000000").split('.');
-        let format_variation = split_variation.length == 1 ? <>{split_variation[0]}<span style={{fontSize: size}}>.000000</span></>  : <>{split_variation[0]}<span style={{fontSize: size}}>.{split_variation[1]}</span></>
+        let format_variation = split_variation.length == 1 ? <>{split_variation[0]}<span style={{fontSize: sizeOne}}>.000000</span></>  : <>{split_variation[0]}<span style={{fontSize: sizeTwo}}>.{split_variation[1]}</span></>
         return format_variation
     }
 
@@ -174,7 +174,7 @@ export default function SpaceWagerCardBody(props) {
                     style={
                         variationStatus == 'DOWN' ? downStylePrice : variationStatus == 'UP' ? upStylePrice : {color:'#fff'}
                     }
-                >${format_number(last_price(), '0.6em')}</p>
+                >${format_number(last_price(), '0.5em', '0.5em')}</p>
             </div>
             <div className="col-6 text-end">
                 <span
@@ -194,7 +194,7 @@ export default function SpaceWagerCardBody(props) {
             </div>
             <div className="col-6 text-end">
                 <p className="my-2 fw-bold fs-6 mb-0">
-                    ${format_number(obj.locked_price / 1000000, '0.8em')}</p>
+                    ${format_number(obj.locked_price / 1000000, '0.8em', '0.8em')}</p>
             </div>
         </div>
         
