@@ -222,7 +222,7 @@ export default function SpaceWagerCardHeader(props) {
                         !game.resolved ?
                                 game.game_id + 2 < state.spaceWagerCurrentRound ?
                                     <>
-                                        <button className="btn btn-outline-primary w-100 btn-sm" hidden={game.resolved} disabled={loaderPendingToResolve.id == game.game_id || isResolvingAll} onClick={() => collectPrize(game.game_id)}>Resolve { isResolvingAll || loaderPendingToResolve.id == game.game_id ? <div className="spinner-grow spinner-grow-sm" role="status"><span className="sr-only"></span></div> : ''} </button>
+                                        <button className="btn btn-outline-primary w-100 btn-sm" hidden={game.resolved} disabled={loaderPendingToResolve.id == game.game_id || isResolvingAll} onClick={() => collectPrize(game.game_id)}>{ isResolvingAll || loaderPendingToResolve.id == game.game_id ? <>Resolving... <div className="spinner-grow spinner-grow-sm" role="status"><span className="sr-only"></span></div></> : 'Resolve'} </button>
                                     </>
                                     : <><Hourglass size={23} /> In progress <span>{game.game_id > state.spaceWagerCurrentRound - 3 ? <>open in {((game.game_id + 3) - state.spaceWagerCurrentRound)} rounds</>: ''}</span></>
                             :
@@ -269,7 +269,7 @@ export default function SpaceWagerCardHeader(props) {
                 <div className="row">
                     <div className="col-9"></div>
                     <div className="col-3">
-                        <button className="btn btn-outline-primary w-100 btn-sm" disabled={!isSomeResolvable || isResolvingAll} onClick={() => resolve_multiples()}>Resolve all { isResolvingAll ? <div className="spinner-grow spinner-grow-sm" role="status"><span className="sr-only"></span></div> : ''} </button>
+                        <button className="btn btn-outline-primary w-100 btn-sm" disabled={!isSomeResolvable || isResolvingAll} onClick={() => resolve_multiples()}>{ isResolvingAll ? <>Resolving... <div className="spinner-grow spinner-grow-sm" role="status"><span className="sr-only"></span></div></> : 'Resolve all'} </button>
                     </div>
                 </div>
 
