@@ -1,9 +1,11 @@
-import React, { useState, useEffect, useMemo } from 'react'
+import React, { useState, useEffect, useMemo, useRef } from 'react'
 import axios from 'axios'
 import { LCDClient, WasmAPI } from '@terra-money/terra.js'
 import {
     useWallet,
+    WalletStatus,
     useConnectedWallet,
+    ConnectType,
 } from '@terra-money/wallet-provider'
 import {
     Wallet,
@@ -11,11 +13,17 @@ import {
     UserCircle,
     Trophy,
     Power,
-    Check   
+    List,
+    Check,
+    X,
+    Ticket,
+    Coin,
+    Bank,
 } from 'phosphor-react'
 import numeral from 'numeral'
 import UserModal from './UserModal'
 import { useStore } from '../store'
+import { Link } from '@reach/router'
 // let useWallet = {}
 // if (typeof document !== 'undefined') {
 //     useWallet = require('@terra-money/wallet-provider').useWallet
@@ -35,7 +43,6 @@ const Dialog = {
     display: "flex",
     justifyContent: "center",
     flexDirection:"column",
-
 } */
 
 const DialogButton = {
@@ -51,7 +58,7 @@ export default function ConnectWallet() {
     const [connected, setConnected] = useState(false)
     const { state, dispatch } = useStore()
 
-    
+
 
     let wallet = ''
     if (typeof document !== 'undefined') {
@@ -85,21 +92,6 @@ export default function ConnectWallet() {
             message: latestBlocks.data.block.header.height,
         })
 
-        
-        // VALKYRIE START
-        const vkrRef = new URLSearchParams(window.location.search);
-        const referrerCode = vkrRef.get('vkr')
-        if(referrerCode){          
-            dispatch({
-                type: 'setVkrReferrer',
-                message: {status:true,code:referrerCode},
-            })
-
-            console.log('vkr referrer detected')
-        }
-
-        // VALKYRIE END
-
         const contractConfigInfo = await api.contractQuery(
             state.loterraContractAddress,
             {
@@ -127,79 +119,77 @@ export default function ConnectWallet() {
         )
         dispatch({ type: 'setAllRecentWinners', message: winners })
 
-        if(connectedWallet){
-            const contractDaoBalance = await api.contractQuery(
-                state.loterraContractAddressCw20,
-                {
-                    balance: {
-                        address: state.loterraContractAddress,
-                    },
+        const contractDaoBalance = await api.contractQuery(
+            state.loterraContractAddressCw20,
+            {
+                balance: {
+                    address: state.loterraContractAddress,
                 },
-            )
-            dispatch({ type: 'setDaoFunds', message: contractDaoBalance.balance })
-    
-            const contractDogetherState = await api.contractQuery(
-                state.dogetherAddress,
-                {
-                    state: {}
-                },
-            )
-            dispatch({
-                type: 'setDogetherState',
-                message: contractDogetherState,
-            })
-    
-            const contractLPLoterraBalance = await api.contractQuery(
-                state.loterraContractAddressCw20,
-                {
-                    balance: {
-                        address: state.loterraStakingLPAddress,
-                    },
-                },
-            )
-            dispatch({
-                type: 'setStakingLoterraFunds',
-                message: contractLPLoterraBalance.balance,
-            })
-            const contractLPAlteredBalance = await api.contractQuery(
-                state.loterraContractAddressCw20,
-                {
-                    balance: {
-                        address: state.alteredStakingLPAddress,
-                    },
-                },
-            )
-            dispatch({
-                type: 'setStakingAlteredFunds',
-                message: contractLPAlteredBalance.balance,
-            })
-    
-            // Get total pool in Dogether
-            const total_pool_dogether = await api.contractQuery(
-                'terra19h4xk8xxxew0ne6fuw0mvuf7ltmjmxjxssj5ts',
-                {
-                    state: {},
-                },
-            )
-            dispatch({
-                type: 'setTotalBalancePoolDogether',
-                message: total_pool_dogether.total_ust_pool,
-            })
-    
-            const jackpotAltered = await api.contractQuery(
-                state.alteredContractAddress,
-                {
-                    balance: {
-                        address: state.loterraContractAddress,
-                    },
-                },
-            )
-            dispatch({
-                type: 'setAlteredJackpot',
-                message: jackpotAltered.balance,
-            })
+            },
+        )
+        dispatch({ type: 'setDaoFunds', message: contractDaoBalance.balance })
 
-            
+        const contractDogetherState = await api.contractQuery(
+            state.dogetherAddress,
+            {
+                state: {}
+            },
+        )
+        dispatch({
+            type: 'setDogetherState',
+            message: contractDogetherState,
+        })
+
+        const contractLPLoterraBalance = await api.contractQuery(
+            state.loterraContractAddressCw20,
+            {
+                balance: {
+                    address: state.loterraStakingLPAddress,
+                },
+            },
+        )
+        dispatch({
+            type: 'setStakingLoterraFunds',
+            message: contractLPLoterraBalance.balance,
+        })
+        const contractLPAlteredBalance = await api.contractQuery(
+            state.loterraContractAddressCw20,
+            {
+                balance: {
+                    address: state.alteredStakingLPAddress,
+                },
+            },
+        )
+        dispatch({
+            type: 'setStakingAlteredFunds',
+            message: contractLPAlteredBalance.balance,
+        })
+
+        // Get total pool in Dogether
+        const total_pool_dogether = await api.contractQuery(
+            'terra19h4xk8xxxew0ne6fuw0mvuf7ltmjmxjxssj5ts',
+            {
+                state: {},
+            },
+        )
+        dispatch({
+            type: 'setTotalBalancePoolDogether',
+            message: total_pool_dogether.total_ust_pool,
+        })
+
+        const jackpotAltered = await api.contractQuery(
+            state.alteredContractAddress,
+            {
+                balance: {
+                    address: state.loterraContractAddress,
+                },
+            },
+        )
+        dispatch({
+            type: 'setAlteredJackpot',
+            message: jackpotAltered.balance,
+        })
+
         //console.log('config',contractConfigInfo)
 
         if (window.location.href.indexOf('dao') > -1) {
@@ -245,13 +235,9 @@ export default function ConnectWallet() {
         const pool_info = await api.contractQuery(state.loterraPoolAddress, {
             pool: {},
         })
-        //console.log('pool_info')
-       // console.log(pool_info)
+        console.log('pool_info')
+        console.log(pool_info)
         dispatch({ type: 'setPoolInfo', message: pool_info })
-        }
-
-    
-
     }
 
     //const installChrome = useInstallChromeExtension();
@@ -281,7 +267,7 @@ export default function ConnectWallet() {
         // Code for winner detector
         try {
             let type = false
-            //console.log('checking for winner')
+            console.log('checking for winner')
             // Query all winners for most recent draw
 
             //Test purposes
@@ -300,7 +286,7 @@ export default function ConnectWallet() {
             })
 
             dispatch({ type: 'setYouWon', message: type })
-           // console.log(state.youWon)
+            console.log(state.youWon)
         } catch (e) {
             console.log(e)
         }
@@ -320,15 +306,15 @@ export default function ConnectWallet() {
                 if (connectedWallet) {
                     lcd.bank.balance(connectedWallet.walletAddress).then(([coins]) => {
                         coins = coins;
-                      // console.log(coins ? coins.get('uusd').amount / 1000000 : '')              
-                       const ustBalance = coins.get('uusd').toData()         
-                       
-                      setBank(ustBalance.amount / 1000000)
-                      dispatch({ type: 'setUstBalance', message: ustBalance.amount / 1000000 })
+                        console.log(coins ? coins.get('uusd').amount / 1000000 : '')
+                        const ustBalance = coins.get('uusd').toData()
+
+                        setBank(ustBalance.amount / 1000000)
+                        dispatch({ type: 'setUstBalance', message: ustBalance.amount / 1000000 })
                     });
-                  } else {
+                } else {
                     setBank(null);
-                  }
+                }
 
                 const contractConfigInfo = await api.contractQuery(
                     state.loterraContractAddress,
@@ -350,9 +336,8 @@ export default function ConnectWallet() {
                     message: parseInt(lastDrawnJackpot) / 1000000,
                 })
 
-                if(connectedWallet.network.name !== 'testnet'){
-                 // Get balance to staked on Dogether
-                 const balance_stake_on_dogether = await api.contractQuery(
+                // Get balance to staked on Dogether
+                const balance_stake_on_dogether = await api.contractQuery(
                     state.dogetherStakingAddress,
                     {
                         holder: { address: connectedWallet.walletAddress },
@@ -397,6 +382,16 @@ export default function ConnectWallet() {
                     message: holderAccruedRewards.rewards,
                 })
                 //console.log(holder)
+
+                const token = await api.contractQuery(
+                    state.loterraContractAddressCw20,
+                    {
+                        balance: { address: connectedWallet.walletAddress },
+                    },
+                )
+                dispatch({ type: 'setLotaBalance', message: token })
+                //console.log(token)
+
                 const claims = await api.contractQuery(
                     state.loterraStakingAddress,
                     {
@@ -448,7 +443,7 @@ export default function ConnectWallet() {
                     message: claimsLP.claims,
                 })
 
-
+                checkIfWon()
 
                 alteTokens = await api.contractQuery(
                     state.alteredContractAddress,
@@ -459,33 +454,10 @@ export default function ConnectWallet() {
                     },
                 )
 
-                // // Better to keep it at the end
-                // // This one can generate an error on try catch if no combination played
-
-                   //Store coins global state
-                dispatch({ type: 'setAllNativeCoins', message: coins })
-                // console.log(coins)
-                let alte = parseInt(alteTokens.balance) / 1000000
-                //  console.log(alte)
-                setAlteBank(numeral(alte).format('0,0.00'))
-
-
-                }
-               
-
-                const token = await api.contractQuery(
-                    state.loterraContractAddressCw20,
-                    {
-                        balance: { address: connectedWallet.walletAddress },
-                    },
-                )
-                dispatch({ type: 'setLotaBalance', message: token })
-                //console.log(token)
-
-              
-
-                 // Because if error others query will not be triggered right after the error
-                 const combinations = await api.contractQuery(
+                // Better to keep it at the end
+                // This one can generate an error on try catch if no combination played
+                // Because if error others query will not be triggered right after the error
+                const combinations = await api.contractQuery(
                     state.loterraContractAddress,
                     {
                         combination: {
@@ -493,25 +465,24 @@ export default function ConnectWallet() {
                             address: connectedWallet.walletAddress,
                         },
                     },
-                ).then((a) => {
-                    dispatch({ type: 'setAllCombinations', message: a })
-                }).catch(error => {
-                    console.log('no combinations found')
-                })
-            
-           
+                )
+                dispatch({ type: 'setAllCombinations', message: combinations })
             } catch (e) {
                 console.log(e)
             }
 
-         
+            //Store coins global state
+            dispatch({ type: 'setAllNativeCoins', message: coins })
+            // console.log(coins)
+            let alte = parseInt(alteTokens.balance) / 1000000
+            console.log(alte)
             // let uusd = coins.filter((c) => {
             //     return c.denom === 'uusd'
             // })
             // let ust = parseInt(uusd) / 1000000
             // setBank(numeral(ust).format('0,0.00'))
-     
-       
+
+            setAlteBank(numeral(alte).format('0,0.00'))
             // connectTo("extension")
         } else {
             setBank(null)
@@ -519,7 +490,7 @@ export default function ConnectWallet() {
             dispatch({ type: 'setWallet', message: {} })
         }
     }
- 
+
 
     function returnBank() {
         return (
@@ -557,160 +528,149 @@ export default function ConnectWallet() {
 
 
     useEffect(() => {
-            baseData()       
+        if (!state.config.lottery_counter) {
+            baseData()
+        }
+        if (connectedWallet) {
+            contactBalance()
+        }
     }, [
-        // connectedWallet,
+        connectedWallet,
         // lcd,
         // state.config,
         // state.allRecentWinners,
         // state.youWon,
     ])
 
-    useEffect(() => {
-        if (connectedWallet && !state.wallet.walletAddress) {
-            contactBalance()                   
-        }
-    },[connectedWallet])
-
-
-    //useEffect for your won function
-
-    useEffect(() => {
-        if(state.allRecentWinners.length > 0 && connectedWallet && connectedWallet.walletAddress)    {
-            checkIfWon()
-        }
-    },[state.allRecentWinners])
-
     return (
-        <>         
-     
-                    {!connected && (
-                        <>
-                            <div className="btn-group">
-                                <button
-                                    className="btn btn-green nav-item dropdown-toggle"
-                                    type="button"
-                                    id="dropdownMenuButton1"
-                                    data-bs-toggle="dropdown"
-                                    aria-expanded="false"
-                                >
-                                    <Wallet
-                                        size={18}
-                                        style={{
-                                            marginTop: '-4px',
-                                            marginRight: '4px',
-                                        }}
-                                    />
-                                    Connect
-                                </button>
-                                <ul
-                                    className="dropdown-menu dropdown-menu-end"
-                                    aria-labelledby="dropdownMenuButton1"
-                                >
-                                    <button
-                                        onClick={() => connectTo('extension')}
-                                        className="dropdown-item"
-                                    >
-                                        <CaretRight
-                                            size={16}
-                                            style={{ marginTop: '-4px' }}
-                                        />{' '}
-                                        Terra Station (extension/mobile)
-                                    </button>
-                                    <button
-                                        onClick={() => connectTo('mobile')}
-                                        className="dropdown-item"
-                                    >
-                                        <CaretRight
-                                            size={16}
-                                            style={{ marginTop: '-4px' }}
-                                        />{' '}
-                                        Terra Station (mobile for desktop)
-                                    </button>
-                                </ul>
-                            </div>
-                        
-                        </>
-                    )}
-                    {connected && (
-                        <>
+        <>
+            {!connected && (
+                <>
+                    <div className="btn-group">
+                        <button
+                            className="btn btn-green nav-item dropdown-toggle"
+                            type="button"
+                            id="dropdownMenuButton1"
+                            data-bs-toggle="dropdown"
+                            aria-expanded="false"
+                        >
+                            <Wallet
+                                size={18}
+                                style={{
+                                    marginTop: '-4px',
+                                    marginRight: '4px',
+                                }}
+                            />
+                            Connect
+                        </button>
+                        <ul
+                            className="dropdown-menu dropdown-menu-end"
+                            aria-labelledby="dropdownMenuButton1"
+                        >
                             <button
-                                className={
-                                    'btn btn-default nav-item' +
-                                    (state.youWon ? ' winner' : '')
-                                }                            
-                                onClick={() => setIsModal(!isModal)}
+                                onClick={() => connectTo('extension')}
+                                className="dropdown-item"
                             >
-                                {state.youWon ? (
-                                    <>
-                                        <Trophy
-                                            size={33}
-                                            style={{                                         
-                                                color: '#ecba26',
-                                            }}
-                                        />
-                                        <span className="badge">YOU WON</span>
-                                    </>
-                                ) : (
-                                    <UserCircle
-                                        size={28}
-                                        style={{                                   
-                                            color: '#72ffc1',
-                                        }}
-                                    />
-                                )}
+                                <CaretRight
+                                    size={16}
+                                    style={{ marginTop: '-4px' }}
+                                />{' '}
+                                Terra Station (extension/mobile)
                             </button>
                             <button
-                                className="btn btn-green nav-item dropdown-toggle"
-                                data-bs-toggle="dropdown"
-                                aria-expanded="false"
+                                onClick={() => connectTo('mobile')}
+                                className="dropdown-item"
                             >
-                                {returnBank() ? returnBank() : 'loading'}
+                                <CaretRight
+                                    size={16}
+                                    style={{ marginTop: '-4px' }}
+                                />{' '}
+                                Terra Station (mobile for desktop)
                             </button>
-                            <ul
-                                className="dropdown-menu dropdown-menu-end"
-                                aria-labelledby="dropdownMenuButton2"                             
+                        </ul>
+                    </div>
+
+                </>
+            )}
+            {connected && (
+                <>
+                    <button
+                        className={
+                            'btn btn-default nav-item' +
+                            (state.youWon ? ' winner' : '')
+                        }
+                        onClick={() => setIsModal(!isModal)}
+                    >
+                        {state.youWon ? (
+                            <>
+                                <Trophy
+                                    size={33}
+                                    style={{
+                                        color: '#ecba26',
+                                    }}
+                                />
+                                <span className="badge">YOU WON</span>
+                            </>
+                        ) : (
+                            <UserCircle
+                                size={28}
+                                style={{
+                                    color: '#72ffc1',
+                                }}
+                            />
+                        )}
+                    </button>
+                    <button
+                        className="btn btn-green nav-item dropdown-toggle"
+                        data-bs-toggle="dropdown"
+                        aria-expanded="false"
+                    >
+                        {returnBank() ? returnBank() : 'loading'}
+                    </button>
+                    <ul
+                        className="dropdown-menu dropdown-menu-end"
+                        aria-labelledby="dropdownMenuButton2"
+                    >
+                        {bank && alteBank && (
+                            <div
+                                className="wallet-info d-inline-block text-start px-3"
+                                style={{ fontSize: '13px' }}
                             >
-                                {bank && alteBank && (
-                                    <div
-                                        className="wallet-info d-inline-block text-start px-3"
-                                        style={{ fontSize: '13px' }}
-                                    >
                                         <span className="d-block">
                                             <strong>YOUR WALLET:</strong>
                                         </span>
-                                        <span
-                                            className="d-block"
-                                            style={{ marginBottom: '-5px' }}
-                                        >
+                                <span
+                                    className="d-block"
+                                    style={{ marginBottom: '-5px' }}
+                                >
                                             {bank}{' '}
-                                            <span className="text-sm">UST</span>
+                                    <span className="text-sm">UST</span>
                                         </span>
-                                        <span className="d-block">
+                                <span className="d-block">
                                             {alteBank}{' '}
-                                            <span className="text-sm">
+                                    <span className="text-sm">
                                                 ALTE
                                             </span>
                                         </span>
-                                    </div>
-                                )}
-                                <button
-                                    onClick={() => connectTo('disconnect')}
-                                    className="dropdown-item"
-                                >
-                                    <Power
-                                        size={16}
-                                        style={{ marginTop: '-2px' }}
-                                    />{' '}
-                                    <span style={{ fontSize: '13px' }}>
+                            </div>
+                        )}
+                        <button
+                            onClick={() => connectTo('disconnect')}
+                            className="dropdown-item"
+                        >
+                            <Power
+                                size={16}
+                                style={{ marginTop: '-2px' }}
+                            />{' '}
+                            <span style={{ fontSize: '13px' }}>
                                         Disconnect
                                     </span>
-                                </button>
-                            </ul>                      
-                        </>
-                    )}
-      
-     
+                        </button>
+                    </ul>
+                </>
+            )}
+
+
 
             {/*<button onClick={() => display()}>Connect Wallet</button>
         {renderDialog()}*/}
@@ -721,7 +681,7 @@ export default function ConnectWallet() {
                     connectedWallet={connectedWallet}
                 />
             )}
-    
+
         </>
     )
 }
