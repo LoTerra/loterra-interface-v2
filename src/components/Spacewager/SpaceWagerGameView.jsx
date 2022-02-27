@@ -217,7 +217,7 @@ export default function SpaceWagerCardHeader(props) {
                 <td>{ game.prize != "0" ?  numeral(game.prize / 1000000).format("0,0.00") + 'UST': '-'}</td>
                 <td>{ game.resolved ? <Check size={23} /> : <X size={23} /> }</td>
                 {/* display a collect button if resolved is false  <Money size={23} />*/}
-                <td>
+                <td className="text-end">
                     {
                         !game.resolved ?
                                 game.game_id + 2 < state.spaceWagerCurrentRound ?
@@ -277,12 +277,12 @@ export default function SpaceWagerCardHeader(props) {
                 <table className="table text-white">
                     <thead>
                     <tr>
-                        <th>Round</th>
-                        <th>Wager UP</th>
-                        <th>Wager DOWN</th>
-                        <th>Total prize</th>
-                        <th>Resolved</th>
-                        <th className="text-end">Actions</th>
+                        <th style={{minWidth:100}}>Round</th>
+                        <th style={{minWidth:150}}>Wager UP</th>
+                        <th style={{minWidth:150}}>Wager DOWN</th>
+                        <th style={{minWidth:150}}>Total prize</th>
+                        <th style={{minWidth:100}}>Resolved</th>
+                        <th style={{minWidth:260}} className="text-end">Actions</th>
                     </tr>
                     </thead>
                     <tbody>

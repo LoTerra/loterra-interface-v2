@@ -267,7 +267,7 @@ export default function SpaceWagerCard(props) {
                             </span>
                                 
                             </div>
-                            <div className="col-md-6 mt-2">
+                            <div className="col-6 mt-2">
                                 <strong
                                     style={{color: '#17b96b'}}
                                 >
@@ -275,7 +275,7 @@ export default function SpaceWagerCard(props) {
                                 </strong>
                                 <p>{numeral(personalBidInfo.up / 1000000).format('0,0')} UST</p>
                             </div>
-                            <div className="col-md-6 mt-2">
+                            <div className="col-6 mt-2">
                                 <strong
                                     style={{
                                         color: '#f038f0'
