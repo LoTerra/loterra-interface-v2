@@ -123,7 +123,7 @@ export default function ConnectWallet() {
                     lottery_id: contractConfigInfo.lottery_counter - 1,
                 },
             },
-        )
+        ) 
         dispatch({ type: 'setAllRecentWinners', message: winners })
 
         const contractDaoBalance = await api.contractQuery(

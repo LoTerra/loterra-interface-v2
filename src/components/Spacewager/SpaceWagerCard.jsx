@@ -138,8 +138,12 @@ export default function SpaceWagerCard(props) {
                         round: round
                     }
                 }
-            );
-            setPersonalBidInfo(personal_bid_info)
+            ).then(a => {
+                setPersonalBidInfo(a)
+            }).catch(error => {
+                console.log('no round results')
+            });
+            
         } catch(e) {
             console.log(e)
         }

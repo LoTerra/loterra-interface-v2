@@ -273,7 +273,7 @@ export default function SpaceWagerCardHeader(props) {
                     </div>
                 </div>
 
-                <div class="table-responsive">
+                <div className="table-responsive">
                 <table className="table text-white">
                     <thead>
                     <tr>
