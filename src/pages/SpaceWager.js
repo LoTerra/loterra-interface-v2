@@ -21,6 +21,7 @@ import Pusher from 'pusher-js';
 import SpaceWagerIcon from '../components/Spacewager/SpaceWagerIcon';
 import { Toaster } from 'react-hot-toast';
 import Footer from '../components/Footer';
+import SpaceWagerIndividualStats from '../components/Spacewager/SpaceWagerIndividualStats';
 
 // Enable pusher logging - don't include this in production
 // Pusher.logToConsole = true;
@@ -49,6 +50,7 @@ export default () => {
     const [lunaStatus, setLunaStatus] = useState('')
     const [lunaPriceCounter, setLunaPriceCountdown] = useState(0)
     const [prizesPoolAmount, setPrizesPoolAmount] = useState(0)
+
     const [amountBetOnUp, setAmountBetOnUp] = useState(0)
     const [amountBetOnDown, setAmountBetOnDown] = useState(0)
     const [bettingOddsOnUp, setBettingOdssOnUp] = useState(0)
@@ -266,6 +268,7 @@ export default () => {
     useEffect(() =>{
         getSpacewagerState()
         getSpacewagerConfig()
+        
         setInterval(() => {
             formatTime()
         }, 1000)
@@ -277,6 +280,8 @@ export default () => {
     useEffect(() => {
         pusher_price()
     }, [])
+
+
 
     useEffect(() => {
         is_equal(state.latestPrediction)
@@ -468,6 +473,7 @@ export default () => {
                 </div>
             </div>
         <div>
+            <SpaceWagerIndividualStats/>
             <SpaceWagerGameView/>
             <Toaster
          position="top-center"
