@@ -200,12 +200,14 @@ export default function SpaceWagerCard(props) {
                         <div className="btn-content" style={{ color: upTextColor()}}>
                             UP
                             <span className="small fw-normal d-block">
+                                <span className="fw-bold">
                                 {
                                     isNextPrediction ?
                                         state.latestPrediction.up == '0' && state.latestPrediction.down != '0' ? 1 : state.latestPrediction.up != '0' && state.latestPrediction.down == '0' || state.latestPrediction.up == '0' && state.latestPrediction.down == '0'? 0 : numeral(parseInt(state.latestPrediction.down) / parseInt(state.latestPrediction.up)).format("0,0.00")
                                         : bettingOddsOnUp == '0' && bettingOddsOnDown != '0' ? 1 : bettingOddsOnUp != '0' && bettingOddsOnDown == '0' || bettingOddsOnUp == '0' && bettingOddsOnDown == '0'? 0 : numeral(parseInt(bettingOddsOnDown) / parseInt(bettingOddsOnUp)).format("0,0.00")
-                                }
-                                x Payout
+                                }x
+                                </span> Payout
+                                 
 
                             </span>
                         </div>
@@ -239,12 +241,12 @@ export default function SpaceWagerCard(props) {
                             {downButtonShape()}
                             <div className="btn-content" style={{ color: downTextColor()}}>
                             <span className="small d-block fw-normal">
-                                {
+                                <span className="fw-bold">{
                                     isNextPrediction ?
                                         state.latestPrediction.down == '0' && state.latestPrediction.up != '0' ? 1 : state.latestPrediction.down != '0' && state.latestPrediction.up == '0' || state.latestPrediction.down == '0' && state.latestPrediction.up == '0'? 0 : numeral(parseInt(state.latestPrediction.up) / parseInt(state.latestPrediction.down)).format("0,0.00")
                                         : bettingOddsOnDown  == '0' && bettingOddsOnUp != '0' ? 1 : bettingOddsOnDown != '0' && bettingOddsOnUp == "0" || bettingOddsOnDown == '0' && bettingOddsOnUp == '0'? 0 : numeral(parseInt(bettingOddsOnUp) / parseInt(bettingOddsOnDown)).format("0,0.00")
 
-                                }x Payout
+                                }x</span> Payout
                             </span>
                             DOWN
                             </div>

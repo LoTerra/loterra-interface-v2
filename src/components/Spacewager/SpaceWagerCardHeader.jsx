@@ -57,10 +57,12 @@ export default function SpaceWagerCardHeader(props) {
                         {isPastPrediction && obj.success == null &&
                             <div className="row">
                                 <div className="col-6 text-start">
-                                    <p>Resolving...</p>
+                                <div class="spinner-border text-white me-2 spinner-sm d-inline-block" role="status">
+                                </div>
+                                    <p className="d-inline-block mb-0">Resolving...</p>
                                 </div>
                                 <div className="col-6 text-end">
-                                    <p>#{obj.prediction_id}</p>
+                                    <p className="text-muted mb-0">#{obj.prediction_id}</p>
                                 </div>
                             </div>
                         }
@@ -68,7 +70,7 @@ export default function SpaceWagerCardHeader(props) {
                             <div className="row">
                                 <div className="col-6 text-start">
                                     <div>
-                                        <p>                                            
+                                        <p className="mb-0">                                            
                                             <SkipForward size={23} style={{position:'relative', top:-1, marginRight:5}} weight={'bold'}/>
 
                                             NEXT
@@ -76,7 +78,7 @@ export default function SpaceWagerCardHeader(props) {
                                     </div>
                                 </div>
                                 <div className="col-6 text-end">
-                                    <p>#{obj.prediction_id}</p>
+                                    <p className="text-muted mb-0">#{obj.prediction_id}</p>
                                 </div>
                             </div>
                         }
@@ -89,7 +91,7 @@ export default function SpaceWagerCardHeader(props) {
                                     </p>
                                 </div>
                                 <div className="col-6 text-end">
-                                    <p>{format_minutes}:{format_seconds} #{obj.prediction_id}</p>
+                                    <p>{format_minutes}:{format_seconds} <span className="text-muted">#{obj.prediction_id}</span></p>
                                 </div>
                                 <div className="col-12">
                                     <div className="progress">
@@ -108,13 +110,13 @@ export default function SpaceWagerCardHeader(props) {
                         { isPastPrediction && obj.success != null &&
                             <div className="row">
                                 <div className="col-6 text-start">
-                                    <p>
+                                    <p className="mb-0 text-muted">
                                         <Prohibit size={23} style={{position:'relative', top:-1, marginRight:5}} weight={'bold'}/>
                                         FINISHED
                                     </p>
                                 </div>
                                 <div className="col-6 text-end">
-                                    <p>#{obj.prediction_id}</p>
+                                    <p className="mb-0 text-muted">#{obj.prediction_id}</p>
                                 </div>
                                 {/*<div className="col-12 text-start">*/}
                                 {/*    <p>*/}

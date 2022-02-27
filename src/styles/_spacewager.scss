@@ -20,6 +20,12 @@
 
 }
 
+.spinner-sm {
+    width:1rem;
+    height:1rem;
+    border-width: 0.15em;
+}
+
 .spacewager-beta {
     background:linear-gradient(45deg, #f13af126, transparent);
     color:#ffd400;
@@ -100,10 +106,12 @@
 
     .btn-up {
         background:#17b96b;
+        border-bottom: 3px solid #04723d;
     }
 
     .btn-down {
         background:#f038f0;
+        border-bottom:3px solid #971097;
     }
 
     &.finished {
