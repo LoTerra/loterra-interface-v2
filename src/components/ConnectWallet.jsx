@@ -1,11 +1,9 @@
-import React, { useState, useEffect, useMemo, useRef } from 'react'
+import React, { useState, useEffect, useMemo } from 'react'
 import axios from 'axios'
 import { LCDClient, WasmAPI } from '@terra-money/terra.js'
 import {
     useWallet,
-    WalletStatus,
     useConnectedWallet,
-    ConnectType,
 } from '@terra-money/wallet-provider'
 import {
     Wallet,
@@ -13,17 +11,11 @@ import {
     UserCircle,
     Trophy,
     Power,
-    List,
-    Check,
-    X,
-    Ticket,
-    Coin,
-    Bank,
+    Check
 } from 'phosphor-react'
 import numeral from 'numeral'
 import UserModal from './UserModal'
 import { useStore } from '../store'
-import { Link } from '@reach/router'
 // let useWallet = {}
 // if (typeof document !== 'undefined') {
 //     useWallet = require('@terra-money/wallet-provider').useWallet
@@ -91,6 +83,21 @@ export default function ConnectWallet() {
             type: 'setBlockHeight',
             message: latestBlocks.data.block.header.height,
         })
+
+
+        // VALKYRIE START
+        const vkrRef = new URLSearchParams(window.location.search);
+        const referrerCode = vkrRef.get('vkr')
+        if(referrerCode){
+            dispatch({
+                type: 'setVkrReferrer',
+                message: {status:true,code:referrerCode},
+            })
+
+            console.log('vkr referrer detected')
+        }
+
+        // VALKYRIE END
 
         const contractConfigInfo = await api.contractQuery(
             state.loterraContractAddress,
@@ -235,8 +242,8 @@ export default function ConnectWallet() {
         const pool_info = await api.contractQuery(state.loterraPoolAddress, {
             pool: {},
         })
-        console.log('pool_info')
-        console.log(pool_info)
+        //console.log('pool_info')
+        // console.log(pool_info)
         dispatch({ type: 'setPoolInfo', message: pool_info })
     }
 
@@ -267,7 +274,7 @@ export default function ConnectWallet() {
         // Code for winner detector
         try {
             let type = false
-            console.log('checking for winner')
+            //console.log('checking for winner')
             // Query all winners for most recent draw
 
             //Test purposes
@@ -286,7 +293,7 @@ export default function ConnectWallet() {
             })
 
             dispatch({ type: 'setYouWon', message: type })
-            console.log(state.youWon)
+            // console.log(state.youWon)
         } catch (e) {
             console.log(e)
         }
@@ -306,7 +313,7 @@ export default function ConnectWallet() {
                 if (connectedWallet) {
                     lcd.bank.balance(connectedWallet.walletAddress).then(([coins]) => {
                         coins = coins;
-                        console.log(coins ? coins.get('uusd').amount / 1000000 : '')
+                        // console.log(coins ? coins.get('uusd').amount / 1000000 : '')
                         const ustBalance = coins.get('uusd').toData()
 
                         setBank(ustBalance.amount / 1000000)
@@ -443,7 +450,7 @@ export default function ConnectWallet() {
                     message: claimsLP.claims,
                 })
 
-                checkIfWon()
+
 
                 alteTokens = await api.contractQuery(
                     state.alteredContractAddress,
@@ -456,6 +463,14 @@ export default function ConnectWallet() {
 
                 // Better to keep it at the end
                 // This one can generate an error on try catch if no combination played
+
+                //Store coins global state
+                dispatch({ type: 'setAllNativeCoins', message: coins })
+                // console.log(coins)
+                let alte = parseInt(alteTokens.balance) / 1000000
+                //  console.log(alte)
+                setAlteBank(numeral(alte).format('0,0.00'))
+
                 // Because if error others query will not be triggered right after the error
                 const combinations = await api.contractQuery(
                     state.loterraContractAddress,
@@ -465,24 +480,25 @@ export default function ConnectWallet() {
                             address: connectedWallet.walletAddress,
                         },
                     },
-                )
-                dispatch({ type: 'setAllCombinations', message: combinations })
+                ).then((a) => {
+                    dispatch({ type: 'setAllCombinations', message: a })
+                }).catch(error => {
+                    console.log('no combinations found')
+                })
+
+
             } catch (e) {
                 console.log(e)
             }
 
-            //Store coins global state
-            dispatch({ type: 'setAllNativeCoins', message: coins })
-            // console.log(coins)
-            let alte = parseInt(alteTokens.balance) / 1000000
-            console.log(alte)
+
             // let uusd = coins.filter((c) => {
             //     return c.denom === 'uusd'
             // })
             // let ust = parseInt(uusd) / 1000000
             // setBank(numeral(ust).format('0,0.00'))
 
-            setAlteBank(numeral(alte).format('0,0.00'))
+
             // connectTo("extension")
         } else {
             setBank(null)
@@ -528,22 +544,33 @@ export default function ConnectWallet() {
 
 
     useEffect(() => {
-        if (!state.config.lottery_counter) {
-            baseData()
-        }
-        if (connectedWallet) {
-            contactBalance()
-        }
+        baseData()
     }, [
-        connectedWallet,
+        // connectedWallet,
         // lcd,
         // state.config,
         // state.allRecentWinners,
         // state.youWon,
     ])
 
+    useEffect(() => {
+        if (connectedWallet && !state.wallet.walletAddress) {
+            contactBalance()
+        }
+    },[connectedWallet])
+
+
+    //useEffect for your won function
+
+    useEffect(() => {
+        if(state.allRecentWinners.length > 0 && connectedWallet && connectedWallet.walletAddress)    {
+            checkIfWon()
+        }
+    },[state.allRecentWinners])
+
     return (
         <>
+
             {!connected && (
                 <>
                     <div className="btn-group">
