@@ -249,8 +249,8 @@ export default () => {
 
                 return(
                 <>
-                    <Clock size={32} style={{position:'relative',top:-10, marginRight:5}} weight={'bold'}/>
-                <span className="fs-1 fw-bold">{format_message}</span>
+                    <Clock size={32} style={{position:'relative', top:'-8px'}} className="d-none d-md-inline-block" weight={'bold'}/>
+                    <h2 className="fs-2 fw-bold d-inline-block mb-0">{format_message}</h2>
                 </>
                 )
             }
@@ -342,52 +342,42 @@ export default () => {
         
                 <div className="row mb-2">
                     <div className="col-6 col-md-4 order-2 order-md-1 text-start">
-                        <div
-                            className="w-100"
-                            style={{
-                                background: '#0b012499',
-                                color: '#ffffff',
-                                marginLeft: '7px',
-                                borderRadius: 20,
-                                padding: 15,
-                                position: 'relative',
-                                top: '-2px',
-                            }}
-                        >
-                            <div className="row">
-                                <div className="col-2 col-md-3 d-flex h-100 text-center d-none d-md-inline-block">
-                                <img
-                                src="/terra-luna-Logo.png"
-                                className="img-fluid align-self-center"
-                                style={{width:130}}
-                            />
-                                </div>
-                                <div className="col-10 col-md-6 d-flex h-100 text-start luna-price-card">
-                                    <div className="align-self-center w-100">
-                                        <p className="mb-0 text-normal text-muted">
-                                        Luna/UST Price
-                                        </p>
-                                    <h2 className={'fs-1 fw-bold mb-0'}>${numeral(lunaPrice).format('0,0.000')}</h2>
-                                    </div>
-                                </div>
-                            </div>
-                           
-                           
+                    <div className="card lota-card">
+                        <div className="card-body">
+                        <div className="row">
+                      
+                      <div className="col-2 col-md-3 d-flex h-100 text-center d-none d-md-inline-block">
+                      <img
+                      src="/terra-luna-Logo.png"
+                      style={{maxWidth:'57px'}}
+                      className="img-fluid align-self-center"
+                  />
+                      </div>
+                      <div className="col-10 col-md-6 d-flex h-100 text-start">
+                       
+                          <div className="align-self-center w-100">
+                              <p className="mb-0 text-normal text-muted card-label">
+                              Luna/UST Price
+                              </p>
+                          <h2 className={'fs-2 fw-bold mb-0'}>${numeral(lunaPrice).format('0,0.000')}</h2>
+                          </div>
+                          </div>
+                      </div>
+                        </div>
+
                         </div>
                     </div>
-                    <div className="col-6 col-md-4 order-3 order-md-2 d-flex text-center countdown-card">
-                <div className="align-self-center w-100 mb-0 text-white"
-                    style={{
-                        background: '#0b012499',
-                        borderRadius: 20,
-                        padding: 15
-                    }}
-                >
-                    <p className="mb-0 text-normal text-muted">
+                    <div className="col-6 col-md-4 order-3 order-md-2 text-center">
+                <div className="card lota-card">
+                    <div className="card-body">
+                    <div className="align-self-center w-100 mb-0 text-white">
+                    <p className="mb-0 text-normal text-muted card-label">
                     Round ends in
                     </p>
                     
                     {state.spaceWagerCurrentTimeRound && formatTime() || "00:00"}
+                </div>
+                    </div>
                 </div>
             </div>
                     <div className="col-12 col-md-4 text-center text-md-end order-1 order-md-2 position-relative">

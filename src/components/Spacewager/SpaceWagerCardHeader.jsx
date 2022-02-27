@@ -53,7 +53,7 @@ export default function SpaceWagerCardHeader(props) {
 
     return (
         <>
-        <div className="card-header p-3">
+        <div className={'card-header p-3' + (isNextPrediction ? ' active' : '')}>
                         {isPastPrediction && obj.success == null &&
                             <div className="row">
                                 <div className="col-6 text-start">
