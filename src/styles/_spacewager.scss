@@ -20,6 +20,12 @@
 
 }
 
+.spinner-sm {
+    width:1rem;
+    height:1rem;
+    border-width: 0.15em;
+}
+
 .spacewager-beta {
     background:linear-gradient(45deg, #f13af126, transparent);
     color:#ffd400;
@@ -59,6 +65,12 @@
     background: #16073e;
 }
 
+.lota-card {
+    .card-label {
+        font-size:13px;
+    }
+}
+
 .spacewager-card {
     color:#fff;
     text-align:center;
@@ -68,6 +80,12 @@
     border-bottom-left-radius: 20px;     
     border-bottom-right-radius: 20px;
     opacity:1;     
+    overflow:hidden;
+    .card-header {
+        &.active {
+            background: linear-gradient(45deg, #4d2bab, #2e0e85);
+        }
+    }
     .card-content {
         border: 3px solid rgba($color: #6B6B6B, $alpha: 0.37);
         color: #ffffff;
@@ -100,10 +118,12 @@
 
     .btn-up {
         background:#17b96b;
+        border-bottom: 3px solid #04723d;
     }
 
     .btn-down {
         background:#f038f0;
+        border-bottom:3px solid #971097;
     }
 
     &.finished {

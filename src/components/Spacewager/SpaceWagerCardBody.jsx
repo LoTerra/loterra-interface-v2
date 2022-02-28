@@ -167,7 +167,7 @@ export default function SpaceWagerCardBody(props) {
             
         <div className="row">            
             <div className="col-12 text-start">
-                <p className="my-2 fs-6 mb-0">Last price:</p>
+                <p className="my-1 mb-0 small text-muted">Last price</p>
             </div>
             <div className="col-6 text-start">
                 <p className="mb-0 fw-bold fs-3"
@@ -190,20 +190,20 @@ export default function SpaceWagerCardBody(props) {
         
         <div className="row">
             <div className="col-6 text-start">
-                <p className="my-2 fw-regular fs-6 mb-0">Locked Price:</p>                    
+                <p className="my-1 fw-regular small mb-0">Locked Price:</p>                    
             </div>
             <div className="col-6 text-end">
-                <p className="my-2 fw-bold fs-6 mb-0">
+                <p className="my-1 fw-regular small mb-0">
                     ${format_number(obj.locked_price / 1000000, '0.8em', '0.8em')}</p>
             </div>
         </div>
         
         <div className="row">
             <div className="col-6 text-start">
-                <p className="my-2 fw-regular fs-6 mb-0">Prizes Pool:</p>
+                <p className="mb-2 fw-bold fs-6 mb-0">Prize Pool:</p>
             </div>
             <div className="col-6 text-end">
-                <p className="my-2 fw-bold fs-6 mb-0">{numeral((parseInt(obj['up']) + parseInt(obj['down']))/ 1_000_000 ).format('0,0.00')} {' '} UST</p>
+                <p className="mb-2 fw-bold fs-6 mb-0">{numeral((parseInt(obj['up']) + parseInt(obj['down']))/ 1_000_000 ).format('0,0.00')} {' '} UST</p>
             </div>
         </div>  
                     
@@ -252,7 +252,7 @@ export default function SpaceWagerCardBody(props) {
                       :
                   <div className="row">
                       <div className="col-6 text-start">
-                          <p className="my-2 fw-regular fs-6 mb-0">Prizes Pool:</p>
+                          <p className="my-2 fw-bold fs-6 mb-0">Prize Pool:</p>
                       </div>
                       <div className="col-6 text-end">
                           {!state.isUserMakingPrediction && (

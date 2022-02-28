@@ -138,8 +138,12 @@ export default function SpaceWagerCard(props) {
                         round: round
                     }
                 }
-            );
-            setPersonalBidInfo(personal_bid_info)
+            ).then(a => {
+                setPersonalBidInfo(a)
+            }).catch(error => {
+                console.log('no round results')
+            });
+            
         } catch(e) {
             console.log(e)
         }
@@ -196,12 +200,15 @@ export default function SpaceWagerCard(props) {
                         <div className="btn-content" style={{ color: upTextColor()}}>
                             UP
                             <span className="small fw-normal d-block">
+                                <span className="fw-bold">
                                 {
                                     isNextPrediction ?
+
                                         state.latestPrediction.up == '0' && state.latestPrediction.down != '0' ? '1.00' : state.latestPrediction.up != '0' && state.latestPrediction.down == '0' || state.latestPrediction.up == '0' && state.latestPrediction.down == '0'? '0.00' : numeral(parseInt(state.latestPrediction.down) / parseInt(state.latestPrediction.up)).format("0,0.00")
                                         : bettingOddsOnUp == '0' && bettingOddsOnDown != '0' ? '1.00' : bettingOddsOnUp != '0' && bettingOddsOnDown == '0' || bettingOddsOnUp == '0' && bettingOddsOnDown == '0'? '0.00' : numeral(parseInt(bettingOddsOnDown) / parseInt(bettingOddsOnUp)).format("0,0.00")
-                                }
-                                x Payout
+                                }x
+                                </span> Payout
+                                 
 
                             </span>
                         </div>
@@ -235,12 +242,12 @@ export default function SpaceWagerCard(props) {
                             {downButtonShape()}
                             <div className="btn-content" style={{ color: downTextColor()}}>
                             <span className="small d-block fw-normal">
-                                {
+                                <span className="fw-bold">{
                                     isNextPrediction ?
                                         state.latestPrediction.down == '0' && state.latestPrediction.up != '0' ? '1.00' : state.latestPrediction.down != '0' && state.latestPrediction.up == '0' || state.latestPrediction.down == '0' && state.latestPrediction.up == '0'? '0.00' : numeral(parseInt(state.latestPrediction.up) / parseInt(state.latestPrediction.down)).format("0,0.00")
                                         : bettingOddsOnDown  == '0' && bettingOddsOnUp != '0' ? '1.00' : bettingOddsOnDown != '0' && bettingOddsOnUp == "0" || bettingOddsOnDown == '0' && bettingOddsOnUp == '0'? '0.00' : numeral(parseInt(bettingOddsOnUp) / parseInt(bettingOddsOnDown)).format("0,0.00")
 
-                                }x Payout
+                                }x</span> Payout
                             </span>
                             DOWN
                             </div>
@@ -263,7 +270,7 @@ export default function SpaceWagerCard(props) {
                             </span>
                                 
                             </div>
-                            <div className="col-md-6 mt-2">
+                            <div className="col-6 mt-2">
                                 <strong
                                     style={{color: '#17b96b'}}
                                 >
@@ -271,7 +278,7 @@ export default function SpaceWagerCard(props) {
                                 </strong>
                                 <p>{numeral(personalBidInfo.up / 1000000).format('0,0')} UST</p>
                             </div>
-                            <div className="col-md-6 mt-2">
+                            <div className="col-6 mt-2">
                                 <strong
                                     style={{
                                         color: '#f038f0'
