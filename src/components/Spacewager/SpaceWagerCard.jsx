@@ -203,8 +203,9 @@ export default function SpaceWagerCard(props) {
                                 <span className="fw-bold">
                                 {
                                     isNextPrediction ?
-                                        state.latestPrediction.up == '0' && state.latestPrediction.down != '0' ? 1 : state.latestPrediction.up != '0' && state.latestPrediction.down == '0' || state.latestPrediction.up == '0' && state.latestPrediction.down == '0'? 0 : numeral(parseInt(state.latestPrediction.down) / parseInt(state.latestPrediction.up)).format("0,0.00")
-                                        : bettingOddsOnUp == '0' && bettingOddsOnDown != '0' ? 1 : bettingOddsOnUp != '0' && bettingOddsOnDown == '0' || bettingOddsOnUp == '0' && bettingOddsOnDown == '0'? 0 : numeral(parseInt(bettingOddsOnDown) / parseInt(bettingOddsOnUp)).format("0,0.00")
+
+                                        state.latestPrediction.up == '0' && state.latestPrediction.down != '0' ? '1.00' : state.latestPrediction.up != '0' && state.latestPrediction.down == '0' || state.latestPrediction.up == '0' && state.latestPrediction.down == '0'? '0.00' : numeral(parseInt(state.latestPrediction.down) / parseInt(state.latestPrediction.up)).format("0,0.00")
+                                        : bettingOddsOnUp == '0' && bettingOddsOnDown != '0' ? '1.00' : bettingOddsOnUp != '0' && bettingOddsOnDown == '0' || bettingOddsOnUp == '0' && bettingOddsOnDown == '0'? '0.00' : numeral(parseInt(bettingOddsOnDown) / parseInt(bettingOddsOnUp)).format("0,0.00")
                                 }x
                                 </span> Payout
                                  
@@ -243,8 +244,8 @@ export default function SpaceWagerCard(props) {
                             <span className="small d-block fw-normal">
                                 <span className="fw-bold">{
                                     isNextPrediction ?
-                                        state.latestPrediction.down == '0' && state.latestPrediction.up != '0' ? 1 : state.latestPrediction.down != '0' && state.latestPrediction.up == '0' || state.latestPrediction.down == '0' && state.latestPrediction.up == '0'? 0 : numeral(parseInt(state.latestPrediction.up) / parseInt(state.latestPrediction.down)).format("0,0.00")
-                                        : bettingOddsOnDown  == '0' && bettingOddsOnUp != '0' ? 1 : bettingOddsOnDown != '0' && bettingOddsOnUp == "0" || bettingOddsOnDown == '0' && bettingOddsOnUp == '0'? 0 : numeral(parseInt(bettingOddsOnUp) / parseInt(bettingOddsOnDown)).format("0,0.00")
+                                        state.latestPrediction.down == '0' && state.latestPrediction.up != '0' ? '1.00' : state.latestPrediction.down != '0' && state.latestPrediction.up == '0' || state.latestPrediction.down == '0' && state.latestPrediction.up == '0'? '0.00' : numeral(parseInt(state.latestPrediction.up) / parseInt(state.latestPrediction.down)).format("0,0.00")
+                                        : bettingOddsOnDown  == '0' && bettingOddsOnUp != '0' ? '1.00' : bettingOddsOnDown != '0' && bettingOddsOnUp == "0" || bettingOddsOnDown == '0' && bettingOddsOnUp == '0'? '0.00' : numeral(parseInt(bettingOddsOnUp) / parseInt(bettingOddsOnDown)).format("0,0.00")
 
                                 }x</span> Payout
                             </span>
