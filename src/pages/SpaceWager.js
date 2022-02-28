@@ -360,7 +360,7 @@ export default () => {
                                 <div className="col-10 col-md-6 d-flex h-100 text-start luna-price-card">
                                     <div className="align-self-center w-100">
                                         <p className="mb-0 text-normal text-muted">
-                                        Luna/UST Price
+                                        LUNA/UST Price
                                         </p>
                                     <h2 className={'fs-1 fw-bold mb-0'}>${numeral(lunaPrice).format('0,0.000')}</h2>
                                     </div>
