@@ -303,14 +303,10 @@ export default () => {
         getSpacewagerPredictions()
     },[spacewagerState.round, state.spaceWagerCurrentRound, state.latestPrediction])
 
-    useEffect(()=>{
-        let price = lunaPrice;
-        console.log("past price")
-        setTimeout(()=>{
-            setLunaPricePast(price)
-        }, 1000)
 
-        console.log(price)
+
+    useEffect(()=>{
+        setLunaPricePast(lunaPrice)
     }, [lunaPrice])
 
     return (

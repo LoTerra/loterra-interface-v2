@@ -6,7 +6,7 @@ import {MsgExecuteContract} from "@terra-money/terra.js";
 import SpaceWagerInfoMessage from './SpaceWagerInfoMessage';
 import { ArrowLeft } from 'phosphor-react';
 import toast, { Toaster } from 'react-hot-toast';
-
+import CountUp from 'react-countup';
 
 export default function SpaceWagerCardBody(props) {
     const { state, dispatch } = useStore()
@@ -149,6 +149,14 @@ export default function SpaceWagerCardBody(props) {
     //         getPersonalBids(obj[0])
     //     }
     // },[isLivePrediction, isPastPrediction, isNextPrediction])
+    useEffect(()=>{
+        let price = lunaPrice;
+        setTimeout(()=>{
+            setLunaPricePast(price)
+        }, 1000)
+
+        console.log(price)
+    }, [lunaPrice])
 
     return (
  <>
