@@ -21,6 +21,7 @@ import Pusher from 'pusher-js';
 import SpaceWagerIcon from '../components/Spacewager/SpaceWagerIcon';
 import { Toaster } from 'react-hot-toast';
 import Footer from '../components/Footer';
+import CountUp from 'react-countup';
 import SpaceWagerIndividualStats from '../components/Spacewager/SpaceWagerIndividualStats';
 
 // Enable pusher logging - don't include this in production
@@ -45,6 +46,7 @@ export default () => {
     const [predictions,setPredictions] = useState([]);
 
     const [lunaPrice, setLunaPrice] = useState(0)
+    const [lunaPricePast, setLunaPricePast] = useState(0)
     const [lunaLockedPrice, setLunaLockedPrice] = useState(0)
     const [lunaPriceVariation, setLunaPriceVariation] = useState(0)
     const [lunaStatus, setLunaStatus] = useState('')
@@ -57,6 +59,7 @@ export default () => {
     const [bettingOddsOnDown, setBettingOdssOnDown] = useState(0)
     const [currentUp, setCurrentUp] = useState(0)
     const [currentDown, setCurrentDown] = useState(0)
+
 
     //Testnet settings now api
 
@@ -287,6 +290,7 @@ export default () => {
         is_equal(state.latestPrediction)
     }, [state.latestPrediction])
 
+
     //Change on lunaprice state change
     useEffect(() =>  {       
       // if(config) {
@@ -298,6 +302,16 @@ export default () => {
 
         getSpacewagerPredictions()
     },[spacewagerState.round, state.spaceWagerCurrentRound, state.latestPrediction])
+
+    useEffect(()=>{
+        let price = lunaPrice;
+        console.log("past price")
+        setTimeout(()=>{
+            setLunaPricePast(price)
+        }, 1000)
+
+        console.log(price)
+    }, [lunaPrice])
 
     return (
         <>
@@ -359,7 +373,9 @@ export default () => {
                               <p className="mb-0 text-normal text-muted card-label">
                               Luna/UST Price
                               </p>
-                          <h2 className={'fs-2 fw-bold mb-0'}>${numeral(lunaPrice).format('0,0.000')}</h2>
+                          <h2 className={'fs-2 fw-bold mb-0'}>
+                              $<CountUp start={lunaPricePast} end={lunaPrice} decimals="3"/>
+                              </h2>
                           </div>
                           </div>
                       </div>
@@ -463,7 +479,7 @@ export default () => {
                 </div>
             </div>
         <div>
-            <SpaceWagerIndividualStats/>
+            {/*<SpaceWagerIndividualStats/>*/}
             <SpaceWagerGameView/>
             <Toaster
          position="top-center"
