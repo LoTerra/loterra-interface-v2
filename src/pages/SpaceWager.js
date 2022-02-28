@@ -1,5 +1,5 @@
 import { LCDClient, WasmAPI } from '@terra-money/terra.js';
-import React, { createRef, useEffect,useMemo,useState } from 'react'
+import React, { createRef, useEffect,useMemo,useState, useRef } from 'react'
 import numeral from 'numeral';
 import { useStore } from '../store'
 import SpaceWagerCard from '../components/Spacewager/SpaceWagerCard';
@@ -26,7 +26,13 @@ import SpaceWagerIndividualStats from '../components/Spacewager/SpaceWagerIndivi
 
 // Enable pusher logging - don't include this in production
 // Pusher.logToConsole = true;
-
+function usePrevious(value) {
+    const ref = useRef();
+    useEffect(() => {
+        ref.current = value;
+    }, [value]);
+    return ref.current;
+}
 
 export default () => {
 
@@ -46,7 +52,8 @@ export default () => {
     const [predictions,setPredictions] = useState([]);
 
     const [lunaPrice, setLunaPrice] = useState(0)
-    const [lunaPricePast, setLunaPricePast] = useState(0)
+    let lunaPricePast = usePrevious(lunaPrice)
+
     const [lunaLockedPrice, setLunaLockedPrice] = useState(0)
     const [lunaPriceVariation, setLunaPriceVariation] = useState(0)
     const [lunaStatus, setLunaStatus] = useState('')
@@ -175,36 +182,6 @@ export default () => {
 
     }
 
-    const getLunaPrice = async (price) => {
-        try {
-            const contractConfigInfo = await api.contractQuery(config.pool_address, {
-                pool: {},
-            }) 
-            let ust = parseInt(contractConfigInfo.assets[1].amount)
-            let luna = parseInt(contractConfigInfo.assets[0].amount)
-            
-            let luna_base_price = luna / ust
-            if(parseFloat(luna_base_price) != parseFloat(price)){
-                let status = ''
-                if(numeral(luna_base_price).format('0,0.000') > numeral(price).format('0,0.000')){
-                    status = 'up'
-                } else if(numeral(luna_base_price).format('0,0.000') < numeral(price).format('0,0.000')){
-                    status = 'down'
-                }
-                setLunaPrice(luna_base_price)
-                setLunaStatus(status)
-                setLunaPriceCountdown(lunaPriceCounter + 1)
-            } else {
-                setLunaPrice(luna_base_price)
-                setLunaStatus('')
-            }
-            setLunaLockedPrice(56.199)
-            setLunaPriceVariation(getVariation(lunaLockedPrice, luna_base_price))
-        } catch(e){
-            console.log(e)
-        }
-    }
-
     function is_equal(prediction){
         if (state.latestPrediction.up != parseInt(state.previousPrediction.up) || state.latestPrediction.down != parseInt(state.previousPrediction.down)){
             dispatch({ type: 'setPreviousPrediction', message: prediction })
@@ -303,15 +280,6 @@ export default () => {
         getSpacewagerPredictions()
     },[spacewagerState.round, state.spaceWagerCurrentRound, state.latestPrediction])
 
-    useEffect(()=>{
-        let price = lunaPrice;
-        console.log("past price")
-        setTimeout(()=>{
-            setLunaPricePast(price)
-        }, 1000)
-
-        console.log(price)
-    }, [lunaPrice])
 
     return (
         <>

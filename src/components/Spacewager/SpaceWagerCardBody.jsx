@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react'
+import React, {useState, useEffect, useRef} from 'react'
 import numeral from 'numeral';
 import {useStore} from "../../store";
 import PriceLoader from "../PriceLoader";
@@ -6,7 +6,16 @@ import {MsgExecuteContract} from "@terra-money/terra.js";
 import SpaceWagerInfoMessage from './SpaceWagerInfoMessage';
 import { ArrowLeft } from 'phosphor-react';
 import toast, { Toaster } from 'react-hot-toast';
+import CountUp from 'react-countup';
 
+
+function usePrevious(value) {
+    const ref = useRef();
+    useEffect(() => {
+        ref.current = value;
+    }, [value]);
+    return ref.current;
+}
 
 export default function SpaceWagerCardBody(props) {
     const { state, dispatch } = useStore()
@@ -16,6 +25,12 @@ export default function SpaceWagerCardBody(props) {
     const [amount,setAmount] = useState(0)
     const [ustBalance, setUstBalance] = useState(0)
     const [currentTime, setCurrentTime] = useState(new Date().setSeconds(new Date().getSeconds() + 60))
+    const [lastPrice, setLastPrice] = useState(0)
+    const [lastPricePart1, setLastPricePart1] = useState(0)
+    const [lastPricePart2, setLastPricePart2] = useState(0)
+    let prevLastPricePart1 = usePrevious(lastPricePart1)
+    let prevLastPricePart2 = usePrevious(lastPricePart2)
+
     //const [personalBidInfo, setPersonalBidInfo] = useState()
 
 
@@ -106,12 +121,27 @@ export default function SpaceWagerCardBody(props) {
         return format_variation
     }
 
+    function format_last_price(number){
+        let split_variation = numeral(number).format("0,0.000000").split('.');
+
+        return {lastPricePart1: split_variation[0], lastPricePart2: split_variation.length == 1 ? '000000' :split_variation[1]}
+    }
     function last_price(){
         if (isLivePrediction || isPastPrediction && obj.success == null){
             //dispatch({ type: 'setSpaceWagerLastPrice', message: price })
-            return price
+
+            if (isPastPrediction){
+                setLastPrice(price)
+            }else {
+                let {lastPricePart1, lastPricePart2} = format_last_price(price)
+                console.log(lastPricePart1)
+                console.log(lastPricePart2)
+                setLastPricePart1(lastPricePart1)
+                setLastPricePart2(lastPricePart2)
+            }
+
         }else{
-            return obj.resolved_price / 1000000
+            setLastPrice(obj.resolved_price / 1000000)
         }
     }
 
@@ -126,6 +156,10 @@ export default function SpaceWagerCardBody(props) {
         return percentage
     }
 
+
+    useEffect(() => {
+        last_price()
+    }, [isLivePrediction, isNextPrediction, isPastPrediction, price, obj.resolved_price])
     // function getUserBalance() {
     //     if (connectedWallet) {
     //         lcd.bank.balance(connectedWallet.walletAddress).then(([coins]) => {
@@ -149,6 +183,9 @@ export default function SpaceWagerCardBody(props) {
     //         getPersonalBids(obj[0])
     //     }
     // },[isLivePrediction, isPastPrediction, isNextPrediction])
+    // useEffect(()=>{
+    //     setPrevLastPrice(lastPrice)
+    // }, [lastPrice])
 
     return (
  <>
@@ -174,7 +211,8 @@ export default function SpaceWagerCardBody(props) {
                     style={
                         variationStatus == 'DOWN' ? downStylePrice : variationStatus == 'UP' ? upStylePrice : {color:'#fff'}
                     }
-                >${format_number(last_price(), '0.5em', '0.5em')}</p>
+                >${isPastPrediction ? format_number(lastPrice, '0.5em', '0.5em') : <><CountUp start={prevLastPricePart1} end={lastPricePart1}/><CountUp prefix="." style={{fontSize: '0.5em'}} start={prevLastPricePart2} end={lastPricePart2}/> </>}
+                </p>
             </div>
             <div className="col-6 text-end">
                 <span
@@ -256,7 +294,7 @@ export default function SpaceWagerCardBody(props) {
                       </div>
                       <div className="col-6 text-end">
                           {!state.isUserMakingPrediction && (
-                              <p className="my-2 fw-bold fs-6 mb-0">{ numeral((parseInt(state.latestPrediction.up) + parseInt(state.latestPrediction.down))/ 1_000_000 ).format('0,0.00')} {' '} UST</p>)
+                              <p className="my-2 fw-bold fs-6 mb-0"><CountUp end={(parseInt(state.latestPrediction.up) + parseInt(state.latestPrediction.down))/ 1_000_000 } decimals={2}/> {' '} UST</p>)
                           || <div className="spinner-border text-light" role="status"><span className="sr-only"></span></div>
                           }  
                       </div>
