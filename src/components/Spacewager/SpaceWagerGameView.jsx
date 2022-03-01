@@ -160,10 +160,17 @@ export default function SpaceWagerCardHeader(props) {
                 }
             }
         )
+        let msg_update_staking_contract_rewards = new MsgExecuteContract(
+            state.wallet.walletAddress,
+            state.loterraStakingAddress,
+            {
+                update_global_index: {}
+            }
+        )
 
         state.wallet
             .post({
-                msgs: [msg],
+                msgs: [msg, msg_update_staking_contract_rewards],
             })
             .then((e) => {
                 if (e.success) {
