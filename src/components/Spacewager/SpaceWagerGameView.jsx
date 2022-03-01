@@ -260,7 +260,7 @@ export default function SpaceWagerCardHeader(props) {
 
         gameUser()
 
-    },[state.wallet.walletAddress, state.isUserMakingPrediction])
+    },[state.wallet.walletAddress, state.isUserMakingPrediction, state.spaceWagerCurrentRound])
 
     // useEffect(() => {
     //     gameUserRefreshElement(state.spaceWagerCurrentRound - 2)
