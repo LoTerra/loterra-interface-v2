@@ -335,15 +335,33 @@ export default () => {
                       className="img-fluid align-self-center"
                   />
                       </div>
-                      <div className="col-10 col-md-6 d-flex h-100 text-start">
+                      <div className="col-10 col-md-8 d-flex h-100 text-start">
                        
                           <div className="align-self-center w-100">
+                          <small className="d-inline-block"
+                          style={{
+                              padding:'5px 10px',
+                              background:'#5a42fb',
+                              borderRadius:'100px',
+                              fontSize:'12px'
+                          }}
+                          >
+                              <svg viewBox="0 0 41 32" focusable="false" class="chakra-icon css-uwfvln" href="https://astroport.fi/"
+                              style={{
+                                width: '20.5px', height: '16px', display: 'inline-block', lineHeight: '1em', marginRight:'7px'
+                              }}
+                              >
+                                  <path d="M24.3958 21.0859V21.0771C22.053 21.0302 20.1681 19.1548 20.1681 16.8442C20.1681 19.1499 18.29 21.0224 15.9541 21.0762V21.0859C18.29 21.1397 20.1681 23.0122 20.1681 25.3179C20.1671 23.0083 22.053 21.1329 24.3958 21.0859Z" fill="currentColor"></path><path d="M23.5293 -0.00012207H17.0028C16.1611 -0.00012207 15.3906 0.471177 15.0048 1.22213L0.1428 30.1503C-0.289706 30.9932 0.319115 31.9974 1.264 31.9974H8.76857C9.618 31.9974 10.3944 31.5173 10.7762 30.7566L14.7681 22.8041C15.3107 21.7227 15.302 20.4457 14.7438 19.372L11.8711 13.8455C11.0899 12.3426 12.177 10.5435 13.8661 10.5454L26.6806 10.5591C28.3697 10.5611 29.4529 12.3622 28.6687 13.8631L25.4357 20.0546C25.0986 20.6989 25.0928 21.4675 25.4191 22.1177L29.7558 30.7576C30.1377 31.5183 30.9141 31.9984 31.7635 31.9984H39.2681C40.213 31.9984 40.8218 30.9942 40.3893 30.1513L25.5272 1.22213C25.1415 0.471177 24.37 -0.00012207 23.5293 -0.00012207Z" fill="currentColor"></path>
+                              </svg>                                  
+                                   <span  style={{color:'#fff'}}>Live price from <a href="https://astroport.fi/" style={{color:'#fff',textDecoration:'none',fontWeight:'700'}} target="_blank">Astroport</a></span>
+                              </small>
                               <p className="mb-0 text-normal text-muted card-label">
                               Luna/UST Price
                               </p>
                           <h2 className={'fs-2 fw-bold mb-0'}>
                               $<CountUp start={lunaPricePast} end={lunaPrice} decimals="3"/>
                               </h2>
+                             
                           </div>
                           </div>
                       </div>
