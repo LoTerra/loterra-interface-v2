@@ -324,17 +324,16 @@ export default () => {
         
                 <div className="row mb-2">
                     <div className="col-6 col-md-4 order-2 order-md-1 text-start">
-                    <div className="card lota-card">
-                        <div className="card-body">
-                        <div className="row">
-                      
-                      <div className="col-2 col-md-3 d-flex h-100 text-center d-none d-md-inline-block">
-                      <img
-                      src="/terra-luna-Logo.png"
-                      style={{maxWidth:'57px'}}
-                      className="img-fluid align-self-center"
+                        <div className="card lota-card">
+                            <div className="card-body">
+                                <div className="row">
+                                    <div className="col-2 col-md-3 d-flex h-100 text-center d-none d-md-inline-block">
+                                        <img
+                                        src="/terra-luna-Logo.png"
+                                        style={{maxWidth:'57px'}}
+                                        className="img-fluid align-self-center"
                   />
-                      </div>
+                                    </div>
                       <div className="col-10 col-md-6 d-flex h-100 text-start">
                        
                           <div className="align-self-center w-100">
