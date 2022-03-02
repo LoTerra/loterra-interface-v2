@@ -57,7 +57,7 @@ export default function SpaceWagerCardHeader(props) {
                         {isPastPrediction && obj.success == null &&
                             <div className="row">
                                 <div className="col-6 text-start">
-                                <div class="spinner-border text-white me-2 spinner-sm d-inline-block" role="status">
+                                <div className="spinner-border text-white me-2 spinner-sm d-inline-block" role="status">
                                 </div>
                                     <p className="d-inline-block mb-0">Resolving...</p>
                                 </div>

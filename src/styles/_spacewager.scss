@@ -28,7 +28,7 @@
 
 .spacewager-beta {
     background:linear-gradient(45deg, #f13af126, transparent);
-    color:#ffd400;
+    color:#ffffffad;
     font-weight:bold;
     padding:6px 10px;
     font-size:13px;
@@ -54,6 +54,21 @@
         }
     }
     
+}
+
+.luna-icon {
+    svg {
+        max-width: 100%;
+        height: auto;
+    }
+}
+
+.astroport {
+    @media(max-width:768px){
+        span {
+            font-size:10px;
+        }
+    }
 }
 
 .spacewager-notice {
@@ -134,7 +149,7 @@
 
 .docs-btn {
     @media(max-width:620px){
-        position: absolute;
+        position: absolute !important;
         right: 14px;
         top: -65px;
     }
