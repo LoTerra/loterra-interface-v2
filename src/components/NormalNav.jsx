@@ -118,6 +118,7 @@ if (typeof location !== 'undefined') {
                             </span>
                         </NavLink>
                     </li>
+                    <span className="sub-heading">Staking & DAO</span>
                     <li className="nav-item">
                         <NavLink exact 
                             to="/staking"
