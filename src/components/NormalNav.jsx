@@ -12,18 +12,20 @@ import {
     Coin,
     Bank,
     Planet,
+    FileText
 } from 'phosphor-react'
 import { Link, NavLink } from 'react-router-dom'
 
 
 export default function NormalNav() {
 //Nav link active settings
-let homeClass, stakingClass, daoClass,spaceWagerClass
+let homeClass, stakingClass, daoClass,spaceWagerClass, tokenomicsClass
 if (typeof location !== 'undefined') {
     homeClass = location.pathname === '/' ? 'active' : ''
     stakingClass = location.pathname.match(/^\/staking/) ? 'active' : ''
     daoClass = location.pathname.match(/^\/dao/) ? 'active' : ''
     spaceWagerClass = location.pathname.match(/^\/spacewager/) ? 'active' : ''
+    tokenomicsClass = location.pathname.match(/^\/tokenomics/) ? 'active' : ''
 }
     return (
         <>
@@ -154,6 +156,27 @@ if (typeof location !== 'undefined') {
                             DAO
                             <span className="item-label">
                                 Together we decide 
+                            </span>
+                        </NavLink>
+                    </li>
+                    <span className="sub-heading">Resources</span>
+                    <li className="nav-item">
+                        <NavLink exact 
+                            to="/tokenomics"
+                            className="nav-link"
+                            className={'nav-link ' + tokenomicsClass}
+                        >
+                            <FileText
+                                size={24}
+                                style={{
+                                    marginRight: '3px',
+                                    position: 'relative',
+                                    top: '-1px',
+                                }}
+                            />{' '}
+                            Tokenomics
+                            <span className="item-label">
+                                Token info
                             </span>
                         </NavLink>
                     </li>
