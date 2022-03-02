@@ -56,6 +56,21 @@
     
 }
 
+.luna-icon {
+    svg {
+        max-width: 100%;
+        height: auto;
+    }
+}
+
+.astroport {
+    @media(max-width:768px){
+        span {
+            font-size:10px;
+        }
+    }
+}
+
 .spacewager-notice {
     border: 1px solid #7a5ec740;
     padding: 5px;
@@ -134,7 +149,7 @@
 
 .docs-btn {
     @media(max-width:620px){
-        position: absolute;
+        position: absolute !important;
         right: 14px;
         top: -65px;
     }
