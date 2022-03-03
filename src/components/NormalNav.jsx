@@ -18,13 +18,16 @@ import { Link, NavLink } from 'react-router-dom'
 
 export default function NormalNav() {
 //Nav link active settings
-let homeClass, stakingClass, daoClass,spaceWagerClass
-if (typeof location !== 'undefined') {
-    homeClass = location.pathname === '/' ? 'active' : ''
-    stakingClass = location.pathname.match(/^\/staking/) ? 'active' : ''
-    daoClass = location.pathname.match(/^\/dao/) ? 'active' : ''
-    spaceWagerClass = location.pathname.match(/^\/spacewager/) ? 'active' : ''
-}
+let homeClass, stakingClass, daoClass,spaceWagerClass,dogetherClass
+useEffect(() => {
+    if (typeof location !== 'undefined') {
+        homeClass = location.pathname === '/' ? 'active' : ''
+        stakingClass = location.pathname.match(/^\/staking/) ? 'active' : ''
+        daoClass = location.pathname.match(/^\/dao/) ? 'active' : ''
+        dogetherClass = location.pathname.match(/^\/dogether/) ? 'active' : ''
+        spaceWagerClass = location.pathname.match(/^\/spacewager/) ? 'active' : ''
+    }
+},[location])
     return (
         <>
      
@@ -85,7 +88,7 @@ if (typeof location !== 'undefined') {
                     <li className="nav-item">
                         <NavLink exact 
                             to="/dogether"
-                            className="nav-link"
+                            className={'nav-link ' + dogetherClass}
                             style={{ position: 'relative' }}
                         >
                             <Trophy
