@@ -12,20 +12,22 @@ import {
     Coin,
     Bank,
     Planet,
-    FileText
+    FileText,
+    Spade
 } from 'phosphor-react'
 import { Link, NavLink } from 'react-router-dom'
 
 
 export default function NormalNav() {
 //Nav link active settings
-let homeClass, stakingClass, daoClass,spaceWagerClass, tokenomicsClass
+let homeClass, stakingClass, daoClass,spaceWagerClass, tokenomicsClass, rafflesClass
 if (typeof location !== 'undefined') {
     homeClass = location.pathname === '/' ? 'active' : ''
     stakingClass = location.pathname.match(/^\/staking/) ? 'active' : ''
     daoClass = location.pathname.match(/^\/dao/) ? 'active' : ''
     spaceWagerClass = location.pathname.match(/^\/spacewager/) ? 'active' : ''
     tokenomicsClass = location.pathname.match(/^\/tokenomics/) ? 'active' : ''
+    rafflesClass = location.pathname.match(/^\/raffles/) ? 'active' : ''
 }
     return (
         <>
@@ -65,6 +67,42 @@ if (typeof location !== 'undefined') {
                             Spacewager
                             <span className="item-label">
                                         Predict the next price
+                                    </span>
+                            <span
+                                className="badge"
+                                style={{
+                                    position: 'absolute',
+                                    right: 0,
+                                    top: '-9px',
+                                    fontSize: '10px',
+                                    lineHeight: '10px',
+                                    padding: '3px',
+                                    textTransform: 'uppercase',
+                                    color: '#10003b',
+                                    background: '#8bf6c2',
+                                }}
+                            >
+                                BETA
+                            </span>
+                        </NavLink>
+                    </li>
+                    <li className="nav-item">
+                        <NavLink exact
+                                 to="/raffles"
+                                 className="nav-link"
+                                 className={'nav-link ' + rafflesClass}
+                        >
+                            <Ticket
+                                size={24}
+                                style={{
+                                    marginRight: '3px',
+                                    position: 'relative',
+                                    top: '-1px',
+                                }}
+                            />{' '}
+                            Raffles
+                            <span className="item-label">
+                                        NFTs & Event tickets
                                     </span>
                             <span
                                 className="badge"

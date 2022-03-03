@@ -18,7 +18,8 @@ import Dogether from './pages/Dogether';
 import Dao from './pages/DAO';
 import Staking from './pages/Staking';
 import SpaceWager from './pages/SpaceWager';
-import Tokenomics from './pages/Tokenomics'
+import Tokenomics from './pages/Tokenomics';
+import Raffles from './pages/Raffles';
 
 
 let bootstrap = {}
@@ -156,6 +157,7 @@ class App extends Component {
                         <Route exact path="/staking" component={Staking} />
                         <Route exact path="/dao" component={Dao} />
                         <Route exact path="/tokenomics" component={Tokenomics} />
+                        <Route exact path="/raffles" component={Raffles} />
                         <Route render={() => <Routes/>} />
                      
                         </Switch>
