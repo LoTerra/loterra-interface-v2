@@ -60,7 +60,6 @@ export default () => {
     }
 
     function marketData(){
-        console.log(lotaPrice.assets)
         let render = (
             <tr>
                 <td className="text-center">1</td>
@@ -78,10 +77,8 @@ export default () => {
                      </> 
                 </td>
                 <td className="text-center">LOTA/UST </td>
-               
-                    <td className="text-center"> ${lotaPrice && lotaPrice.assets ? numeral(lotaPrice.assets[1].amount / lotaPrice.assets[0].amount).format('0.000') : ''}</td>
-                    <td className="text-center">{ lotaPrice && lotaPrice.assets ? numeral(lotaPrice.assets[1].amount * 2 / 1000000).format('0,0.00') : '' } UST</td>
-            
+                <td className="text-center"> ${lotaPrice && lotaPrice.assets ? numeral(lotaPrice.assets[1].amount / lotaPrice.assets[0].amount).format('0.000') : ''}</td>
+                <td className="text-center">{ lotaPrice && lotaPrice.assets ? numeral(lotaPrice.assets[1].amount * 2 / 1000000).format('0,0.00') : '' } UST</td>
             </tr>
         )
 
@@ -93,7 +90,7 @@ export default () => {
     }
 
     useEffect(() => {
-        fetchContractQuery()   
+        fetchContractQuery()  
     }, [fetchContractQuery])
 
     return (
