@@ -29,7 +29,7 @@ export default function RapidoCounter(props) {
     return (
         <>
         {expiryTimestamp > new Date() ? (
-        <span>{days.toString().padStart(2, 0)}:{hours.toString().padStart(2, 0)}:{minutes.toString().padStart(2, 0)}:{seconds.toString().padStart(2, 0)}</span>
+        <span>{days.toString().padStart(2, 0)}D {hours.toString().padStart(2, 0)}H {minutes.toString().padStart(2, 0)}M</span>
         ) : 'Expired' }
         </>
     )
