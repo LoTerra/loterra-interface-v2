@@ -16,20 +16,24 @@ import {
     Lightning
 } from 'phosphor-react'
 import { Link, NavLink } from 'react-router-dom'
+import RapidoCounter from './RapidoCounter'
 
 
 export default function NormalNav() {
 //Nav link active settings
 let homeClass, stakingClass, daoClass,spaceWagerClass, tokenomicsClass, rafflesClass,dogetherClass
-if (typeof location !== 'undefined') {
-    homeClass = location.pathname === '/' ? 'active' : ''
-    dogetherClass = location.pathname.match(/^\/dogether/) ? 'active' : ''
-    stakingClass = location.pathname.match(/^\/staking/) ? 'active' : ''
-    daoClass = location.pathname.match(/^\/dao/) ? 'active' : ''
-    spaceWagerClass = location.pathname.match(/^\/spacewager/) ? 'active' : ''
-    tokenomicsClass = location.pathname.match(/^\/tokenomics/) ? 'active' : ''
-    rafflesClass = location.pathname.match(/^\/raffles/) ? 'active' : ''
-}
+
+useEffect(() => {
+    if (typeof location !== 'undefined') {
+        homeClass = location.pathname === '/' ? 'active' : ''
+        dogetherClass = location.pathname.match(/^\/dogether/) ? 'active' : ''
+        stakingClass = location.pathname.match(/^\/staking/) ? 'active' : ''
+        daoClass = location.pathname.match(/^\/dao/) ? 'active' : ''
+        spaceWagerClass = location.pathname.match(/^\/spacewager/) ? 'active' : ''
+        tokenomicsClass = location.pathname.match(/^\/tokenomics/) ? 'active' : ''
+        rafflesClass = location.pathname.match(/^\/raffles/) ? 'active' : ''
+    }
+},[location])
 
     return (
         <>
@@ -39,7 +43,7 @@ if (typeof location !== 'undefined') {
                 </a>               
         
                     <li className="nav-item">
-                        <NavLink exact  to="/" className={'nav-link'}>
+                        <NavLink exact  to="/" className={'nav-link '}>
                             <Ticket
                                 size={24}
                                 style={{
@@ -55,8 +59,7 @@ if (typeof location !== 'undefined') {
                     
                     <li className="nav-item">
                         <NavLink exact
-                                 to="/spacewager"
-                                 className="nav-link"
+                                 to="/spacewager"       
                                  className={'nav-link ' + spaceWagerClass}
                         >
                             <Planet
@@ -160,9 +163,7 @@ if (typeof location !== 'undefined') {
                         </NavLink>
                     </li>
                     <li className="nav-item"
-                        style={{
-                            opacity: 0.5
-                        }}
+                       
                     >
                     <a className={'nav-link'}>
                         <Lightning
@@ -171,10 +172,12 @@ if (typeof location !== 'undefined') {
                                 marginRight: '3px',
                                 position: 'relative',
                                 top: '-1px',
+                                opacity:0.5
                             }}
                         />{' '}
-                        Rapido
-                        <span className="item-label">Lottery 2.0</span>
+                        <span style={{opacity:0.5}}>Rapido</span>
+                        <span className="item-label" style={{opacity:0.5}}>Lottery 2.0 </span>
+                        
                         <span
                                 className="badge"
                                 style={{
@@ -185,11 +188,11 @@ if (typeof location !== 'undefined') {
                                     lineHeight: '10px',
                                     padding: '3px',
                                     textTransform: 'uppercase',
-                                    color: '#10003b',
-                                    background: '#8bf6c2',
+                                    color: '#fff',
+                                    background: '#ff0dff',
                                 }}
                             >
-                                COMING SOON
+                                COMING SOON - <RapidoCounter expiryTimestamp={1647288000 * 1000}/>
                             </span>
                             </a>
                     </li>
