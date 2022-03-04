@@ -127,11 +127,11 @@ export default () => {
             </Head>
             <div className="w-100 py-3 py-md-5 text-center">
                 <h1 className="mb-0 fw-bold" style={{textShadow:'1px 1px 10px #14053b'}}>Tokenomics</h1>
-                <h2 className="my-2 fw-regular fs-6 mb-0">LOTA is the governance token of the LoTerra ecosystem gaming lottery, token give the power to vote proposals. LOTA holders are owners of the LoTerra ecosystem casino, their job is to ensure the ecosystem is working well, they can control lotteries configurations and get staking rewards for responsibilities and management.</h2>
+                <h2 className="my-2 fw-regular fs-6 mb-0 p-4 pb-0 text-muted">LOTA is the governance token of the LoTerra ecosystem gaming lottery, token give the power to vote proposals. LOTA holders are owners of the LoTerra ecosystem casino, their job is to ensure the ecosystem is working well, they can control lotteries configurations and get staking rewards for responsibilities and management.</h2>
             </div>
             <div className="container-fluid">
                 <div className="card-body">
-                    <div className="col-12 text-center">
+                    <div className="col-12 text-start mb-3">
                         <h3 className="fw-bold">Information</h3>
                     </div>
                     <div className="row">
@@ -183,7 +183,7 @@ export default () => {
                                 </h5>
                             </div>
                         </div>
-                        <div className="col-12 text-center">
+                        <div className="col-12 text-start mb-3 mt-3">
                             <h3 className="fw-bold">Token Supply</h3>
                         </div>
                         <div className="col-md-6 mb-3">
@@ -240,7 +240,7 @@ export default () => {
                             </div>
                         </div>
                     </div>
-                    <div className="col-12 text-center">
+                    <div className="col-12 text-start mb-3 mt-3">
                         <h3 className="fw-bold">Market</h3>
                     </div>
                     <div className="table-responsive">
