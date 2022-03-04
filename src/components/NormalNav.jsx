@@ -13,6 +13,7 @@ import {
     Bank,
     Planet,
     FileText,
+    Lightning
 } from 'phosphor-react'
 import { Link, NavLink } from 'react-router-dom'
 
@@ -49,6 +50,7 @@ if (typeof location !== 'undefined') {
                             <span className="item-label">Jackpot Lottery</span>
                         </NavLink>
                     </li>
+                    
                     <li className="nav-item">
                         <NavLink exact
                                  to="/spacewager"
@@ -154,6 +156,40 @@ if (typeof location !== 'undefined') {
                                 BETA
                             </span>
                         </NavLink>
+                    </li>
+                    <li className="nav-item"
+                        style={{
+                            opacity: 0.5
+                        }}
+                    >
+                        
+                        <Lightning
+                            size={24}
+                            style={{
+                                marginRight: '3px',
+                                position: 'relative',
+                                top: '-1px',
+                            }}
+                        />{' '}
+                        Rapido
+                        <span className="item-label">Lottery 2.0</span>
+                        <span
+                                className="badge"
+                                style={{
+                                    position: 'absolute',
+                                    right: 0,
+                                    top: '-9px',
+                                    fontSize: '10px',
+                                    lineHeight: '10px',
+                                    padding: '3px',
+                                    textTransform: 'uppercase',
+                                    color: '#10003b',
+                                    background: '#8bf6c2',
+                                }}
+                            >
+                                COMING SOON
+                            </span>
+                        
                     </li>
                     <span className="sub-heading">Staking & DAO</span>
                     <li className="nav-item">
