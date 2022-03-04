@@ -16,25 +16,6 @@ export default () => {
     const loterra_contract_address = 'terra1q2k29wwcz055q4ftx4eucsq6tg9wtulprjg75w'
     const loterra_pool_address = 'terra1pn20mcwnmeyxf68vpt3cyel3n57qm9mp289jta'
 
-    function tokenInfo(){
-        let render = (
-            <tr>
-                <td className="text-center">LoTerra</td>
-                <td className="text-center">LOTA</td>
-                <td className="text-center">cw20</td>
-                <td className="text-center">6</td>
-                <td className="text-center">Utility</td>
-                <td className="text-center">Terra</td>
-            </tr>
-        )
-
-        return (
-            <>
-                { render }
-            </>
-        )
-    }
-
     const fetchContractQuery = useCallback(async () => {
         try {
             //Get current lota price
@@ -76,6 +57,37 @@ export default () => {
                 circulatingSupply()
             return sum
         }
+    }
+
+    function marketData(){
+        console.log(lotaPrice.assets)
+        let render = (
+            <tr>
+                <td className="text-center">1</td>
+                <td className="text-center"> 
+                    <>
+                        <button className='btn btn-link p-0' 
+                            onClick={() => window.open("https://app.terraswap.io/swap?to=&type=swap&from=uluna", "_blank")
+                        }>
+                            <img src="/terraswap-Icon.png" 
+                                style={{maxWidth:'30px'}} 
+                                className="img-fluid align-self-center" 
+                            /> 
+                            Terraswap
+                        </button>
+                     </> 
+                </td>
+                <td className="text-center">LOTA/UST </td>
+                <td className="text-center"> ${numeral(lotaPrice.assets[1].amount / lotaPrice.assets[0].amount).format('0.000')}</td>
+                <td className="text-center">{ numeral(lotaPrice.assets[1].amount * 2 / 1000000).format('0,0.00') } UST</td>
+            </tr>
+        )
+
+        return (
+            <>
+                { render }
+            </>
+        )
     }
 
     useEffect(() => {
@@ -221,14 +233,34 @@ export default () => {
                                     <>
                                         <p>Price</p>
                                         <h5>
-                                            {numeral(lotaPrice.assets[1].amount / lotaPrice.assets[0].amount,).format('0.000')}
+                                            {numeral(lotaPrice.assets[1].amount / lotaPrice.assets[0].amount).format('0.000')}
                                             <span>UST</span>
                                         </h5>
                                     </>
                                 )}
                             </div>
                         </div>
-                        <div className="col-md-12 text-center">
+                    </div>
+                    <div className="col-12 text-center">
+                        <h3 className="fw-bold">Market</h3>
+                    </div>
+                    <div className="table-responsive">
+                        <table className="table text-white">
+                            <thead>
+                            <tr>
+                                <th style={{minWidth:50}} className="text-center">#</th>
+                                <th style={{minWidth:150}} className="text-center">Source</th>
+                                <th style={{minWidth:100}} className="text-center">Pairs</th>
+                                <th style={{minWidth:150}} className="text-center">Price</th>
+                                <th style={{minWidth:150}} className="text-center">Total Liquidity</th>
+                            </tr>
+                            </thead>
+                            <tbody>
+                            {marketData()}
+                            </tbody>
+                        </table>
+                    </div>
+                    <div className="col-md-12 text-center">
                             <a
                                 href="https://coinhall.org/charts/terra/terra1pn20mcwnmeyxf68vpt3cyel3n57qm9mp289jta"
                                 target="_blank"
@@ -249,7 +281,6 @@ export default () => {
                                 View chart
                             </a>
                         </div>
-                    </div>
                 </div>
             </div>
         </>

@@ -34,6 +34,8 @@ export default () => {
                                 data-bs-toggle="pill"
                                 data-bs-target="#pills-staking"                         
                             >
+                                <Cards size={24} style={{position:'relative',top:-2}} weight={'bold'}/>
+                                {' '}
                                 NFTs
                             </a>
                         </li>
@@ -46,12 +48,21 @@ export default () => {
                                 data-bs-toggle="pill"
                                 data-bs-target="#pills-lpstaking"                                   
                             >
+                                <Calendar size={24} style={{position:'relative',top:-2}} weight={'bold'}/>
+                                {' '}
                                 Events
                             </a>
                         </li>
                     </ul>
                 </div> 
-
+                
+            </div>
+            <div className="row mb-2 position-relative">
+                    <RafflesCard
+                    id='1'
+                    obj='3'
+                    />
+                   
             </div>
             
         </>

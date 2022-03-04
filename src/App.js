@@ -157,7 +157,7 @@ class App extends Component {
                         <Route exact path="/staking" component={Staking} />
                         <Route exact path="/dao" component={Dao} />
                         <Route exact path="/tokenomics" component={Tokenomics} />
-                        <Route exact path="/raffles" component={Raffles} />
+                        {/* <Route exact path="/raffles" component={Raffles} /> */}
                         <Route render={() => <Routes/>} />
                      
                         </Switch>

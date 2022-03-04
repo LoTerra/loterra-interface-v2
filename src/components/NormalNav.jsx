@@ -13,7 +13,6 @@ import {
     Bank,
     Planet,
     FileText,
-    Spade
 } from 'phosphor-react'
 import { Link, NavLink } from 'react-router-dom'
 
@@ -86,13 +85,13 @@ if (typeof location !== 'undefined') {
                             </span>
                         </NavLink>
                     </li>
-                    <li className="nav-item">
+                    {/* <li className="nav-item">
                         <NavLink exact
                                  to="/raffles"
                                  className="nav-link"
                                  className={'nav-link ' + rafflesClass}
-                        >
-                            <Ticket
+                        > 
+                             <Ticket
                                 size={24}
                                 style={{
                                     marginRight: '3px',
@@ -121,7 +120,7 @@ if (typeof location !== 'undefined') {
                                 BETA
                             </span>
                         </NavLink>
-                    </li>
+                    </li> */}
                     <li className="nav-item">
                         <NavLink exact 
                             to="/dogether"
@@ -205,7 +204,7 @@ if (typeof location !== 'undefined') {
                             className="nav-link"
                             className={'nav-link ' + tokenomicsClass}
                         >
-                            <FileText
+                            <Coin
                                 size={24}
                                 style={{
                                     marginRight: '3px',
@@ -218,6 +217,27 @@ if (typeof location !== 'undefined') {
                                 Token info
                             </span>
                         </NavLink>
+                    </li>
+                    <li className="nav-item">
+                        <a
+                            href="https://linktr.ee/LoTerra"
+                            target="_blank"
+                            className="nav-link"
+                            className={'nav-link '}
+                        >
+                            <FileText
+                                size={24}
+                                style={{
+                                    marginRight: '3px',
+                                    position: 'relative',
+                                    top: '-1px',
+                                }}
+                            />{' '}
+                            Documentation
+                            <span className="item-label">
+                                All sources
+                            </span>
+                        </a>
                     </li>
                     <span className="sub-heading">LoTerra projects</span>
                     <li className="nav-item">
@@ -252,11 +272,6 @@ if (typeof location !== 'undefined') {
                             </span>
                         </a>
                     </li>
-
-              
-     
-
-    
         </>
     )
 }
