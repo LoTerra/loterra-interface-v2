@@ -90,14 +90,21 @@ body {
     }
     .nav-item {
         list-style-type:none;
-        margin-bottom:15px;
+        margin-bottom:0;
         position:relative;
+        @media(max-width:620px){
+            margin-bottom:0;
+        }
         .nav-link {
             display:block;
             color:#fff;
             font-weight:700;
             transition:all 150ms linear;
             box-shadow: inset 0px 0px 0px 0px #8ff8c5;
+            @media(max-width:620px){
+                padding: 0.4rem 1rem;
+            }
+           
             .item-label {
                 display:block;
                 font-size:13px;
@@ -973,16 +980,16 @@ h4,
     background: #1809437d;
     border-radius: 10px;
     p {
-        color: $primary;
+        opacity: 0.5;
         margin: 0;
         text-transform: uppercase;
     }
     h5 {
-        font-weight: 700;
+        font-weight: 300;
         font-size: 2.25rem;
         margin: 0;
         span {
-            font-weight: 400;
+            font-weight: 200;
             opacity: 0.5;
             font-size: 1.8rem;
             margin-left: 5px;
