@@ -164,7 +164,7 @@ if (typeof location !== 'undefined') {
                             opacity: 0.5
                         }}
                     >
-                        
+                    <a className={'nav-link'}>
                         <Lightning
                             size={24}
                             style={{
@@ -191,7 +191,7 @@ if (typeof location !== 'undefined') {
                             >
                                 COMING SOON
                             </span>
-                        
+                            </a>
                     </li>
                     <span className="sub-heading">Staking & DAO</span>
                     <li className="nav-item">
@@ -209,8 +209,7 @@ if (typeof location !== 'undefined') {
                             />{' '}
                             Staking
                             <span className="item-label">
-                                Become a casino owner or earn LOTA when staking
-                                LP
+                                Become a casino owner
                             </span>
                         </NavLink>
                     </li>
