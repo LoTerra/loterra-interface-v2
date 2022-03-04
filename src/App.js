@@ -17,7 +17,9 @@ import Index from './pages/Index';
 import Dogether from './pages/Dogether';
 import Dao from './pages/DAO';
 import Staking from './pages/Staking';
- 
+import SpaceWager from './pages/SpaceWager';
+import Tokenomics from './pages/Tokenomics';
+import Raffles from './pages/Raffles';
 
 
 let bootstrap = {}
@@ -28,7 +30,7 @@ import { StoreProvider } from './store'
 import ConnectWallet from './components/ConnectWallet'
 import NormalNav from './components/NormalNav'
 import { List } from 'phosphor-react'
-import SpaceWager from './pages/SpaceWager';
+
 
 
 
@@ -150,10 +152,12 @@ class App extends Component {
                         <Switch>
                   
                         <Route exact path="/" component={Index} />
-                            <Route exact path="/spacewager" component={SpaceWager} />
-                            <Route exact path="/dogether" component={Dogether} />
+                        <Route exact path="/spacewager" component={SpaceWager} />
+                        <Route exact path="/dogether" component={Dogether} />
                         <Route exact path="/staking" component={Staking} />
                         <Route exact path="/dao" component={Dao} />
+                        <Route exact path="/tokenomics" component={Tokenomics} />
+                        {/* <Route exact path="/raffles" component={Raffles} /> */}
                         <Route render={() => <Routes/>} />
                      
                         </Switch>

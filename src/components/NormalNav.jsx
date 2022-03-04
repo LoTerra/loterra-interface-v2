@@ -12,22 +12,24 @@ import {
     Coin,
     Bank,
     Planet,
+    FileText,
 } from 'phosphor-react'
 import { Link, NavLink } from 'react-router-dom'
 
 
 export default function NormalNav() {
 //Nav link active settings
-let homeClass, stakingClass, daoClass,spaceWagerClass,dogetherClass
-useEffect(() => {
-    if (typeof location !== 'undefined') {
-        homeClass = location.pathname === '/' ? 'active' : ''
-        stakingClass = location.pathname.match(/^\/staking/) ? 'active' : ''
-        daoClass = location.pathname.match(/^\/dao/) ? 'active' : ''
-        dogetherClass = location.pathname.match(/^\/dogether/) ? 'active' : ''
-        spaceWagerClass = location.pathname.match(/^\/spacewager/) ? 'active' : ''
-    }
-},[location])
+let homeClass, stakingClass, daoClass,spaceWagerClass, tokenomicsClass, rafflesClass,dogetherClass
+if (typeof location !== 'undefined') {
+    homeClass = location.pathname === '/' ? 'active' : ''
+    dogetherClass = location.pathname.match(/^\/dogether/) ? 'active' : ''
+    stakingClass = location.pathname.match(/^\/staking/) ? 'active' : ''
+    daoClass = location.pathname.match(/^\/dao/) ? 'active' : ''
+    spaceWagerClass = location.pathname.match(/^\/spacewager/) ? 'active' : ''
+    tokenomicsClass = location.pathname.match(/^\/tokenomics/) ? 'active' : ''
+    rafflesClass = location.pathname.match(/^\/raffles/) ? 'active' : ''
+}
+
     return (
         <>
      
@@ -85,6 +87,42 @@ useEffect(() => {
                             </span>
                         </NavLink>
                     </li>
+                    {/* <li className="nav-item">
+                        <NavLink exact
+                                 to="/raffles"
+                                 className="nav-link"
+                                 className={'nav-link ' + rafflesClass}
+                        > 
+                             <Ticket
+                                size={24}
+                                style={{
+                                    marginRight: '3px',
+                                    position: 'relative',
+                                    top: '-1px',
+                                }}
+                            />{' '}
+                            Raffles
+                            <span className="item-label">
+                                        NFTs & Event tickets
+                                    </span>
+                            <span
+                                className="badge"
+                                style={{
+                                    position: 'absolute',
+                                    right: 0,
+                                    top: '-9px',
+                                    fontSize: '10px',
+                                    lineHeight: '10px',
+                                    padding: '3px',
+                                    textTransform: 'uppercase',
+                                    color: '#10003b',
+                                    background: '#8bf6c2',
+                                }}
+                            >
+                                BETA
+                            </span>
+                        </NavLink>
+                    </li> */}
                     <li className="nav-item">
                         <NavLink exact 
                             to="/dogether"
@@ -119,10 +157,10 @@ useEffect(() => {
                             </span>
                         </NavLink>
                     </li>
+                    <span className="sub-heading">Staking & DAO</span>
                     <li className="nav-item">
                         <NavLink exact 
                             to="/staking"
-                            className="nav-link"
                             className={'nav-link ' + stakingClass}
                         >
                             <Coin
@@ -143,7 +181,6 @@ useEffect(() => {
                     <li className="nav-item">
                         <NavLink exact 
                             to="/dao"
-                            className="nav-link"
                             className={'nav-link ' + daoClass}
                         >
                             <Bank
@@ -159,6 +196,46 @@ useEffect(() => {
                                 Together we decide 
                             </span>
                         </NavLink>
+                    </li>
+                    <span className="sub-heading">Resources</span>
+                    <li className="nav-item">
+                        <NavLink exact 
+                            to="/tokenomics"
+                            className={'nav-link ' + tokenomicsClass}
+                        >
+                            <Coin
+                                size={24}
+                                style={{
+                                    marginRight: '3px',
+                                    position: 'relative',
+                                    top: '-1px',
+                                }}
+                            />{' '}
+                            Tokenomics
+                            <span className="item-label">
+                                Token info
+                            </span>
+                        </NavLink>
+                    </li>
+                    <li className="nav-item">
+                        <a
+                            href="https://linktr.ee/LoTerra"
+                            target="_blank"
+                            className={'nav-link '}
+                        >
+                            <FileText
+                                size={24}
+                                style={{
+                                    marginRight: '3px',
+                                    position: 'relative',
+                                    top: '-1px',
+                                }}
+                            />{' '}
+                            Documentation
+                            <span className="item-label">
+                                All sources
+                            </span>
+                        </a>
                     </li>
                     <span className="sub-heading">LoTerra projects</span>
                     <li className="nav-item">
@@ -193,11 +270,6 @@ useEffect(() => {
                             </span>
                         </a>
                     </li>
-
-              
-     
-
-    
         </>
     )
 }

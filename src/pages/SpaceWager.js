@@ -325,6 +325,7 @@ export default () => {
         
                 <div className="row mb-2">
                     <div className="col-6 col-md-4 order-2 order-md-1 text-start">
+
                     <div className="card lota-card">
                         <div className="card-body">
                         <div className="row">
@@ -333,6 +334,7 @@ export default () => {
                         <SpaceWagerLunaLogo/>
                       </div>
                       <div className="col-12 col-md-8 d-flex h-100 text-start">
+
                        
                           <div className="align-self-center w-100">
                           <small className="d-inline-block mb-1 astroport"
