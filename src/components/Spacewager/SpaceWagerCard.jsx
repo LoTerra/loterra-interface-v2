@@ -215,8 +215,7 @@ export default function SpaceWagerCard(props) {
                                 <span className="fw-bold">
                                 {getRatioUp()}x
                                 </span> Payout
-                                 
-
+                                
                             </span>
                         </div>
                     </div>
