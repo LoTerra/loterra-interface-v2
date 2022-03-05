@@ -291,7 +291,7 @@ export default function SpaceWagerCard(props) {
                                 </strong>
                                 <p>{numeral(personalBidInfo.down / 1000000).format('0,0')} UST</p>
                             </div>
-                            <div className="col-12 mt-0 text-center">
+                            {/* <div className="col-12 mt-0 text-center">
                                 <strong>Possible rewards</strong>
                                 <div className="row">
                                 <div className="col-6">
@@ -309,7 +309,7 @@ export default function SpaceWagerCard(props) {
                                 </div>
                                 
                                
-                            </div>
+                            </div> */}
                             {/* { obj[1].success && obj[1].is_up && parseInt(personalBidInfo.up) > 0 &&
                                 <div className="col-12">
                                     <p>YOU WON WITH UP</p>
