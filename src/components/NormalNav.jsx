@@ -23,17 +23,21 @@ export default function NormalNav() {
 //Nav link active settings
 let homeClass, stakingClass, daoClass,spaceWagerClass, tokenomicsClass, rafflesClass,dogetherClass
 
-useEffect(() => {
-    if (typeof location !== 'undefined') {
-        homeClass = location.pathname === '/' ? 'active' : ''
-        dogetherClass = location.pathname.match(/^\/dogether/) ? 'active' : ''
-        stakingClass = location.pathname.match(/^\/staking/) ? 'active' : ''
-        daoClass = location.pathname.match(/^\/dao/) ? 'active' : ''
-        spaceWagerClass = location.pathname.match(/^\/spacewager/) ? 'active' : ''
-        tokenomicsClass = location.pathname.match(/^\/tokenomics/) ? 'active' : ''
-        rafflesClass = location.pathname.match(/^\/raffles/) ? 'active' : ''
-    }
-},[location])
+if(typeof location !== 'undefined'){
+
+    useEffect(() => {
+        if (typeof location !== 'undefined') {
+            homeClass = location.pathname === '/' ? 'active' : ''
+            dogetherClass = location.pathname.match(/^\/dogether/) ? 'active' : ''
+            stakingClass = location.pathname.match(/^\/staking/) ? 'active' : ''
+            daoClass = location.pathname.match(/^\/dao/) ? 'active' : ''
+            spaceWagerClass = location.pathname.match(/^\/spacewager/) ? 'active' : ''
+            tokenomicsClass = location.pathname.match(/^\/tokenomics/) ? 'active' : ''
+            rafflesClass = location.pathname.match(/^\/raffles/) ? 'active' : ''
+        }
+    },[location])
+
+}
 
     return (
         <>
