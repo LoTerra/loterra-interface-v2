@@ -318,26 +318,21 @@ export default () => {
                 <p className="mb-0"><Warning size={'13px'} weight="fill" style={{position:'relative',top:'-1px', marginRight:4}} />Spacewager is currently in BETA, any losses inccured due your actions are your own responsibilty.</p>
             </div>
             <div className="container">
-                
+                <div className="w-100 py-3 py-md-5 text-center">
+                    <h1 className="mb-0 fw-bold" style={{textShadow:'1px 1px 10px #14053b'}}>Spacewager</h1>
+                    <h2 className="my-2 fw-regular fs-6 mb-0">Predict the future LUNA price</h2>
+                </div>
         
                 <div className="row mb-2">
-                    <div className="col-6 col-md-4 order-1 order-md-1">
-                        <div className="w-100 py-3 py-md-5 text-start text-md-start">
-                        <h1 className="mb-0 fw-bold" style={{textShadow:'1px 1px 10px #14053b'}}>Spacewager</h1>
-                        <h2 className="my-2 fw-regular fs-6 mb-0 text-muted">Predict the future LUNA price</h2>
-                        </div>
-                    </div>
-                    <div className="col-6 col-md-4 order-2 order-md-2 text-start d-flex">
-
-                    <div className="card lota-card w-100 align-self-center">
-                        <div className="card-body p-2 p-md-3">
+                    <div className="col-6 col-md-4 order-2 order-md-1 text-start">
+                    <div className="card lota-card">
+                        <div className="card-body">
                         <div className="row">
                       
                       <div className="col-2 col-md-3 d-flex h-100 text-center d-none d-md-inline-block">
                         <SpaceWagerLunaLogo/>
                       </div>
                       <div className="col-12 col-md-8 d-flex h-100 text-start">
-
                        
                           <div className="align-self-center w-100">
                           <small className="d-inline-block mb-1 astroport"
@@ -371,8 +366,20 @@ export default () => {
 
                         </div>
                     </div>
-
-                    <div className="col-12 col-md-4 text-center text-md-end order-3 position-relative">
+                    <div className="col-6 col-md-4 order-3 order-md-2 text-center">
+                <div className="card lota-card h-100">
+                    <div className="card-body d-flex">
+                    <div className="align-self-center w-100 mb-0 text-white">
+                    <p className="mb-0 text-normal text-muted card-label">
+                    Round ends in
+                    </p>
+                    
+                    {state.spaceWagerCurrentTimeRound && formatTime() || "00:00"}
+                </div>
+                    </div>
+                </div>
+            </div>
+                    <div className="col-12 col-md-4 text-center text-md-end order-1 order-md-2 position-relative">
                         <button className="btn btn-plain fw-bold w-20 ms-2 docs-btn" style={{zIndex:999, position:'relative'}}
                             onClick={() => window.open("https://docs.loterra.io/upcoming/roadmap/spacewager", "_blank")}>
                             <Question size={24} style={{position:'relative',top:-2}} weight={'bold'}/>
@@ -445,8 +452,6 @@ export default () => {
                                 isLivePrediction={obj.closing_time * 1000 < Date.now() && obj.closing_time * 1000 > Date.now() - 300000}
                                 isNextPrediction={obj.closing_time * 1000 > Date.now()}
                                 isPastPrediction={obj.closing_time * 1000 < Date.now() && obj.closing_time * 1000 < Date.now() - 300000 }
-                                spaceWagerCurrentTimeRound={state.spaceWagerCurrentTimeRound}
-                                formatTime={formatTime}
                                 />
                             </SwiperSlide>
                         )

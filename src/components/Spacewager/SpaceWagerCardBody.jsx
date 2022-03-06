@@ -4,7 +4,7 @@ import {useStore} from "../../store";
 import PriceLoader from "../PriceLoader";
 import {MsgExecuteContract} from "@terra-money/terra.js";
 import SpaceWagerInfoMessage from './SpaceWagerInfoMessage';
-import { ArrowLeft, TrendDown, TrendUp } from 'phosphor-react';
+import { ArrowLeft } from 'phosphor-react';
 import toast, { Toaster } from 'react-hot-toast';
 import CountUp from 'react-countup';
 
@@ -19,7 +19,7 @@ function usePrevious(value) {
 
 export default function SpaceWagerCardBody(props) {
     const { state, dispatch } = useStore()
-    const {obj,price, currentTimeRound, counterOneMinute, variationStatus,formattedVariation,lockedPrice,prizesPool, isLivePrediction, isPastPrediction, isNextPrediction , bettingOddsOnDown, bettingOddsOnUp} = props;
+    const {obj,price, currentTimeRound, counterOneMinute, variationStatus,formattedVariation,lockedPrice,prizesPool, isLivePrediction, isPastPrediction, isNextPrediction} = props;
     const [bidScreen, setBidScreen] = useState(false)
     const [bidType, setBidType] = useState('');
     const [amount,setAmount] = useState(0)
@@ -33,18 +33,6 @@ export default function SpaceWagerCardBody(props) {
 
     //const [personalBidInfo, setPersonalBidInfo] = useState()
 
-
-    const payoutUpStyle = {
-        color:'rgb(23, 185, 107)',
-        background:'linear-gradient(45deg, #17b96b4d, transparent)',
-        color:'#fff'
-    }
-
-    const payoutDownStyle = {
-        color:'#f038f0',
-        background:'linear-gradient(45deg, #f13af126, transparent)',
-        color:'#fff'
-    }
 
 
     const equalStyle = {
@@ -265,9 +253,9 @@ export default function SpaceWagerCardBody(props) {
           <div>
               {
                   bidScreen ? <div>
-                          <div className="row" >
+                          <div className="row">
                               <div className="col-12">
-                                  <button className={'btn btn-secondary float-start p-1 px-2'} style={{position:'absolute',top:'78px',left:'25px',background:'#1f085e'}} onClick={() => makeBid()}>
+                                  <button className={'btn btn-secondary float-start p-1 px-2'} onClick={() => makeBid()}>
                                         <ArrowLeft size={'18'} /> 
                                   </button>
                               </div>
@@ -286,11 +274,9 @@ export default function SpaceWagerCardBody(props) {
                         <input className="form-control" type="number" min="1" value={amount} onChange={(e) => setAmount(e.target.value)}/>
                           </div>
                           
-                          { state.wallet && state.wallet.hasOwnProperty('walletAddress') &&
                           <h6 className='mt-2 text-muted text-end small'>
-                              Balance: <span onClick={() => setAmount(state.ustBalance)} style={{textDecoration:'underline'}}>{numeral(state.ustBalance).format('0,0.00')} UST</span>
+                              Balance: 0 UST
                           </h6>
-                          }
                           { state.wallet && state.wallet.hasOwnProperty('walletAddress') &&
                             <button onClick={() => makeBidFinal(obj.prediction_id) } className={"btn w-100 mt-1" + (bidType == 'UP' ? ' btn-up' : ' btn-down')}>Enter {bidType}</button>
                           }
@@ -303,17 +289,17 @@ export default function SpaceWagerCardBody(props) {
                   </div>
                       :
                   <div className="row">
-                           <div className="col-6 text-start">
+                      <div className="col-6 text-start">
                           <p className="my-2 fw-bold fs-6 mb-0">Prize Pool:</p>
                       </div>
-                      <div className="col-6 text-end mb-2">
+                      <div className="col-6 text-end">
                           {!state.isUserMakingPrediction && (
                               <p className="my-2 fw-bold fs-6 mb-0"><CountUp end={(parseInt(state.latestPrediction.up) + parseInt(state.latestPrediction.down))/ 1_000_000 } decimals={2}/> {' '} UST</p>)
                           || <div className="spinner-border text-light" role="status"><span className="sr-only"></span></div>
                           }  
                       </div>
                       <div className="col-12 mt-2">
-                        {/* <div className="progress">
+                        <div className="progress">
                                 <div
                                     className='progress-bar'
                                     color='#000000'
@@ -322,87 +308,19 @@ export default function SpaceWagerCardBody(props) {
                                     style={{width: remainingTime()+'%'}}
                                 >
                                 </div>
-                            </div> */}
+                            </div>
                       </div>
                       
                       <div className="col-12 my-3">
-                          <h3 className="fs-6 text-muted fw-bold mb-1">Your Prediction</h3>
-                          <div className="row">
-                   
-                              <div className="col-6">
-                                <button className="btn btn-up" onClick={() => makeBid('UP')}><TrendUp size={18} style={{marginRight:'3px'}}/>
-                                UP
-                                <span className="small fw-normal d-block" style={{fontSize:'12px'}}>
-                                <span className="fw-bold">
-                                {
-                                    isNextPrediction ?
-
-                                        state.latestPrediction.up == '0' && state.latestPrediction.down != '0' ? '1.00' : state.latestPrediction.up != '0' && state.latestPrediction.down == '0' || state.latestPrediction.up == '0' && state.latestPrediction.down == '0'? '0.00' : numeral((parseInt(state.latestPrediction.down) + parseInt(state.latestPrediction.up)) / parseInt(state.latestPrediction.up)).format("0,0.00")
-                                        : bettingOddsOnUp == '0' && bettingOddsOnDown != '0' ? '1.00' : bettingOddsOnUp != '0' && bettingOddsOnDown == '0' || bettingOddsOnUp == '0' && bettingOddsOnDown == '0'? '0.00' : numeral((parseInt(bettingOddsOnDown) +  parseInt(bettingOddsOnUp)) / parseInt(bettingOddsOnUp)).format("0,0.00")
-                                }x
-                                </span> Payout
-                                 
-
-                            </span>
-                                </button>
-                              </div>
-                              <div className="col-6">
-                                <button className="btn btn-down" onClick={() => makeBid('DOWN')}><TrendDown size={18} style={{marginRight:'3px'}} />
-                                DOWN
-                                <span className="small d-block fw-normal" style={{fontSize:'12px'}}>
-                                <span className="fw-bold">{
-                                    isNextPrediction ?
-                                        state.latestPrediction.down == '0' && state.latestPrediction.up != '0' ? '1.00' : state.latestPrediction.down != '0' && state.latestPrediction.up == '0' || state.latestPrediction.down == '0' && state.latestPrediction.up == '0'? '0.00' : numeral((parseInt(state.latestPrediction.up) + parseInt(state.latestPrediction.down)) / parseInt(state.latestPrediction.down)).format("0,0.00")
-                                        : bettingOddsOnDown  == '0' && bettingOddsOnUp != '0' ? '1.00' : bettingOddsOnDown != '0' && bettingOddsOnUp == "0" || bettingOddsOnDown == '0' && bettingOddsOnUp == '0'? '0.00' : numeral((parseInt(bettingOddsOnUp) + parseInt(bettingOddsOnDown)) / parseInt(bettingOddsOnDown)).format("0,0.00")
-
-                                }x</span> Payout
-                            </span>
-                                </button>
-                              </div>                         
-                          </div>
+                          <button className="btn btn-up btn-lg mb-2" onClick={() => makeBid('UP')}>Enter UP</button>
+                          <button className="btn btn-down btn-lg" onClick={() => makeBid('DOWN')}>Enter DOWN</button>
                       </div>
                   </div>
               }
-
-              
             
           </div>
     }
-                { isLivePrediction &&
-                  <div className="col-12 my-3">              
-                  <div className="row">
-                      <div className="col-6 rounded py-2"
-                      style={
-                       variationStatus == 'UP' ? payoutUpStyle : {opacity:0.5}
-                        }
-                      >
-                       
-                        UP
-                        <span className="small fw-normal d-block" style={{fontSize:'12px'}}>
-                        <span className="fw-bold">
-                        {bettingOddsOnUp == '0' && bettingOddsOnDown != '0' ? '1.00' : bettingOddsOnUp != '0' && bettingOddsOnDown == '0' || bettingOddsOnUp == '0' && bettingOddsOnDown == '0'? '0.00' : numeral((parseInt(bettingOddsOnDown) +  parseInt(bettingOddsOnUp)) / parseInt(bettingOddsOnUp)).format("0,0.00")                        }x
-                        </span> Payout
-                         
 
-                    </span>
-                      
-                      </div>
-                      <div className="col-6 rounded py-2"
-                      style={
-                        variationStatus == 'DOWN' ? payoutDownStyle : {opacity:0.5}
-                        }
-                      >
-                       DOWN
-                        <span className="small d-block fw-normal" style={{fontSize:'12px'}}>
-                        <span className="fw-bold">{bettingOddsOnDown  == '0' && bettingOddsOnUp != '0' ? '1.00' : bettingOddsOnDown != '0' && bettingOddsOnUp == "0" || bettingOddsOnDown == '0' && bettingOddsOnUp == '0'? '0.00' : numeral((parseInt(bettingOddsOnUp) + parseInt(bettingOddsOnDown)) / parseInt(bettingOddsOnDown)).format("0,0.00")}
-                        x</span> Payout
-                    </span>
-                       
-                      </div>                         
-                  </div>
-              </div>
-
-              }
  </>
     )
 

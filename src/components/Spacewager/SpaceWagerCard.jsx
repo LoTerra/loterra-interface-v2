@@ -27,10 +27,7 @@ export default function SpaceWagerCard(props) {
         isNextPrediction,
         isPastPrediction,
         bettingOddsOnUp,
-        bettingOddsOnDown,
-
-        spaceWagerCurrentTimeRound,
-        formatTime
+        bettingOddsOnDown
     } = props;
 
     const {state,dispatch} = useStore()
@@ -179,7 +176,6 @@ export default function SpaceWagerCard(props) {
         },[state.spaceWagerLastPrice, state.spaceWagerCurrentRound])
 
     useEffect(() => {
-        console.log('prediction', isNextPrediction, obj.prediction_id)
         if(state.wallet && obj.prediction_id){
             getPersonalBids(obj.prediction_id)
         }
@@ -195,15 +191,11 @@ export default function SpaceWagerCard(props) {
             >    
                 <SpaceWagerCardHeader obj={obj} currentTimeRound={currentTimeRound} isLivePrediction={isLivePrediction} isNextPrediction={isNextPrediction} isPastPrediction={isPastPrediction}/> 
 
-                <div className="card-body"> 
-                        { isLivePrediction &&
-                            <div className={''}></div>
-                        }
-                        { !isNextPrediction && !isLivePrediction &&
-                            
-                                <div className="btn-green fw-bold w-100"
+                <div className="card-body">
+                    
+                        <div className="btn-green fw-bold w-100"
                         style={{borderBottomLeftRadius:0,borderBottomRightRadius:0}}
-                        >
+                    >
                         {upButtonShape()}
                         <div className="btn-content" style={{ color: upTextColor()}}>
                             UP
@@ -221,27 +213,14 @@ export default function SpaceWagerCard(props) {
                             </span>
                         </div>
                     </div>
-                        }
                     
                     
                     <div className="card-content" 
                         style={
-                            variationStatus == 'DOWN' && !isNextPrediction ? downStyle : variationStatus == 'UP' && !isNextPrediction ? upStyle : isNextPrediction ? {border:'3px solid transparent'} : {border:''}
+                            variationStatus == 'DOWN' && !isNextPrediction ? downStyle : variationStatus == 'UP' && !isNextPrediction ? upStyle : {border:''}
                         }
                     >
-                        { isNextPrediction &&
-                       
-                    <div className="w-100">
-                    <div className="text-white">
-                    <p className="mb-0 text-normal text-muted card-label">
-                    Round ends in
-                    </p>
-                    
-                    {spaceWagerCurrentTimeRound && formatTime() || "00:00"}
-                </div>
-                    </div>
-              
-                        }
+
                         <SpaceWagerCardBody
                         obj={obj}
                         price={price}
@@ -253,17 +232,13 @@ export default function SpaceWagerCard(props) {
                         isLivePrediction = {isLivePrediction}
                         isPastPrediction = {isPastPrediction}
                         isNextPrediction = {isNextPrediction}
-                        bettingOddsOnDown = {bettingOddsOnDown}
-                        bettingOddsOnUp = {bettingOddsOnUp}
                         />
-                        
 
                     </div>
 
-                    { !isNextPrediction && !isLivePrediction &&
-                            <div className="btn-red w-100 fw-bold"
+                        <div className="btn-red w-100 fw-bold"
                             style={{borderTopLeftRadius:0,borderTopRightRadius:0}}
-                            >
+                        >
                             {downButtonShape()}
                             <div className="btn-content" style={{ color: downTextColor()}}>
                             <span className="small d-block fw-normal">
@@ -276,8 +251,7 @@ export default function SpaceWagerCard(props) {
                             </span>
                             DOWN
                             </div>
-                            </div>
-                    }
+                        </div>
                 </div>
                 <div className="card-footer p-0">
                     { personalBidInfo && (parseInt(personalBidInfo.up) > 0 || parseInt(personalBidInfo.down) > 0) &&
