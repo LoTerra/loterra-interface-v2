@@ -3,7 +3,8 @@ import { Root, Routes,addPrefetchExcludes } from 'react-static'
 import {
     Switch,
     Route,
-    Link
+    Link,
+    NavLink
   } from "react-router-dom";
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
@@ -127,6 +128,11 @@ class App extends Component {
                         <nav className="navbar navbar-expand navbar-light sticky-top" id="smallNav">
                     <div className="container-fluid px-0">
                         <button className="btn btn-default" id="sidebarToggle"> <List size={26} /></button>
+                        <NavLink className="navbar-brand d-inline-block d-md-none align-self-center" exact  to="/">
+                      
+                        <img src="/logo.png" className="img-fluid" />
+                       
+                        </NavLink>  
                         <div className="navbar">
                         <ConnectWallet/>
                         </div>

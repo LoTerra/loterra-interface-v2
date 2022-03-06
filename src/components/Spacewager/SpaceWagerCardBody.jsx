@@ -274,9 +274,11 @@ export default function SpaceWagerCardBody(props) {
                         <input className="form-control" type="number" min="1" value={amount} onChange={(e) => setAmount(e.target.value)}/>
                           </div>
                           
+                          { state.wallet && state.wallet.hasOwnProperty('walletAddress') &&
                           <h6 className='mt-2 text-muted text-end small'>
-                              Balance: 0 UST
+                              Balance: <span onClick={() => setAmount(state.ustBalance)} style={{textDecoration:'underline'}}>{numeral(state.ustBalance).format('0,0.00')} UST</span>
                           </h6>
+                          }
                           { state.wallet && state.wallet.hasOwnProperty('walletAddress') &&
                             <button onClick={() => makeBidFinal(obj.prediction_id) } className={"btn w-100 mt-1" + (bidType == 'UP' ? ' btn-up' : ' btn-down')}>Enter {bidType}</button>
                           }

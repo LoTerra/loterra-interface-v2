@@ -50,10 +50,25 @@ body {
     border-bottom: 1px solid #ffffff14;
     border-left: 1px solid #ffffff14;
     height: 77px;
+    .navbar-brand {
+        position: absolute;
+        left: 50%;
+        margin-left: -45px;
+        @media(max-width:768px){
+            margin-left:-40px;
+        }
+    }
     .btn {
         height: 42px;
         border-radius: 7px !important;
         margin-right: 15px;
+        font-size:14px;
+        @media(max-width:768px){
+            margin-right: 5px;
+            &.dropdown-toggle {
+                margin-right:15px;
+            }
+        }
     }
   }
 
