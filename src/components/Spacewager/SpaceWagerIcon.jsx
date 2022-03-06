@@ -6,7 +6,7 @@ export default function SpaceWagerIcon(props) {
 
 
     return (
-        <div className="spacewager-icon">        
+        <div className="spacewager-icon" style={{display:'none'}}>        
         <svg version="1.1" width="512" height="512" x="0" y="0" viewBox="0 0 512 512" style={{enableBackground:'new 0 0 512 512'}} xmlSpace="preserve"><g xmlns="http://www.w3.org/2000/svg">
         <path d="m256 271.936 42.247 76.354-42.247 70.949h-40.684c-6.464 0-12.197-4.13-14.239-10.259l-23.794-71.346z" fill="#9580ff" data-original="#9580ff" className=""/>
         <path d="m334.717 337.633-23.794 71.346c-2.041 6.13-7.775 10.259-14.239 10.259h-40.684v-147.302z" fill="#8066ff" data-original="#8066ff"/>

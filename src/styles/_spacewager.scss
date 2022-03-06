@@ -26,6 +26,7 @@
     border-width: 0.15em;
 }
 
+
 .spacewager-beta {
     background:linear-gradient(45deg, #f13af126, transparent);
     color:#ffffffad;
@@ -151,7 +152,8 @@
     @media(max-width:620px){
         position: absolute !important;
         right: 14px;
-        top: -65px;
+        top: 17px;
+        opacity: 0.5;
     }
 }
 
