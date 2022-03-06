@@ -57,7 +57,7 @@ if(typeof location !== 'undefined'){
                                 }}
                             />{' '}
                             Lottery
-                            <span className="item-label">Jackpot Lottery</span>
+                            <span className="item-label">Jackpot Lottery</span> 
                         </NavLink>
                     </li>
                     

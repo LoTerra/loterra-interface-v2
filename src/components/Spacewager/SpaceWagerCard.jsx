@@ -149,18 +149,6 @@ export default function SpaceWagerCard(props) {
         }
     }
 
-    const getRatioUp = () =>{
-        return isNextPrediction ?
-        state.latestPrediction.up == '0' && state.latestPrediction.down != '0' ? '1.00' : state.latestPrediction.up != '0' && state.latestPrediction.down == '0' || state.latestPrediction.up == '0' && state.latestPrediction.down == '0'? '0.00' : numeral(parseInt(state.latestPrediction.down) / parseInt(state.latestPrediction.up)).format("0,0.00")
-        : bettingOddsOnUp == '0' && bettingOddsOnDown != '0' ? '1.00' : bettingOddsOnUp != '0' && bettingOddsOnDown == '0' || bettingOddsOnUp == '0' && bettingOddsOnDown == '0'? '0.00' : numeral(parseInt(bettingOddsOnDown) / parseInt(bettingOddsOnUp)).format("0,0.00")
-    }
-
-    const getRatioDown = () => {
-        return isNextPrediction ?
-        state.latestPrediction.down == '0' && state.latestPrediction.up != '0' ? '1.00' : state.latestPrediction.down != '0' && state.latestPrediction.up == '0' || state.latestPrediction.down == '0' && state.latestPrediction.up == '0'? '0.00' : numeral(parseInt(state.latestPrediction.up) / parseInt(state.latestPrediction.down)).format("0,0.00")
-        : bettingOddsOnDown  == '0' && bettingOddsOnUp != '0' ? '1.00' : bettingOddsOnDown != '0' && bettingOddsOnUp == "0" || bettingOddsOnDown == '0' && bettingOddsOnUp == '0'? '0.00' : numeral(parseInt(bettingOddsOnUp) / parseInt(bettingOddsOnDown)).format("0,0.00")
-    }
-
 
     // function getVariationRatio(lockedPrice, currentPrice) {
     //     let variation = 0.000
@@ -213,9 +201,15 @@ export default function SpaceWagerCard(props) {
                             UP
                             <span className="small fw-normal d-block">
                                 <span className="fw-bold">
-                                {getRatioUp()}x
+                                {
+                                    isNextPrediction ?
+
+                                        state.latestPrediction.up == '0' && state.latestPrediction.down != '0' ? '1.00' : state.latestPrediction.up != '0' && state.latestPrediction.down == '0' || state.latestPrediction.up == '0' && state.latestPrediction.down == '0'? '0.00' : numeral((parseInt(state.latestPrediction.down) + parseInt(state.latestPrediction.up)) / parseInt(state.latestPrediction.up)).format("0,0.00")
+                                        : bettingOddsOnUp == '0' && bettingOddsOnDown != '0' ? '1.00' : bettingOddsOnUp != '0' && bettingOddsOnDown == '0' || bettingOddsOnUp == '0' && bettingOddsOnDown == '0'? '0.00' : numeral((parseInt(bettingOddsOnDown) +  parseInt(bettingOddsOnUp)) / parseInt(bettingOddsOnUp)).format("0,0.00")
+                                }x
                                 </span> Payout
-                                
+                                 
+
                             </span>
                         </div>
                     </div>
@@ -248,9 +242,12 @@ export default function SpaceWagerCard(props) {
                             {downButtonShape()}
                             <div className="btn-content" style={{ color: downTextColor()}}>
                             <span className="small d-block fw-normal">
-                                <span className="fw-bold">
-                                    {getRatioDown()}x
-                                    </span> Payout
+                                <span className="fw-bold">{
+                                    isNextPrediction ?
+                                        state.latestPrediction.down == '0' && state.latestPrediction.up != '0' ? '1.00' : state.latestPrediction.down != '0' && state.latestPrediction.up == '0' || state.latestPrediction.down == '0' && state.latestPrediction.up == '0'? '0.00' : numeral((parseInt(state.latestPrediction.up) + parseInt(state.latestPrediction.down)) / parseInt(state.latestPrediction.down)).format("0,0.00")
+                                        : bettingOddsOnDown  == '0' && bettingOddsOnUp != '0' ? '1.00' : bettingOddsOnDown != '0' && bettingOddsOnUp == "0" || bettingOddsOnDown == '0' && bettingOddsOnUp == '0'? '0.00' : numeral((parseInt(bettingOddsOnUp) + parseInt(bettingOddsOnDown)) / parseInt(bettingOddsOnDown)).format("0,0.00")
+
+                                }x</span> Payout
                             </span>
                             DOWN
                             </div>
@@ -291,25 +288,6 @@ export default function SpaceWagerCard(props) {
                                 </strong>
                                 <p>{numeral(personalBidInfo.down / 1000000).format('0,0')} UST</p>
                             </div>
-                            {/* <div className="col-12 mt-0 text-center">
-                                <strong>Possible rewards</strong>
-                                <div className="row">
-                                <div className="col-6">
-                                    <p className="mb-0">{ personalBidInfo.up > 0 &&
-                                        <span>{numeral(personalBidInfo.up / 1000000 * parseFloat(getRatioUp())).format('0,00') } UST</span>                                              
-                                    }
-                                    </p>
-                                    </div>
-                                    <div className="col-6">
-                                    <p className="mb-0">{ personalBidInfo.down > 0 &&
-                                        <span>{numeral(personalBidInfo.down / 1000000 * parseFloat(getRatioDown())).format('0,00') } UST</span>                                        
-                                    }
-                                    </p>
-                                    </div>                                    
-                                </div>
-                                
-                               
-                            </div> */}
                             {/* { obj[1].success && obj[1].is_up && parseInt(personalBidInfo.up) > 0 &&
                                 <div className="col-12">
                                     <p>YOU WON WITH UP</p>
