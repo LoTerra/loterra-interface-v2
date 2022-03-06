@@ -42,11 +42,19 @@ if(typeof location !== 'undefined'){
     return (
         <>
      
-                <a className="navbar-brand text-center" href="/">
-                    <img src="/logo.png" className="img-fluid" /> <span className="d-block">LoTerra</span>
-                </a>               
+                <NavLink className="navbar-brand w-100 d-block" exact  to="/">
+                    <div className="row">
+                        <div className="col-3 text-center">
+                            <img src="/logo.png" className="img-fluid" />
+                        </div>
+                         <div className="col-9 ps-0 d-flex text-start">
+                            <span className="d-inline-block align-self-center">LoTerra</span>
+                         </div>
+                    </div>
+                </NavLink>               
         
-                    <li className="nav-item">
+                   <div className="sidebar-menu-wrapper">
+                   <li className="nav-item">
                         <NavLink exact  to="/" className={'nav-link '}>
                             <Ticket
                                 size={24}
@@ -312,6 +320,7 @@ if(typeof location !== 'undefined'){
                             </span>
                         </a>
                     </li>
+                   </div>
         </>
     )
 }

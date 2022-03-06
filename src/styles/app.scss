@@ -46,9 +46,14 @@ body {
   }
 
   #smallNav {
-    background: #00000047;
+    background: linear-gradient(180deg, #210a5c, #16073e);
+    border-bottom: 1px solid #ffffff14;
+    border-left: 1px solid #ffffff14;
+    height: 77px;
     .btn {
-        height:42px;
+        height: 42px;
+        border-radius: 7px !important;
+        margin-right: 15px;
     }
   }
 
@@ -64,16 +69,22 @@ body {
     transition: margin 0.25s ease-out;
     width: 300px;
     background:#16073e;
-    padding:0 15px;
+    
     flex:none;
     flex-direction: column;
+    .sidebar-menu-wrapper {
+        padding:0 15px;
+    }
     .navbar-brand {
         display:block;
+        padding:10px 15px;
+        background:linear-gradient(180deg, #210a5c, #16073e);
+        border-bottom: 1px solid #ffffff14;
         img {
             width:100px;
             margin:10px auto;
         }
-        margin-bottom:25px;
+        margin-bottom:60px;
         span {
             color:#fff;
             font-weight:700;
@@ -90,7 +101,7 @@ body {
     }
     .nav-item {
         list-style-type:none;
-        margin-bottom:0;
+        margin-bottom:10px;
         position:relative;
         @media(max-width:620px){
             margin-bottom:0;
@@ -98,7 +109,7 @@ body {
         .nav-link {
             display:block;
             color:#fff;
-            font-weight:700;
+            font-weight:600;
             transition:all 150ms linear;
             box-shadow: inset 0px 0px 0px 0px #8ff8c5;
             @media(max-width:620px){
@@ -106,7 +117,7 @@ body {
             }
            
             .item-label {
-                display:block;
+                display:none;
                 font-size:13px;
                 font-weight:400;
                 opacity:0.5;
