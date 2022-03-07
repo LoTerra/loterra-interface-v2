@@ -10,9 +10,9 @@ export default function RapidoCardHeader() {
 
 
     return (
-        <div className="card-header">
-               
-              
+        <div className="card-header"
+        style={{background:'linear-gradient(45deg, rgb(33, 10, 92), transparent)'}}
+        >                             
                 <div className="row">
                     <div className="col-6 text-start">
                         <p className="mb-0 rounded"
@@ -26,11 +26,11 @@ export default function RapidoCardHeader() {
                             fontWeight:700
                         }}
                         >Active</p>
-                        <p className="fs-4 fw-bold">Name</p>
+                        <p className="fs-4 mb-0 fw-bold">Name</p>
                     </div>
                     <div className="col-6 text-end">                       
                         <p className="mb-0 text-muted">Next draw</p>
-                        <p className="fs-5 fw-bold">00:00</p>
+                        <p className="fs-5 mb-0 fw-bold">00:00</p>
                     </div>
                 </div>
             </div>

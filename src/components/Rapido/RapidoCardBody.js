@@ -78,36 +78,15 @@ return (
                             <div className="col-7">
                                 <div className="btn-holder text-end">
                                 {[1,2,3,4,5].map((obj,k) =>{
-                            return (
-                                <button key={k} className={'nr-btn medium-s' + (nrOfDraws == obj ? ' active-g' : '')} onClick={(e) => selectNrOfDraws(obj)}>{obj}</button>
-                            )
-                        })
-                        }
-        
+                                return (
+                                    <button key={k} className={'nr-btn medium-s' + (nrOfDraws == obj ? ' active-g' : '')} onClick={(e) => selectNrOfDraws(obj)}>{obj}</button>
+                                )
+                                })
+                                }
                                 </div>
                             </div>
                         </div>
-                    </div>
-                    <div className="col-12  mt-3">
-                            <p className="fs-6 fw-bold text-start mt-3 mb-1">Your combination</p>
-                            </div>
-                    <div className="col-12">
-                    {[1,2,3,4,5].map((obj,k) =>{
-                            return (
-                                <span key={k} className={"rapido-combi-nr" + (obj == 5 ? ' g' : '')}>
-                                    <span className="d-block" style={{background:'#120338',fontSize:'13px',fontWeight:300}}>{obj}</span>
-                                    {
-                                    obj <= 4 ? 
-                                        fourNumbers[obj - 1] ? fourNumbers[obj - 1] : '*'
-                                    : 
-                                        oneNumber[0] ? oneNumber[0] : '*'
-                                    }</span>
-                            )
-                        })
-                        }   
-                    </div>
-
-                    
+                    </div>      
                 </div>    
             </div>
 )

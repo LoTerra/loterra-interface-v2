@@ -7,7 +7,7 @@ export default function RapidoCardFooter(props) {
 
 
     const {state,dispatch} = useStore()
-    const {enterDraw,multiplier,nrOfDraws} = props;
+    const {enterDraw,multiplier,nrOfDraws,fourNumbers,oneNumber} = props;
 
 
     return (
@@ -15,6 +15,26 @@ export default function RapidoCardFooter(props) {
                     <div className="row">
                         <div className="col-12 text-center mt-1">
                             <p className="fs-6 fw-bold">Receipt</p>
+                        </div>
+                        <div className="col-6 text-start d-flex">
+                            <p className="mb-0 align-self-center">Combination</p>
+                        </div>
+                        <div className="col-6 text-end">
+                        <div className="col-12 mb-2">
+                    {[1,2,3,4,5].map((obj,k) =>{
+                            return (
+                                <span key={k} className={"rapido-combi-nr" + (obj == 5 ? ' g' : '')}>
+                                    <span className="d-block" style={{background:'#120338',fontSize:'13px',fontWeight:300}}>{obj}</span>
+                                    {
+                                    obj <= 4 ? 
+                                        fourNumbers[obj - 1] ? fourNumbers[obj - 1] : '*'
+                                    : 
+                                        oneNumber[0] ? oneNumber[0] : '*'
+                                    }</span>
+                            )
+                        })
+                        }   
+                    </div>
                         </div>
                         <div className="col-6 text-start">
                             <p>Cost</p>

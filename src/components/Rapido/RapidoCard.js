@@ -82,6 +82,8 @@ export default function RapidoCard() {
             enterDraw={() => enterDraw()}
             multiplier={multiplier}
             nrOfDraws={nrOfDraws}
+            fourNumbers={fourNumbers}
+            oneNumber={oneNumber}
             />
             
         </div>
