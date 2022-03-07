@@ -12,18 +12,21 @@ import {
     Coin,
     Bank,
     Planet,
+    FileText,
+    Lightning
 } from 'phosphor-react'
 import { Link, NavLink } from 'react-router-dom'
 
 
 export default function NormalNav() {
 //Nav link active settings
-let homeClass, stakingClass, daoClass,spaceWagerClass
+let homeClass, stakingClass, daoClass, spaceWagerClass, tokenomicsClass
 if (typeof location !== 'undefined') {
     homeClass = location.pathname === '/' ? 'active' : ''
     stakingClass = location.pathname.match(/^\/staking/) ? 'active' : ''
     daoClass = location.pathname.match(/^\/dao/) ? 'active' : ''
     spaceWagerClass = location.pathname.match(/^\/spacewager/) ? 'active' : ''
+    tokenomicsClass = location.pathname.match(/^\/tokenomics/) ? 'active' : ''
 }
     return (
         <>
@@ -116,6 +119,41 @@ if (typeof location !== 'undefined') {
                             </span>
                         </NavLink>
                     </li>
+                    <li className="nav-item"
+                        style={{
+                            opacity: 0.5
+                        }}
+                    >
+                        
+                        <Lightning
+                            size={24}
+                            style={{
+                                marginRight: '3px',
+                                position: 'relative',
+                                top: '-1px',
+                            }}
+                        />{' '}
+                        Rapido
+                        <span className="item-label">Lottery 2.0</span>
+                        <span
+                                className="badge"
+                                style={{
+                                    position: 'absolute',
+                                    right: 0,
+                                    top: '-9px',
+                                    fontSize: '10px',
+                                    lineHeight: '10px',
+                                    padding: '3px',
+                                    textTransform: 'uppercase',
+                                    color: '#10003b',
+                                    background: '#8bf6c2',
+                                }}
+                            >
+                                COMING SOON
+                            </span>
+                        
+                    </li>
+                    <span className="sub-heading">Staking & DAO</span>
                     <li className="nav-item">
                         <NavLink exact 
                             to="/staking"
@@ -156,6 +194,48 @@ if (typeof location !== 'undefined') {
                                 Together we decide 
                             </span>
                         </NavLink>
+                    </li>
+                    <span className="sub-heading">Resources</span>
+                    <li className="nav-item">
+                        <NavLink exact 
+                            to="/tokenomics"
+                            className="nav-link"
+                            className={'nav-link ' + tokenomicsClass}
+                        >
+                            <Coin
+                                size={24}
+                                style={{
+                                    marginRight: '3px',
+                                    position: 'relative',
+                                    top: '-1px',
+                                }}
+                            />{' '}
+                            Tokenomics
+                            <span className="item-label">
+                                LOTA token information 
+                            </span>
+                        </NavLink>
+                    </li>
+                    <li className="nav-item">
+                        <a
+                            href="https://linktr.ee/LoTerra"
+                            target="_blank"
+                            className="nav-link"
+                            className={'nav-link '}
+                        >
+                            <FileText
+                                size={24}
+                                style={{
+                                    marginRight: '3px',
+                                    position: 'relative',
+                                    top: '-1px',
+                                }}
+                            />{' '}
+                            Documentation
+                            <span className="item-label">
+                                All sources
+                            </span>
+                        </a>
                     </li>
                     <span className="sub-heading">LoTerra projects</span>
                     <li className="nav-item">
