@@ -7,6 +7,21 @@
     text-align:center;
 }
 
+.rapido-combi-nr {
+    display: inline-block;
+    width: 18%;
+    text-align: center;
+    font-weight: 700;
+    font-size: 2rem;
+    background: #341d63;
+    border-radius: 6px;
+    box-shadow: inset 0px 0px 0px 3px #fe00fe;
+    margin: 1%;
+    &.g {
+        box-shadow: inset 0px 0px 0px 3px #01bd65;
+    }
+}
+
 .nr-btn {
     background:#341D63;
     color:#fff;
@@ -20,10 +35,22 @@
         width: 10%;
         margin: 1%;
     }
+    &.medium {
+        width: 23%;
+        margin: 2%;
+    }
+    &.medium-s {
+        width: 15%;
+        margin: 2%;
+    }
     &.active {
         box-shadow:inset 0px 0px 0px 3px #FE00FE;
     }
     &.active-g {
         box-shadow:inset 0px 0px 0px 3px #01bd65;
+    }
+    &:hover {
+        background: #0c022469;
+        transform: scale(1.1);
     }
 }
