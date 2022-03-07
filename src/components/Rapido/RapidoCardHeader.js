@@ -11,13 +11,13 @@ export default function RapidoCardHeader() {
 
     return (
         <div className="card-header"
-        style={{background:'linear-gradient(45deg, rgb(33, 10, 92), transparent)'}}
+        style={{background:'#27498C'}}
         >                             
                 <div className="row">
                     <div className="col-6 text-start">
                         <p className="mb-0 rounded"
                         style={{
-                            background:'#01bd65',
+                            background:'#A67244',
                             padding:'5px',
                             color:'#fff',
                             marginTop:'-23px',

@@ -1,6 +1,7 @@
 .rapido-card {
-    background:#120338;
+    background:#27498C;
     color:#fff;
+    border: 0;
 }   
 
 .btn-holder {
@@ -13,17 +14,17 @@
     text-align: center;
     font-weight: 700;
     font-size: 1.2rem;
-    background: #341d63;
+    background: '#27498C';
     border-radius: 6px;
-    box-shadow: inset 0px 0px 0px 3px #fe00fe;
+    box-shadow: inset 0px 0px 0px 3px #048abf;
     margin: 1%;
     &.g {
-        box-shadow: inset 0px 0px 0px 3px #01bd65;
+        box-shadow: inset 0px 0px 0px 3px #f2d230;
     }
 }
 
 .label-four {
-    background: #fe00fe;
+    background: #048abf;
     padding: 5px;
     padding-top: 3px;
     width: 200px;
@@ -34,7 +35,7 @@
 }
 
 .label-one {
-    background: #01bd65;
+    background: #f2d230;
     padding: 5px;
     padding-top: 3px;
     width: 200px;
@@ -45,11 +46,11 @@
 }
 
 .nr-btn {
-    background:#341D63;
+    background:#27498C;
     color:#fff;
     padding:5px;
     text-align:center;
-    border-radius:4px;
+    border-radius:10px;
     border:0;
     box-shadow:inset 0px 0px 0px 3px #87809c4a;
     transition:all 150ms linear;
@@ -66,10 +67,13 @@
         margin: 2%;
     }
     &.active {
-        box-shadow:inset 0px 0px 0px 3px #FE00FE;
+        box-shadow:inset 0px 0px 0px 3px #048abf;
     }
     &.active-g {
-        box-shadow:inset 0px 0px 0px 3px #01bd65;
+        box-shadow:inset 0px 0px 0px 3px #f2d230;
+    }
+    &.active-i {
+        box-shadow:inset 0px 0px 0px 3px #A67244;
     }
     &:hover {
         background: #0c022469;
