@@ -37,23 +37,8 @@ export default function RapidoCard() {
         return fourNumbers.indexOf(nr) > -1
     }
 
-    const selectOneNumber = (nr) => {
-        if(checkInOne(nr)){
-            console.log('found')
-            var array = [...oneNumber]; // make a separate copy of the array
-            var index = array.indexOf(nr)
-            if (index !== -1) {
-                array.splice(index, 1);
-                setOneNumber(array);
-                return ;
-            }
-        }
-        if(oneNumber.length <= 0){
-            setOneNumber([...oneNumber,nr])
-        } else {
-            alert('deselect a number, max is 1')
-        }
-        
+    const selectOneNumber = (nr) => {  
+            setOneNumber([nr])       
         console.log(oneNumber)
     }
 
