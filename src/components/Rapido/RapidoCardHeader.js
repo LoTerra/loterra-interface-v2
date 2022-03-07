@@ -11,7 +11,9 @@ export default function RapidoCardHeader() {
 
     return (
         <div className="card-header"
-        style={{background:'#27498C'}}
+        style={{
+            background:'#27498C',
+        }}
         >                             
                 <div className="row">
                     <div className="col-6 text-start">
@@ -26,7 +28,7 @@ export default function RapidoCardHeader() {
                             fontWeight:700
                         }}
                         >Active</p>
-                        <p className="fs-4 mb-0 fw-bold">Name</p>
+                        <p className="fs-4 mb-0 fw-bold">#Round</p>
                     </div>
                     <div className="col-6 text-end">                       
                         <p className="mb-0 text-muted">Next draw</p>

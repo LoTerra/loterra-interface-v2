@@ -64,11 +64,7 @@ export default function RapidoCard() {
 
 
     return (
-        <div className={'card rapido-card'}
-            style={{
-                borderRadius: 20
-            }}
-        >
+        <div className={'card rapido-card'}>
             <RapidoCardHeader/>
             <RapidoCardBody
                 checkInFour={(a) => checkInFour(a)}
