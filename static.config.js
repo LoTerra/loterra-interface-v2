@@ -39,6 +39,10 @@ export default {
             path: 'spacewager',
             template: 'src/pages/SpaceWager',
         },
+        {
+            path: 'rapido',
+            template: 'src/pages/Rapido',
+        },
         // A 404 component
         {
             path: '404',
