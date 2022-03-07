@@ -20,9 +20,10 @@ import { Link, NavLink } from 'react-router-dom'
 
 export default function NormalNav() {
 //Nav link active settings
-let homeClass, stakingClass, daoClass, spaceWagerClass, tokenomicsClass
+let homeClass, rapidoClass, stakingClass, daoClass, spaceWagerClass, tokenomicsClass
 if (typeof location !== 'undefined') {
     homeClass = location.pathname === '/' ? 'active' : ''
+    rapidoClass = location.pathname.match(/^\/rapido/) ? 'active' : ''
     stakingClass = location.pathname.match(/^\/staking/) ? 'active' : ''
     daoClass = location.pathname.match(/^\/dao/) ? 'active' : ''
     spaceWagerClass = location.pathname.match(/^\/spacewager/) ? 'active' : ''
@@ -47,6 +48,42 @@ if (typeof location !== 'undefined') {
                             />{' '}
                             Lottery
                             <span className="item-label">Jackpot Lottery</span>
+                        </NavLink>
+                    </li>
+                    <li className="nav-item">
+                        <NavLink exact
+                                 to="/rapido"
+                                 className="nav-link"
+                                 className={'nav-link ' + rapidoClass}
+                        >
+                            <Lightning
+                                size={24}
+                                style={{
+                                    marginRight: '3px',
+                                    position: 'relative',
+                                    top: '-1px',
+                                }}
+                            />{' '}
+                            Rapido
+                            <span className="item-label">
+                                        Lottery every 5 minutes
+                                    </span>
+                            <span
+                                className="badge"
+                                style={{
+                                    position: 'absolute',
+                                    right: 0,
+                                    top: '-9px',
+                                    fontSize: '10px',
+                                    lineHeight: '10px',
+                                    padding: '3px',
+                                    textTransform: 'uppercase',
+                                    color: '#10003b',
+                                    background: '#8bf6c2',
+                                }}
+                            >
+                                BETA
+                            </span>
                         </NavLink>
                     </li>
                     <li className="nav-item">
@@ -118,40 +155,6 @@ if (typeof location !== 'undefined') {
                                 BETA
                             </span>
                         </NavLink>
-                    </li>
-                    <li className="nav-item"
-                        style={{
-                            opacity: 0.5
-                        }}
-                    >
-                        
-                        <Lightning
-                            size={24}
-                            style={{
-                                marginRight: '3px',
-                                position: 'relative',
-                                top: '-1px',
-                            }}
-                        />{' '}
-                        Rapido
-                        <span className="item-label">Lottery 2.0</span>
-                        <span
-                                className="badge"
-                                style={{
-                                    position: 'absolute',
-                                    right: 0,
-                                    top: '-9px',
-                                    fontSize: '10px',
-                                    lineHeight: '10px',
-                                    padding: '3px',
-                                    textTransform: 'uppercase',
-                                    color: '#10003b',
-                                    background: '#8bf6c2',
-                                }}
-                            >
-                                COMING SOON
-                            </span>
-                        
                     </li>
                     <span className="sub-heading">Staking & DAO</span>
                     <li className="nav-item">

@@ -14,12 +14,12 @@ import { popper } from '@popperjs/core'
 
 
 import Index from './pages/Index';
+import Rapido from './pages/Rapido'
 import Dogether from './pages/Dogether';
 import Dao from './pages/DAO';
 import Staking from './pages/Staking';
 import SpaceWager from './pages/SpaceWager';
 import Tokenomics from './pages/Tokenomics';
-
 
 let bootstrap = {}
 if (typeof document !== 'undefined') {
@@ -150,6 +150,7 @@ class App extends Component {
                         <Switch>
                   
                         <Route exact path="/" component={Index} />
+                        <Route exact path="/rapido" component={Rapido} />
                         <Route exact path="/spacewager" component={SpaceWager} />
                         <Route exact path="/dogether" component={Dogether} />
                         <Route exact path="/staking" component={Staking} />
