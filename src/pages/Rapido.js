@@ -1,6 +1,6 @@
 import { Head } from 'react-static'
 import React, { useState, useEffect, useCallback, useRef } from 'react'
-
+import { useStore } from '../store'
 import RapidoCard from '../components/Rapido/RapidoCard';
 
 import SwiperCore, { Navigation, Pagination ,Autoplay,EffectFade } from 'swiper';
@@ -17,6 +17,7 @@ export default () => {
     const {state,dispatch} = useStore();
     const terra = state.lcd_client
     const [rapidoState, setRapidoState] = useState({round:null})
+    const [lotteries, setlotteries] = useState([]);
 
     const [config,setConfig] = useState({
         denom: "uusd",
@@ -57,6 +58,35 @@ export default () => {
             );
             console.log('config',rapido_config)
             setConfig(rapido_config)
+        } catch(e) {
+            console.log(e)
+        }        
+    }
+
+    async function getRapidoLotteries(){
+        try {
+            if (rapidoState.round == null){
+                return
+            }
+            // Prepare query
+            let query = {
+                lotteries_state: {}
+            }
+            // Add start after to get only last 5 elements
+            // if (parseInt(rapidoState.round) - 2 > 0){
+            //     query.lotteries_state.start_after = parseInt(rapidoState.round) - 2
+            // }
+            // Query to state smart contract
+            let lotteries_state = await api.contractQuery(
+                state.rapidoAddress,
+                query
+            );
+            // Set the array of predictions
+            setlotteries(lotteries_state)
+            /*
+                TODO: dismiss the prediction loader here
+             */
+
         } catch(e) {
             console.log(e)
         }        
@@ -116,45 +146,46 @@ export default () => {
                     </div>
                 </div>
             </div>
+                {lotteries.length > 0 &&
                     <Swiper
-                    spaceBetween={50}
-                    navigation={{
-                        nextEl: '.swiper-next',
-                        prevEl: '.swiper-prev',
-                      }}
-                    //   modules={[Navigation, Pagination, A11y]}                           
-                    initialSlide={4}
-                    slidesPerView={1}
-                    breakpoints={{
-                        // when window width is >= 640px
-                        1: {
-                            slidesPerView: 1,
-                        },
-                        // when window width is >= 768px
-                        768: {
-                            slidesPerView: 1,
-                        },
-                        1000: {
-                            slidesPerView: 1,
-                        },
-                        1500: {
-                            slidesPerView: 1,
-                        },
-                    }}
-                    onSlideChange={() => console.log('slide change')}
-                    onSwiper={(swiper) => console.log(swiper)}
-                >
-                                { [1,2,3,4].map((obj,k) => {
-                                    return (
-                                        <SwiperSlide key={k} >
-                                            <RapidoCard/>
-                                        </SwiperSlide>
-                                    )
-                                })
-
-                                }
-                </Swiper>
-          
+                        spaceBetween={50}
+                        navigation={{
+                            nextEl: '.swiper-next',
+                            prevEl: '.swiper-prev',
+                        }}
+                        //   modules={[Navigation, Pagination, A11y]}                           
+                        initialSlide={rapidoState.round}
+                        slidesPerView={1}
+                        breakpoints={{
+                            // when window width is >= 640px
+                            1: {
+                                slidesPerView: 1,
+                            },
+                            // when window width is >= 768px
+                            768: {
+                                slidesPerView: 1,
+                            },
+                            1000: {
+                                slidesPerView: 1,
+                            },
+                            1500: {
+                                slidesPerView: 1,
+                            },
+                        }}
+                        onSlideChange={() => console.log('slide change')}
+                        onSwiper={(swiper) => console.log(swiper)}
+                    >
+                        { lotteries.length > 0 && lotteries.map((obj, k) => {
+                            
+                            return (
+                                
+                                <SwiperSlide key={k} >
+                                    <RapidoCard/>
+                                </SwiperSlide>
+                            )
+                        })}
+                    </Swiper>
+                }
             </div>
 
             <div className="container py-5">

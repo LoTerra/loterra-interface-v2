@@ -5,7 +5,6 @@ import { useStore } from '../../store'
 
 export default function RapidoCardBody(props) {
 
-
     const {state,dispatch} = useStore()
 
     const {
