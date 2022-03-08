@@ -4,6 +4,7 @@ import { useStore } from '../../store'
 import numeral from 'numeral'
 import {MsgExecuteContract} from "@terra-money/terra.js";
 import toast, { Toaster } from 'react-hot-toast';
+import { Lightning, Star } from 'phosphor-react';
 
 export default function RapidoCardFooter(props) {
 
@@ -72,9 +73,9 @@ export default function RapidoCardFooter(props) {
                                     </span>
                                     {
                                     obj <= 4 ? 
-                                        fourNumbers[obj - 1] ? fourNumbers[obj - 1] : '*'
+                                        fourNumbers[obj - 1] ? fourNumbers[obj - 1] : <Lightning size={15} style={{position:'relative',top:'-1px', marginRight:1}}/>
                                     : 
-                                        oneNumber[0] ? oneNumber[0] : '*'
+                                        oneNumber[0] ? oneNumber[0] : <Star size={15} style={{position:'relative',top:'-1px', marginRight:1}}/>
                                     }
                                 </span>
                             )

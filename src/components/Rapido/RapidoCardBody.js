@@ -67,7 +67,7 @@ export default function RapidoCardBody(props) {
                             <div className="btn-holder text-end">
                             {[1,2,5].map((obj,k) =>{
                         return (
-                            <button key={k} className={'nr-btn medium' + (multiplier == obj ? ' active-i' : '')} onClick={(e) => selectMultiplier(obj)}>{obj}ust</button>
+                            <button key={k} className={'nr-btn medium' + (multiplier == obj ? ' active-i' : '')} onClick={(e) => selectMultiplier(obj)}>{obj}UST</button>
                         )
                     })
                     }
