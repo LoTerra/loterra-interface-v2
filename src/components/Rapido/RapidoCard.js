@@ -6,8 +6,8 @@ import RapidoCardFooter from './RapidoCardFooter'
 import RapidoCardHeader from './RapidoCardHeader'
 
 
-export default function RapidoCard() {
-
+export default function RapidoCard(props) {
+    const {lotteryId} = props;
     const {state,dispatch} = useStore()
 
     const [fourNumbers, setFourNumbers] = useState([])
@@ -64,7 +64,7 @@ export default function RapidoCard() {
 
     return (
         <div className={'card rapido-card'}>
-            <RapidoCardHeader/>
+            <RapidoCardHeader lotteryId={lotteryId}/>
             <RapidoCardBody
                 checkInFour={(a) => checkInFour(a)}
                 checkInOne={(a) => checkInOne(a)}

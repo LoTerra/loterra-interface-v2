@@ -68,12 +68,12 @@ export default () => {
             }
             // Prepare query
             let query = {
-                lotteries_state: {}
+                lotteries_state: {limit: 5}
             }
             // Add start after to get only last 5 elements
-            // if (parseInt(rapidoState.round) - 2 > 0){
-            //     query.lotteries_state.start_after = parseInt(rapidoState.round) - 2
-            // }
+            if (parseInt(rapidoState.round) - 2 > 0){
+                query.lotteries_state.start_after = parseInt(rapidoState.round) - 2
+            }
             // Query to state smart contract
             let lotteries_state = await api.contractQuery(
                 state.rapidoAddress,
@@ -180,7 +180,7 @@ export default () => {
                             return (
                                 
                                 <SwiperSlide key={k} >
-                                    <RapidoCard/>
+                                    <RapidoCard lotteryId={obj.lottery_id}/>
                                 </SwiperSlide>
                             )
                         })}

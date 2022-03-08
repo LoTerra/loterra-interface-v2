@@ -3,8 +3,8 @@ import React, { useState } from 'react'
 import { useStore } from '../../store'
 
 
-export default function RapidoCardHeader() {
-
+export default function RapidoCardHeader(props) {
+    const {lotteryId} = props;
 
     const {state,dispatch} = useStore()
 
@@ -28,7 +28,7 @@ export default function RapidoCardHeader() {
                             fontWeight:700
                         }}
                         >Active</p>
-                        <p className="fs-4 mb-0 fw-bold">#Round</p>
+                        <p className="fs-4 mb-0 fw-bold">#{lotteryId}</p>
                     </div>
                     <div className="col-6 text-end">                       
                         <p className="mb-0 text-muted">Next draw</p>
