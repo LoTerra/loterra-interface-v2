@@ -2,7 +2,8 @@ import { Trash } from 'phosphor-react'
 import React, { useState } from 'react'
 import { useStore } from '../../store'
 import numeral from 'numeral'
-
+import {MsgExecuteContract} from "@terra-money/terra.js";
+import toast, { Toaster } from 'react-hot-toast';
 
 export default function RapidoCardFooter(props) {
 
@@ -10,6 +11,42 @@ export default function RapidoCardFooter(props) {
     const {state,dispatch} = useStore()
     const {enterDraw,multiplier,nrOfDraws,fourNumbers,oneNumber} = props;
 
+    const validateTheTicket = (round) => { 
+        if(fourNumbers.length < 4){
+            toast.error('Please select 4 blue numbers')
+            return;
+        } else if (oneNumber.length < 1) {
+            toast.error('Please select 1 yellow star')
+            return;
+        } else if (multiplier < 1) {
+            toast.error('Please select a multiplier (1UST / 2UST / 5UST')
+            return;
+        } else if (nrOfDraws < 1) {
+            toast.error('Please select a number of draw')
+            return;
+        }
+        let msg = new MsgExecuteContract(
+            state.wallet.walletAddress,
+            state.spaceWagerAddress,
+            { uusd: parseFloat(multiplier) * 1000000 },
+        )
+        state.wallet
+            .post({
+                msgs: [msg],
+            })
+            .then((e) => {
+                if (e.success) {
+                    toast.success('Ticket succesfully validated!')
+                } else {
+                    toast.error('Something went wrong, please try again')
+                    console.log(e)
+                }
+            })
+            .catch((e) => {
+                dispatch({ type: 'setIsUserMakingPrediction', message: false })
+                console.log(e)
+            })
+    }
 
     return (
         <div className="card-footer pb-3" style={{background:'#27498C'}}>
@@ -58,7 +95,12 @@ export default function RapidoCardFooter(props) {
                 </div>
                 
                 <div className="col-12">
-                    <button className="btn btn-special w-100" style={{background:'#A67244'}} onClick={(e) => enterDraw()}>Enter</button>    
+                    { state.wallet && state.wallet.hasOwnProperty('walletAddress') &&
+                        <button onClick={() => validateTheTicket(1)} className="btn btn-special w-100" style={{background:'#A67244'}}>Enter</button>
+                    }
+                    { state.wallet && !state.wallet.hasOwnProperty('walletAddress') &&
+                        <button className="btn btn-special w-100" style={{background:'#A67244'}} onClick={() => toast.error('Please connect your wallet')}>Connect wallet</button>
+                    } 
                 </div>
             </div>
             

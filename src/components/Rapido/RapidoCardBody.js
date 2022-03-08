@@ -83,12 +83,11 @@ export default function RapidoCardBody(props) {
                         </div>
                         <div className="col-7">
                             <div className="btn-holder text-end">
-                            {[1,2,3,4,5,10,20,30,40,50].map((obj,k) =>{
-                            return (
-                                <button key={k} className={'nr-btn medium-s' + (nrOfDraws == obj ? ' active-i' : '')} onClick={(e) => selectNrOfDraws(obj)}>{obj}</button>
-                            )
-                            })
-                            }
+                                {[1,2,3,4,5,10,20,30,40,50].map((obj,k) =>{
+                                    return (
+                                        <button key={k} className={'nr-btn medium-s' + (nrOfDraws == obj ? ' active-i' : '')} onClick={(e) => selectNrOfDraws(obj)}>{obj}</button>
+                                    )
+                                })}
                             </div>
                         </div>
                     </div>
