@@ -8,7 +8,6 @@ import RapidoCardHeader from './RapidoCardHeader'
 
 export default function RapidoCard() {
 
-
     const {state,dispatch} = useStore()
 
     const [fourNumbers, setFourNumbers] = useState([])

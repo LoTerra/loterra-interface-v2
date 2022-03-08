@@ -31,7 +31,7 @@ export default function RapidoCardFooter(props) {
         }
         let msg = new MsgExecuteContract(
             state.wallet.walletAddress,
-            state.spaceWagerAddress,
+            state.rapidoAddress,
             { uusd: parseFloat(multiplier) * 1000000 },
         )
         state.wallet

@@ -13,6 +13,92 @@ import 'swiper/swiper.min.css'
 import { ArrowLeft, ArrowRight } from 'phosphor-react';
 
 export default () => {
+    
+    const {state,dispatch} = useStore();
+    const terra = state.lcd_client
+    const [rapidoState, setRapidoState] = useState({round:null})
+
+    const [config,setConfig] = useState({
+        denom: "uusd",
+        frequency: 300,
+        fee_collector: "0.05",
+        fee_collector_address: "terra1umd70qd4jv686wjrsnk92uxgewca3805dxd46p",
+        fee_collector_terrand: "0.001",
+        fee_collector_terrand_address: "terra1a62jxn3hh54fa5slan4dkd7u6v4nzgz3pjhygm"
+    });
+
+    async function getRapidoState(){
+        try {
+            let rapido_state = await api.contractQuery(
+                state.rapidoAddress,
+                {
+                    state: {
+                       
+                    }
+                }
+            );
+            console.log('state',rapido_state)
+            setRapidoState(rapido_state)
+            dispatch({ type: 'setRapidoCurrentRound', message: rapido_state.round })
+        } catch(e) {
+            console.log(e)
+        }        
+    }
+
+    async function getRapidoConfig(){
+        try {
+            let rapido_config = await api.contractQuery(
+                state.rapidoAddress,
+                {
+                    config: {
+                       
+                    }
+                }
+            );
+            console.log('config',rapido_config)
+            setConfig(rapido_config)
+        } catch(e) {
+            console.log(e)
+        }        
+    }
+
+    function formatTime(){
+
+        let timeBetween = state.rapidoCurrentTimeRound * 1000 - Date.now()
+        const seconds = Math.floor((timeBetween / 1000) % 60)
+        const minutes = Math.floor((timeBetween / 1000 / 60) % 60)
+        let format_minutes = minutes < 10 ? "0" + minutes : minutes;
+        let format_seconds = seconds < 10 ? "0" + seconds : seconds;
+
+        let format_message = "Closing..."
+        if (state.rapidoCurrentTimeRound * 1000 > Date.now()){
+            format_message = format_minutes + ":" + format_seconds
+
+            return(
+            <>
+                <Clock size={32} style={{position:'relative', top:'-8px'}} className="d-none d-md-inline-block" weight={'bold'}/>
+                <h2 className="fs-2 fw-bold d-inline-block mb-0">{format_message}</h2>
+            </>
+            )
+        }
+
+        return (
+            <span className="fs-6">{format_message}</span>
+        )
+    }
+
+    useEffect(() =>{
+        getRapidoState()
+        getRapidoConfig()
+        
+        setInterval(() => {
+            formatTime()
+        }, 1000)
+        /*
+            TODO: show the prediction loader here
+         */
+    },[])
+
     return (
         <>
             <div className="w-100 py-3 pt-md-5 text-center">
