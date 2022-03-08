@@ -1,5 +1,5 @@
 import { Head } from 'react-static'
-import React, { useState, useEffect, useCallback, useRef } from 'react'
+import React, { useState, useEffect, useCallback, useRef, useMemo } from 'react'
 import { useStore } from '../store'
 import RapidoCard from '../components/Rapido/RapidoCard';
 
@@ -16,7 +16,7 @@ import {WasmAPI} from "@terra-money/terra.js";
 export default () => {
     const {state,dispatch} = useStore();
     const terra = state.lcd_client
-    const [rapidoState, setRapidoState] = useState({round:0})
+    const [rapidoState, setRapidoState] = useState({round: null})
     const [lotteries, setlotteries] = useState([]);
 
     const [config,setConfig] = useState({
@@ -71,8 +71,8 @@ export default () => {
                 lotteries_state: {limit: 5}
             }
             // Add start after to get only last 5 elements
-            if (parseInt(rapidoState.round) - 2 > 0){
-                query.lotteries_state.start_after = parseInt(rapidoState.round) - 2
+            if (parseInt(rapidoState.round) - 5 > 0){
+                query.lotteries_state.start_after = parseInt(rapidoState.round) - 5
             }
             // Query to state smart contract
             let lotteries_state = await api.contractQuery(
@@ -116,11 +116,14 @@ export default () => {
         )
     }
 
-    useEffect(() =>{
+    useMemo(() =>{
         getRapidoState()
         getRapidoConfig()
-        getRapidoLotteries()
-        
+        if (rapidoState){
+            getRapidoLotteries()
+        }
+
+
         setInterval(() => {
             formatTime()
         }, 1000)
@@ -129,6 +132,14 @@ export default () => {
          */
     },[])
 
+    useEffect(() =>{
+        if (rapidoState){
+            getRapidoLotteries()
+        }
+        /*
+            TODO: show the prediction loader here
+         */
+    },[rapidoState])
     return (
         <>
             <div className="w-100 py-3 pt-md-5 text-center">
