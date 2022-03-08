@@ -112,6 +112,7 @@ const initialState = {
     dogetherAddress: 'terra19h4xk8xxxew0ne6fuw0mvuf7ltmjmxjxssj5ts',
     dogetherStakingAddress: 'terra1z2vgthmdy5qlz4cnj9d9d3ajtqeq7uzc0acxrp',
     spaceWagerAddress: /*'terra1t8zj09gvp388lsksj7w0usk2f09ltz767ej685' */ "terra1whe6adg8dlw4xsvlc0yax0r8ksaum5fuaaldg3",
+    rapidoAddress: 'terra1kfu8v4eplt7ng6lxary9j4jsdmuy8qcnl7ljt0',
     vkrContract: 'terra143kpwsuu82rtdy8jkyagmvn426q9amqsk7ftrw',
     vkrQualifierContract:'terra1xme735w8y8hamfvlyeh924puazfclrec2ka8fh',
     vkrReferrer: {status:false,code:''},

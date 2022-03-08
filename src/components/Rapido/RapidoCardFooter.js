@@ -2,27 +2,30 @@ import { Trash } from 'phosphor-react'
 import React, { useState } from 'react'
 import { useStore } from '../../store'
 import numeral from 'numeral'
-import {MsgExecuteContract} from "@terra-money/terra.js";
-import toast, { Toaster } from 'react-hot-toast';
-import { Lightning, Star } from 'phosphor-react';
+import {MsgExecuteContract} from "@terra-money/terra.js"
+import toast from 'react-hot-toast'
+import { Lightning, Star } from 'phosphor-react'
 
 export default function RapidoCardFooter(props) {
 
-
     const {state,dispatch} = useStore()
-    const {enterDraw,multiplier,nrOfDraws,fourNumbers,oneNumber} = props;
+    const {enterDraw, multiplier, nrOfDraws, fourNumbers, oneNumber} = props;
 
     const validateTheTicket = (round) => { 
         if(fourNumbers.length < 4){
+            console.log('Please select 4 blue numbers')
             toast.error('Please select 4 blue numbers')
             return;
         } else if (oneNumber.length < 1) {
+            console.log('Please select 1 yellow star')
             toast.error('Please select 1 yellow star')
             return;
         } else if (multiplier < 1) {
+            console.log('Please select a multiplier (1UST / 2UST / 5UST')
             toast.error('Please select a multiplier (1UST / 2UST / 5UST')
             return;
         } else if (nrOfDraws < 1) {
+            console.log('Please select a number of draw')
             toast.error('Please select a number of draw')
             return;
         }
