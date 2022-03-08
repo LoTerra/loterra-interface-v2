@@ -11,12 +11,12 @@ import { Swiper, SwiperSlide } from "swiper/react";
 import 'swiper/swiper-bundle.min.css'
 import 'swiper/swiper.min.css'
 import { ArrowLeft, ArrowRight } from 'phosphor-react';
+import {WasmAPI} from "@terra-money/terra.js";
 
 export default () => {
-    
     const {state,dispatch} = useStore();
     const terra = state.lcd_client
-    const [rapidoState, setRapidoState] = useState({round:null})
+    const [rapidoState, setRapidoState] = useState({round:0})
     const [lotteries, setlotteries] = useState([]);
 
     const [config,setConfig] = useState({
@@ -28,14 +28,14 @@ export default () => {
         fee_collector_terrand_address: "terra1a62jxn3hh54fa5slan4dkd7u6v4nzgz3pjhygm"
     });
 
+    const api = new WasmAPI(state.lcd_client_testnet.apiRequester)
+
     async function getRapidoState(){
         try {
             let rapido_state = await api.contractQuery(
                 state.rapidoAddress,
                 {
-                    state: {
-                       
-                    }
+                    state: {}
                 }
             );
             console.log('state',rapido_state)
@@ -51,9 +51,7 @@ export default () => {
             let rapido_config = await api.contractQuery(
                 state.rapidoAddress,
                 {
-                    config: {
-                       
-                    }
+                    config: {}
                 }
             );
             console.log('config',rapido_config)
@@ -81,6 +79,7 @@ export default () => {
                 state.rapidoAddress,
                 query
             );
+            console.log(lotteries_state)
             // Set the array of predictions
             setlotteries(lotteries_state)
             /*
@@ -120,6 +119,7 @@ export default () => {
     useEffect(() =>{
         getRapidoState()
         getRapidoConfig()
+        getRapidoLotteries()
         
         setInterval(() => {
             formatTime()

@@ -186,11 +186,17 @@ const initialState = {
     latestPrediction: {up: '0', down: '0'},
     previousPrediction: {up: '0', down: '0'},
     isUserMakingPrediction: false,
-    spaceWagerCurrentRound: 0
+    spaceWagerCurrentRound: 0,
+    rapidoCurrentRound: 0,
 }
 
 const reducer = (state, action) => {
     switch (action.type) {
+        case "setRapidoCurrentRound":
+            return {
+                ...state,
+                rapidoCurrentRound: action.message,
+            }
         case "setSpaceWagerCurrentRound":
             return {
                 ...state,
