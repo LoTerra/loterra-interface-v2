@@ -157,7 +157,7 @@ export default () => {
                 query
             );
             // Set the array of predictions
-            setPredictions(spacewager_predictions)
+            setPredictions([...spacewager_predictions])
             /*
                 TODO: dismiss the prediction loader here
              */
@@ -279,7 +279,7 @@ export default () => {
       // }
 
         getSpacewagerPredictions()
-    },[spacewagerState.round, state.spaceWagerCurrentRound, state.latestPrediction])
+    },[state.spaceWagerCurrentRound, state.latestPrediction])
 
 
     return (
