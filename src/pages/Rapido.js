@@ -191,7 +191,11 @@ export default () => {
                             return (
                                 
                                 <SwiperSlide key={k} >
-                                    <RapidoCard lotteryId={obj.lottery_id}/>
+                                    <RapidoCard 
+                                    lotteryId={obj.lottery_id}
+                                    winningCombination={obj.winning_number}
+                                    bonusNumber={obj.bonus_number}
+                                    />
                                 </SwiperSlide>
                             )
                         })}

@@ -7,7 +7,7 @@ import RapidoCardHeader from './RapidoCardHeader'
 
 
 export default function RapidoCard(props) {
-    const {lotteryId} = props;
+    const {lotteryId, winningCombination, bonusNumber} = props;
     const {state,dispatch} = useStore()
 
     const [fourNumbers, setFourNumbers] = useState([])
@@ -76,6 +76,8 @@ export default function RapidoCard(props) {
                 oneNumber={oneNumber}
                 multiplier={multiplier}
                 nrOfDraws={nrOfDraws}
+                winningCombination={winningCombination}
+                bonusNumber={bonusNumber}
             />
             <RapidoCardFooter
             enterDraw={() => enterDraw()}
