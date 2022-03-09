@@ -9,7 +9,7 @@ import { Lightning, Star } from 'phosphor-react'
 export default function RapidoCardFooter(props) {
 
     const {state,dispatch} = useStore()
-    const {enterDraw, multiplier, nrOfDraws, fourNumbers, oneNumber} = props;
+    const {enterDraw, multiplier, nrOfDraws, fourNumbers, oneNumber,winningCombination} = props;
 
     const validateTheTicket = (round) => { 
         if(fourNumbers.length < 4){
@@ -99,10 +99,10 @@ export default function RapidoCardFooter(props) {
                 </div>
                 
                 <div className="col-12">
-                    { state.wallet && state.wallet.hasOwnProperty('walletAddress') &&
+                    { state.wallet && state.wallet.hasOwnProperty('walletAddress') && winningCombination == null &&
                         <button onClick={() => validateTheTicket(1)} className="btn btn-special w-100" style={{background:'#A67244'}}>Enter</button>
                     }
-                    { state.wallet && !state.wallet.hasOwnProperty('walletAddress') &&
+                    { state.wallet && !state.wallet.hasOwnProperty('walletAddress') && winningCombination == null &&
                         <button className="btn btn-special w-100" style={{background:'#A67244'}} onClick={() => toast.error('Please connect your wallet')}>Connect wallet</button>
                     } 
                 </div>

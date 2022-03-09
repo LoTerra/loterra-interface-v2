@@ -1,5 +1,5 @@
 import { Trash, X } from 'phosphor-react'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useStore } from '../../store'
 
 
@@ -23,17 +23,21 @@ export default function RapidoCardBody(props) {
     } = props;
   
 
+    useEffect(()=>{
+        console.log(winningCombination)
+    },[winningCombination])
+
 
     return (
         <div className={'card-body'}>
-            { winningCombination == 'null' &&
+            { winningCombination == null &&
             <div className="row px-2">
                 <div className="col-12 p-2 mb-3" style={{border:'3px solid #048abf', borderRadius:'10px'}}>
                     <p className="fs-6 fw-bold text-center mb-0 label-four">Select 4 numbers</p>
                     <div className="btn-holder">
                         {[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16].map((obj,k) =>{
                             return (
-                                <button type="button" key={k} className={'nr-btn smaller'} value={obj} onClick={(e) => selectFourNumbers(obj)}>{obj}</button>
+                                <button type="button" key={k} className={'nr-btn smaller' + (checkInFour(obj) ? ' active': '')} value={obj} onClick={(e) => selectFourNumbers(obj)}>{obj}</button>
                             )
                         })}
                     </div>
@@ -91,7 +95,14 @@ export default function RapidoCardBody(props) {
             }    
             <div className="col-12 text-center">
                     <div className="col-12 mb-2">
-                        {winningCombination + ' - ' + bonusNumber}   
+                        <div className={'rapido-winning-combination'}>                       
+                        {winningCombination && winningCombination.map((nr,k) => {
+                            return (
+                                <span className="rapido-combi-nr big">{nr}</span>
+                            )
+                        })} 
+                        <span className="rapido-combi-nr g big">{bonusNumber}</span>
+                        </div>
                     </div>
                 </div>
         </div>

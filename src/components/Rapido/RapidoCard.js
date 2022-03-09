@@ -64,7 +64,10 @@ export default function RapidoCard(props) {
 
     return (
         <div className={'card rapido-card'}>
-            <RapidoCardHeader lotteryId={lotteryId}/>
+            <RapidoCardHeader 
+            lotteryId={lotteryId}
+            winningCombination={winningCombination}
+            />
             <RapidoCardBody
                 checkInFour={(a) => checkInFour(a)}
                 checkInOne={(a) => checkInOne(a)}
@@ -85,6 +88,7 @@ export default function RapidoCard(props) {
             nrOfDraws={nrOfDraws}
             fourNumbers={fourNumbers}
             oneNumber={oneNumber}
+            winningCombination={winningCombination}
             />
             
         </div>
