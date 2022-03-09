@@ -100,10 +100,10 @@ export default function RapidoCardFooter(props) {
                 
                 <div className="col-12">
                     { state.wallet && state.wallet.hasOwnProperty('walletAddress') && winningCombination == null &&
-                        <button onClick={() => validateTheTicket(1)} className="btn btn-special w-100" style={{background:'#A67244'}}>Enter</button>
+                        <button onClick={() => validateTheTicket(1)} className="btn btn-special w-100" style={{background:'#17b96b'}}>Enter</button>
                     }
                     { state.wallet && !state.wallet.hasOwnProperty('walletAddress') && winningCombination == null &&
-                        <button className="btn btn-special w-100" style={{background:'#A67244'}} onClick={() => toast.error('Please connect your wallet')}>Connect wallet</button>
+                        <button className="btn btn-special w-100" style={{background:'#17b96b'}} onClick={() => toast.error('Please connect your wallet')}>Connect wallet</button>
                     } 
                 </div>
             </div>

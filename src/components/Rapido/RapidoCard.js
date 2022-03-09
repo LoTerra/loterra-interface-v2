@@ -63,7 +63,7 @@ export default function RapidoCard(props) {
 
 
     return (
-        <div className={'card rapido-card'}>
+        <div className={'card rapido-card' + (winningCombination == null ? ' active' : '' )}>
             <RapidoCardHeader 
             lotteryId={lotteryId}
             winningCombination={winningCombination}

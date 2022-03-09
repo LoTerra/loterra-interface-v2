@@ -2,6 +2,31 @@
     background:#27498C;
     color:#fff;
     border: 0;
+
+    &.active {
+        background:#fff;
+        color:#000;
+        .label-four,.label-one {
+            color:#fff;
+        }
+        .rapido-combi-nr {
+            .d-block {
+                background:#f1f1f1 !important;
+                color:#000 !important;
+            }
+        }
+        .card-header {
+            background:#fff !important;
+            color:#000;
+            .text-muted {
+                color:#000 !important;
+            }
+        }
+        .card-footer {
+            background:#fff !important;
+            color:#000 !important;
+        }
+    }
 }   
 
 .btn-holder {
@@ -49,14 +74,16 @@
 }
 
 .nr-btn {
-    background:#27498C;
-    color:#fff;
-    padding:5px;
-    text-align:center;
-    border-radius:10px;
-    border:0;
-    box-shadow:inset 0px 0px 0px 3px #87809c4a;
-    transition:all 150ms linear;
+    background: #f5f5f5;
+    color: #161616;
+    padding: 5px;
+    text-align: center;
+    border-radius: 10px;
+    font-weight: 600;
+    border: 0;
+    box-shadow: inset 0px 0px 0px 3px #87809c4a;
+    transition: all 150ms linear;
+
     &.smaller {
         width: 10%;
         margin: 1%;
@@ -70,13 +97,19 @@
         margin: 2%;
     }
     &.active {
-        box-shadow:inset 0px 0px 0px 3px #048abf;
+        box-shadow: inset 0px 0px 0px 3px #048abf;
+        background: #048abf;
+        color: #fff;
     }
     &.active-g {
         box-shadow:inset 0px 0px 0px 3px #f2d230;
+        background: #f2d230;
+        color: #fff;
     }
     &.active-i {
-        box-shadow:inset 0px 0px 0px 3px #A67244;
+        box-shadow:inset 0px 0px 0px 3px #bf046b;
+        background: #bf046b;
+        color: #fff;
     }
     &:hover {
         background: #0c022469;

@@ -55,10 +55,7 @@ export default function RapidoCardBody(props) {
                 </div>
                 
                 <div className="col-12 mt-2">
-                    <div className="row">
-                        <div className="col-12">
-                        <p className="fs-6 fw-bold text-start mt-3 mb-0">Settings</p>
-                        </div>
+                    <div className="row">                     
                         <div className="col-5 d-flex">
                             <p className="mb-0 align-self-center">Multiplier</p>
                         </div>

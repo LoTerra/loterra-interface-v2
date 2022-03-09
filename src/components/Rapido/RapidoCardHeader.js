@@ -20,7 +20,7 @@ export default function RapidoCardHeader(props) {
                     { winningCombination == null ?
                         <p className="mb-0 rounded"
                         style={{
-                            background:'#A67244',
+                            background:'rgb(23, 185, 107)',
                             padding:'5px',
                             color:'#fff',
                             marginTop:'-23px',
