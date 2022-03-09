@@ -12,6 +12,7 @@ import 'swiper/swiper-bundle.min.css'
 import 'swiper/swiper.min.css'
 import { ArrowLeft, ArrowRight } from 'phosphor-react';
 import {WasmAPI} from "@terra-money/terra.js";
+import Pusher from "pusher-js";
 
 export default () => {
     const {state,dispatch} = useStore();
@@ -116,6 +117,22 @@ export default () => {
         )
     }
 
+    async function rapidoWebsocket(){
+        const pusher = new Pusher('c1288646a5093e3c0c7c', {
+            cluster: 'eu'
+        });
+        const channel = pusher.subscribe('rapido')
+
+        // Update rapido round every x seconds
+        channel.bind('round', function (data) {
+            dispatch({ type: 'setRapidoCurrentRound', message: data.message })
+        })
+
+        return () => {
+            pusher.unsubscribe('space-wager')
+        }
+    }
+
     useMemo(() =>{
         getRapidoState()
         getRapidoConfig()
@@ -140,6 +157,10 @@ export default () => {
             TODO: show the prediction loader here
          */
     },[rapidoState])
+
+    useMemo(()=> {
+        rapidoWebsocket()
+    }, [])
     return (
         <>
             <div className="w-100 py-3 pt-md-5 text-center">
