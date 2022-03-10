@@ -228,6 +228,8 @@ export default () => {
                                     lotteryId={obj.lottery_id}
                                     winningCombination={obj.winning_number}
                                     bonusNumber={obj.bonus_number}
+                                    isLotteryLive={obj.draw_time * 1000 > Date.now()}
+                                    drawTime={obj.draw_time}
                                     />
                                 </SwiperSlide>
                             )

@@ -1,6 +1,7 @@
 import { Trash, X } from 'phosphor-react'
 import React, { useEffect, useState } from 'react'
 import { useStore } from '../../store'
+import {WasmAPI} from "@terra-money/terra.js";
 
 
 export default function RapidoCardBody(props) {
@@ -19,18 +20,19 @@ export default function RapidoCardBody(props) {
         multiplier,
         nrOfDraws,
         winningCombination,
-        bonusNumber
+        bonusNumber,
+        lotteryId,
+        isLotteryLive
     } = props;
-  
+
 
     useEffect(()=>{
         console.log(winningCombination)
     },[winningCombination])
 
-
     return (
         <div className={'card-body'}>
-            { winningCombination == null &&
+            { isLotteryLive ?
             <div className="row px-2">
                 <div className="col-12 p-2 mb-3" style={{border:'3px solid #048abf', borderRadius:'10px'}}>
                     <p className="fs-6 fw-bold text-center mb-0 label-four">Select 4 numbers</p>
@@ -89,19 +91,31 @@ export default function RapidoCardBody(props) {
                     </div>
                 </div>      
             </div>
-            }    
+                : winningCombination != null && !isLotteryLive ?
             <div className="col-12 text-center">
-                    <div className="col-12 mb-2">
-                        <div className={'rapido-winning-combination'}>                       
-                        {winningCombination && winningCombination.map((nr,k) => {
+                <div className="col-12 mb-2">
+                    <div className={'rapido-winning-combination'}>
+                        { winningCombination.map((nr,k) => {
                             return (
                                 <span className="rapido-combi-nr big">{nr}</span>
                             )
-                        })} 
+                        })}
                         <span className="rapido-combi-nr g big">{bonusNumber}</span>
-                        </div>
                     </div>
                 </div>
+            </div>
+                    :
+            <div className="col-12 text-center">
+                <div className="col-12 mb-2">
+                    <div className={'rapido-winning-combination'}>
+                        Draw is happening
+                        May the luck be with you!
+                    </div>
+                </div>
+            </div>
+
+            }    
+
         </div>
     )
 }

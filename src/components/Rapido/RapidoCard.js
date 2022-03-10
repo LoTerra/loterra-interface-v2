@@ -1,19 +1,24 @@
 import { Trash } from 'phosphor-react'
-import React, { useState } from 'react'
+import React, {useEffect, useState} from 'react'
 import { useStore } from '../../store'
 import RapidoCardBody from './RapidoCardBody'
 import RapidoCardFooter from './RapidoCardFooter'
 import RapidoCardHeader from './RapidoCardHeader'
+import {WasmAPI} from "@terra-money/terra.js";
 
 
 export default function RapidoCard(props) {
-    const {lotteryId, winningCombination, bonusNumber} = props;
+
+    const {lotteryId, winningCombination, bonusNumber, drawTime, isLotteryLive} = props;
     const {state,dispatch} = useStore()
 
     const [fourNumbers, setFourNumbers] = useState([])
     const [oneNumber, setOneNumber] = useState([])
     const [multiplier, setMultiplier] = useState(1)
     const [nrOfDraws, setNrOfDraws] = useState(1)
+    let [userGames, setUserGames] = useState([]);
+
+    const api = new WasmAPI(state.lcd_client_testnet.apiRequester)
 
     const selectFourNumbers = (nr) => {
         if(checkInFour(nr)){
@@ -62,11 +67,31 @@ export default function RapidoCard(props) {
     }
 
 
+    async function get_user_combination(){
+        let rapido_games = await api.contractQuery(
+            state.rapidoAddress,
+            {
+                games: {
+                    round: lotteryId,
+                    player: state.wallet.walletAddress
+                }
+            }
+        );
+
+        setUserGames([...rapido_games])
+
+    }
+
+    useEffect(() => {
+        get_user_combination()
+    }, [state.wallet.walletAddress])
+
     return (
-        <div className={'card rapido-card' + (winningCombination == null ? ' active' : '' )}>
+        <div className={'card rapido-card' + (isLotteryLive ? ' active' : '' )}>
             <RapidoCardHeader 
             lotteryId={lotteryId}
             winningCombination={winningCombination}
+            isLotteryLive={isLotteryLive}
             />
             <RapidoCardBody
                 checkInFour={(a) => checkInFour(a)}
@@ -81,6 +106,8 @@ export default function RapidoCard(props) {
                 nrOfDraws={nrOfDraws}
                 winningCombination={winningCombination}
                 bonusNumber={bonusNumber}
+                lotteryId={lotteryId}
+                isLotteryLive={isLotteryLive}
             />
             <RapidoCardFooter
             enterDraw={() => enterDraw()}
@@ -89,6 +116,8 @@ export default function RapidoCard(props) {
             fourNumbers={fourNumbers}
             oneNumber={oneNumber}
             winningCombination={winningCombination}
+            isLotteryLive={isLotteryLive}
+            userGames={userGames}
             />
             
         </div>
