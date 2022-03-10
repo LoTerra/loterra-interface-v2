@@ -17,9 +17,8 @@ import Pusher from "pusher-js";
 export default () => {
     const {state,dispatch} = useStore();
     const terra = state.lcd_client
-    const [rapidoState, setRapidoState] = useState({round: null})
-    const [lotteries, setlotteries] = useState([]);
-    const [drawTime, setDrawTime] = useState(0)
+    const [rapidoState, setRapidoState] = useState({})
+    const [lotteries, setlotteries] = useState([{round: null}]);
 
     const [config,setConfig] = useState({
         denom: "uusd",
@@ -84,7 +83,8 @@ export default () => {
 
             // Set the array of lotteries
             setlotteries([...lotteries_state])
-            setDrawTime(lotteries_state.pop())
+
+
             /*
                 TODO: dismiss the prediction loader here
              */
@@ -96,15 +96,15 @@ export default () => {
 
     function formatTime(){
 
-        let timeBetween = drawTime.draw_time * 1000 - Date.now()
-        console.log('time-' + drawTime.draw_time)
+        let timeBetween = lotteries[lotteries.length - 1].draw_time * 1000 - Date.now()
+        console.log('time-' + lotteries[lotteries.length - 1].draw_time)
         const seconds = Math.floor((timeBetween / 1000) % 60)
         const minutes = Math.floor((timeBetween / 1000 / 60) % 60)
         let format_minutes = minutes < 10 ? "0" + minutes : minutes;
         let format_seconds = seconds < 10 ? "0" + seconds : seconds;
 
         let format_message = "Closing..."
-        if (drawTime.draw_time * 1000 > Date.now()){
+        if (lotteries[lotteries.length - 1].draw_time * 1000 > Date.now()){
             format_message = format_minutes + ":" + format_seconds
 
             return(
@@ -142,7 +142,7 @@ export default () => {
         setInterval(() => {
             formatTime()
         }, 1000)
-    }, [drawTime])
+    }, [])
 
     useEffect(() =>{
         getRapidoState()
@@ -175,7 +175,7 @@ export default () => {
                                 <p className="mb-0 text-normal text-muted card-label">
                                 Round ends in
                                 </p>
-                                {drawTime && formatTime() || "00:00"}
+                                {lotteries.length != 0 && formatTime() || "00:00"}
                             </div>
                         </div>
                     </div>

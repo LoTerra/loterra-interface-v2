@@ -9,9 +9,10 @@ import { Lightning, Star } from 'phosphor-react'
 export default function RapidoCardFooter(props) {
 
     const {state,dispatch} = useStore()
-    const {enterDraw, multiplier, nrOfDraws, fourNumbers, oneNumber,winningCombination} = props;
+    const {enterDraw, multiplier, nrOfDraws, fourNumbers, oneNumber, winningCombination} = props;
 
-    const validateTheTicket = (round) => { 
+    const validateTheTicket = (round) => {
+
         if(fourNumbers.length < 4){
             console.log('Please select 4 blue numbers')
             toast.error('Please select 4 blue numbers')
@@ -29,10 +30,19 @@ export default function RapidoCardFooter(props) {
             toast.error('Please select a number of draw')
             return;
         }
+
         let msg = new MsgExecuteContract(
             state.wallet.walletAddress,
             state.rapidoAddress,
-            { uusd: parseFloat(multiplier) * 1000000 },
+            {
+                    register: {
+                        numbers: [...fourNumbers, ...oneNumber],
+                        multiplier: String(parseInt(multiplier) * 1000000) ,
+                        live_round: nrOfDraws,
+                        //address: None
+                    }
+                },
+            { uusd: (multiplier * nrOfDraws)  * 1000000 },
         )
         state.wallet
             .post({
