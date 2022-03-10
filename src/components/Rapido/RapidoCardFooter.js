@@ -38,7 +38,7 @@ export default function RapidoCardFooter(props) {
                     register: {
                         numbers: [...fourNumbers, ...oneNumber],
                         multiplier: String(parseInt(multiplier) * 1000000) ,
-                        live_round: nrOfDraws,
+                        live_round: parseInt(nrOfDraws),
                         //address: None
                     }
                 },
