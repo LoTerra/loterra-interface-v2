@@ -216,6 +216,11 @@
     @media(max-width:650px){
         width:100%;
     }
+
+    &.draws {
+        width:100%;
+        padding:45px;
+    }
 }
 
 .swiper-slide-active {
