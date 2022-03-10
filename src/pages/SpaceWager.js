@@ -269,6 +269,9 @@ export default () => {
     }, [state.latestPrediction])
 
 
+    
+
+
     //Change on lunaprice state change
     useEffect(() =>  {       
       // if(config) {

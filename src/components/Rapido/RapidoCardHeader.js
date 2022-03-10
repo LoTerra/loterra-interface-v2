@@ -11,9 +11,7 @@ export default function RapidoCardHeader(props) {
 
     return (
         <div className="card-header"
-        style={{
-            background:'#27498C',
-        }}
+        style={{borderBottom:0}}
         >                             
                 <div className="row">
                     <div className="col-6 text-start">

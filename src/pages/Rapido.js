@@ -4,6 +4,8 @@ import { useStore } from '../store'
 import RapidoCard from '../components/Rapido/RapidoCard';
 import { Clock } from 'phosphor-react'
 import SwiperCore, { Navigation, Pagination ,Autoplay,EffectFade } from 'swiper';
+import { useLocation } from 'react-router-dom';
+
 
 SwiperCore.use([Navigation, Pagination,Autoplay,EffectFade ]);
 
@@ -16,9 +18,9 @@ import Pusher from "pusher-js";
 
 export default () => {
     const {state,dispatch} = useStore();
-    const terra = state.lcd_client
+
     const [rapidoState, setRapidoState] = useState({})
-    const [lotteries, setlotteries] = useState([{round: null}]);
+    const [lotteries, setlotteries] = useState([{}]);
 
     const [config,setConfig] = useState({
         denom: "uusd",
@@ -97,7 +99,6 @@ export default () => {
     function formatTime(){
 
         let timeBetween = state.rapidoCurrentTimeRound * 1000 - Date.now()
-        console.log('time-' + state.rapidoCurrentTimeRound)
         const seconds = Math.floor((timeBetween / 1000) % 60)
         const minutes = Math.floor((timeBetween / 1000 / 60) % 60)
         let format_minutes = minutes < 10 ? "0" + minutes : minutes;
@@ -105,20 +106,49 @@ export default () => {
 
         let format_message = "Closing..."
         if (state.rapidoCurrentTimeRound * 1000 > Date.now()){
-            format_message = format_minutes + ":" + format_seconds
+            format_message = format_minutes + ":" +format_seconds
 
             return(
-            <>
-                <Clock size={32} style={{position:'relative', top:'-8px'}} className="d-none d-md-inline-block" weight={'bold'}/>
-                <h2 className="fs-2 fw-bold d-inline-block mb-0">{format_message}</h2>
-            </>
+                <>
+                    <Clock size={32} style={{position:'relative', top:'-8px'}} className="d-none d-md-inline-block" weight={'bold'}/>
+                    <h2 className="fs-2 fw-bold d-inline-block mb-0">{format_message}</h2>
+                </>
             )
         }
 
         return (
             <span className="fs-6">{format_message}</span>
         )
+
+        //   console.log(currentTime, expiryTimestamp)
+
     }
+
+    // function formatTime(){
+    //
+    //     let timeBetween = state.rapidoCurrentTimeRound * 1000 - Date.now()
+    //     console.log('time-' + state.rapidoCurrentTimeRound)
+    //     const seconds = Math.floor((timeBetween / 1000) % 60)
+    //     const minutes = Math.floor((timeBetween / 1000 / 60) % 60)
+    //     let format_minutes = minutes < 10 ? "0" + minutes : minutes;
+    //     let format_seconds = seconds < 10 ? "0" + seconds : seconds;
+    //
+    //     let format_message = "Closing..."
+    //     if (state.rapidoCurrentTimeRound * 1000 > Date.now()){
+    //         format_message = format_minutes + ":" + format_seconds
+    //
+    //         return(
+    //         <>
+    //             <Clock size={32} style={{position:'relative', top:'-8px'}} className="d-none d-md-inline-block" weight={'bold'}/>
+    //             <h2 className="fs-2 fw-bold d-inline-block mb-0">{format_message}</h2>
+    //         </>
+    //         )
+    //     }
+    //
+    //     return (
+    //         <span className="fs-6">{format_message}</span>
+    //     )
+    // }
 
     async function rapidoWebsocket(){
         const pusher = new Pusher('c1288646a5093e3c0c7c', {
@@ -141,13 +171,14 @@ export default () => {
         }
     }
 
-    useEffect(() =>{
-
-    }, [])
 
     useEffect(() =>{
         getRapidoState()
         getRapidoConfig()
+
+        setInterval(() => {
+            formatTime()
+        }, 1000)
     },[])
 
     useEffect(() =>{
@@ -158,6 +189,9 @@ export default () => {
             TODO: show a loader | Loading current lotteries...
          */
     },[rapidoState.round])
+
+
+
 
     useMemo(()=> {
         rapidoWebsocket()
@@ -192,6 +226,13 @@ export default () => {
                     </div>
                 </div>
             </div>
+            { lotteries.length <= 1 &&
+            <div className="w-100 py-5 text-center">
+                <div class="spinner-grow text-primary " role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>    
+            </div>
+            }
                 {lotteries.length > 0 &&
                     <Swiper
                         spaceBetween={50}
@@ -200,7 +241,7 @@ export default () => {
                             prevEl: '.swiper-prev',
                         }}
                         //   modules={[Navigation, Pagination, A11y]}                           
-                        initialSlide={rapidoState.round}
+                
                         slidesPerView={1}
                         breakpoints={{
                             // when window width is >= 640px
@@ -218,17 +259,21 @@ export default () => {
                                 slidesPerView: 1,
                             },
                         }}
-                        onSlideChange={() => console.log('slide change')}
+                        initialSlide={4}
+                        onSlideChange={(swiper) => console.log('slide change',swiper.realIndex)}
                         onSwiper={(swiper) => console.log(swiper)}
                     >
-                        { lotteries.length > 0 && lotteries.map((obj, k) => {
+                        { lotteries.length > 1 && lotteries.map((obj, k) => {
                             
                             return (
                                 
-                                <SwiperSlide key={obj.lottery_id} >
-                                    <RapidoCard
-                                        key={obj.lottery_id}
-                                        lotteryId={obj.lottery_id}
+
+                                <SwiperSlide key={k} >
+                                    <RapidoCard 
+                                    key={obj.lottery_id+k}
+                                    id={k}
+                                    dataLength={lotteries.length}
+                                    lotteryId={obj.lottery_id}
                                     winningCombination={obj.winning_number}
                                     bonusNumber={obj.bonus_number}
                                     isLotteryLive={obj.draw_time * 1000 > Date.now()}

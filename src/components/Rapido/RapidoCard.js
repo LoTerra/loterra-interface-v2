@@ -43,8 +43,6 @@ export default function RapidoCard(props) {
 
     function currentLottery(){
         if (isLotteryLive){
-            console.log("drawTime")
-            console.log(drawTime)
             dispatch({ type: 'setRapidoCurrentTimeRound', message: drawTime })
         }
     }
