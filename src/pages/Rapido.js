@@ -168,13 +168,18 @@ export default () => {
     }, [])
     return (
         <>
-            <div className="w-100 py-3 pt-md-5 text-center">
+            <div className="w-100 py-3 pt-md-5 text-center mb-4">
                 <h1 className="mb-0 fw-bold" style={{textShadow:'1px 1px 10px #14053b'}}>Rapido</h1>
                 <h2 className="my-2 fw-regular fs-6 mb-0">One draw every 5 minutes</h2>
             </div>
             <div className="container">
-                <div className="col-12 col-md-4 order-3 order-md-2 text-center">
-                    <div className="card lota-card h-100">
+                
+          
+
+            <div className="row">
+                <div className="col-md-7 p-5">
+                <div className="col-12 text-center">
+                    <div className="card rapido-card h-100">
                         <div className="card-body d-flex">
                             <div className="align-self-center w-100 mb-0 text-white">
                                 <p className="mb-0 text-normal text-muted card-label">
@@ -185,7 +190,37 @@ export default () => {
                         </div>
                     </div>
                 </div>
-            <div className="w-100 order-4 my-3">
+                    <div className="col-12 mb-4">
+                        
+                        <h2 className="fw-bold mb-2 mt-4">Current draw</h2>
+                        { lotteries.length > 0 && lotteries.filter(a => a.draw_time == new Date() * 1000 ).map(obj => {
+                            <RapidoCard 
+                            key={obj.lottery_id+k}
+                            id={k}
+                            dataLength={lotteries.length}
+                            lotteryId={obj.lottery_id}
+                            winningCombination={obj.winning_number}
+                            bonusNumber={obj.bonus_number}
+                            isLotteryLive={obj.draw_time * 1000 > Date.now()}
+                            drawTime={obj.draw_time}
+                            />
+                        })
+                        }
+                        { lotteries.length > 0 && lotteries.filter(a => a.draw_time == new Date() * 1000 ).length == 0 &&
+                            <div style={{
+                                width:'100%',
+                                padding:'25px',
+                                textAlign:'center',
+                                background:'#0c3273b5',
+                                borderRadius:'10px'
+                            }}>
+                                No live draw
+                            </div>
+                        }
+                    </div>
+                    <div className="col-12 overflow-hidden mb-4">
+                        <h2 className="fw-bold ">Last draws</h2>
+                        <div className="w-100 order-4 my-3 mb-5">
                 <div className="row">
                     <div className="col-6 text-end">
                         <button className="swiper-prev btn btn-plain pb-2"><ArrowLeft size={24} /></button>
@@ -195,7 +230,7 @@ export default () => {
                     </div>
                 </div>
             </div>
-            { lotteries.length <= 1 &&
+                    { lotteries.length <= 1 &&
             <div className="w-100 py-5 text-center">
                 <div class="spinner-grow text-primary " role="status">
                     <span class="visually-hidden">Loading...</span>
@@ -232,7 +267,7 @@ export default () => {
                         onSlideChange={(swiper) => console.log('slide change',swiper.realIndex)}
                         onSwiper={(swiper) => console.log(swiper)}
                     >
-                        { lotteries.length > 1 && lotteries.map((obj, k) => {
+                        { lotteries.length > 1 && lotteries.filter((a) => a.winning_number !== null).map((obj, k) => {
                             
                             return (
                                 
@@ -252,6 +287,40 @@ export default () => {
                         })}
                     </Swiper>
                 }
+                    </div>
+                </div>
+                <div className="col-md-5 px-5">
+                { lotteries.length <= 1 &&
+            <div className="w-100 py-5 text-center">
+                <div class="spinner-grow text-primary " role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>    
+            </div>
+            }
+                {               
+                       lotteries.length > 1 && lotteries.filter((a) => a.winning_number == null).map((obj, k) => {
+                            
+                            return (
+                                
+                               
+                                    <RapidoCard 
+                                    key={obj.lottery_id+k}
+                                    id={k}
+                                    dataLength={lotteries.length}
+                                    lotteryId={obj.lottery_id}
+                                    winningCombination={obj.winning_number}
+                                    bonusNumber={obj.bonus_number}
+                                    isLotteryLive={obj.draw_time * 1000 > Date.now()}
+                                    drawTime={obj.draw_time}
+                                    />
+                              
+                            )
+                        })}               
+                
+                </div>
+            </div>
+
+            
             </div>
 
             <div className="container py-5">
