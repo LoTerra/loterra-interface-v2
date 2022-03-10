@@ -95,7 +95,7 @@ export default function RapidoCardFooter(props) {
     return (
         <>
             {
-                isLotteryLive ?
+                fourNumbers.length != 0 || oneNumber.length != 0 && isLotteryLive ?
                 <div className="card-footer pb-3" style={{background:'#27498C'}}>
                     <div className="row">
                         <div className="col-12 text-start mt-1">
@@ -111,7 +111,7 @@ export default function RapidoCardFooter(props) {
 
                                         <span key={k} className={"rapido-combi-nr" + (obj == 5 ? ' g' : '')}>
 
-                                    <span className="d-block" style={{background:'#27498C',fontSize:'13px',fontWeight:300}}>
+                                    <span className="d-block" style={{background:'#7a5ec7',fontSize:'13px',fontWeight:300}}>
                                         {obj}
                                     </span>
                                             {
@@ -140,10 +140,10 @@ export default function RapidoCardFooter(props) {
 
                         <div className="col-12">
                             { state.wallet && state.wallet.hasOwnProperty('walletAddress') && winningCombination == null &&
-                            <button onClick={() => validateTheTicket(1)} className="btn btn-special w-100" style={{background:'#17b96b'}}>Enter</button>
+                            <button onClick={() => validateTheTicket(1)} className="btn btn-special w-100" style={{background:'#7a5ec7'}}>Enter</button>
                             }
                             { state.wallet && !state.wallet.hasOwnProperty('walletAddress') && winningCombination == null &&
-                            <button className="btn btn-special w-100" style={{background:'#17b96b'}} onClick={() => toast.error('Please connect your wallet')}>Connect wallet</button>
+                            <button className="btn btn-special w-100" style={{background:'#7a5ec7'}} onClick={() => toast.error('Please connect your wallet')}>Connect wallet</button>
                             }
                         </div>
                     </div>

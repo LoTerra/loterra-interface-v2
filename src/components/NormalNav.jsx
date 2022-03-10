@@ -32,11 +32,10 @@ useEffect(() => {
 
     //Change background
     if(rapidoClass == 'active'){
-        document.body.setAttribute('style', 'background: radial-gradient(97.8% 97.8% at 52.12% 2.2%, #87B3FF 0%, #0C3273 100%), #001945;')
+        document.body.setAttribute('style', 'background: #210a5c')
         
     } else {
         document.body.setAttribute('style', 'background: #210a5c;')
-
     }
 
     stakingClass = location.pathname.match(/^\/staking/) ? 'active' : ''

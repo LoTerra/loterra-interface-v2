@@ -19,7 +19,7 @@ export default function RapidoCardHeader(props) {
                     { isLotteryLive ?
                         <p className="mb-0 rounded"
                         style={{
-                            background:'rgb(23, 185, 107)',
+                            background:'#7a5ec7',
                             padding:'5px',
                             color:'#fff',
                             marginTop:'-23px',
@@ -31,7 +31,7 @@ export default function RapidoCardHeader(props) {
                         : winningCombination == null ?
                         <p className="mb-0 rounded"
                         style={{
-                            background:'rgb(33 10 92)',
+                            background:'#7a5ec740',
                             padding:'5px',
                             color:'#fff',
                             marginTop:'-23px',
@@ -43,7 +43,7 @@ export default function RapidoCardHeader(props) {
                             :
                             <p className="mb-0 rounded"
                                style={{
-                                   background:'rgb(33 10 92)',
+                                   background:'#BF046B',
                                    padding:'5px',
                                    color:'#fff',
                                    marginTop:'-23px',

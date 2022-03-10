@@ -30,7 +30,7 @@ export default function RapidoCardBody(props) {
         <div className={'card-body'}>
             { isLotteryLive ?
             <div className="row px-2">
-                <div className="col-12 p-2 mb-3" style={{border:'3px solid #1890FF', borderRadius:'10px'}}>
+                <div className="col-12 p-2 mb-3" style={{border:'3px solid #048ABF', borderRadius:'10px'}}>
                     <p className="fs-6 fw-bold text-center mb-0 label-four">Select 4 numbers</p>
                     <div className="btn-holder">
                         {[1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,16].map((obj,k) =>{
@@ -40,7 +40,7 @@ export default function RapidoCardBody(props) {
                         })}
                     </div>
                 </div>
-                <div className="col-12 p-2" style={{border:'3px solid #FFC700', borderRadius:'10px'}}>
+                <div className="col-12 p-2" style={{border:'3px solid #F2D230', borderRadius:'10px'}}>
                 <p className="fs-6 fw-bold text-center mb-0 label-one">Select 1 star</p>
                     <div className="btn-holder">
                     {[1,2,3,4,5,6,7,8].map((obj,k) =>{
@@ -65,7 +65,7 @@ export default function RapidoCardBody(props) {
                                 marginBottom:'-4px'
                             }}
                             >Multiplier</span>
-                            {obj}UST
+                            x{obj} {' '} UST
                         </button>
                         )
                     })}                      
@@ -77,7 +77,7 @@ export default function RapidoCardBody(props) {
                             <p className="mb-0 align-self-center">Number of draw</p>
                         </div>
                         <div className="col-5">
-                            <select className="form-control" onChange={(e) => selectNrOfDraws(e.target.value)}>
+                            <select className="form-control text-center" onChange={(e) => selectNrOfDraws(e.target.value)}>
                             {[1,2,3,4,5,10,20,30,40,50].map((obj,k) =>{
                                     return (
                                         <option key={k} value={obj}>{obj}</option>
