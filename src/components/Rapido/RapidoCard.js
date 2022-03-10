@@ -41,6 +41,14 @@ export default function RapidoCard(props) {
         console.log(fourNumbers)
     }
 
+    function currentLottery(){
+        if (isLotteryLive){
+            console.log("drawTime")
+            console.log(drawTime)
+            dispatch({ type: 'setRapidoCurrentTimeRound', message: drawTime })
+        }
+    }
+
     const checkInFour = (nr) => {
         return fourNumbers.indexOf(nr) > -1
     }
@@ -104,7 +112,9 @@ export default function RapidoCard(props) {
     }
 
     useEffect(() => {
+        setUserGames([])
         get_user_combination()
+        currentLottery()
     }, [state.wallet.walletAddress, state.rapidoCurrentRound])
 
     return (

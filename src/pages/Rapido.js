@@ -40,7 +40,7 @@ export default () => {
                 }
             );
             console.log('state',rapido_state)
-            setRapidoState(rapido_state)
+            setRapidoState({...rapido_state})
             dispatch({ type: 'setRapidoCurrentRound', message: rapido_state.round })
         } catch(e) {
             console.log(e)
@@ -96,15 +96,15 @@ export default () => {
 
     function formatTime(){
 
-        let timeBetween = lotteries[lotteries.length - 1].draw_time * 1000 - Date.now()
-        console.log('time-' + lotteries[lotteries.length - 1].draw_time)
+        let timeBetween = state.rapidoCurrentTimeRound * 1000 - Date.now()
+        console.log('time-' + state.rapidoCurrentTimeRound)
         const seconds = Math.floor((timeBetween / 1000) % 60)
         const minutes = Math.floor((timeBetween / 1000 / 60) % 60)
         let format_minutes = minutes < 10 ? "0" + minutes : minutes;
         let format_seconds = seconds < 10 ? "0" + seconds : seconds;
 
         let format_message = "Closing..."
-        if (lotteries[lotteries.length - 1].draw_time * 1000 > Date.now()){
+        if (state.rapidoCurrentTimeRound * 1000 > Date.now()){
             format_message = format_minutes + ":" + format_seconds
 
             return(
@@ -129,8 +129,11 @@ export default () => {
         // Update rapido round every x seconds
         channel.bind('state', function (data) {
             let new_rapido_state = JSON.parse(data.message);
-            setRapidoState(new_rapido_state)
-            dispatch({ type: 'setRapidoCurrentRound', message: new_rapido_state.round })
+            if (rapidoState.round != new_rapido_state.round){
+                setRapidoState({...new_rapido_state})
+                dispatch({ type: 'setRapidoCurrentRound', message: new_rapido_state.round })
+            }
+
         })
 
         return () => {
@@ -139,9 +142,7 @@ export default () => {
     }
 
     useEffect(() =>{
-        setInterval(() => {
-            formatTime()
-        }, 1000)
+
     }, [])
 
     useEffect(() =>{
@@ -150,17 +151,18 @@ export default () => {
     },[])
 
     useEffect(() =>{
-        if (rapidoState){
+        if (rapidoState.round){
             getRapidoLotteries()
         }
         /*
             TODO: show a loader | Loading current lotteries...
          */
-    },[rapidoState])
+    },[rapidoState.round])
 
     useMemo(()=> {
         rapidoWebsocket()
     }, [])
+
     return (
         <>
             <div className="w-100 py-3 pt-md-5 text-center">
@@ -175,7 +177,7 @@ export default () => {
                                 <p className="mb-0 text-normal text-muted card-label">
                                 Round ends in
                                 </p>
-                                {lotteries.length != 0 && formatTime() || "00:00"}
+                                {state.rapidoCurrentTimeRound && formatTime() || "00:00"}
                             </div>
                         </div>
                     </div>
@@ -223,9 +225,10 @@ export default () => {
                             
                             return (
                                 
-                                <SwiperSlide key={k} >
-                                    <RapidoCard 
-                                    lotteryId={obj.lottery_id}
+                                <SwiperSlide key={obj.lottery_id} >
+                                    <RapidoCard
+                                        key={obj.lottery_id}
+                                        lotteryId={obj.lottery_id}
                                     winningCombination={obj.winning_number}
                                     bonusNumber={obj.bonus_number}
                                     isLotteryLive={obj.draw_time * 1000 > Date.now()}
