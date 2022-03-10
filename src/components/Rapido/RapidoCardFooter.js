@@ -9,7 +9,7 @@ import { Lightning, Star } from 'phosphor-react'
 export default function RapidoCardFooter(props) {
 
     const {state,dispatch} = useStore()
-    const {enterDraw, multiplier, nrOfDraws, fourNumbers, oneNumber, winningCombination, isLotteryLive, userGames} = props;
+    const {enterDraw, multiplier, nrOfDraws, fourNumbers, oneNumber, winningCombination, isLotteryLive, userGames, loadMore, isLastItem, lotteryId} = props;
 
     const validateTheTicket = (round) => {
 
@@ -57,7 +57,37 @@ export default function RapidoCardFooter(props) {
                 }
             })
             .catch((e) => {
-                dispatch({ type: 'setIsUserMakingPrediction', message: false })
+                console.log(e)
+            })
+    }
+
+    const checkLottoNumbers = (game_id) => {
+
+        let msg = new MsgExecuteContract(
+            state.wallet.walletAddress,
+            state.rapidoAddress,
+            {
+                collect: {
+                    round: lotteryId,
+                    player: state.wallet.walletAddress,
+                    game_id: [game_id],
+                },
+            }
+        )
+
+        state.wallet
+            .post({
+                msgs: [msg],
+            })
+            .then((e) => {
+                if (e.success) {
+                    toast.success('Successfully checked lottery numbers!')
+                } else {
+                    toast.error('Something went wrong, please try again')
+                    console.log(e)
+                }
+            })
+            .catch((e) => {
                 console.log(e)
             })
     }
@@ -132,11 +162,25 @@ export default function RapidoCardFooter(props) {
                             "resolved": false,
                             "game_id": 0
                         }*/}
-                        {userGames.map(game => (
-                            <>
-                                <div>ticket number #{game.game_id + 1} | {game.number[0]} {game.number[1]} {game.number[2]} {game.number[3]} | bonus: {game.bonus} </div>
-                            </>
-                        ))}
+                        {userGames.length != 0 && winningCombination != null ? <>
+                            {
+                                userGames.map(game => (
+                                    <>
+                                        <div>ticket number #{game.game_id + 1} | {game.number[0]} {game.number[1]} {game.number[2]} {game.number[3]} | bonus: {game.bonus}
+                                            <button disabled={game.resolved} onClick= { () =>
+                                                checkLottoNumbers(game.game_id)
+                                            }> Check lotto numbers </button>
+                                        </div>
+
+                                    </>
+                                ))
+                            }
+                            <button disabled={isLastItem} onClick= { () =>
+                                loadMore(userGames[userGames.length - 1].game_id)
+                            }> Load More </button>
+                        </>: <></>
+                        }
+
                     </div>
             }
 

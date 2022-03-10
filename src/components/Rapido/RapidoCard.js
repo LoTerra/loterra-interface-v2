@@ -16,7 +16,8 @@ export default function RapidoCard(props) {
     const [oneNumber, setOneNumber] = useState([])
     const [multiplier, setMultiplier] = useState(1)
     const [nrOfDraws, setNrOfDraws] = useState(1)
-    let [userGames, setUserGames] = useState([]);
+    const [userGames, setUserGames] = useState([]);
+    const [isLastItem, setIsLastItem] = useState(false);
 
     const api = new WasmAPI(state.lcd_client_testnet.apiRequester)
 
@@ -67,24 +68,44 @@ export default function RapidoCard(props) {
     }
 
 
-    async function get_user_combination(){
+    async function get_user_combination(last_element){
+        const default_limit = 5
+        let query = {
+            games: {
+                round: lotteryId,
+                player: state.wallet.walletAddress,
+                limit: default_limit
+            }
+        }
+
+        if (last_element){
+            query.games.start_after = last_element
+        }
+
         let rapido_games = await api.contractQuery(
             state.rapidoAddress,
-            {
-                games: {
-                    round: lotteryId,
-                    player: state.wallet.walletAddress
-                }
-            }
+            query
         );
 
-        setUserGames([...rapido_games])
+        if (rapido_games.length != 0){
+            if (last_element){
+                setUserGames([...userGames, ...rapido_games])
 
+            }else{
+                setUserGames([...rapido_games])
+            }
+        }
+
+        if (rapido_games.length < 5) {
+            setIsLastItem(true)
+        }else {
+            setIsLastItem(false)
+        }
     }
 
     useEffect(() => {
         get_user_combination()
-    }, [state.wallet.walletAddress])
+    }, [state.wallet.walletAddress, state.rapidoCurrentRound])
 
     return (
         <div className={'card rapido-card' + (isLotteryLive ? ' active' : '' )}>
@@ -118,6 +139,9 @@ export default function RapidoCard(props) {
             winningCombination={winningCombination}
             isLotteryLive={isLotteryLive}
             userGames={userGames}
+            loadMore={get_user_combination}
+            isLastItem={isLastItem}
+            lotteryId={lotteryId}
             />
             
         </div>
