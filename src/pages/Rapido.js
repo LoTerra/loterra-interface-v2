@@ -4,8 +4,6 @@ import { useStore } from '../store'
 import RapidoCard from '../components/Rapido/RapidoCard';
 import { Clock } from 'phosphor-react'
 import SwiperCore, { Navigation, Pagination ,Autoplay,EffectFade } from 'swiper';
-import { useLocation } from 'react-router-dom';
-
 
 SwiperCore.use([Navigation, Pagination,Autoplay,EffectFade ]);
 
@@ -21,6 +19,7 @@ export default () => {
 
     const [rapidoState, setRapidoState] = useState({})
     const [lotteries, setlotteries] = useState([{}]);
+    const [timeBetween, setTimeBetween] = useState(0)
 
     const [config,setConfig] = useState({
         denom: "uusd",
@@ -41,7 +40,6 @@ export default () => {
                     state: {}
                 }
             );
-            console.log('state',rapido_state)
             setRapidoState({...rapido_state})
             dispatch({ type: 'setRapidoCurrentRound', message: rapido_state.round })
         } catch(e) {
@@ -96,59 +94,29 @@ export default () => {
         }        
     }
 
-    function formatTime(){
 
-        let timeBetween = state.rapidoCurrentTimeRound * 1000 - Date.now()
+    function formatTime(){
         const seconds = Math.floor((timeBetween / 1000) % 60)
         const minutes = Math.floor((timeBetween / 1000 / 60) % 60)
         let format_minutes = minutes < 10 ? "0" + minutes : minutes;
         let format_seconds = seconds < 10 ? "0" + seconds : seconds;
 
         let format_message = "Closing..."
-        if (state.rapidoCurrentTimeRound * 1000 > Date.now()){
-            format_message = format_minutes + ":" +format_seconds
+        if (state.rapidoCurrentTimeRound  * 1000 > Date.now()){
+            format_message = format_minutes + ":" + format_seconds
 
             return(
-                <>
-                    <Clock size={32} style={{position:'relative', top:'-8px'}} className="d-none d-md-inline-block" weight={'bold'}/>
-                    <h2 className="fs-2 fw-bold d-inline-block mb-0">{format_message}</h2>
-                </>
+            <>
+                <Clock size={32} style={{position:'relative', top:'-8px'}} className="d-none d-md-inline-block" weight={'bold'}/>
+                <h2 className="fs-2 fw-bold d-inline-block mb-0">{format_message}</h2>
+            </>
             )
         }
 
         return (
             <span className="fs-6">{format_message}</span>
         )
-
-        //   console.log(currentTime, expiryTimestamp)
-
     }
-
-    // function formatTime(){
-    //
-    //     let timeBetween = state.rapidoCurrentTimeRound * 1000 - Date.now()
-    //     console.log('time-' + state.rapidoCurrentTimeRound)
-    //     const seconds = Math.floor((timeBetween / 1000) % 60)
-    //     const minutes = Math.floor((timeBetween / 1000 / 60) % 60)
-    //     let format_minutes = minutes < 10 ? "0" + minutes : minutes;
-    //     let format_seconds = seconds < 10 ? "0" + seconds : seconds;
-    //
-    //     let format_message = "Closing..."
-    //     if (state.rapidoCurrentTimeRound * 1000 > Date.now()){
-    //         format_message = format_minutes + ":" + format_seconds
-    //
-    //         return(
-    //         <>
-    //             <Clock size={32} style={{position:'relative', top:'-8px'}} className="d-none d-md-inline-block" weight={'bold'}/>
-    //             <h2 className="fs-2 fw-bold d-inline-block mb-0">{format_message}</h2>
-    //         </>
-    //         )
-    //     }
-    //
-    //     return (
-    //         <span className="fs-6">{format_message}</span>
-    //     )
-    // }
 
     async function rapidoWebsocket(){
         const pusher = new Pusher('c1288646a5093e3c0c7c', {
@@ -176,13 +144,21 @@ export default () => {
         getRapidoState()
         getRapidoConfig()
 
-        setInterval(() => {
-            formatTime()
-        }, 1000)
-
     },[])
 
+    useEffect(()=>{
+        const timer = setInterval(() => {
+            setTimeBetween(state.rapidoCurrentTimeRound * 1000 - Date.now())
+            if (timeBetween > 0){
+                formatTime()
+            }
+        }, 1000)
+        return () => clearInterval(timer);
+
+    }, [timeBetween])
+
     useEffect(() =>{
+
         if (rapidoState.round){
             getRapidoLotteries()
         }
@@ -191,10 +167,7 @@ export default () => {
          */
     },[rapidoState.round])
 
-
-
-
-    useMemo(()=> {
+    useEffect(()=> {
         rapidoWebsocket()
     }, [])
 

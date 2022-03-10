@@ -54,6 +54,7 @@ export default () => {
 
     const [lunaPrice, setLunaPrice] = useState(0)
     let lunaPricePast = usePrevious(lunaPrice)
+    const [timeBetween, setTimeBetween] = useState(0)
 
     const [lunaLockedPrice, setLunaLockedPrice] = useState(0)
     const [lunaPriceVariation, setLunaPriceVariation] = useState(0)
@@ -218,7 +219,6 @@ export default () => {
     }
     function formatTime(){
 
-            let timeBetween = state.spaceWagerCurrentTimeRound * 1000 - Date.now()
             const seconds = Math.floor((timeBetween / 1000) % 60)
             const minutes = Math.floor((timeBetween / 1000 / 60) % 60)
             let format_minutes = minutes < 10 ? "0" + minutes : minutes;
@@ -249,14 +249,20 @@ export default () => {
     useEffect(() =>{
         getSpacewagerState()
         getSpacewagerConfig()
-        
-        setInterval(() => {
-            formatTime()
-        }, 1000)
+
         /*
             TODO: show the prediction loader here
          */
     },[])
+    useEffect(() => {
+        const timer = setInterval(() => {
+            setTimeBetween(state.spaceWagerCurrentTimeRound * 1000 - Date.now())
+            if (timeBetween > 0){
+                formatTime()
+            }
+        }, 1000)
+        return () => clearInterval(timer);
+    }, [timeBetween])
 
     useEffect(() => {
         pusher_price()
