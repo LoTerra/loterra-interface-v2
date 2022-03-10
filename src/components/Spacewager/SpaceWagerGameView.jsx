@@ -278,7 +278,7 @@ export default function SpaceWagerCardHeader(props) {
                     <h3 className="fw-bold">Player history</h3>
                     </div>
                     <div className="col-4">
-                        <button className="btn btn-outline-primary w-100 btn-sm" disabled={!isSomeResolvable || isResolvingAll} onClick={() => resolve_multiples()}>{ isResolvingAll ? <>Resolving... <div className="spinner-border spinner-border-sm text-light" role="status"><span className="sr-only"></span></div></> : 'Resolve all'} </button>
+                        <button className="btn btn-outline-primary w-100 btn-sm" disabled={!isSomeResolvable || isResolvingAll} onClick={() => resolve_multiples()}>{ isResolvingAll ? <>Resolving... <div className="spinner-border spinner-border-sm text-light" role="status"><span className="sr-only"></span></div></> : 'Resolve the following'} </button>
                     </div>
                 </div>
 
