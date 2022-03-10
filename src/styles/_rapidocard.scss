@@ -4,8 +4,8 @@
     border: 0;
 
     &.active {
-        background:#fff;
-        color:#000;
+        background:linear-gradient(45deg, #4d2bab, #2e0e85);
+        color:#fff;
         .label-four,.label-one {
             color:#fff;
         }
@@ -16,15 +16,15 @@
             }
         }
         .card-header {
-            background:#fff !important;
-            color:#000;
+            background:linear-gradient(45deg, #4d2bab, #2e0e85) !important;
+            color:#fff;
             .text-muted {
                 color:#000 !important;
             }
         }
         .card-footer {
-            background:#fff !important;
-            color:#000 !important;
+            background:linear-gradient(45deg, #4d2bab, #2e0e85) !important;
+            color:#fff !important;
         }
     }
 }   

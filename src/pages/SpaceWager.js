@@ -367,18 +367,18 @@ export default () => {
                         </div>
                     </div>
                     <div className="col-6 col-md-4 order-3 order-md-2 text-center">
-                <div className="card lota-card h-100">
-                    <div className="card-body d-flex">
-                    <div className="align-self-center w-100 mb-0 text-white">
-                    <p className="mb-0 text-normal text-muted card-label">
-                    Round ends in
-                    </p>
-                    
-                    {state.spaceWagerCurrentTimeRound && formatTime() || "00:00"}
-                </div>
+                        <div className="card lota-card h-100">
+                            <div className="card-body d-flex">
+                                <div className="align-self-center w-100 mb-0 text-white">
+                                    <p className="mb-0 text-normal text-muted card-label">
+                                    Round ends in
+                                    </p>
+                            
+                                    {state.spaceWagerCurrentTimeRound && formatTime() || "00:00"}
+                                </div>
+                            </div>
+                        </div>
                     </div>
-                </div>
-            </div>
                     <div className="col-12 col-md-4 text-center text-md-end order-1 order-md-2 position-relative">
                         <button className="btn btn-plain fw-bold w-20 ms-2 docs-btn" style={{zIndex:999, position:'relative'}}
                             onClick={() => window.open("https://docs.loterra.io/upcoming/roadmap/spacewager", "_blank")}>

@@ -44,7 +44,7 @@ export default function RapidoCardHeader(props) {
                     }
                         <p className="fs-4 mb-0 fw-bold">#{lotteryId}</p>
                     </div>
-                    <div className="col-6 text-end">        
+                    {/* <div className="col-6 text-end">        
                     { winningCombination == null ?
                         <>
                         <p className="mb-0 text-muted">Next draw</p>
@@ -54,7 +54,7 @@ export default function RapidoCardHeader(props) {
                         <>
                         </>
                     }                                       
-                    </div>
+                    </div> */}
                 </div>
             </div>
         )

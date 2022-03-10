@@ -2,7 +2,7 @@ import { Head } from 'react-static'
 import React, { useState, useEffect, useCallback, useRef, useMemo } from 'react'
 import { useStore } from '../store'
 import RapidoCard from '../components/Rapido/RapidoCard';
-
+import { Clock } from 'phosphor-react'
 import SwiperCore, { Navigation, Pagination ,Autoplay,EffectFade } from 'swiper';
 
 SwiperCore.use([Navigation, Pagination,Autoplay,EffectFade ]);
@@ -19,6 +19,7 @@ export default () => {
     const terra = state.lcd_client
     const [rapidoState, setRapidoState] = useState({round: null})
     const [lotteries, setlotteries] = useState([]);
+    const [drawTime, setDrawTime] = useState(0)
 
     const [config,setConfig] = useState({
         denom: "uusd",
@@ -83,6 +84,7 @@ export default () => {
 
             // Set the array of lotteries
             setlotteries([...lotteries_state])
+            setDrawTime(lotteries_state.pop())
             /*
                 TODO: dismiss the prediction loader here
              */
@@ -94,14 +96,15 @@ export default () => {
 
     function formatTime(){
 
-        let timeBetween = state.rapidoCurrentTimeRound * 1000 - Date.now()
+        let timeBetween = drawTime.draw_time * 1000 - Date.now()
+        console.log('time-' + drawTime.draw_time)
         const seconds = Math.floor((timeBetween / 1000) % 60)
         const minutes = Math.floor((timeBetween / 1000 / 60) % 60)
         let format_minutes = minutes < 10 ? "0" + minutes : minutes;
         let format_seconds = seconds < 10 ? "0" + seconds : seconds;
 
         let format_message = "Closing..."
-        if (state.rapidoCurrentTimeRound * 1000 > Date.now()){
+        if (drawTime.draw_time * 1000 > Date.now()){
             format_message = format_minutes + ":" + format_seconds
 
             return(
@@ -135,14 +138,15 @@ export default () => {
         }
     }
 
-    useMemo(() =>{
-        getRapidoState()
-        getRapidoConfig()
-
+    useEffect(() =>{
         setInterval(() => {
             formatTime()
         }, 1000)
+    }, [drawTime])
 
+    useEffect(() =>{
+        getRapidoState()
+        getRapidoConfig()
     },[])
 
     useEffect(() =>{
@@ -164,6 +168,18 @@ export default () => {
                 <h2 className="my-2 fw-regular fs-6 mb-0">One draw every 5 minutes</h2>
             </div>
             <div className="container">
+                <div className="col-12 col-md-4 order-3 order-md-2 text-center">
+                    <div className="card lota-card h-100">
+                        <div className="card-body d-flex">
+                            <div className="align-self-center w-100 mb-0 text-white">
+                                <p className="mb-0 text-normal text-muted card-label">
+                                Round ends in
+                                </p>
+                                {drawTime && formatTime() || "00:00"}
+                            </div>
+                        </div>
+                    </div>
+                </div>
             <div className="w-100 order-4 my-3">
                 <div className="row">
                     <div className="col-6 text-end">
