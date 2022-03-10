@@ -80,9 +80,9 @@ export default () => {
                 state.rapidoAddress,
                 query
             );
-            console.log(lotteries_state)
-            // Set the array of predictions
-            setlotteries(lotteries_state)
+
+            // Set the array of lotteries
+            setlotteries([...lotteries_state])
             /*
                 TODO: dismiss the prediction loader here
              */
@@ -124,8 +124,10 @@ export default () => {
         const channel = pusher.subscribe('rapido')
 
         // Update rapido round every x seconds
-        channel.bind('round', function (data) {
-            dispatch({ type: 'setRapidoCurrentRound', message: data.message })
+        channel.bind('state', function (data) {
+            let new_rapido_state = JSON.parse(data.message);
+            setRapidoState(new_rapido_state)
+            dispatch({ type: 'setRapidoCurrentRound', message: new_rapido_state.round })
         })
 
         return () => {
@@ -136,17 +138,11 @@ export default () => {
     useMemo(() =>{
         getRapidoState()
         getRapidoConfig()
-        if (rapidoState){
-            getRapidoLotteries()
-        }
-
 
         setInterval(() => {
             formatTime()
         }, 1000)
-        /*
-            TODO: show the prediction loader here
-         */
+
     },[])
 
     useEffect(() =>{
@@ -154,7 +150,7 @@ export default () => {
             getRapidoLotteries()
         }
         /*
-            TODO: show the prediction loader here
+            TODO: show a loader | Loading current lotteries...
          */
     },[rapidoState])
 
@@ -165,7 +161,7 @@ export default () => {
         <>
             <div className="w-100 py-3 pt-md-5 text-center">
                 <h1 className="mb-0 fw-bold" style={{textShadow:'1px 1px 10px #14053b'}}>Rapido</h1>
-                <h2 className="my-2 fw-regular fs-6 mb-0">Lottery every 5 minutes</h2>
+                <h2 className="my-2 fw-regular fs-6 mb-0">One draw every 5 minutes</h2>
             </div>
             <div className="container">
             <div className="w-100 order-4 my-3">
