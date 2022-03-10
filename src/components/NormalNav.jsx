@@ -15,19 +15,35 @@ import {
     FileText,
     Lightning
 } from 'phosphor-react'
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, useLocation } from 'react-router-dom'
 
 
 export default function NormalNav() {
 //Nav link active settings
 let homeClass, rapidoClass, stakingClass, daoClass, spaceWagerClass, tokenomicsClass
+
+
+  
+
 if (typeof location !== 'undefined') {
+useEffect(() => {
     homeClass = location.pathname === '/' ? 'active' : ''
     rapidoClass = location.pathname.match(/^\/rapido/) ? 'active' : ''
+
+    //Change background
+    if(rapidoClass == 'active'){
+        document.body.setAttribute('style', 'background: radial-gradient(97.8% 97.8% at 52.12% 2.2%, #87B3FF 0%, #0C3273 100%), #001945;')
+        
+    } else {
+        document.body.setAttribute('style', 'background: #210a5c;')
+
+    }
+
     stakingClass = location.pathname.match(/^\/staking/) ? 'active' : ''
     daoClass = location.pathname.match(/^\/dao/) ? 'active' : ''
     spaceWagerClass = location.pathname.match(/^\/spacewager/) ? 'active' : ''
     tokenomicsClass = location.pathname.match(/^\/tokenomics/) ? 'active' : ''
+},[useLocation()])
 }
     return (
         <>

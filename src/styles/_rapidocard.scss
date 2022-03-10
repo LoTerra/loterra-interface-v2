@@ -1,10 +1,13 @@
 .rapido-card {
-    background:#27498C;
+    background: radial-gradient(100% 100% at 50.14% 0%, #3966B7 0%, rgba(0, 0, 0, 0) 100%), #0D3A89;
+    box-shadow: 0px 3px 29px #08224E;
     color:#fff;
     border: 0;
 
     &.active {
-        background:linear-gradient(45deg, #4d2bab, #2e0e85);
+        background: linear-gradient(156.21deg, #4573C9 0.88%, #0B3172 99.42%), #0C3273 !important;
+        
+        border-radius: 20px;
         color:#fff;
         .label-four,.label-one {
             color:#fff;
@@ -15,15 +18,28 @@
                 color:#000 !important;
             }
         }
+        .card-body {
+            .form-control {
+                background: #0C3273;
+                box-shadow: inset 0px 4px 4px rgba(33, 10, 92, 0.09);
+                border-radius: 5px;
+                color:#fff;
+                border:0;
+                padding:7px;
+
+            }
+        }
         .card-header {
-            background:linear-gradient(45deg, #4d2bab, #2e0e85) !important;
+            background:transparent !important;
+            border:0;
             color:#fff;
             .text-muted {
                 color:#000 !important;
             }
         }
         .card-footer {
-            background:linear-gradient(45deg, #4d2bab, #2e0e85) !important;
+            border-top:2px dashed #052155 !important;
+            background: linear-gradient(180.16deg, #002E7C -14.16%, #325EAD 99.86%) !important;
             color:#fff !important;
         }
     }
@@ -33,6 +49,15 @@
     text-align:center;
 }
 
+@keyframes fadeIn{
+    0% {
+      opacity:0;
+    }
+    100% {
+      opacity:1;
+    }
+  }
+
 .rapido-combi-nr {
     display: inline-block;
     width: 18%;
@@ -40,19 +65,20 @@
     font-weight: 700;
     font-size: 1.2rem;
     background: '#27498C';
-    border-radius: 6px;
-    box-shadow: inset 0px 0px 0px 3px #048abf;
+    border-radius: 7px;
+    box-shadow: inset 0px 0px 0px 3px #1890FF;
     margin: 1%;
     &.g {
-        box-shadow: inset 0px 0px 0px 3px #f2d230;
+        box-shadow: inset 0px 0px 0px 3px #FFC700;
     }
     &.big {
         font-size:36px;
+        background: #08275A;
     }
 }
 
 .label-four {
-    background: #048abf;
+    background: #1890FF;
     padding: 5px;
     padding-top: 3px;
     width: 200px;
@@ -63,7 +89,7 @@
 }
 
 .label-one {
-    background: #f2d230;
+    background: #FFC700;
     padding: 5px;
     padding-top: 3px;
     width: 200px;
@@ -74,14 +100,16 @@
 }
 
 .nr-btn {
-    background: #f5f5f5;
-    color: #161616;
-    padding: 5px;
+    background: #0C3273;
+    box-shadow: inset 0px 3px 0px rgba(3, 26, 66, 0.35);
+    border-radius: 7px;
+    color: #fff;
+    padding: 3px;
     text-align: center;
-    border-radius: 10px;
+
     font-weight: 600;
     border: 0;
-    box-shadow: inset 0px 0px 0px 3px #87809c4a;
+   
     transition: all 150ms linear;
 
     &.smaller {
@@ -89,7 +117,7 @@
         margin: 1%;
     }
     &.medium {
-        width: 23%;
+        width: 29.2%;
         margin: 2%;
     }
     &.medium-s {
@@ -97,22 +125,26 @@
         margin: 2%;
     }
     &.active {
-        box-shadow: inset 0px 0px 0px 3px #048abf;
-        background: #048abf;
+        box-shadow: inset 0px 0px 0px 3px #1890FF;
+        background: #1890FF;
         color: #fff;
     }
     &.active-g {
-        box-shadow:inset 0px 0px 0px 3px #f2d230;
-        background: #f2d230;
+        box-shadow:inset 0px 0px 0px 3px #FFC700;
+        background: #FFC700;
         color: #fff;
     }
     &.active-i {
-        box-shadow:inset 0px 0px 0px 3px #bf046b;
-        background: #bf046b;
+        background: linear-gradient(99.89deg, #00C2FF 7.57%, #1890FF 56.88%), #1890FF;
         color: #fff;
+        box-shadow:none;
+        &:hover {
+            background: linear-gradient(99.89deg, #00C2FF 7.57%, #1890FF 56.88%), #1890FF;
+            transform: scale(1.1);
+        }
     }
     &:hover {
-        background: #0c022469;
+     
         transform: scale(1.1);
     }
 }

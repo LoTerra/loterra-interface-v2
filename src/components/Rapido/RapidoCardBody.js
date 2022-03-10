@@ -56,30 +56,40 @@ export default function RapidoCardBody(props) {
                     </div>
                 </div>
                 
-                <div className="col-12 mt-2">
-                    <div className="row">                     
-                        <div className="col-5 d-flex">
-                            <p className="mb-0 align-self-center">Multiplier</p>
-                        </div>
-                        <div className="col-7">
-                            <div className="btn-holder text-end">
-                            {[1,2,5].map((obj,k) =>{
+                <div className="col-12 mt-2 p-0">                  
+                    <div className="btn-holder text-end">
+                    {[1,2,5].map((obj,k) =>{
                         return (
-                            <button key={k} className={'nr-btn medium' + (multiplier == obj ? ' active-i' : '')} onClick={(e) => selectMultiplier(obj)}>{obj}UST</button>
+                        <button key={k} className={'nr-btn medium' + (multiplier == obj ? ' active-i' : '')} onClick={(e) => selectMultiplier(obj)}>
+                            <span className="d-block small"
+                            style={{
+                                fontSize:'12px',
+                                opacity:0.6,
+                                fontWeight:400,
+                                marginBottom:'-4px'
+                            }}
+                            >Multiplier</span>
+                            {obj}UST
+                        </button>
                         )
-                    })
-                    }
-
-                            </div>
-                        </div>
+                    })}                      
                     </div>
                 </div>
                 <div className="col-12">
                     <div className="row">
-                        <div className="col-5 d-flex">
+                        <div className="col-7 d-flex">
                             <p className="mb-0 align-self-center">Number of draw</p>
                         </div>
-                        <div className="col-7">
+                        <div className="col-5">
+                            <select className="form-control" onChange={(e) => selectNrOfDraws(e.target.value)}>
+                            {[1,2,3,4,5,10,20,30,40,50].map((obj,k) =>{
+                                    return (
+                                        <option value={obj}>{obj}</option>
+                                    )
+                                })}
+                            </select>
+                        </div>
+                        {/* <div className="col-7">
                             <div className="btn-holder text-end">
                                 {[1,2,3,4,5,10,20,30,40,50].map((obj,k) =>{
                                     return (
@@ -87,7 +97,7 @@ export default function RapidoCardBody(props) {
                                     )
                                 })}
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                 </div>      
             </div>

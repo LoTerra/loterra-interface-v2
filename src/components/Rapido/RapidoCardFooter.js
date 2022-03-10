@@ -93,15 +93,16 @@ export default function RapidoCardFooter(props) {
     }
 
     return (
-        <div className="card-footer pb-3" style={{background:'#27498C'}}>
+        <>
             {
                 isLotteryLive ?
+                <div className="card-footer pb-3" style={{background:'#27498C'}}>
                     <div className="row">
-                        <div className="col-12 text-center mt-1">
+                        <div className="col-12 text-start mt-1">
                             <p className="fs-6 fw-bold">Receipt</p>
                         </div>
                         <div className="col-6 text-start d-flex">
-                            <p className="mb-0 align-self-center">Combination</p>
+                            <p className="mb-0 align-self-center text-muted">Combination</p>
                         </div>
                         <div className="col-6 text-end">
                             <div className="col-12 mb-2">
@@ -124,13 +125,13 @@ export default function RapidoCardFooter(props) {
                                 })}
                             </div>
                         </div>
-                        <div className="col-6 text-start">
+                        <div className="col-6 text-start text-muted">
                             <p>Cost</p>
                         </div>
                         <div className="col-6 text-end">
                             <p className="fw-bold">{multiplier * nrOfDraws} UST</p>
                         </div>
-                        <div className="col-8 text-start">
+                        <div className="col-8 text-start text-muted">
                             <p>Potential winnings per draw</p>
                         </div>
                         <div className="col-4 text-end">
@@ -145,6 +146,7 @@ export default function RapidoCardFooter(props) {
                             <button className="btn btn-special w-100" style={{background:'#17b96b'}} onClick={() => toast.error('Please connect your wallet')}>Connect wallet</button>
                             }
                         </div>
+                    </div>
                     </div>
                     :
                     <div>
@@ -184,7 +186,6 @@ export default function RapidoCardFooter(props) {
                     </div>
             }
 
-            
-        </div>
+            </>
     )
 }

@@ -4,6 +4,8 @@ import { useStore } from '../store'
 import RapidoCard from '../components/Rapido/RapidoCard';
 import { Clock } from 'phosphor-react'
 import SwiperCore, { Navigation, Pagination ,Autoplay,EffectFade } from 'swiper';
+import { useLocation } from 'react-router-dom';
+
 
 SwiperCore.use([Navigation, Pagination,Autoplay,EffectFade ]);
 
@@ -158,6 +160,9 @@ export default () => {
          */
     },[rapidoState])
 
+
+
+
     useMemo(()=> {
         rapidoWebsocket()
     }, [])
@@ -190,6 +195,13 @@ export default () => {
                     </div>
                 </div>
             </div>
+            { lotteries.length <= 1 &&
+            <div className="w-100 py-5 text-center">
+                <div class="spinner-grow text-primary " role="status">
+                    <span class="visually-hidden">Loading...</span>
+                </div>    
+            </div>
+            }
                 {lotteries.length > 0 &&
                     <Swiper
                         spaceBetween={50}
@@ -198,7 +210,7 @@ export default () => {
                             prevEl: '.swiper-prev',
                         }}
                         //   modules={[Navigation, Pagination, A11y]}                           
-                        initialSlide={rapidoState.round}
+                
                         slidesPerView={1}
                         breakpoints={{
                             // when window width is >= 640px
@@ -216,15 +228,19 @@ export default () => {
                                 slidesPerView: 1,
                             },
                         }}
-                        onSlideChange={() => console.log('slide change')}
+                        initialSlide={4}
+                        onSlideChange={(swiper) => console.log('slide change',swiper.realIndex)}
                         onSwiper={(swiper) => console.log(swiper)}
                     >
-                        { lotteries.length > 0 && lotteries.map((obj, k) => {
+                        { lotteries.length > 1 && lotteries.map((obj, k) => {
                             
                             return (
                                 
                                 <SwiperSlide key={k} >
                                     <RapidoCard 
+                                    key={obj.lottery_id+k}
+                                    id={k}
+                                    dataLength={lotteries.length}
                                     lotteryId={obj.lottery_id}
                                     winningCombination={obj.winning_number}
                                     bonusNumber={obj.bonus_number}

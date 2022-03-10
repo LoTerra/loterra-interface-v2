@@ -1,9 +1,10 @@
-import React, { Component, Suspense, useContext } from 'react'
+import React, { Component, Suspense, useContext, useEffect } from 'react'
 import { Root, Routes,addPrefetchExcludes } from 'react-static'
 import {
     Switch,
     Route,
-    Link
+    Link,
+    useLocation
   } from "react-router-dom";
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
@@ -50,6 +51,7 @@ if(typeof window !== 'undefined'){
 
     
     });
+   
 
     
 }
@@ -57,7 +59,10 @@ if(typeof window !== 'undefined'){
 
 class App extends Component {
 
-    render() {
+    
+
+    render() {    
+   
         return (
             
                 <Root>
@@ -117,7 +122,7 @@ class App extends Component {
                     </Head>
                     <StoreProvider>
                   
-                    <div className="d-flex" id="wrapper">
+                    <div className={'d-flex'} id="wrapper">
                         <div id="sidebar-wrapper" className="sticky-top">
                             <NormalNav />
                         </div>
