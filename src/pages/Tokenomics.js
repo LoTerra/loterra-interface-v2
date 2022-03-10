@@ -10,22 +10,59 @@ const BURNED_LOTA = 4301383550000
 export default () => {
 
     const { state, dispatch } = useStore()
-    const [lotaPrice, setLotaPrice] = useState(0)
+    const [lotaPriceOnTerraswap, setlotaPriceOnTerraswap] = useState(0)
+    const [lotaPriceOnAstroport, setLotaPriceOnAstroport] = useState(0)
+    const [lotaPriceOnLoop, setLotaPriceOnLoop] = useState(0)
+    const [lotaLoopPriceOnLoop, setLotaLoopPriceOnLoop] = useState(0)
+    const [loopPrice, setLoopPrice] = useState(0)
     const terra = state.lcd_client
     const api = new WasmAPI(terra.apiRequester)
     const loterra_contract_address = 'terra1q2k29wwcz055q4ftx4eucsq6tg9wtulprjg75w'
-    const loterra_pool_address = 'terra1pn20mcwnmeyxf68vpt3cyel3n57qm9mp289jta'
+    const loterra_terraswap_pool_address = 'terra1pn20mcwnmeyxf68vpt3cyel3n57qm9mp289jta'
+    const loterra_astroport_pool_address = 'terra1z7634s8kyyvjjuv7lcgkfy49hamxssxq9f9xw6'
+    const loterra_loop_pool_address = 'terra15568nqrqcawm263yqcuuuvj5mh763tp8jyscq3'
+    const loterraLoop_loop_pool_address = 'terra1kw95x0l3qw5y7jw3j0h3fy83y56rj68wd8w7rc'
+    const loopUst_pool_address = 'terra106a00unep7pvwvcck4wylt4fffjhgkf9a0u6eu'
 
     const fetchContractQuery = useCallback(async () => {
         try {
             //Get current lota price
-            const currentLotaPrice = await api.contractQuery(
-                loterra_pool_address,
+            const currentLotaPriceOnTerraswap = await api.contractQuery(
+                loterra_terraswap_pool_address,
                 {
                     pool: {},
                 },
             )
-            setLotaPrice(currentLotaPrice)
+            setlotaPriceOnTerraswap(currentLotaPriceOnTerraswap)
+            const currentLotaPriceOnAstroport = await api.contractQuery(
+                loterra_astroport_pool_address,
+                {
+                    pool: {},
+                },
+            )
+            setLotaPriceOnAstroport(currentLotaPriceOnAstroport)
+            const currentLotaPriceOnLoop = await api.contractQuery(
+                loterra_loop_pool_address,
+                {
+                    pool: {},
+                },
+            )
+            setLotaPriceOnLoop(currentLotaPriceOnLoop)
+            const currentLotaLoopPriceOnLoop = await api.contractQuery(
+                loterraLoop_loop_pool_address,
+                {
+                    pool: {},
+                },
+            )
+            setLotaLoopPriceOnLoop(currentLotaLoopPriceOnLoop)
+            
+            const currentLoopPrice = await api.contractQuery(
+                loopUst_pool_address,
+                {
+                    pool: {},
+                },
+            )
+            setLoopPrice(currentLoopPrice)
         } catch(e){
             console.log(e)
         }
@@ -51,42 +88,30 @@ export default () => {
     }
 
     function marketCap() {
-        if (lotaPrice.assets) {
+        if (lotaPriceOnTerraswap.assets) {
             let sum =
-                (lotaPrice.assets[1].amount / lotaPrice.assets[0].amount) *
+                (lotaPriceOnTerraswap.assets[1].amount / lotaPriceOnTerraswap.assets[0].amount) *
                 circulatingSupply()
             return sum
         }
     }
 
-    function marketData(){
-        let render = (
-            <tr>
-                <td className="text-center">1</td>
-                <td className="text-center"> 
-                    <>
-                        <button className='btn btn-link p-0' 
-                            onClick={() => window.open("https://app.terraswap.io/swap?to=&type=swap&from=uluna", "_blank")
-                        }>
-                            <img src="/Terraswap-Icon.png" 
-                                style={{maxWidth:'30px'}} 
-                                className="img-fluid align-self-center" 
-                            /> 
-                            Terraswap
-                        </button>
-                     </> 
-                </td>
-                <td className="text-center">LOTA/UST </td>
-                <td className="text-center"> ${lotaPrice && lotaPrice.assets ? numeral(lotaPrice.assets[1].amount / lotaPrice.assets[0].amount).format('0.000') : ''}</td>
-                <td className="text-center">{ lotaPrice && lotaPrice.assets ? numeral(lotaPrice.assets[1].amount * 2 / 1000000).format('0,0.00') : '' } UST</td>
-            </tr>
-        )
-
-        return (
-            <>
-                { render }
-            </>
-        )
+    function loopUstPrice() {
+        if (loopPrice.assets && loopPrice.assets) {
+            let lotaLoop = lotaLoopPriceOnLoop.assets[0].amount / lotaLoopPriceOnLoop.assets[1].amount
+            let loopUst = loopPrice.assets[1].amount / loopPrice.assets[0].amount
+            let result = lotaLoop * loopUst 
+            return numeral(result).format('0.000')
+        }
+    }
+    
+    function loopUstLiquidity() {
+        if (loopPrice.assets) {
+            let lotaLoop = lotaLoopPriceOnLoop.assets[0].amount * 2 / 1000000
+            let loopUst = loopPrice.assets[1].amount / loopPrice.assets[0].amount
+            let result = lotaLoop * loopUst 
+            return numeral(result).format('0,0.000')
+        }
     }
 
     useEffect(() => {
@@ -188,7 +213,7 @@ export default () => {
                         </div>
                         <div className="col-md-6 mb-3">
                             <div className="lota-stats mb-4 mb-md-0">
-                                {lotaPrice.assets && (
+                                {lotaPriceOnTerraswap.assets && (
                                     <>
                                         <p>Total supply</p>
                                         <h5>
@@ -228,11 +253,11 @@ export default () => {
                         </div>
                         <div className="col-md-12 mb-3">
                             <div className="lota-stats">
-                                {lotaPrice.assets && (
+                                {lotaPriceOnTerraswap.assets && (
                                     <>
                                         <p>Price</p>
                                         <h5>
-                                            {numeral(lotaPrice.assets[1].amount / lotaPrice.assets[0].amount).format('0.000')}
+                                            {numeral(lotaPriceOnTerraswap.assets[1].amount / lotaPriceOnTerraswap.assets[0].amount).format('0.000')}
                                             <span>UST</span>
                                         </h5>
                                     </>
@@ -254,8 +279,84 @@ export default () => {
                                 <th style={{minWidth:150}} className="text-center">Total Liquidity</th>
                             </tr>
                             </thead>
+                            
                             <tbody>
-                            {marketData()}
+                                <tr>
+                                    <td className="text-center">1</td>
+                                    <td className="text-center"> 
+                                        <>
+                                            <button className='btn btn-link p-0' 
+                                                onClick={() => window.open("https://app.terraswap.io/swap?to=&type=swap&from=uluna", "_blank")
+                                            }>
+                                                <img src="/Terraswap-Icon.png" 
+                                                    style={{maxWidth:'30px'}} 
+                                                    className="img-fluid align-self-center" 
+                                                /> 
+                                                Terraswap
+                                            </button>
+                                        </> 
+                                    </td>
+                                    <td className="text-center">LOTA/UST </td>
+                                    <td className="text-center"> ${lotaPriceOnTerraswap && lotaPriceOnTerraswap.assets ? numeral(lotaPriceOnTerraswap.assets[1].amount / lotaPriceOnTerraswap.assets[0].amount).format('0.000') : ''}</td>
+                                    <td className="text-center">{ lotaPriceOnTerraswap && lotaPriceOnTerraswap.assets ? numeral(lotaPriceOnTerraswap.assets[1].amount * 2 / 1000000).format('0,0.00') : '' } UST</td>
+                                </tr>
+                                <tr>
+                                    <td className="text-center">2</td>
+                                    <td className="text-center"> 
+                                        <>
+                                            <button className='btn btn-link p-0' 
+                                                onClick={() => window.open("hhttps://dex.loop.markets/swap#Swap", "_blank")
+                                            }>
+                                                <img src="/LoopFinance-logo.png" 
+                                                    style={{maxWidth:'30px'}} 
+                                                    className="img-fluid align-self-center" 
+                                                /> 
+                                                 Loop Finance
+                                            </button>
+                                        </> 
+                                    </td>
+                                    <td className="text-center">LOTA/UST </td>
+                                    <td className="text-center"> ${lotaPriceOnLoop && lotaPriceOnLoop.assets ? numeral(lotaPriceOnLoop.assets[1].amount / lotaPriceOnLoop.assets[0].amount).format('0.000') : ''}</td>
+                                    <td className="text-center">{ lotaPriceOnLoop && lotaPriceOnLoop.assets ? numeral(lotaPriceOnLoop.assets[1].amount * 2 / 1000000).format('0,0.00') : '' } UST</td>
+                                </tr>
+                                <tr>
+                                    <td className="text-center">4</td>
+                                    <td className="text-center"> 
+                                        <>
+                                            <button className='btn btn-link p-0' 
+                                                onClick={() => window.open("https://app.astroport.fi/swap?from=terra1ez46kxtulsdv07538fh5ra5xj8l68mu8eg24vr&to=uusd", "_blank")
+                                            }>
+                                                <img src="/LoopFinance-logo.png" 
+                                                    style={{maxWidth:'30px'}} 
+                                                    className="img-fluid align-self-center" 
+                                                /> 
+                                                Loop Finance
+                                            </button>
+                                        </> 
+                                    </td>
+                                    <td className="text-center">LOTA/LOOP </td>
+                                    <td className="text-center"> ${loopUstPrice()}</td>
+                                    <td className="text-center">{loopUstLiquidity()} UST</td>
+                                </tr>
+                                <tr>
+                                    <td className="text-center">3</td>
+                                    <td className="text-center"> 
+                                        <>
+                                            <button className='btn btn-link p-0' 
+                                                onClick={() => window.open("https://app.astroport.fi/swap?from=terra1ez46kxtulsdv07538fh5ra5xj8l68mu8eg24vr&to=uusd", "_blank")
+                                            }>
+                                                <img src="/Astroport-logo.png" 
+                                                    style={{maxWidth:'30px'}} 
+                                                    className="img-fluid align-self-center" 
+                                                /> 
+                                                Astroport
+                                            </button>
+                                        </> 
+                                    </td>
+                                    <td className="text-center">LOTA/UST </td>
+                                    <td className="text-center"> ${lotaPriceOnAstroport && lotaPriceOnAstroport.assets ? numeral(lotaPriceOnAstroport.assets[1].amount / lotaPriceOnAstroport.assets[0].amount).format('0.000') : ''}</td>
+                                    <td className="text-center">{ lotaPriceOnAstroport && lotaPriceOnAstroport.assets ? numeral(lotaPriceOnAstroport.assets[1].amount * 2 / 1000000).format('0,0.00') : '' } UST</td>
+                                </tr>
                             </tbody>
                         </table>
                     </div>
