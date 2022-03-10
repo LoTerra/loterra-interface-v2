@@ -179,6 +179,7 @@ export default () => {
         setInterval(() => {
             formatTime()
         }, 1000)
+
     },[])
 
     useEffect(() =>{
