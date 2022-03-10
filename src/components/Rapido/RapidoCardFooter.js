@@ -165,14 +165,14 @@ export default function RapidoCardFooter(props) {
                         {userGames.length != 0 && winningCombination != null ? <>
                             {
                                 userGames.map(game => (
-                                    <>
+                                    <div  key={game.game_id}>
                                         <div>ticket number #{game.game_id + 1} | {game.number[0]} {game.number[1]} {game.number[2]} {game.number[3]} | bonus: {game.bonus}
                                             <button disabled={game.resolved} onClick= { () =>
                                                 checkLottoNumbers(game.game_id)
                                             }> Check lotto numbers </button>
                                         </div>
 
-                                    </>
+                                    </div>
                                 ))
                             }
                             <button disabled={isLastItem} onClick= { () =>

@@ -97,7 +97,7 @@ export default function RapidoCardBody(props) {
                     <div className={'rapido-winning-combination'}>
                         { winningCombination.map((nr,k) => {
                             return (
-                                <span className="rapido-combi-nr big">{nr}</span>
+                                <span key={k} className="rapido-combi-nr big">{nr}</span>
                             )
                         })}
                         <span className="rapido-combi-nr g big">{bonusNumber}</span>
