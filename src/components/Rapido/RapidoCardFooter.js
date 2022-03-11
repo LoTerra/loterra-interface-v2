@@ -273,24 +273,26 @@ export default function RapidoCardFooter(props) {
                                                 Check lotto numbers{' '}
                                             </button>
                                         </div>
+
+
                                     </div>
                                 </div>
                             ))}
+                            <button
+                                disabled={isLastItem}
+                                onClick={() =>
+                                    loadMore(
+                                        userGames[userGames.length - 1].game_id,
+                                    )
+                                }
+                            >
+                                {' '}
+                                Load More{' '}
+                            </button>
                         </>
                     ) : (
                         <></>
                     )}
-                    <button
-                        disabled={isLastItem}
-                        onClick={() =>
-                            loadMore(
-                                userGames[userGames.length - 1].game_id,
-                            )
-                        }
-                    >
-                        {' '}
-                        Load More{' '}
-                    </button>
                 </div>
             )}
         </>
