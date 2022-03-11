@@ -63,7 +63,7 @@ export default function RapidoCardBody(props) {
     }
 
     useEffect(() => {
-        if (numberOne, numberTwo, numberThree, numberFour) {
+        if (numberOne || numberTwo || numberThree || numberFour) {
             selectFourNumbers([numberOne, numberTwo, numberThree, numberFour])
         }else{
             selectFourNumbers([])
