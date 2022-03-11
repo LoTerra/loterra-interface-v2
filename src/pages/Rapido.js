@@ -89,9 +89,8 @@ export default () => {
             let allLotteries_state = await api.contractQuery(
                 state.rapidoAddress,
                 {
-                    lotteries_state: {},
+                    lotteries_state: {limit: 50},
                 }
-               
             )
             // Set the array of lotteries
             setlotteries([...lotteries_state])
@@ -137,8 +136,9 @@ export default () => {
             <tr key={lottery.lottery_id}>
                 {console.log(' - ' + lottery.lottery_id)}
                 <td>#{lottery.lottery_id}</td>
-                <td className='text-center'> {lottery.counter_player}</td>
-                <td className='text-center'> {lottery.winning_number + lottery.bonus_number}</td>
+                <td className='text-center'>{lottery.terrand_round}</td>
+                <td className='text-center'>{lottery.counter_player ? lottery.counter_player : '-'}</td>
+                <td className='text-center'> {lottery.winning_number + ' ' + lottery.bonus_number}</td>
             </tr>
         ))
         return <>{render}</>
@@ -346,9 +346,10 @@ export default () => {
                         <table className="table text-white">
                             <thead>
                                 <tr>
-                                    <th style={{ minWidth: 100 }}>draw</th>
-                                    <th style={{ minWidth: 100 }}>Number of players</th>
-                                    <th style={{ minWidth: 150 }} className='text-center'>Result</th>
+                                    <th style={{ minWidth: 100 }}>draws</th>
+                                    <th style={{ minWidth: 100 }} className='text-center'>Terrand round</th>
+                                    <th style={{ minWidth: 100 }} className='text-center'>Numbers of players</th>
+                                    <th style={{ minWidth: 100 }} className='text-center'>Results</th>
                                 </tr>
                             </thead>
                             <tbody>{resultHistory()}</tbody>
