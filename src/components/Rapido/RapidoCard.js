@@ -46,11 +46,8 @@ export default function RapidoCard(props) {
         //         array.splice(array[x], 1)
         //     }
         // }
-        if (fourNumbers.length < 4) {
-            setFourNumbers([...fourNumbers, nr])
-        } else {
-            alert('deselect a number, max is 4')
-        }
+        setFourNumbers(nr)
+
 
         console.log(fourNumbers)
     }
@@ -61,12 +58,8 @@ export default function RapidoCard(props) {
         }
     }
 
-    const checkInFour = (nr) => {
-        return fourNumbers.indexOf(nr) > -1
-    }
-
     const selectOneNumber = (nr) => {
-        setOneNumber([nr])
+        setOneNumber(nr)
         console.log(oneNumber)
     }
 
@@ -76,10 +69,6 @@ export default function RapidoCard(props) {
 
     const selectNrOfDraws = (nr) => {
         setNrOfDraws(nr)
-    }
-
-    const checkInOne = (nr) => {
-        return oneNumber.indexOf(nr) > -1
     }
 
     const enterDraw = () => {
@@ -131,8 +120,6 @@ export default function RapidoCard(props) {
                 isLotteryLive={isLotteryLive}
             />
             <RapidoCardBody
-                checkInFour={(a) => checkInFour(a)}
-                checkInOne={(a) => checkInOne(a)}
                 selectMultiplier={(a) => selectMultiplier(a)}
                 selectNrOfDraws={(a) => selectNrOfDraws(a)}
                 selectOneNumber={(a) => selectOneNumber(a)}

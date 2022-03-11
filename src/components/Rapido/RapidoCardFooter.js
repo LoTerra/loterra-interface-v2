@@ -103,8 +103,7 @@ export default function RapidoCardFooter(props) {
 
     return (
         <>
-            {fourNumbers.length != 0 ||
-            (oneNumber.length != 0 && isLotteryLive) ? (
+            {isLotteryLive ? (
                 <div
                     className="card-footer pb-3"
                     style={{ background: '#27498C' }}

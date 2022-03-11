@@ -8,8 +8,6 @@ export default function RapidoCardBody(props) {
     const { state, dispatch } = useStore()
 
     const {
-        checkInFour,
-        checkInOne,
         selectMultiplier,
         selectNrOfDraws,
         selectOneNumber,
@@ -63,6 +61,23 @@ export default function RapidoCardBody(props) {
                 break;
         }
     }
+
+    useEffect(() => {
+        if (numberOne, numberTwo, numberThree, numberFour) {
+            selectFourNumbers([numberOne, numberTwo, numberThree, numberFour])
+        }else{
+            selectFourNumbers([])
+        }
+
+
+        if (numberBonus){
+            selectOneNumber([numberBonus])
+        }else {
+            selectOneNumber([])
+        }
+
+
+    }, [numberOne, numberTwo, numberThree, numberFour, numberBonus])
 
     return (
         <div className={'card-body'}>

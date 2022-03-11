@@ -135,7 +135,6 @@ export default () => {
     function resultHistory() {
         let render = allLotteriesHistory.map((lottery) => (
             <tr key={lottery.lottery_id}>
-                {console.log(' - ' + lottery.lottery_id)}
                 <td>#{lottery.lottery_id}</td>
                 <td className='text-center'> {lottery.counter_player}</td>
                 <td className='text-center'> {lottery.winning_number + lottery.bonus_number}</td>
