@@ -19,6 +19,7 @@ export default () => {
 
     const [rapidoState, setRapidoState] = useState({})
     const [lotteries, setlotteries] = useState([{}]);
+    const [allLotteriesHistory, setAllLotteriesHistory] = useState([{}])
     const [timeBetween, setTimeBetween] = useState(0)
 
     const [config,setConfig] = useState({
@@ -83,8 +84,6 @@ export default () => {
 
             // Set the array of lotteries
             setlotteries([...lotteries_state])
-
-
             /*
                 TODO: dismiss the prediction loader here
              */
@@ -93,7 +92,6 @@ export default () => {
             console.log(e)
         }        
     }
-
 
     function formatTime(){
         const seconds = Math.floor((timeBetween / 1000) % 60)
@@ -115,6 +113,48 @@ export default () => {
 
         return (
             <span className="fs-6">{format_message}</span>
+        )
+    }
+
+    async function getAllRapidoLotteries(){
+        try {
+            if (rapidoState.round == null){
+                return
+            }
+            // Prepare query
+            let query = {
+                lotteries_state: {}
+            }
+            // Query to state smart contract
+            let lotteries_state = await api.contractQuery(
+                state.rapidoAddress,
+                query
+            );
+
+            // Set the array of lotteries
+            setAllLotteriesHistory([lotteries_state])
+            /*
+                TODO: dismiss the prediction loader here
+             */
+
+        } catch(e) {
+            console.log(e)
+        } 
+    }
+
+    function resultHistory(){
+        
+        let render = allLotteriesHistory.map((lottery) => 
+            
+            <tr key={allLotteriesHistory.lottery_id}>
+                {console.log(' - ' + allLotteriesHistory.lottery_id)}
+                <td>#{ lottery.lottery_id }</td>
+            </tr>
+        )
+        return (
+            <>
+                { render }
+            </>
         )
     }
 
@@ -143,7 +183,6 @@ export default () => {
     useEffect(() =>{
         getRapidoState()
         getRapidoConfig()
-
     },[])
 
     useEffect(()=>{
@@ -173,6 +212,7 @@ export default () => {
 
     return (
         <>
+        
             <div className="w-100 py-3 pt-md-5 text-center mb-4">
                 <h1 className="mb-0 fw-bold" style={{textShadow:'1px 1px 10px #14053b'}}>Rapido</h1>
                 <h2 className="my-2 fw-regular fs-6 mb-0">One draw every 5 minutes</h2>
@@ -280,8 +320,6 @@ export default () => {
                        lotteries.length > 1 && lotteries.filter((a) => a.winning_number == null).map((obj, k) => {
                             
                             return (
-                                
-                               
                                     <RapidoCard 
                                     key={obj.lottery_id+k}
                                     id={k}
@@ -308,6 +346,29 @@ export default () => {
                         <h2 className="fs-1 fw-bold">Play for free?</h2>
                         <h4 className="fs-4 fw-normal text-muted">Deposit UST in Dogether our no loss rapido</h4>
                         
+                    </div>
+                </div>
+            </div>
+            <div className="container py-5">
+                <div className="row">
+                    <div className="col-6 p-4">
+                        <h2 className="fs-1 fw-bold">Rapido results</h2>
+                        <h4 className="fs-4 fw-normal text-muted">Get all results per day</h4>
+                        
+                    </div>
+                    <div className="table-responsive">
+                        <table className="table text-white">
+                            <thead>
+                                <tr>
+                                    <th style={{minWidth:100}}>#draw</th>
+                                    <th style={{minWidth:150}}>Result</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                
+                                {resultHistory()}
+                            </tbody>
+                        </table>
                     </div>
                 </div>
             </div>
