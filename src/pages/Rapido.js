@@ -16,16 +16,18 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/swiper-bundle.min.css'
 import 'swiper/swiper.min.css'
 import { ArrowLeft, ArrowRight } from 'phosphor-react'
-import { WasmAPI } from '@terra-money/terra.js'
+import {MsgExecuteContract, WasmAPI} from '@terra-money/terra.js'
 import Pusher from 'pusher-js'
+import toast from "react-hot-toast";
 
 export default () => {
     const { state, dispatch } = useStore()
 
     const [rapidoState, setRapidoState] = useState({})
     const [lotteries, setlotteries] = useState([])
-    const [allLotteriesHistory, setAllLotteriesHistory] = useState([{}])
+    const [allLotteriesHistory, setAllLotteriesHistory] = useState([])
     const [timeBetween, setTimeBetween] = useState(0)
+
 
     const [config, setConfig] = useState({
         denom: 'uusd',
@@ -85,16 +87,10 @@ export default () => {
                 state.rapidoAddress,
                 query,
             )
-            
-            let allLotteries_state = await api.contractQuery(
-                state.rapidoAddress,
-                {
-                    lotteries_state: {limit: 50},
-                }
-            )
+
             // Set the array of lotteries
             setlotteries([...lotteries_state])
-            setAllLotteriesHistory([...allLotteries_state])
+
             /*
                 TODO: dismiss the prediction loader here
              */
@@ -102,6 +98,65 @@ export default () => {
             console.log(e)
         }
     }
+
+
+    async function getRapidoLotteriesPagination(start_after) {
+        try {
+            // Prepare query
+            let query = {
+                lotteries_state: { limit: 5},
+            }
+            // Add start after to get only last 5 elements
+            console.log(start_after)
+            if (start_after) {
+                query.lotteries_state.start_after =
+                    start_after
+            }
+            // Query to state smart contract
+            let lotteries_state = await api.contractQuery(
+                state.rapidoAddress,
+                query,
+            )
+
+            if (lotteries_state.length > 0){
+                let new_arr = [...allLotteriesHistory, ...lotteries_state]
+                new_arr.sort((a,b) => b.lottery_id - a.lottery_id)
+                // Set the array of lotteries
+                setAllLotteriesHistory(new_arr)
+                // get_user_combination(lotteries_state)
+            }
+
+
+            /*
+                TODO: dismiss the prediction loader here
+             */
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
+    // async function get_user_combination(lotteries) {
+    //     const default_limit = 5
+    //     if (state.wallet.walletAddress){
+    //         lotteries.map( lottery =>{
+    //             let query = {
+    //                 games: {
+    //                     round: lottery_id,
+    //                     player: state.wallet.walletAddress,
+    //                     limit: default_limit,
+    //                 }
+    //             }
+    //
+    //             let rapido_games = await api.contractQuery(state.rapidoAddress, query)
+    //
+    //             if (rapido_games.length != 0) {
+    //                 console.log(rapido_games)
+    //                 //setUserGames([...userGames, ...rapido_games])
+    //
+    //             }
+    //         })
+    //     }
+    // }
 
     function formatTime() {
         const seconds = Math.floor((timeBetween / 1000) % 60)
@@ -136,8 +191,27 @@ export default () => {
             <tr key={lottery.lottery_id}>
                 <td>#{lottery.lottery_id}</td>
                 <td className='text-center'>{lottery.terrand_round}</td>
-                <td className='text-center'>{lottery.counter_player ? lottery.counter_player : '-'}</td>
-                <td className='text-center'> {lottery.winning_number + ' ' + lottery.bonus_number}</td>
+                {/*<td className='text-center'>{lottery.counter_player ? lottery.counter_player : '-'}</td>*/}
+                <td className='text-center'>
+                    <div className="btn-holder">
+                        <span className={
+                            'nr-btn smaller'
+                        } style={{padding: "10px"}}>{lottery.winning_number[0]}</span>
+                        <span className={
+                            'nr-btn smaller'
+                        } style={{padding: "10px"}}>{lottery.winning_number[1]}</span>
+                        <span className={
+                            'nr-btn smaller'
+                        } style={{padding: "10px"}}>{lottery.winning_number[2]}</span>
+                        <span className={
+                            'nr-btn smaller'
+                        } style={{padding: "10px"}}>{lottery.winning_number[3]}</span>
+                        <span className={
+                            'nr-btn smaller'
+                        } style={{padding: "10px"}}>{lottery.bonus_number}</span>
+                    </div>
+
+                </td>
             </tr>
         ))
         return <>{render}</>
@@ -166,9 +240,73 @@ export default () => {
         }
     }
 
+    async function resolve_all(){
+        const default_limit = 30
+        let msgs = []
+        for (let x = rapidoState.round; x > 0; x--) {
+            let record_rapido_games = []
+            let rapido_games_amount = []
+            let loop = true
+            while (loop) {
+                let query = {
+                    games: {
+                        round: x,
+                        player: state.wallet.walletAddress,
+                        limit: default_limit,
+                    },
+                }
+                if (rapido_games_amount.length == 30) {
+                    query.games.start_after = rapido_games_amount[rapido_games_amount.length - 1]
+                }else {
+                    loop = false
+                }
+                let rapido_games = await api.contractQuery(state.rapidoAddress, query)
+                rapido_games_amount = rapido_games;
+                record_rapido_games.push(rapido_games)
+            }
+
+            if (record_rapido_games.length != 0){
+                let msg = new MsgExecuteContract(
+                    state.wallet.walletAddress,
+                    state.rapidoAddress,
+                    {
+                        collect: {
+                            round: x,
+                            player: state.wallet.walletAddress,
+                            game_id: record_rapido_games,
+                        },
+                    },
+                )
+                console.log(record_rapido_games)
+                msgs.push(msg)
+            }
+        }
+        console.log(msgs)
+
+
+
+        // state.wallet
+        //     .post({
+        //         msgs: [msg],
+        //     })
+        //     .then((e) => {
+        //         if (e.success) {
+        //             toast.success('Successfully checked lottery numbers!')
+        //         } else {
+        //             toast.error('Something went wrong, please try again')
+        //             console.log(e)
+        //         }
+        //     })
+        //     .catch((e) => {
+        //         console.log(e)
+        //     })
+        //
+    }
+
     useEffect(() => {
         getRapidoState()
         getRapidoConfig()
+
     }, [])
 
     useEffect(() => {
@@ -184,6 +322,7 @@ export default () => {
     useEffect(() => {
         if (rapidoState.round) {
             getRapidoLotteries()
+            getRapidoLotteriesPagination(rapidoState.round - 6)
         }
         /*
             TODO: show a loader | Loading current lotteries...
@@ -193,6 +332,11 @@ export default () => {
     useEffect(() => {
         rapidoWebsocket()
     }, [])
+
+    // useEffect(()=>{
+    //         resolve_all()
+    //
+    // }, [state.wallet.walletAddress])
 
     return (
         <>
@@ -333,6 +477,7 @@ export default () => {
                     </div>
                 </div>
             </div>
+
             <div className="container py-5">
                 <div className="row">
                     <div className="col-6 p-4">
@@ -347,12 +492,13 @@ export default () => {
                                 <tr>
                                     <th style={{ minWidth: 100 }}>draws</th>
                                     <th style={{ minWidth: 100 }} className='text-center'>Terrand round</th>
-                                    <th style={{ minWidth: 100 }} className='text-center'>Numbers of players</th>
+                                    {/*<th style={{ minWidth: 100 }} className='text-center'>Numbers of players</th>*/}
                                     <th style={{ minWidth: 100 }} className='text-center'>Results</th>
                                 </tr>
                             </thead>
                             <tbody>{resultHistory()}</tbody>
                         </table>
+                        <button onClick={()=>getRapidoLotteriesPagination(allLotteriesHistory[allLotteriesHistory.length - 1].lottery_id - 6)}>Load more</button>
                     </div>
                 </div>
             </div>
