@@ -23,7 +23,7 @@ export default () => {
     const { state, dispatch } = useStore()
 
     const [rapidoState, setRapidoState] = useState({})
-    const [lotteries, setlotteries] = useState([{}])
+    const [lotteries, setlotteries] = useState([])
     const [allLotteriesHistory, setAllLotteriesHistory] = useState([{}])
     const [timeBetween, setTimeBetween] = useState(0)
 
@@ -85,9 +85,17 @@ export default () => {
                 state.rapidoAddress,
                 query,
             )
-
+            
+            let allLotteries_state = await api.contractQuery(
+                state.rapidoAddress,
+                {
+                    lotteries_state: {},
+                }
+               
+            )
             // Set the array of lotteries
             setlotteries([...lotteries_state])
+            setAllLotteriesHistory([...allLotteries_state])
             /*
                 TODO: dismiss the prediction loader here
              */
@@ -124,36 +132,12 @@ export default () => {
         return <span className="fs-6">{format_message}</span>
     }
 
-    async function getAllRapidoLotteries() {
-        try {
-            if (rapidoState.round == null) {
-                return
-            }
-            // Prepare query
-            let query = {
-                lotteries_state: {},
-            }
-            // Query to state smart contract
-            let lotteries_state = await api.contractQuery(
-                state.rapidoAddress,
-                query,
-            )
-
-            // Set the array of lotteries
-            setAllLotteriesHistory([lotteries_state])
-            /*
-                TODO: dismiss the prediction loader here
-             */
-        } catch (e) {
-            console.log(e)
-        }
-    }
-
     function resultHistory() {
         let render = allLotteriesHistory.map((lottery) => (
-            <tr key={allLotteriesHistory.lottery_id}>
-                {console.log(' - ' + allLotteriesHistory.lottery_id)}
+            <tr key={lottery.lottery_id}>
+                {console.log(' - ' + lottery.lottery_id)}
                 <td>#{lottery.lottery_id}</td>
+                <td className='text-center'> {lottery.winning_number + lottery.bonus_number}</td>
             </tr>
         ))
         return <>{render}</>
@@ -362,8 +346,8 @@ export default () => {
                         <table className="table text-white">
                             <thead>
                                 <tr>
-                                    <th style={{ minWidth: 100 }}>#draw</th>
-                                    <th style={{ minWidth: 150 }}>Result</th>
+                                    <th style={{ minWidth: 100 }}>draw</th>
+                                    <th style={{ minWidth: 150 }} className='text-center'>Result</th>
                                 </tr>
                             </thead>
                             <tbody>{resultHistory()}</tbody>
