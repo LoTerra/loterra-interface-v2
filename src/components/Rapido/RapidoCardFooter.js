@@ -103,7 +103,7 @@ export default function RapidoCardFooter(props) {
 
     return (
         <>
-            {isLotteryLive ? (
+            { (fourNumbers.length > 0 || oneNumber.length > 0) && isLotteryLive ? (
                 <div
                     className="card-footer pb-3"
                     style={{ background: '#27498C' }}
@@ -237,37 +237,60 @@ export default function RapidoCardFooter(props) {
                             {userGames.map((game) => (
                                 <div key={game.game_id}>
                                     <div>
-                                        ticket number #{game.game_id + 1} |{' '}
-                                        {game.number[0]} {game.number[1]}{' '}
-                                        {game.number[2]} {game.number[3]} |
-                                        bonus: {game.bonus}
-                                        <button
-                                            disabled={game.resolved}
-                                            onClick={() =>
-                                                checkLottoNumbers(game.game_id)
-                                            }
-                                        >
-                                            {' '}
-                                            Check lotto numbers{' '}
-                                        </button>
+
+                                        <div className="btn-holder">
+                                            <span>#{game.game_id + 1}</span>
+                                            <span className={
+                                                'nr-btn smaller' +
+                                                (game.number[0] == winningCombination[0] ? ' active' : '')
+                                            } style={{padding: "10px"}}>{game.number[0]}</span>
+                                            <span className={
+                                                'nr-btn smaller' +
+                                                (game.number[1] == winningCombination[1] ? ' active' : '')
+                                            } style={{padding: "10px"}}>{game.number[1]}</span>
+                                            <span className={
+                                                'nr-btn smaller' +
+                                                (game.number[2] == winningCombination[2] ? ' active' : '')
+                                            } style={{padding: "10px"}}>{game.number[2]}</span>
+                                            <span className={
+                                                'nr-btn smaller' +
+                                                (game.number[3] == winningCombination[3] ? ' active' : '')
+                                            } style={{padding: "10px"}}>{game.number[3]}</span>
+                                            <span className={
+                                                'nr-btn smaller' +
+                                                (game.bonus == winningCombination[4] ? ' active-g' : '')
+                                            } style={{padding: "10px"}}>{game.bonus}</span>
+
+                                            <button
+                                                className="btn"
+                                                style={{background: "rgb(122, 94, 199)"}}
+                                                disabled={game.resolved}
+                                                onClick={() =>
+                                                    checkLottoNumbers(game.game_id)
+                                                }
+                                            >
+                                                {' '}
+                                                Check lotto numbers{' '}
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             ))}
-                            <button
-                                disabled={isLastItem}
-                                onClick={() =>
-                                    loadMore(
-                                        userGames[userGames.length - 1].game_id,
-                                    )
-                                }
-                            >
-                                {' '}
-                                Load More{' '}
-                            </button>
                         </>
                     ) : (
                         <></>
                     )}
+                    <button
+                        disabled={isLastItem}
+                        onClick={() =>
+                            loadMore(
+                                userGames[userGames.length - 1].game_id,
+                            )
+                        }
+                    >
+                        {' '}
+                        Load More{' '}
+                    </button>
                 </div>
             )}
         </>

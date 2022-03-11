@@ -290,6 +290,7 @@ export default function RapidoCardBody(props) {
                 </div>
             ) : winningCombination != null && !isLotteryLive ? (
                 <div className="col-12 text-center">
+                    <h4>Winning number</h4>
                     <div className="col-12 mb-2">
                         <div className={'rapido-winning-combination'}>
                             {winningCombination.map((nr, k) => {
@@ -312,7 +313,7 @@ export default function RapidoCardBody(props) {
                 <div className="col-12 text-center">
                     <div className="col-12 mb-2">
                         <div className={'rapido-winning-combination'}>
-                            Draw is happening May the luck be with you!
+                            This Draw’s closing transaction has been submitted to the blockchain, and is awaiting confirmation. May the luck be with you!
                         </div>
                     </div>
                 </div>
