@@ -1,9 +1,4 @@
-import React, {
-    useEffect,
-    useState,
-    useCallback,
-    useRef,
-} from 'react'
+import React, { useEffect, useState, useCallback, useRef } from 'react'
 import numeral from 'numeral'
 import {
     X,
@@ -19,12 +14,7 @@ import {
     Check,
 } from 'phosphor-react'
 // import Jackpot from "../components/Jackpot";
-import {
-    Fee,
-    MsgExecuteContract,
-    WasmAPI,
-   
-} from '@terra-money/terra.js'
+import { Fee, MsgExecuteContract, WasmAPI } from '@terra-money/terra.js'
 import Countdown from '../components/Countdown'
 import TicketModal from '../components/TicketModal'
 
@@ -64,7 +54,7 @@ export default () => {
     const [buyNow, setBuyNow] = useState(false)
     const [buyLoader, setBuyLoader] = useState(false)
     const [alteBonus, setAlteBonus] = useState(false)
-    const [randomnizing,setRandomnizing] = useState(false);
+    const [randomnizing, setRandomnizing] = useState(false)
     const [giftFriend, setGiftFriend] = useState({ active: false, wallet: '' })
     const [notification, setNotification] = useState({
         type: 'success',
@@ -100,17 +90,17 @@ export default () => {
                 parseInt(contractConfigInfo.block_time_play * 1000),
             )
             // const bank = new BankAPI(terra.apiRequester)
-            const jackpotAlocation = contractConfigInfo.jackpot_percentage_reward
-            terra.bank.balance(loterra_contract_address).then(([coins]) => {            
+            const jackpotAlocation =
+                contractConfigInfo.jackpot_percentage_reward
+            terra.bank.balance(loterra_contract_address).then(([coins]) => {
                 const ustBalance = coins.get('uusd').toData()
-            
+
                 const contractJackpotInfo =
                     (ustBalance.amount * jackpotAlocation) / 100
-    
+
                 setContractBalance(ustBalance.amount / 1000000)
                 setJackpot(parseInt(contractJackpotInfo) / 1000000)
-            });
-           
+            })
 
             const jackpotAltered = await api.contractQuery(
                 state.alteredContractAddress,
@@ -130,15 +120,19 @@ export default () => {
                 message: alteredJackpot,
             })
 
-            const poolAlte = await api.contractQuery('terra18adm0emn6j3pnc90ldechhun62y898xrdmfgfz', {
-                pool: {},
-            })
+            const poolAlte = await api.contractQuery(
+                'terra18adm0emn6j3pnc90ldechhun62y898xrdmfgfz',
+                {
+                    pool: {},
+                },
+            )
 
             let ust = parseInt(poolAlte.assets[1].amount)
             let alte = parseInt(poolAlte.assets[0].amount)
 
             let formatPrice = ust / alte
-            let final = formatPrice.toFixed() * parseInt(alteredJackpot) / 1000000;
+            let final =
+                (formatPrice.toFixed() * parseInt(alteredJackpot)) / 1000000
             setAlteredJackpotUst(final)
 
             const jackpotInfo = await api.contractQuery(
@@ -255,7 +249,7 @@ export default () => {
     }, [])
 
     useEffect(() => {
-        fetchContractQuery()   
+        fetchContractQuery()
     }, [fetchContractQuery])
     let connectedWallet = ''
     if (typeof document !== 'undefined') {
@@ -397,9 +391,9 @@ export default () => {
             )
             msgs.push(msg)
         }
-        
-        if(state.config.lottery_counter > 48){
-            try{
+
+        if (state.config.lottery_counter > 48) {
+            try {
                 ////////////////////////////
                 //  VALKYRIE START
                 ////////////////////////////
@@ -409,46 +403,62 @@ export default () => {
                     {
                         qualify_preview: {
                             lottery_id: state.config.lottery_counter,
-                            player: connectedWallet.walletAddress,   
-                            preview_play_count: cart.length                         
+                            player: connectedWallet.walletAddress,
+                            preview_play_count: cart.length,
                         },
                     },
                 )
                 //If user is eligible go further
-                if(vkrEligible && vkrEligible.continue_option == 'eligible') {
+                if (vkrEligible && vkrEligible.continue_option == 'eligible') {
                     //Get participation count qualifier contract
                     const participationCount = await api.contractQuery(
                         state.vkrQualifierContract,
                         {
                             participation_count: {
                                 lottery_id: state.config.lottery_counter,
-                                player: connectedWallet.walletAddress,                            
+                                player: connectedWallet.walletAddress,
                             },
                         },
                     )
                     //Get total tickets bought by lottery_id
-                    let combinations  = {};
+                    let combinations = {}
                     combinations.combination = []
-                    const combinations_query = await api.contractQuery(
-                        state.loterraContractAddress,
-                        {
+                    const combinations_query = await api
+                        .contractQuery(state.loterraContractAddress, {
                             combination: {
                                 lottery_id: state.config.lottery_counter,
                                 address: state.wallet.walletAddress,
                             },
-                        },
-                    ).then((a) => { 
-                        combinations = a
-                    }).catch(error => {
-                        console.log('no combinations yet')
-                    })
-    
+                        })
+                        .then((a) => {
+                            combinations = a
+                        })
+                        .catch((error) => {
+                            console.log('no combinations yet')
+                        })
+
                     //Do the C - Q * 10 formula
-                    const participationTimes = (combinations.combination.length + cart.length - (participationCount.participation_count * 10)) / 10;
-                    console.log(Math.floor(participationTimes), combinations.combination.length, cart.length, participationCount.participation_count)
-    
-                    for (let index = 0; index < Math.floor(participationTimes); index++) {
-                        if(state.vkrReferrer.status && state.vkrReferrer.code !== ''){
+                    const participationTimes =
+                        (combinations.combination.length +
+                            cart.length -
+                            participationCount.participation_count * 10) /
+                        10
+                    console.log(
+                        Math.floor(participationTimes),
+                        combinations.combination.length,
+                        cart.length,
+                        participationCount.participation_count,
+                    )
+
+                    for (
+                        let index = 0;
+                        index < Math.floor(participationTimes);
+                        index++
+                    ) {
+                        if (
+                            state.vkrReferrer.status &&
+                            state.vkrReferrer.code !== ''
+                        ) {
                             //Valkyrie referrer detected
                             const msg = new MsgExecuteContract(
                                 connectedWallet.walletAddress,
@@ -457,22 +467,21 @@ export default () => {
                                     participate: {
                                         actor: connectedWallet.walletAddress,
                                         referrer: {
-                                            compressed: state.vkrReferrer.code
-                                        }
+                                            compressed: state.vkrReferrer.code,
+                                        },
                                     },
-                                }
+                                },
                             )
-    
+
                             msgs.push(msg)
-    
                         } else {
                             //Check normal valkyrie participator
                             const msg = new MsgExecuteContract(
                                 connectedWallet.walletAddress,
-                                state.vkrContract, 
+                                state.vkrContract,
                                 {
                                     participate: {
-                                        actor: connectedWallet.walletAddress
+                                        actor: connectedWallet.walletAddress,
                                     },
                                 },
                             )
@@ -480,7 +489,7 @@ export default () => {
                         }
                     }
                 }
-            }catch(e){
+            } catch (e) {
                 console.log(e)
             }
         }
@@ -488,8 +497,8 @@ export default () => {
         //  VALKYRIE END
         ////////////////////////////
 
-        ///Make good fee           
-     
+        ///Make good fee
+
         connectedWallet
             .post({
                 msgs: msgs,
@@ -607,8 +616,7 @@ export default () => {
         setAmount(cart.length)
         setTimeout(() => {
             setRandomnizing(false)
-        },1500)
-        
+        }, 1500)
     }
 
     function updateCombos(new_code, index) {
@@ -742,112 +750,136 @@ export default () => {
                     backgroundPosition: 'center center',
                 }}
             > */}
-                <div className="container-fluid px-md-5">
-
-                    <div className="card base-card border-0">
-                        <div className="card-body p-md-5">
-                            <div className="row">
-                                <div className="col-md-12 text-center">
-                                    <h1>Decentralized Lottery </h1>
-                                    <p className="slogan">LoTerra is a decentralized gaming ecosystem managed by LOTA holders</p>
-                                </div>
-                                <div className="col-xl-6">
-                                
+            <div className="container-fluid px-md-5">
+                <div className="card base-card border-0">
+                    <div className="card-body p-md-5">
+                        <div className="row">
+                            <div className="col-md-12 text-center">
+                                <h1>Decentralized Lottery </h1>
+                                <p className="slogan">
+                                    LoTerra is a decentralized gaming ecosystem
+                                    managed by LOTA holders
+                                </p>
+                            </div>
+                            <div className="col-xl-6">
                                 <p className="sub-title">Next jackpot</p>
                                 <h2>
-                                    {numeral(jackpotAlteredUst + jackpot)
-                                        .format('0,0.00')}<span>UST</span>
-                                    
-                                </h2> 
+                                    {numeral(
+                                        jackpotAlteredUst + jackpot,
+                                    ).format('0,0.00')}
+                                    <span>UST</span>
+                                </h2>
                                 <p className="sub-title">Mixed jackpot</p>
-                                <h2 className="alte" style={{color:"#fff"}}>
-                                {numeral(jackpot)
-                                        .format('0,0.00')}<span>UST</span>
-                                    
-                                </h2> 
+                                <h2 className="alte" style={{ color: '#fff' }}>
+                                    {numeral(jackpot).format('0,0.00')}
+                                    <span>UST</span>
+                                </h2>
                                 <h2 className="alte">
-                                +{numeral(jackpotAltered)
-                                        .format('0,0.00')}<span>ALTE</span>
-                                    
-                                </h2> 
+                                    +{numeral(jackpotAltered).format('0,0.00')}
+                                    <span>ALTE</span>
+                                </h2>
                                 <div className="col-12 text-start mt-4 mb-4">
-                                                <button
-                                                    className={
-                                                        'btn btn-special'
-                                                    }
-                                                    onClick={() =>
-                                                        setBuyNow(!buyNow)
-                                                    }
-                                                >
-                                                    Buy Tickets
-                                                </button>
-                                                <small
-                                                    style={{
-                                                        display: 'block',
-                                                        marginTop: '10px',
-                                                        fontSize: '12px',
-                                                        opacity: '0.6',
-                                                    }}
-                                                >
-                                                    You can buy tickets with{' '}
-                                                    <strong>UST</strong> and{' '}
-                                                    <strong>ALTE</strong>
-                                                </small>
-                                            </div>    
-                                            <a href="https://app.valkyrieprotocol.com/campaigns/terra143kpwsuu82rtdy8jkyagmvn426q9amqsk7ftrw" target="_blank" className="card grey-card text-center mb-3">
+                                    <button
+                                        className={'btn btn-special'}
+                                        onClick={() => setBuyNow(!buyNow)}
+                                    >
+                                        Buy Tickets
+                                    </button>
+                                    <small
+                                        style={{
+                                            display: 'block',
+                                            marginTop: '10px',
+                                            fontSize: '12px',
+                                            opacity: '0.6',
+                                        }}
+                                    >
+                                        You can buy tickets with{' '}
+                                        <strong>UST</strong> and{' '}
+                                        <strong>ALTE</strong>
+                                    </small>
+                                </div>
+                                <a
+                                    href="https://app.valkyrieprotocol.com/campaigns/terra143kpwsuu82rtdy8jkyagmvn426q9amqsk7ftrw"
+                                    target="_blank"
+                                    className="card grey-card text-center mb-3"
+                                >
                                     <div className="card-body">
                                         <span className="badge">Active</span>
-                                    <img src="/logo-vkr.png"/>
-                                    <ul className="text-start">
-                                        <li><Check size={16} color={'#fdf500'} weight={'bold'}/> Participate 10 tickets and get 2 $LOTA</li>
-                                        <li><Check size={16} color={'#fdf500'} weight={'bold'}/> Share your Referral link and get 24 $VKR</li>
-                                    </ul>
-                                    <button className="btn btn-grey mt-3 w-100 fw-bold">Join Campaign</button>
+                                        <img src="/logo-vkr.png" />
+                                        <ul className="text-start">
+                                            <li>
+                                                <Check
+                                                    size={16}
+                                                    color={'#fdf500'}
+                                                    weight={'bold'}
+                                                />{' '}
+                                                Participate 10 tickets and get 2
+                                                $LOTA
+                                            </li>
+                                            <li>
+                                                <Check
+                                                    size={16}
+                                                    color={'#fdf500'}
+                                                    weight={'bold'}
+                                                />{' '}
+                                                Share your Referral link and get
+                                                24 $VKR
+                                            </li>
+                                        </ul>
+                                        <button className="btn btn-grey mt-3 w-100 fw-bold">
+                                            Join Campaign
+                                        </button>
                                     </div>
-                                </a>    
-                                </div>
-                                <div className="col-xl-6 d-flex">
-                                            <div className="align-self-center w-100">
-                                            <p className="sub-title">Next draw in</p>
-                                <Countdown
-                                                    expiryTimestamp={
-                                                        expiryTimestamp
-                                                    }
-                                                />
-                                                <div className="row">
-                                                    <div className="col-6 p-1 text-center">
-                                                    <div className="card base-card-light">
-                                                        <div className="card-body">
-                                                        <p className="sub-title">Players</p>
+                                </a>
+                            </div>
+                            <div className="col-xl-6 d-flex">
+                                <div className="align-self-center w-100">
+                                    <p className="sub-title">Next draw in</p>
+                                    <Countdown
+                                        expiryTimestamp={expiryTimestamp}
+                                    />
+                                    <div className="row">
+                                        <div className="col-6 p-1 text-center">
+                                            <div className="card base-card-light">
+                                                <div className="card-body">
+                                                    <p className="sub-title">
+                                                        Players
+                                                    </p>
                                                     {players ? (
-                                                                        <p className="amount">{players}</p>
-                                                                    ) : (
-                                                                        <PriceLoader />
-                                                                    )}
-                                                        </div>
-                                                    </div>
-                                                    </div>
-                                                    <div className="col-6 p-1 text-center">
-                                                    <div className="card base-card-light">
-                                                        <div className="card-body">
-                                                    <p className="sub-title">Tickets</p>
-                                                    {tickets ? (
-                                                                        <p className="amount">{tickets}</p>
-                                                                    ) : (
-                                                                        <PriceLoader />
-                                                                    )}
-                                                                    </div>
-                                                                    </div>
-                                                    </div>
+                                                        <p className="amount">
+                                                            {players}
+                                                        </p>
+                                                    ) : (
+                                                        <PriceLoader />
+                                                    )}
                                                 </div>
                                             </div>
+                                        </div>
+                                        <div className="col-6 p-1 text-center">
+                                            <div className="card base-card-light">
+                                                <div className="card-body">
+                                                    <p className="sub-title">
+                                                        Tickets
+                                                    </p>
+                                                    {tickets ? (
+                                                        <p className="amount">
+                                                            {tickets}
+                                                        </p>
+                                                    ) : (
+                                                        <PriceLoader />
+                                                    )}
+                                                </div>
+                                            </div>
+                                        </div>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     </div>
+                </div>
 
-                    <div className="row">
-                        {/* <div className="col-lg-12 text-center">
+                <div className="row">
+                    {/* <div className="col-lg-12 text-center">
                           
                                 <div className="jackpot">                              
                             
@@ -985,7 +1017,7 @@ export default () => {
                                 </div>
                             </div>
                         </div> */}
-{/* 
+                    {/* 
                         <div className="col-12 col-md-8 mx-auto">
                             <div className="row">
                                 <div className="col-12 col-md-8 mx-auto">
@@ -1041,7 +1073,6 @@ export default () => {
                             }
                         >
                             <div className="card-header">
-                                
                                 <button
                                     className="toggle"
                                     onClick={() => setBuyNow(!buyNow)}
@@ -1051,136 +1082,223 @@ export default () => {
                             </div>
                             <div className="card-body d-flex">
                                 <div className="align-self-center card-body-wrapper">
-                                <h3>Book Your Tickets</h3>
-                                <p
-                                    style={{
-                                        marginBottom: 0,
-                                    }}
-                                >
-                                    Pay with:
-                                </p>
-                                <div className="btn-group w-100 mb-2">
-                                    <button
-                                        className={
-                                            'btn btn-default' +
-                                            (payWith == 'ust'
-                                                ? ' active'
-                                                : ' inactive')
-                                        }
-                                        onClick={() => setPayWith('ust')}
+                                    <h3>Book Your Tickets</h3>
+                                    <p
+                                        style={{
+                                            marginBottom: 0,
+                                        }}
                                     >
-                                        <img
-                                            src={'/UST.svg'}
-                                            className="me-2"
-                                            width="20px"
-                                        />
-                                        UST
-                                    </button>
-                                    <button
-                                        className={
-                                            'btn btn-default' +
-                                            (payWith == 'alte'
-                                                ? ' active'
-                                                : ' inactive')
-                                        }
-                                        onClick={() => setPayWith('alte')}
-                                    >
-                                        <img
-                                            src={'/ALTE.png'}
-                                            className="me-2"
-                                            width="20px"
-                                        />
-                                        ALTE
-                                    </button>
-                                </div>
-                                <small>
-                                    <span>HINT</span> Increase your odds!
-                                    Average buying ticket is{' '}
-                                    {parseInt(tickets / players)}
-                                </small>
-                                <div className="input-group mt-3 mb-2">
-                                    <button
-                                        className="btn btn-default"
-                                        onClick={() => amountChange('down')}
-                                    >
-                                        <MinusCircle
-                                            size={31}
-                                            color={'#9183d4'}
-                                        />
-                                    </button>
-                                    <input
-                                        type="number"
-                                        className="form-control amount-control"
-                                        value={amount}
-                                        min="1"
-                                        max="200"
-                                        step="1"
-                                        onChange={(e) => inputChange(e)}
-                                    />
-                                    <button
-                                        className="btn btn-default"
-                                        onClick={() => amountChange('up')}
-                                    >
-                                        <PlusCircle
-                                            size={31}
-                                            color={'#9183d4'}
-                                        />
-                                    </button>
-                                </div>
-                                {/* <p className="mb-2">Total: <strong>{numeral((amount * price) / 1000000).format("0,0.00")} UST</strong></p> */}
-                                {!alteBonus || payWith == 'alte' ? (
-                                    <p className="mb-2">
-                                        Total:{' '}
-                                        <strong>
-                                            {numeral(
-                                                (amount * price) / 1000000,
-                                            ).format('0,0.00')}{' '}
-                                            {payWith == 'ust' ? 'UST' : 'ALTE'}
-                                        </strong>
+                                        Pay with:
                                     </p>
-                                ) : (
-                                    <>
-                                        <p
-                                            className="mb-0"
-                                            style={{
-                                                textDecoration: 'line-through',
-                                            }}
+                                    <div className="btn-group w-100 mb-2">
+                                        <button
+                                            className={
+                                                'btn btn-default' +
+                                                (payWith == 'ust'
+                                                    ? ' active'
+                                                    : ' inactive')
+                                            }
+                                            onClick={() => setPayWith('ust')}
                                         >
+                                            <img
+                                                src={'/UST.svg'}
+                                                className="me-2"
+                                                width="20px"
+                                            />
+                                            UST
+                                        </button>
+                                        <button
+                                            className={
+                                                'btn btn-default' +
+                                                (payWith == 'alte'
+                                                    ? ' active'
+                                                    : ' inactive')
+                                            }
+                                            onClick={() => setPayWith('alte')}
+                                        >
+                                            <img
+                                                src={'/ALTE.png'}
+                                                className="me-2"
+                                                width="20px"
+                                            />
+                                            ALTE
+                                        </button>
+                                    </div>
+                                    <small>
+                                        <span>HINT</span> Increase your odds!
+                                        Average buying ticket is{' '}
+                                        {parseInt(tickets / players)}
+                                    </small>
+                                    <div className="input-group mt-3 mb-2">
+                                        <button
+                                            className="btn btn-default"
+                                            onClick={() => amountChange('down')}
+                                        >
+                                            <MinusCircle
+                                                size={31}
+                                                color={'#9183d4'}
+                                            />
+                                        </button>
+                                        <input
+                                            type="number"
+                                            className="form-control amount-control"
+                                            value={amount}
+                                            min="1"
+                                            max="200"
+                                            step="1"
+                                            onChange={(e) => inputChange(e)}
+                                        />
+                                        <button
+                                            className="btn btn-default"
+                                            onClick={() => amountChange('up')}
+                                        >
+                                            <PlusCircle
+                                                size={31}
+                                                color={'#9183d4'}
+                                            />
+                                        </button>
+                                    </div>
+                                    {/* <p className="mb-2">Total: <strong>{numeral((amount * price) / 1000000).format("0,0.00")} UST</strong></p> */}
+                                    {!alteBonus || payWith == 'alte' ? (
+                                        <p className="mb-2">
                                             Total:{' '}
                                             <strong>
                                                 {numeral(
                                                     (amount * price) / 1000000,
                                                 ).format('0,0.00')}{' '}
-                                                UST
+                                                {payWith == 'ust'
+                                                    ? 'UST'
+                                                    : 'ALTE'}
                                             </strong>
                                         </p>
-                                        <p
-                                            className="mb-2"
-                                            style={{ color: '#4ee19b' }}
-                                        >
-                                            Total:{' '}
-                                            <strong>
-                                                {' '}
-                                                {numeral(
-                                                    (amount * price) / 1000000 -
-                                                        (amount * price) /
-                                                            1000000 /
-                                                            state.config
-                                                                .bonus_burn_rate,
-                                                ).format('0,0.00')}{' '}
-                                                UST{' '}
-                                                <span>
-                                                    +{' '}
+                                    ) : (
+                                        <>
+                                            <p
+                                                className="mb-0"
+                                                style={{
+                                                    textDecoration:
+                                                        'line-through',
+                                                }}
+                                            >
+                                                Total:{' '}
+                                                <strong>
                                                     {numeral(
                                                         (amount * price) /
-                                                            1000000 /
-                                                            state.config
-                                                                .bonus_burn_rate,
+                                                            1000000,
                                                     ).format('0,0.00')}{' '}
+                                                    UST
+                                                </strong>
+                                            </p>
+                                            <p
+                                                className="mb-2"
+                                                style={{ color: '#4ee19b' }}
+                                            >
+                                                Total:{' '}
+                                                <strong>
+                                                    {' '}
+                                                    {numeral(
+                                                        (amount * price) /
+                                                            1000000 -
+                                                            (amount * price) /
+                                                                1000000 /
+                                                                state.config
+                                                                    .bonus_burn_rate,
+                                                    ).format('0,0.00')}{' '}
+                                                    UST{' '}
+                                                    <span>
+                                                        +{' '}
+                                                        {numeral(
+                                                            (amount * price) /
+                                                                1000000 /
+                                                                state.config
+                                                                    .bonus_burn_rate,
+                                                        ).format('0,0.00')}{' '}
+                                                        ALTE
+                                                    </span>
+                                                </strong>
+                                            </p>
+                                            <span className="info mb-2">
+                                                <Info
+                                                    size={14}
+                                                    style={{
+                                                        marginTop: '-2px',
+                                                    }}
+                                                    weight="fill"
+                                                    className="me-1"
+                                                />
+                                                No ALTE? you can buy ALTE on the{' '}
+                                                <a
+                                                    href="https://app.alteredprotocol.com"
+                                                    target="_blank"
+                                                >
+                                                    Altered website
+                                                </a>
+                                            </span>
+                                        </>
+                                    )}
+
+                                    {payWith == 'ust' && (
+                                        <>
+                                            <p
+                                                style={{
+                                                    marginBottom: '7px',
+                                                    fontSize: '14px',
+                                                    opacity: '0.3',
+                                                }}
+                                            >
+                                                Earn extra bonus while burning{' '}
+                                                <a
+                                                    style={{ color: '#fff' }}
+                                                    href="https://app.alteredprotocol.com"
+                                                    target="_blank"
+                                                >
+                                                    Altered
+                                                </a>
+                                            </p>
+                                            <label className="bonus-label">
+                                                <input
+                                                    type="checkbox"
+                                                    ref={bonusToggle}
+                                                    checked={alteBonus}
+                                                    className="switch"
+                                                    name="alte_bonus"
+                                                    onChange={(e, checked) =>
+                                                        bonusCheckbox(
+                                                            e,
+                                                            checked,
+                                                        )
+                                                    }
+                                                />
+                                                <label
+                                                    className="switch-label"
+                                                    onClick={() =>
+                                                        clickElement(
+                                                            bonusToggle,
+                                                        )
+                                                    }
+                                                ></label>
+                                                <Fire size={24} weight="fill" />{' '}
+                                                BURN
+                                                <span
+                                                    style={{
+                                                        color: '#d0e027',
+                                                        fontFamily: 'Cosmos',
+                                                        fontSize: '1.2em',
+                                                        padding: '4px 8px',
+                                                        background:
+                                                            'linear-gradient(228.88deg,rgba(0,0,0,.2) 18.2%,hsla(0,0%,69%,.107292) 77.71%,rgba(0,0,0,.0885417) 99.78%,transparent 146.58%),#171717',
+                                                        borderRadius: '25px',
+                                                    }}
+                                                >
                                                     ALTE
                                                 </span>
-                                            </strong>
-                                        </p>
+                                                <span className="badge rounded-pill">
+                                                    Bonus
+                                                </span>
+                                            </label>
+                                        </>
+                                    )}
+                                    {payWith !== 'ust' && (
                                         <span className="info mb-2">
                                             <Info
                                                 size={14}
@@ -1196,163 +1314,90 @@ export default () => {
                                                 Altered website
                                             </a>
                                         </span>
-                                    </>
-                                )}
+                                    )}
 
-                                {payWith == 'ust' && (
-                                    <>
-                                        <p
-                                            style={{
-                                                marginBottom: '7px',
-                                                fontSize: '14px',
-                                                opacity: '0.3',
-                                            }}
-                                        >
-                                            Earn extra bonus while burning{' '}
-                                            <a
-                                                style={{ color: '#fff' }}
-                                                href="https://app.alteredprotocol.com"
-                                                target="_blank"
-                                            >
-                                                Altered
-                                            </a>
-                                        </p>
-                                        <label className="bonus-label">
+                                    <label className="gift-label">
+                                        <input
+                                            type="checkbox"
+                                            ref={friendsToggle}
+                                            checked={giftFriend.active}
+                                            className="switch"
+                                            name="gift_friend"
+                                            onChange={(e, checked) =>
+                                                giftCheckbox(e, checked)
+                                            }
+                                        />
+                                        <label
+                                            className="switch-label"
+                                            onClick={() =>
+                                                clickElement(friendsToggle)
+                                            }
+                                        ></label>
+                                        <Gift size={24} weight="fill" /> Gift
+                                        tickets to friends
+                                        <span className="badge rounded-pill">
+                                            GIFTS
+                                        </span>
+                                    </label>
+                                    {giftFriend.active && (
+                                        <>
+                                            <p className="m-0">
+                                                Friends wallet address:
+                                            </p>
                                             <input
-                                                type="checkbox"
-                                                ref={bonusToggle}
-                                                checked={alteBonus}
-                                                className="switch"
-                                                name="alte_bonus"
-                                                onChange={(e, checked) =>
-                                                    bonusCheckbox(e, checked)
-                                                }
+                                                type="text"
+                                                className="form-control"
+                                                placeholder="yourfriendswalletaddress"
+                                                name="gift_wallet"
+                                                onChange={(e) => giftAddress(e)}
                                             />
-                                            <label
-                                                className="switch-label"
-                                                onClick={() =>
-                                                    clickElement(bonusToggle)
-                                                }
-                                            ></label>
-                                            <Fire size={24} weight="fill" />{' '}
-                                            BURN
-                                            <span
+                                        </>
+                                    )}
+                                    <div className="text-sm">{result}</div>
+
+                                    <button
+                                        onClick={() =>
+                                            setTicketModal(!ticketModal)
+                                        }
+                                        className="btn btn-default w-100 mb-3 mt-3"
+                                        style={{
+                                            fontSize: '18px',
+                                            fontWeight: 'bold',
+                                            padding: '11px 5px',
+                                        }}
+                                    >
+                                        <PencilLine
+                                            size={24}
+                                            color={'#ff36ff'}
+                                            style={{
+                                                marginTop: '-1px',
+                                                marginRight: '5px',
+                                            }}
+                                        />
+                                        Personalize tickets
+                                    </button>
+                                    <button
+                                        onClick={(e) => execute(e)}
+                                        className="btn btn-special w-100"
+                                        disabled={amount <= 0}
+                                    >
+                                        {!buyLoader ? (
+                                            <>Buy {amount} tickets</>
+                                        ) : (
+                                            <div
+                                                className="spinner-border spinner-border-sm"
+                                                role="status"
                                                 style={{
-                                                    color: '#d0e027',
-                                                    fontFamily: 'Cosmos',
-                                                    fontSize: '1.2em',
-                                                    padding: '4px 8px',
-                                                    background:
-                                                        'linear-gradient(228.88deg,rgba(0,0,0,.2) 18.2%,hsla(0,0%,69%,.107292) 77.71%,rgba(0,0,0,.0885417) 99.78%,transparent 146.58%),#171717',
-                                                    borderRadius: '25px',
+                                                    position: 'relative',
+                                                    top: '-3px',
                                                 }}
                                             >
-                                                ALTE
-                                            </span>
-                                            <span className="badge rounded-pill">
-                                                Bonus
-                                            </span>
-                                        </label>
-                                    </>
-                                )}
-                                {payWith !== 'ust' && (
-                                    <span className="info mb-2">
-                                        <Info
-                                            size={14}
-                                            style={{ marginTop: '-2px' }}
-                                            weight="fill"
-                                            className="me-1"
-                                        />
-                                        No ALTE? you can buy ALTE on the{' '}
-                                        <a
-                                            href="https://app.alteredprotocol.com"
-                                            target="_blank"
-                                        >
-                                            Altered website
-                                        </a>
-                                    </span>
-                                )}
-
-                                <label className="gift-label">
-                                    <input
-                                        type="checkbox"
-                                        ref={friendsToggle}
-                                        checked={giftFriend.active}
-                                        className="switch"
-                                        name="gift_friend"
-                                        onChange={(e, checked) =>
-                                            giftCheckbox(e, checked)
-                                        }
-                                    />
-                                    <label
-                                        className="switch-label"
-                                        onClick={() =>
-                                            clickElement(friendsToggle)
-                                        }
-                                    ></label>
-                                    <Gift size={24} weight="fill" /> Gift
-                                    tickets to friends
-                                    <span className="badge rounded-pill">
-                                        GIFTS
-                                    </span>
-                                </label>
-                                {giftFriend.active && (
-                                    <>
-                                        <p className="m-0">
-                                            Friends wallet address:
-                                        </p>
-                                        <input
-                                            type="text"
-                                            className="form-control"
-                                            placeholder="yourfriendswalletaddress"
-                                            name="gift_wallet"
-                                            onChange={(e) => giftAddress(e)}
-                                        />
-                                    </>
-                                )}
-                                <div className="text-sm">{result}</div>
-
-                                <button
-                                    onClick={() => setTicketModal(!ticketModal)}
-                                    className="btn btn-default w-100 mb-3 mt-3"
-                                    style={{
-                                        fontSize: '18px',
-                                        fontWeight: 'bold',
-                                        padding: '11px 5px'                                
-                                    }}
-                                >
-                                    <PencilLine
-                                        size={24}
-                                        color={'#ff36ff'}
-                                        style={{
-                                            marginTop: '-1px',
-                                            marginRight: '5px',
-                                        }}
-                                    />
-                                    Personalize tickets
-                                </button>
-                                <button
-                                    onClick={(e) => execute(e)}
-                                    className="btn btn-special w-100"
-                                    disabled={amount <= 0}
-                                >
-                                    {!buyLoader ? (
-                                        <>Buy {amount} tickets</>
-                                    ) : (
-                                        <div
-                                            className="spinner-border spinner-border-sm"
-                                            role="status"
-                                            style={{
-                                                position: 'relative',
-                                                top: '-3px',
-                                            }}
-                                        >
-                                            <span className="visually-hidden">
-                                                Loading...
-                                            </span>
-                                        </div>
-                                    )}
-                                </button>
+                                                <span className="visually-hidden">
+                                                    Loading...
+                                                </span>
+                                            </div>
+                                        )}
+                                    </button>
                                 </div>
                             </div>
                         </div>
@@ -1365,9 +1410,7 @@ export default () => {
                 </div>
             </div>
 
-            <div
-                className="how"
-            >
+            <div className="how">
                 <div className="container">
                     <div className="row">
                         <div className="col-md-12">

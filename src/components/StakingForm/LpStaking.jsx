@@ -27,26 +27,30 @@ export default function LpStaking(props) {
         }
         let msgs = []
         if (type == 'stake') {
-            msgs.push(new MsgExecuteContract(
-                state.wallet.walletAddress,
-                state.loterraLPAddress,
-                {
-                    send: {
-                        contract: state.loterraStakingLPAddress,
-                        amount: amount.toString(),
-                        msg: 'eyAiYm9uZF9zdGFrZSI6IHt9IH0=',
+            msgs.push(
+                new MsgExecuteContract(
+                    state.wallet.walletAddress,
+                    state.loterraLPAddress,
+                    {
+                        send: {
+                            contract: state.loterraStakingLPAddress,
+                            amount: amount.toString(),
+                            msg: 'eyAiYm9uZF9zdGFrZSI6IHt9IH0=',
+                        },
                     },
-                },
-            ))
+                ),
+            )
         } else {
             // unbond
-            msgs.push(new MsgExecuteContract(
-                state.wallet.walletAddress,
-                state.loterraStakingLPAddress,
-                {
-                    unbond_stake: { amount: amount.toString() },
-                },
-            ))
+            msgs.push(
+                new MsgExecuteContract(
+                    state.wallet.walletAddress,
+                    state.loterraStakingLPAddress,
+                    {
+                        unbond_stake: { amount: amount.toString() },
+                    },
+                ),
+            )
             // Withdraw directly after unbond
             msgs.push(
                 new MsgExecuteContract(
@@ -54,8 +58,8 @@ export default function LpStaking(props) {
                     state.loterraStakingLPAddress,
                     {
                         withdraw_stake: {},
-                    }
-                )
+                    },
+                ),
             )
         }
 
@@ -221,8 +225,9 @@ export default function LpStaking(props) {
                         >
                             Terraswap
                         </a>{' '}
-                        and stake your LP token and unstake at any time! Rewards are waiting! Share: 273.00 LOTA daily
-                        rewards | 100,000.00 LOTA year rewards
+                        and stake your LP token and unstake at any time! Rewards
+                        are waiting! Share: 273.00 LOTA daily rewards |
+                        100,000.00 LOTA year rewards
                     </p>
                 }
                 <span
@@ -344,84 +349,66 @@ export default function LpStaking(props) {
             </div>
 
             <div className="col-md-12 staking-rewards-info">
-                                                <h2>Staking LP rewards</h2>
-                                                {state.wallet &&
-                                                    state.wallet
-                                                        .walletAddress &&
-                                                    state.poolInfo.assets
-                                                        .length > 0 && (
-                                                        <p>
-                                                            {numeral(
-                                                                parseInt(
-                                                                    state.LPHolderAccruedRewards,
-                                                                ) / 1000000,
-                                                            ).format(
-                                                                '0,0.000000',
-                                                            )}{' '}
-                                                            LOTA ={' '}
-                                                            {numeral(
-                                                                (state.LPHolderAccruedRewards *
-                                                                    state
-                                                                        .poolInfo
-                                                                        .assets[1]
-                                                                        .amount) /
-                                                                    state
-                                                                        .poolInfo
-                                                                        .assets[0]
-                                                                        .amount /
-                                                                    1000000,
-                                                            ).format(
-                                                                '0,0.00',
-                                                            )}{' '}
-                                                            UST
-                                                        </p>
-                                                    )}
-                                                <button
-                                                    className=" btn btn-outline-primary mt-3"
-                                                    disabled={
-                                                        state.LPHolderAccruedRewards <=
-                                                        0
-                                                            ? true
-                                                            : false
-                                                    }
-                                                    onClick={() =>
-                                                        claimLPRewards()
-                                                    }
-                                                    style={{
-                                                        boxShadow: 'none',
-                                                    }}
-                                                >
-                                                    Claim rewards
-                                                </button>
-                                            </div>
+                <h2>Staking LP rewards</h2>
+                {state.wallet &&
+                    state.wallet.walletAddress &&
+                    state.poolInfo.assets.length > 0 && (
+                        <p>
+                            {numeral(
+                                parseInt(state.LPHolderAccruedRewards) /
+                                    1000000,
+                            ).format('0,0.000000')}{' '}
+                            LOTA ={' '}
+                            {numeral(
+                                (state.LPHolderAccruedRewards *
+                                    state.poolInfo.assets[1].amount) /
+                                    state.poolInfo.assets[0].amount /
+                                    1000000,
+                            ).format('0,0.00')}{' '}
+                            UST
+                        </p>
+                    )}
+                <button
+                    className=" btn btn-outline-primary mt-3"
+                    disabled={state.LPHolderAccruedRewards <= 0 ? true : false}
+                    onClick={() => claimLPRewards()}
+                    style={{
+                        boxShadow: 'none',
+                    }}
+                >
+                    Claim rewards
+                </button>
+            </div>
 
-            {pendingClaim() > 0 || claimInfo() > 0 &&
-             <div className="col-md-12 my-3">
-                <div className="claim-unstake">
-                    <p className="input-heading">Claim unstake</p>
-                    <p className="input-slogan">
-                        There is no unbonding period, you can stake and unstake
-                        instantly
-                    </p>
-                    <button
-                        className="btn btn-default-lg w-100"
-                        onClick={() => claimUnstake()}
-                        style={{ marginTop: '7px' }}
-                    >
-                        Claim unstake
-                    </button>
+            {pendingClaim() > 0 ||
+                (claimInfo() > 0 && (
+                    <div className="col-md-12 my-3">
+                        <div className="claim-unstake">
+                            <p className="input-heading">Claim unstake</p>
+                            <p className="input-slogan">
+                                There is no unbonding period, you can stake and
+                                unstake instantly
+                            </p>
+                            <button
+                                className="btn btn-default-lg w-100"
+                                onClick={() => claimUnstake()}
+                                style={{ marginTop: '7px' }}
+                            >
+                                Claim unstake
+                            </button>
 
-                    <small className="float-end text-muted mt-2">
-                        Available:
-                        <strong>
-                            {state.wallet &&
-                                state.wallet.walletAddress &&
-                                claimInfo()}
-                            LP token
-                        </strong>
-                    </small>
-                </div>
-            </div> }
+                            <small className="float-end text-muted mt-2">
+                                Available:
+                                <strong>
+                                    {state.wallet &&
+                                        state.wallet.walletAddress &&
+                                        claimInfo()}
+                                    LP token
+                                </strong>
+                            </small>
+                        </div>
+                    </div>
+                ))}
         </div>
     )
 }

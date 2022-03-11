@@ -1,11 +1,19 @@
 import React, { useState } from 'react'
 import { useStore } from '../../store'
 import numeral from 'numeral'
-import { Bank, Check, Info, Ticket, Coin, User, UsersFour } from 'phosphor-react'
+import {
+    Bank,
+    Check,
+    Info,
+    Ticket,
+    Coin,
+    User,
+    UsersFour,
+} from 'phosphor-react'
 
 // import Nouislider from "nouislider-react";
 // import "nouislider/distribute/nouislider.css";
-import {Coins, MsgExecuteContract, Fee, WasmAPI} from '@terra-money/terra.js'
+import { Coins, MsgExecuteContract, Fee, WasmAPI } from '@terra-money/terra.js'
 import { useEffect } from 'react'
 const obj = new Fee(700_000, { uusd: 319200 })
 
@@ -15,9 +23,8 @@ export default function Main(props) {
     const [agreement, setAgreement] = useState(false)
     const [amount, setAmount] = useState(285)
     const [percentage, setPercentage] = useState(100)
-    const[dogetherUserStats,setDogetherUserStats] = useState([])
+    const [dogetherUserStats, setDogetherUserStats] = useState([])
     const [earning, setEarning] = useState(0)
- 
 
     // const onSlideChange = (render, handle, value, un, percent) => {
     //     setPercentage(percent[0].toFixed(2))
@@ -26,7 +33,7 @@ export default function Main(props) {
     const anchorPercentage = 18
 
     function doGether(e) {
-     //   console.log('Dogether with: ', amount, percentage)
+        //   console.log('Dogether with: ', amount, percentage)
         if (!agreement) {
             showNotification('You need to accept the agreement', 'error', 4000)
             return
@@ -119,10 +126,10 @@ export default function Main(props) {
             state.dogetherAddress,
             {
                 claim_un_pool: {},
-            }
+            },
         )
-        if (amount){
-            msg.coins = new Coins({"uusd": amount})
+        if (amount) {
+            msg.coins = new Coins({ uusd: amount })
         }
         state.wallet
             .post({
@@ -151,34 +158,37 @@ export default function Main(props) {
         return parseInt(state.balanceStakeOnDogether) / 1000000
     }
 
-    async function accrued_rewards(){
+    async function accrued_rewards() {
         const api = new WasmAPI(state.lcd_client.apiRequester)
         let dogether_holder = await api.contractQuery(
-            "terra1z2vgthmdy5qlz4cnj9d9d3ajtqeq7uzc0acxrp",
+            'terra1z2vgthmdy5qlz4cnj9d9d3ajtqeq7uzc0acxrp',
             {
                 accrued_rewards: {
-                    address: state.wallet.walletAddress
-                }
-            }
-        );
+                    address: state.wallet.walletAddress,
+                },
+            },
+        )
         setEarning(parseInt(dogether_holder.rewards))
     }
 
     useEffect(() => {
-        if(state.wallet.walletAddress){
-            fetch('https://privilege.digital/api/get-dogether-user?address='+state.wallet.walletAddress)
-  .then(response => response.json())
-  .then(data => setDogetherUserStats(data.user.info)).catch(e => console.log(e));
+        if (state.wallet.walletAddress) {
+            fetch(
+                'https://privilege.digital/api/get-dogether-user?address=' +
+                    state.wallet.walletAddress,
+            )
+                .then((response) => response.json())
+                .then((data) => setDogetherUserStats(data.user.info))
+                .catch((e) => console.log(e))
             accrued_rewards()
         }
-    },[state.wallet.walletAddress])
+    }, [state.wallet.walletAddress])
 
     return (
-        <>            
-        <div className="col-md-12 mb-4">
-        <div className="card lota-card staking dogether-card margin-top">
+        <>
+            <div className="col-md-12 mb-4">
+                <div className="card lota-card staking dogether-card margin-top">
                     <div className="card-body">
-                   
                         <h2
                             className="text-center"
                             style={{
@@ -193,7 +203,9 @@ export default function Main(props) {
                             {totalBalance() ? (
                                 <>
                                     <span className="d-block nr-1">
-                                        {numeral(totalBalance()).format('0,0.00')}{' '}
+                                        {numeral(totalBalance()).format(
+                                            '0,0.00',
+                                        )}{' '}
                                         <small>UST</small>
                                     </span>
                                     <span className="d-inline-block nr-2">
@@ -206,7 +218,7 @@ export default function Main(props) {
                                                 100) *
                                                 anchorPercentage) /
                                                 356) *
-                                            7
+                                                7,
                                         ).format('0,0.00')}
                                     </span>
                                     <span className="d-inline-block nr-2">
@@ -218,14 +230,20 @@ export default function Main(props) {
                                                 percentage) /
                                                 100) *
                                                 anchorPercentage) /
-                                            1
+                                                1,
                                         ).format('0,0.00')}
                                     </span>
                                     <span className="d-inline-block nr-3">
                                         <span className="d-block heading-2">
                                             Next draw tickets
                                         </span>
-                                        {" "+ new Date(parseInt(state.dogetherState.next_draw) * 1000).toUTCString()}
+                                        {' ' +
+                                            new Date(
+                                                parseInt(
+                                                    state.dogetherState
+                                                        .next_draw,
+                                                ) * 1000,
+                                            ).toUTCString()}
                                     </span>
                                 </>
                             ) : (
@@ -242,21 +260,16 @@ export default function Main(props) {
                             )}
                         </h2>
                     </div>
-                    <span
-                            className="info mb-3"
-                            style={{ color: '#ffffffeb' }}
-                        >
-                            ⚠️ We are in contact with security audit, until a
-                            full audit report we recommend to use Dogether at
-                            your own discretion and risk.
-                        </span>
+                    <span className="info mb-3" style={{ color: '#ffffffeb' }}>
+                        ⚠️ We are in contact with security audit, until a full
+                        audit report we recommend to use Dogether at your own
+                        discretion and risk.
+                    </span>
                 </div>
-        </div>
+            </div>
             <div className="col-xl-6">
                 <div className="card lota-card staking dogether-card mt-0">
                     <div className="card-body">
-                        
-                   
                         <div className="row mb-3">
                             <div className="col-md-12">
                                 <h3>How it works</h3>
@@ -329,42 +342,52 @@ export default function Main(props) {
                                 <h3>Games</h3>
                             </div>
                             <div className="col-md-6 mb-4">
-                                <div className="card stats-card d-flex py-3 text-center">                                  
-                                <p className="badge-status active">Active</p>
-                                    <User size={48}
-                                      color={'#82f3be'}
-                                      className="mx-auto"
+                                <div className="card stats-card d-flex py-3 text-center">
+                                    <p className="badge-status active">
+                                        Active
+                                    </p>
+                                    <User
+                                        size={48}
+                                        color={'#82f3be'}
+                                        className="mx-auto"
                                     />
-                                    <p className="mb-0"><strong>Solo</strong></p>
+                                    <p className="mb-0">
+                                        <strong>Solo</strong>
+                                    </p>
                                     <p
                                         className="w-100 m-0"
                                         style={{ fontSize: '14px' }}
                                     >
                                         Everything is yours
                                     </p>
-                                  
                                 </div>
                             </div>
-                            <div className="col-md-6 mb-4" style={{opacity:0.5}}>
-                                <div className="card stats-card d-flex py-3 text-center">      
-                                <p className="badge-status inactive">Coming soon</p>                          
-                                    <UsersFour size={48}
-                                      color={'#82f3be'}
-                                      className="mx-auto"
+                            <div
+                                className="col-md-6 mb-4"
+                                style={{ opacity: 0.5 }}
+                            >
+                                <div className="card stats-card d-flex py-3 text-center">
+                                    <p className="badge-status inactive">
+                                        Coming soon
+                                    </p>
+                                    <UsersFour
+                                        size={48}
+                                        color={'#82f3be'}
+                                        className="mx-auto"
                                     />
-                                        <p className="mb-0"><strong>Coop</strong></p>
+                                    <p className="mb-0">
+                                        <strong>Coop</strong>
+                                    </p>
                                     <p
                                         className="w-100 m-0"
                                         style={{ fontSize: '14px' }}
                                     >
                                         Shared between all players
                                     </p>
-                                   
                                 </div>
                             </div>
                         </div>
                     </div>
-                    
 
                     {/* <div className="modal fade" id="agreementModal" tabindex="-1" aria-labelledby="agreementModalLabel" aria-hidden="true">
   <div className="modal-dialog">
@@ -382,8 +405,11 @@ export default function Main(props) {
                 </div>
             </div>
             <div className="col-xl-6">
-                <div className="card lota-card staking dogether-card" style={{marginTop:0}}>
-                <p className="input-heading mt-3" style={{}}>
+                <div
+                    className="card lota-card staking dogether-card"
+                    style={{ marginTop: 0 }}
+                >
+                    <p className="input-heading mt-3" style={{}}>
                         The amount you want to pool
                     </p>
                     <div className="input-group mb-3">
@@ -429,7 +455,7 @@ export default function Main(props) {
 
                             <div className="col-md-6 mb-3">
                                 <div className="card stats-card">
-                                    <div className="card-body">                                        
+                                    <div className="card-body">
                                         <small className="d-block">
                                             NR TICKETS A WEEK
                                         </small>
@@ -587,7 +613,8 @@ export default function Main(props) {
                                     className="w-100 text-end d-block"
                                     style={{ color: '#9186c3' }}
                                 >
-                                    Instant unPool or UnPool period 100000 blockheight ~7 days
+                                    Instant unPool or UnPool period 100000
+                                    blockheight ~7 days
                                 </small>
                             </div>
 
@@ -609,7 +636,6 @@ export default function Main(props) {
                                             >
                                                 My Stats
                                             </strong>{' '}
-                                            
                                         </p>
                                         <p
                                             className="mb-1"
@@ -621,47 +647,93 @@ export default function Main(props) {
                                             )}{' '}
                                             UST
                                         </p>
-                                        {dogetherUserStats.length > 0 &&
-                                        <>
-                                      
-                                        <table className="table">
-                                            <thead>
-                                                <tr>
-                                                    <th style={{padding:0}}>Lottery</th>
-                                                    <th style={{padding:0}}>Nr Tickets bought</th>
-                                                </tr>
-                                            </thead>
-                                            <tbody>
-                                            {  dogetherUserStats.map(obj => {
-                                                return (<tr style={{background:'transparent',color:'#fff'}}>
-                                                    <td style={{padding:0}}><strong>#{obj.lottery_id}</strong></td>
-                                                    <td style={{padding:0}}>
-                                                    <Ticket
-                                                    size={18}
-                                                    color={'#82f3be'}
-                                                    style={{
-                                                        position: 'relative',
-                                                        top: '-2px',
-                                                        marginRight: '4px',
-                                                    }}
-                                                    />
-                                                        <strong>{obj.amount}</strong>
-                                                        </td>
-                                                </tr>)
-                                            })
-                                            }
-                                            </tbody>
-                                        </table>
-                                        </>
-                                        }
+                                        {dogetherUserStats.length > 0 && (
+                                            <>
+                                                <table className="table">
+                                                    <thead>
+                                                        <tr>
+                                                            <th
+                                                                style={{
+                                                                    padding: 0,
+                                                                }}
+                                                            >
+                                                                Lottery
+                                                            </th>
+                                                            <th
+                                                                style={{
+                                                                    padding: 0,
+                                                                }}
+                                                            >
+                                                                Nr Tickets
+                                                                bought
+                                                            </th>
+                                                        </tr>
+                                                    </thead>
+                                                    <tbody>
+                                                        {dogetherUserStats.map(
+                                                            (obj) => {
+                                                                return (
+                                                                    <tr
+                                                                        style={{
+                                                                            background:
+                                                                                'transparent',
+                                                                            color: '#fff',
+                                                                        }}
+                                                                    >
+                                                                        <td
+                                                                            style={{
+                                                                                padding: 0,
+                                                                            }}
+                                                                        >
+                                                                            <strong>
+                                                                                #
+                                                                                {
+                                                                                    obj.lottery_id
+                                                                                }
+                                                                            </strong>
+                                                                        </td>
+                                                                        <td
+                                                                            style={{
+                                                                                padding: 0,
+                                                                            }}
+                                                                        >
+                                                                            <Ticket
+                                                                                size={
+                                                                                    18
+                                                                                }
+                                                                                color={
+                                                                                    '#82f3be'
+                                                                                }
+                                                                                style={{
+                                                                                    position:
+                                                                                        'relative',
+                                                                                    top: '-2px',
+                                                                                    marginRight:
+                                                                                        '4px',
+                                                                                }}
+                                                                            />
+                                                                            <strong>
+                                                                                {
+                                                                                    obj.amount
+                                                                                }
+                                                                            </strong>
+                                                                        </td>
+                                                                    </tr>
+                                                                )
+                                                            },
+                                                        )}
+                                                    </tbody>
+                                                </table>
+                                            </>
+                                        )}
                                         <small
-                                                style={{
-                                                    marginLeft: '0px',
-                                                    color: '#a49ab6',
-                                                }}
-                                            >
-                                                Predictions
-                                            </small>
+                                            style={{
+                                                marginLeft: '0px',
+                                                color: '#a49ab6',
+                                            }}
+                                        >
+                                            Predictions
+                                        </small>
                                         <p
                                             className="mb-1"
                                             style={{ fontSize: '14px' }}
@@ -694,10 +766,11 @@ export default function Main(props) {
                                             style={{ fontSize: '14px' }}
                                         >
                                             <strong>Earn compound</strong>{' '}
-                                            {numeral(earning / 1000000).format("0,0.000000")}Ticket(s) (Updated weekly)
-
+                                            {numeral(earning / 1000000).format(
+                                                '0,0.000000',
+                                            )}
+                                            Ticket(s) (Updated weekly)
                                         </p>
-
                                     </div>
                                 </div>
                             )}
@@ -829,14 +902,34 @@ export default function Main(props) {
                                                         ? false
                                                         : true
                                                 }
-                                                onClick={() => claimUnstake(Math.floor(pendingClaim() * 1000000 * 30 / 100 / 365 * 7))}
+                                                onClick={() =>
+                                                    claimUnstake(
+                                                        Math.floor(
+                                                            ((pendingClaim() *
+                                                                1000000 *
+                                                                30) /
+                                                                100 /
+                                                                365) *
+                                                                7,
+                                                        ),
+                                                    )
+                                                }
                                                 style={{ marginTop: '10px' }}
                                             >
-                                                {claimInfo() == 0?
-                                                    `Instant claim unPool (Pay ${numeral(Math.floor(pendingClaim() * 1000000 * 30 / 100 / 365 * 7) / 1000000).format("0,0.000000")}UST fees)`
-                                                    : "First claim currently available to unlock instant claim"
-                                                }
-
+                                                {claimInfo() == 0
+                                                    ? `Instant claim unPool (Pay ${numeral(
+                                                          Math.floor(
+                                                              ((pendingClaim() *
+                                                                  1000000 *
+                                                                  30) /
+                                                                  100 /
+                                                                  365) *
+                                                                  7,
+                                                          ) / 1000000,
+                                                      ).format(
+                                                          '0,0.000000',
+                                                      )}UST fees)`
+                                                    : 'First claim currently available to unlock instant claim'}
                                             </button>
                                         </div>
                                     </div>
@@ -844,11 +937,10 @@ export default function Main(props) {
                         </div>
                         {/* <p>{amount}</p>
             <p>{percentage}</p> */}
-                        
                     </div>
                     <small>
-                    <strong>Current blockheight:</strong>{' '}
-                    {state.blockHeight}
+                        <strong>Current blockheight:</strong>{' '}
+                        {state.blockHeight}
                     </small>
                 </div>
             </div>

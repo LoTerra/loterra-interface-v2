@@ -8,11 +8,11 @@
                 rgba(255, 255, 255, 0.6) -1.42%,
                 rgba(10, 176, 96, 0.6) 102.82%
             ),
-            #20ff93;        
+            #20ff93;
         border-radius: 7px;
     }
     &.btn-red {
-        background:linear-gradient(45deg, #ff0dff, #bd06bd);
+        background: linear-gradient(45deg, #ff0dff, #bd06bd);
     }
     &.btn-special {
         background: #ff0dff;
@@ -124,19 +124,16 @@
         padding: 11px 5px;
     }
 
-
-    
     &:active {
-        opacity:0.8;
+        opacity: 0.8;
         background-size: 100%;
         transition: opacity 0s;
-        
-        outline:none;
-        box-shadow:none;
+
+        outline: none;
+        box-shadow: none;
     }
     &:focus {
-        outline:none;
-        box-shadow:none;
+        outline: none;
+        box-shadow: none;
     }
-
 }

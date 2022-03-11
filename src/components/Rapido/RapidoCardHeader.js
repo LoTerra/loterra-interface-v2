@@ -2,60 +2,64 @@ import { Trash } from 'phosphor-react'
 import React, { useState } from 'react'
 import { useStore } from '../../store'
 
-
 export default function RapidoCardHeader(props) {
-    const {lotteryId, winningCombination, isLotteryLive} = props;
+    const { lotteryId, winningCombination, isLotteryLive } = props
 
-    const {state,dispatch} = useStore()
-
+    const { state, dispatch } = useStore()
 
     return (
-        <div className="card-header"
-        style={{borderBottom:0}}
-        >                             
-                <div className="row">
-                    <div className="col-6 text-start">
-
-                    { isLotteryLive ?
-                        <p className="mb-0 rounded"
-                        style={{
-                            background:'#7a5ec7',
-                            padding:'5px',
-                            color:'#fff',
-                            marginTop:'-23px',
-                            width:'100px',
-                            textAlign:'center',
-                            fontWeight:700
-                        }}
-                        >Active</p>
-                        : winningCombination == null ?
-                        <p className="mb-0 rounded"
-                        style={{
-                            background:'#7a5ec740',
-                            padding:'5px',
-                            color:'#fff',
-                            marginTop:'-23px',
-                            width:'100px',
-                            textAlign:'center',
-                            fontWeight:700
-                        }}
-                        >Resolving</p>
-                            :
-                            <p className="mb-0 rounded"
-                               style={{
-                                   background:'#BF046B',
-                                   padding:'5px',
-                                   color:'#fff',
-                                   marginTop:'-23px',
-                                   width:'100px',
-                                   textAlign:'center',
-                                   fontWeight:700
-                               }}
-                            >Finished</p>
-                    }
-                        <p className="fs-4 mb-0 fw-bold">#{lotteryId}</p>
-                    </div>
-                    {/* <div className="col-6 text-end">        
+        <div className="card-header" style={{ borderBottom: 0 }}>
+            <div className="row">
+                <div className="col-6 text-start">
+                    {isLotteryLive ? (
+                        <p
+                            className="mb-0 rounded"
+                            style={{
+                                background: '#7a5ec7',
+                                padding: '5px',
+                                color: '#fff',
+                                marginTop: '-23px',
+                                width: '100px',
+                                textAlign: 'center',
+                                fontWeight: 700,
+                            }}
+                        >
+                            Active
+                        </p>
+                    ) : winningCombination == null ? (
+                        <p
+                            className="mb-0 rounded"
+                            style={{
+                                background: '#7a5ec740',
+                                padding: '5px',
+                                color: '#fff',
+                                marginTop: '-23px',
+                                width: '100px',
+                                textAlign: 'center',
+                                fontWeight: 700,
+                            }}
+                        >
+                            Resolving
+                        </p>
+                    ) : (
+                        <p
+                            className="mb-0 rounded"
+                            style={{
+                                background: '#BF046B',
+                                padding: '5px',
+                                color: '#fff',
+                                marginTop: '-23px',
+                                width: '100px',
+                                textAlign: 'center',
+                                fontWeight: 700,
+                            }}
+                        >
+                            Finished
+                        </p>
+                    )}
+                    <p className="fs-4 mb-0 fw-bold">#{lotteryId}</p>
+                </div>
+                {/* <div className="col-6 text-end">        
                     { winningCombination == null ?
                         <>
                         <p className="mb-0 text-muted">Next draw</p>
@@ -66,7 +70,7 @@ export default function RapidoCardHeader(props) {
                         </>
                     }                                       
                     </div> */}
-                </div>
             </div>
-        )
+        </div>
+    )
 }

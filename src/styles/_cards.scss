@@ -1,12 +1,12 @@
 .card {
     &.base-card-light {
-        color:#fff;
-        background:#1a0948;
+        color: #fff;
+        background: #1a0948;
         .amount {
             font-style: normal;
-font-weight: bold;
-font-size: 48px;
-margin-bottom:0;
+            font-weight: bold;
+            font-size: 48px;
+            margin-bottom: 0;
         }
     }
     &.grey-card {
@@ -15,15 +15,15 @@ margin-bottom:0;
         border: 0.5px solid #3b3531;
         background-color: #1a1a1e;
         width: auto;
-    display: inline-block;
-    text-decoration:none;
-    .badge {
-        position: absolute;
-        top: -10px;
-        right: 10px;
-        background: #4ae198;
-        color: #16073e;
-    }
+        display: inline-block;
+        text-decoration: none;
+        .badge {
+            position: absolute;
+            top: -10px;
+            right: 10px;
+            background: #4ae198;
+            color: #16073e;
+        }
         img {
             display: block;
             width: 150px;
@@ -31,46 +31,49 @@ margin-bottom:0;
             margin-bottom: 10px;
         }
         ul {
-            margin:0;
-            padding:0;
+            margin: 0;
+            padding: 0;
             li {
-                text-decoration:none;
-                color:#fff;
+                text-decoration: none;
+                color: #fff;
                 list-style-type: none;
-                font-size:14px;
+                font-size: 14px;
             }
         }
-        
+
         .btn-grey {
-                font-size:15px;
-                border-style: solid;
-                border-width: 1px;
-                border-color: rgb(19, 19, 19);
-                border-radius: 5px;          
-                background: linear-gradient( 90deg, rgb(16,16,16) 0%, rgb(26,26,30) 99%);       
-                color:#fdf500;
-              
+            font-size: 15px;
+            border-style: solid;
+            border-width: 1px;
+            border-color: rgb(19, 19, 19);
+            border-radius: 5px;
+            background: linear-gradient(
+                90deg,
+                rgb(16, 16, 16) 0%,
+                rgb(26, 26, 30) 99%
+            );
+            color: #fdf500;
         }
     }
     &.base-card {
-        background:transparent;
-        color:#fff;
+        background: transparent;
+        color: #fff;
         .slogan {
             font-size: 19px;
-    opacity: 0.5;
-    margin-bottom: 44px;
-    @media(max-width:620px){
-        font-size: 14px;
-    opacity: 0.5;
-    margin-bottom: 20px;
-    }
+            opacity: 0.5;
+            margin-bottom: 44px;
+            @media (max-width: 620px) {
+                font-size: 14px;
+                opacity: 0.5;
+                margin-bottom: 20px;
+            }
         }
         h1 {
             font-style: normal;
             font-weight: bold;
             font-size: 55px;
             line-height: 67px;
-            @media(max-width:620px){
+            @media (max-width: 620px) {
                 font-size: 25px;
                 line-height: 20px;
             }
@@ -80,51 +83,51 @@ margin-bottom:0;
             font-weight: bold;
             font-size: 79px;
             line-height: 79px;
-            margin-bottom:0;
-            color: #FFFFFF;
+            margin-bottom: 0;
+            color: #ffffff;
             span {
                 font-style: normal;
-font-weight: 500;
-font-size: 36px;
+                font-weight: 500;
+                font-size: 36px;
             }
-            @media(max-width:1500px){
-                font-size:56px;
+            @media (max-width: 1500px) {
+                font-size: 56px;
                 span {
                     font-size: 23px;
                 }
             }
-            @media(max-width:620px){
-                font-size:51px;
+            @media (max-width: 620px) {
+                font-size: 51px;
                 span {
-                    font-size:21px;
+                    font-size: 21px;
                 }
             }
             &.alte {
                 font-style: normal;
-font-weight: bold;
-font-size: 42px;
-line-height: 42px;
+                font-weight: bold;
+                font-size: 42px;
+                line-height: 42px;
 
-color: #FAFF00;
-span {
-    font-weight: 500;
-font-size: 21px;
-line-height: 31px;
-}
-@media(max-width:620px){
-    font-size:36px;
-    span {
-        font-size:16px;
-    }
-}
+                color: #faff00;
+                span {
+                    font-weight: 500;
+                    font-size: 21px;
+                    line-height: 31px;
+                }
+                @media (max-width: 620px) {
+                    font-size: 36px;
+                    span {
+                        font-size: 16px;
+                    }
+                }
             }
         }
         .sub-title {
             font-style: normal;
             font-weight: 500;
             font-size: 18px;
-            color:#ff0dff;
-            margin-bottom:0;
+            color: #ff0dff;
+            margin-bottom: 0;
         }
     }
     &.latest-draw {
@@ -296,8 +299,8 @@ line-height: 31px;
         }
 
         &.staking-rewards {
-            padding: 35px 35px;  
-            margin-top:35px;
+            padding: 35px 35px;
+            margin-top: 35px;
             h2 {
                 font-weight: bold;
                 font-size: 46px;

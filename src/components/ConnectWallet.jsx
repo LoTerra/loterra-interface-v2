@@ -1,17 +1,14 @@
 import React, { useState, useEffect, useMemo } from 'react'
 import axios from 'axios'
 import { LCDClient, WasmAPI } from '@terra-money/terra.js'
-import {
-    useWallet,
-    useConnectedWallet,
-} from '@terra-money/wallet-provider'
+import { useWallet, useConnectedWallet } from '@terra-money/wallet-provider'
 import {
     Wallet,
     CaretRight,
     UserCircle,
     Trophy,
     Power,
-    Check
+    Check,
 } from 'phosphor-react'
 import numeral from 'numeral'
 import UserModal from './UserModal'
@@ -41,7 +38,6 @@ const DialogButton = {
     margin: '10px 20px 10px 20px',
 }
 export default function ConnectWallet() {
-
     let connectedWallet = ''
     const [isDisplayDialog, setIsDisplayDialog] = useState(false)
     const [isModal, setIsModal] = useState(false)
@@ -50,8 +46,6 @@ export default function ConnectWallet() {
     const [alteBank, setAlteBank] = useState()
     const [connected, setConnected] = useState(false)
     const { state, dispatch } = useStore()
-
-
 
     let wallet = ''
     if (typeof document !== 'undefined') {
@@ -85,14 +79,13 @@ export default function ConnectWallet() {
             message: latestBlocks.data.block.header.height,
         })
 
-
         // VALKYRIE START
-        const vkrRef = new URLSearchParams(window.location.search);
+        const vkrRef = new URLSearchParams(window.location.search)
         const referrerCode = vkrRef.get('vkr')
-        if(referrerCode){
+        if (referrerCode) {
             dispatch({
                 type: 'setVkrReferrer',
-                message: {status:true,code:referrerCode},
+                message: { status: true, code: referrerCode },
             })
 
             console.log('vkr referrer detected')
@@ -124,7 +117,7 @@ export default function ConnectWallet() {
                     lottery_id: contractConfigInfo.lottery_counter - 1,
                 },
             },
-        ) 
+        )
         dispatch({ type: 'setAllRecentWinners', message: winners })
 
         const contractDaoBalance = await api.contractQuery(
@@ -140,7 +133,7 @@ export default function ConnectWallet() {
         const contractDogetherState = await api.contractQuery(
             state.dogetherAddress,
             {
-                state: {}
+                state: {},
             },
         )
         dispatch({
@@ -312,16 +305,21 @@ export default function ConnectWallet() {
             try {
                 const api = new WasmAPI(lcd.apiRequester)
                 if (connectedWallet) {
-                    lcd.bank.balance(connectedWallet.walletAddress).then(([coins]) => {
-                        coins = coins;
-                        // console.log(coins ? coins.get('uusd').amount / 1000000 : '')
-                        const ustBalance = coins.get('uusd').toData()
+                    lcd.bank
+                        .balance(connectedWallet.walletAddress)
+                        .then(([coins]) => {
+                            coins = coins
+                            // console.log(coins ? coins.get('uusd').amount / 1000000 : '')
+                            const ustBalance = coins.get('uusd').toData()
 
-                        setBank(ustBalance.amount / 1000000)
-                        dispatch({ type: 'setUstBalance', message: ustBalance.amount / 1000000 })
-                    });
+                            setBank(ustBalance.amount / 1000000)
+                            dispatch({
+                                type: 'setUstBalance',
+                                message: ustBalance.amount / 1000000,
+                            })
+                        })
                 } else {
-                    setBank(null);
+                    setBank(null)
                 }
 
                 const contractConfigInfo = await api.contractQuery(
@@ -451,8 +449,6 @@ export default function ConnectWallet() {
                     message: claimsLP.claims,
                 })
 
-
-
                 alteTokens = await api.contractQuery(
                     state.alteredContractAddress,
                     {
@@ -473,32 +469,28 @@ export default function ConnectWallet() {
                 setAlteBank(numeral(alte).format('0,0.00'))
 
                 // Because if error others query will not be triggered right after the error
-                const combinations = await api.contractQuery(
-                    state.loterraContractAddress,
-                    {
+                const combinations = await api
+                    .contractQuery(state.loterraContractAddress, {
                         combination: {
                             lottery_id: contractConfigInfo.lottery_counter,
                             address: connectedWallet.walletAddress,
                         },
-                    },
-                ).then((a) => {
-                    dispatch({ type: 'setAllCombinations', message: a })
-                }).catch(error => {
-                    console.log('no combinations found')
-                })
-
-
+                    })
+                    .then((a) => {
+                        dispatch({ type: 'setAllCombinations', message: a })
+                    })
+                    .catch((error) => {
+                        console.log('no combinations found')
+                    })
             } catch (e) {
                 console.log(e)
             }
-
 
             // let uusd = coins.filter((c) => {
             //     return c.denom === 'uusd'
             // })
             // let ust = parseInt(uusd) / 1000000
             // setBank(numeral(ust).format('0,0.00'))
-
 
             // connectTo("extension")
         } else {
@@ -507,7 +499,6 @@ export default function ConnectWallet() {
             dispatch({ type: 'setWallet', message: {} })
         }
     }
-
 
     function returnBank() {
         return (
@@ -542,36 +533,39 @@ export default function ConnectWallet() {
         )
     }
 
-
-
-    useEffect(() => {
-        baseData()
-    }, [
-        // connectedWallet,
-        // lcd,
-        // state.config,
-        // state.allRecentWinners,
-        // state.youWon,
-    ])
+    useEffect(
+        () => {
+            baseData()
+        },
+        [
+            // connectedWallet,
+            // lcd,
+            // state.config,
+            // state.allRecentWinners,
+            // state.youWon,
+        ],
+    )
 
     useEffect(() => {
         if (connectedWallet && !state.wallet.walletAddress) {
             contactBalance()
         }
-    },[connectedWallet])
-
+    }, [connectedWallet])
 
     //useEffect for your won function
 
     useEffect(() => {
-        if(state.allRecentWinners.length > 0 && connectedWallet && connectedWallet.walletAddress)    {
+        if (
+            state.allRecentWinners.length > 0 &&
+            connectedWallet &&
+            connectedWallet.walletAddress
+        ) {
             checkIfWon()
         }
-    },[state.allRecentWinners])
+    }, [state.allRecentWinners])
 
     return (
         <>
-
             {!connected && (
                 <>
                     <div className="btn-group">
@@ -617,7 +611,6 @@ export default function ConnectWallet() {
                             </button>
                         </ul>
                     </div>
-
                 </>
             )}
             {connected && (
@@ -664,41 +657,31 @@ export default function ConnectWallet() {
                                 className="wallet-info d-inline-block text-start px-3"
                                 style={{ fontSize: '13px' }}
                             >
-                                        <span className="d-block">
-                                            <strong>YOUR WALLET:</strong>
-                                        </span>
+                                <span className="d-block">
+                                    <strong>YOUR WALLET:</strong>
+                                </span>
                                 <span
                                     className="d-block"
                                     style={{ marginBottom: '-5px' }}
                                 >
-                                            {bank}{' '}
-                                    <span className="text-sm">UST</span>
-                                        </span>
+                                    {bank} <span className="text-sm">UST</span>
+                                </span>
                                 <span className="d-block">
-                                            {alteBank}{' '}
-                                    <span className="text-sm">
-                                                ALTE
-                                            </span>
-                                        </span>
+                                    {alteBank}{' '}
+                                    <span className="text-sm">ALTE</span>
+                                </span>
                             </div>
                         )}
                         <button
                             onClick={() => connectTo('disconnect')}
                             className="dropdown-item"
                         >
-                            <Power
-                                size={16}
-                                style={{ marginTop: '-2px' }}
-                            />{' '}
-                            <span style={{ fontSize: '13px' }}>
-                                        Disconnect
-                                    </span>
+                            <Power size={16} style={{ marginTop: '-2px' }} />{' '}
+                            <span style={{ fontSize: '13px' }}>Disconnect</span>
                         </button>
                     </ul>
                 </>
             )}
-
-
 
             {/*<button onClick={() => display()}>Connect Wallet</button>
         {renderDialog()}*/}
@@ -709,7 +692,6 @@ export default function ConnectWallet() {
                     connectedWallet={connectedWallet}
                 />
             )}
-
         </>
     )
 }

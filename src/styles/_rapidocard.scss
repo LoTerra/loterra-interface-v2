@@ -6,16 +6,17 @@
 
     &.active {
         background: linear-gradient(45deg, #4d2bab, #2e0e85) !important;
-        
+
         border-radius: 20px;
-        color:#fff;
-        .label-four,.label-one {
-            color:#fff;
+        color: #fff;
+        .label-four,
+        .label-one {
+            color: #fff;
         }
         .rapido-combi-nr {
             .d-block {
-                background:#7a5ec7 !important;
-                color:#fff !important;
+                background: #7a5ec7 !important;
+                color: #fff !important;
             }
         }
         .card-body {
@@ -23,41 +24,41 @@
                 background: #7a5ec740;
                 box-shadow: inset 0px 4px 4px rgba(33, 10, 92, 0.09);
                 border-radius: 5px;
-                color:#fff;
-                border:0;
-                padding:7px;
+                color: #fff;
+                border: 0;
+                padding: 7px;
             }
         }
         .card-header {
-            background:transparent !important;
-            border:0;
-            color:#fff;
+            background: transparent !important;
+            border: 0;
+            color: #fff;
             .text-muted {
-                color:#000 !important;
+                color: #000 !important;
             }
         }
         .card-footer {
-            border-top:2px dashed #f2d230 !important;
+            border-top: 2px dashed #f2d230 !important;
             background: linear-gradient(45deg, #4d2bab, #2e0e85) !important;
             border-bottom-right-radius: 20px;
             border-bottom-left-radius: 20px;
-            color:#fff !important;
+            color: #fff !important;
         }
     }
-}   
-
-.btn-holder {
-    text-align:center;
 }
 
-@keyframes fadeIn{
+.btn-holder {
+    text-align: center;
+}
+
+@keyframes fadeIn {
     0% {
-      opacity:0;
+        opacity: 0;
     }
     100% {
-      opacity:1;
+        opacity: 1;
     }
-  }
+}
 
 .rapido-combi-nr {
     display: inline-block;
@@ -67,19 +68,19 @@
     font-size: 1.2rem;
     background: '#7a5ec7';
     border-radius: 7px;
-    box-shadow: inset 0px 0px 0px 3px #048ABF;
+    box-shadow: inset 0px 0px 0px 3px #048abf;
     margin: 1%;
     &.g {
         box-shadow: inset 0px 0px 0px 3px #f2d230;
     }
     &.big {
-        font-size:36px;
+        font-size: 36px;
         background: #7a5ec740;
     }
 }
 
 .label-four {
-    background: #048ABF;
+    background: #048abf;
     padding: 5px;
     padding-top: 3px;
     width: 200px;
@@ -110,7 +111,7 @@
 
     font-weight: 600;
     border: 0;
-   
+
     transition: all 150ms linear;
 
     &.smaller {
@@ -126,26 +127,25 @@
         margin: 2%;
     }
     &.active {
-        box-shadow: inset 0px 0px 0px 3px #048ABF;
-        background: #048ABF;
+        box-shadow: inset 0px 0px 0px 3px #048abf;
+        background: #048abf;
         color: #fff;
     }
     &.active-g {
-        box-shadow:inset 0px 0px 0px 3px #f2d230;
+        box-shadow: inset 0px 0px 0px 3px #f2d230;
         background: #f2d230;
         color: #fff;
     }
     &.active-i {
         background: #7a5ec7;
         color: #fff;
-        box-shadow:none;
+        box-shadow: none;
         &:hover {
             background: #7a5ec7;
             transform: scale(1.1);
         }
     }
     &:hover {
-     
         transform: scale(1.1);
     }
 }

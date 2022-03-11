@@ -12,7 +12,6 @@ export default () => {
     const obj = new Fee(700_000, { uusd: 319200 + addToGas })
     return (
         <>
-         
             <section className="proposals" style={{ marginTop: '90px' }}>
                 <div className="container">
                     <div className="card lota-card proposals">

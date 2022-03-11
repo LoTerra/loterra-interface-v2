@@ -9,7 +9,7 @@ const addToGas = 5800
 const obj = new Fee(700_000, { uusd: 319200 + addToGas })
 
 export default function Staking(props) {
-    const { showNotification,heightBlock } = props
+    const { showNotification, heightBlock } = props
     const { state, dispatch } = useStore()
 
     function setInputAmount(amount) {
@@ -256,125 +256,117 @@ export default function Staking(props) {
                     </strong>
                 </small>
             </div>
-            <div className="col-md-12 staking-rewards-info">           
-                                                <h2>Staking rewards</h2>
-                                                {state.wallet &&
-                                                    state.wallet
-                                                        .walletAddress && (
-                                                        <p>
-                                                            {numeral(
-                                                                parseInt(
-                                                                    state.holderAccruedRewards,
-                                                                ) / 1000000,
-                                                            ).format(
-                                                                '0.00',
-                                                            )}{' '}
-                                                            UST
-                                                        </p>
-                                                    )}
-                                                <button
-                                                    className=" btn btn-outline-primary mt-3"
-                                                    disabled={
-                                                        state.holderAccruedRewards <=
-                                                        0
-                                                            ? true
-                                                            : false
-                                                    }
-                                                    onClick={() =>
-                                                        claimRewards()
-                                                    }
-                                                    style={{
-                                                        boxShadow: 'none',
-                                                    }}
-                                                >
-                                                    Claim rewards
-                                                </button>
-                                         
-            </div>        
-      
-            {(claimInfo() > 0 || pendingClaim() > 0) &&
+            <div className="col-md-12 staking-rewards-info">
+                <h2>Staking rewards</h2>
+                {state.wallet && state.wallet.walletAddress && (
+                    <p>
+                        {numeral(
+                            parseInt(state.holderAccruedRewards) / 1000000,
+                        ).format('0.00')}{' '}
+                        UST
+                    </p>
+                )}
+                <button
+                    className=" btn btn-outline-primary mt-3"
+                    disabled={state.holderAccruedRewards <= 0 ? true : false}
+                    onClick={() => claimRewards()}
+                    style={{
+                        boxShadow: 'none',
+                    }}
+                >
+                    Claim rewards
+                </button>
+            </div>
+
+            {(claimInfo() > 0 || pendingClaim() > 0) && (
                 <div className="col-md-12 my-3">
-                <div className="claim-unstake">
-                    <button
-                        className="btn btn-default-lg w-100"
-                        disabled={claimInfo() > 0 ? false : true }
-                        onClick={() => claimUnstake()}
-                        style={{ marginTop: '21px' }}
-                    >
-                        Claim unstake
-                    </button>
-                    {/* If unstake claiming condition */}
-                    <span className="info">
-                        <Info size={14} weight="fill" className="me-1" />
-                        Your pending claim amount available soon:
-                        <strong>{pendingClaim()} LOTA</strong>
-                        <div style={{ marginTop: '20px' }}>
-                            List of pending claims
-                        </div>
-                        <table>
-                            <thead>
-                                <tr>
-                                    <td style={{ paddingLeft: '20px' }}>
-                                        Amount
-                                    </td>
-                                    <td style={{ paddingLeft: '20px' }}>
-                                        Release at blockheight
-                                    </td>
-                                </tr>
-                            </thead>
-                            <tbody>                                
-                                {state.holderClaims ? (
-                                    state.holderClaims.map((e) => {
-                                        if (
-                                            e.release_at.at_height >
-                                            heightBlock
-                                        ) {
-                                       
+                    <div className="claim-unstake">
+                        <button
+                            className="btn btn-default-lg w-100"
+                            disabled={claimInfo() > 0 ? false : true}
+                            onClick={() => claimUnstake()}
+                            style={{ marginTop: '21px' }}
+                        >
+                            Claim unstake
+                        </button>
+                        {/* If unstake claiming condition */}
+                        <span className="info">
+                            <Info size={14} weight="fill" className="me-1" />
+                            Your pending claim amount available soon:
+                            <strong>{pendingClaim()} LOTA</strong>
+                            <div style={{ marginTop: '20px' }}>
+                                List of pending claims
+                            </div>
+                            <table>
+                                <thead>
+                                    <tr>
+                                        <td style={{ paddingLeft: '20px' }}>
+                                            Amount
+                                        </td>
+                                        <td style={{ paddingLeft: '20px' }}>
+                                            Release at blockheight
+                                        </td>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    {state.holderClaims ? (
+                                        state.holderClaims.map((e) => {
+                                            if (
+                                                e.release_at.at_height >
+                                                heightBlock
+                                            ) {
                                                 return (
                                                     <tr>
-                                                    <td
-                                                        style={{
-                                                            paddingLeft: '20px',
-                                                        }}
-                                                    >
-                                                        {numeral(
-                                                            parseInt(e.amount) /
-                                                                1000000,
-                                                        ).format('0,0.000000')}
-                                                        LOTA
-                                                    </td>
-                                                    <td
-                                                        style={{
-                                                            paddingLeft: '20px',
-                                                        }}
-                                                    >
-                                                        {e.release_at.at_height}
-                                                    </td>
-                                                </tr>
+                                                        <td
+                                                            style={{
+                                                                paddingLeft:
+                                                                    '20px',
+                                                            }}
+                                                        >
+                                                            {numeral(
+                                                                parseInt(
+                                                                    e.amount,
+                                                                ) / 1000000,
+                                                            ).format(
+                                                                '0,0.000000',
+                                                            )}
+                                                            LOTA
+                                                        </td>
+                                                        <td
+                                                            style={{
+                                                                paddingLeft:
+                                                                    '20px',
+                                                            }}
+                                                        >
+                                                            {
+                                                                e.release_at
+                                                                    .at_height
+                                                            }
+                                                        </td>
+                                                    </tr>
                                                 )
-                                            
-                                        }
-                                    })
-                                ) : (
-                                    <tr>
-                                        <td>Empty</td>
-                                    </tr>
-                                )}
-                            </tbody>
-                        </table>
-                    </span>
-                    <small className="float-end text-muted mt-2">
-                        Available:
-                        <strong>
-                            {state.wallet &&
-                                state.wallet.walletAddress &&
-                                claimInfo()}
-                            LOTA
-                        </strong>
-                    </small>
+                                            }
+                                        })
+                                    ) : (
+                                        <tr>
+                                            <td>Empty</td>
+                                        </tr>
+                                    )}
+                                </tbody>
+                            </table>
+                        </span>
+                        <small className="float-end text-muted mt-2">
+                            Available:
+                            <strong>
+                                {state.wallet &&
+                                    state.wallet.walletAddress &&
+                                    claimInfo()}
+                                LOTA
+                            </strong>
+                        </small>
+                    </div>
                 </div>
-            </div>
-            }
+            )}
         </div>
     )
 }

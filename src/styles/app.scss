@@ -27,128 +27,126 @@ body {
     background-repeat: no-repeat;
     color: #fff;
     height: 100vh;
-    
+
     display: flex;
     overflow-x: hidden !important;
     #root {
         height: 100%;
-        width:100%;
+        width: 100%;
     }
 }
 
 #wrapper {
-    min-height:100vh;
-    max-width:100%;
-  }
+    min-height: 100vh;
+    max-width: 100%;
+}
 
-  .sticky-top {
+.sticky-top {
     align-self: flex-start;
-  }
+}
 
-  #smallNav {
+#smallNav {
     background: #00000047;
     .btn {
-        height:42px;
+        height: 42px;
     }
-  }
+}
 
-  .card-body-wrapper {
+.card-body-wrapper {
     width: 600px !important;
     position: relative;
-    margin:0 auto;
-  }
+    margin: 0 auto;
+}
 
-  #sidebar-wrapper {
+#sidebar-wrapper {
     min-height: 100vh;
     margin-left: -300px;
     transition: margin 0.25s ease-out;
     width: 300px;
-    background:#16073e;
-    padding:0 15px;
-    flex:none;
+    background: #16073e;
+    padding: 0 15px;
+    flex: none;
     flex-direction: column;
     .navbar-brand {
-        display:block;
+        display: block;
         img {
-            width:100px;
-            margin:10px auto;
+            width: 100px;
+            margin: 10px auto;
         }
-        margin-bottom:25px;
+        margin-bottom: 25px;
         span {
-            color:#fff;
-            font-weight:700;
+            color: #fff;
+            font-weight: 700;
         }
     }
     .sub-heading {
-        display:block;
-        text-transform:uppercase;
-        font-weight:600;
-        font-size:13px;
-        opacity:0.5;
-        margin-top:15px;
-        margin-bottom:10px;
+        display: block;
+        text-transform: uppercase;
+        font-weight: 600;
+        font-size: 13px;
+        opacity: 0.5;
+        margin-top: 15px;
+        margin-bottom: 10px;
     }
     .nav-item {
-        list-style-type:none;
-        margin-bottom:15px;
-        position:relative;
+        list-style-type: none;
+        margin-bottom: 15px;
+        position: relative;
         .nav-link {
-            display:block;
-            color:#fff;
-            font-weight:700;
-            transition:all 150ms linear;
+            display: block;
+            color: #fff;
+            font-weight: 700;
+            transition: all 150ms linear;
             box-shadow: inset 0px 0px 0px 0px #8ff8c5;
             .item-label {
-                display:block;
-                font-size:13px;
-                font-weight:400;
-                opacity:0.5;
-                @media(max-width:620px){
-                    display:none;
+                display: block;
+                font-size: 13px;
+                font-weight: 400;
+                opacity: 0.5;
+                @media (max-width: 620px) {
+                    display: none;
                 }
             }
             svg {
-                opacity:0.7;
+                opacity: 0.7;
             }
             &.active {
                 box-shadow: inset 4px 0px 0px 0px #f035f0;
-                background: linear-gradient(
-            45deg, #f13af126, transparent);
+                background: linear-gradient(45deg, #f13af126, transparent);
             }
             &:hover {
-                background: linear-gradient(
-                    45deg, #2b126a, transparent);
-                        box-shadow: inset 4px 0px 0px 0px #8ff8c5;
+                background: linear-gradient(45deg, #2b126a, transparent);
+                box-shadow: inset 4px 0px 0px 0px #8ff8c5;
             }
         }
     }
-  }
+}
 
 #page-content-wrapper {
     min-width: 100vw;
     flex-direction: column;
-    max-width:100%;
-    width:100%;
+    max-width: 100%;
+    width: 100%;
 }
 
 body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
     margin-left: 0;
-  }
+}
 
 @media (min-width: 768px) {
     #sidebar-wrapper {
-      margin-left: 0;
+        margin-left: 0;
     }
-  
+
     #page-content-wrapper {
         min-width: 0;
         width: 100%;
     }
-  
+
     body.sb-sidenav-toggled #wrapper #sidebar-wrapper {
-      margin-left: -300px;
+        margin-left: -300px;
     }
-  }
+}
 
 h4,
 .h4 {
@@ -173,16 +171,16 @@ h4,
     }
 }
 
-.navbar {    
+.navbar {
     z-index: 10;
     transition: background 150ms linear;
-    padding:0;
+    padding: 0;
     .btn {
-        border-radius:0 !important;
+        border-radius: 0 !important;
     }
     .btn-default {
-        border:0;
-        background:transparent;
+        border: 0;
+        background: transparent;
     }
     .navbar-brand {
         span {
@@ -224,7 +222,6 @@ h4,
         padding: 77px 0;
     }
     &.staking {
-
         background-position: center center;
         .van {
             margin-top: -70px;
@@ -247,12 +244,8 @@ h4,
                 0 0 120px #f038f0, 0 0 200px #f038f0;
         }
         @media (max-width: 990px) {
-        
-    
         }
         @media (max-width: 510px) {
-  
-   
             h1 {
                 font-size: 43px;
             }
@@ -458,7 +451,7 @@ h4,
     margin: 0 auto;
     display: block;
     position: relative;
-  
+
     margin-top: 10px;
     margin-bottom: 10px;
     z-index: 9;
@@ -470,7 +463,7 @@ h4,
     width: 20px;
     margin: 10 auto;
     display: inline-block;
-  
+
     margin-top: -5px;
     z-index: 9;
     @media (max-width: 10px) {
@@ -481,23 +474,20 @@ h4,
     margin: 0 auto;
     display: block;
     position: relative;
-    
+
     margin-bottom: -31px;
     z-index: 9;
     @media (max-width: 768px) {
-    
     }
 }
 
 .dogether-card {
- 
     background: linear-gradient(
         328.75deg,
-        #10003ba6 -5.49%, 
+        #10003ba6 -5.49%,
         #0f0038f2 104.44%
     ) !important;
     @media (max-width: 1100px) {
-       
     }
     h3 {
         font-size: 30px !important;
@@ -506,7 +496,7 @@ h4,
         text-shadow: 1px 1px 20px #10003b, 1px 2px 0px #8c6910;
     }
     .heading-1 {
-        font-size: 14px; 
+        font-size: 14px;
         text-transform: uppercase;
         color: #f13cf1;
     }
@@ -543,7 +533,7 @@ h4,
         font-size: 22px;
         color: #f5c753;
         margin-bottom: 10px;
-        text-align: center;  
+        text-align: center;
         text-shadow: 1px 1px 20px #10003b, 1px 2px 0px #8c6910;
     }
     .stats-card {
@@ -698,23 +688,22 @@ h4,
         font-weight: 600;
     }
     h2 {
-        font-size:86px;
-        font-weight:700;
+        font-size: 86px;
+        font-weight: 700;
         &.alte-jackpot {
-            font-size:46px;
+            font-size: 46px;
         }
         span {
-            font-weight:300;
-            font-size:18px;
+            font-weight: 300;
+            font-size: 18px;
         }
     }
-
 }
 
 .info {
     font-size: 12px;
     border: 1px solid #44377e;
-    padding: 8px;    
+    padding: 8px;
     display: block;
     border-radius: 10px;
     margin: 5px 0;
@@ -855,13 +844,11 @@ h4,
 
 .progress {
     background: rgba(0, 0, 0, 0.37);
-    border-color: rgba(0, 0, 0, 0.0);
+    border-color: rgba(0, 0, 0, 0);
     .progress-bar {
-        background-color:#fff;
+        background-color: #fff;
     }
 }
-
-
 
 .badge {
     &.progress-badge {
@@ -895,7 +882,7 @@ h4,
 
 .amount-block {
     background: linear-gradient(95.45deg, #3b2e73 -92.2%, #10003b 105.35%);
-    box-sizing: border-box;    
+    box-sizing: border-box;
     border-radius: 0;
     visibility: hidden;
     opacity: 0;
@@ -905,11 +892,11 @@ h4,
     transition: all 200ms linear;
     z-index: 1020;
     width: 100%;
-    height:100%;
+    height: 100%;
     top: 0;
-    left:0;
-    right:0;
-    bottom:0;    
+    left: 0;
+    right: 0;
+    bottom: 0;
     .toggle {
         background: transparent;
         border: 0;
@@ -938,10 +925,9 @@ h4,
         h2 {
             text-align: center;
         }
-        
     }
     h3 {
-        font-weight: 700;        
+        font-weight: 700;
         font-size: 33px;
         color: #ffffff;
     }
@@ -1297,7 +1283,6 @@ h4,
     }
 }
 
-
 .badge-status {
     font-size: 13px;
     background: #82f3be;
@@ -1309,29 +1294,29 @@ h4,
     border-radius: 5px;
     position: absolute;
     top: -8px;
-    text-transform:uppercase;
-    font-weight:700;
+    text-transform: uppercase;
+    font-weight: 700;
     &.active {
-        color:#212529;
+        color: #212529;
     }
     &.inactive {
-        background:#ee26f1;
-        color:#fff;
+        background: #ee26f1;
+        color: #fff;
     }
 }
 
 .staking-rewards-info {
-    padding:15px;
+    padding: 15px;
     background: #10003b82;
-    border-radius:5px;
+    border-radius: 5px;
     h2 {
-        font-size:18px;
-        font-weight:600;
-        margin-bottom:0;
+        font-size: 18px;
+        font-weight: 600;
+        margin-bottom: 0;
     }
     p {
-        margin:0;
-        font-size:24px;
+        margin: 0;
+        font-size: 24px;
     }
 }
 .trading-competition-body {
@@ -1342,39 +1327,41 @@ h4,
     background-attachment: fixed;
 }
 .trading-competition {
-    margin-top:135px;
+    margin-top: 135px;
     .stats-card {
         background: #0e0230d1;
-    border-radius: 10px;
-    color: #fff;
-    padding: 10px;
-    h3 {
-        span {
-            text-transform:uppercase;
+        border-radius: 10px;
+        color: #fff;
+        padding: 10px;
+        h3 {
+            span {
+                text-transform: uppercase;
+            }
         }
     }
-    }
     .heading-table {
-        font-family: "Sigmar One", cursive;
+        font-family: 'Sigmar One', cursive;
         text-shadow: 1px 2px 0px #ff36ff;
     }
     .title {
         color: #fff;
-    text-transform: uppercase;
-    font-size: 50px;
-    line-height: 30px;
-    position: relative;
-    margin-bottom: 37px;
-    z-index: 2;
-    font-weight: 300;
-    text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff, 0 0 40px #f038f0, 0 0 70px #f038f0, 0 0 80px #f038f0, 0 0 120px #f038f0, 0 0 200px #f038f0;
-    font-family: "Monoton", cursive;
-    @media(max-width:768px){
-        font-size:33px;
-    }
+        text-transform: uppercase;
+        font-size: 50px;
+        line-height: 30px;
+        position: relative;
+        margin-bottom: 37px;
+        z-index: 2;
+        font-weight: 300;
+        text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff,
+            0 0 40px #f038f0, 0 0 70px #f038f0, 0 0 80px #f038f0,
+            0 0 120px #f038f0, 0 0 200px #f038f0;
+        font-family: 'Monoton', cursive;
+        @media (max-width: 768px) {
+            font-size: 33px;
+        }
     }
     .trading-competition-table {
-        color:#fff;
+        color: #fff;
         tbody {
             tr {
                 border-bottom: 1px solid rgb(31, 16, 77);
@@ -1391,36 +1378,35 @@ h4,
             }
         }
         .trader-address {
-            font-size:12px;
-            opacity:0.5;
+            font-size: 12px;
+            opacity: 0.5;
         }
         .rank {
             span {
-                font-size:16px;
+                font-size: 16px;
             }
         }
         .prize {
             p {
                 margin-bottom: 0;
-    font-size: 16px;
-    font-weight: 700;
+                font-size: 16px;
+                font-weight: 700;
             }
         }
         .amount {
-            font-weight:600;
-            font-size:16px;
+            font-weight: 600;
+            font-size: 16px;
         }
         .big {
             border-bottom: 1px solid #1f104d;
-    background: linear-gradient(
-45deg, #ff36ff0d, #0d0230);
+            background: linear-gradient(45deg, #ff36ff0d, #0d0230);
             .rank {
                 span {
-                    font-size:21px;
+                    font-size: 21px;
                 }
             }
             .amount {
-                font-size:21px;
+                font-size: 21px;
             }
         }
     }
