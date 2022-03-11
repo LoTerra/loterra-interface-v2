@@ -137,6 +137,7 @@ export default () => {
             <tr key={lottery.lottery_id}>
                 {console.log(' - ' + lottery.lottery_id)}
                 <td>#{lottery.lottery_id}</td>
+                <td className='text-center'> {lottery.counter_player}</td>
                 <td className='text-center'> {lottery.winning_number + lottery.bonus_number}</td>
             </tr>
         ))
@@ -347,6 +348,7 @@ export default () => {
                             <thead>
                                 <tr>
                                     <th style={{ minWidth: 100 }}>draw</th>
+                                    <th style={{ minWidth: 100 }}>Number of players</th>
                                     <th style={{ minWidth: 150 }} className='text-center'>Result</th>
                                 </tr>
                             </thead>
