@@ -241,7 +241,6 @@ export default () => {
                             </div>
                         </div>
                         <div className="col-12 overflow-hidden mb-4 mt-5">
-                            <h2 className="fw-bold ">Last draws</h2>
                             <div className="w-100 order-4 my-3 mb-2">
                                 <div className="row">
                                     <div className="col-6 text-end">
