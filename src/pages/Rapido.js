@@ -271,14 +271,14 @@ export default () => {
                             {lotteries.length > 0 && (
                                 <Swiper
                                     spaceBetween={55}
-                                    className="draws"
+                                    style={{padding: '45px'}}
                                     navigation={{
                                         nextEl: '.swiper-next',
                                         prevEl: '.swiper-prev',
                                     }}
                                     //   modules={[Navigation, Pagination, A11y]}
 
-                                    slidesPerView={1}
+                                    slidesPerView={4}
                                     breakpoints={{
                                         // when window width is >= 640px
                                         1: {
