@@ -88,9 +88,10 @@ export default function RapidoCardBody(props) {
                     <div className="col-12 text-center">
                         <div className="col-12 mb-2">
                             <div className={'rapido-winning-combination'}>
-                                <span
+                                <button
                                     type="button"
                                     className="rapido-combi-nr big text-white"
+                                    style={{padding: '0', border: 'none', background: 'none', outline: 'none'}}
                                     onClick={() => removeNumberFromArray(1)}
                                 >
                                     {!numberOne ? (
@@ -107,10 +108,11 @@ export default function RapidoCardBody(props) {
                                     ) : (
                                         numberOne
                                     )}
-                                </span>
-                                <span
+                                </button>
+                                <button
                                     type="button"
                                     className="rapido-combi-nr big text-white"
+                                    style={{padding: '0', border: 'none', background: 'none', outline: 'none'}}
                                     onClick={() => removeNumberFromArray(2)}
                                 >
                                     {!numberTwo ? (
@@ -127,10 +129,11 @@ export default function RapidoCardBody(props) {
                                     ) : (
                                         numberTwo
                                     )}
-                                </span>
-                                <span
+                                </button>
+                                <button
                                     type="button"
                                     className="rapido-combi-nr big text-white"
+                                    style={{padding: '0', border: 'none', background: 'none', outline: 'none'}}
                                     onClick={() => removeNumberFromArray(3)}
                                 >
                                     {!numberThree ? (
@@ -147,10 +150,11 @@ export default function RapidoCardBody(props) {
                                     ) : (
                                         numberThree
                                     )}
-                                </span>
-                                <span
+                                </button>
+                                <button
                                     type="button"
                                     className="rapido-combi-nr big text-white"
+                                    style={{padding: '0', border: 'none', background: 'none', outline: 'none'}}
                                     onClick={() => removeNumberFromArray(4)}
                                 >
                                     {!numberFour ? (
@@ -167,10 +171,11 @@ export default function RapidoCardBody(props) {
                                     ) : (
                                         numberFour
                                     )}
-                                </span>
-                                <span
+                                </button>
+                                <button
                                     type="button"
                                     className="rapido-combi-nr g big text-white"
+                                    style={{padding: '0', border: 'none', background: 'none', outline: 'none'}}
                                     onClick={() => removeNumberFromArray(5)}
                                 >
                                     {!numberBonus ? (
@@ -187,7 +192,7 @@ export default function RapidoCardBody(props) {
                                     ) : (
                                         numberBonus
                                     )}
-                                </span>
+                                </button>
                             </div>
                         </div>
                     </div>
