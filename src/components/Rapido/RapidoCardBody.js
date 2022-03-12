@@ -179,7 +179,7 @@ export default function RapidoCardBody(props) {
                                         type="button"
                                         key={k}
                                         className={
-                                            'nr-btn smaller'
+                                            'nr-btn smaller' + (fourNumbers.includes(obj) ? ' active' : '')
                                         }
                                         value={obj}
                                         onClick={(e) => selectNumbers(obj)}

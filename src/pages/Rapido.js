@@ -368,7 +368,7 @@ export default () => {
                                 </div>
                             </div>
                         </div>
-                        <div className="col-12 overflow-hidden mb-4 mt-5">
+                        <div className="col-12 overflow-hidden mb-4 mt-2">
                             <div className="w-100 order-4 my-3 mb-2">
                                 <div className="row">
                                     <div className="col-6 text-end">
@@ -398,28 +398,30 @@ export default () => {
                             {lotteries.length > 0 && (
                                 <Swiper
                                     spaceBetween={55}
-                                    style={{padding: '45px'}}
+                                    style={{padding: '45px 25px'}}
                                     navigation={{
                                         nextEl: '.swiper-next',
                                         prevEl: '.swiper-prev',
                                     }}
                                     //   modules={[Navigation, Pagination, A11y]}
 
-                                    slidesPerView={4}
+                                    slidesPerView={1}
                                     breakpoints={{
                                         // when window width is >= 640px
                                         1: {
                                             slidesPerView: 1,
+                                            spaceBetween:10,
                                         },
                                         // when window width is >= 768px
                                         768: {
                                             slidesPerView: 1,
+                                            spaceBetween:55,
                                         },
                                         1000: {
                                             slidesPerView: 1,
                                         },
                                         1500: {
-                                            slidesPerView: 2,
+                                            slidesPerView: 1,
                                         },
                                     }}
                                     initialSlide={4}
