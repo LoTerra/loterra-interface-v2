@@ -22,11 +22,11 @@
         }
         .card-body {
             .form-control {
-                background: #7a5ec740;
-                box-shadow: inset 0px 4px 4px rgba(33, 10, 92, 0.09);
+                background: rgb(45 16 122);
+                box-shadow: inset 0px 4px 4px rgb(33 10 92 / 9%);
                 border-radius: 5px;
                 color: #fff;
-                border: 0;
+                border: 1px solid #1a005c;
                 padding: 7px;
             }
         }
@@ -88,7 +88,7 @@
     height: 3.5rem;
         position:relative;
         svg {
-            
+            -webkit-transform: translate(0px,0px);
         }
         @media(max-width:768px){
             font-size: 1.8rem;
@@ -187,12 +187,51 @@
     }
 }
 
-.resolving-svg svg {
-    width:200px;
-    margin:0 auto;
-    margin-bottom:25px;
+.resolving-loader {
+    width: 8vmax;
+    height: 8vmax;
+    border-right: 4px solid #f2d230;
+    border-radius: 100%;
+    transition:all 150ms linear;
+    animation: spinRight 800ms linear infinite;
+    margin:20px auto;
+    box-shadow:0px 0px 10px #000;
     display:block;
-}
+    &:before, &:after {
+      content: '';
+      width: 6vmax;
+      height: 6vmax;
+      display: block;
+      position: absolute;
+      top: calc(50% - 3vmax);
+      left: calc(50% - 3vmax);
+      border-left: 5px solid #f2d230;
+      border-radius: 100%;
+      animation: spinLeft 800ms linear infinite;
+    }
+    
+    &:after {
+      width: 4vmax;
+      height: 4vmax;
+      top: calc(50% - 2vmax);
+      left: calc(50% - 2vmax);
+      border: 0;
+      border-right: 4px solid #f2d230;
+      animation: none;
+    }
+  }
+  
+  @keyframes spinLeft {
+    0% {transform:rotate(0deg); box-shadow:0px 0px 0px #210a5c;}
+    50% {transform:rotate(360deg); box-shadow:0px 0px 10px #210a5c;}
+    100% {transform:rotate(720deg); box-shadow:0px 0px 0px #210a5c;}
+  }
+  
+  @keyframes spinRight {
+    0% {transform:rotate(360deg); box-shadow:0px 0px 0px #210a5c;}
+    50% {transform:rotate(180deg); box-shadow:0px 0px 10px #210a5c;}
+    100% {transform:rotate(0deg); box-shadow:0px 0px 0px #210a5c;}
+  }
 
 @keyframes shake {
 	0% { -webkit-transform: translate(2px, 1px) rotate(0deg); }

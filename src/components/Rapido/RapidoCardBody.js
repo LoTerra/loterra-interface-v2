@@ -319,15 +319,17 @@ export default function RapidoCardBody(props) {
                             <span className="rapido-combi-nr g big">
                                 {bonusNumber}
                             </span>
+                            
                         </div>
+
                     </div>
                 </div>
             ) : (
                 <div className="col-12 text-center">
                     <div className="col-12 mb-2">
                         <div className={'rapido-winning-combination'}>
-                            <div className="resolving-svg">
-                        
+                            <div className="resolving-loader">
+
                             </div>
                             <p className="small text-muted">This Draw’s closing transaction has been submitted to the blockchain, and is awaiting confirmation. May the luck be with you!</p>
                         </div>
