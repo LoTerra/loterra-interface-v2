@@ -386,10 +386,10 @@ export default () => {
                             {lotteries.length <= 1 && (
                                 <div className="w-100 py-5 text-center">
                                     <div
-                                        class="spinner-grow text-primary "
+                                        className="spinner-grow text-primary "
                                         role="status"
                                     >
-                                        <span class="visually-hidden">
+                                        <span className="visually-hidden">
                                             Loading...
                                         </span>
                                     </div>

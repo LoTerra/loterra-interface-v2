@@ -42,6 +42,7 @@
         "react-static-plugin-sass": "^7.3.0",
         "react-static-plugin-sitemap": "^7.5.1",
         "react-static-plugin-source-filesystem": "^7.5.1",
+        "react-static-plugin-svg": "^0.0.1",
         "react-timer-hook": "^3.0.4",
         "sass": "^1.46.0",
         "swiper": "6.8.4"

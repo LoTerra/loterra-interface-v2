@@ -113,7 +113,7 @@ export default function RapidoCard(props) {
     }, [state.wallet.walletAddress, state.rapidoCurrentRound])
 
     return (
-        <div className={'card rapido-card' + (isLotteryLive ? ' active' : '')}>
+        <div className={'card rapido-card' + (isLotteryLive ? ' active' : winningCombination == null ? ' resolving' : '')}>
             <RapidoCardHeader
                 lotteryId={lotteryId}
                 winningCombination={winningCombination}
