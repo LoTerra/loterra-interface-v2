@@ -3,7 +3,6 @@ import React, { useEffect, useState } from 'react'
 import { useStore } from '../../store'
 import { WasmAPI } from '@terra-money/terra.js'
 import { Lightning, Star } from 'phosphor-react'
-import Clover from './clover.svg'
 
 
 export default function RapidoCardBody(props) {
@@ -241,7 +240,7 @@ export default function RapidoCardBody(props) {
                                     <button
                                         key={k}
                                         className={
-                                            'nr-btn medium' +
+                                            'nr-btn medium multiplier' +
                                             (multiplier == obj
                                                 ? ' active-i'
                                                 : '')
@@ -328,7 +327,7 @@ export default function RapidoCardBody(props) {
                     <div className="col-12 mb-2">
                         <div className={'rapido-winning-combination'}>
                             <div className="resolving-svg">
-                                <Clover/>
+                        
                             </div>
                             <p className="small text-muted">This Draw’s closing transaction has been submitted to the blockchain, and is awaiting confirmation. May the luck be with you!</p>
                         </div>

@@ -10,7 +10,7 @@ import SwiperCore, {
     EffectFade,
 } from 'swiper'
 
-SwiperCore.use([Navigation, Pagination, Autoplay, EffectFade])
+
 
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/swiper-bundle.min.css'
@@ -18,11 +18,11 @@ import 'swiper/swiper.min.css'
 import { ArrowLeft, ArrowRight } from 'phosphor-react'
 import {MsgExecuteContract, WasmAPI} from '@terra-money/terra.js'
 import Pusher from 'pusher-js'
-import toast from "react-hot-toast";
+import toast, { Toaster } from "react-hot-toast";
 
 export default () => {
     const { state, dispatch } = useStore()
-
+    SwiperCore.use([Navigation, Pagination, Autoplay, EffectFade])
     const [rapidoState, setRapidoState] = useState({})
     const [lotteries, setlotteries] = useState([])
     const [allLotteriesHistory, setAllLotteriesHistory] = useState([])
@@ -193,6 +193,7 @@ export default () => {
                 <td className='text-center'>{lottery.terrand_round}</td>
                 {/*<td className='text-center'>{lottery.counter_player ? lottery.counter_player : '-'}</td>*/}
                 <td className='text-center'>
+                    { lottery.winning_number && lottery.winning_number.length > 0 &&
                     <div className="btn-holder">
                         <span className={
                             'nr-btn smaller'
@@ -210,6 +211,7 @@ export default () => {
                             'nr-btn smaller'
                         } style={{padding: "10px"}}>{lottery.bonus_number}</span>
                     </div>
+                    }
 
                 </td>
             </tr>
@@ -504,6 +506,7 @@ export default () => {
                     </div>
                 </div>
             </div>
+            <Toaster/>
         </>
     )
 }

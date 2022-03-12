@@ -63,10 +63,12 @@
 
 .rapido-combi-nr {
     display: inline-block;
-    width: 17%;
+    width: 1rem;
     text-align: center;
-    font-weight: 700;
+    font-weight: 600;
+    line-height: 3.5rem;
     font-size: 1.2rem;
+
     background:#7a5ec7;
     border-radius: 100px;
     box-shadow: inset 0px 0px 0px 3px #048abf;
@@ -82,19 +84,21 @@
         background: #7a5ec740;
         position: relative;
         border-radius: 50%;
-        width: 16%;
-        height: auto;
-        padding-bottom: 0%;
-        padding-top: 1%;
+        width: 3.5rem;
+    height: 3.5rem;
+        position:relative;
+        svg {
+            
+        }
         @media(max-width:768px){
             font-size: 1.8rem;
     background: #7a5ec740;
     position: relative;
     border-radius: 50%;
-    width: 18%;
-    height: auto;
-    padding-bottom: 0%;
-    padding-top: 1%;
+    width: 2.8rem;
+    height: 2.8rem;
+    line-height: 2.8rem;
+
         }
     }
 }
@@ -143,6 +147,17 @@
     &.medium {
         width: 29.2%;
         margin: 2%;
+        &.multiplier {
+            border-bottom: 4px solid #30137c;
+            background: linear-gradient(45deg, #7757d1, transparent);
+            box-shadow: none;
+            border-top: 1px solid #6e4ec8;
+            &.active-i {
+                background: linear-gradient(45deg, #210764, transparent);
+                color: #f2d230;
+                border-bottom-color: #240969;
+            }
+        }
     }
     &.medium-s {
         width: 15%;
@@ -163,7 +178,7 @@
         color: #fff;
         box-shadow: none;
         &:hover {
-            background: #7a5ec7;
+           
             transform: scale(1.1);
         }
     }
