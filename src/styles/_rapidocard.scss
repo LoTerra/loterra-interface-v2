@@ -12,6 +12,7 @@
         .label-four,
         .label-one {
             color: #fff;
+            text-shadow: 1px 1px 0px #00000078;
         }
         .rapido-combi-nr {
             .d-block {
@@ -38,7 +39,7 @@
             }
         }
         .card-footer {
-            border-top: 2px dashed #f2d230 !important;
+            border-top: 2px dashed #210a5ca8 !important;
             background: linear-gradient(45deg, #4d2bab, #2e0e85) !important;
             border-bottom-right-radius: 20px;
             border-bottom-left-radius: 20px;
@@ -62,25 +63,45 @@
 
 .rapido-combi-nr {
     display: inline-block;
-    width: 15%;
+    width: 17%;
     text-align: center;
     font-weight: 700;
     font-size: 1.2rem;
-    background: '#7a5ec7';
-    border-radius: 7px;
+    background:#7a5ec7;
+    border-radius: 100px;
     box-shadow: inset 0px 0px 0px 3px #048abf;
     margin: 1%;
+
+
+
     &.g {
         box-shadow: inset 0px 0px 0px 3px #f2d230;
     }
     &.big {
-        font-size: 36px;
+        font-size: 2.3rem;
         background: #7a5ec740;
+        position: relative;
+        border-radius: 50%;
+        width: 16%;
+        height: auto;
+        padding-bottom: 0%;
+        padding-top: 1%;
+        @media(max-width:768px){
+            font-size: 1.8rem;
+    background: #7a5ec740;
+    position: relative;
+    border-radius: 50%;
+    width: 18%;
+    height: auto;
+    padding-bottom: 0%;
+    padding-top: 1%;
+        }
     }
 }
 
 .label-four {
-    background: #048abf;
+    background: rgb(4,138,191);
+    background: linear-gradient(180deg, rgba(4,138,191,1) 0%, rgba(4,138,191,1) 50%, rgba(0,117,163,1) 50%, rgba(0,117,163,1) 100%);
     padding: 5px;
     padding-top: 3px;
     width: 200px;
@@ -91,7 +112,8 @@
 }
 
 .label-one {
-    background: #f2d230;
+    background: rgb(242,210,48);
+    background: linear-gradient(180deg, rgba(242,210,48,1) 0%, rgba(242,210,48,1) 50%, rgba(242,191,48,1) 50%, rgba(242,191,48,1) 100%);
     padding: 5px;
     padding-top: 3px;
     width: 200px;
