@@ -90,10 +90,12 @@ export default function RapidoCardBody(props) {
                                     {!numberOne?
                                         <Lightning
                                         size={25}
+                                        weight={'fill'}
                                         style={{
                                             position:
                                                 'relative',
-                                            top: '-1px',
+                                                opacity:0.5,
+                                            top: '-3px',
                                             marginRight: 1,
                                         }}
                                         /> :
@@ -104,10 +106,12 @@ export default function RapidoCardBody(props) {
                                     {!numberTwo ?
                                         <Lightning
                                             size={25}
+                                            weight={'fill'}
                                             style={{
                                                 position:
                                                     'relative',
-                                                top: '-1px',
+                                                    opacity:0.5,
+                                                top: '-3px',
                                                 marginRight: 1,
                                             }}
                                         /> :
@@ -118,10 +122,12 @@ export default function RapidoCardBody(props) {
                                     {!numberThree ?
                                         <Lightning
                                             size={25}
+                                            weight={'fill'}
                                             style={{
                                                 position:
                                                     'relative',
-                                                top: '-1px',
+                                                    opacity:0.5,
+                                                top: '-3px',
                                                 marginRight: 1,
                                             }}
                                         /> :
@@ -132,10 +138,12 @@ export default function RapidoCardBody(props) {
                                     {!numberFour ?
                                         <Lightning
                                             size={25}
+                                            weight={'fill'}
                                             style={{
                                                 position:
                                                     'relative',
-                                                top: '-1px',
+                                                    opacity:0.5,
+                                                top: '-3px',
                                                 marginRight: 1,
                                             }}
                                         /> :
@@ -146,10 +154,12 @@ export default function RapidoCardBody(props) {
                                     {!numberBonus ?
                                         <Star
                                             size={25}
+                                            weight={'fill'}
                                             style={{
                                                 position:
                                                     'relative',
-                                                top: '-1px',
+                                                    opacity:0.5,
+                                                top: '-3px',
                                                 marginRight: 1,
                                             }}
                                         /> :
@@ -164,6 +174,7 @@ export default function RapidoCardBody(props) {
                         style={{
                             border: '3px solid #048ABF',
                             borderRadius: '10px',
+                            background:'#210a5c69'
                         }}
                     >
                         <p className="fs-6 fw-bold text-center mb-0 label-four">
@@ -195,6 +206,7 @@ export default function RapidoCardBody(props) {
                         style={{
                             border: '3px solid #F2D230',
                             borderRadius: '10px',
+                            background:'#210a5c69'
                         }}
                     >
                         <p className="fs-6 fw-bold text-center mb-0 label-one">
