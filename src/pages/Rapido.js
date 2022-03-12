@@ -342,7 +342,7 @@ export default () => {
 
     return (
         <>
-            <div className="w-100 py-3 pt-md-5 text-center mb-4">
+            <div className="w-100 py-3 pt-md-5 text-center mb-2">
                 <h1
                     className="mb-0 fw-bold"
                     style={{ textShadow: '1px 1px 10px #14053b' }}
@@ -353,10 +353,10 @@ export default () => {
                     One draw every 5 minutes
                 </h2>
             </div>
-            <div className="container">
+            <div className="container"> 
                 <div className="row">
                     <div className="col-12">
-                        <div className="col-12 text-center">
+                        {/* <div className="col-12 text-center">
                             <div className="card rapido-card h-100">
                                 <div className="card-body d-flex">
                                     <div className="align-self-center w-100 mb-0 text-white">
@@ -369,7 +369,7 @@ export default () => {
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
                         <div className="col-12 overflow-hidden mb-4 mt-2">
                             <div className="w-100 order-4 my-3 mb-2">
                                 <div className="row">
@@ -442,6 +442,7 @@ export default () => {
                                                     <RapidoCard
                                                         key={obj.lottery_id + k}
                                                         id={k}
+                                                    
                                                         dataLength={
                                                             lotteries.length
                                                         }
@@ -459,6 +460,7 @@ export default () => {
                                                                 1000 >
                                                             Date.now()
                                                         }
+                                                        formatTime={formatTime}
                                                         drawTime={obj.draw_time}
                                                     />
                                                 </SwiperSlide>

@@ -13,6 +13,7 @@ export default function RapidoCard(props) {
         bonusNumber,
         drawTime,
         isLotteryLive,
+        formatTime,
     } = props
     const { state, dispatch } = useStore()
 
@@ -118,6 +119,7 @@ export default function RapidoCard(props) {
                 lotteryId={lotteryId}
                 winningCombination={winningCombination}
                 isLotteryLive={isLotteryLive}
+                formatTime={formatTime}
             />
             <RapidoCardBody
                 selectMultiplier={(a) => selectMultiplier(a)}

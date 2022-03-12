@@ -1,4 +1,4 @@
-import { Trash, X } from 'phosphor-react'
+import { Trash, Trophy, X } from 'phosphor-react'
 import React, { useEffect, useState } from 'react'
 import { useStore } from '../../store'
 import { WasmAPI } from '@terra-money/terra.js'
@@ -303,20 +303,21 @@ export default function RapidoCardBody(props) {
                 </div>
             ) : winningCombination != null && !isLotteryLive ? (
                 <div className="col-12 text-center">
-                    <h4>Winning number</h4>
+                    <Trophy size={55} weight="fill" fill={'#f2d230'} className="mx-auto mb-3" />
+                    <h4 className="fs-5">Winning number</h4>
                     <div className="col-12 mb-2">
                         <div className={'rapido-winning-combination'}>
                             {winningCombination.map((nr, k) => {
                                 return (
                                     <span
                                         key={k}
-                                        className="rapido-combi-nr big"
+                                        className="rapido-combi-nr medium"
                                     >
                                         {nr}
                                     </span>
                                 )
                             })}
-                            <span className="rapido-combi-nr g big">
+                            <span className="rapido-combi-nr g medium">
                                 {bonusNumber}
                             </span>
                             

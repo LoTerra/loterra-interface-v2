@@ -1,5 +1,5 @@
 .rapido-card {
-    background: linear-gradient(45deg, #4d2bab, #2e0e85);
+    background: linear-gradient(45deg, #210a5c, #2e0e85);
     color: #fff;
     border: 0;
     border-radius: 20px;
@@ -73,11 +73,20 @@
     border-radius: 100px;
     box-shadow: inset 0px 0px 0px 3px #048abf;
     margin: 1%;
-
-
+    background:linear-gradient(180deg, #048abf 0%, #048abf 50%, #0075a3 50%, #0075a3 100%);
+    &.medium {
+        width: 2.3rem;
+        height: 2.3rem;
+        text-align: center;
+        font-weight: 600;
+        line-height: 2.4rem;
+        font-size: 1.3rem;
+    }
 
     &.g {
         box-shadow: inset 0px 0px 0px 3px #f2d230;
+        background: linear-gradient(180deg, #f2d230 0%, #f2d230 50%, #f2bf30 50%, #f2bf30 100%);
+        color: #16073e;
     }
     &.big {
         font-size: 2.3rem;
