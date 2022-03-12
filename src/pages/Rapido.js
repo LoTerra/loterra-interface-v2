@@ -639,7 +639,7 @@ export default () => {
                                         // when window width is >= 768px
                                         768: {
                                             slidesPerView: 1,
-                                            spaceBetween:55,
+                                            spaceBetween: 55,
                                         },
                                         1000: {
                                             slidesPerView: 1,

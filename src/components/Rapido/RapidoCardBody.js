@@ -197,6 +197,7 @@ export default function RapidoCardBody(props) {
                         </div>
                     </div>
                     <div
+                        hidden={numberOne && numberTwo && numberThree && numberFour}
                         className="col-12 p-2 mb-3"
                         style={{
                             border: '3px solid #048ABF',
@@ -229,6 +230,7 @@ export default function RapidoCardBody(props) {
                         </div>
                     </div>
                     <div
+                        hidden={numberBonus || !numberOne || !numberTwo || !numberThree || !numberFour}
                         className="col-12 p-2"
                         style={{
                             border: '3px solid #F2D230',
