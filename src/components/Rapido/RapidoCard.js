@@ -23,7 +23,6 @@ export default function RapidoCard(props) {
     const [userGames, setUserGames] = useState([])
     const [isLastItem, setIsLastItem] = useState(false)
 
-
     const api = new WasmAPI(state.lcd_client_testnet.apiRequester)
 
     const selectFourNumbers = (nr) => {
@@ -47,7 +46,6 @@ export default function RapidoCard(props) {
         //     }
         // }
         setFourNumbers(nr)
-
 
         console.log(fourNumbers)
     }

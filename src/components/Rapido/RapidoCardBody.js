@@ -29,14 +29,13 @@ export default function RapidoCardBody(props) {
     const [numberBonus, setNumberBonus] = useState('')
 
     const selectNumbers = (nr) => {
-
         if (!numberOne) {
             setNumberOne(nr)
-        } else if (!numberTwo){
+        } else if (!numberTwo) {
             setNumberTwo(nr)
-        } else if(!numberThree){
+        } else if (!numberThree) {
             setNumberThree(nr)
-        } else if(!numberFour){
+        } else if (!numberFour) {
             setNumberFour(nr)
         } else {
             alert('deselect a number, max is 4')
@@ -47,36 +46,38 @@ export default function RapidoCardBody(props) {
         setNumberBonus(nr)
     }
 
-    function removeNumberFromArray(nr){
+    function removeNumberFromArray(nr) {
         switch (nr) {
-            case 1: setNumberOne('')
-                break;
-            case 2: setNumberTwo('')
-                break;
-            case 3: setNumberThree('')
-                break;
-            case 4: setNumberFour('')
-                break;
-            case 5: setNumberBonus('')
-                break;
+            case 1:
+                setNumberOne('')
+                break
+            case 2:
+                setNumberTwo('')
+                break
+            case 3:
+                setNumberThree('')
+                break
+            case 4:
+                setNumberFour('')
+                break
+            case 5:
+                setNumberBonus('')
+                break
         }
     }
 
     useEffect(() => {
         if (numberOne || numberTwo || numberThree || numberFour) {
             selectFourNumbers([numberOne, numberTwo, numberThree, numberFour])
-        }else{
+        } else {
             selectFourNumbers([])
         }
 
-
-        if (numberBonus){
+        if (numberBonus) {
             selectOneNumber([numberBonus])
-        }else {
+        } else {
             selectOneNumber([])
         }
-
-
     }, [numberOne, numberTwo, numberThree, numberFour, numberBonus])
 
     return (
@@ -86,85 +87,105 @@ export default function RapidoCardBody(props) {
                     <div className="col-12 text-center">
                         <div className="col-12 mb-2">
                             <div className={'rapido-winning-combination'}>
-                                <span type="button" className="rapido-combi-nr big text-white" onClick={() => removeNumberFromArray(1)}>
-                                    {!numberOne?
+                                <span
+                                    type="button"
+                                    className="rapido-combi-nr big text-white"
+                                    onClick={() => removeNumberFromArray(1)}
+                                >
+                                    {!numberOne ? (
                                         <Lightning
-                                        size={25}
-                                        weight={'fill'}
-                                        style={{
-                                            position:
-                                                'relative',
-                                                opacity:0.5,
-                                            top: '-3px',
-                                            marginRight: 1,
-                                        }}
-                                        /> :
+                                            size={25}
+                                            weight={'fill'}
+                                            style={{
+                                                position: 'relative',
+                                                opacity: 0.5,
+                                                top: '-3px',
+                                                marginRight: 1,
+                                            }}
+                                        />
+                                    ) : (
                                         numberOne
-                                    }
+                                    )}
                                 </span>
-                                <span type="button" className="rapido-combi-nr big text-white" onClick={() => removeNumberFromArray(2)}>
-                                    {!numberTwo ?
+                                <span
+                                    type="button"
+                                    className="rapido-combi-nr big text-white"
+                                    onClick={() => removeNumberFromArray(2)}
+                                >
+                                    {!numberTwo ? (
                                         <Lightning
                                             size={25}
                                             weight={'fill'}
                                             style={{
-                                                position:
-                                                    'relative',
-                                                    opacity:0.5,
+                                                position: 'relative',
+                                                opacity: 0.5,
                                                 top: '-3px',
                                                 marginRight: 1,
                                             }}
-                                        /> :
+                                        />
+                                    ) : (
                                         numberTwo
-                                    }
+                                    )}
                                 </span>
-                                <span type="button" className="rapido-combi-nr big text-white" onClick={() => removeNumberFromArray(3)}>
-                                    {!numberThree ?
+                                <span
+                                    type="button"
+                                    className="rapido-combi-nr big text-white"
+                                    onClick={() => removeNumberFromArray(3)}
+                                >
+                                    {!numberThree ? (
                                         <Lightning
                                             size={25}
                                             weight={'fill'}
                                             style={{
-                                                position:
-                                                    'relative',
-                                                    opacity:0.5,
+                                                position: 'relative',
+                                                opacity: 0.5,
                                                 top: '-3px',
                                                 marginRight: 1,
                                             }}
-                                        /> :
+                                        />
+                                    ) : (
                                         numberThree
-                                    }
+                                    )}
                                 </span>
-                                <span type="button" className="rapido-combi-nr big text-white" onClick={() => removeNumberFromArray(4)}>
-                                    {!numberFour ?
+                                <span
+                                    type="button"
+                                    className="rapido-combi-nr big text-white"
+                                    onClick={() => removeNumberFromArray(4)}
+                                >
+                                    {!numberFour ? (
                                         <Lightning
                                             size={25}
                                             weight={'fill'}
                                             style={{
-                                                position:
-                                                    'relative',
-                                                    opacity:0.5,
+                                                position: 'relative',
+                                                opacity: 0.5,
                                                 top: '-3px',
                                                 marginRight: 1,
                                             }}
-                                        /> :
+                                        />
+                                    ) : (
                                         numberFour
-                                    }
+                                    )}
                                 </span>
-                                <span type="button" className="rapido-combi-nr g big text-white" onClick={() => removeNumberFromArray(5)}>
-                                    {!numberBonus ?
+                                <span
+                                    type="button"
+                                    className="rapido-combi-nr g big text-white"
+                                    onClick={() => removeNumberFromArray(5)}
+                                >
+                                    {!numberBonus ? (
                                         <Star
                                             size={25}
                                             weight={'fill'}
                                             style={{
-                                                position:
-                                                    'relative',
-                                                    opacity:0.5,
+                                                position: 'relative',
+                                                opacity: 0.5,
                                                 top: '-3px',
                                                 marginRight: 1,
                                             }}
-                                        /> :
+                                        />
+                                    ) : (
                                         numberBonus
-                                    }
+                                    )}
                                 </span>
                             </div>
                         </div>
@@ -174,7 +195,7 @@ export default function RapidoCardBody(props) {
                         style={{
                             border: '3px solid #048ABF',
                             borderRadius: '10px',
-                            background:'#210a5c69'
+                            background: '#210a5c69',
                         }}
                     >
                         <p className="fs-6 fw-bold text-center mb-0 label-four">
@@ -190,7 +211,10 @@ export default function RapidoCardBody(props) {
                                         type="button"
                                         key={k}
                                         className={
-                                            'nr-btn smaller' + (fourNumbers.includes(obj) ? ' active' : '')
+                                            'nr-btn smaller' +
+                                            (fourNumbers.includes(obj)
+                                                ? ' active'
+                                                : '')
                                         }
                                         value={obj}
                                         onClick={(e) => selectNumbers(obj)}
@@ -206,7 +230,7 @@ export default function RapidoCardBody(props) {
                         style={{
                             border: '3px solid #F2D230',
                             borderRadius: '10px',
-                            background:'#210a5c69'
+                            background: '#210a5c69',
                         }}
                     >
                         <p className="fs-6 fw-bold text-center mb-0 label-one">
@@ -220,7 +244,9 @@ export default function RapidoCardBody(props) {
                                         key={k}
                                         className={
                                             'nr-btn smaller' +
-                                            (numberBonus == obj ? ' active-g' : '')
+                                            (numberBonus == obj
+                                                ? ' active-g'
+                                                : '')
                                         }
                                         value={obj}
                                         onClick={(e) => selectBonus(obj)}
@@ -325,7 +351,9 @@ export default function RapidoCardBody(props) {
                 <div className="col-12 text-center">
                     <div className="col-12 mb-2">
                         <div className={'rapido-winning-combination'}>
-                            This Draw’s closing transaction has been submitted to the blockchain, and is awaiting confirmation. May the luck be with you!
+                            This Draw’s closing transaction has been submitted
+                            to the blockchain, and is awaiting confirmation. May
+                            the luck be with you!
                         </div>
                     </div>
                 </div>

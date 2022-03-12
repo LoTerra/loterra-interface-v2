@@ -47,7 +47,7 @@ export default function RapidoCardHeader(props) {
                             style={{
                                 background: 'rgb(33 10 92)',
                                 padding: '5px',
-                                color: 'rgb(255 255 255 / 47%)', 
+                                color: 'rgb(255 255 255 / 47%)',
                                 marginTop: '-23px',
                                 width: '100px',
                                 textAlign: 'center',

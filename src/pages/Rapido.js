@@ -28,6 +28,7 @@ export default () => {
     const [allLotteriesHistory, setAllLotteriesHistory] = useState([])
     const [timeBetween, setTimeBetween] = useState(0)
     const [gameStats, setGameStats] = useState([])
+    const [games, setGames] = useState([])
 
 
     const [config, setConfig] = useState({
@@ -162,15 +163,53 @@ export default () => {
                 setGameStats(new_arr)
                 // get_user_combination(lotteries_state)
             }
-
-
-            /*
-                TODO: dismiss the prediction loader here
-             */
         } catch (e) {
             console.log(e)
         }
     }
+
+    async function getGames(game_stats_id) {
+        try {
+
+            let start_after = ''
+            let loop = true
+            while (loop){
+                // Prepare query
+                let query = {
+                    games: {
+                        limit: 5,
+                        round: game_stats_id,
+                        player: state.wallet.walletAddress,
+                    },
+                }
+                // Add start after to get pagination
+                if (start_after) {
+                    query.games.start_after =
+                        start_after
+                }
+
+                // Query to state smart contract
+                let res_games = await api.contractQuery(
+                    state.rapidoAddress,
+                    query,
+                )
+                if (res_games.length > 0){
+                    let new_arr = [...games, ...res_games]
+                    setGames(new_arr)
+
+                    start_after = res_games[res_games.length - 1].game_id
+                    // get_user_combination(lotteries_state)
+                }else {
+                    loop = false
+                    start_after = ''
+                }
+
+            }
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
 
     // async function get_user_combination(lotteries) {
     //     const default_limit = 5
@@ -223,13 +262,16 @@ export default () => {
         return <span className="fs-6">{format_message}</span>
     }
 
+
     function resultHistory() {
-        let render = gameStats.map((game) => (
-            <tr key={game.game_stats_id}>
-                <td>#{game.game_stats_id}</td>
-                <td className='text-center'>{game.total_ticket}</td>
+
+        let render = gameStats.map( (game_stats, k) => (
+            <tr key={game_stats.game_stats_id}>
+                <td>#{game_stats.game_stats_id}</td>
+                <td className='text-center'>{game_stats.total_ticket}</td>
                 {/*<td className='text-center'>{lottery.counter_player ? lottery.counter_player : '-'}</td>*/}
                 <td className='text-center'>
+                    <button onClick={() => getGames(game_stats.game_stats_id)}>More info</button>
                     {/*<div className="btn-holder">*/}
                     {/*    <span className={*/}
                     {/*        'nr-btn smaller'*/}
@@ -249,8 +291,24 @@ export default () => {
                     {/*</div>*/}
 
                 </td>
+                <td>
+                    <div style={{flex: "column"}}>
+                        {
+                            games.map((game) => {
+                                if (game.lottery_id == game_stats.game_stats_id){
+                                    return (
+                                        <div>x{game.multiplier} - {game.number[0]} {game.number[1]} {game.number[2]} {game.number[3]} | {game.bonus}</div>
+                                    )
+                                }
+                            })
+                        }
+                    </div>
+                </td>
+
             </tr>
+
         ))
+
         return <>{render}</>
     }
 
@@ -278,67 +336,139 @@ export default () => {
     }
 
     async function resolve_all(){
-        const default_limit = 30
-        let msgs = []
-        for (let x = rapidoState.round; x > 0; x--) {
-            let record_rapido_games = []
-            let rapido_games_amount = []
-            let loop = true
-            while (loop) {
-                let query = {
-                    games: {
-                        round: x,
-                        player: state.wallet.walletAddress,
-                        limit: default_limit,
-                    },
+
+        let all_games = [];
+        new Promise(async (resolve, reject) => {
+            try {
+                let start_after = ''
+                let loop = true
+                while (loop){
+                    // Prepare query
+                    let query = {
+                        game_stats: { player: state.wallet.walletAddress, limit: 30},
+                    }
+
+                    // Add start after to get only last 5 elements
+                    if (start_after) {
+                        query.game_stats.start_after =
+                            start_after
+                    }
+
+
+                    // Query to state smart contract
+                    let game_stats = await api.contractQuery(
+                        state.rapidoAddress,
+                        query,
+                    )
+
+                    if (game_stats.length > 0){
+                        all_games = [...all_games, ...game_stats]
+                        // get_user_combination(lotteries_state)
+                        start_after = game_stats[game_stats.length - 1].game_stats_id
+                    }else {
+                        loop = false
+                        start_after = ''
+                    }
+
                 }
-                if (rapido_games_amount.length == 30) {
-                    query.games.start_after = rapido_games_amount[rapido_games_amount.length - 1]
-                }else {
-                    loop = false
-                }
-                let rapido_games = await api.contractQuery(state.rapidoAddress, query)
-                rapido_games_amount = rapido_games;
-                record_rapido_games.push(rapido_games)
+                resolve(all_games)
+            } catch (e) {
+                console.log(e)
             }
+        }).then((all_games) => {
+            console.log("all_games")
+            console.log(all_games)
 
-            if (record_rapido_games.length != 0){
-                let msg = new MsgExecuteContract(
-                    state.wallet.walletAddress,
-                    state.rapidoAddress,
-                    {
-                        collect: {
-                            round: x,
-                            player: state.wallet.walletAddress,
-                            game_id: record_rapido_games,
-                        },
-                    },
-                )
-                console.log(record_rapido_games)
-                msgs.push(msg)
-            }
-        }
-        console.log(msgs)
+            let all_msgs = []
+            new Promise((resolve, reject) => {
+                all_games.map(async (game) => {
+                    console.log(game)
+                    try {
+                        let data_game = []
+                        let start_after = null
+                        let loop = true
+                        while (loop) {
+                            // Prepare query
+                            let query = {
+                                games: {
+                                    limit: 30,
+                                    round: game.game_stats_id,
+                                    player: state.wallet.walletAddress,
+                                },
+                            }
+                            // Add start after to get pagination
+                            if (start_after != null) {
+                                query.games.start_after =
+                                    start_after
+                            }
+
+                            // Query to state smart contract
+                            let res_games = await api.contractQuery(
+                                state.rapidoAddress,
+                                query,
+                            )
+                            //console.log(res_games)
+                            if (res_games.length > 0) {
+
+                                let new_res_games = []
+                                res_games.map(g => {
+                                    console.log(g.resolved)
+                                    if (!g.resolved)
+                                        new_res_games.push(g.game_id)
+                                })
+                                data_game = [...data_game, ...new_res_games]
+                                start_after = res_games[res_games.length - 1].game_id
+                                // get_user_combination(lotteries_state)
+                            } else {
+                                loop = false
+                                start_after = null
+                            }
+
+                        }
+
+                        let msg = new MsgExecuteContract(
+                            state.wallet.walletAddress,
+                            state.rapidoAddress,
+                            {
+                                collect: {
+                                    round: game.game_stats_id,
+                                    player: state.wallet.walletAddress,
+                                    game_id: data_game,
+                                },
+                            },
+                        )
+                        all_msgs.push(msg)
+                    } catch (e) {
+                        console.log(e)
+                    }
+
+                })
+                resolve(all_msgs)
+
+            }).then((_all_msgs) => {
+                console.log(_all_msgs)
+                state.wallet
+                    .post({
+                        msgs: _all_msgs,
+                    })
+                    .then((e) => {
+                        if (e.success) {
+                            toast.success('Successfully resolved!')
+                        } else {
+                            toast.error('Something went wrong, please try again')
+                            console.log(e)
+                        }
+                    })
+                    .catch((e) => {
+                        console.log(e)
+                    })
+            })
+        })
 
 
-
-        // state.wallet
-        //     .post({
-        //         msgs: [msg],
-        //     })
-        //     .then((e) => {
-        //         if (e.success) {
-        //             toast.success('Successfully checked lottery numbers!')
-        //         } else {
-        //             toast.error('Something went wrong, please try again')
-        //             console.log(e)
-        //         }
-        //     })
-        //     .catch((e) => {
-        //         console.log(e)
-        //     })
-        //
     }
+
+
 
     useEffect(() => {
         getRapidoState()
@@ -362,6 +492,7 @@ export default () => {
             //getRapidoLotteriesPagination(rapidoState.round - 6)
             if (state.wallet.walletAddress){
                 getGameStatsPagination()
+                resolve_all()
             }
         }
         /*
@@ -533,14 +664,14 @@ export default () => {
                             <thead>
                                 <tr>
                                     <th style={{ minWidth: 100 }}>draws</th>
-                                    <th style={{ minWidth: 100 }} className='text-center'>Terrand round</th>
+                                    <th style={{ minWidth: 100 }} className='text-center'>Tickets played</th>
                                     {/*<th style={{ minWidth: 100 }} className='text-center'>Numbers of players</th>*/}
                                     <th style={{ minWidth: 100 }} className='text-center'>Results</th>
                                 </tr>
                             </thead>
                             <tbody>{resultHistory()}</tbody>
                         </table>
-                        <button onClick={()=>getRapidoLotteriesPagination(allLotteriesHistory[allLotteriesHistory.length - 1].lottery_id - 6)}>Load more</button>
+                        <button onClick={()=>getGameStatsPagination(gameStats[gameStats.length - 1].game_stats_id)}>Load more</button>
                     </div>
                 </div>
             </div>
