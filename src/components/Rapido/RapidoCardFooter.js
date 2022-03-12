@@ -113,7 +113,7 @@ export default function RapidoCardFooter(props) {
                         <div className="col-12 text-start mt-1">
                             <p className="fs-6 fw-bold">Receipt</p>
                         </div>
-                        <div className="col-6 text-start d-flex">
+                        {/* <div className="col-6 text-start d-flex">
                             <p className="mb-0 align-self-center text-muted">
                                 Combination
                             </p>
@@ -169,7 +169,7 @@ export default function RapidoCardFooter(props) {
                                     )
                                 })}
                             </div>
-                        </div>
+                        </div> */}
                         <div className="col-6 text-start text-muted">
                             <p>Cost</p>
                         </div>
@@ -194,7 +194,7 @@ export default function RapidoCardFooter(props) {
                                     <button
                                         onClick={() => validateTheTicket(1)}
                                         className="btn btn-special w-100"
-                                        style={{ background: '#7a5ec7' }}
+                                        style={{ background: 'rgb(31 211 124)' }}
                                     >
                                         Enter
                                     </button>
@@ -300,13 +300,13 @@ export default function RapidoCardFooter(props) {
                                             >
                                                 {game.bonus}
                                             </span>
+                                            
+                                        </div>  
 
-                                            <button
-                                                className="btn"
-                                                style={{
-                                                    background:
-                                                        'rgb(122, 94, 199)',
-                                                }}
+                                        <div className="w-100 px-4 mt-4">
+                                        <button
+                                                className="btn btn-default w-100"
+                                                style={{background: "rgb(122, 94, 199)"}}
                                                 disabled={game.resolved}
                                                 onClick={() =>
                                                     checkLottoNumbers(
@@ -321,7 +321,9 @@ export default function RapidoCardFooter(props) {
                                     </div>
                                 </div>
                             ))}
+                            <div className="w-100 px-4">
                             <button
+                            className="btn btn-default w-100 mb-4 mt-2 btn-sm"
                                 disabled={isLastItem}
                                 onClick={() =>
                                     loadMore(
@@ -332,6 +334,7 @@ export default function RapidoCardFooter(props) {
                                 {' '}
                                 Load More{' '}
                             </button>
+                            </div>
                         </>
                     ) : (
                         <></>

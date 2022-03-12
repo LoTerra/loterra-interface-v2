@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { useStore } from '../../store'
 
 export default function RapidoCardHeader(props) {
-    const { lotteryId, winningCombination, isLotteryLive } = props
+    const { lotteryId, winningCombination, isLotteryLive, formatTime } = props
 
     const { state, dispatch } = useStore()
 
@@ -15,13 +15,14 @@ export default function RapidoCardHeader(props) {
                         <p
                             className="mb-0 rounded"
                             style={{
-                                background: '#7a5ec7',
+                                background: 'rgb(61 221 144)',
                                 padding: '5px',
-                                color: '#fff',
+                                color: 'rgb(24 7 66)',
                                 marginTop: '-23px',
                                 width: '100px',
                                 textAlign: 'center',
                                 fontWeight: 700,
+                                boxShadow:'0px 0px 12px #77f0b6'
                             }}
                         >
                             Active
@@ -57,19 +58,18 @@ export default function RapidoCardHeader(props) {
                             Finished
                         </p>
                     )}
-                    <p className="fs-4 mb-0 fw-bold">#{lotteryId}</p>
+                    <p className="fs-5 mb-0 mt-1 fw-regular" style={{opacity:0.5}}>#{lotteryId}</p>
                 </div>
-                {/* <div className="col-6 text-end">        
-                    { winningCombination == null ?
+                <div className="col-6 text-end">        
+                    { isLotteryLive ?
                         <>
-                        <p className="mb-0 text-muted">Next draw</p>
-                        <p className="fs-5 mb-0 fw-bold">00:00</p>
+                        <p className="small mb-0" style={{color:'#fff', opacity:0.5}}>Round ends in</p>
+                        {formatTime()}
                         </>
                         :
-                        <>
-                        </>
+                        ''
                     }                                       
-                    </div> */}
+                    </div>
             </div>
         </div>
     )

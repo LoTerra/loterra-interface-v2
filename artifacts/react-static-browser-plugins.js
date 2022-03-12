@@ -8,6 +8,11 @@ const plugins = [{
         hooks: {}
       },
 {
+        location: "__react_static_root__/node_modules/react-static-plugin-svg",
+        plugins: [],
+        hooks: {}
+      },
+{
         location: "__react_static_root__/node_modules/react-static-plugin-react-router",
         plugins: [],
         hooks: plugin0({})

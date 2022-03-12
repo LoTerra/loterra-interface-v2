@@ -1,8 +1,9 @@
-import { Trash, X } from 'phosphor-react'
+import { Trash, Trophy, X } from 'phosphor-react'
 import React, { useEffect, useState } from 'react'
 import { useStore } from '../../store'
 import { WasmAPI } from '@terra-money/terra.js'
 import { Lightning, Star } from 'phosphor-react'
+
 
 export default function RapidoCardBody(props) {
     const { state, dispatch } = useStore()
@@ -211,10 +212,7 @@ export default function RapidoCardBody(props) {
                                         type="button"
                                         key={k}
                                         className={
-                                            'nr-btn smaller' +
-                                            (fourNumbers.includes(obj)
-                                                ? ' active'
-                                                : '')
+                                            'nr-btn smaller'
                                         }
                                         value={obj}
                                         onClick={(e) => selectNumbers(obj)}
@@ -265,7 +263,7 @@ export default function RapidoCardBody(props) {
                                     <button
                                         key={k}
                                         className={
-                                            'nr-btn medium' +
+                                            'nr-btn medium multiplier' +
                                             (multiplier == obj
                                                 ? ' active-i'
                                                 : '')
@@ -289,11 +287,11 @@ export default function RapidoCardBody(props) {
                             })}
                         </div>
                     </div>
-                    <div className="col-12">
+                    <div className="col-12 mt-2">
                         <div className="row">
                             <div className="col-7 d-flex">
-                                <p className="mb-0 align-self-center">
-                                    Number of draw
+                                <p className="mb-0 align-self-center fw-bold">
+                                    Number of draws
                                 </p>
                             </div>
                             <div className="col-5">
@@ -328,32 +326,35 @@ export default function RapidoCardBody(props) {
                 </div>
             ) : winningCombination != null && !isLotteryLive ? (
                 <div className="col-12 text-center">
-                    <h4>Winning number</h4>
+                    <Trophy size={55} weight="fill" fill={'#f2d230'} className="mx-auto mb-3" />
+                    <h4 className="fs-5">Winning number</h4>
                     <div className="col-12 mb-2">
                         <div className={'rapido-winning-combination'}>
                             {winningCombination.map((nr, k) => {
                                 return (
                                     <span
                                         key={k}
-                                        className="rapido-combi-nr big"
+                                        className="rapido-combi-nr medium"
                                     >
                                         {nr}
                                     </span>
                                 )
                             })}
-                            <span className="rapido-combi-nr g big">
+                            <span className="rapido-combi-nr g medium">
                                 {bonusNumber}
                             </span>
+                            
                         </div>
+
                     </div>
                 </div>
             ) : (
                 <div className="col-12 text-center">
                     <div className="col-12 mb-2">
                         <div className={'rapido-winning-combination'}>
-                            This Draw’s closing transaction has been submitted
-                            to the blockchain, and is awaiting confirmation. May
-                            the luck be with you!
+                            <div className="resolving-loader">
+                            </div>
+                            <p className="small text-muted">This Draw’s closing transaction has been submitted to the blockchain, and is awaiting confirmation. May the luck be with you!</p>
                         </div>
                     </div>
                 </div>
