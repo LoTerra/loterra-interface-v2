@@ -27,6 +27,7 @@ export default () => {
     const [lotteries, setlotteries] = useState([])
     const [allLotteriesHistory, setAllLotteriesHistory] = useState([])
     const [timeBetween, setTimeBetween] = useState(0)
+    const [gameStats, setGameStats] = useState([])
 
 
     const [config, setConfig] = useState({
@@ -135,6 +136,42 @@ export default () => {
         }
     }
 
+    async function getGameStatsPagination(start_after) {
+        try {
+            // Prepare query
+            let query = {
+                game_stats: { player: state.wallet.walletAddress, limit: 5},
+            }
+            // Add start after to get only last 5 elements
+            console.log(start_after)
+            if (start_after) {
+                query.game_stats.start_after =
+                    start_after
+            }
+            // Query to state smart contract
+            let game_stats = await api.contractQuery(
+                state.rapidoAddress,
+                query,
+            )
+
+            console.log(game_stats)
+            if (game_stats.length > 0){
+                let new_arr = [...gameStats, ...game_stats]
+                //new_arr.sort((a,b) => b.lottery_id - a.lottery_id)
+                // Set the array of lotteries
+                setGameStats(new_arr)
+                // get_user_combination(lotteries_state)
+            }
+
+
+            /*
+                TODO: dismiss the prediction loader here
+             */
+        } catch (e) {
+            console.log(e)
+        }
+    }
+
     // async function get_user_combination(lotteries) {
     //     const default_limit = 5
     //     if (state.wallet.walletAddress){
@@ -187,29 +224,29 @@ export default () => {
     }
 
     function resultHistory() {
-        let render = allLotteriesHistory.map((lottery) => (
-            <tr key={lottery.lottery_id}>
-                <td>#{lottery.lottery_id}</td>
-                <td className='text-center'>{lottery.terrand_round}</td>
+        let render = gameStats.map((game) => (
+            <tr key={game.game_stats_id}>
+                <td>#{game.game_stats_id}</td>
+                <td className='text-center'>{game.total_ticket}</td>
                 {/*<td className='text-center'>{lottery.counter_player ? lottery.counter_player : '-'}</td>*/}
                 <td className='text-center'>
-                    <div className="btn-holder">
-                        <span className={
-                            'nr-btn smaller'
-                        } style={{padding: "10px"}}>{lottery.winning_number[0]}</span>
-                        <span className={
-                            'nr-btn smaller'
-                        } style={{padding: "10px"}}>{lottery.winning_number[1]}</span>
-                        <span className={
-                            'nr-btn smaller'
-                        } style={{padding: "10px"}}>{lottery.winning_number[2]}</span>
-                        <span className={
-                            'nr-btn smaller'
-                        } style={{padding: "10px"}}>{lottery.winning_number[3]}</span>
-                        <span className={
-                            'nr-btn smaller'
-                        } style={{padding: "10px"}}>{lottery.bonus_number}</span>
-                    </div>
+                    {/*<div className="btn-holder">*/}
+                    {/*    <span className={*/}
+                    {/*        'nr-btn smaller'*/}
+                    {/*    } style={{padding: "10px"}}>{lottery.winning_number[0]}</span>*/}
+                    {/*    <span className={*/}
+                    {/*        'nr-btn smaller'*/}
+                    {/*    } style={{padding: "10px"}}>{lottery.winning_number[1]}</span>*/}
+                    {/*    <span className={*/}
+                    {/*        'nr-btn smaller'*/}
+                    {/*    } style={{padding: "10px"}}>{lottery.winning_number[2]}</span>*/}
+                    {/*    <span className={*/}
+                    {/*        'nr-btn smaller'*/}
+                    {/*    } style={{padding: "10px"}}>{lottery.winning_number[3]}</span>*/}
+                    {/*    <span className={*/}
+                    {/*        'nr-btn smaller'*/}
+                    {/*    } style={{padding: "10px"}}>{lottery.bonus_number}</span>*/}
+                    {/*</div>*/}
 
                 </td>
             </tr>
@@ -322,12 +359,15 @@ export default () => {
     useEffect(() => {
         if (rapidoState.round) {
             getRapidoLotteries()
-            getRapidoLotteriesPagination(rapidoState.round - 6)
+            //getRapidoLotteriesPagination(rapidoState.round - 6)
+            if (state.wallet.walletAddress){
+                getGameStatsPagination()
+            }
         }
         /*
             TODO: show a loader | Loading current lotteries...
          */
-    }, [rapidoState.round])
+    }, [rapidoState.round, state.wallet.walletAddress])
 
     useEffect(() => {
         rapidoWebsocket()
