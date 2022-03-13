@@ -612,18 +612,15 @@ export default () => {
     return (
         <>
             <div className="w-100 py-3 pt-md-5 text-center mb-2">
-                <h1
-                    className="mb-0 fw-bold"
-                    style={{ textShadow: '1px 1px 10px #14053b' }}
-                >
-                    Rapido
-                </h1>
+
+                <img src="/Rapido-logo.svg" height="100px"/>
                 <h2 className="my-2 fw-regular fs-6 mb-0">
                     Win up to $50,000 every 5 minutes
                 </h2>
             </div>
             <div className="container">
                 <div className="row">
+                    
                     <div className="col-12">
                         {/* <div className="col-12 text-center">
                             <div className="card rapido-card h-100">
