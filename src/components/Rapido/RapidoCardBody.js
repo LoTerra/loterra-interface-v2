@@ -373,7 +373,7 @@ export default function RapidoCardBody(props) {
                                         selectNrOfDraws(e.target.value)
                                     }
                                 >
-                                    {[1, 2, 3, 4, 5, 10, 20, 30, 40, 50].map(
+                                    {[1, 2, 3, 4, 5, 10, 20, 30, 40, 50, 100, 200, 300, 500, 777].map(
                                         (obj, k) => {
                                             return (
                                                 <option key={k} value={obj}>
