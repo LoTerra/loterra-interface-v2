@@ -657,7 +657,8 @@ export default () => {
                             {lotteries.length <= 1 && (
                                 <div className="w-100 py-5 text-center">
                                     <div
-                                        className="spinner-grow text-primary "
+                                        style={{color:"#BF046B"}}
+                                        className="spinner-grow"
                                         role="status"
                                     >
                                         <span className="visually-hidden">

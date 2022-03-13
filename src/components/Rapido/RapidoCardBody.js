@@ -370,6 +370,7 @@ export default function RapidoCardBody(props) {
                             </div>
                             <div className="col-5">
                                 <select
+                                    style={{fontSize: "x-large", fontWeight: "bold"}}
                                     className="form-control text-center"
                                     onChange={(e) =>
                                         selectNrOfDraws(e.target.value)
