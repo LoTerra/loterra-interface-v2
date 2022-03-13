@@ -694,16 +694,16 @@ export default () => {
                 </div>
             </div>
 
-            <div className="container py-5">
-                <div className="row">
-                    <div className="col-6 p-4">
-                        <h2 className="fs-1 fw-bold">Play for free?</h2>
-                        <h4 className="fs-4 fw-normal text-muted">
-                            Deposit UST in Dogether our no loss rapido
-                        </h4>
-                    </div>
-                </div>
-            </div>
+            {/*<div className="container py-5">*/}
+            {/*    <div className="row">*/}
+            {/*        <div className="col-6 p-4">*/}
+            {/*            <h2 className="fs-1 fw-bold">Play for free?</h2>*/}
+            {/*            <h4 className="fs-4 fw-normal text-muted">*/}
+            {/*                Deposit UST in Dogether our no loss rapido*/}
+            {/*            </h4>*/}
+            {/*        </div>*/}
+            {/*    </div>*/}
+            {/*</div>*/}
 
             <div className="container py-5">
                 <div className="row">
