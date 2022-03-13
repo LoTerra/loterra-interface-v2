@@ -356,17 +356,17 @@ export default () => {
         }
     }
 
-    async function resolve_all(){
+    async function resolve_all() {
 
         let all_games = [];
         let game_stats_promise = new Promise(async (resolve, reject) => {
             try {
                 let start_after = ''
                 let loop = true
-                while (loop){
+                while (loop) {
                     // Prepare query
                     let query = {
-                        game_stats: { player: state.wallet.walletAddress, limit: 30},
+                        game_stats: {player: state.wallet.walletAddress, limit: 30},
                     }
 
                     // Add start after to get only last 5 elements
@@ -382,11 +382,11 @@ export default () => {
                         query,
                     )
 
-                    if (game_stats.length > 0){
+                    if (game_stats.length > 0) {
                         all_games = [...all_games, ...game_stats]
                         // get_user_combination(lotteries_state)
                         start_after = game_stats[game_stats.length - 1].game_stats_id
-                    }else {
+                    } else {
                         loop = false
                         start_after = ''
                     }
@@ -398,33 +398,28 @@ export default () => {
             }
         })
 
-        let all_msgs=[]
-        Promise.all([game_stats_promise]).then((res)=>{
+        let all_promises = []
+        let all_msgs= []
+        Promise.all([game_stats_promise]).then((res) => {
 
-            let games_promise = new Promise((resolve, reject) => {
-                console.log("all_games")
-                console.log(res)
-                let len = 0
-                res[0].map(async (game) => {
-                    console.log(game)
-                    console.log(game.game_stats_id)
-                    if (game.game_stats_id >= state.rapidoCurrentRound) {
+            res[0].map(async (game) => {
+                if (game.game_stats_id < state.rapidoCurrentRound) {
 
-                        // Prepare query
-                        let query = {
-                            games: {
-                                limit: 30,
-                                round: game.game_stats_id,
-                                player: state.wallet.walletAddress,
-                            },
-                        }
-                        try {
-                            let data_game = []
-                            let start_after = null
-                            let loop = true
+                    // Prepare query
+                    let query = {
+                        games: {
+                            limit: 30,
+                            round: game.game_stats_id,
+                            player: state.wallet.walletAddress,
+                        },
+                    }
+                    try {
+                        let data_game = []
+                        let start_after = null
+                        let loop = true
 
+                        let games_promise = new Promise(async (resolve, reject) => {
                             while (loop) {
-
 
                                 // Add start after to get pagination
                                 if (start_after != null) {
@@ -437,7 +432,7 @@ export default () => {
                                     state.rapidoAddress,
                                     query,
                                 )
-                                //console.log(res_games)
+
                                 if (res_games.length > 0) {
 
                                     let new_res_games = []
@@ -453,8 +448,6 @@ export default () => {
                                     start_after = null
                                 }
                             }
-                            console.log("data_game")
-                            console.log(data_game)
                             if (data_game.length != 0) {
                                 let msg = new MsgExecuteContract(
                                     state.wallet.walletAddress,
@@ -467,30 +460,31 @@ export default () => {
                                         },
                                     },
                                 )
-                                all_msgs.push(msg)
-
+                                resolve(msg)
+                                console.log(msg)
                             }
-                            len++
-                            if (res[0].length == len) {
-                                console.log(all_msgs)
-                                resolve(all_msgs)
-                            }
-                            console.log("len")
-                            console.log(len)
+                            resolve()
+                        })
 
-                        } catch (e) {
-                            console.log(e)
-                        }
+                        all_promises.push(games_promise)
+
+                    } catch (e) {
+                        console.log(e)
                     }
-                })
+                }
+
             })
 
-            Promise.all([games_promise]).then((result) => {
-                console.log(result[0])
-                if (result[0].length > 0){
+            Promise.all(all_promises).then((result) => {
+                let new_arr = result
+                let filtered = new_arr.filter(element => {
+                    return element !== undefined;
+                });
+
+                if (filtered.length > 0){
                     state.wallet
                         .post({
-                            msgs: result[0],
+                            msgs: filtered,
                         })
                         .then((e) => {
                             if (e.success) {
@@ -504,13 +498,10 @@ export default () => {
                             console.log(e)
                         })
                 }
+
+
             })
         })
-
-
-
-
-
         // state.wallet
         //     .post({
         //         msgs: _all_msgs,
