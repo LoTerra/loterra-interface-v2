@@ -61,6 +61,43 @@
     }
 }
 
+.position-icon {
+    position:relative;
+    top:-1px;
+}
+
+.rapido-table-results {
+    .multiplier-table {
+        color: #f2d230;
+    opacity: 1;
+    background: #2a0f73;
+    border-radius: 5px;
+    padding: 2px 5px;
+    font-weight: 700;
+    top: -2px;
+    position: relative;
+    }
+    .nr-btn {
+        display:inline-block;
+        opacity:1;
+ 
+        &.smaller {
+            border-radius: 50%;
+            width: 1.8rem;
+            height: 1.8rem;
+            background: #048abf;
+            color: #fff;
+            margin: 0 5px;
+            line-height: 1.6rem;
+            font-size: 1rem;
+            &.bonus {
+                background:#f2d230;
+                color:#16073e;
+            }
+        }
+    }
+}
+
 .rapido-combi-nr {
     display: inline-block;
     width: 1rem;

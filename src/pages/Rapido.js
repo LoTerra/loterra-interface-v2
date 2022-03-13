@@ -2,7 +2,7 @@ import { Head } from 'react-static'
 import React, { useState, useEffect, useCallback, useRef, useMemo } from 'react'
 import { useStore } from '../store'
 import RapidoCard from '../components/Rapido/RapidoCard'
-import { Clock } from 'phosphor-react'
+import { ArrowsClockwise, Clock } from 'phosphor-react'
 import SwiperCore, {
     Navigation,
     Pagination,
@@ -277,11 +277,11 @@ export default () => {
 
         let render = gameStats.map( (game_stats, k) => (
             <tr key={k}>
-                <td>#{game_stats.game_stats_id}</td>
+                <td><strong>#{game_stats.game_stats_id}</strong></td>
                 <td className='text-center'>{game_stats.total_ticket}</td>
                 {/*<td className='text-center'>{lottery.counter_player ? lottery.counter_player : '-'}</td>*/}
-                <td className='text-center'>
-                    <button onClick={() => getGames(game_stats.game_stats_id)}>More info</button>
+                {/* <td className='text-center'> */}
+                    
                     {/*<div className="btn-holder">*/}
                     {/*    <span className={*/}
                     {/*        'nr-btn smaller'*/}
@@ -301,14 +301,24 @@ export default () => {
                     {/*</div>*/}
 
 
-                </td>
-                <td>
-                    <div style={{flex: "column"}}>
+                {/* </td> */}
+                <td className="text-center">
+                    <div style={{flex: "column"}} className="rapido-table-results">
+                        { games.filter(a => a.lottery_id == game_stats.game_stats_id).length == 0 &&
+                            <button className="btn btn-default btn-sm" onClick={() => getGames(game_stats.game_stats_id)}><ArrowsClockwise size={14} className="position-icon me-1"/>Get results</button>
+                        }
                         {
                             games.map((game, k) => {
                                 if (game.lottery_id == game_stats.game_stats_id){
                                     return (
-                                        <div key={game.game_id + game.lottery_id}>x{game.multiplier} - {game.number[0]} {game.number[1]} {game.number[2]} {game.number[3]} | {game.bonus}</div>
+                                        <div key={game.game_id + game.lottery_id}>
+                                            <span className="multiplier-table">x{game.multiplier}</span>
+                                            <span className="nr-btn smaller">{game.number[0]}</span>
+                                            <span className="nr-btn smaller">{game.number[1]}</span>
+                                            <span className="nr-btn smaller">{game.number[2]}</span>
+                                            <span className="nr-btn smaller">{game.number[3]}</span>
+                                            <span className="nr-btn smaller bonus">{game.bonus}</span>
+                                        </div>
                                     )
                                 }
                             })
@@ -708,29 +718,29 @@ export default () => {
 
             <div className="container py-5">
                 <div className="row">
-                    <div className="col-6 p-4">
+                    <div className="col-md-6 p-md-4 text-center text-md-start">
                         <h2 className="fs-1 fw-bold">Rapido games</h2>
                         <h4 className="fs-4 fw-normal text-muted">
                             Get all your games
                         </h4>
                     </div>
-                    <div>
-                        <button onClick={ () => resolve_all()}> Resolve all</button>
-                        <span>Can take some minutes</span>
+                    <div className="col-md-6 text-center text-md-end pt-2 pt-md-5">
+                        <button className="btn btn-default btn-sm" onClick={ () => resolve_all()}> Resolve all</button>
+                        <span className="small d-block text-muted">Can take some minutes</span>
                     </div>
                     <div className="table-responsive">
                         <table className="table text-white">
                             <thead>
                                 <tr>
                                     <th style={{ minWidth: 100 }}>draws</th>
-                                    <th style={{ minWidth: 100 }} className='text-center'>Tickets played</th>
+                                    <th style={{ minWidth: 150 }} className='text-center'>Tickets played</th>
                                     {/*<th style={{ minWidth: 100 }} className='text-center'>Numbers of players</th>*/}
-                                    <th style={{ minWidth: 100 }} className='text-center'>Results</th>
+                                    <th style={{ minWidth: 250 }} className='text-center'>Results</th>
                                 </tr>
                             </thead>
                             <tbody>{resultHistory()}</tbody>
                         </table>
-                        <button onClick={()=>getGameStatsPagination(gameStats[gameStats.length - 1].game_stats_id)}>Load more</button>
+                        <button className="w-100 mt-2 btn btn-sm btn-default text-muted" onClick={()=>getGameStatsPagination(gameStats[gameStats.length - 1].game_stats_id)}>Load more</button>
                     </div>
                 </div>
             </div>
