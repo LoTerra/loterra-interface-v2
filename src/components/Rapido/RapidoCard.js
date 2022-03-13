@@ -81,10 +81,12 @@ export default function RapidoCard(props) {
         }
     }
 
-    function switchToDefault(){
-        setToDefault(true)
-        setNrOfDraws(1)
-        setMultiplier(1)
+    function switchToDefault(d){
+        if (d){
+            setNrOfDraws(1)
+            setMultiplier(1)
+        }
+        setToDefault(d)
     }
 
     useEffect(() => {
@@ -112,6 +114,7 @@ export default function RapidoCard(props) {
             />
             <RapidoCardBody
                 toDefault={toDefault}
+                switchToDefault={(d) => switchToDefault(d)}
                 selectMultiplier={(a) => selectMultiplier(a)}
                 selectNrOfDraws={(a) => selectNrOfDraws(a)}
                 selectOneNumber={(a) => selectOneNumber(a)}
@@ -127,7 +130,7 @@ export default function RapidoCard(props) {
                 isLotteryLive={isLotteryLive}
             />
             <RapidoCardFooter
-                switchToDefault={() => switchToDefault()}
+                switchToDefault={(d) => switchToDefault(d)}
                 enterDraw={() => enterDraw()}
                 multiplier={multiplier}
                 nrOfDraws={nrOfDraws}

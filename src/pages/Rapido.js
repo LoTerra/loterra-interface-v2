@@ -91,11 +91,40 @@ export default () => {
         }
     }
 
+    // async function getLotteryId(lottery_id){
+    //     try {
+    //         // Prepare query
+    //         let query = {
+    //             lottery_state: { round: lottery_id },
+    //         }
+    //
+    //         // Query to state smart contract
+    //         let lottery_state = await api.contractQuery(
+    //             state.rapidoAddress,
+    //             query,
+    //         )
+    //
+    //         if (lottery_state.length > 0) {
+    //             let copy_games = [...games]
+    //             let x = copy_games.filter(
+    //                 (e) => e.lottery_id != game_stats_id,
+    //             )
+    //
+    //             let new_arr = [...x, ...res_games]
+    //             setGames(new_arr)
+    //
+    //             // get_user_combination(lotteries_state)
+    //         }
+    //     } catch (e) {
+    //         console.log(e)
+    //     }
+    // }
+
     async function getRapidoLotteriesPagination(start_after) {
         try {
             // Prepare query
             let query = {
-                lotteries_state: { limit: 5 },
+                lottery_state: { limit: 5 },
             }
             // Add start after to get only last 5 elements
             console.log(start_after)
@@ -299,7 +328,7 @@ export default () => {
                                     size={14}
                                     className="position-icon me-1"
                                 />
-                                Get my numbers
+                                Show my numbers
                             </button>
                         )}
                         {games.map((game, k) => {
@@ -330,6 +359,24 @@ export default () => {
                         })}
                     </div>
                 </td>
+                {/*<td>*/}
+                {/*    {games.filter(*/}
+                {/*        (a) => a.lottery_id == game_stats.game_stats_id,*/}
+                {/*    ).length == 0 && (*/}
+                {/*        <button*/}
+                {/*            className="btn btn-default btn-sm"*/}
+                {/*            onClick={() =>*/}
+                {/*                getLotteryId(game_stats.game_stats_id)*/}
+                {/*            }*/}
+                {/*        >*/}
+                {/*            <ArrowsClockwise*/}
+                {/*                size={14}*/}
+                {/*                className="position-icon me-1"*/}
+                {/*            />*/}
+                {/*            Show winning combination*/}
+                {/*        </button>*/}
+                {/*    )}*/}
+                {/*</td>*/}
             </tr>
         ))
 

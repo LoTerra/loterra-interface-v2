@@ -22,7 +22,8 @@ export default function RapidoCardBody(props) {
         bonusNumber,
         lotteryId,
         isLotteryLive,
-        toDefault
+        toDefault,
+        switchToDefault
     } = props
 
     const [numberOne, setNumberOne] = useState('')
@@ -97,6 +98,7 @@ export default function RapidoCardBody(props) {
             setNumberThree('')
             setNumberFour('')
             setNumberBonus('')
+            switchToDefault(false)
         }
 
         if (numberOne || numberTwo || numberThree || numberFour) {
