@@ -24,10 +24,7 @@ export default function RapidoCardFooter(props) {
         isLastItem,
         lotteryId,
         bonusNumber,
-        selectOneNumber,
-        selectFourNumbers,
-        selectMultiplier,
-        selectNrOfDraws
+        switchToDefault
     } = props
 
     const validateTheTicket = (round) => {
@@ -69,10 +66,7 @@ export default function RapidoCardFooter(props) {
             .then((e) => {
                 if (e.success) {
                     toast.success('Ticket succesfully validated!')
-                    selectFourNumbers([])
-                    selectOneNumber([])
-                    selectNrOfDraws(1)
-                    selectMultiplier(1)
+                    switchToDefault(true)
                 } else {
                     toast.error('Something went wrong, please try again')
                     console.log(e)

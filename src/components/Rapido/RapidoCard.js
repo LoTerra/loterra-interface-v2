@@ -23,6 +23,7 @@ export default function RapidoCard(props) {
     const [nrOfDraws, setNrOfDraws] = useState(1)
     const [userGames, setUserGames] = useState([])
     const [isLastItem, setIsLastItem] = useState(false)
+    const [toDefault, setToDefault] = useState(false)
 
     const api = new WasmAPI(state.lcd_client_testnet.apiRequester)
 
@@ -48,11 +49,6 @@ export default function RapidoCard(props) {
     const selectNrOfDraws = (nr) => {
         setNrOfDraws(nr)
     }
-
-    const enterDraw = () => {
-        alert('hello sir kwon!')
-    }
-
     async function get_user_combination(last_element) {
         const default_limit = 5
         let query = {
@@ -85,6 +81,12 @@ export default function RapidoCard(props) {
         }
     }
 
+    function switchToDefault(){
+        setToDefault(true)
+        setNrOfDraws(1)
+        setMultiplier(1)
+    }
+
     useEffect(() => {
         setUserGames([])
         get_user_combination()
@@ -109,6 +111,7 @@ export default function RapidoCard(props) {
                 formatTime={formatTime}
             />
             <RapidoCardBody
+                toDefault={toDefault}
                 selectMultiplier={(a) => selectMultiplier(a)}
                 selectNrOfDraws={(a) => selectNrOfDraws(a)}
                 selectOneNumber={(a) => selectOneNumber(a)}
@@ -124,10 +127,7 @@ export default function RapidoCard(props) {
                 isLotteryLive={isLotteryLive}
             />
             <RapidoCardFooter
-                selectMultiplier={(a) => selectMultiplier(a)}
-                selectNrOfDraws={(a) => selectNrOfDraws(a)}
-                selectOneNumber={(a) => selectOneNumber(a)}
-                selectFourNumbers={(a) => selectFourNumbers(a)}
+                switchToDefault={() => switchToDefault()}
                 enterDraw={() => enterDraw()}
                 multiplier={multiplier}
                 nrOfDraws={nrOfDraws}

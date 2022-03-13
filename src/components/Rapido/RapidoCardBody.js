@@ -22,6 +22,7 @@ export default function RapidoCardBody(props) {
         bonusNumber,
         lotteryId,
         isLotteryLive,
+        toDefault
     } = props
 
     const [numberOne, setNumberOne] = useState('')
@@ -89,6 +90,15 @@ export default function RapidoCardBody(props) {
     }
 
     useEffect(() => {
+
+        if (toDefault) {
+            setNumberOne('')
+            setNumberTwo('')
+            setNumberThree('')
+            setNumberFour('')
+            setNumberBonus('')
+        }
+
         if (numberOne || numberTwo || numberThree || numberFour) {
             selectFourNumbers([numberOne, numberTwo, numberThree, numberFour])
         } else {
@@ -100,7 +110,7 @@ export default function RapidoCardBody(props) {
         } else {
             selectOneNumber([])
         }
-    }, [numberOne, numberTwo, numberThree, numberFour, numberBonus])
+    }, [numberOne, numberTwo, numberThree, numberFour, numberBonus, toDefault])
 
     return (
         <div className={'card-body'}>
