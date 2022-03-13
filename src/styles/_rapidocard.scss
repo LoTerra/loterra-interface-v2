@@ -227,13 +227,11 @@
         width: 29.2%;
         margin: 2%;
         &.multiplier {
-            border-bottom: 4px solid #30137c;
-            background: #7757d1;
+            background: rgb(191, 4, 107, 0.5);
             box-shadow: none;
             border-top: 0;
             &.active-i {
-                background: #210764;
-                color: #f2d230;
+                background: #BF046B;
                 border-bottom: 0px solid #30137c;
             }
         }

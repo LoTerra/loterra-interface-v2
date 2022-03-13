@@ -15,14 +15,12 @@ export default function RapidoCardHeader(props) {
                         <p
                             className="mb-0 rounded"
                             style={{
-                                background: 'rgb(61 221 144)',
+                                background: '#bf046b',
                                 padding: '5px',
-                                color: 'rgb(24 7 66)',
                                 marginTop: '-23px',
                                 width: '100px',
                                 textAlign: 'center',
                                 fontWeight: 700,
-                                boxShadow: '0px 0px 12px #77f0b6',
                             }}
                         >
                             Active
@@ -31,7 +29,7 @@ export default function RapidoCardHeader(props) {
                         <p
                             className="mb-0 rounded"
                             style={{
-                                background: 'rgb(240 53 240)',
+                                background: '#f2d230',
                                 padding: '5px',
                                 color: '#fff',
                                 marginTop: '-23px',
@@ -46,7 +44,7 @@ export default function RapidoCardHeader(props) {
                         <p
                             className="mb-0 rounded"
                             style={{
-                                background: 'rgb(33 10 92)',
+                                background: 'rgb(122 94 199)',
                                 padding: '5px',
                                 color: 'rgb(255 255 255 / 47%)',
                                 marginTop: '-23px',
