@@ -306,7 +306,7 @@ export default function RapidoCardBody(props) {
                         }}
                     >
                         <p className="fs-6 fw-bold text-center mb-0 label-one">
-                            Select 1 star
+                            Tick 1 star
                         </p>
                         <div className="btn-holder">
                             {[1, 2, 3, 4, 5, 6, 7, 8].map((obj, k) => {
