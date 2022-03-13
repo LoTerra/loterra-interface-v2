@@ -124,6 +124,7 @@ export default function RapidoCard(props) {
                 loadMore={get_user_combination}
                 isLastItem={isLastItem}
                 lotteryId={lotteryId}
+                bonusNumber={bonusNumber}
             />
         </div>
     )

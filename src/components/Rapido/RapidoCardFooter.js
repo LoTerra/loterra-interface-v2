@@ -20,6 +20,7 @@ export default function RapidoCardFooter(props) {
         loadMore,
         isLastItem,
         lotteryId,
+        bonusNumber
     } = props
 
     const validateTheTicket = (round) => {
@@ -91,6 +92,7 @@ export default function RapidoCardFooter(props) {
             .then((e) => {
                 if (e.success) {
                     toast.success('Successfully checked lottery numbers!')
+                    
                 } else {
                     toast.error('Something went wrong, please try again')
                     console.log(e)
@@ -235,10 +237,11 @@ export default function RapidoCardFooter(props) {
                         }*/}
                     {userGames.length != 0 && winningCombination != null ? (
                         <>
+                        <p className="fs-6 fw-bold text-center mb-2 text-muted">Your plays</p>
                             {userGames.map((game) => (
                                 <div key={game.game_id}>
                                     <div>
-                                        <div className="btn-holder">
+                                        <div className="btn-holder w-100 pt-4">
                                             <span>#{game.game_id + 1}</span>
                                             <span
                                                 className={
@@ -292,7 +295,7 @@ export default function RapidoCardFooter(props) {
                                                 className={
                                                     'nr-btn smaller' +
                                                     (game.bonus ==
-                                                    winningCombination[4]
+                                                        bonusNumber
                                                         ? ' active-g'
                                                         : '')
                                                 }
