@@ -299,13 +299,13 @@ export default () => {
                                     size={14}
                                     className="position-icon me-1"
                                 />
-                                Get results
+                                Get my numbers
                             </button>
                         )}
                         {games.map((game, k) => {
                             if (game.lottery_id == game_stats.game_stats_id) {
                                 return (
-                                    <div key={game.game_id + game.lottery_id}>
+                                    <div key={game.game_id + game.lottery_id} style={{marginBottom: '5px'}}>
                                         <span className="multiplier-table">
                                             x{game.multiplier}
                                         </span>
@@ -741,7 +741,7 @@ export default () => {
                                         style={{ minWidth: 250 }}
                                         className="text-center"
                                     >
-                                        Results
+                                        My numbers
                                     </th>
                                 </tr>
                             </thead>
