@@ -194,7 +194,7 @@ export default function RapidoCardFooter(props) {
                                     <button
                                         onClick={() => validateTheTicket(1)}
                                         className="btn btn-special w-100"
-                                        style={{ background: 'rgb(31 211 124)' }}
+                                        style={{ background: 'rgb(119 87 209)' }}
                                     >
                                         Enter
                                     </button>

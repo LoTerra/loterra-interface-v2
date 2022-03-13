@@ -187,6 +187,14 @@
     border-bottom-right-radius: 10px;
 }
 
+.resolving-svg {
+    svg {
+        width:250px;
+        display:block;
+        margin:10px auto;
+    }
+}
+
 .nr-btn {
     background: #7a5ec740;
     box-shadow: inset 0px 3px 0px rgba(3, 26, 66, 0.35);
@@ -210,13 +218,13 @@
         margin: 2%;
         &.multiplier {
             border-bottom: 4px solid #30137c;
-            background: linear-gradient(45deg, #7757d1, transparent);
+            background: #7757d1;
             box-shadow: none;
-            border-top: 1px solid #6e4ec8;
+            border-top: 0;
             &.active-i {
-                background: linear-gradient(45deg, #210764, transparent);
-                color: #f2d230;
-                border-bottom-color: #240969;
+                background: #210764;
+                color: #f2d230;                
+                border-bottom: 0px solid #30137c;
             }
         }
     }
@@ -315,3 +323,5 @@
 	// -webkit-animation-iteration-count: infinite;
 	// -webkit-animation-timing-function: linear;
 }
+
+

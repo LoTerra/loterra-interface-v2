@@ -3,6 +3,9 @@ import React, { useEffect, useState } from 'react'
 import { useStore } from '../../store'
 import { WasmAPI } from '@terra-money/terra.js'
 import { Lightning, Star } from 'phosphor-react'
+import Animation from './animation.svg'
+
+
 
 
 export default function RapidoCardBody(props) {
@@ -349,8 +352,7 @@ export default function RapidoCardBody(props) {
                             })}
                             <span className="rapido-combi-nr g medium">
                                 {bonusNumber}
-                            </span>
-                            
+                            </span>                  
                         </div>
 
                     </div>
@@ -359,7 +361,8 @@ export default function RapidoCardBody(props) {
                 <div className="col-12 text-center">
                     <div className="col-12 mb-2">
                         <div className={'rapido-winning-combination'}>
-                            <div className="resolving-loader">
+                            <div className="resolving-svg">
+                                <Animation/>
                             </div>
                             <p className="small text-muted">This Draw’s closing transaction has been submitted to the blockchain, and is awaiting confirmation. May the luck be with you!</p>
                         </div>
