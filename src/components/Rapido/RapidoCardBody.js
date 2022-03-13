@@ -18,8 +18,9 @@ export default function RapidoCardBody(props) {
         selectFourNumbers,
         fourNumbers,
         oneNumber,
-        multiplier,
+        multiplier, 
         nrOfDraws,
+        userGames,
         winningCombination,
         bonusNumber,
         lotteryId,
@@ -70,6 +71,20 @@ export default function RapidoCardBody(props) {
         }
     }
 
+    function checkUserGames(id){
+        if(userGames.length > 0){
+                console.log('found',userGames.filter(a => a.lottery_id == id), id)
+                if (userGames.filter(a => parseInt(a.lottery_id) == parseInt(id)).lenght > 0){
+                    return true;
+                } else {
+                    return false;
+                }
+            
+        } else {
+            return false;
+        }
+    }
+
     useEffect(() => {
         if (numberOne || numberTwo || numberThree || numberFour) {
             selectFourNumbers([numberOne, numberTwo, numberThree, numberFour])
@@ -86,9 +101,13 @@ export default function RapidoCardBody(props) {
 
     return (
         <div className={'card-body'}>
+            { lotteryId &&
+                <p>{checkUserGames(lotteryId) ? 'You played this' : 'You played not'}</p>
+            }
             {isLotteryLive ? (
                 <div className="row px-2">
                     <div className="col-12 text-center">
+                        
                         <div className="col-12 mb-2">
                             <div className={'rapido-winning-combination'}>
                                 <button

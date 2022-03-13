@@ -70,6 +70,7 @@ export default function RapidoCard(props) {
         let rapido_games = await api.contractQuery(state.rapidoAddress, query)
 
         if (rapido_games.length != 0) {
+            console.log('rapido user games', rapido_games)
             if (last_element) {
                 setUserGames([...userGames, ...rapido_games])
             } else {
@@ -107,6 +108,7 @@ export default function RapidoCard(props) {
                 oneNumber={oneNumber}
                 multiplier={multiplier}
                 nrOfDraws={nrOfDraws}
+                userGames={userGames}
                 winningCombination={winningCombination}
                 bonusNumber={bonusNumber}
                 lotteryId={lotteryId}
