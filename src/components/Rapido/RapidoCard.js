@@ -92,7 +92,16 @@ export default function RapidoCard(props) {
     }, [state.wallet.walletAddress, state.rapidoCurrentRound])
 
     return (
-        <div className={'card rapido-card' + (isLotteryLive ? ' active' : winningCombination == null ? ' resolving' : '')}>
+        <div
+            className={
+                'card rapido-card' +
+                (isLotteryLive
+                    ? ' active'
+                    : winningCombination == null
+                    ? ' resolving'
+                    : '')
+            }
+        >
             <RapidoCardHeader
                 lotteryId={lotteryId}
                 winningCombination={winningCombination}
@@ -115,6 +124,10 @@ export default function RapidoCard(props) {
                 isLotteryLive={isLotteryLive}
             />
             <RapidoCardFooter
+                selectMultiplier={(a) => selectMultiplier(a)}
+                selectNrOfDraws={(a) => selectNrOfDraws(a)}
+                selectOneNumber={(a) => selectOneNumber(a)}
+                selectFourNumbers={(a) => selectFourNumbers(a)}
                 enterDraw={() => enterDraw()}
                 multiplier={multiplier}
                 nrOfDraws={nrOfDraws}

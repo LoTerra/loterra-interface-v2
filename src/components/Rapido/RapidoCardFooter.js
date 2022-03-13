@@ -5,6 +5,9 @@ import numeral from 'numeral'
 import { MsgExecuteContract } from '@terra-money/terra.js'
 import toast from 'react-hot-toast'
 import { Lightning, Star } from 'phosphor-react'
+import { Swiper, SwiperSlide } from 'swiper/react'
+import 'swiper/swiper-bundle.min.css'
+import 'swiper/swiper.min.css'
 
 export default function RapidoCardFooter(props) {
     const { state, dispatch } = useStore()
@@ -20,7 +23,11 @@ export default function RapidoCardFooter(props) {
         loadMore,
         isLastItem,
         lotteryId,
-        bonusNumber
+        bonusNumber,
+        selectOneNumber,
+        selectFourNumbers,
+        selectMultiplier,
+        selectNrOfDraws
     } = props
 
     const validateTheTicket = (round) => {
@@ -62,6 +69,10 @@ export default function RapidoCardFooter(props) {
             .then((e) => {
                 if (e.success) {
                     toast.success('Ticket succesfully validated!')
+                    selectFourNumbers([])
+                    selectOneNumber([])
+                    selectNrOfDraws(1)
+                    selectMultiplier(1)
                 } else {
                     toast.error('Something went wrong, please try again')
                     console.log(e)
@@ -92,7 +103,6 @@ export default function RapidoCardFooter(props) {
             .then((e) => {
                 if (e.success) {
                     toast.success('Successfully checked lottery numbers!')
-                    
                 } else {
                     toast.error('Something went wrong, please try again')
                     console.log(e)
@@ -196,9 +206,11 @@ export default function RapidoCardFooter(props) {
                                     <button
                                         onClick={() => validateTheTicket(1)}
                                         className="btn btn-special w-100"
-                                        style={{ background: 'rgb(119 87 209)' }}
+                                        style={{
+                                            background: 'rgb(119 87 209)',
+                                        }}
                                     >
-                                        Enter
+                                        Enter To Win
                                     </button>
                                 )}
                             {state.wallet &&
@@ -237,106 +249,183 @@ export default function RapidoCardFooter(props) {
                         }*/}
                     {userGames.length != 0 && winningCombination != null ? (
                         <>
-                        <p className="fs-6 fw-bold text-center mb-2 text-muted">Your plays</p>
-                            {userGames.map((game) => (
-                                <div key={game.game_id}>
-                                    <div>
-                                        <div className="btn-holder w-100 pt-4">
-                                            <span>#{game.game_id + 1}</span>
-                                            <span
-                                                className={
-                                                    'nr-btn smaller' +
-                                                    (game.number[0] ==
-                                                    winningCombination[0]
-                                                        ? ' active'
-                                                        : '')
-                                                }
-                                                style={{ padding: '10px' }}
-                                            >
-                                                {game.number[0]}
-                                            </span>
-                                            <span
-                                                className={
-                                                    'nr-btn smaller' +
-                                                    (game.number[1] ==
-                                                    winningCombination[1]
-                                                        ? ' active'
-                                                        : '')
-                                                }
-                                                style={{ padding: '10px' }}
-                                            >
-                                                {game.number[1]}
-                                            </span>
-                                            <span
-                                                className={
-                                                    'nr-btn smaller' +
-                                                    (game.number[2] ==
-                                                    winningCombination[2]
-                                                        ? ' active'
-                                                        : '')
-                                                }
-                                                style={{ padding: '10px' }}
-                                            >
-                                                {game.number[2]}
-                                            </span>
-                                            <span
-                                                className={
-                                                    'nr-btn smaller' +
-                                                    (game.number[3] ==
-                                                    winningCombination[3]
-                                                        ? ' active'
-                                                        : '')
-                                                }
-                                                style={{ padding: '10px' }}
-                                            >
-                                                {game.number[3]}
-                                            </span>
-                                            <span
-                                                className={
-                                                    'nr-btn smaller' +
-                                                    (game.bonus ==
-                                                        bonusNumber
-                                                        ? ' active-g'
-                                                        : '')
-                                                }
-                                                style={{ padding: '10px' }}
-                                            >
-                                                {game.bonus}
-                                            </span>
-                                            
-                                        </div>  
+                            <p className="fs-6 fw-bold text-center mb-2 text-muted">
+                                Your plays
+                            </p>
+                            <div style={{height: "150px", overflow:'hidden'}}>
+                                <Swiper
+                                    style={{"width": '100%'}}
+                                    breakpointsBase="container"
+                                    direction="vertical"
+                                    spaceBetween={55}
+                                    navigation={{
+                                        nextEl: '.swiper-next',
+                                        prevEl: '.swiper-prev',
+                                    }}
+                                    //   modules={[Navigation, Pagination, A11y]}
 
-                                        <div className="w-100 px-4 mt-4">
+                                    slidesPerView={1}
+                                    breakpoints={{
+                                        // when window width is >= 640px
+                                        1: {
+                                            slidesPerView: 1,
+                                            spaceBetween: 10,
+                                        },
+                                        // when window width is >= 768px
+                                        768: {
+                                            slidesPerView: 1,
+                                            spaceBetween: 55,
+                                        },
+                                        1000: {
+                                            slidesPerView: 1,
+                                        },
+                                        1500: {
+                                            slidesPerView: 1,
+                                        },
+                                    }}
+                                    onSlideChange={(swiper) =>
+                                        console.log(
+                                            'slide change',
+                                            swiper.realIndex,
+                                        )
+                                    }
+                                    onSwiper={(swiper) => console.log(swiper)}
+                                >
+                                    {userGames.length > 0 &&
+                                        userGames.map((game, k) => {
+                                            return (
+                                                <SwiperSlide key={k}>
+                                                    <div key={game.game_id + k}>
+                                                        <div>
+                                                            <div className="btn-holder w-100 pt-4">
+                                                                <span>
+                                                                    #
+                                                                    {game.game_id +
+                                                                        1}
+                                                                </span>
+                                                                <span
+                                                                    className={
+                                                                        'nr-btn smaller' +
+                                                                        (game
+                                                                            .number[0] ==
+                                                                        winningCombination[0]
+                                                                            ? ' active'
+                                                                            : '')
+                                                                    }
+                                                                    style={{
+                                                                        padding:
+                                                                            '10px',
+                                                                    }}
+                                                                >
+                                                                    {game.number[0]}
+                                                                </span>
+                                                                <span
+                                                                    className={
+                                                                        'nr-btn smaller' +
+                                                                        (game
+                                                                            .number[1] ==
+                                                                        winningCombination[1]
+                                                                            ? ' active'
+                                                                            : '')
+                                                                    }
+                                                                    style={{
+                                                                        padding:
+                                                                            '10px',
+                                                                    }}
+                                                                >
+                                                                    {game.number[1]}
+                                                                </span>
+                                                                <span
+                                                                    className={
+                                                                        'nr-btn smaller' +
+                                                                        (game
+                                                                            .number[2] ==
+                                                                        winningCombination[2]
+                                                                            ? ' active'
+                                                                            : '')
+                                                                    }
+                                                                    style={{
+                                                                        padding:
+                                                                            '10px',
+                                                                    }}
+                                                                >
+                                                                    {game.number[2]}
+                                                                </span>
+                                                                <span
+                                                                    className={
+                                                                        'nr-btn smaller' +
+                                                                        (game
+                                                                            .number[3] ==
+                                                                        winningCombination[3]
+                                                                            ? ' active'
+                                                                            : '')
+                                                                    }
+                                                                    style={{
+                                                                        padding:
+                                                                            '10px',
+                                                                    }}
+                                                                >
+                                                                    {game.number[3]}
+                                                                </span>
+                                                                <span
+                                                                    className={
+                                                                        'nr-btn smaller' +
+                                                                        (game.bonus ==
+                                                                        bonusNumber
+                                                                            ? ' active-g'
+                                                                            : '')
+                                                                    }
+                                                                    style={{
+                                                                        padding:
+                                                                            '10px',
+                                                                    }}
+                                                                >
+                                                                    {game.bonus}
+                                                                </span>
+                                                            </div>
+
+                                                            <div className="w-100 px-4 mt-4">
+                                                                <button
+                                                                    className="btn btn-default w-100"
+                                                                    style={{
+                                                                        background:
+                                                                            'rgb(122, 94, 199)',
+                                                                    }}
+                                                                    disabled={
+                                                                        game.resolved
+                                                                    }
+                                                                    onClick={() =>
+                                                                        checkLottoNumbers(
+                                                                            game.game_id,
+                                                                        )
+                                                                    }
+                                                                >
+                                                                    {' '}
+                                                                    Check lotto
+                                                                    numbers{' '}
+                                                                </button>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </SwiperSlide>
+                                            )
+                                        })}
+                                    <SwiperSlide key={"button-load-more"}>
                                         <button
-                                                className="btn btn-default w-100"
-                                                style={{background: "rgb(122, 94, 199)"}}
-                                                disabled={game.resolved}
-                                                onClick={() =>
-                                                    checkLottoNumbers(
-                                                        game.game_id,
-                                                    )
-                                                }
-                                            >
-                                                {' '}
-                                                Check lotto numbers{' '}
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
-                            ))}
-                            <div className="w-100 px-4">
-                            <button
-                            className="btn btn-default w-100 mb-4 mt-2 btn-sm"
-                                disabled={isLastItem}
-                                onClick={() =>
-                                    loadMore(
-                                        userGames[userGames.length - 1].game_id,
-                                    )
-                                }
-                            >
-                                {' '}
-                                Load More{' '}
-                            </button>
+                                            className="btn btn-default w-100 mb-4 mt-2 btn-sm"
+                                            disabled={isLastItem}
+                                            onClick={() =>
+                                                loadMore(
+                                                    userGames[userGames.length - 1]
+                                                        .game_id,
+                                                )
+                                            }
+                                        >
+                                            {' '}
+                                            Load More{' '}
+                                        </button>
+                                    </SwiperSlide>
+                                </Swiper>
                             </div>
                         </>
                     ) : (

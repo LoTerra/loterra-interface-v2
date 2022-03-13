@@ -22,7 +22,7 @@ export default function RapidoCardHeader(props) {
                                 width: '100px',
                                 textAlign: 'center',
                                 fontWeight: 700,
-                                boxShadow:'0px 0px 12px #77f0b6'
+                                boxShadow: '0px 0px 12px #77f0b6',
                             }}
                         >
                             Active
@@ -58,18 +58,28 @@ export default function RapidoCardHeader(props) {
                             Finished
                         </p>
                     )}
-                    <p className="fs-5 mb-0 mt-1 fw-regular" style={{opacity:0.5}}>#{lotteryId}</p>
+                    <p
+                        className="fs-5 mb-0 mt-1 fw-regular"
+                        style={{ opacity: 0.5 }}
+                    >
+                        #{lotteryId}
+                    </p>
                 </div>
-                <div className="col-6 text-end">        
-                    { isLotteryLive ?
+                <div className="col-6 text-end">
+                    {isLotteryLive ? (
                         <>
-                        <p className="small mb-0" style={{color:'#fff', opacity:0.5}}>Round ends in</p>
-                        {formatTime()}
+                            <p
+                                className="small mb-0"
+                                style={{ color: '#fff', opacity: 0.5 }}
+                            >
+                                Round ends in
+                            </p>
+                            {formatTime()}
                         </>
-                        :
+                    ) : (
                         ''
-                    }                                       
-                    </div>
+                    )}
+                </div>
             </div>
         </div>
     )

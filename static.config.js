@@ -10,7 +10,7 @@ export default {
     silent: true,
     plugins: [
         ['react-static-plugin-sass'],
-        ["react-static-plugin-svg"],
+        ['react-static-plugin-svg'],
         ['react-static-plugin-react-router'],
     ],
     getSiteData: async ({ dev }) => ({

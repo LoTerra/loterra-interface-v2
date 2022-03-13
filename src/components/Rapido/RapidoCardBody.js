@@ -5,9 +5,6 @@ import { WasmAPI } from '@terra-money/terra.js'
 import { Lightning, Star } from 'phosphor-react'
 import Animation from './animation.svg'
 
-
-
-
 export default function RapidoCardBody(props) {
     const { state, dispatch } = useStore()
 
@@ -18,7 +15,7 @@ export default function RapidoCardBody(props) {
         selectFourNumbers,
         fourNumbers,
         oneNumber,
-        multiplier, 
+        multiplier,
         nrOfDraws,
         userGames,
         winningCombination,
@@ -71,17 +68,23 @@ export default function RapidoCardBody(props) {
         }
     }
 
-    function checkUserGames(id){
-        if(userGames.length > 0){
-                console.log('found',userGames.filter(a => a.lottery_id == id), id)
-                if (userGames.filter(a => parseInt(a.lottery_id) == parseInt(id)).lenght > 0){
-                    return true;
-                } else {
-                    return false;
-                }
-            
+    function checkUserGames(id) {
+        if (userGames.length > 0) {
+            console.log(
+                'found',
+                userGames.filter((a) => a.lottery_id == id),
+                id,
+            )
+            if (
+                userGames.filter((a) => parseInt(a.lottery_id) == parseInt(id))
+                    .lenght > 0
+            ) {
+                return true
+            } else {
+                return false
+            }
         } else {
-            return false;
+            return false
         }
     }
 
@@ -101,19 +104,23 @@ export default function RapidoCardBody(props) {
 
     return (
         <div className={'card-body'}>
-            { lotteryId &&
-                <p>{checkUserGames(lotteryId) ? 'You played this' : 'You played not'}</p>
-            }
+            {/*{ lotteryId &&*/}
+            {/*    <p>{checkUserGames(lotteryId) ? 'You played this' : 'You played not'}</p>*/}
+            {/*}*/}
             {isLotteryLive ? (
                 <div className="row px-2">
                     <div className="col-12 text-center">
-                        
                         <div className="col-12 mb-2">
                             <div className={'rapido-winning-combination'}>
                                 <button
                                     type="button"
                                     className="rapido-combi-nr big text-white"
-                                    style={{padding: '0', border: 'none', background: 'none', outline: 'none'}}
+                                    style={{
+                                        padding: '0',
+                                        border: 'none',
+                                        background: 'none',
+                                        outline: 'none',
+                                    }}
                                     onClick={() => removeNumberFromArray(1)}
                                 >
                                     {!numberOne ? (
@@ -134,7 +141,12 @@ export default function RapidoCardBody(props) {
                                 <button
                                     type="button"
                                     className="rapido-combi-nr big text-white"
-                                    style={{padding: '0', border: 'none', background: 'none', outline: 'none'}}
+                                    style={{
+                                        padding: '0',
+                                        border: 'none',
+                                        background: 'none',
+                                        outline: 'none',
+                                    }}
                                     onClick={() => removeNumberFromArray(2)}
                                 >
                                     {!numberTwo ? (
@@ -155,7 +167,12 @@ export default function RapidoCardBody(props) {
                                 <button
                                     type="button"
                                     className="rapido-combi-nr big text-white"
-                                    style={{padding: '0', border: 'none', background: 'none', outline: 'none'}}
+                                    style={{
+                                        padding: '0',
+                                        border: 'none',
+                                        background: 'none',
+                                        outline: 'none',
+                                    }}
                                     onClick={() => removeNumberFromArray(3)}
                                 >
                                     {!numberThree ? (
@@ -176,7 +193,12 @@ export default function RapidoCardBody(props) {
                                 <button
                                     type="button"
                                     className="rapido-combi-nr big text-white"
-                                    style={{padding: '0', border: 'none', background: 'none', outline: 'none'}}
+                                    style={{
+                                        padding: '0',
+                                        border: 'none',
+                                        background: 'none',
+                                        outline: 'none',
+                                    }}
                                     onClick={() => removeNumberFromArray(4)}
                                 >
                                     {!numberFour ? (
@@ -197,7 +219,12 @@ export default function RapidoCardBody(props) {
                                 <button
                                     type="button"
                                     className="rapido-combi-nr g big text-white"
-                                    style={{padding: '0', border: 'none', background: 'none', outline: 'none'}}
+                                    style={{
+                                        padding: '0',
+                                        border: 'none',
+                                        background: 'none',
+                                        outline: 'none',
+                                    }}
                                     onClick={() => removeNumberFromArray(5)}
                                 >
                                     {!numberBonus ? (
@@ -219,7 +246,9 @@ export default function RapidoCardBody(props) {
                         </div>
                     </div>
                     <div
-                        hidden={numberOne && numberTwo && numberThree && numberFour}
+                        hidden={
+                            numberOne && numberTwo && numberThree && numberFour
+                        }
                         className="col-12 p-2 mb-3"
                         style={{
                             border: '3px solid #048ABF',
@@ -239,9 +268,7 @@ export default function RapidoCardBody(props) {
                                     <button
                                         type="button"
                                         key={k}
-                                        className={
-                                            'nr-btn smaller'
-                                        }
+                                        className={'nr-btn smaller'}
                                         value={obj}
                                         onClick={(e) => selectNumbers(obj)}
                                     >
@@ -252,7 +279,13 @@ export default function RapidoCardBody(props) {
                         </div>
                     </div>
                     <div
-                        hidden={numberBonus || !numberOne || !numberTwo || !numberThree || !numberFour}
+                        hidden={
+                            numberBonus ||
+                            !numberOne ||
+                            !numberTwo ||
+                            !numberThree ||
+                            !numberFour
+                        }
                         className="col-12 p-2"
                         style={{
                             border: '3px solid #F2D230',
@@ -355,7 +388,13 @@ export default function RapidoCardBody(props) {
                 </div>
             ) : winningCombination != null && !isLotteryLive ? (
                 <div className="col-12 text-center">
-                    <Trophy size={55} weight="fill" fill={'#f2d230'} className="mx-auto mb-3" />
+                    {/*<img src="/trophy.gif" alt="Trophy..." width="50%" height="50%"/>*/}
+                    <Trophy
+                        size={55}
+                        weight="fill"
+                        fill={'#f2d230'}
+                        className="mx-auto mb-3"
+                    />
                     <h4 className="fs-5">Winning number</h4>
                     <div className="col-12 mb-2">
                         <div className={'rapido-winning-combination'}>
@@ -371,9 +410,8 @@ export default function RapidoCardBody(props) {
                             })}
                             <span className="rapido-combi-nr g medium">
                                 {bonusNumber}
-                            </span>                  
+                            </span>
                         </div>
-
                     </div>
                 </div>
             ) : (
@@ -381,9 +419,19 @@ export default function RapidoCardBody(props) {
                     <div className="col-12 mb-2">
                         <div className={'rapido-winning-combination'}>
                             <div className="resolving-svg">
-                                <Animation/>
+                                {/*<Animation/>*/}
+                                <img
+                                    src="/draw.gif"
+                                    alt="Draw is happening..."
+                                    width="100%"
+                                    height="100%"
+                                />
                             </div>
-                            <p className="small text-muted">This Draw’s closing transaction has been submitted to the blockchain, and is awaiting confirmation. May the luck be with you!</p>
+                            <p className="small text-muted">
+                                This Draw’s closing transaction has been
+                                submitted to the blockchain, and is awaiting
+                                confirmation. May the luck be with you!
+                            </p>
                         </div>
                     </div>
                 </div>
