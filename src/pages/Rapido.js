@@ -184,6 +184,17 @@ export default () => {
         }
     }
 
+    function getGameWinnings(game){
+        let price = 0;
+        //Do stuff here
+        //game.winning_nummber
+        //game.winning_bonus
+        //game.bonus
+        //game.number
+        
+        
+    }
+
     async function getGames(game_stats_id) {
         try {
             let start_after = null
@@ -395,6 +406,9 @@ export default () => {
                                                 <p>{game.bonus} <Star size={18} fill={'#048abf'} weight={'fill'}/></p>
                                             }
                                         </span>
+                                        <div className="w-100">
+                                            {getGameWinnings(game)}
+                                        </div>
                                     </div>
                                 )
                             }
