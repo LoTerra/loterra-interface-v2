@@ -22,10 +22,10 @@
         }
         .card-body {
             .form-control {
-                background: #220c5e;
+                background: #2e1379;
                 box-shadow: inset 0px 4px 4px rgb(33 10 92 / 9%);
                 border-radius: 5px;
-                color: #f2d230;
+                color: #fff;
                 border: 1px solid #2a0f73;
                 padding: 7px;
             }
@@ -244,13 +244,14 @@
         width: 29.2%;
         margin: 2%;
         &.multiplier {
-            background: rgb(119, 87, 209);
+            background: #32147f;
             color: #fff;
-            box-shadow: none;
+            box-shadow: inset 0px 3px 0px #0000002e;
             border-top: 0;
+        
             &.active-i {
-                background: #220c5e;
-                color: #f2d230;
+                background: #bf046b;
+                color: #fff;
                 border-bottom: 0px solid #30137c;
             }
         }

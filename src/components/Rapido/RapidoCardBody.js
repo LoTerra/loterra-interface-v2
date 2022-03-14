@@ -156,8 +156,7 @@ export default function RapidoCardBody(props) {
                                     className="rapido-combi-nr big text-white"
                                     style={{
                                         padding: '0',
-                                        border: 'none',
-                                        background: 'none',
+                                        border: 'none',                              
                                         outline: 'none',
                                     }}
                                     onClick={() => removeNumberFromArray(2)}
@@ -184,8 +183,7 @@ export default function RapidoCardBody(props) {
                                     className="rapido-combi-nr big text-white"
                                     style={{
                                         padding: '0',
-                                        border: 'none',
-                                        background: 'none',
+                                        border: 'none',                                       
                                         outline: 'none',
                                     }}
                                     onClick={() => removeNumberFromArray(3)}
@@ -212,8 +210,7 @@ export default function RapidoCardBody(props) {
                                     className="rapido-combi-nr big text-white"
                                     style={{
                                         padding: '0',
-                                        border: 'none',
-                                        background: 'none',
+                                        border: 'none',                            
                                         outline: 'none',
                                     }}
                                     onClick={() => removeNumberFromArray(4)}
@@ -240,8 +237,7 @@ export default function RapidoCardBody(props) {
                                     className="rapido-combi-nr g big text-white"
                                     style={{
                                         padding: '0',
-                                        border: 'none',
-                                        background: 'none',
+                                        border: 'none',                                      
                                         outline: 'none',
                                     }}
                                     onClick={() => removeNumberFromArray(5)}
