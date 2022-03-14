@@ -22,10 +22,10 @@
         }
         .card-body {
             .form-control {
-                background: #bf046b;
+                background: #220c5e;
                 box-shadow: inset 0px 4px 4px rgb(33 10 92 / 9%);
                 border-radius: 5px;
-                color: #fff;
+                color: #f2d230;
                 border: 1px solid #2a0f73;
                 padding: 7px;
             }
@@ -95,6 +95,21 @@
                 color: #16073e;
             }
         }
+    }
+}
+
+.btn-rapido-nav {
+    background: #311189;
+    border: 0;
+    color: #fff;
+    border-radius: 6px;
+    svg {
+        position:relative;
+        top:3px;
+        opacity:0.7;
+    }
+    &.swiper-button-disabled {
+        opacity:0.5;
     }
 }
 
@@ -219,22 +234,24 @@
     transition: all 150ms linear;
 
     &.smaller {
-        width: 56px;
-        height: 60px;
+        width: 55px;
+        height: 44px;
         margin: 2%;
+        font-size: 1.4rem;
+        line-height:40px;
     }
     &.medium {
         width: 29.2%;
         margin: 2%;
         &.multiplier {
-            background: #ffffff;
-            color: #bf046b;
+            background: rgb(119, 87, 209);
+            color: #fff;
             box-shadow: none;
             border-top: 0;
             &.active-i {
-                background: #bf046b;
-                color: #ffffff;
-    border-bottom: 0px solid #30137c;
+                background: #220c5e;
+                color: #f2d230;
+                border-bottom: 0px solid #30137c;
             }
         }
     }

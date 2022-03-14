@@ -389,7 +389,7 @@ export default function RapidoCardBody(props) {
                                         (obj, k) => {
                                             return (
                                                 <option key={k} value={obj}>
-                                                    {obj}
+                                                    {obj}x
                                                 </option>
                                             )
                                         },
@@ -445,11 +445,11 @@ export default function RapidoCardBody(props) {
                                 {/*<Animation/>*/}
                                 <div className="circle-loader">
                                     <div className="circle-loader-container">
-                                        <span class="circle b"></span>
-                                        <span class="circle b"></span>
-                                        <span class="circle b"></span>
-                                        <span class="circle y"></span>
-                                        <span class="circle y"></span>
+                                        <span className="circle b"></span>
+                                        <span className="circle b"></span>
+                                        <span className="circle b"></span>
+                                        <span className="circle y"></span>
+                                        <span className="circle y"></span>
                                     </div>
                                 </div>
                             </div>

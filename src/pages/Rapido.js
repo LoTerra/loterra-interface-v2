@@ -651,16 +651,16 @@ export default () => {
                                 </div>
                             </div>
                         </div> */}
-                        <div className="col-12 overflow-hidden mb-4 mt-2">
-                            <div className="w-100 order-4 my-3 mb-2">
+                        <div className="col-12 overflow-hidden mb-4">
+                            <div className="w-100 order-4 mb-2">
                                 <div className="row">
                                     <div className="col-6 text-end">
-                                        <button className="swiper-prev btn btn-plain pb-2">
+                                        <button className="swiper-prev btn-rapido-nav pb-2">
                                             <ArrowLeft size={24} />
                                         </button>
                                     </div>
                                     <div className="col-6 text-start">
-                                        <button className="swiper-next btn btn-plain pb-2">
+                                        <button className="swiper-next btn-rapido-nav pb-2">
                                             <ArrowRight size={24} />
                                         </button>
                                     </div>
@@ -681,8 +681,8 @@ export default () => {
                             )}
                             {lotteries.length > 0 && (
                                 <Swiper
-                                    spaceBetween={55}
-                                    style={{ padding: '45px 25px' }}
+                                    spaceBetween={35}
+                                    style={{ padding: '45px 15px' }}
                                     navigation={{
                                         nextEl: '.swiper-next',
                                         prevEl: '.swiper-prev',
@@ -708,7 +708,7 @@ export default () => {
                                             slidesPerView: 1,
                                         },
                                     }}
-                                    initialSlide={4}
+                                    initialSlide={lotteries.length}
                                     onSlideChange={(swiper) =>
                                         console.log(
                                             'slide change',

@@ -249,7 +249,7 @@ export default function RapidoCardFooter(props) {
                             <div style={{height: "150px", overflow:'hidden'}}>
                                 <Swiper
                                     style={{"width": '100%'}}
-                                    breakpointsBase="container"
+                                    breakpointsbase="container"
                                     direction="vertical"
                                     spaceBetween={55}
                                     navigation={{
