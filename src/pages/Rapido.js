@@ -833,12 +833,14 @@ export default () => {
                     <div className="table-responsive">
                         <table className="table text-white">
                             <thead>
+                                <tr>
                                 <th style={{ minWidth: 50 }}>Rank</th>
                                 <th style={{ minWidth: 100 }} className="text-center">Score</th>
                                 <th style={{ minWidth: 100 }} className="text-center">Odds</th>
                                 <th style={{ minWidth: 50 }} className="text-center">$ 1</th>
                                 <th style={{ minWidth: 50 }} className="text-center">$ 2</th>
                                 <th style={{ minWidth: 50 }} className="text-center">$ 5</th>
+                                </tr>
                             </thead>
                             <tbody>
                                 <tr>

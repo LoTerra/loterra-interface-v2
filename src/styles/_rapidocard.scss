@@ -22,11 +22,11 @@
         }
         .card-body {
             .form-control {
-                background: rgb(45 16 122);
+                background: #2a0f73;
                 box-shadow: inset 0px 4px 4px rgb(33 10 92 / 9%);
                 border-radius: 5px;
-                color: #fff;
-                border: 1px solid #1a005c;
+                color: #f2d230;
+                border: 1px solid #2a0f73;
                 padding: 7px;
             }
         }
@@ -39,7 +39,7 @@
             }
         }
         .card-footer {
-            border-top: 2px dashed #f2d230 !important;
+            border-top: 2px dashed #2a0f73 !important;
             background: linear-gradient(45deg, #4d2bab, #2e0e85) !important;
             border-bottom-right-radius: 20px;
             border-bottom-left-radius: 20px;
@@ -227,12 +227,13 @@
         width: 29.2%;
         margin: 2%;
         &.multiplier {
-            background: rgb(191, 4, 107, 0.2);
+            background: rgb(119 87 209);
             box-shadow: none;
             border-top: 0;
             &.active-i {
-                background: #BF046B;
-                border-bottom: 0px solid #30137c;
+                background: #2a0f73;
+    color: #f2d230;
+    border-bottom: 0px solid #30137c;
             }
         }
     }
