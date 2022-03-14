@@ -827,7 +827,7 @@ export default () => {
                     <div className="col-md-6 p-md-4 text-center text-md-start">
                         <h2 className="fs-1 fw-bold">Paytable</h2>
                         <h4 className="fs-4 fw-normal text-muted">
-                            Get all your games
+                            List of payouts
                         </h4>
                     </div>
                     <div className="table-responsive">
