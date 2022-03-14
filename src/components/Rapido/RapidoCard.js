@@ -82,10 +82,6 @@ export default function RapidoCard(props) {
     }
 
     function switchToDefault(d){
-        if (d){
-            setNrOfDraws(1)
-            setMultiplier(1)
-        }
         setToDefault(d)
     }
 
