@@ -192,7 +192,7 @@ export default function NormalNav() {
                     />{' '}
                     Staking
                     <span className="item-label">
-                        Become a casino owner or earn LOTA when staking LP
+                        Become a casino owner
                     </span>
                 </NavLink>
             </li>

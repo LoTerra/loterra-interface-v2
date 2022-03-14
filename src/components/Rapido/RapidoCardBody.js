@@ -115,7 +115,7 @@ export default function RapidoCardBody(props) {
     }, [numberOne, numberTwo, numberThree, numberFour, numberBonus, toDefault])
 
     return (
-        <div className={'card-body'}>
+        <div className={'card-body' + (isLotteryLive ? ' pt-0' : '')}>
             {/*{ lotteryId &&*/}
             {/*    <p>{checkUserGames(lotteryId) ? 'You played this' : 'You played not'}</p>*/}
             {/*}*/}

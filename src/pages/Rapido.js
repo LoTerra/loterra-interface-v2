@@ -2,7 +2,7 @@ import { Head } from 'react-static'
 import React, { useState, useEffect, useCallback, useRef, useMemo } from 'react'
 import { useStore } from '../store'
 import RapidoCard from '../components/Rapido/RapidoCard'
-import { ArrowsClockwise, Clock } from 'phosphor-react'
+import { ArrowsClockwise, Clock, HourglassSimpleHigh } from 'phosphor-react'
 
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/swiper-bundle.min.css'
@@ -265,7 +265,7 @@ export default () => {
 
             return (
                 <>
-                    <Clock
+                    <HourglassSimpleHigh
                         size={32}
                         style={{ position: 'relative', top: '-8px' }}
                         className="d-none d-md-inline-block"
@@ -629,7 +629,7 @@ export default () => {
             <div className="w-100 py-3 pt-md-5 text-center mb-2">
 
                 <img src="/Rapido-logo.svg" height="100px"/>
-                <h2 className="my-2 fw-regular fs-6 mb-0">
+                <h2 className="mb-2 fw-regular fs-6 mb-0">
                     Win up to $50,000 every 5 minutes
                 </h2>
             </div>
@@ -682,7 +682,7 @@ export default () => {
                             {lotteries.length > 0 && (
                                 <Swiper
                                     spaceBetween={35}
-                                    style={{ padding: '45px 15px' }}
+                                    style={{ padding: '10px 15px' }}
                                     navigation={{
                                         nextEl: '.swiper-next',
                                         prevEl: '.swiper-prev',
