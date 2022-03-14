@@ -1,4 +1,4 @@
-import { Trash, Trophy, X } from 'phosphor-react'
+import { Pencil, Trash, Trophy, X, XCircle } from 'phosphor-react'
 import React, { useEffect, useState } from 'react'
 import { useStore } from '../../store'
 import { WasmAPI } from '@terra-money/terra.js'
@@ -129,8 +129,7 @@ export default function RapidoCardBody(props) {
                                     className="rapido-combi-nr big text-white"
                                     style={{
                                         padding: '0',
-                                        border: 'none',
-                                        background: 'none',
+                                        border: 'none',                                        
                                         outline: 'none',
                                     }}
                                     onClick={() => removeNumberFromArray(1)}
@@ -147,7 +146,9 @@ export default function RapidoCardBody(props) {
                                             }}
                                         />
                                     ) : (
-                                        numberOne
+                                        <>
+                                            {numberOne}<span className="edit-number"><X size={15} /></span>
+                                        </>
                                     )}
                                 </button>
                                 <button
@@ -173,7 +174,9 @@ export default function RapidoCardBody(props) {
                                             }}
                                         />
                                     ) : (
-                                        numberTwo
+                                        <>
+                                            {numberTwo}<span className="edit-number"><X size={15} /></span>
+                                        </>
                                     )}
                                 </button>
                                 <button
@@ -199,7 +202,9 @@ export default function RapidoCardBody(props) {
                                             }}
                                         />
                                     ) : (
-                                        numberThree
+                                        <>
+                                            {numberThree}<span className="edit-number"><X size={15} /></span>
+                                        </>
                                     )}
                                 </button>
                                 <button
@@ -225,7 +230,9 @@ export default function RapidoCardBody(props) {
                                             }}
                                         />
                                     ) : (
-                                        numberFour
+                                        <>
+                                            {numberFour}<span className="edit-number"><X size={15} /></span>
+                                        </>
                                     )}
                                 </button>
                                 <button
@@ -251,7 +258,9 @@ export default function RapidoCardBody(props) {
                                             }}
                                         />
                                     ) : (
-                                        numberBonus
+                                        <>
+                                        {numberBonus}<span className="edit-number"><X size={15} /></span>
+                                        </>
                                     )}
                                 </button>
                             </div>
@@ -365,7 +374,7 @@ export default function RapidoCardBody(props) {
                         <div className="row">
                             <div className="col-7 d-flex">
                                 <p className="mb-0 align-self-center fw-bold">
-                                    Number of draws
+                                    Number of draws:
                                 </p>
                             </div>
                             <div className="col-5">
@@ -424,6 +433,7 @@ export default function RapidoCardBody(props) {
                             <span className="rapido-combi-nr g medium">
                                 {bonusNumber}
                             </span>
+                            
                         </div>
                     </div>
                 </div>
@@ -433,12 +443,15 @@ export default function RapidoCardBody(props) {
                         <div className={'rapido-winning-combination'}>
                             <div className="resolving-svg">
                                 {/*<Animation/>*/}
-                                <img
-                                    src="/draw.gif"
-                                    alt="Draw is happening..."
-                                    width="100%"
-                                    height="100%"
-                                />
+                                <div className="circle-loader">
+                                    <div className="circle-loader-container">
+                                        <span class="circle b"></span>
+                                        <span class="circle b"></span>
+                                        <span class="circle b"></span>
+                                        <span class="circle y"></span>
+                                        <span class="circle y"></span>
+                                    </div>
+                                </div>
                             </div>
                             <p className="small text-muted">
                                 This Draw’s closing transaction has been
