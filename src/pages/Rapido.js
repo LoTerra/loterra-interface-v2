@@ -893,9 +893,9 @@ export default () => {
                                 <th style={{ minWidth: 50 }}>Rank</th>
                                 <th style={{ minWidth: 100 }} className="text-center">Score</th>
                                 <th style={{ minWidth: 100 }} className="text-center">Odds</th>
-                                <th style={{ minWidth: 50 }} className="text-center">$ 1</th>
-                                <th style={{ minWidth: 50 }} className="text-center">$ 2</th>
-                                <th style={{ minWidth: 50 }} className="text-center">$ 5</th>
+                                <th style={{ minWidth: 50 }} className="text-center">$1</th>
+                                <th style={{ minWidth: 50 }} className="text-center">$2</th>
+                                <th style={{ minWidth: 50 }} className="text-center">$5</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -903,65 +903,65 @@ export default () => {
                                     <td>#1</td>
                                     <td className="text-center">4 + 1 star</td>
                                     <td className="text-center">1 / 524,288</td>
-                                    <td className="text-center">$ 10,000</td>
-                                    <td className="text-center">$ 20,000</td>
-                                    <td className="text-center">$ 50,000</td>
+                                    <td className="text-center">$10,000</td>
+                                    <td className="text-center">$20,000</td>
+                                    <td className="text-center">$50,000</td>
                                 </tr>
                                 <tr>
                                     <td>#2</td>
                                     <td className="text-center">4 </td>
                                     <td className="text-center">1 / 65,536</td>
-                                    <td className="text-center">$ 500</td>
-                                    <td className="text-center">$ 1000</td>
-                                    <td className="text-center">$ 2,500</td>
+                                    <td className="text-center">$500</td>
+                                    <td className="text-center">$1000</td>
+                                    <td className="text-center">$2,500</td>
                                 </tr>
                                 <tr>
                                     <td>#3</td>
                                     <td className="text-center">3 + 1 star </td>
                                     <td className="text-center">1 / 32,768</td>
-                                    <td className="text-center">$ 150</td>
-                                    <td className="text-center">$ 300</td>
-                                    <td className="text-center">$ 750</td>
+                                    <td className="text-center">$150</td>
+                                    <td className="text-center">$300</td>
+                                    <td className="text-center">$750</td>
                                 </tr>
                                 <tr>
                                     <td>#4</td>
                                     <td className="text-center">3 </td>
                                     <td className="text-center">1 / 4,096</td>
-                                    <td className="text-center">$ 50</td>
-                                    <td className="text-center">$ 100</td>
-                                    <td className="text-center">$ 250</td>
+                                    <td className="text-center">$50</td>
+                                    <td className="text-center">$100</td>
+                                    <td className="text-center">$250</td>
                                 </tr>
                                 <tr>
                                     <td>#5</td>
                                     <td className="text-center">2 + 1 star </td>
                                     <td className="text-center">1 / 2,048</td>
-                                    <td className="text-center">$ 30</td>
-                                    <td className="text-center">$ 60</td>
-                                    <td className="text-center">$ 150</td>
+                                    <td className="text-center">$30</td>
+                                    <td className="text-center">$60</td>
+                                    <td className="text-center">$150</td>
                                 </tr>
                                 <tr>
                                     <td>#6</td>
                                     <td className="text-center">2  </td>
                                     <td className="text-center">1 / 256</td>
-                                    <td className="text-center">$ 10</td>
-                                    <td className="text-center">$ 20</td>
-                                    <td className="text-center">$ 50</td>
+                                    <td className="text-center">$10</td>
+                                    <td className="text-center">$20</td>
+                                    <td className="text-center">$50</td>
                                 </tr>
                                 <tr>
                                     <td>#7</td>
                                     <td className="text-center">1 + 1 star </td>
                                     <td className="text-center">1 / 128</td>
-                                    <td className="text-center">$ 5</td>
-                                    <td className="text-center">$ 10</td>
-                                    <td className="text-center">$ 25</td>
+                                    <td className="text-center">$5</td>
+                                    <td className="text-center">$10</td>
+                                    <td className="text-center">$25</td>
                                 </tr>
                                 <tr>
                                     <td>#8</td>
                                     <td className="text-center">1 </td>
                                     <td className="text-center">1 / 16</td>
-                                    <td className="text-center">$ 1</td>
-                                    <td className="text-center">$ 2</td>
-                                    <td className="text-center">$ 5</td>
+                                    <td className="text-center">$1</td>
+                                    <td className="text-center">$2</td>
+                                    <td className="text-center">$5</td>
                                 </tr>
                             </tbody>
                         </table>
