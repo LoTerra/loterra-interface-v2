@@ -288,17 +288,24 @@ export default () => {
     function formatTime() {
         const seconds = Math.floor((timeBetween / 1000) % 60)
         const minutes = Math.floor((timeBetween / 1000 / 60) % 60)
+        
         let format_minutes = minutes < 10 ? '0' + minutes : minutes
         let format_seconds = seconds < 10 ? '0' + seconds : seconds
 
         let format_message = 'Closing...'
         if (state.rapidoCurrentTimeRound * 1000 > Date.now()) {
-            format_message = format_minutes + ':' + format_seconds
+            
+            if (seconds < 0 && minutes < 0){
+                format_message = '00:00'
+            }else {
+                format_message = format_minutes + ':' + format_seconds
+            }
+            
 
             return (
                 <>
                     <HourglassSimpleHigh
-                        size={32}
+                        size={25}
                         style={{ position: 'relative', top: '-8px' }}
                         className="d-none d-md-inline-block"
                         weight={'bold'}

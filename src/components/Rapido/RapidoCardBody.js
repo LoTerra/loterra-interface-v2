@@ -147,7 +147,7 @@ export default function RapidoCardBody(props) {
                                         />
                                     ) : (
                                         <>
-                                            {numberOne}<span className="edit-number"><X size={15} /></span>
+                                            {numberOne}
                                         </>
                                     )}
                                 </button>
@@ -174,7 +174,7 @@ export default function RapidoCardBody(props) {
                                         />
                                     ) : (
                                         <>
-                                            {numberTwo}<span className="edit-number"><X size={15} /></span>
+                                            {numberTwo}
                                         </>
                                     )}
                                 </button>
@@ -201,7 +201,7 @@ export default function RapidoCardBody(props) {
                                         />
                                     ) : (
                                         <>
-                                            {numberThree}<span className="edit-number"><X size={15} /></span>
+                                            {numberThree}
                                         </>
                                     )}
                                 </button>
@@ -228,7 +228,7 @@ export default function RapidoCardBody(props) {
                                         />
                                     ) : (
                                         <>
-                                            {numberFour}<span className="edit-number"><X size={15} /></span>
+                                            {numberFour}
                                         </>
                                     )}
                                 </button>
@@ -255,7 +255,7 @@ export default function RapidoCardBody(props) {
                                         />
                                     ) : (
                                         <>
-                                        {numberBonus}<span className="edit-number"><X size={15} /></span>
+                                        {numberBonus}
                                         </>
                                     )}
                                 </button>
