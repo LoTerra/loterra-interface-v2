@@ -2,7 +2,7 @@ import { Head } from 'react-static'
 import React, { useState, useEffect, useCallback, useRef, useMemo } from 'react'
 import { useStore } from '../store'
 import RapidoCard from '../components/Rapido/RapidoCard'
-import { ArrowsClockwise, Clock, HourglassSimpleHigh } from 'phosphor-react'
+import { ArrowsClockwise, Clock, HourglassSimpleHigh, Lightning, Star } from 'phosphor-react'
 
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/swiper-bundle.min.css'
@@ -188,6 +188,20 @@ export default () => {
         try {
             let start_after = null
             let loop = true
+
+            //Get lottery info
+            let lottery_query = {
+                lottery_state: {
+                    round: game_stats_id
+                }
+            }
+            let lottery_info = await api.contractQuery(
+                state.rapidoAddress,
+                lottery_query,
+            )
+            console.log('info',lottery_info)
+
+
             while (loop) {
                 // Prepare query
                 let query = {
@@ -210,11 +224,18 @@ export default () => {
                 )
                 console.log(query)
                 if (res_games.length > 0) {
-                    let copy_games = [...games]
+                    let copy_games = [...games]                   
+                    
                     let x = copy_games.filter(
                         (e) => e.lottery_id != game_stats_id,
                     )
 
+                    //Set main lottery info on game                   
+                    res_games.map(o => {
+                        o.winning_number = lottery_info.winning_number
+                        o.winning_bonus = lottery_info.bonus_number
+                    })
+                    
                     let new_arr = [...x, ...res_games]
                     setGames(new_arr)
 
@@ -331,6 +352,7 @@ export default () => {
                                 Show my numbers
                             </button>
                         )}
+                        
                         {games.map((game, k) => {
                             if (game.lottery_id == game_stats.game_stats_id) {
                                 return (
@@ -339,19 +361,39 @@ export default () => {
                                             x{game.multiplier}
                                         </span>
                                         <span className="nr-btn smaller">
-                                            {game.number[0]}
+                                            {!game.hasOwnProperty('winning_number') || game.number[0] != game.winning_number[0] ?
+                                                game.number[0]
+                                                :
+                                                <p>{game.number[0]} <Lightning size={18} fill={'#f2d230'} weight={'fill'}/></p>
+                                            }
                                         </span>
                                         <span className="nr-btn smaller">
-                                            {game.number[1]}
+                                        {!game.hasOwnProperty('winning_number') || game.number[1] != game.winning_number[1] ?
+                                                game.number[1]
+                                                :
+                                                <p>{game.number[1]} <Lightning size={18} fill={'#f2d230'} weight={'fill'}/></p>
+                                            }
                                         </span>
                                         <span className="nr-btn smaller">
-                                            {game.number[2]}
+                                        {!game.hasOwnProperty('winning_number') || game.number[2] != game.winning_number[2] ?
+                                                game.number[2]
+                                                :
+                                                <p>{game.number[2]} <Lightning size={18} fill={'#f2d230'} weight={'fill'}/></p>
+                                            }
                                         </span>
                                         <span className="nr-btn smaller">
-                                            {game.number[3]}
+                                        {!game.hasOwnProperty('winning_number') || game.number[3] != game.winning_number[3] ?
+                                                game.number[3]
+                                                :
+                                                <p>{game.number[3]} <Lightning size={18} fill={'#f2d230'} weight={'fill'}/></p>
+                                            }
                                         </span>
                                         <span className="nr-btn smaller bonus">
-                                            {game.bonus}
+                                        {!game.hasOwnProperty('winning_bonus') || game.bonus != game.winning_bonus ?
+                                                game.bonus
+                                                :
+                                                <p>{game.bonus} <Star size={18} fill={'#048abf'} weight={'fill'}/></p>
+                                            }
                                         </span>
                                     </div>
                                 )
