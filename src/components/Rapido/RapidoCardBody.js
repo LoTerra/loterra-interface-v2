@@ -389,7 +389,7 @@ export default function RapidoCardBody(props) {
                                         (obj, k) => {
                                             return (
                                                 <option key={k} value={obj}>
-                                                    {obj}x
+                                                    {obj}
                                                 </option>
                                             )
                                         },
