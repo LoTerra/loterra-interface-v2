@@ -166,7 +166,7 @@ export default () => {
                 >
                     Tokenomics
                 </h1>
-                <h2 className="my-2 fw-regular fs-6 mb-0">
+                <h2 className="my-2 fw-regular fs-6 mb-0 px-3 px-md-5 text-muted">
                     LOTA is the governance token of the LoTerra ecosystem gaming
                     lottery, token give the power to vote proposals. LOTA
                     holders are owners of the LoTerra ecosystem casino, their
