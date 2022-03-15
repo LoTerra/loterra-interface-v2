@@ -10,6 +10,7 @@ import 'swiper/swiper-bundle.min.css'
 import 'swiper/swiper.min.css'
 
 export default function RapidoCardFooter(props) {
+
     const { state, dispatch } = useStore()
     const {
         enterDraw,
@@ -255,13 +256,14 @@ export default function RapidoCardFooter(props) {
                             </p>
                             <div style={{height: "150px", overflow:'hidden'}}>
                                 <Swiper
+
                                     style={{"width": '100%'}}
                                     breakpointsbase="container"
                                     direction="vertical"
                                     spaceBetween={55}
                                     navigation={{
-                                        nextEl: '.swiper-next',
-                                        prevEl: '.swiper-prev',
+                                        nextEl: '.swiper-next-in-card',
+                                        prevEl: '.swiper-prev-in-card',
                                     }}
                                     //   modules={[Navigation, Pagination, A11y]}
 
