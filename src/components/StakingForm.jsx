@@ -42,11 +42,9 @@ export default function StakingForm(props) {
                                 <a
                                     className="nav-link active"
                                     id="pills-staking-tab"
-                                    href="#pills-staking"  
+                                    href="#pills-staking"
                                     data-bs-toggle="pill"
                                     data-bs-target="#pills-staking"
-                                                            
-                                                               
                                 >
                                     Staking
                                 </a>
@@ -56,11 +54,9 @@ export default function StakingForm(props) {
                                 <a
                                     className="nav-link"
                                     id="pills-lpstaking-tab"
-                                    href="#pills-lpstaking"    
+                                    href="#pills-lpstaking"
                                     data-bs-toggle="pill"
-                                    data-bs-target="#pills-lpstaking"     
-                                                          
-                                                                    
+                                    data-bs-target="#pills-lpstaking"
                                 >
                                     LP Staking <label>NEW</label>
                                 </a>
@@ -74,7 +70,10 @@ export default function StakingForm(props) {
                             role="tabpanel"
                             aria-labelledby="pills-staking-tab"
                         >
-                            <Staking showNotification={showNotification} heightBlock={heightBlock} />
+                            <Staking
+                                showNotification={showNotification}
+                                heightBlock={heightBlock}
+                            />
                         </div>
                         <div
                             className="tab-pane fade"

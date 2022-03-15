@@ -100,9 +100,11 @@ const comboTextOne = [
 const initialState = {
     lunaPoolAddress: 'terra1tndcaqxkpc5ce9qee5ggqf430mr2z3pefe5wj6',
     loterraContractAddress: 'terra1q2k29wwcz055q4ftx4eucsq6tg9wtulprjg75w',
-    loterraTestnetContractAddress: 'terra1a353y4fa24fv99jh5cqr6xpg68ffn04yxptccp',
+    loterraTestnetContractAddress:
+        'terra1a353y4fa24fv99jh5cqr6xpg68ffn04yxptccp',
     loterraContractAddressCw20: 'terra1ez46kxtulsdv07538fh5ra5xj8l68mu8eg24vr',
-    loterraTestnetContractAddressCw20: 'terra1udwh63czgtnpqdfzzmvz0v8flskuqyd0892khy',
+    loterraTestnetContractAddressCw20:
+        'terra1udwh63czgtnpqdfzzmvz0v8flskuqyd0892khy',
     loterraPoolAddress: 'terra1pn20mcwnmeyxf68vpt3cyel3n57qm9mp289jta',
     loterraStakingAddress: 'terra1342fp86c3z3q0lksq92lncjxpkfl9hujwh6xfn',
     alteredContractAddress: 'terra15tztd7v9cmv0rhyh37g843j8vfuzp8kw0k5lqv',
@@ -111,10 +113,12 @@ const initialState = {
     alteredStakingLPAddress: 'terra1augyqytpq9klph5egx99m5ufrcjx5f7xgrcqck',
     dogetherAddress: 'terra19h4xk8xxxew0ne6fuw0mvuf7ltmjmxjxssj5ts',
     dogetherStakingAddress: 'terra1z2vgthmdy5qlz4cnj9d9d3ajtqeq7uzc0acxrp',
-    spaceWagerAddress: /*'terra1t8zj09gvp388lsksj7w0usk2f09ltz767ej685' */ "terra1whe6adg8dlw4xsvlc0yax0r8ksaum5fuaaldg3",
+    spaceWagerAddress:
+        /*'terra1t8zj09gvp388lsksj7w0usk2f09ltz767ej685' */ 'terra1whe6adg8dlw4xsvlc0yax0r8ksaum5fuaaldg3',
+    rapidoAddress: /*'terra1kfu8v4eplt7ng6lxary9j4jsdmuy8qcnl7ljt0'*/ 'terra1zl82rpjyrtgxagvc2zh3r2p0zxd7uef8h5ypkq',
     vkrContract: 'terra143kpwsuu82rtdy8jkyagmvn426q9amqsk7ftrw',
-    vkrQualifierContract:'terra1xme735w8y8hamfvlyeh924puazfclrec2ka8fh',
-    vkrReferrer: {status:false,code:''},
+    vkrQualifierContract: 'terra1xme735w8y8hamfvlyeh924puazfclrec2ka8fh',
+    vkrReferrer: { status: false, code: '' },
 
     allWinners: [],
     allRecentWinners: [],
@@ -149,14 +153,14 @@ const initialState = {
     lcd_client: new LCDClient({
         URL: 'https://lcd.terra.dev/',
         chainID: 'columbus-5',
-        feeDenoms:['uusd'],
+        feeDenoms: ['uusd'],
         gasPrices: { uusd: 0.15 },
         gasAdjustment: 1.4,
     }),
     lcd_client_testnet: new LCDClient({
         URL: 'https://bombay-lcd.terra.dev/',
         chainID: 'bombay-12',
-        feeDenoms:['uusd'],
+        feeDenoms: ['uusd'],
         gasPrices: { uusd: 0.15 },
         gasAdjustment: 1.4,
     }),
@@ -182,50 +186,74 @@ const initialState = {
     spaceWagerCurrentTimeRound: 0,
     spaceWagerLastPrice: 0,
     spaceWagerResolving: false,
-    latestPrediction: {up: '0', down: '0'},
-    previousPrediction: {up: '0', down: '0'},
+    latestPrediction: { up: '0', down: '0' },
+    previousPrediction: { up: '0', down: '0' },
     isUserMakingPrediction: false,
-    spaceWagerCurrentRound: 0
+    spaceWagerCurrentRound: 0,
+    rapidoCurrentRound: 0,
+    rapidoCurrentTimeRound: 0,
+    loaderResolveLottoNumber: false,
+    isBuyingRapidoTicket: false
 }
 
 const reducer = (state, action) => {
     switch (action.type) {
-        case "setSpaceWagerCurrentRound":
+        case 'setIsBuyingRapidoTicket':
+            return {
+                ...state,
+                isBuyingRapidoTicket: action.message,
+            }
+        case 'setLoaderResolveLottoNumber':
+            return {
+                ...state,
+                loaderResolveLottoNumber: action.message,
+            }
+        case 'setRapidoCurrentTimeRound':
+            return {
+                ...state,
+                rapidoCurrentTimeRound: action.message,
+            }
+        case 'setRapidoCurrentRound':
+            return {
+                ...state,
+                rapidoCurrentRound: action.message,
+            }
+        case 'setSpaceWagerCurrentRound':
             return {
                 ...state,
                 spaceWagerCurrentRound: action.message,
             }
-        case "setIsUserMakingPrediction":
+        case 'setIsUserMakingPrediction':
             return {
                 ...state,
                 isUserMakingPrediction: action.message,
             }
-        case "setPreviousPrediction":
+        case 'setPreviousPrediction':
             return {
                 ...state,
                 previousPrediction: action.message,
             }
-        case "setLatestPrediction":
+        case 'setLatestPrediction':
             return {
                 ...state,
                 latestPrediction: action.message,
             }
-        case "setSpaceWagerResolving":
+        case 'setSpaceWagerResolving':
             return {
                 ...state,
                 spaceWagerResolving: action.message,
             }
-        case "setSpaceWagerLastPrice":
+        case 'setSpaceWagerLastPrice':
             return {
                 ...state,
                 spaceWagerLastPrice: action.message,
             }
-        case "setSpaceWagerCurrentTimeRound":
+        case 'setSpaceWagerCurrentTimeRound':
             return {
                 ...state,
                 spaceWagerCurrentTimeRound: action.message,
             }
-        case "setDogetherState":
+        case 'setDogetherState':
             return {
                 ...state,
                 dogetherState: action.message,
@@ -235,11 +263,11 @@ const reducer = (state, action) => {
                 ...state,
                 totalBalancePoolDogether: action.message,
             }
-            case 'setVkrReferrer':
-                return {
-                    ...state,
-                    vkrReferrer: action.message,
-                }
+        case 'setVkrReferrer':
+            return {
+                ...state,
+                vkrReferrer: action.message,
+            }
         case 'setHolderClaimsDogether':
             return {
                 ...state,

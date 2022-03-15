@@ -42,7 +42,7 @@ export default () => {
         <>
             <div
                 className="bg-hero"
-                style={{                  
+                style={{
                     backgroundSize: 'cover',
                     backgroundPosition: 'center center',
                     backgroundRepeat: 'no-repeat',

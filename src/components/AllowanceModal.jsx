@@ -90,7 +90,9 @@ export default function AllowanceModal(props) {
                             <input
                                 name="allowance_amount"
                                 value={
-                                    prefillValue == 0 && prefill ? prefill : prefillValue
+                                    prefillValue == 0 && prefill
+                                        ? prefill
+                                        : prefillValue
                                 }
                                 type="number"
                                 min={prefill ? prefill : prefillValue}

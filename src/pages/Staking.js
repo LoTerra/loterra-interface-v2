@@ -111,9 +111,7 @@ export default () => {
 
     return (
         <>
-            <div
-                className="hero staking"               
-            >
+            <div className="hero staking">
                 <div className="container">
                     <div className="row">
                         <div className="col-md-6">
@@ -128,130 +126,152 @@ export default () => {
                                     showNotification(message, type, dur)
                                 }
                             />
-    </div>
-    <div className="col-md-6">
-<div className="card lota-card staking-rewards" style={{background:'transparent'}}>
-                        <div className="card-body">
-                            <div className="row">
-                                <div className="col-lg-12 d-flex">
-                                    {state.tokenInfo.total_supply &&
-                                    state.poolInfo.total_share ? (
-                                        <div className="align-self-center w-100">
-                                            <div className="pie-stats">
-                                                <div className="row">
-                                                    <div className="col-6 text-white">
-                                                        <span className="circle-green"></span>
-                                                        Available
+                        </div>
+                        <div className="col-md-6">
+                            <div
+                                className="card lota-card staking-rewards"
+                                style={{ background: 'transparent' }}
+                            >
+                                <div className="card-body">
+                                    <div className="row">
+                                        <div className="col-lg-12 d-flex">
+                                            {state.tokenInfo.total_supply &&
+                                            state.poolInfo.total_share ? (
+                                                <div className="align-self-center w-100">
+                                                    <div className="pie-stats">
+                                                        <div className="row">
+                                                            <div className="col-6 text-white">
+                                                                <span className="circle-green"></span>
+                                                                Available
+                                                            </div>
+                                                            <div className="col-6">
+                                                                {state.tokenInfo
+                                                                    .total_supply
+                                                                    ? numeral(
+                                                                          getStakedNr(),
+                                                                      ).format(
+                                                                          '0.0,00',
+                                                                      )
+                                                                    : '0'}
+                                                            </div>
+                                                            <div className="col-6 text-white">
+                                                                <span className="circle-pink"></span>
+                                                                DAO
+                                                            </div>
+                                                            <div className="col-6">
+                                                                {state.tokenInfo
+                                                                    .total_supply
+                                                                    ? numeral(
+                                                                          getDaoFunds(),
+                                                                      ).format(
+                                                                          '0.0,00',
+                                                                      )
+                                                                    : '0'}
+                                                            </div>
+                                                            <div className="col-6 text-white">
+                                                                <span className="circle-blue"></span>
+                                                                LP funds
+                                                            </div>
+                                                            <div className="col-6">
+                                                                {state.tokenInfo
+                                                                    .total_supply
+                                                                    ? numeral(
+                                                                          getLPFunds(),
+                                                                      ).format(
+                                                                          '0.0,00',
+                                                                      )
+                                                                    : '0'}
+                                                            </div>
+                                                            <div className="col-6 text-white">
+                                                                <span className="circle-yellow"></span>
+                                                                LP staked
+                                                            </div>
+                                                            <div className="col-6">
+                                                                {state.tokenInfo
+                                                                    .total_supply
+                                                                    ? numeral(
+                                                                          getTotalStakedLP(),
+                                                                      ).format(
+                                                                          '0.0,00',
+                                                                      )
+                                                                    : '0'}
+                                                            </div>
+                                                            <div className="col-6 text-white">
+                                                                <span className="circle-grey"></span>
+                                                                Staked
+                                                            </div>
+                                                            <div className="col-6">
+                                                                {state.tokenInfo
+                                                                    .total_supply
+                                                                    ? numeral(
+                                                                          getNotStaked(),
+                                                                      ).format(
+                                                                          '0.0,00',
+                                                                      )
+                                                                    : '0'}
+                                                            </div>
+                                                        </div>
                                                     </div>
-                                                    <div className="col-6">
-                                                        {state.tokenInfo
-                                                            .total_supply
-                                                            ? numeral(
-                                                                  getStakedNr(),
-                                                              ).format('0.0,00')
-                                                            : '0'}
-                                                    </div>
-                                                    <div className="col-6 text-white">
-                                                        <span className="circle-pink"></span>
-                                                        DAO
-                                                    </div>
-                                                    <div className="col-6">
-                                                        {state.tokenInfo
-                                                            .total_supply
-                                                            ? numeral(
-                                                                  getDaoFunds(),
-                                                              ).format('0.0,00')
-                                                            : '0'}
-                                                    </div>
-                                                    <div className="col-6 text-white">
-                                                        <span className="circle-blue"></span>
-                                                        LP funds
-                                                    </div>
-                                                    <div className="col-6">
-                                                        {state.tokenInfo
-                                                            .total_supply
-                                                            ? numeral(
-                                                                  getLPFunds(),
-                                                              ).format('0.0,00')
-                                                            : '0'}
-                                                    </div>
-                                                    <div className="col-6 text-white">
-                                                        <span className="circle-yellow"></span>
-                                                        LP staked
-                                                    </div>
-                                                    <div className="col-6">
-                                                        {state.tokenInfo
-                                                            .total_supply
-                                                            ? numeral(
-                                                                  getTotalStakedLP(),
-                                                              ).format('0.0,00')
-                                                            : '0'}
-                                                    </div>
-                                                    <div className="col-6 text-white">
-                                                        <span className="circle-grey"></span>
-                                                        Staked
-                                                    </div>
-                                                    <div className="col-6">
-                                                        {state.tokenInfo
-                                                            .total_supply
-                                                            ? numeral(
-                                                                  getNotStaked(),
-                                                              ).format('0.0,00')
-                                                            : '0'}
-                                                    </div>
+                                                    <Pie
+                                                        data={pieData}
+                                                        data-staked={
+                                                            state.tokenInfo
+                                                                .total_supply
+                                                                ? getStakedNr()
+                                                                : '0'
+                                                        }
+                                                        data-total={
+                                                            state.tokenInfo
+                                                                .total_supply
+                                                                ? getNotStaked()
+                                                                : '0'
+                                                        }
+                                                        data-dao={
+                                                            state.tokenInfo
+                                                                .total_supply
+                                                                ? getDaoFunds()
+                                                                : '0'
+                                                        }
+                                                        data-lpfunds={
+                                                            state.tokenInfo
+                                                                .total_supply
+                                                                ? getLPFunds()
+                                                                : '0'
+                                                        }
+                                                        data-lpstaked={
+                                                            state.poolInfo
+                                                                .total_share
+                                                                ? getTotalStakedLP()
+                                                                : '0'
+                                                        }
+                                                        options={{
+                                                            animation: {
+                                                                duration: 0,
+                                                            },
+                                                        }}
+                                                        style={{
+                                                            maxHeight: '400px',
+                                                        }}
+                                                    />
                                                 </div>
-                                            </div>
-                                            <Pie
-                                                data={pieData}
-                                                data-staked={
-                                                    state.tokenInfo.total_supply
-                                                        ? getStakedNr()
-                                                        : '0'
-                                                }
-                                                data-total={
-                                                    state.tokenInfo.total_supply
-                                                        ? getNotStaked()
-                                                        : '0'
-                                                }
-                                                data-dao={
-                                                    state.tokenInfo.total_supply
-                                                        ? getDaoFunds()
-                                                        : '0'
-                                                }
-                                                data-lpfunds={
-                                                    state.tokenInfo.total_supply
-                                                        ? getLPFunds()
-                                                        : '0'
-                                                }
-                                                data-lpstaked={
-                                                    state.poolInfo.total_share
-                                                        ? getTotalStakedLP()
-                                                        : '0'
-                                                }
-                                                options={{
-                                                    animation: { duration: 0 },
-                                                }}
-                                                style={{ maxHeight: '400px' }}
-                                            />
+                                            ) : (
+                                                <PieLoader />
+                                            )}
                                         </div>
-                                    ) : (
-                                        <PieLoader />
-                                    )}
-                                </div>
-                                {/* <div className="col-md-6">
+                                        {/* <div className="col-md-6">
                                 <div className="current-value">
                                     10.00<span>UST</span>
                                 </div>
                             <Line data={lineData} options={lineOptions} style={{background:'#10003b', borderRadius:'10px'}}/>
-                            </div> */}                               
+                            </div> */}
+                                    </div>
+                                </div>
                             </div>
                         </div>
                     </div>
-                    </div>
-                        </div>
-                    </div>
                 </div>
-            
+            </div>
+
             {/* <section className="apystats my-5">
             <div className="container">
                 <div className="card lota-card apy-stats">
