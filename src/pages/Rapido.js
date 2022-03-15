@@ -20,6 +20,8 @@ export default () => {
     const [timeBetween, setTimeBetween] = useState(0)
     const [gameStats, setGameStats] = useState([])
     const [games, setGames] = useState([])
+    const [winningNumber, setWinningNumber] = useState([])
+    const [loaderGames, setLoaderGames] = useState(false)
 
     const [config, setConfig] = useState({
         denom: 'uusd',
@@ -196,6 +198,7 @@ export default () => {
     }
 
     async function getGames(game_stats_id) {
+        setLoaderGames(true)
         try {
             let start_after = null
             let loop = true
@@ -210,56 +213,56 @@ export default () => {
                 state.rapidoAddress,
                 lottery_query,
             )
-            console.log('info',lottery_info)
 
+            let copy_games = new Promise(async (resolve, reject ) => {
+                let games_el = []
+                while (loop) {
+                    // Prepare query
+                    let query = {
+                        games: {
+                            limit: 5,
+                            round: game_stats_id,
+                            player: state.wallet.walletAddress,
+                        },
+                    }
+                    // Add start after to get pagination
+                    if (start_after != null) {
+                        query.games.start_after = start_after
+                    }
+                    console.log(start_after)
 
-            while (loop) {
-                // Prepare query
-                let query = {
-                    games: {
-                        limit: 5,
-                        round: game_stats_id,
-                        player: state.wallet.walletAddress,
-                    },
-                }
-                // Add start after to get pagination
-                if (start_after != null) {
-                    query.games.start_after = start_after
-                }
-                console.log(start_after)
-
-                // Query to state smart contract
-                let res_games = await api.contractQuery(
-                    state.rapidoAddress,
-                    query,
-                )
-                console.log(query)
-                if (res_games.length > 0) {
-                    let copy_games = [...games]                   
-                    
-                    let x = copy_games.filter(
-                        (e) => e.lottery_id != game_stats_id,
+                    // Query to state smart contract
+                    let res_games = await api.contractQuery(
+                        state.rapidoAddress,
+                        query,
                     )
+                    console.log(query)
+                    if (res_games.length > 0 ) {
 
-                    //Set main lottery info on game                   
-                    res_games.map(o => {
-                        o.winning_number = lottery_info.winning_number
-                        o.winning_bonus = lottery_info.bonus_number
-                    })
-                    
-                    let new_arr = [...x, ...res_games]
-                    setGames(new_arr)
-
-                    start_after = res_games[res_games.length - 1].game_id
-                    // get_user_combination(lotteries_state)
-                } else {
-                    loop = false
-                    start_after = null
+                        games_el = [...games_el, ...res_games]
+                        start_after = res_games[res_games.length - 1].game_id
+                        // get_user_combination(lotteries_state)
+                    } else {
+                        loop = false
+                        start_after = null
+                    }
                 }
+                resolve(games_el)
+            }).then((res )=> {
+                setGames([...games, ...res])
+                setLoaderGames(false)
+            })
+
+            let newWinningNumber = [...lottery_info.winning_number, lottery_info.bonus_number]
+            let new_arr = {
+                ...winningNumber
             }
+            new_arr[game_stats_id] = newWinningNumber
+            setWinningNumber(new_arr)
         } catch (e) {
             console.log(e)
         }
+
     }
 
     // async function get_user_combination(lotteries) {
@@ -328,27 +331,29 @@ export default () => {
                 </td>
                 <td className="text-center">{game_stats.total_ticket}</td>
                 {/*<td className='text-center'>{lottery.counter_player ? lottery.counter_player : '-'}</td>*/}
-                {/* <td className='text-center'> */}
+                <td className='text-center'>
+                { winningNumber[game_stats.game_stats_id] &&
 
-                {/*<div className="btn-holder">*/}
-                {/*    <span className={*/}
-                {/*        'nr-btn smaller'*/}
-                {/*    } style={{padding: "10px"}}>{lottery.winning_number[0]}</span>*/}
-                {/*    <span className={*/}
-                {/*        'nr-btn smaller'*/}
-                {/*    } style={{padding: "10px"}}>{lottery.winning_number[1]}</span>*/}
-                {/*    <span className={*/}
-                {/*        'nr-btn smaller'*/}
-                {/*    } style={{padding: "10px"}}>{lottery.winning_number[2]}</span>*/}
-                {/*    <span className={*/}
-                {/*        'nr-btn smaller'*/}
-                {/*    } style={{padding: "10px"}}>{lottery.winning_number[3]}</span>*/}
-                {/*    <span className={*/}
-                {/*        'nr-btn smaller'*/}
-                {/*    } style={{padding: "10px"}}>{lottery.bonus_number}</span>*/}
-                {/*</div>*/}
+                    <div className="btn-holder">
+                        <span className={
+                            'nr-btn smaller'
+                        } style={{padding: "10px"}}>{winningNumber[game_stats.game_stats_id][0]}</span>
+                        <span className={
+                            'nr-btn smaller'
+                        } style={{padding: "10px"}}>{winningNumber[game_stats.game_stats_id][1]}</span>
+                        <span className={
+                            'nr-btn smaller'
+                        } style={{padding: "10px"}}>{winningNumber[game_stats.game_stats_id][2]}</span>
+                        <span className={
+                            'nr-btn smaller'
+                        } style={{padding: "10px"}}>{winningNumber[game_stats.game_stats_id][3]}</span>
+                        <span className={
+                            'nr-btn smaller'
+                        } style={{padding: "10px"}}>{winningNumber[game_stats.game_stats_id][4]}</span>
+                    </div>
 
-                {/* </td> */}
+                 }
+                </td>
                 <td className="text-center">
                     <div
                         style={{ flex: 'column' }}
@@ -358,6 +363,7 @@ export default () => {
                             (a) => a.lottery_id == game_stats.game_stats_id,
                         ).length == 0 && (
                             <button
+                                disabled={loaderGames}
                                 className="btn btn-default btn-sm"
                                 onClick={() =>
                                     getGames(game_stats.game_stats_id)
@@ -367,7 +373,7 @@ export default () => {
                                     size={14}
                                     className="position-icon me-1"
                                 />
-                                Show my numbers
+                                Show details
                             </button>
                         )}
                         
@@ -379,35 +385,35 @@ export default () => {
                                             x{game.multiplier}
                                         </span>
                                         <span className="nr-btn smaller">
-                                            {!game.hasOwnProperty('winning_number') || game.number[0] != game.winning_number[0] ?
+                                            {!winningNumber[game_stats.game_stats_id] || game.number[0] != winningNumber[game_stats.game_stats_id][0] ?
                                                 game.number[0]
                                                 :
                                                 <p>{game.number[0]} <Lightning size={18} fill={'#f2d230'} weight={'fill'}/></p>
                                             }
                                         </span>
                                         <span className="nr-btn smaller">
-                                        {!game.hasOwnProperty('winning_number') || game.number[1] != game.winning_number[1] ?
+                                        {!winningNumber[game_stats.game_stats_id] || game.number[1] != winningNumber[game_stats.game_stats_id][1] ?
                                                 game.number[1]
                                                 :
                                                 <p>{game.number[1]} <Lightning size={18} fill={'#f2d230'} weight={'fill'}/></p>
                                             }
                                         </span>
                                         <span className="nr-btn smaller">
-                                        {!game.hasOwnProperty('winning_number') || game.number[2] != game.winning_number[2] ?
+                                        {!winningNumber[game_stats.game_stats_id] || game.number[2] != winningNumber[game_stats.game_stats_id][2] ?
                                                 game.number[2]
                                                 :
                                                 <p>{game.number[2]} <Lightning size={18} fill={'#f2d230'} weight={'fill'}/></p>
                                             }
                                         </span>
                                         <span className="nr-btn smaller">
-                                        {!game.hasOwnProperty('winning_number') || game.number[3] != game.winning_number[3] ?
+                                        {!winningNumber[game_stats.game_stats_id] || game.number[3] != winningNumber[game_stats.game_stats_id][3] ?
                                                 game.number[3]
                                                 :
                                                 <p>{game.number[3]} <Lightning size={18} fill={'#f2d230'} weight={'fill'}/></p>
                                             }
                                         </span>
                                         <span className="nr-btn smaller bonus">
-                                        {!game.hasOwnProperty('winning_bonus') || game.bonus != game.winning_bonus ?
+                                        {!winningNumber[game_stats.game_stats_id] || game.bonus != winningNumber[game_stats.game_stats_id][4] ?
                                                 game.bonus
                                                 :
                                                 <p>{game.bonus} <Star size={18} fill={'#048abf'} weight={'fill'}/></p>
@@ -624,6 +630,10 @@ export default () => {
                                 )
                                 console.log(e)
                             }
+                            dispatch({
+                                type: 'setLoaderResolveLottoNumber',
+                                message: true,
+                            })
                         })
                         .catch((e) => {
                             console.log(e)
@@ -668,7 +678,10 @@ export default () => {
             getRapidoLotteries()
             //getRapidoLotteriesPagination(rapidoState.round - 6)
             if (state.wallet.walletAddress) {
-                getGameStatsPagination()
+                setTimeout(() => {
+                    getGameStatsPagination()
+                }, 6000)
+
             } else {
                 setGameStats([])
             }
@@ -676,7 +689,7 @@ export default () => {
         /*
             TODO: show a loader | Loading current lotteries...
          */
-    }, [rapidoState.round, state.wallet.walletAddress])
+    }, [rapidoState.round, state.wallet.walletAddress, state.loaderResolveLottoNumber])
 
     useEffect(() => {
         rapidoWebsocket()
@@ -842,7 +855,7 @@ export default () => {
                             onClick={() => resolve_all()}
                         >
                             {' '}
-                            Resolve all
+                            Try resolve all games
                         </button>
                         <span className="small d-block text-muted">
                             Can take some minutes
@@ -860,6 +873,12 @@ export default () => {
                                         Tickets played
                                     </th>
                                     {/*<th style={{ minWidth: 100 }} className='text-center'>Numbers of players</th>*/}
+                                    <th
+                                        style={{ minWidth: 250 }}
+                                        className="text-center"
+                                    >
+                                        Winning combo
+                                    </th>
                                     <th
                                         style={{ minWidth: 250 }}
                                         className="text-center"

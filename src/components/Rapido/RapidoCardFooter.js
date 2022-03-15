@@ -78,6 +78,7 @@ export default function RapidoCardFooter(props) {
     }
 
     const checkLottoNumbers = (game_id) => {
+
         let msg = new MsgExecuteContract(
             state.wallet.walletAddress,
             state.rapidoAddress,
@@ -101,6 +102,10 @@ export default function RapidoCardFooter(props) {
                     toast.error('Something went wrong, please try again')
                     console.log(e)
                 }
+                dispatch({
+                    type: 'setLoaderResolveLottoNumber',
+                    message: true,
+                })
             })
             .catch((e) => {
                 console.log(e)
@@ -395,7 +400,7 @@ export default function RapidoCardFooter(props) {
                                                                     }
                                                                 >
                                                                     {' '}
-                                                                    Check lotto
+                                                                    Resolve lotto
                                                                     numbers{' '}
                                                                 </button>
                                                             </div>

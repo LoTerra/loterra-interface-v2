@@ -87,9 +87,15 @@ export default function RapidoCard(props) {
 
     useEffect(() => {
         setUserGames([])
-        get_user_combination()
+        setTimeout(() => {
+            get_user_combination()
+            dispatch({
+                type: 'setLoaderResolveLottoNumber',
+                message: false,
+            })
+        }, 6000)
         currentLottery()
-    }, [state.wallet.walletAddress, state.rapidoCurrentRound])
+    }, [state.wallet.walletAddress, state.rapidoCurrentRound, state.loaderResolveLottoNumber])
 
     return (
         <div
