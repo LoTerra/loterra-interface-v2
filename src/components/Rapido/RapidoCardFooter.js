@@ -28,11 +28,13 @@ export default function RapidoCardFooter(props) {
     } = props
 
     const validateTheTicket = (round) => {
-        if (fourNumbers.length < 4) {
+        let fourNumbersFilter = fourNumbers.filter(e => e != "")
+        let oneNumberFilter = oneNumber.filter(e => e != "")
+        if (fourNumbersFilter.length < 4) {
             console.log('Please select 4 blue numbers')
             toast.error('Please select 4 blue numbers')
             return
-        } else if (oneNumber.length < 1) {
+        } else if (oneNumberFilter.length < 1) {
             console.log('Please select 1 yellow star')
             toast.error('Please select 1 yellow star')
             return
