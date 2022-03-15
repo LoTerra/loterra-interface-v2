@@ -192,11 +192,17 @@ const initialState = {
     spaceWagerCurrentRound: 0,
     rapidoCurrentRound: 0,
     rapidoCurrentTimeRound: 0,
-    loaderResolveLottoNumber: false
+    loaderResolveLottoNumber: false,
+    isBuyingRapidoTicket: false
 }
 
 const reducer = (state, action) => {
     switch (action.type) {
+        case 'setIsBuyingRapidoTicket':
+            return {
+                ...state,
+                isBuyingRapidoTicket: action.message,
+            }
         case 'setLoaderResolveLottoNumber':
             return {
                 ...state,

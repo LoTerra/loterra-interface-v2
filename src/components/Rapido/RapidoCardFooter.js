@@ -71,6 +71,10 @@ export default function RapidoCardFooter(props) {
                 if (e.success) {
                     toast.success('Ticket succesfully validated!')
                     switchToDefault(true)
+                    dispatch({
+                        type: 'setIsBuyingRapidoTicket',
+                        message: true,
+                    })
                 } else {
                     toast.error('Something went wrong, please try again')
                     console.log(e)
@@ -82,7 +86,10 @@ export default function RapidoCardFooter(props) {
     }
 
     const checkLottoNumbers = (game_id) => {
-
+        dispatch({
+            type: 'setIsBuyingRapidoTicket',
+            message: true,
+        })
         let msg = new MsgExecuteContract(
             state.wallet.walletAddress,
             state.rapidoAddress,
@@ -110,6 +117,7 @@ export default function RapidoCardFooter(props) {
                     type: 'setLoaderResolveLottoNumber',
                     message: true,
                 })
+
             })
             .catch((e) => {
                 console.log(e)

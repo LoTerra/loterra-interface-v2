@@ -221,17 +221,6 @@ export default () => {
             let start_after = null
             let loop = true
 
-            //Get lottery info
-            let lottery_query = {
-                lottery_state: {
-                    round: game_stats_id
-                }
-            }
-            let lottery_info = await api.contractQuery(
-                state.rapidoAddress,
-                lottery_query,
-            )
-
             let copy_games = new Promise(async (resolve, reject ) => {
                 let games_el = []
                 while (loop) {
@@ -271,12 +260,31 @@ export default () => {
                 setLoaderGames(false)
             })
 
-            let newWinningNumber = [...lottery_info.winning_number, lottery_info.bonus_number]
-            let new_arr = {
-                ...winningNumber
+            try {
+                //Get lottery info
+                let lottery_query = {
+                    lottery_state: {
+                        round: game_stats_id
+                    }
+                }
+                let lottery_info = await api.contractQuery(
+                    state.rapidoAddress,
+                    lottery_query,
+                )
+
+                if (lottery_info){
+                    let newWinningNumber = [...lottery_info.winning_number, lottery_info.bonus_number]
+                    let new_arr = {
+                        ...winningNumber
+                    }
+                    new_arr[game_stats_id] = newWinningNumber
+                    setWinningNumber(new_arr)
+                }
+            }catch (e) {
+                console.log("no lottery round")
             }
-            new_arr[game_stats_id] = newWinningNumber
-            setWinningNumber(new_arr)
+
+
         } catch (e) {
             console.log(e)
         }
@@ -350,7 +358,7 @@ export default () => {
                 <td className="text-center">{game_stats.total_ticket}</td>
                 {/*<td className='text-center'>{lottery.counter_player ? lottery.counter_player : '-'}</td>*/}
                 <td className='text-center'>
-                { winningNumber[game_stats.game_stats_id] &&
+                { winningNumber[game_stats.game_stats_id] ?
 
                     <div className="btn-holder">
                         <span className={
@@ -368,7 +376,7 @@ export default () => {
                         <span className={
                             'nr-btn smaller'
                         } style={{padding: "10px"}}>{winningNumber[game_stats.game_stats_id][4]}</span>
-                    </div>
+                    </div> : game_stats.game_stats_id >= state.rapidoCurrentRound ? <> <span>Lotto still in progress...</span></> : <></>
 
                  }
                 </td>
@@ -701,6 +709,7 @@ export default () => {
     }, [timeBetween])
 
     useEffect(() => {
+
         if (rapidoState.round) {
             getRapidoLotteries()
             //getRapidoLotteriesPagination(rapidoState.round - 6)
@@ -716,7 +725,22 @@ export default () => {
         /*
             TODO: show a loader | Loading current lotteries...
          */
-    }, [rapidoState.round, state.wallet.walletAddress, state.loaderResolveLottoNumber])
+    }, [rapidoState.round, state.wallet.walletAddress])
+
+    useEffect(() => {
+        dispatch({
+            type: 'setIsBuyingRapidoTicket',
+            message: false,
+        })
+        if (state.wallet.walletAddress) {
+            setTimeout(() => {
+                getGameStatsPagination()
+            }, 6000)
+
+        } else {
+            setGameStats([])
+        }
+    }, [state.isBuyingRapidoTicket])
 
     useEffect(() => {
         rapidoWebsocket()
