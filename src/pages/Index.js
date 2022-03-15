@@ -25,6 +25,7 @@ import Footer from '../components/Footer'
 import AllowanceModal from '../components/AllowanceModal'
 import PriceLoader from '../components/PriceLoader'
 import JackpotResults from '../components/JackpotResults'
+import { NavLink } from 'react-router-dom'
 
 let useConnectedWallet = {}
 if (typeof document !== 'undefined') {
@@ -750,12 +751,53 @@ export default () => {
                     backgroundPosition: 'center center',
                 }}
             > */}
+            <div style={{background:'linear-gradient(360deg, #16073e, transparent)', paddingBottom:'35px'}}>
+                <div className="container-fluid">
+                <div className="row px-md-5">
+                    <div className="col-12 text-start mt-4">
+                        <h3 className="fs-3 fw-bold">New games</h3>
+                    </div>
+                    <div className="col-6 text-center">
+                        <div className="card lota-card lota-card-glass">
+                            <div className="card-body">
+                                <NavLink to="/rapido" className="btn btn-outline-primary text-white float-end fw-bold"
+                                style={{
+                                    position:'absolute',
+                                    right:0,
+                                    bottom:-10
+                                }}
+                                >Play</NavLink>
+                                <img src={'/Rapido-logo.svg'} style={{maxHeight:'60px'}} className="img-fluid"/>
+                                <p className="text-muted d-none d-md-block">Win up to $50,000 every 5 minutes</p>
+                             
+                            </div>
+                        </div>
+                    </div>
+                    <div className="col-6 text-center">
+                        <div className="card lota-card lota-card-glass">
+                            <div className="card-body">
+                                <img src={'/spacewager-logo.svg'} style={{maxHeight:'60px'}} className="img-fluid"/>
+                                <p className="text-muted d-none d-md-block">Predict lunas future price</p>
+                                <NavLink to="/spacewager" className="btn btn-outline-primary text-white fw-bold"
+                                style={{
+                                    position:'absolute',
+                                    right:0,
+                                    bottom:-10
+                                }}
+                                >Play</NavLink>
+                            </div>
+                        </div>
+                    </div>  
+                </div>
+                </div>
+            </div>
             <div className="container-fluid px-md-5">
+                
                 <div className="card base-card border-0">
                     <div className="card-body p-md-5">
                         <div className="row">
-                            <div className="col-md-12 text-center">
-                                <h1>Decentralized Lottery </h1>
+                            <div className="col-md-12 text-start">
+                                <h1 className="fs-1 mb-0">Decentralized Lottery </h1>
                                 <p className="slogan">
                                     LoTerra is a decentralized gaming ecosystem
                                     managed by LOTA holders

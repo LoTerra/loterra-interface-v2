@@ -1,4 +1,5 @@
 .card {
+
     &.base-card-light {
         color: #fff;
         background: #1a0948;
@@ -296,6 +297,10 @@
                 margin-bottom: 20px;
                 border-radius: 5px;
             }
+        }
+
+        &.lota-card-glass {
+            background: radial-gradient(115.07% 115.07% at 50% -15.07%, rgb(62 36 131) 0%, rgba(255, 255, 255, 0) 100%), #1A0948;
         }
 
         &.staking-rewards {
