@@ -758,7 +758,7 @@ export default () => {
                             {lotteries.length > 0 && (
                                 <Swiper
                                     spaceBetween={35}
-                                    style={{ padding: '10px 15px' }}
+                                    style={{ padding: '10px 15px', marginTop: '25px' }}
                                     navigation={{
                                         nextEl: '.swiper-next',
                                         prevEl: '.swiper-prev',
