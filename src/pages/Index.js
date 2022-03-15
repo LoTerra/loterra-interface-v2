@@ -767,8 +767,8 @@ export default () => {
             <div style={{background:'linear-gradient(360deg, #16073e, transparent)', paddingBottom:'35px', paddingBottom:'50px'}}>
                 <div className="container-fluid">
                 <div className="row px-md-5">
-                    <div className="col-12 text-start mt-4">
-                        <h3 className="fs-3 fw-bold">New games</h3>
+                    <div className="col-12 text-center text-md-start mt-4">
+                        <h3 className="banner-swiper-label">New Games</h3>
                     </div>
                     <div className="col-12 banner-swiper">
                         <Swiper
