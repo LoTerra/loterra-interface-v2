@@ -22,6 +22,7 @@ export default () => {
     const [games, setGames] = useState([])
     const [winningNumber, setWinningNumber] = useState([])
     const [loaderGames, setLoaderGames] = useState(false)
+    const [loaderResolveAll, setLoaderResolveAll] = useState(false)
 
     const [config, setConfig] = useState({
         denom: 'uusd',
@@ -491,6 +492,7 @@ export default () => {
     }
 
     async function resolve_all() {
+        setLoaderResolveAll(true)
         let all_games = []
         let game_stats_promise = new Promise(async (resolve, reject) => {
             try {
@@ -638,7 +640,15 @@ export default () => {
                         .catch((e) => {
                             console.log(e)
                         })
+                }else {
+                    toast.error(
+                        'Nothing to resolve, enter in lottery before trying again',
+                    )
                 }
+                // time the transaction to be approved on blockchain
+                setTimeout(() => {
+                    setLoaderResolveAll(false)
+                }, 6000)
             })
         })
         // state.wallet
@@ -705,8 +715,8 @@ export default () => {
             <div className="w-100 py-3 pt-md-5 text-center mb-2">
 
                 <img src="/Rapido-logo.svg" height="100px"/>
-                <h2 className="mb-2 fw-regular fs-6 mb-0">
-                    Win up to $50,000 every 5 minutes
+                <h2 className="mb-2 mb-0 text-10xl xs:text-13xl xs:-mt-0 font-semibold">
+                    Win up to <span style={{backgroundImage: 'linear-gradient( 77.6deg, #048ABF 0%, #BF046B 48.47%, #F2D230 88.67%)', webkitBackgroundClip: 'text', color: "transparent"}}>$50,000</span> every 5 minutes
                 </h2>
             </div>
             <div className="container">
@@ -851,10 +861,18 @@ export default () => {
                     </div>
                     <div className="col-md-6 text-center text-md-end pt-2 pt-md-5">
                         <button
+                            disabled={loaderResolveAll}
                             className="btn btn-default btn-sm"
                             onClick={() => resolve_all()}
                         >
-                            {' '}
+                            { loaderResolveAll &&
+                                <div className="spinner-border spinner-sm" role="status">
+                                   <span className="visually-hidden">
+                                            Loading...
+                                        </span>
+                                </div>
+                            }
+
                             Try resolve all games
                         </button>
                         <span className="small d-block text-muted">
