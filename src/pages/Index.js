@@ -26,6 +26,19 @@ import AllowanceModal from '../components/AllowanceModal'
 import PriceLoader from '../components/PriceLoader'
 import JackpotResults from '../components/JackpotResults'
 import { NavLink } from 'react-router-dom'
+import SwiperCore, {
+    Navigation,
+    Pagination,
+    Autoplay,
+    A11y,
+    EffectFade,
+} from 'swiper'
+
+SwiperCore.use([Navigation, Pagination, Autoplay, EffectFade])
+
+import { Swiper, SwiperSlide } from 'swiper/react'
+import 'swiper/swiper-bundle.min.css'
+import 'swiper/swiper.min.css'
 
 let useConnectedWallet = {}
 if (typeof document !== 'undefined') {
@@ -751,43 +764,76 @@ export default () => {
                     backgroundPosition: 'center center',
                 }}
             > */}
-            <div style={{background:'linear-gradient(360deg, #16073e, transparent)', paddingBottom:'35px'}}>
+            <div style={{background:'linear-gradient(360deg, #16073e, transparent)', paddingBottom:'35px', paddingBottom:'50px'}}>
                 <div className="container-fluid">
                 <div className="row px-md-5">
                     <div className="col-12 text-start mt-4">
                         <h3 className="fs-3 fw-bold">New games</h3>
                     </div>
-                    <div className="col-6 text-center">
-                        <div className="card lota-card lota-card-glass">
-                            <div className="card-body">
-                                <NavLink to="/rapido" className="btn btn-outline-primary text-white float-end fw-bold"
+                    <div className="col-12 banner-swiper">
+                        <Swiper
+                                      
+               
+                        modules={[Navigation, Pagination, A11y]}
+                        pagination={true}
+                        spaceBetween={25}
+                        slidesPerView={2}
+                        breakpoints={{
+                            // when window width is >= 640px
+                            1: {
+                                slidesPerView: 1,
+                         
+                            },
+                            // when window width is >= 768px
+                            768: {
+                                slidesPerView: 2,
+                           
+                            },
+                            1000: {
+                                slidesPerView: 2,
+                             
+                            },
+                            1500: {
+                                slidesPerView: 2,
+                            
+                            },
+                        }}                  
+                    
+                        >
+                            <SwiperSlide key={1}>
+                            <div className="card lota-card lota-card-glass text-center">
+                            <div className="card-body" style={{minHeight:76}}>
+                                <NavLink to="/rapido" className="btn btn-default text-white float-end fw-bold btn-sm w-100"
                                 style={{
                                     position:'absolute',
                                     right:0,
                                     bottom:-10
                                 }}
-                                >Play</NavLink>
+                                >Play Now</NavLink>
                                 <img src={'/Rapido-logo.svg'} style={{maxHeight:'60px'}} className="img-fluid"/>
                                 <p className="text-muted d-none d-md-block">Win up to $50,000 every 5 minutes</p>
                              
                             </div>
                         </div>
-                    </div>
-                    <div className="col-6 text-center">
-                        <div className="card lota-card lota-card-glass">
-                            <div className="card-body">
-                                <img src={'/spacewager-logo.svg'} style={{maxHeight:'60px'}} className="img-fluid"/>
-                                <p className="text-muted d-none d-md-block">Predict lunas future price</p>
-                                <NavLink to="/spacewager" className="btn btn-outline-primary text-white fw-bold"
+                            </SwiperSlide>
+                            <SwiperSlide key={2}>
+                            <div className="card lota-card lota-card-glass text-center">
+                            <div className="card-body" style={{minHeight:76}}>
+                                <NavLink to="/rapido" className="btn btn-default text-white float-end fw-bold btn-sm w-100"
                                 style={{
                                     position:'absolute',
                                     right:0,
                                     bottom:-10
                                 }}
-                                >Play</NavLink>
+                                >Play Now</NavLink>
+                                <img src={'/Rapido-logo.svg'} style={{maxHeight:'60px'}} className="img-fluid"/>
+                                <p className="text-muted d-none d-md-block">Win up to $50,000 every 5 minutes</p>
+                             
                             </div>
                         </div>
-                    </div>  
+                            </SwiperSlide>
+                        </Swiper>
+                    </div>                     
                 </div>
                 </div>
             </div>

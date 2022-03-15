@@ -1417,3 +1417,13 @@ h4,
         }
     }
 }
+
+.banner-swiper {
+    .swiper-container {
+        width: 100%;
+        min-height:auto;
+    }
+    .swiper-container-horizontal > .swiper-pagination-bullets, .swiper-pagination-custom, .swiper-pagination-fraction {
+        bottom: -41px !important;
+    }
+}
