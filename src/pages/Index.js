@@ -819,15 +819,15 @@ export default () => {
                             <SwiperSlide key={2}>
                             <div className="card lota-card lota-card-glass text-center">
                             <div className="card-body" style={{minHeight:76}}>
-                                <NavLink to="/rapido" className="btn btn-default text-white float-end fw-bold btn-sm w-100"
+                                <NavLink to="/spacewager" className="btn btn-default text-white float-end fw-bold btn-sm w-100"
                                 style={{
                                     position:'absolute',
                                     right:0,
                                     bottom:-10
                                 }}
                                 >Play Now</NavLink>
-                                <img src={'/Rapido-logo.svg'} style={{maxHeight:'60px'}} className="img-fluid"/>
-                                <p className="text-muted d-none d-md-block">Win up to $50,000 every 5 minutes</p>
+                                <img src={'/spacewager-logo.svg'} style={{maxHeight:'60px'}} className="img-fluid"/>
+                                <p className="text-muted d-none d-md-block">Predicts LUNA's future price</p>
                              
                             </div>
                         </div>
