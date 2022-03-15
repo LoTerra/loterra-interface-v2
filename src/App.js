@@ -1,6 +1,6 @@
 import React, { Component, Suspense, useContext, useEffect } from 'react'
 import { Root, Routes, addPrefetchExcludes } from 'react-static'
-import { Switch, Route, Link, useLocation } from 'react-router-dom'
+import { Switch, Route, Link, useLocation, NavLink } from 'react-router-dom'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 
@@ -107,7 +107,7 @@ class App extends Component {
                         </div>
                         <div id="page-content-wrapper">
                             <nav
-                                className="navbar navbar-expand navbar-light sticky-top"
+                                className="navbar navbar-expand navbar-light sticky-top"            
                                 id="smallNav"
                             >
                                 <div className="container-fluid px-0">
@@ -116,8 +116,16 @@ class App extends Component {
                                         id="sidebarToggle"
                                     >
                                         {' '}
-                                        <List size={26} />
+                                        <List size={31} weight={'bold'} />
                                     </button>
+                                    <NavLink to={'/'} style={{
+                                            width:50,
+                                            left:'50%',
+                                            marginLeft:-30,
+                                            position:'absolute'
+                                    }}>
+                                    <img src="/logo.png" className="d-block d-md-none img-fluid"  />       
+                                    </NavLink>  
                                     <div className="navbar">
                                         <ConnectWallet />
                                     </div>

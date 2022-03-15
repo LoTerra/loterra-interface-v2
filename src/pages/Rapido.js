@@ -731,7 +731,7 @@ export default () => {
 
                 <img src="/Rapido-logo.svg" height="100px"/>
                 <h2 className="mb-2 mb-0 text-10xl xs:text-13xl xs:-mt-0 font-semibold">
-                    Win up to <span style={{backgroundImage: 'linear-gradient( 77.6deg, #048ABF 0%, #BF046B 48.47%, #F2D230 88.67%)', webkitBackgroundClip: 'text', color: "transparent"}}>$50,000</span> every 5 minutes
+                    Win up to <span style={{backgroundImage: 'linear-gradient( 77.6deg, #048ABF 0%, #BF046B 48.47%, #F2D230 88.67%)', webkitBackgroundClip: 'text', color: "transparent", fontWeight:700}}>$50,000</span> every 5 minutes
                 </h2>
             </div>
             <div className="container">
