@@ -956,7 +956,7 @@ export default () => {
                                     <td className="text-center">4 </td>
                                     <td className="text-center">1 / 65,536</td>
                                     <td className="text-center">$500</td>
-                                    <td className="text-center">$1000</td>
+                                    <td className="text-center">$1,000</td>
                                     <td className="text-center">$2,500</td>
                                 </tr>
                                 <tr>
