@@ -236,7 +236,12 @@ export default () => {
 
         let format_message = 'Closing...'
         if (state.spaceWagerCurrentTimeRound * 1000 > Date.now()) {
-            format_message = format_minutes + ':' + format_seconds
+            if (seconds < 0 || minutes < 0){
+                format_message = '00:00'
+            }else {
+                format_message = format_minutes + ':' + format_seconds
+            }
+
 
             return (
                 <>
