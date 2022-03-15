@@ -348,14 +348,15 @@ export default () => {
             </div>
             <div className="container">
                 <div className="w-100 py-3 py-md-5 text-center">
-                    <h1
-                        className="mb-0 fw-bold"
-                        style={{ textShadow: '1px 1px 10px #14053b' }}
-                    >
-                        Spacewager
-                    </h1>
-                    <h2 className="my-2 fw-regular fs-6 mb-0">
-                        Predict the future LUNA price
+                    {/*<h1*/}
+                    {/*    className="mb-0 fw-bold"*/}
+                    {/*    style={{ textShadow: '1px 1px 10px #14053b' }}*/}
+                    {/*>*/}
+                    {/*    Spacewager*/}
+                    {/*</h1>*/}
+                    <img src="/spacewager-logo.svg" height="100px"/>
+                    <h2 className="mb-2 mb-0 text-10xl xs:text-13xl xs:-mt-0 font-semibold">
+                        Predict the future <span style={{backgroundImage: 'linear-gradient( 77.6deg, #17b96a 0%, #f037ef 48.47%, #F2D230 88.67%)', webkitBackgroundClip: 'text', color: "transparent"}}>LUNA</span> price
                     </h2>
                 </div>
 
