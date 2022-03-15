@@ -2,7 +2,7 @@ import { Head } from 'react-static'
 import React, { useState, useEffect, useCallback, useRef, useMemo } from 'react'
 import { useStore } from '../store'
 import RapidoCard from '../components/Rapido/RapidoCard'
-import { ArrowsClockwise, Clock, HourglassSimpleHigh, Lightning, Star } from 'phosphor-react'
+import { ArrowsClockwise, Clock, HourglassSimpleHigh, Lightning, Star, Warning } from 'phosphor-react'
 
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/swiper-bundle.min.css'
@@ -712,6 +712,21 @@ export default () => {
 
     return (
         <>
+        <div className="spacewager-beta">
+                <p className="mb-0">
+                    <Warning
+                        size={'13px'}
+                        weight="fill"
+                        style={{
+                            position: 'relative',
+                            top: '-1px',
+                            marginRight: 4,
+                        }}
+                    />
+                    Rapido is currently in BETA, any losses inccured due
+                    your actions are your own responsibilty.
+                </p>
+            </div>
             <div className="w-100 py-3 pt-md-5 text-center mb-2">
 
                 <img src="/Rapido-logo.svg" height="100px"/>
