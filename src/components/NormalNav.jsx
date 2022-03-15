@@ -50,9 +50,10 @@ export default function NormalNav() {
     }
     return (
         <>
-            <a className="navbar-brand text-center" href="/">
-                <img src="/logo.png" className="img-fluid" />{' '}
-                <span className="d-block">LoTerra</span>
+            <a className="navbar-brand text-center" href="/">                
+
+                <img src="/logo.png" className="img-fluid d-inline-block" />                
+                <span className="d-inline-block">LoTerra</span>
             </a>
 
             <li className="nav-item">

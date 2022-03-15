@@ -45,10 +45,19 @@ body {
     align-self: flex-start;
 }
 
+#sidebarToggle {
+    svg {
+        position:relative;
+        top:-3px;
+    }
+}
+
 #smallNav {
     background: #00000047;
+    padding:10px 5px;
     .btn {
-        height: 42px;
+        height: 38px;
+        border-radius:5px !important;
     }
 }
 
@@ -69,8 +78,12 @@ body {
     flex-direction: column;
     .navbar-brand {
         display: block;
+        margin-bottom: 25px;
+        background: linear-gradient(45deg, #2f196a, transparent);
+        margin-top: 11px;
+        border-radius: 5px;
         img {
-            width: 100px;
+            width: 75px;
             margin: 10px auto;
         }
         margin-bottom: 25px;
@@ -98,7 +111,8 @@ body {
         .nav-link {
             display: block;
             color: #fff;
-            font-weight: 700;
+            font-size:14px;
+            font-weight: 600;
             transition: all 150ms linear;
             box-shadow: inset 0px 0px 0px 0px #8ff8c5;
             @media (max-width: 620px) {
