@@ -740,8 +740,8 @@ export default () => {
                             marginRight: 4,
                         }}
                     />
-                    Rapido is currently in BETA, any losses inccured due
-                    your actions are your own responsibilty.
+                    Rapido is currently in BETA, any losses incurred due
+                    your actions are your own responsibility.
                 </p>
             </div>
             <div className="w-100 py-3 pt-md-5 text-center mb-2">

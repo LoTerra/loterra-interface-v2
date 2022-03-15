@@ -347,8 +347,8 @@ export default () => {
                             marginRight: 4,
                         }}
                     />
-                    Spacewager is currently in BETA, any losses inccured due
-                    your actions are your own responsibilty.
+                    Spacewager is currently in BETA, any losses incurred due
+                    your actions are your own responsibility.
                 </p>
             </div>
             <div className="container">
