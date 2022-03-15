@@ -35,7 +35,7 @@ export default () => {
             'terra1a62jxn3hh54fa5slan4dkd7u6v4nzgz3pjhygm',
     })
 
-    const api = new WasmAPI(state.lcd_client_testnet.apiRequester)
+    const api = new WasmAPI(state.lcd_client.apiRequester)
 
     async function getRapidoState() {
         try {
