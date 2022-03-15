@@ -14,7 +14,7 @@ export default function RapidoCard(props) {
         drawTime,
         isLotteryLive,
         formatTime,
-        numberOfPlayer
+        lotteryStats
     } = props
     const { state, dispatch } = useStore()
 
@@ -114,7 +114,7 @@ export default function RapidoCard(props) {
                 winningCombination={winningCombination}
                 isLotteryLive={isLotteryLive}
                 formatTime={formatTime}
-                numberOfPlayer={numberOfPlayer}
+                lotteryStats={lotteryStats}
             />
             <RapidoCardBody
                 toDefault={toDefault}
@@ -132,7 +132,7 @@ export default function RapidoCard(props) {
                 bonusNumber={bonusNumber}
                 lotteryId={lotteryId}
                 isLotteryLive={isLotteryLive}
-                numberOfPlayer={numberOfPlayer}
+                lotteryStats={lotteryStats}
             />
             <RapidoCardFooter
                 switchToDefault={(d) => switchToDefault(d)}
@@ -148,7 +148,7 @@ export default function RapidoCard(props) {
                 isLastItem={isLastItem}
                 lotteryId={lotteryId}
                 bonusNumber={bonusNumber}
-                numberOfPlayer={numberOfPlayer}
+                lotteryStats={lotteryStats}
             />
         </div>
     )

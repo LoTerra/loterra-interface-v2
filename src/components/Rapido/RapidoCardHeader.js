@@ -3,7 +3,7 @@ import React, { useState } from 'react'
 import { useStore } from '../../store'
 
 export default function RapidoCardHeader(props) {
-    const { lotteryId, winningCombination, isLotteryLive, formatTime, numberOfPlayer } = props
+    const { lotteryId, winningCombination, isLotteryLive, formatTime, lotteryStats } = props
 
     const { state, dispatch } = useStore()
 
@@ -26,7 +26,7 @@ export default function RapidoCardHeader(props) {
                             Active
                         </p>
                     ) :
-                        winningCombination == null && numberOfPlayer == null ? (
+                        winningCombination == null && lotteryStats && lotteryStats[lotteryId].counter_player == null && state.rapidoCurrentRound != lotteryId ? (
                                 <p
                                     className="mb-0 rounded"
                                     style={{

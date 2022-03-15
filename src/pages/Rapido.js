@@ -23,6 +23,7 @@ export default () => {
     const [winningNumber, setWinningNumber] = useState([])
     const [loaderGames, setLoaderGames] = useState(false)
     const [loaderResolveAll, setLoaderResolveAll] = useState(false)
+    const [lotteryStats, setLotteryStats] = useState(null)
 
     const [config, setConfig] = useState({
         denom: 'uusd',
@@ -86,9 +87,25 @@ export default () => {
             // Set the array of lotteries
             setlotteries([...lotteries_state])
 
-            /*
-                TODO: dismiss the prediction loader here
-             */
+            let promiseMap = lotteries_state.map(async lottery => {
+                    let query = {
+                        lottery_stats: { round: lottery.lottery_id },
+                    }
+                    let lottery_stats = await api.contractQuery(
+                        state.rapidoAddress,
+                        query,
+                    )
+                return lottery_stats
+            })
+
+            Promise.all(promiseMap).then(e => {
+                let stats = {}
+                e.map(d => {
+                    stats[d.lottery_stats_id] = d
+                })
+                setLotteryStats(stats)
+            })
+
         } catch (e) {
             console.log(e)
         }
@@ -729,9 +746,9 @@ export default () => {
             </div>
             <div className="w-100 py-3 pt-md-5 text-center mb-2">
 
-                <img src="/Rapido-logo.svg" height="100px"/>
-                <h2 className="mb-2 mb-0 text-10xl xs:text-13xl xs:-mt-0 font-semibold">
-                    Win up to <span style={{backgroundImage: 'linear-gradient( 77.6deg, #048ABF 0%, #BF046B 48.47%, #F2D230 88.67%)', webkitBackgroundClip: 'text', color: "transparent", fontWeight:700}}>$50,000</span> every 5 minutes
+                <img src="/Rapido-logo.svg"  className={'img-fluid'} style={{maxHeight: ' 135px', marginBottom: '-11px'}}/>
+                <h2 className="mb-2 mb-0 text-10xl xs:text-13xl xs:-mt-0 font-semibold" style={{color: "#048ABF"}}>
+                    Win up to <span style={{color: '#F2D230', fontWeight: 700}}>$50,000</span> every 5 minutes
                 </h2>
             </div>
             <div className="container">
@@ -767,7 +784,7 @@ export default () => {
                                     </div>
                                 </div>
                             </div>
-                            {lotteries.length <= 1 && (
+                            {lotteries.length <= 1 && !lotteryStats && (
                                 <div className="w-100 py-5 text-center">
                                     <div
                                         style={{color:"#BF046B"}}
@@ -780,7 +797,7 @@ export default () => {
                                     </div>
                                 </div>
                             )}
-                            {lotteries.length > 0 && (
+                            {lotteries.length > 0  && lotteryStats && (
                                 <Swiper
                                     spaceBetween={35}
                                     style={{ padding: '10px 15px', marginTop: '25px' }}
@@ -844,7 +861,7 @@ export default () => {
                                                         }
                                                         formatTime={formatTime}
                                                         drawTime={obj.draw_time}
-                                                        numberOfPlayer={obj.counter_player}
+                                                        lotteryStats={lotteryStats}
                                                     />
                                                 </SwiperSlide>
                                             )

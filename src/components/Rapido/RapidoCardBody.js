@@ -24,7 +24,7 @@ export default function RapidoCardBody(props) {
         isLotteryLive,
         toDefault,
         switchToDefault,
-        numberOfPlayer
+        lotteryStats
     } = props
 
     const [numberOne, setNumberOne] = useState('')
@@ -405,36 +405,8 @@ export default function RapidoCardBody(props) {
                         </div>
                     </div>
                 </div>
-            ) : winningCombination != null && !isLotteryLive && numberOfPlayer != null ? (
-                <div className="col-12 text-center">
-                    {/*<img src="/trophy.gif" alt="Trophy..." width="50%" height="50%"/>*/}
-                    <Trophy
-                        size={55}
-                        weight="fill"
-                        fill={'#f2d230'}
-                        className="mx-auto mb-3"
-                    />
-                    <h4 className="fs-5">Winning number</h4>
-                    <div className="col-12 mb-2">
-                        <div className={'rapido-winning-combination'}>
-                            {winningCombination.map((nr, k) => {
-                                return (
-                                    <span
-                                        key={k}
-                                        className="rapido-combi-nr medium"
-                                    >
-                                        {nr}
-                                    </span>
-                                )
-                            })}
-                            <span className="rapido-combi-nr g medium">
-                                {bonusNumber}
-                            </span>
-                            
-                        </div>
-                    </div>
-                </div>
-            ) :  winningCombination == null && !isLotteryLive && numberOfPlayer == null && !state.loaderResolveLottoNumber?
+            ) :
+                winningCombination == null && !isLotteryLive && lotteryStats && lotteryStats[lotteryId].count_player == null && state.rapidoCurrentRound != lotteryId?
 
                 (
                     <div className="col-12 text-center">
@@ -448,6 +420,37 @@ export default function RapidoCardBody(props) {
                         </div>
                     </div>
                 )
+
+                :  winningCombination != null && !isLotteryLive ? (
+                        <div className="col-12 text-center">
+                            {/*<img src="/trophy.gif" alt="Trophy..." width="50%" height="50%"/>*/}
+                            <Trophy
+                                size={55}
+                                weight="fill"
+                                fill={'#f2d230'}
+                                className="mx-auto mb-3"
+                            />
+                            <h4 className="fs-5">Winning number</h4>
+                            <div className="col-12 mb-2">
+                                <div className={'rapido-winning-combination'}>
+                                    {winningCombination.map((nr, k) => {
+                                        return (
+                                            <span
+                                                key={k}
+                                                className="rapido-combi-nr medium"
+                                            >
+                                        {nr}
+                                    </span>
+                                        )
+                                    })}
+                                    <span className="rapido-combi-nr g medium">
+                                {bonusNumber}
+                            </span>
+
+                                </div>
+                            </div>
+                        </div>
+                    )
                 : (
                 <div className="col-12 text-center">
                     <div className="col-12 mb-2">

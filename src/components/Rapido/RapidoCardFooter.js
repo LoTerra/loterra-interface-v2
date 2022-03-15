@@ -26,7 +26,7 @@ export default function RapidoCardFooter(props) {
         lotteryId,
         bonusNumber,
         switchToDefault,
-        numberOfPlayer
+        lotteryStats
     } = props
 
     const validateTheTicket = (round) => {
@@ -250,7 +250,7 @@ export default function RapidoCardFooter(props) {
                             "resolved": false,
                             "game_id": 0
                         }*/}
-                    {userGames.length != 0 && winningCombination != null && numberOfPlayer != null? (
+                    {userGames.length != 0 && winningCombination != null && lotteryStats && lotteryStats[lotteryId].counter_player != null? (
                         <>
                             <p className="fs-6 fw-bold text-center mb-2 text-muted">
                                 Your plays
