@@ -23,7 +23,8 @@ export default function RapidoCardBody(props) {
         lotteryId,
         isLotteryLive,
         toDefault,
-        switchToDefault
+        switchToDefault,
+        numberOfPlayer
     } = props
 
     const [numberOne, setNumberOne] = useState('')
@@ -404,7 +405,7 @@ export default function RapidoCardBody(props) {
                         </div>
                     </div>
                 </div>
-            ) : winningCombination != null && !isLotteryLive ? (
+            ) : winningCombination != null && !isLotteryLive && numberOfPlayer != null ? (
                 <div className="col-12 text-center">
                     {/*<img src="/trophy.gif" alt="Trophy..." width="50%" height="50%"/>*/}
                     <Trophy
@@ -433,7 +434,21 @@ export default function RapidoCardBody(props) {
                         </div>
                     </div>
                 </div>
-            ) : (
+            ) :  winningCombination == null && !isLotteryLive && numberOfPlayer == null && !state.loaderResolveLottoNumber?
+
+                (
+                    <div className="col-12 text-center">
+                        <div className="col-12 mb-2">
+                            <div className={'rapido-winning-combination'}>
+                                <p className="small text-muted">
+                                    This Draw’s closing transaction has been
+                                    canceled because no player detected
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                )
+                : (
                 <div className="col-12 text-center">
                     <div className="col-12 mb-2">
                         <div className={'rapido-winning-combination'}>

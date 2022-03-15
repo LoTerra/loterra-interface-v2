@@ -844,6 +844,7 @@ export default () => {
                                                         }
                                                         formatTime={formatTime}
                                                         drawTime={obj.draw_time}
+                                                        numberOfPlayer={obj.counter_player}
                                                     />
                                                 </SwiperSlide>
                                             )
