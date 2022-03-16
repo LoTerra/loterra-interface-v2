@@ -769,16 +769,18 @@ export default () => {
                 />
                 <meta
                     property="og:image"
-                    content="/rapido-preview-og.JPG"
+                    content="https://loterry.io/rapido-preview-og.JPG"
                 />
+                <meta property="og:type" content="website" />
                 <meta
                     property="twitter:title"
                     content="Rapido | Win up to $50,000 every 5 minutes!"
                 />
+                <meta property="twitter:type" content="website" />
                 <meta name="twitter:card" content="summary_large_image"/>
                 <meta
                     property="twitter:image"
-                    content="/rapido-preview-og.JPG"
+                    content="https://loterra.io/rapido-preview-og.JPG"
                 />
                 <meta
                     property="twitter:description"
