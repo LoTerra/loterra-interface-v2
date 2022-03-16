@@ -318,7 +318,7 @@ export default () => {
                 />
                 <meta
                     property="og:image"
-                    content="/spacewager-logo.svg"
+                    content="/spacewager-preview-og.JPG"
                 />
                 <meta
                     property="twitter:title"
@@ -326,7 +326,7 @@ export default () => {
                 />
                 <meta
                     property="twitter:image"
-                    content="/spacewager-logo.svg"
+                    content="/spacewager-preview-og.JPG"
                 />
                 <meta
                     property="twitter:description"
