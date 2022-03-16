@@ -24,6 +24,7 @@ export default () => {
     const [loaderGames, setLoaderGames] = useState(false)
     const [loaderResolveAll, setLoaderResolveAll] = useState(false)
     const [lotteryStats, setLotteryStats] = useState(null)
+    const [loaderUserGames, setLoaderUserGames] = useState(false)
 
     const [config, setConfig] = useState({
         denom: 'uusd',
@@ -217,6 +218,7 @@ export default () => {
 
     async function getGames(game_stats_id) {
         setLoaderGames(true)
+
         try {
             let start_after = null
             let loop = true
@@ -350,6 +352,7 @@ export default () => {
     }
 
     function resultHistory() {
+
         let render = gameStats.map((game_stats, k) => (
             <tr key={k}>
                 <td>
@@ -753,6 +756,34 @@ export default () => {
 
     return (
         <>
+            <Head>
+                <meta charSet="UTF-8" />
+                <title>Rapido | Win up to $50,000 every 5 minutes!</title>
+                <meta
+                    property="og:title"
+                    content="Rapido | Win up to $50,000 every 5 minutes!"
+                />
+                <meta
+                    property="og:description"
+                    content="Rapido is the game of successive draws which offers a draw every 5 minutes! Try to find your 5 numbers among the combination of 4 blue and 1 yellow star numbers drawn at random and win up to $50,000!* | about LoTerra Rapido a new decentralized lottery game with fixed winnings on Terra Blockchain."
+                />
+                <meta
+                    property="og:image"
+                    content="/Rapido-logo.svg"
+                />
+                <meta
+                    property="twitter:title"
+                    content="Rapido | Win up to $50,000 every 5 minutes!"
+                />
+                <meta
+                    property="twitter:image"
+                    content="/Rapido-logo.svg"
+                />
+                <meta
+                    property="twitter:description"
+                    content="Rapido is the game of successive draws which offers a draw every 5 minutes! Try to find your 5 numbers among the combination of 4 blue and 1 yellow star numbers drawn at random and win up to $50,000!* | about LoTerra Rapido a new decentralized lottery game with fixed winnings on Terra Blockchain."
+                />
+            </Head>
         <div className="spacewager-beta">
                 <p className="mb-0">
                     <Warning
@@ -962,7 +993,7 @@ export default () => {
                                     </th>
                                 </tr>
                             </thead>
-                            <tbody>{resultHistory()}</tbody>
+                            <tbody>{ resultHistory()}</tbody>
                         </table>
                         <button
                             className="w-100 mt-2 btn btn-sm btn-default text-muted"
