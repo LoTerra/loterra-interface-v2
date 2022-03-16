@@ -322,8 +322,8 @@ export default () => {
                     content="https://loterra.io/spacewager-preview-og.JPG"
                 />
 
-                <meta name="twitter:card" content="summary_large_image"/>
                 <meta property="twitter:type" content="website" />
+                <meta name="twitter:card" content="summary_large_image"/>
                 <meta
                     property="twitter:title"
                     content="Spacewager | Predict LUNA/UST price prediction!"
