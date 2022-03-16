@@ -138,7 +138,7 @@ export default function SpaceWagerCardHeader(props) {
                         </div>
                     </div>
                 )}
-                {isPastPrediction && obj.success != null && (
+                {isPastPrediction && obj.success != null && obj.success == true && (
                     <div className="row">
                         <div className="col-6 text-start">
                             <p className="mb-0 text-muted">
@@ -166,6 +166,35 @@ export default function SpaceWagerCardHeader(props) {
                         {/*    </p>*/}
                         {/*</div>*/}
                     </div>
+                )}
+                {isPastPrediction && obj.success != null && obj.success == false && (
+                <div className="row">
+                    <div className="col-6 text-start">
+                        <p className="mb-0 text-muted">
+                            <Prohibit
+                                size={23}
+                                style={{
+                                    position: 'relative',
+                                    top: -1,
+                                    marginRight: 5,
+                                }}
+                                weight={'bold'}
+                            />
+                            CANCELED
+                        </p>
+                    </div>
+                    <div className="col-6 text-end">
+                        <p className="mb-0 text-muted">
+                            #{obj.prediction_id}
+                        </p>
+                    </div>
+                    {/*<div className="col-12 text-start">*/}
+                    {/*    <p>*/}
+                    {/*        Success:*/}
+                    {/*        { obj.success && " true" ||  " false" }*/}
+                    {/*    </p>*/}
+                    {/*</div>*/}
+                </div>
                 )}
             </div>
         </>
