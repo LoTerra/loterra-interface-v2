@@ -318,7 +318,7 @@ export default () => {
                 />
                 <meta
                     property="og:image"
-                    content="https://drive.google.com/file/d/1G6HMrcU05YhfTeAJpmz7sVUvbyOp_kuB/view?usp=sharing"
+                    content="/spacewager-logo.svg"
                 />
                 <meta
                     property="twitter:title"
@@ -326,7 +326,7 @@ export default () => {
                 />
                 <meta
                     property="twitter:image"
-                    content="https://drive.google.com/file/d/1G6HMrcU05YhfTeAJpmz7sVUvbyOp_kuB/view?usp=sharing"
+                    content="/spacewager-logo.svg"
                 />
                 <meta
                     property="twitter:description"

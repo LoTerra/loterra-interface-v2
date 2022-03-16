@@ -769,7 +769,7 @@ export default () => {
                 />
                 <meta
                     property="og:image"
-                    content="/Rapido-logo"
+                    content="/Rapido-logo.svg"
                 />
                 <meta
                     property="twitter:title"
@@ -777,7 +777,7 @@ export default () => {
                 />
                 <meta
                     property="twitter:image"
-                    content="/Rapido-logo"
+                    content="/Rapido-logo.svg"
                 />
                 <meta
                     property="twitter:description"
