@@ -307,27 +307,31 @@ export default () => {
         <>
             <Head>
                 <meta charSet="UTF-8" />
-                <title>Spacewager | Predict LUNA/UST price prediction!</title>
+                <title>SpaceWager | Predict LUNA/UST price prediction!</title>
                 <meta
                     property="og:title"
-                    content="Spacewager | Predict LUNA/UST price prediction!"
+                    content="SpaceWager | Predict LUNA/UST price prediction!"
                 />
                 <meta
                     property="og:description"
                     content="LoTerra Spacewager is a decentralized prediction game on Terra Blockchain. Predict whether LUNA's price will rise or fall – guess correctly to win!"
                 />
-                <meta name="twitter:card" content="app"/>
+                <meta property="og:type" content="website" />
                 <meta
                     property="og:image"
-                    content="/spacewager-preview-og.JPG"
+                    content="https://loterra.io/spacewager-preview-og.JPG"
                 />
+
+                <meta name="twitter:card" content="summary_large_image"/>
+                <meta property="twitter:type" content="website" />
                 <meta
                     property="twitter:title"
                     content="Spacewager | Predict LUNA/UST price prediction!"
                 />
+
                 <meta
                     property="twitter:image"
-                    content="/spacewager-preview-og.JPG"
+                    content="https://loterra.io/spacewager-preview-og.JPG"
                 />
                 <meta
                     property="twitter:description"
@@ -345,7 +349,7 @@ export default () => {
                             marginRight: 4,
                         }}
                     />
-                    Spacewager is currently in BETA, any losses incurred due
+                    SpaceWager is currently in BETA, any losses incurred due
                     your actions are your own responsibility.
                 </p>
             </div>
