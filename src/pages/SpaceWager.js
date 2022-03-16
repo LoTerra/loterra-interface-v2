@@ -316,6 +316,7 @@ export default () => {
                     property="og:description"
                     content="LoTerra Spacewager is a decentralized prediction game on Terra Blockchain. Predict whether LUNA's price will rise or fall – guess correctly to win!"
                 />
+                <meta name="twitter:card" content="app"/>
                 <meta
                     property="og:image"
                     content="/spacewager-preview-og.JPG"

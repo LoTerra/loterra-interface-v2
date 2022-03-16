@@ -775,6 +775,7 @@ export default () => {
                     property="twitter:title"
                     content="Rapido | Win up to $50,000 every 5 minutes!"
                 />
+                <meta name="twitter:card" content="summary_large_image"/>
                 <meta
                     property="twitter:image"
                     content="/rapido-preview-og.JPG"
