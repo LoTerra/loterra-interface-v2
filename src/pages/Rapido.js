@@ -1037,7 +1037,7 @@ export default () => {
                             <tbody>
                                 <tr>
                                     <td>#1</td>
-                                    <td className="text-center">4 + 1 star</td>
+                                    <td className="text-center">4 (exact position) + 1 star</td>
                                     <td className="text-center">1 / 524,288</td>
                                     <td className="text-center">$10,000</td>
                                     <td className="text-center">$20,000</td>
@@ -1045,7 +1045,7 @@ export default () => {
                                 </tr>
                                 <tr>
                                     <td>#2</td>
-                                    <td className="text-center">4 </td>
+                                    <td className="text-center">4 (exact position)</td>
                                     <td className="text-center">1 / 74,898.29</td>
                                     <td className="text-center">$1,000</td>
                                     <td className="text-center">$2,000</td>
@@ -1053,7 +1053,7 @@ export default () => {
                                 </tr>
                                 <tr>
                                     <td>#3</td>
-                                    <td className="text-center">3 + 1 star </td>
+                                    <td className="text-center">3 (exact position) + 1 star </td>
                                     <td className="text-center">1 / 8,738.13</td>
                                     <td className="text-center">$150</td>
                                     <td className="text-center">$300</td>
@@ -1061,7 +1061,7 @@ export default () => {
                                 </tr>
                                 <tr>
                                     <td>#4</td>
-                                    <td className="text-center">3 </td>
+                                    <td className="text-center">3 (exact position) </td>
                                     <td className="text-center">1 / 1,248.3</td>
                                     <td className="text-center">$50</td>
                                     <td className="text-center">$100</td>
@@ -1069,7 +1069,7 @@ export default () => {
                                 </tr>
                                 <tr>
                                     <td>#5</td>
-                                    <td className="text-center">2 + 1 star </td>
+                                    <td className="text-center">2 (exact position) + 1 star </td>
                                     <td className="text-center">1 / 388.36</td>
                                     <td className="text-center">$30</td>
                                     <td className="text-center">$60</td>
@@ -1077,7 +1077,7 @@ export default () => {
                                 </tr>
                                 <tr>
                                     <td>#6</td>
-                                    <td className="text-center">2  </td>
+                                    <td className="text-center">2 (exact position)  </td>
                                     <td className="text-center">1 / 55.48</td>
                                     <td className="text-center">$10</td>
                                     <td className="text-center">$20</td>
@@ -1085,7 +1085,7 @@ export default () => {
                                 </tr>
                                 <tr>
                                     <td>#7</td>
-                                    <td className="text-center">1 + 1 star </td>
+                                    <td className="text-center">1 (exact position) + 1 star </td>
                                     <td className="text-center">1 / 38.84</td>
                                     <td className="text-center">$5</td>
                                     <td className="text-center">$10</td>
