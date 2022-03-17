@@ -1091,22 +1091,24 @@ export default () => {
                                     <td className="text-center">$10</td>
                                     <td className="text-center">$25</td>
                                 </tr>
+
                                 <tr>
                                     <td>#8</td>
-                                    <td className="text-center">1 </td>
-                                    <td className="text-center">1 / 16</td>
+                                    <td className="text-center">1 star</td>
+                                    <td className="text-center">1 / 8</td>
                                     <td className="text-center">$2</td>
                                     <td className="text-center">$4</td>
                                     <td className="text-center">$10</td>
                                 </tr>
                                 <tr>
                                     <td>#9</td>
-                                    <td className="text-center">1 star</td>
-                                    <td className="text-center">1 / 8</td>
+                                    <td className="text-center">1</td>
+                                    <td className="text-center">1 / 16</td>
                                     <td className="text-center">$1</td>
                                     <td className="text-center">$2</td>
                                     <td className="text-center">$5</td>
                                 </tr>
+
                             </tbody>
                         </table>
                     </div>
