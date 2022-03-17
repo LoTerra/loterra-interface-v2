@@ -1046,9 +1046,9 @@ export default () => {
                                     <td>#2</td>
                                     <td className="text-center">4 </td>
                                     <td className="text-center">1 / 65,536</td>
-                                    <td className="text-center">$500</td>
                                     <td className="text-center">$1,000</td>
-                                    <td className="text-center">$2,500</td>
+                                    <td className="text-center">$2,000</td>
+                                    <td className="text-center">$5,000</td>
                                 </tr>
                                 <tr>
                                     <td>#3</td>
@@ -1094,6 +1094,14 @@ export default () => {
                                     <td>#8</td>
                                     <td className="text-center">1 </td>
                                     <td className="text-center">1 / 16</td>
+                                    <td className="text-center">$2</td>
+                                    <td className="text-center">$4</td>
+                                    <td className="text-center">$10</td>
+                                </tr>
+                                <tr>
+                                    <td>#9</td>
+                                    <td className="text-center">1 star</td>
+                                    <td className="text-center">1 / 8</td>
                                     <td className="text-center">$1</td>
                                     <td className="text-center">$2</td>
                                     <td className="text-center">$5</td>
