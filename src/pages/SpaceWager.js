@@ -498,6 +498,7 @@ export default () => {
                 <div className="row mb-2 position-relative">
                     {predictions.length > 0 && (
                         <Swiper
+                            threshold={10}
                             spaceBetween={-50}
                             navigation={{
                                 nextEl: '.swiper-next',

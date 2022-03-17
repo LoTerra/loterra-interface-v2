@@ -265,6 +265,8 @@ export default function RapidoCardFooter(props) {
                             </p>
                             <div style={{height: "150px", overflow:'hidden'}}>
                                 <Swiper
+                                    nested={true}
+                                    grabCursor= {true}
                                     style={{"width": '100%'}}
                                     breakpointsbase="container"
                                     direction="vertical"
