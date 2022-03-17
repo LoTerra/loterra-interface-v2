@@ -857,6 +857,7 @@ export default () => {
                             )}
                             {lotteries.length > 0  && lotteryStats && (
                                 <Swiper
+                                    threshold={10}
                                     spaceBetween={35}
                                     style={{ padding: '10px 15px', marginTop: '25px' }}
                                     navigation={{
