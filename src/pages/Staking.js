@@ -138,7 +138,9 @@ export default () => {
                                             {state.tokenInfo.total_supply &&
                                             state.poolInfo.total_share ? (
                                                 <div className="align-self-center w-100">
-                                                    <div className="pie-stats">
+                                                    <div className="pie-stats" 
+                                                     style={{border:'0px'}}
+                                                    >
                                                         <div className="row">
                                                             <div className="col-6 text-white">
                                                                 <span className="circle-green"></span>
@@ -212,7 +214,7 @@ export default () => {
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <Pie
+                                                    <Pie 
                                                         data={pieData}
                                                         data-staked={
                                                             state.tokenInfo
