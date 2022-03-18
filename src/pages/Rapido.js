@@ -11,6 +11,7 @@ import { ArrowLeft, ArrowRight } from 'phosphor-react'
 import { MsgExecuteContract, WasmAPI } from '@terra-money/terra.js'
 import Pusher from 'pusher-js'
 import toast, { Toaster } from 'react-hot-toast'
+import CountUp from 'react-countup'
 
 export default () => {
     const { state, dispatch } = useStore()
@@ -806,7 +807,11 @@ export default () => {
 
                 <img src="/Rapido-logo.svg"  className={'img-fluid'} style={{maxHeight: ' 135px', marginBottom: '-11px'}}/>
                 <h2 className="mb-2 mb-0 text-10xl xs:text-13xl xs:-mt-0 font-semibold" style={{color: "#048ABF"}}>
-                    Win up to <span style={{color: '#F2D230', fontWeight: 700}}>$50,000</span> every 5 minutes
+                    Win up to <span style={{color: '#F2D230', fontWeight: 700}}>$<CountUp
+                    start={0}
+                    end={50000}
+                    separator={","}
+                /></span> every 5 minutes
                 </h2>
             </div>
             <div className="container">
