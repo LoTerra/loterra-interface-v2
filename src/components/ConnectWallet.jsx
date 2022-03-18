@@ -192,23 +192,31 @@ export default function ConnectWallet() {
         })
 
         //console.log('config',contractConfigInfo)
-
+        console.log(window.location.href.indexOf('dao'))
         if (window.location.href.indexOf('dao') > -1) {
             let pollCount = contractConfigInfo.poll_count
             //console.log('count',pollCount)
-            let allProposals = []
+            let allPromise = []
             for (let index = 1; index < pollCount + 1; index++) {
-                const proposal = await api.contractQuery(
-                    state.loterraContractAddress,
-                    {
-                        get_poll: { poll_id: index },
-                    },
-                )
-                proposal.nr = index
-                allProposals.push(proposal)
-                //console.log('single', proposal)
+                let promise = new Promise(async (resolve, reject ) => {
+                    const proposal = await api.contractQuery(
+                        state.loterraContractAddress,
+                        {
+                            get_poll: { poll_id: index },
+                        },
+                    )
+                    proposal.nr = index
+                    //allProposals.push(proposal)
+                    resolve(proposal)
+                })
+                allPromise.push(promise)
+
             }
-            dispatch({ type: 'setAllProposals', message: allProposals })
+
+            Promise.all(allPromise).then((e) => {
+                dispatch({ type: 'setAllProposals', message: e })
+            })
+
             //console.log('proposals',allProposals)
         }
 

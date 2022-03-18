@@ -10,6 +10,7 @@ export default () => {
     const { state, dispatch } = useStore()
     const addToGas = 5800
     const obj = new Fee(700_000, { uusd: 319200 + addToGas })
+    console.log(state.allProposals)
     return (
         <>
             <section className="proposals" style={{ marginTop: '90px' }}>
