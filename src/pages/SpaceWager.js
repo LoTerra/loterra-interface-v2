@@ -459,7 +459,7 @@ export default () => {
                     <div className="col-12 col-md-4 text-center text-md-end order-1 order-md-2 position-relative">
                         <button
                             className="btn btn-plain fw-bold w-20 ms-2 docs-btn"
-                            style={{ zIndex: 999, position: 'relative' }}
+                            style={{ zIndex: 9, position: 'relative', marginTop: '50px' }}
                             onClick={() =>
                                 window.open(
                                     'https://docs.loterra.io/upcoming/roadmap/spacewager',
