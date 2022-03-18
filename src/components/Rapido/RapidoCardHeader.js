@@ -55,7 +55,7 @@ export default function RapidoCardHeader(props) {
                                 fontWeight: 700,
                             }}
                         >
-                            Resolving
+                            <span style={{color:"#048ABF"}}>Resolving</span>
                         </p>
                     ) : (
                         <p
