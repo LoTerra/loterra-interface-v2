@@ -362,8 +362,8 @@ export default () => {
                     {/*    Spacewager*/}
                     {/*</h1>*/}
                     <img src="/spacewager-logo.svg" className="img-fluid" style={{maxHeight:135, marginBottom:-11}}/>
-                    <h2 className="mb-2 mb-0 text-10xl xs:text-13xl xs:-mt-0 font-semibold">
-                        Predict the future <span style={{backgroundImage: 'linear-gradient( 77.6deg, #17b96a 0%, #f037ef 48.47%, #F2D230 88.67%)', webkitBackgroundClip: 'text', color: "transparent", fontWeight:700}}>LUNA</span> price
+                    <h2 className="mb-2 mb-0 text-10xl xs:text-13xl xs:-mt-0 font-semibold" style={{color: "#4f5eca"}}>
+                        Predict the future <span style={{color: "#ffd73d", fontWeight:700}}>LUNA</span> price
                     </h2>
                 </div>
 
@@ -459,7 +459,7 @@ export default () => {
                     <div className="col-12 col-md-4 text-center text-md-end order-1 order-md-2 position-relative">
                         <button
                             className="btn btn-plain fw-bold w-20 ms-2 docs-btn"
-                            style={{ zIndex: 999, position: 'relative' }}
+                            style={{ zIndex: 9, position: 'relative', marginTop: '50px' }}
                             onClick={() =>
                                 window.open(
                                     'https://docs.loterra.io/upcoming/roadmap/spacewager',
@@ -498,6 +498,7 @@ export default () => {
                 <div className="row mb-2 position-relative">
                     {predictions.length > 0 && (
                         <Swiper
+                            threshold={10}
                             spaceBetween={-50}
                             navigation={{
                                 nextEl: '.swiper-next',
