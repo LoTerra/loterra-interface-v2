@@ -187,17 +187,16 @@ export default function Main(props) {
     return (
         <>
             <div className="col-md-12 mb-4">
-                <div className="card lota-card staking dogether-card margin-top">
+                <div className="card lota-card staking dogether-card mt-5"
+                    style={{
+                        borderRadius: '20px'
+                    }}
+                >
                     <div className="card-body">
-                        <h2
-                            className="text-center"
-                            style={{
-                                background:
-                                    'radial-gradient(#ffde872e, transparent)',
-                                padding: '15px 0',
-                            }}
-                        >
-                            <span className="d-block heading-1">
+                        <h2 className="text-center">
+                            <span className="d-block heading-1"
+                                style={{color: '#F2D230'}}
+                            >
                                 Current pool balance
                             </span>
                             {totalBalance() ? (
@@ -209,7 +208,9 @@ export default function Main(props) {
                                         <small>UST</small>
                                     </span>
                                     <span className="d-inline-block nr-2">
-                                        <span className="d-block heading-2">
+                                        <span className="d-block heading-2"
+                                            style={{color: '#F2D230'}}
+                                        >
                                             Tickets a week
                                         </span>
                                         {numeral(
@@ -222,7 +223,9 @@ export default function Main(props) {
                                         ).format('0,0.00')}
                                     </span>
                                     <span className="d-inline-block nr-2">
-                                        <span className="d-block heading-2">
+                                        <span className="d-block heading-2"
+                                            style={{color: '#F2D230'}}
+                                        >
                                             Tickets a year
                                         </span>
                                         {numeral(
@@ -234,7 +237,9 @@ export default function Main(props) {
                                         ).format('0,0.00')}
                                     </span>
                                     <span className="d-inline-block nr-3">
-                                        <span className="d-block heading-2">
+                                        <span className="d-block heading-2"
+                                            style={{color: '#F2D230'}}
+                                        >
                                             Next draw tickets
                                         </span>
                                         {' ' +
@@ -269,7 +274,11 @@ export default function Main(props) {
             </div>
             <div className="col-xl-6">
                 <div className="card lota-card staking dogether-card mt-0">
-                    <div className="card-body">
+                    <div className="card-body"
+                        style={{
+                            boderRadius: '20px'
+                        }}
+                    >
                         <div className="row mb-3">
                             <div className="col-md-12">
                                 <h3>How it works</h3>
@@ -279,7 +288,7 @@ export default function Main(props) {
                                     <span className="nr">1</span>
                                     <Coin
                                         size={48}
-                                        color={'#82f3be'}
+                                        color={'#F2D230'}
                                         className="mx-auto"
                                     />
                                     <p
@@ -311,7 +320,7 @@ export default function Main(props) {
                                     <span className="nr">3</span>
                                     <Ticket
                                         size={48}
-                                        color={'#82f3be'}
+                                        color={'#F2D230'}
                                         className="mx-auto"
                                     />
                                     <p
@@ -326,12 +335,12 @@ export default function Main(props) {
                         <p
                             className="text-center"
                             style={{
-                                color: '#82f3be',
+                                color: '#ffffff',
                                 fontWeight: 700,
                                 fontSize: '12px',
                             }}
                         >
-                            <Info size={24} style={{ marginTop: '-4px' }} />{' '}
+                            <Info size={24} style={{ color:'#ffffff', marginTop: '-4px' }} />{' '}
                             Dogether will automatically buy tickets for LoTerra
                             Lottery, enjoy the possibility to win thousands of
                             $UST prizes every week!
@@ -343,12 +352,17 @@ export default function Main(props) {
                             </div>
                             <div className="col-md-6 mb-4">
                                 <div className="card stats-card d-flex py-3 text-center">
-                                    <p className="badge-status active">
+                                    <p className="badge-status active"
+                                        style={{ 
+                                            background:'#F2D230',
+                                            color: '#ffffff'
+                                        }}
+                                    >
                                         Active
                                     </p>
                                     <User
                                         size={48}
-                                        color={'#82f3be'}
+                                        color={'#F2D230'}
                                         className="mx-auto"
                                     />
                                     <p className="mb-0">
@@ -367,12 +381,17 @@ export default function Main(props) {
                                 style={{ opacity: 0.5 }}
                             >
                                 <div className="card stats-card d-flex py-3 text-center">
-                                    <p className="badge-status inactive">
+                                    <p className="badge-status inactive"
+                                        style={{ 
+                                            background:'#F2D230',
+                                            color: '#ffffff'
+                                        }}
+                                    >
                                         Coming soon
                                     </p>
                                     <UsersFour
                                         size={48}
-                                        color={'#82f3be'}
+                                        color={'#F2D230'}
                                         className="mx-auto"
                                     />
                                     <p className="mb-0">
@@ -447,22 +466,20 @@ export default function Main(props) {
                                 /> */}
                     <div className="dogether-settings-info">
                         <div className="row">
-                            <div className="col-12 text-center">
-                                <p className="title">
-                                    Your Dogether Predictions
-                                </p>
-                            </div>
-
                             <div className="col-md-6 mb-3">
                                 <div className="card stats-card">
                                     <div className="card-body">
-                                        <small className="d-block">
+                                        <small className="d-block"
+                                            style={{
+                                                color: '#ffffff'
+                                            }}
+                                        >
                                             NR TICKETS A WEEK
                                         </small>
                                         <h4>
                                             <Ticket
                                                 size={30}
-                                                color={'#82f3be'}
+                                                color={'#ffffff'}
                                                 style={{
                                                     position: 'relative',
                                                     top: '-3px',
@@ -484,13 +501,17 @@ export default function Main(props) {
                             <div className="col-md-6 mb-3">
                                 <div className="card stats-card">
                                     <div className="card-body">
-                                        <small className="d-block">
+                                        <small className="d-block"
+                                            style={{
+                                                color:'#ffffff'
+                                            }}
+                                        >
                                             NR TICKETS A YEAR
                                         </small>
                                         <h4>
                                             <Ticket
                                                 size={30}
-                                                color={'#82f3be'}
+                                                color={'#ffffff'}
                                                 style={{
                                                     position: 'relative',
                                                     top: '-3px',
@@ -561,6 +582,7 @@ export default function Main(props) {
                             <div className="col-md-6 mb-3">
                                 <button
                                     className="btn btn-normal-lg w-100 mt-2"
+                                    style={{background: '#F2D230'}}
                                     onClick={(e) => doGether()}
                                     disabled={!agreement}
                                 >
@@ -572,6 +594,7 @@ export default function Main(props) {
                                         textDecoration: 'underline',
                                         fontSize: '13px',
                                         opacity: 0.6,
+                                        
                                     }}
                                     onClick={() => setAmount(state.ustBalance)}
                                 >
@@ -625,14 +648,14 @@ export default function Main(props) {
                                         style={{
                                             color: '#fff',
                                             padding: '7px',
-                                            borderRadius: '4px',
-                                            background:
-                                                'linear-gradient(45deg, #30d9876e, #160842)',
+                                            borderRadius: '10px',
+                                            border: '3px',
+                                            borderColor:'#F2D230'
                                         }}
                                     >
                                         <p className="mb-1">
                                             <strong
-                                                style={{ color: '#82f3be' }}
+                                                style={{ color: '#F2D230'}}
                                             >
                                                 My Stats
                                             </strong>{' '}
@@ -702,7 +725,7 @@ export default function Main(props) {
                                                                                     18
                                                                                 }
                                                                                 color={
-                                                                                    '#82f3be'
+                                                                                    '#F2D230'
                                                                                 }
                                                                                 style={{
                                                                                     position:
