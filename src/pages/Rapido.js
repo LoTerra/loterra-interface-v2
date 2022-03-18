@@ -198,23 +198,96 @@ export default () => {
                 } else {
                     setGameStats(game_stats)
                 }
-
                 // get_user_combination(lotteries_state)
+
+                let resolve_promise = []
+                game_stats.map(game => {
+
+                    let start_after = null
+                    let loop = true
+
+                    let promise_copy_games = new Promise(async (resolve, reject) => {
+                        let games_el = []
+                        while (loop) {
+                            // Prepare query
+                            let query = {
+                                games: {
+                                    limit: 5,
+                                    round: game.game_stats_id,
+                                    player: state.wallet.walletAddress,
+                                },
+                            }
+                            // Add start after to get pagination
+                            if (start_after != null) {
+                                query.games.start_after = start_after
+                            }
+                            console.log(start_after)
+
+                            // Query to state smart contract
+                            let res_games = await api.contractQuery(
+                                state.rapidoAddress,
+                                query,
+                            )
+                            console.log(query)
+                            if (res_games.length > 0) {
+
+                                games_el = [...games_el, ...res_games]
+                                start_after = res_games[res_games.length - 1].game_id
+                                // get_user_combination(lotteries_state)
+                            } else {
+                                loop = false
+                                start_after = null
+                            }
+                        }
+                        resolve(games_el)
+                    })
+
+                    resolve_promise.push(promise_copy_games)
+
+                    let promise_lottery_winning = new Promise(async (resolve, reject )=> {
+                        //Get lottery info
+                        let lottery_query = {
+                            lottery_state: {
+                                round: game.game_stats_id
+                            }
+                        }
+                        let lottery_info = await api.contractQuery(
+                            state.rapidoAddress,
+                            lottery_query,
+                        )
+
+                        if (lottery_info){
+                            //setWinningNumber(new_arr)
+                            resolve(lottery_info)
+                        }
+                    })
+                    resolve_promise.push(promise_lottery_winning)
+                })
+                Promise.all(resolve_promise).then((w) => {
+                    console.log(w)
+                    let new_games_arr = []
+                    let new_winning_obj = {}
+                    w.map(e => {
+                        if (Array.isArray(e)){
+                            new_games_arr = [...new_games_arr, ...e]
+                        }else {
+                            let newWinningNumber = [...e.winning_number, e.bonus_number]
+                            let new_arr = {
+                                ...winningNumber,
+                                ...new_winning_obj
+                            }
+                            new_arr[e.lottery_id] = newWinningNumber
+                            new_winning_obj = new_arr
+                        }
+                    })
+                    setGames([...games, ...new_games_arr])
+                    setWinningNumber(new_winning_obj)
+                })
             }
+
         } catch (e) {
             console.log(e)
         }
-    }
-
-    function getGameWinnings(game){
-        let price = 0;
-        //Do stuff here
-        //game.winning_nummber
-        //game.winning_bonus
-        //game.bonus
-        //game.number
-        
-        
     }
 
     async function getGames(game_stats_id) {
@@ -389,23 +462,23 @@ export default () => {
                         style={{ flex: 'column' }}
                         className="rapido-table-results"
                     >
-                        {games.filter(
-                            (a) => a.lottery_id == game_stats.game_stats_id,
-                        ).length == 0 && (
-                            <button
-                                disabled={loaderGames}
-                                className="btn btn-default btn-sm"
-                                onClick={() =>
-                                    getGames(game_stats.game_stats_id)
-                                }
-                            >
-                                <ArrowsClockwise
-                                    size={14}
-                                    className="position-icon me-1"
-                                />
-                                Show details
-                            </button>
-                        )}
+                        {/*{games.filter(*/}
+                        {/*    (a) => a.lottery_id == game_stats.game_stats_id,*/}
+                        {/*).length == 0 && (*/}
+                        {/*    <button*/}
+                        {/*        disabled={loaderGames}*/}
+                        {/*        className="btn btn-default btn-sm"*/}
+                        {/*        onClick={() =>*/}
+                        {/*            getGames(game_stats.game_stats_id)*/}
+                        {/*        }*/}
+                        {/*    >*/}
+                        {/*        <ArrowsClockwise*/}
+                        {/*            size={14}*/}
+                        {/*            className="position-icon me-1"*/}
+                        {/*        />*/}
+                        {/*        Show details*/}
+                        {/*    </button>*/}
+                        {/*)}*/}
                         
                         {games.map((game, k) => {
                             if (game.lottery_id == game_stats.game_stats_id) {
@@ -449,9 +522,7 @@ export default () => {
                                                 <p>{game.bonus} <Star size={18} fill={'#048abf'} weight={'fill'}/></p>
                                             }
                                         </span>
-                                        <div className="w-100">
-                                            {getGameWinnings(game)}
-                                        </div>
+
                                     </div>
                                 )
                             }
