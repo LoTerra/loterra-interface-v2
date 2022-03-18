@@ -361,8 +361,8 @@ export default () => {
                     {/*>*/}
                     {/*    Spacewager*/}
                     {/*</h1>*/}
-                    <img src="/spacewager-logo.svg" className="img-fluid" style={{maxHeight:135, marginBottom:-11, color: "#4f5eca"}}/>
-                    <h2 className="mb-2 mb-0 text-10xl xs:text-13xl xs:-mt-0 font-semibold">
+                    <img src="/spacewager-logo.svg" className="img-fluid" style={{maxHeight:135, marginBottom:-11}}/>
+                    <h2 className="mb-2 mb-0 text-10xl xs:text-13xl xs:-mt-0 font-semibold" style={{color: "#4f5eca"}}>
                         Predict the future <span style={{color: "#ffd73d", fontWeight:700}}>LUNA</span> price
                     </h2>
                 </div>
