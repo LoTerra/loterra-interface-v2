@@ -766,7 +766,7 @@ export default () => {
                 />
                 <meta
                     property="og:description"
-                    content="Rapido is the game of successive draws which offers a draw every 5 minutes! Try to find your 5 numbers among the combination of 4 blue and 1 yellow star numbers drawn at random and win up to $50,000!* | about LoTerra Rapido a new decentralized lottery game with fixed winnings on Terra Blockchain."
+                    content="Rapido is the game of successive draws which offers a draw every 5 minutes! Try to find your 5 numbers among the combination of 4 blue and 1 yellow star numbers drawn at random and win up to $50,000!*"
                 />
                 <meta
                     property="og:image"
@@ -785,7 +785,7 @@ export default () => {
                 />
                 <meta
                     property="twitter:description"
-                    content="Rapido is the game of successive draws which offers a draw every 5 minutes! Try to find your 5 numbers among the combination of 4 blue and 1 yellow star numbers drawn at random and win up to $50,000!* | about LoTerra Rapido a new decentralized lottery game with fixed winnings on Terra Blockchain."
+                    content="Rapido is the game of successive draws which offers a draw every 5 minutes! Try to find your 5 numbers among the combination of 4 blue and 1 yellow star numbers drawn at random and win up to $50,000!*"
                 />
             </Head>
         <div className="spacewager-beta">
