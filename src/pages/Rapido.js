@@ -206,9 +206,9 @@ export default () => {
 
                     let start_after = null
                     let loop = true
-
+                    let games_el = []
                     let promise_copy_games = new Promise(async (resolve, reject) => {
-                        let games_el = []
+
                         while (loop) {
                             // Prepare query
                             let query = {
@@ -229,13 +229,13 @@ export default () => {
                                 state.rapidoAddress,
                                 query,
                             )
-                            console.log(query)
-                            if (res_games.length > 0) {
 
+                            if (res_games.length > 0) {
                                 games_el = [...games_el, ...res_games]
                                 start_after = res_games[res_games.length - 1].game_id
                                 // get_user_combination(lotteries_state)
                             } else {
+
                                 loop = false
                                 start_after = null
                             }
@@ -484,8 +484,10 @@ export default () => {
                         
                         {games.map((game, k) => {
                             if (game.lottery_id == game_stats.game_stats_id) {
+                                console.log("ok")
+                                console.log(games.length)
                                 return (
-                                    <div key={game.game_id + game.lottery_id + k} style={{marginBottom: '5px'}}>
+                                    <div key={k} style={{marginBottom: '5px'}}>
                                         <span className="multiplier-table">
                                             x{game.multiplier}
                                         </span>
