@@ -867,12 +867,13 @@ export default () => {
                                     <span>ALTE</span>
                                 </h2>
                                 <div className="col-12 text-start mt-4 mb-4">
-                                    <button
+                                    <NavLink
                                         className={'btn btn-special'}
-                                        onClick={() => setBuyNow(!buyNow)}
+                                        to="/rapido"
+
                                     >
-                                        Buy Tickets
-                                    </button>
+                                        Play Rapido
+                                    </NavLink>
                                     <small
                                         style={{
                                             display: 'block',
@@ -881,9 +882,10 @@ export default () => {
                                             opacity: '0.6',
                                         }}
                                     >
-                                        You can buy tickets with{' '}
-                                        <strong>UST</strong> and{' '}
-                                        <strong>ALTE</strong>
+                                        {/*You can buy tickets with{' '}*/}
+                                        {/*<strong>UST</strong> and{' '}*/}
+                                        {/*<strong>ALTE</strong>*/}
+                                        LoTerra default lottery have been deprecated and replaced by Rapido
                                     </small>
                                 </div>
                                 <a
