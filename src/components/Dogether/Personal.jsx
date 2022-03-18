@@ -27,10 +27,10 @@ export default function Personal() {
                         <h3 className="text-start">1000 UST</h3>
                     </div>
                     <div className="col-6">
-                        <p className="m-0" style={{ color: '#82f3be' }}>
+                        <p className="m-0" style={{ color: '#F2D230' }}>
                             Current Profit UST
                         </p>
-                        <h3 className="text-start" style={{ color: '#82f3be' }}>
+                        <h3 className="text-start" style={{ color: '#F2D230' }}>
                             100 UST
                         </h3>
                     </div>
@@ -56,7 +56,7 @@ export default function Personal() {
                                 <h4>
                                     <Ticket
                                         size={30}
-                                        color={'#ff36ff'}
+                                        color={'#ffffff'}
                                         style={{
                                             position: 'relative',
                                             top: '-3px',
@@ -83,7 +83,7 @@ export default function Personal() {
                                 <h4>
                                     <Ticket
                                         size={30}
-                                        color={'#ff36ff'}
+                                        color={'#ffffff'}
                                         style={{
                                             position: 'relative',
                                             top: '-3px',
@@ -102,7 +102,7 @@ export default function Personal() {
                     <div className="col-12 my-3">
                         <div className="row">
                             <div className="col-12">
-                                <p style={{ color: '#82f3be' }}>
+                                <p style={{ color: '#F2D230' }}>
                                     + Average profits
                                 </p>
                             </div>
@@ -111,7 +111,7 @@ export default function Personal() {
                                     <div className="card-body">
                                         <small
                                             className="d-block"
-                                            style={{ color: '#82f3be' }}
+                                            style={{ color: '#F2D230' }}
                                         >
                                             DAILY
                                         </small>
@@ -134,7 +134,7 @@ export default function Personal() {
                                     <div className="card-body">
                                         <small
                                             className="d-block"
-                                            style={{ color: '#82f3be' }}
+                                            style={{ color: '#F2D230' }}
                                         >
                                             MONTHLY
                                         </small>
@@ -157,7 +157,7 @@ export default function Personal() {
                                     <div className="card-body">
                                         <small
                                             className="d-block"
-                                            style={{ color: '#82f3be' }}
+                                            style={{ color: '#F2D230' }}
                                         >
                                             YEARLY
                                         </small>
