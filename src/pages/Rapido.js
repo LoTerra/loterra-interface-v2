@@ -795,7 +795,7 @@ export default () => {
         /*
             TODO: show a loader | Loading current lotteries...
          */
-    }, [rapidoState.round])
+    }, [rapidoState.round, state.rapidoCurrentRound])
 
     useEffect(() => {
         setGameStats([])
