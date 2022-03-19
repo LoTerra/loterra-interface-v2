@@ -433,16 +433,10 @@ export default function RapidoCardBody(props) {
                             <h4 className="fs-5">Winning number</h4>
                             <div className="col-12 mb-2">
                                 <div className={'rapido-winning-combination'}>
-                                    {winningCombination.map((nr, k) => {
-                                        return (
-                                            <span
-                                                key={k}
-                                                className="rapido-combi-nr medium"
-                                            >
-                                        {nr}
-                                    </span>
-                                        )
-                                    })}
+                                    <span className="rapido-combi-nr medium">{winningCombination[0]}</span>
+                                    <span className="rapido-combi-nr medium">{winningCombination[1]}</span>
+                                    <span className="rapido-combi-nr medium">{winningCombination[2]}</span>
+                                    <span className="rapido-combi-nr medium">{winningCombination[3]}</span>
                                     <span className="rapido-combi-nr g medium">
                                 {bonusNumber}
                             </span>

@@ -605,7 +605,7 @@ export default function ConnectWallet() {
                                     size={16}
                                     style={{ marginTop: '-4px' }}
                                 />{' '}
-                                Terra Station (extension/mobile)
+                                Terra Station (Mobile or Desktop)
                             </button>
                             <button
                                 onClick={() => connectTo('mobile')}
@@ -615,8 +615,41 @@ export default function ConnectWallet() {
                                     size={16}
                                     style={{ marginTop: '-4px' }}
                                 />{' '}
-                                Terra Station (mobile for desktop)
+                                Terra Station (Mobile to Desktop)
                             </button>
+                            <a
+                                href="https://chrome.google.com/webstore/detail/terra-station-wallet/aiifbnbfobpmeekipheeijimdpnlpgpp"
+                                className="dropdown-item"
+                                target="_blank"
+                            >
+                                <CaretRight
+                                    size={16}
+                                    style={{ marginTop: '-4px' }}
+                                />
+                                Install Terra Station extension
+                            </a>
+                            <a
+                                href="https://ramp.kado.money/"
+                                className="dropdown-item"
+                                target="_blank"
+                            >
+                                <CaretRight
+                                    size={16}
+                                    style={{ marginTop: '-4px' }}
+                                />
+                                Top up UST with credit card (Terra Station address required)
+                            </a>
+                            <a
+                                href="https://medium.com/stakingbits/how-to-obtain-ust-on-terra-for-anchor-protocol-station-extension-setup-a633d8f4896f"
+                                className="dropdown-item"
+                                target="_blank"
+                            >
+                                <CaretRight
+                                    size={16}
+                                    style={{ marginTop: '-4px' }}
+                                />
+                                How to setup my wallet?
+                            </a>
                         </ul>
                     </div>
                 </>
