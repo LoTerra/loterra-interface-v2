@@ -176,7 +176,6 @@ export default () => {
     }
 
     async function getGameStatsPagination(start_after) {
-        console.log("eeeeee")
         try {
             // Prepare query
             let query = {
@@ -268,22 +267,28 @@ export default () => {
                     console.log(w)
                     let new_games_arr = []
                     let new_winning_obj = {}
+
                     w.map(e => {
                         if (Array.isArray(e)){
                             new_games_arr = [...new_games_arr, ...e]
                         }else {
-                            let newWinningNumber = [...e.winning_number, e.bonus_number]
-                            let new_arr = {
-                                ...winningNumber,
-                                ...new_winning_obj
+                            if (e.winning_number) {
+                                let newWinningNumber = [...e.winning_number, e.bonus_number]
+                                let new_arr = {
+                                    ...winningNumber,
+                                    ...new_winning_obj
+                                }
+                                new_arr[e.lottery_id] = newWinningNumber
+                                new_winning_obj = new_arr
                             }
-                            new_arr[e.lottery_id] = newWinningNumber
-                            new_winning_obj = new_arr
                         }
                     })
-                    console.log(games)
                     setGames([...games, ...new_games_arr])
                     setWinningNumber(new_winning_obj)
+
+
+                    //console.log(games)
+
                 })
             }
 
@@ -484,8 +489,6 @@ export default () => {
                         
                         {games.map((game, k) => {
                             if (game.lottery_id == game_stats.game_stats_id) {
-                                console.log("ok")
-                                console.log(games.length)
                                 return (
                                     <div key={k} style={{marginBottom: '5px'}}>
                                         <span className="multiplier-table">
