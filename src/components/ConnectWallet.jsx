@@ -637,7 +637,7 @@ export default function ConnectWallet() {
                                     size={16}
                                     style={{ marginTop: '-4px' }}
                                 />
-                                Top up UST with credit card (Terra Station address required)
+                                Top up UST with credit card
                             </a>
                             <a
                                 href="https://medium.com/stakingbits/how-to-obtain-ust-on-terra-for-anchor-protocol-station-extension-setup-a633d8f4896f"
