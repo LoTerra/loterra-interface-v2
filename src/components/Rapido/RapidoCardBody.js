@@ -437,13 +437,13 @@ export default function RapidoCardBody(props) {
                                         return (
                                             <span                                              
                                                 key={k}
-                                                className={"rapido-combi-nr medium drop-"+k}
+                                                className={"rapido-combi-nr medium ball drop d"+k}
                                             >
                                         {nr}
                                     </span>
                                         )
                                     })}
-                                    <span className="rapido-combi-nr g medium drop-4">
+                                    <span className="rapido-combi-nr medium ball drop y d4">
                                 {bonusNumber}
                             </span>
 

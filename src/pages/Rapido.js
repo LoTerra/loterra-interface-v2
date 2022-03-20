@@ -2,7 +2,7 @@ import { Head } from 'react-static'
 import React, { useState, useEffect, useCallback, useRef, useMemo } from 'react'
 import { useStore } from '../store'
 import RapidoCard from '../components/Rapido/RapidoCard'
-import { ArrowsClockwise, Clock, HourglassSimpleHigh, Lightning, Star, Warning } from 'phosphor-react'
+import { ArrowsClockwise, CaretLeft, CaretRight, Clock, HourglassSimpleHigh, Lightning, Star, Warning } from 'phosphor-react'
 
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/swiper-bundle.min.css'
@@ -803,10 +803,10 @@ export default () => {
                     your actions are your own responsibility.
                 </p>
             </div>
-            <div className="w-100 py-3 pt-md-5 text-center mb-2">
+            <div className="w-100 pt-3 pt-md-5 text-center mb-2">
 
                 <img src="/Rapido-logo.svg"  className={'img-fluid'} style={{maxHeight: ' 135px', marginBottom: '-11px'}}/>
-                <h2 className="mb-2 mb-0 text-10xl xs:text-13xl xs:-mt-0 font-semibold" style={{color: "#048ABF"}}>
+                <h2 className="mb-2 mb-0 font-semibold rapido-slogan" style={{color: "#048ABF"}}>
                     Win up to <span style={{color: '#F2D230', fontWeight: 700}}>$<CountUp
                     start={0}
                     end={50000}
@@ -834,18 +834,7 @@ export default () => {
                         </div> */}
                         <div className="col-12 overflow-hidden mb-4">
                             <div className="w-100 order-4 mb-2">
-                                <div className="row">
-                                    <div className="col-6 text-end">
-                                        <button className="swiper-prev btn-rapido-nav pb-2">
-                                            <ArrowLeft size={24} />
-                                        </button>
-                                    </div>
-                                    <div className="col-6 text-start">
-                                        <button className="swiper-next btn-rapido-nav pb-2">
-                                            <ArrowRight size={24} />
-                                        </button>
-                                    </div>
-                                </div>
+                                
                             </div>
                             {lotteries.length <= 1 && !lotteryStats && (
                                 <div className="w-100 py-5 text-center">
@@ -899,6 +888,20 @@ export default () => {
                                     }
                                     onSwiper={(swiper) => console.log(swiper)}
                                 >
+                                <div className="w-100 slider-pagination-rapido">
+                                    <div className="row">
+                                        <div className="col-6 text-start px-0">
+                                            <button className="swiper-prev btn-rapido-nav">
+                                                <CaretLeft weight={'bold'} size={24} />
+                                            </button>
+                                        </div>
+                                        <div className="col-6 text-end px-0">
+                                            <button className="swiper-next btn-rapido-nav">
+                                                <CaretRight weight={'bold'} size={24} />
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
                                     {lotteries.length > 0 &&
                                         lotteries.map((obj, k) => {
                                             return (
