@@ -12,6 +12,7 @@ import { MsgExecuteContract, WasmAPI } from '@terra-money/terra.js'
 import Pusher from 'pusher-js'
 import toast, { Toaster } from 'react-hot-toast'
 import CountUp from 'react-countup'
+import axios from "axios";
 
 export default () => {
     const { state, dispatch } = useStore()
@@ -265,27 +266,34 @@ export default () => {
                 })
                 Promise.all(resolve_promise).then((w) => {
                     console.log(w)
-                    let new_games_arr = []
-                    let new_winning_obj = {}
+                   let new_games_arr = []
+                   let new_winning_obj = {}
+                    let dataPromise = w.map(async e => {
+                       if (Array.isArray(e)){
+                           new_games_arr = [...new_games_arr, ...e]
+                           return new_games_arr
+                       }else {
+                           if (e.winning_number) {
+                               const res2 = await axios.get(`https://drand.cloudflare.com/public/${e.terrand_round}`)
+                               const {randomness} = res2.data
+                               let newWinningNumber = [...e.winning_number, e.bonus_number, e.terrand_round, randomness]
+                               console.log(newWinningNumber)
+                               let new_arr = {
+                                   ...winningNumber,
+                                   ...new_winning_obj
+                               }
+                               new_arr[e.lottery_id] = newWinningNumber
+                               new_winning_obj = new_arr
+                               return new_winning_obj
+                           }
+                       }
 
-                    w.map(e => {
-                        if (Array.isArray(e)){
-                            new_games_arr = [...new_games_arr, ...e]
-                        }else {
-                            if (e.winning_number) {
-                                let newWinningNumber = [...e.winning_number, e.bonus_number]
-                                let new_arr = {
-                                    ...winningNumber,
-                                    ...new_winning_obj
-                                }
-                                new_arr[e.lottery_id] = newWinningNumber
-                                new_winning_obj = new_arr
-                            }
-                        }
+                   })
+
+                    Promise.all(dataPromise).then((data) =>{
+                        setGames([...games, ...new_games_arr])
+                        setWinningNumber(new_winning_obj)
                     })
-                    setGames([...games, ...new_games_arr])
-                    setWinningNumber(new_winning_obj)
-
 
                     //console.log(games)
 
@@ -441,6 +449,17 @@ export default () => {
                 </td>
                 <td className="text-center">{game_stats.total_ticket}</td>
                 {/*<td className='text-center'>{lottery.counter_player ? lottery.counter_player : '-'}</td>*/}
+                <td className='text-center'>
+                    { winningNumber[game_stats.game_stats_id] ? <>
+                        <a style={{textDecoration: 'None'}} href={`https://drand.cloudflare.com/public/${winningNumber[game_stats.game_stats_id][5]}`}>
+                            <span style={{padding: "10px"}}>{winningNumber[game_stats.game_stats_id][6][0]}</span>
+                            <span style={{padding: "10px"}}>{winningNumber[game_stats.game_stats_id][6][1]}</span>
+                            <span style={{padding: "10px"}}>{winningNumber[game_stats.game_stats_id][6][2]}</span>
+                            <span style={{padding: "10px"}}>{winningNumber[game_stats.game_stats_id][6][3]}</span>
+                            <span style={{padding: "10px"}}>{winningNumber[game_stats.game_stats_id][6][63]}</span>
+                        </a>
+                    </> : <></> }
+                    </td>
                 <td className='text-center'>
                 { winningNumber[game_stats.game_stats_id] ?
 
@@ -1053,12 +1072,16 @@ export default () => {
                                 <tr>
                                     <th style={{ minWidth: 100 }}>draws</th>
                                     <th
-                                        style={{ minWidth: 150 }}
                                         className="text-center"
                                     >
                                         Tickets played
                                     </th>
                                     {/*<th style={{ minWidth: 100 }} className='text-center'>Numbers of players</th>*/}
+                                    <th
+                                        className="text-center"
+                                    >
+                                       Provably fair
+                                    </th>
                                     <th
                                         style={{ minWidth: 250 }}
                                         className="text-center"
