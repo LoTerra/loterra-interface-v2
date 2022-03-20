@@ -41,7 +41,7 @@ export default () => {
     return (
         <>
             <div
-                className="bg-hero"
+                className="bg-hero mt-3"
                 style={{
                     backgroundSize: 'cover',
                     backgroundPosition: 'center center',
@@ -58,7 +58,7 @@ export default () => {
                     <div className="row">
                         <div className="col-12">
                             <img
-                                src="/dogether-7.png"
+                                src="/dogether-logo.svg"
                                 className="img-fluid dogether-logo"
                             />
                         </div>

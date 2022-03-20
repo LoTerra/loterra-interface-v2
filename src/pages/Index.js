@@ -801,13 +801,16 @@ export default () => {
                     
                         >
                             <SwiperSlide key={1}>
-                            <div className="card lota-card lota-card-glass text-center">
+                            <div className="card lota-card lota-card-glass text-center" 
+                                style={{borderRadius:'20px', border:'0px'}}
+                            >
                             <div className="card-body" style={{minHeight:76}}>
                                 <NavLink to="/rapido" className="btn btn-default text-white float-end fw-bold btn-sm w-100"
                                 style={{
                                     position:'absolute',
                                     right:0,
-                                    bottom:-10
+                                    bottom:-10,
+                                    borderRadius:'10px', 
                                 }}
                                 >Play Now</NavLink>
                                 <img src={'/Rapido-logo.svg'} style={{maxHeight:'60px'}} className="img-fluid"/>
@@ -817,13 +820,16 @@ export default () => {
                         </div>
                             </SwiperSlide>
                             <SwiperSlide key={2}>
-                            <div className="card lota-card lota-card-glass text-center">
+                            <div className="card lota-card lota-card-glass text-center" 
+                                style={{borderRadius:'20px', border:'0px'}}
+                            >
                             <div className="card-body" style={{minHeight:76}}>
                                 <NavLink to="/spacewager" className="btn btn-default text-white float-end fw-bold btn-sm w-100"
                                 style={{
                                     position:'absolute',
                                     right:0,
-                                    bottom:-10
+                                    bottom:-10,
+                                    borderRadius:'10px',
                                 }}
                                 >Play Now</NavLink>
                                 <img src={'/spacewager-logo.svg'} style={{maxHeight:'60px'}} className="img-fluid"/>
@@ -1561,123 +1567,6 @@ export default () => {
 
             <JackpotResults />
 
-            <div
-                ref={loterraStats}
-                className="container"
-                style={{ marginTop: '8rem' }}
-            >
-                <div className="card lota-card">
-                    <div className="card-header text-center">
-                        <div className="card-header-icon">
-                            <ChartPie size={90} color="#20FF93" />
-                        </div>
-                        <h3>LoTerra Stats</h3>
-                    </div>
-                    <div className="card-body">
-                        <div className="row">
-                            <div className="col-md-6 mb-3">
-                                <div className="lota-stats mb-4 mb-md-0">
-                                    {lotaPrice.assets && (
-                                        <>
-                                            <p>Current LOTA price</p>
-                                            <h5>
-                                                {numeral(
-                                                    lotaPrice.assets[1].amount /
-                                                        lotaPrice.assets[0]
-                                                            .amount,
-                                                ).format('0.000')}
-                                                <span>UST</span>
-                                            </h5>
-                                            {/* <p>{contractJackpotInfo}</p> */}
-                                        </>
-                                    )}
-                                </div>
-                            </div>
-                            <div className="col-md-6 mb-3">
-                                <div className="lota-stats">
-                                    <p>Current lottery balance</p>
-                                    <h5>
-                                        {numeral(contractBalance).format(
-                                            '0,0.00',
-                                        )}
-                                        <span>UST</span>
-                                    </h5>
-                                </div>
-                            </div>
-                            <div className="col-md-6 mb-3">
-                                <div className="lota-stats">
-                                    <p>Circulating SUPPLY</p>
-                                    <h5>
-                                        {numeral(circulatingSupply()).format(
-                                            '0,0.00',
-                                        )}
-                                        <span>LOTA</span>
-                                    </h5>
-                                </div>
-                            </div>
-                            <div className="col-md-6 mb-3">
-                                <div className="lota-stats">
-                                    <p>Total SUPPLY</p>
-                                    <h5>
-                                        {numeral(totalSupply()).format(
-                                            '0,0.00',
-                                        )}
-                                        <span>LOTA</span>
-                                    </h5>
-                                </div>
-                            </div>
-                            <div className="col-md-12 mb-3">
-                                <div className="lota-stats">
-                                    {lotaPrice.assets && (
-                                        <>
-                                            <p>Market Cap</p>
-                                            <h5>
-                                                {numeral(marketCap()).format(
-                                                    '0,0.00',
-                                                )}
-                                                <span>UST</span>
-                                            </h5>
-                                        </>
-                                    )}
-                                </div>
-                            </div>
-                            <div className="col-md-12 text-center">
-                                <a
-                                    href="https://coinhall.org/charts/terra/terra1pn20mcwnmeyxf68vpt3cyel3n57qm9mp289jta"
-                                    target="_blank"
-                                    className="btn btn-plain"
-                                    style={{
-                                        color: 'rgb(166, 159, 187)',
-                                        fontSize: '16px',
-                                    }}
-                                >
-                                    <ChartLine
-                                        size={21}
-                                        style={{
-                                            position: 'relative',
-                                            top: '-2px',
-                                            marginRight: '3px',
-                                        }}
-                                    />
-                                    View chart
-                                </a>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            {/* <div className="container" style={{ marginTop: '2rem' }}>
-                <div className="card lota-card">
-                    <div className="card-body">
-                        <coingecko-coin-price-chart-widget
-                            currency="usd"
-                            coin-id="loterra"
-                            locale="en"
-                            height="300"
-                        ></coingecko-coin-price-chart-widget>
-                    </div>
-                </div>
-            </div> */}
             <Footer />
 
             <Notification

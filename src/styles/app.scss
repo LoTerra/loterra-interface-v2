@@ -372,7 +372,7 @@ h4,
         width: 10px;
         height: 10px;
         border-radius: 100px;
-        background: #36df8d;
+        background: #17b96b;
         display: inline-block;
         margin-right: 3px;
     }
@@ -380,7 +380,7 @@ h4,
         width: 10px;
         height: 10px;
         border-radius: 100px;
-        background: #342756;
+        background: #4d2bab;
         display: inline-block;
         margin-right: 3px;
     }
@@ -388,7 +388,7 @@ h4,
         width: 10px;
         height: 10px;
         border-radius: 100px;
-        background: #c345c3;
+        background: #f038f0;
         display: inline-block;
         margin-right: 3px;
     }
@@ -396,7 +396,7 @@ h4,
         width: 10px;
         height: 10px;
         border-radius: 100px;
-        background: #505eca;
+        background: #048abf;
         display: inline-block;
         margin-right: 3px;
     }
@@ -404,7 +404,7 @@ h4,
         width: 10px;
         height: 10px;
         border-radius: 100px;
-        background: #ffcb63;
+        background: #F2D230;
         display: inline-block;
         margin-right: 3px;
     }
@@ -511,9 +511,7 @@ h4,
     }
     h3 {
         font-size: 30px !important;
-        font-family: 'Sigmar One';
-        color: #f5c753 !important;
-        text-shadow: 1px 1px 20px #10003b, 1px 2px 0px #8c6910;
+        color: #ffffff !important;
     }
     .heading-1 {
         font-size: 14px;
@@ -530,7 +528,6 @@ h4,
         font-size: 4vw;
         font-weight: 700;
         margin-bottom: 7px;
-        text-shadow: 0px 2px 0px #adadad;
         @media (max-width: 768px) {
             font-size: 8vw;
         }
@@ -540,7 +537,6 @@ h4,
         font-weight: 700;
         width: 50%;
         text-align: center;
-        text-shadow: 0px 1px 0px #adadad;
         @media (max-width: 768px) {
             font-size: 4vw;
         }
@@ -549,15 +545,13 @@ h4,
         }
     }
     .input-heading {
-        font-family: 'Sigmar One';
         font-size: 22px;
-        color: #f5c753;
+        color: #fff;
         margin-bottom: 10px;
         text-align: center;
-        text-shadow: 1px 1px 20px #10003b, 1px 2px 0px #8c6910;
     }
     .stats-card {
-        background: linear-gradient(45deg, #30d9876e, #160842);
+        background: #281b59;
         border-radius: 10px;
         color: #fff;
         padding: 5px;
@@ -581,8 +575,7 @@ h4,
             font-size: 20px;
             font-weight: 700;
             border-radius: 6px;
-            box-shadow: 0px 5px 6px #ff36ff63;
-            background: linear-gradient(45deg, #ee26f1, #9a23a8);
+            background: #F2D230;
         }
     }
 }
@@ -613,10 +606,8 @@ h4,
 
 .dogether-settings-info {
     .title {
-        font-family: 'Sigmar One';
         font-size: 22px;
-        color: #f5c753;
-        text-shadow: 1px 1px 20px #10003b, 1px 2px 0px #8c6910;
+        color: #fff;
     }
     small {
         font-size: 10px;
