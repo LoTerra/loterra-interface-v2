@@ -116,6 +116,8 @@
     height: 50px;
     width: 25px;
     padding: 0;
+    position:relative;
+    z-index:9999;
     svg {
         position:relative;
         top:0px;
@@ -424,7 +426,7 @@
     left: 0;
     right: 0;
     top: 40%;
-    z-index: 999;
+    
 }
 
 
