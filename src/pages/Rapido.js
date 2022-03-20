@@ -449,17 +449,19 @@ export default () => {
                 </td>
                 <td className="text-center">{game_stats.total_ticket}</td>
                 {/*<td className='text-center'>{lottery.counter_player ? lottery.counter_player : '-'}</td>*/}
-                <td className='text-center'>
-                    { winningNumber[game_stats.game_stats_id] ? <>
-                        <a style={{textDecoration: 'None'}} href={`https://drand.cloudflare.com/public/${winningNumber[game_stats.game_stats_id][5]}`}>
-                            <span style={{padding: "10px"}}>{winningNumber[game_stats.game_stats_id][6][0]}</span>
-                            <span style={{padding: "10px"}}>{winningNumber[game_stats.game_stats_id][6][1]}</span>
-                            <span style={{padding: "10px"}}>{winningNumber[game_stats.game_stats_id][6][2]}</span>
-                            <span style={{padding: "10px"}}>{winningNumber[game_stats.game_stats_id][6][3]}</span>
-                            <span style={{padding: "10px"}}>{winningNumber[game_stats.game_stats_id][6][63]}</span>
-                        </a>
-                    </> : <></> }
-                    </td>
+
+                {/*<td className='text-center'>*/}
+                {/*    { winningNumber[game_stats.game_stats_id] ? <>*/}
+                {/*        <a style={{textDecoration: 'None'}} href={`https://drand.cloudflare.com/public/${winningNumber[game_stats.game_stats_id][5]}`}>*/}
+                {/*            <span style={{padding: "10px"}}>{winningNumber[game_stats.game_stats_id][6][0]}</span>*/}
+                {/*            <span style={{padding: "10px"}}>{winningNumber[game_stats.game_stats_id][6][1]}</span>*/}
+                {/*            <span style={{padding: "10px"}}>{winningNumber[game_stats.game_stats_id][6][2]}</span>*/}
+                {/*            <span style={{padding: "10px"}}>{winningNumber[game_stats.game_stats_id][6][3]}</span>*/}
+                {/*            <span style={{padding: "10px"}}>{winningNumber[game_stats.game_stats_id][6][63]}</span>*/}
+                {/*        </a>*/}
+                {/*    </> : <></> }*/}
+                {/*    </td>*/}
+
                 <td className='text-center'>
                 { winningNumber[game_stats.game_stats_id] ?
 
@@ -1077,11 +1079,11 @@ export default () => {
                                         Tickets played
                                     </th>
                                     {/*<th style={{ minWidth: 100 }} className='text-center'>Numbers of players</th>*/}
-                                    <th
-                                        className="text-center"
-                                    >
-                                       Provably fair
-                                    </th>
+                                    {/*<th*/}
+                                    {/*    className="text-center"*/}
+                                    {/*>*/}
+                                    {/*   Provably fair*/}
+                                    {/*</th>*/}
                                     <th
                                         style={{ minWidth: 250 }}
                                         className="text-center"
