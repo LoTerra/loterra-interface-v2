@@ -1074,6 +1074,7 @@ export default () => {
                                 <tr>
                                     <th style={{ minWidth: 100 }}>draws</th>
                                     <th
+                                        style={{ minWidth: 150 }}
                                         className="text-center"
                                     >
                                         Tickets played
