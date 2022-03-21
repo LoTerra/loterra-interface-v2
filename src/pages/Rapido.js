@@ -803,7 +803,7 @@ export default () => {
                     your actions are your own responsibility.
                 </p>
             </div>
-            <div className="w-100 pt-1 pt-md-5 text-center mb-2">
+            <div className="w-100 pt-1 pt-md-3 text-center mb-2">
 
                 <img src="/Rapido-logo.svg"  className={'img-fluid'} style={{maxHeight: ' 135px', marginBottom: '-11px'}}/>
                 <h2 className="mb-2 mb-0 font-semibold rapido-slogan" style={{color: "#048ABF"}}>
