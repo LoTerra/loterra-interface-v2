@@ -833,8 +833,21 @@ export default () => {
                             </div>
                         </div> */}
                         <div className="col-12 overflow-hidden mb-4">
-                            <div className="w-100 order-4 mb-2">
-                                
+                            <div className="order-4">
+                            <div className="w-100 slider-pagination-rapido">
+                                    <div className="row">
+                                        <div className="col-6 text-end px-0">
+                                            <button className="swiper-prev btn-rapido-nav">
+                                                <CaretLeft weight={'bold'} size={24} />
+                                            </button>
+                                        </div>
+                                        <div className="col-6 text-start px-0">
+                                            <button className="swiper-next btn-rapido-nav">
+                                                <CaretRight weight={'bold'} size={24} />
+                                            </button>
+                                        </div>
+                                    </div>
+                                </div>
                             </div>
                             {lotteries.length <= 1 && !lotteryStats && (
                                 <div className="w-100 py-5 text-center">
@@ -850,6 +863,7 @@ export default () => {
                                 </div>
                             )}
                             {lotteries.length > 0  && lotteryStats && (
+                                
                                 <Swiper
                                     threshold={10}
                                     spaceBetween={35}
@@ -888,20 +902,7 @@ export default () => {
                                     }
                                     onSwiper={(swiper) => console.log(swiper)}
                                 >
-                                <div className="w-100 slider-pagination-rapido">
-                                    <div className="row">
-                                        <div className="col-6 text-start px-0">
-                                            <button className="swiper-prev btn-rapido-nav">
-                                                <CaretLeft weight={'bold'} size={24} />
-                                            </button>
-                                        </div>
-                                        <div className="col-6 text-end px-0">
-                                            <button className="swiper-next btn-rapido-nav">
-                                                <CaretRight weight={'bold'} size={24} />
-                                            </button>
-                                        </div>
-                                    </div>
-                                </div>
+                              
                                     {lotteries.length > 0 &&
                                         lotteries.map((obj, k) => {
                                             return (
@@ -932,9 +933,12 @@ export default () => {
                                                     />
                                                 </SwiperSlide>
                                             )
+                                            
                                         })}
+                            
                                 </Swiper>
                             )}
+                              
                         </div>
                     </div>
                 </div>
