@@ -174,15 +174,14 @@ h4,
 }
 
 .form-control {
-    background: #10003b;
+    background: #331093;
     border: 1px solid #44377e;
     box-sizing: border-box;
-    box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 10px;
     color: #fff;
     &:focus {
-        background: #10003b;
-        border: 1px solid $primary;
+        background: #331093;
+        border: 1px solid #F2D230;
         color: #fff;
     }
     &::placeholder {
@@ -502,11 +501,8 @@ h4,
 }
 
 .dogether-card {
-    background: linear-gradient(
-        328.75deg,
-        #10003ba6 -5.49%,
-        #0f0038f2 104.44%
-    ) !important;
+    background: linear-gradient(45deg, #4d2bab, #2e0e85) !important;
+    border-radius: 20px;
     @media (max-width: 1100px) {
     }
     h3 {
@@ -551,7 +547,7 @@ h4,
         text-align: center;
     }
     .stats-card {
-        background: #281b59;
+        background: #331093;
         border-radius: 10px;
         color: #fff;
         padding: 5px;

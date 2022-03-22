@@ -432,7 +432,11 @@ export default function Main(props) {
                         The amount you want to pool
                     </p>
                     <div className="input-group mb-3">
-                        <span className="input-group-text" id="basic-addon1">
+                        <span className="input-group-text" id="basic-addon1"
+                            style={{
+                                background:"#331093" 
+                            }}
+                        >
                             <img
                                 src="/UST.svg"
                                 width="30px"
@@ -608,6 +612,9 @@ export default function Main(props) {
                             <div className="col-md-6 mb-3">
                                 <button
                                     className="btn btn-plain-lg w-100 mt-2"
+                                    style={{
+                                        background: "#2e0e85"
+                                    }}
                                     onClick={(e) => doGetherUnstake()}
                                 >
                                     UnPool
