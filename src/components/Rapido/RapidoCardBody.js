@@ -4,11 +4,16 @@ import { useStore } from '../../store'
 import { WasmAPI } from '@terra-money/terra.js'
 import { Lightning, Star } from 'phosphor-react'
 import Animation from './animation.svg'
-import useSound from 'use-sound';
 
+//Eggs
+import YellowEgg from './eggs/yellow.js';
+import BlueEgg from './eggs/blue.js';
+
+//Sound code
+import useSound from 'use-sound';
 import buttonSfx from './sounds/navigation_hover-tap.mp3';
 import removeSfx from './sounds/ui_lock.mp3';
-import errorSfx from './sounds/navigation_backward-selection.mp3';
+import breakEggSfx from './sounds/notification_simple-02.mp3';
  
 
 export default function RapidoCardBody(props) {
@@ -17,6 +22,7 @@ export default function RapidoCardBody(props) {
     //Sounds declaration
     const [playButtonClick] = useSound(buttonSfx);  
     const [playRemove] = useSound(removeSfx);
+    const [playBreakEgg] = useSound(breakEggSfx);
 
 
     const {
@@ -44,6 +50,13 @@ export default function RapidoCardBody(props) {
     const [numberFour, setNumberFour] = useState('')
     const [numberBonus, setNumberBonus] = useState('')
 
+    const [revealNrOne, setRevealNrOne] = useState(false)
+    const [revealNrTwo, setRevealNrTwo] = useState(false)
+    const [revealNrThree, setRevealNrThree] = useState(false)
+    const [revealNrFour, setRevealNrFour] = useState(false)
+    const [revealNrBonus, setRevealNrBonus] = useState(false)
+
+
     const selectNumbers = (nr) => {
         playButtonClick()
         if (!numberOne) {
@@ -62,6 +75,21 @@ export default function RapidoCardBody(props) {
     const selectBonus = (nr) => {
         playButtonClick()
         setNumberBonus(nr)
+    }
+
+    function getBrokenEggStatus(nr) {
+        switch(nr){
+            case 0:
+            return revealNrOne
+            case 1:
+            return revealNrTwo
+            case 2:
+            return revealNrThree
+            case 3:
+            return revealNrFour
+            case 4:
+            return revealNrBonus
+        }
     }
 
     function removeNumberFromArray(nr) {
@@ -451,15 +479,18 @@ export default function RapidoCardBody(props) {
                                         return (
                                             <span                                              
                                                 key={k}
-                                                className={"rapido-combi-nr medium ball drop d"+k}
+                                                className={"ball-holder"}
+                                                onClick={() => {playBreakEgg();  k == 0 ? setRevealNrOne(true) : k == 1 ? setRevealNrTwo(true) : k == 2 ? setRevealNrThree(true) : k == 3 ? setRevealNrFour(true) : ''}}
                                             >
-                                        {nr}
+                                                <span className={"egg " + (getBrokenEggStatus(k) ? 'broken' : '')}><BlueEgg/></span>
+                                                <span className={"ball " + (getBrokenEggStatus(k) ? 'broken' : '')}>{nr}</span>
                                     </span>
                                         )
                                     })}
-                                    <span className="rapido-combi-nr medium ball drop y d4">
-                                {bonusNumber}
-                            </span>
+                                    <span className="ball-holder" onClick={ () => {playBreakEgg(); setRevealNrBonus(true)}}>
+                                        <span className={"egg " + (getBrokenEggStatus(4) ? 'broken' : '')}><YellowEgg/></span>
+                                        <span className={"ball y " + (getBrokenEggStatus(4) ? 'broken' : '')}>{bonusNumber}</span>                                        
+                                    </span>
 
                                 </div>
                             </div>

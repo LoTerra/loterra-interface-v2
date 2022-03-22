@@ -788,7 +788,7 @@ export default () => {
                     content="Rapido is the game of successive draws which offers a draw every 5 minutes! Try to find your 5 numbers among the combination of 4 blue and 1 yellow star numbers drawn at random and win up to $50,000!* | about LoTerra Rapido a new decentralized lottery game with fixed winnings on Terra Blockchain."
                 />
             </Head>
-            <img src={'/rapido-bg.svg'} className="rapido-bg" style={{position:'absolute', zIndex:-1, left:0, right:0, top:0, bottom:0}}/>
+            <img src={'/rapido-bg.svg'} className="rapido-bg"/>
 
         <div className="spacewager-beta">
                 <p className="mb-0">
@@ -805,7 +805,7 @@ export default () => {
                     your actions are your own responsibility.
                 </p>
             </div>
-            <div className="w-100 pt-1 px-4 px-md-0 pt-md-3 text-center mb-2">
+            <div className="w-100 pt-1 px-4 px-md-0 pt-md-3 text-center mb-2 position-relative">
 
                 <img src="/rapido-logo.png"  className={'img-fluid my-3'} style={{maxHeight: ' 135px', marginBottom: '41px'}}/>
                 <img src="/rapido-slogan.png"  className={'img-fluid rapido-slogan-img'} style={{position:'absolute', marginTop:71, marginLeft:-125}}/>

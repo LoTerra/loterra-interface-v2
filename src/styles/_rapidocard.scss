@@ -117,6 +117,11 @@
 }
 
 .rapido-bg {
+    position:fixed;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
     @media(max-width:620px){
         background-size:200%;
     }
@@ -493,6 +498,42 @@
     to {transform: translateX(45px)}
   }
 
+  .ball-holder {
+      position:relative;
+      width:50px; 
+      height:50px;
+      margin: 0 3px;
+    .egg {
+        position:absolute;
+        left:0;
+        width:auto;     
+        transition:all 150ms ease-in-out;   
+        svg {      
+            height:auto;
+            width:40px;
+            -webkit-animation: vibrate 2s cubic-bezier(.36, .07, .19, .97) infinite;
+            animation: vibrate 2s cubic-bezier(.36, .07, .19, .97) infinite;
+            -webkit-transform: translate3d(0, 0, 0);
+            transform: translate3d(0, 0, 0);
+            -webkit-backface-visibility: hidden;
+            backface-visibility: hidden;
+            -webkit-perspective: 300px;
+            perspective: 300px;
+            transition:all 150ms ease-in-out;
+        
+        }
+        &.broken {
+            opacity:0;
+            transform:scale(5);
+            visibility: hidden;
+        }
+        &:hover {
+            transform:scale(1.2);
+            cursor:pointer;
+        }
+    }
+  }
+
   .ball {
     color:#fff;
     width:50px; 
@@ -503,12 +544,15 @@
     font-size:28px;
     border-radius:100%;
      background: radial-gradient(circle at 65% 15%, #d9f4ff  1px, #aee8ff 3%, #048abf 60%, #022330 100%);
-    animation-name:drop; 
-    animation-duration:.5s;
-      transition-timing-function: ease-in-out;
-    animation-fill-mode: forwards;
+
     display:inline-block;
-    opacity:0;
+    opacity:0;    
+    position:relative;
+    visibility: hidden;
+    &.broken {
+        visibility: visible;
+        opacity:1;
+    }
   }
 
   .y {
@@ -535,6 +579,25 @@
 .d5 {
  animation-delay:9s;
 }
+
+
+@keyframes vibrate {
+    0.50%, 10%, 20%, 30%, 40%, 50%
+    {
+      -webkit-transform: translate3d(0.5px, 0, 0);
+      transform: translate3d(0.5px, 0, 0);
+    }
+    5%, 15%, 25%, 35%, 45% 
+    {
+      -webkit-transform: translate3d(-0.5px, 0, 0);
+      transform: translate3d(-0.5px, 0, 0);
+    }
+    100% {
+      -webkit-transform: translate3d(0.5px, 0, 0);
+      transform: translate3d(0.5px, 0, 0);
+    }
+  
+  }
 
 @keyframes drop {
  0% {opacity:0; transform:translateY(-100px) scale(0) rotateZ(180deg); box-shadow:0px 0px 0px 0px #000;} 
