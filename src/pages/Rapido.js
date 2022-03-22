@@ -789,6 +789,7 @@ export default () => {
                 />
             </Head>
         <div className="spacewager-beta">
+            <img src={'/rapido-bg.svg'} style={{position:'absolute', zIndex:-1, left:0, right:0, top:0, bottom:0}}/>
                 <p className="mb-0">
                     <Warning
                         size={'13px'}
@@ -805,14 +806,15 @@ export default () => {
             </div>
             <div className="w-100 pt-1 pt-md-3 text-center mb-2">
 
-                <img src="/Rapido-logo.svg"  className={'img-fluid'} style={{maxHeight: ' 135px', marginBottom: '-11px'}}/>
-                <h2 className="mb-2 mb-0 font-semibold rapido-slogan" style={{color: "#048ABF"}}>
+                <img src="/rapido-logo.png"  className={'img-fluid my-3'} style={{maxHeight: ' 135px', marginBottom: '41px'}}/>
+                <img src="/rapido-slogan.png"  className={'img-fluid'} style={{position:'absolute', marginTop:71, marginLeft:-125}}/>
+                {/* <h2 className="mb-2 mb-0 font-semibold rapido-slogan" style={{color: "#048ABF"}}>
                     Win up to <span style={{color: '#F2D230', fontWeight: 700}}>$<CountUp
                     start={0}
                     end={50000}
                     separator={","}
                 /></span> every 5 minutes
-                </h2>
+                </h2> */}
             </div>
             <div className="container">
                 <div className="row">

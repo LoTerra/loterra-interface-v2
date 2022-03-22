@@ -4,9 +4,19 @@ import { useStore } from '../../store'
 import { WasmAPI } from '@terra-money/terra.js'
 import { Lightning, Star } from 'phosphor-react'
 import Animation from './animation.svg'
+import useSound from 'use-sound';
+
+import buttonSfx from './sounds/navigation_hover-tap.mp3';
+import removeSfx from './sounds/ui_lock.mp3';
+ 
 
 export default function RapidoCardBody(props) {
     const { state, dispatch } = useStore()
+
+    const [playButtonClick] = useSound(buttonSfx);
+  
+    const [playRemove] = useSound(removeSfx);
+
 
     const {
         selectMultiplier,
@@ -14,7 +24,7 @@ export default function RapidoCardBody(props) {
         selectOneNumber,
         selectFourNumbers,
         fourNumbers,
-        oneNumber,
+        oneNumber, 
         multiplier,
         nrOfDraws,
         userGames,
@@ -34,6 +44,7 @@ export default function RapidoCardBody(props) {
     const [numberBonus, setNumberBonus] = useState('')
 
     const selectNumbers = (nr) => {
+        playButtonClick()
         if (!numberOne) {
             setNumberOne(nr)
         } else if (!numberTwo) {
@@ -48,10 +59,12 @@ export default function RapidoCardBody(props) {
     }
 
     const selectBonus = (nr) => {
+        playButtonClick()
         setNumberBonus(nr)
     }
 
     function removeNumberFromArray(nr) {
+        playRemove()
         switch (nr) {
             case 1:
                 setNumberOne('')
