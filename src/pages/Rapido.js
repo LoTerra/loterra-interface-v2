@@ -2,7 +2,7 @@ import { Head } from 'react-static'
 import React, { useState, useEffect, useCallback, useRef, useMemo } from 'react'
 import { useStore } from '../store'
 import RapidoCard from '../components/Rapido/RapidoCard'
-import { ArrowsClockwise, Clock, HourglassSimpleHigh, Lightning, Star, Warning } from 'phosphor-react'
+import { ArrowsClockwise, CaretLeft, CaretRight, Clock, HourglassSimpleHigh, Lightning, Star, Warning } from 'phosphor-react'
 
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/swiper-bundle.min.css'
@@ -11,6 +11,7 @@ import { ArrowLeft, ArrowRight } from 'phosphor-react'
 import { MsgExecuteContract, WasmAPI } from '@terra-money/terra.js'
 import Pusher from 'pusher-js'
 import toast, { Toaster } from 'react-hot-toast'
+import CountUp from 'react-countup'
 
 export default () => {
     const { state, dispatch } = useStore()
@@ -802,11 +803,15 @@ export default () => {
                     your actions are your own responsibility.
                 </p>
             </div>
-            <div className="w-100 py-3 pt-md-5 text-center mb-2">
+            <div className="w-100 pt-1 pt-md-5 text-center mb-2">
 
                 <img src="/Rapido-logo.svg"  className={'img-fluid'} style={{maxHeight: ' 135px', marginBottom: '-11px'}}/>
-                <h2 className="mb-2 mb-0 text-10xl xs:text-13xl xs:-mt-0 font-semibold" style={{color: "#048ABF"}}>
-                    Win up to <span style={{color: '#F2D230', fontWeight: 700}}>$50,000</span> every 5 minutes
+                <h2 className="mb-2 mb-0 font-semibold rapido-slogan" style={{color: "#048ABF"}}>
+                    Win up to <span style={{color: '#F2D230', fontWeight: 700}}>$<CountUp
+                    start={0}
+                    end={50000}
+                    separator={","}
+                /></span> every 5 minutes
                 </h2>
             </div>
             <div className="container">
@@ -828,17 +833,19 @@ export default () => {
                             </div>
                         </div> */}
                         <div className="col-12 overflow-hidden mb-4">
-                            <div className="w-100 order-4 mb-2">
-                                <div className="row">
-                                    <div className="col-6 text-end">
-                                        <button className="swiper-prev btn-rapido-nav pb-2">
-                                            <ArrowLeft size={24} />
-                                        </button>
-                                    </div>
-                                    <div className="col-6 text-start">
-                                        <button className="swiper-next btn-rapido-nav pb-2">
-                                            <ArrowRight size={24} />
-                                        </button>
+                            <div className="order-4">
+                            <div className="w-100 slider-pagination-rapido">
+                                    <div className="row">
+                                        <div className="col-6 text-end px-0">
+                                            <button className="swiper-prev btn-rapido-nav">
+                                                <CaretLeft weight={'bold'} size={24} />
+                                            </button>
+                                        </div>
+                                        <div className="col-6 text-start px-0">
+                                            <button className="swiper-next btn-rapido-nav">
+                                                <CaretRight weight={'bold'} size={24} />
+                                            </button>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -856,7 +863,9 @@ export default () => {
                                 </div>
                             )}
                             {lotteries.length > 0  && lotteryStats && (
+                                
                                 <Swiper
+                                    threshold={10}
                                     spaceBetween={35}
                                     style={{ padding: '10px 15px', marginTop: '25px' }}
                                     navigation={{
@@ -893,6 +902,7 @@ export default () => {
                                     }
                                     onSwiper={(swiper) => console.log(swiper)}
                                 >
+                              
                                     {lotteries.length > 0 &&
                                         lotteries.map((obj, k) => {
                                             return (
@@ -923,9 +933,12 @@ export default () => {
                                                     />
                                                 </SwiperSlide>
                                             )
+                                            
                                         })}
+                            
                                 </Swiper>
                             )}
+                              
                         </div>
                     </div>
                 </div>
@@ -1036,7 +1049,7 @@ export default () => {
                             <tbody>
                                 <tr>
                                     <td>#1</td>
-                                    <td className="text-center">4 + 1 star</td>
+                                    <td className="text-center">4 (exact position) + 1 star</td>
                                     <td className="text-center">1 / 524,288</td>
                                     <td className="text-center">$10,000</td>
                                     <td className="text-center">$20,000</td>
@@ -1044,68 +1057,70 @@ export default () => {
                                 </tr>
                                 <tr>
                                     <td>#2</td>
-                                    <td className="text-center">4 </td>
-                                    <td className="text-center">1 / 65,536</td>
+                                    <td className="text-center">4 (exact position)</td>
+                                    <td className="text-center">1 / 74,898.29</td>
                                     <td className="text-center">$1,000</td>
                                     <td className="text-center">$2,000</td>
                                     <td className="text-center">$5,000</td>
                                 </tr>
                                 <tr>
                                     <td>#3</td>
-                                    <td className="text-center">3 + 1 star </td>
-                                    <td className="text-center">1 / 32,768</td>
+                                    <td className="text-center">3 (exact position) + 1 star </td>
+                                    <td className="text-center">1 / 8,738.13</td>
                                     <td className="text-center">$150</td>
                                     <td className="text-center">$300</td>
                                     <td className="text-center">$750</td>
                                 </tr>
                                 <tr>
                                     <td>#4</td>
-                                    <td className="text-center">3 </td>
-                                    <td className="text-center">1 / 4,096</td>
+                                    <td className="text-center">3 (exact position) </td>
+                                    <td className="text-center">1 / 1,248.3</td>
                                     <td className="text-center">$50</td>
                                     <td className="text-center">$100</td>
                                     <td className="text-center">$250</td>
                                 </tr>
                                 <tr>
                                     <td>#5</td>
-                                    <td className="text-center">2 + 1 star </td>
-                                    <td className="text-center">1 / 2,048</td>
+                                    <td className="text-center">2 (exact position) + 1 star </td>
+                                    <td className="text-center">1 / 388.36</td>
                                     <td className="text-center">$30</td>
                                     <td className="text-center">$60</td>
                                     <td className="text-center">$150</td>
                                 </tr>
                                 <tr>
                                     <td>#6</td>
-                                    <td className="text-center">2  </td>
-                                    <td className="text-center">1 / 256</td>
+                                    <td className="text-center">2 (exact position)  </td>
+                                    <td className="text-center">1 / 55.48</td>
                                     <td className="text-center">$10</td>
                                     <td className="text-center">$20</td>
                                     <td className="text-center">$50</td>
                                 </tr>
                                 <tr>
                                     <td>#7</td>
-                                    <td className="text-center">1 + 1 star </td>
-                                    <td className="text-center">1 / 128</td>
+                                    <td className="text-center">1 (exact position) + 1 star </td>
+                                    <td className="text-center">1 / 38.84</td>
                                     <td className="text-center">$5</td>
                                     <td className="text-center">$10</td>
                                     <td className="text-center">$25</td>
                                 </tr>
+
                                 <tr>
                                     <td>#8</td>
-                                    <td className="text-center">1 </td>
-                                    <td className="text-center">1 / 16</td>
+                                    <td className="text-center">1 star</td>
+                                    <td className="text-center">1 / 10.36</td>
                                     <td className="text-center">$2</td>
                                     <td className="text-center">$4</td>
                                     <td className="text-center">$10</td>
                                 </tr>
                                 <tr>
                                     <td>#9</td>
-                                    <td className="text-center">1 star</td>
-                                    <td className="text-center">1 / 8</td>
+                                    <td className="text-center">1 (exact position)</td>
+                                    <td className="text-center">1 / 5.55</td>
                                     <td className="text-center">$1</td>
                                     <td className="text-center">$2</td>
                                     <td className="text-center">$5</td>
                                 </tr>
+
                             </tbody>
                         </table>
                     </div>

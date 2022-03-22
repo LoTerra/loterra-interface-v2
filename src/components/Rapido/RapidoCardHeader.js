@@ -23,7 +23,7 @@ export default function RapidoCardHeader(props) {
                                 fontWeight: 700,
                             }}
                         >
-                            Active
+                            <span style={{color:"#F2D230"}}>Active</span>
                         </p>
                     ) :
                         winningCombination == null && lotteryStats && lotteryStats[lotteryId].counter_player == null && state.rapidoCurrentRound != lotteryId ? (
@@ -55,7 +55,7 @@ export default function RapidoCardHeader(props) {
                                 fontWeight: 700,
                             }}
                         >
-                            Resolving
+                            <span style={{color:"#048ABF"}}>Resolving</span>
                         </p>
                     ) : (
                         <p
