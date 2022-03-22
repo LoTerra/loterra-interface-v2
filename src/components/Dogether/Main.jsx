@@ -270,16 +270,8 @@ export default function Main(props) {
                         audit report we recommend to use Dogether at your own
                         discretion and risk.
                     </span>
-                </div>
-            </div>
-            <div className="col-xl-6">
-                <div className="card lota-card staking dogether-card mt-0">
-                    <div className="card-body"
-                        style={{
-                            boderRadius: '20px'
-                        }}
-                    >
-                        <div className="row mb-3">
+
+                    <div className="row mb-3">
                             <div className="col-md-12">
                                 <h3>How it works</h3>
                             </div>
@@ -406,29 +398,14 @@ export default function Main(props) {
                                 </div>
                             </div>
                         </div>
-                    </div>
-
-                    {/* <div className="modal fade" id="agreementModal" tabindex="-1" aria-labelledby="agreementModalLabel" aria-hidden="true">
-  <div className="modal-dialog">
-    <div className="modal-content card lota-card">
-      <div className="modal-header" style={{borderBottom:0}}>
-        <h5 className="modal-title" id="exampleModalLabel">Agreement</h5>
-        <button type="button" style={{color:'#fff'}} className="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-      </div>
-      <div className="modal-body">
-        ...
-      </div>
-    </div>
-  </div>
-</div> */}
                 </div>
             </div>
-            <div className="col-xl-6">
-                <div
-                    className="card lota-card staking dogether-card"
-                    style={{ marginTop: 0 }}
+                <div className="card lota-card staking dogether-card mt-5"
+                    style={{
+                        borderRadius: '20px'
+                    }}
                 >
-                    <p className="input-heading mt-3" style={{}}>
+                        <p className="input-heading mt-3" style={{}}>
                         The amount you want to pool
                     </p>
                     <div className="input-group mb-3">
@@ -965,15 +942,13 @@ export default function Main(props) {
                                     </div>
                                 )}
                         </div>
-                        {/* <p>{amount}</p>
-            <p>{percentage}</p> */}
                     </div>
                     <small>
                         <strong>Current blockheight:</strong>{' '}
                         {state.blockHeight}
                     </small>
                 </div>
-            </div>
+                
         </>
     )
 }
