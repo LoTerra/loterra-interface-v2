@@ -108,6 +108,20 @@
     }
 }
 
+.rapido-slogan-img {
+    @media(max-width:620px){
+        width: 160px;
+        margin-top: 56px !important;
+        margin-left: -150px !important;
+    }
+}
+
+.rapido-bg {
+    @media(max-width:620px){
+        background-size:200%;
+    }
+}
+
 .btn-rapido-nav {
     background: #16073e;
     border: 0;

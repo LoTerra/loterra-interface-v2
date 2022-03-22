@@ -9,7 +9,15 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/swiper-bundle.min.css'
 import 'swiper/swiper.min.css'
 
+import useSound from 'use-sound';
+import errorSfx from './sounds/navigation_backward-selection.mp3';
+import successSfx from './sounds/notification_high-intensity.mp3';
+
 export default function RapidoCardFooter(props) {
+
+    const [playError] = useSound(errorSfx);
+    const [playSuccess] = useSound(successSfx);
+
 
     const { state, dispatch } = useStore()
     const {
@@ -35,18 +43,22 @@ export default function RapidoCardFooter(props) {
         if (fourNumbersFilter.length < 4) {
             console.log('Please select 4 blue numbers')
             toast.error('Please select 4 blue numbers')
+            playError()
             return
         } else if (oneNumberFilter.length < 1) {
             console.log('Please select 1 yellow star')
             toast.error('Please select 1 yellow star')
+            playError()
             return
         } else if (multiplier < 1) {
             console.log('Please select a multiplier (1UST / 2UST / 5UST')
             toast.error('Please select a multiplier (1UST / 2UST / 5UST')
+            playError()
             return
         } else if (nrOfDraws < 1) {
             console.log('Please select a number of draw')
             toast.error('Please select a number of draw')
+            playError()
             return
         }
 
@@ -69,6 +81,7 @@ export default function RapidoCardFooter(props) {
             })
             .then((e) => {
                 if (e.success) {
+                    playSuccess()
                     toast.success('Ticket succesfully validated!')
                     switchToDefault(true)
                     dispatch({
@@ -76,6 +89,7 @@ export default function RapidoCardFooter(props) {
                         message: true,
                     })
                 } else {
+                    playError()
                     toast.error('Something went wrong, please try again')
                     console.log(e)
                 }

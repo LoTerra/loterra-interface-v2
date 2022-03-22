@@ -8,13 +8,14 @@ import useSound from 'use-sound';
 
 import buttonSfx from './sounds/navigation_hover-tap.mp3';
 import removeSfx from './sounds/ui_lock.mp3';
+import errorSfx from './sounds/navigation_backward-selection.mp3';
  
 
 export default function RapidoCardBody(props) {
     const { state, dispatch } = useStore()
 
-    const [playButtonClick] = useSound(buttonSfx);
-  
+    //Sounds declaration
+    const [playButtonClick] = useSound(buttonSfx);  
     const [playRemove] = useSound(removeSfx);
 
 
