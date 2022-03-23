@@ -35,7 +35,7 @@ export default function NormalNav() {
             if (rapidoClass == 'active') {
                 document.body.setAttribute('style', 'background: #210a5c')
             } else {
-                document.body.setAttribute('style', 'background: #210a5c;')
+                document.body.setAttribute('style', 'background-image:linear-gradient(to top, #2a1562 0%, #16073e 100%);')
             }
 
             stakingClass = location.pathname.match(/^\/staking/) ? 'active' : ''

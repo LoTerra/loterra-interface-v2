@@ -111,7 +111,7 @@ export default () => {
 
     return (
         <>
-            <div className="hero staking">
+            <div className="hero staking pt-3">
                 <div className="container">
                     <div className="row">
                         <div className="col-md-6">
@@ -129,11 +129,14 @@ export default () => {
                         </div>
                         <div className="col-md-6">
                             <div
-                                className="card lota-card staking-rewards"
-                                style={{ background: 'transparent' }}
+                                className="card lota-card staking-rewards pt-0"
+                                style={{ background: 'transparent', border:0 }}
                             >
                                 <div className="card-body">
                                     <div className="row">
+                                        <div className="col-12">
+                                        <h3 className="fw-bold">LoTerra distribution</h3>
+                                        </div>
                                         <div className="col-lg-12 d-flex">
                                             {state.tokenInfo.total_supply &&
                                             state.poolInfo.total_share ? (
@@ -250,6 +253,11 @@ export default () => {
                                                             animation: {
                                                                 duration: 0,
                                                             },
+                                                            plugins: {
+                                                                legend: {
+                                                                    display: false
+                                                                }
+                                                            }
                                                         }}
                                                         style={{
                                                             maxHeight: '400px',

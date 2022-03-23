@@ -23,13 +23,17 @@ export default function StakingForm(props) {
     }, [])
 
     return (
-        <div className="card lota-card staking">
-            <div className="card-header">
-                <div className="card-header-icon">
-                    <Coin size={90} color="#20FF93" />
-                </div>
-                <h3>Staking</h3>
-            </div>
+        <div>
+            <h3 className="mt-4 fw-bold">Staking</h3>
+            <Staking
+            showNotification={showNotification}
+            heightBlock={heightBlock}
+            />
+            <h3 className="mt-4 fw-bold">LP Staking</h3>
+            <LpStaking 
+            showNotification={showNotification}
+            />
+        {/* <div className="card lota-card staking">            
             <div className="card-body">
                 <div className="row">
                     <div className="col-12 text-center">
@@ -58,7 +62,7 @@ export default function StakingForm(props) {
                                     data-bs-toggle="pill"
                                     data-bs-target="#pills-lpstaking"
                                 >
-                                    LP Staking <label>NEW</label>
+                                    LP Staking
                                 </a>
                             </li>
                         </ul>
@@ -100,6 +104,7 @@ export default function StakingForm(props) {
                     </div>
                 </div>
             </div>
+        </div> */}
         </div>
     )
 }

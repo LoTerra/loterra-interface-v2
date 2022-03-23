@@ -180,19 +180,17 @@ export default function LpStaking(props) {
     return (
         <div className="row">
             <div className="col-md-12">
-                <p className="input-heading">
-                    The amount you want to LP Stake
-                    <span
-                        className="badge"
+                {/* <p className="input-heading">
+                    The amount you want to LP Stake                   
+                </p> */}
+                        <p    
+                        className={'mb-1'}                   
                         style={{
-                            background: '#9bfbcd',
-                            color: '#10003b',
-                            marginLeft: '7px',
-                            position: 'relative',
-                            top: '-2px',
+                        color: '#9bfbcd',                     
+                        position: 'relative',  
                         }}
-                    >
-                        APR
+                        >
+                        APR{' '}
                         <strong>
                             {total_staked() ? (
                                 numeral((100000 / total_staked()) * 100).format(
@@ -214,8 +212,7 @@ export default function LpStaking(props) {
                             )}
                             %
                         </strong>
-                    </span>
-                </p>
+                    </p>
                 {
                     <p className="input-slogan">
                         Provide liquidity on pair <strong>LOTA-UST</strong> on{' '}
@@ -230,7 +227,7 @@ export default function LpStaking(props) {
                         100,000.00 LOTA year rewards
                     </p>
                 }
-                <span
+                {/* <span
                     className="info"
                     style={{
                         color: '#ff36ff',
@@ -257,7 +254,7 @@ export default function LpStaking(props) {
                             </div>
                         )}
                     </strong>
-                </span>
+                </span> */}
                 <div className="input-group mb-3">
                     <span className="input-group-text" id="basic-addon1">
                         <img
@@ -295,7 +292,7 @@ export default function LpStaking(props) {
             </div>*/}
             <div className="col-6 my-3">
                 <button
-                    className="btn btn-normal-lg w-100"
+                    className="btn btn-primary text-white fw-bold w-100"
                     onClick={() => stakeOrUnstake('stake')}
                 >
                     Stake Now
@@ -321,7 +318,7 @@ export default function LpStaking(props) {
             </div>
             <div className="col-6 my-3">
                 <button
-                    className="btn btn-plain-lg w-100"
+                    className="btn btn-default text-white fw-bold w-100"
                     onClick={() => stakeOrUnstake('unstake')}
                 >
                     Unstake

@@ -154,8 +154,8 @@ export default function Staking(props) {
     return (
         <div className="row">
             <div className="col-md-12">
-                <p className="input-heading">The amount you want to stake</p>
-                <span
+                {/* <p className="input-heading">The amount you want to stake</p> */}
+                {/* <span
                     className="info"
                     style={{
                         color: '#ff36ff',
@@ -165,7 +165,7 @@ export default function Staking(props) {
                     <Info size={14} weight="fill" className="me-1" />
                     <strong>Hello new casino owner!</strong> Stake LOTA, join
                     our DAO and get 20% on winner prizes.
-                </span>
+                </span> */}
                 <div className="input-group mb-3">
                     <span className="input-group-text" id="basic-addon1">
                         <img
@@ -205,7 +205,7 @@ export default function Staking(props) {
                 {/* <p className="shortcut float-end" onClick={()=> setInputAmount(parseInt(state.LotaBalance.balance))}>MAX
                 </p> */}
                 <button
-                    className="btn btn-normal-lg w-100"
+                    className="btn btn-primary text-white fw-bold w-100"
                     onClick={() => stakeOrUnstake('stake')}
                 >
                     Stake
@@ -233,7 +233,7 @@ export default function Staking(props) {
             <div className="col-6 my-3">
                 {/* <p className="shortcut float-end" onClick={()=> setInputAmount(state.allHolder.balance)}>MAX</p> */}
                 <button
-                    className="btn btn-plain-lg w-100"
+                    className="btn btn-default text-white fw-bold w-100"
                     onClick={() => stakeOrUnstake('unstake')}
                 >
                     Unstake
