@@ -837,731 +837,731 @@ export default () => {
                 </div>
                 </div>
             </div>
-            <div className="container-fluid px-md-5">
-                
-                <div className="card base-card border-0">
-                    <div className="card-body p-md-5">
-                        <div className="row">
-                            <div className="col-md-12 text-start">
-                                <h1 className="fs-1 mb-0">Decentralized Lottery </h1>
-                                <p className="slogan">
-                                    LoTerra is a decentralized gaming ecosystem
-                                    managed by LOTA holders
-                                </p>
-                            </div>
-                            <div className="col-xl-6">
-                                <p className="sub-title">Next jackpot</p>
-                                <h2>
-                                    {numeral(
-                                        jackpotAlteredUst + jackpot,
-                                    ).format('0,0.00')}
-                                    <span>UST</span>
-                                </h2>
-                                <p className="sub-title">Mixed jackpot</p>
-                                <h2 className="alte" style={{ color: '#fff' }}>
-                                    {numeral(jackpot).format('0,0.00')}
-                                    <span>UST</span>
-                                </h2>
-                                <h2 className="alte">
-                                    +{numeral(jackpotAltered).format('0,0.00')}
-                                    <span>ALTE</span>
-                                </h2>
-                                <div className="col-12 text-start mt-4 mb-4">
-                                    <NavLink
-                                        className={'btn btn-special'}
-                                        to="/rapido"
+            {/*<div className="container-fluid px-md-5">*/}
+            {/*    */}
+            {/*    <div className="card base-card border-0">*/}
+            {/*        <div className="card-body p-md-5">*/}
+            {/*            <div className="row">*/}
+            {/*                <div className="col-md-12 text-start">*/}
+            {/*                    <h1 className="fs-1 mb-0">Decentralized Lottery </h1>*/}
+            {/*                    <p className="slogan">*/}
+            {/*                        LoTerra is a decentralized gaming ecosystem*/}
+            {/*                        managed by LOTA holders*/}
+            {/*                    </p>*/}
+            {/*                </div>*/}
+            {/*                <div className="col-xl-6">*/}
+            {/*                    <p className="sub-title">Next jackpot</p>*/}
+            {/*                    <h2>*/}
+            {/*                        {numeral(*/}
+            {/*                            jackpotAlteredUst + jackpot,*/}
+            {/*                        ).format('0,0.00')}*/}
+            {/*                        <span>UST</span>*/}
+            {/*                    </h2>*/}
+            {/*                    <p className="sub-title">Mixed jackpot</p>*/}
+            {/*                    <h2 className="alte" style={{ color: '#fff' }}>*/}
+            {/*                        {numeral(jackpot).format('0,0.00')}*/}
+            {/*                        <span>UST</span>*/}
+            {/*                    </h2>*/}
+            {/*                    <h2 className="alte">*/}
+            {/*                        +{numeral(jackpotAltered).format('0,0.00')}*/}
+            {/*                        <span>ALTE</span>*/}
+            {/*                    </h2>*/}
+            {/*                    <div className="col-12 text-start mt-4 mb-4">*/}
+            {/*                        <NavLink*/}
+            {/*                            className={'btn btn-special'}*/}
+            {/*                            to="/rapido"*/}
 
-                                    >
-                                        Play Rapido
-                                    </NavLink>
-                                    <small
-                                        style={{
-                                            display: 'block',
-                                            marginTop: '10px',
-                                            fontSize: '12px',
-                                            opacity: '0.6',
-                                        }}
-                                    >
-                                        {/*You can buy tickets with{' '}*/}
-                                        {/*<strong>UST</strong> and{' '}*/}
-                                        {/*<strong>ALTE</strong>*/}
-                                        LoTerra default lottery have been deprecated and replaced by Rapido
-                                    </small>
-                                </div>
-                                <a
-                                    href="https://app.valkyrieprotocol.com/campaigns/terra143kpwsuu82rtdy8jkyagmvn426q9amqsk7ftrw"
-                                    target="_blank"
-                                    className="card grey-card text-center mb-3"
-                                >
-                                    <div className="card-body">
-                                        <span className="badge">Active</span>
-                                        <img src="/logo-vkr.png" />
-                                        <ul className="text-start">
-                                            <li>
-                                                <Check
-                                                    size={16}
-                                                    color={'#fdf500'}
-                                                    weight={'bold'}
-                                                />{' '}
-                                                Participate 10 tickets and get 2
-                                                $LOTA
-                                            </li>
-                                            <li>
-                                                <Check
-                                                    size={16}
-                                                    color={'#fdf500'}
-                                                    weight={'bold'}
-                                                />{' '}
-                                                Share your Referral link and get
-                                                24 $VKR
-                                            </li>
-                                        </ul>
-                                        <button className="btn btn-grey mt-3 w-100 fw-bold">
-                                            Join Campaign
-                                        </button>
-                                    </div>
-                                </a>
-                            </div>
-                            <div className="col-xl-6 d-flex">
-                                <div className="align-self-center w-100">
-                                    <p className="sub-title">Next draw in</p>
-                                    <Countdown
-                                        expiryTimestamp={expiryTimestamp}
-                                    />
-                                    <div className="row">
-                                        <div className="col-6 p-1 text-center">
-                                            <div className="card base-card-light">
-                                                <div className="card-body">
-                                                    <p className="sub-title">
-                                                        Players
-                                                    </p>
-                                                    {players ? (
-                                                        <p className="amount">
-                                                            {players}
-                                                        </p>
-                                                    ) : (
-                                                        <PriceLoader />
-                                                    )}
-                                                </div>
-                                            </div>
-                                        </div>
-                                        <div className="col-6 p-1 text-center">
-                                            <div className="card base-card-light">
-                                                <div className="card-body">
-                                                    <p className="sub-title">
-                                                        Tickets
-                                                    </p>
-                                                    {tickets ? (
-                                                        <p className="amount">
-                                                            {tickets}
-                                                        </p>
-                                                    ) : (
-                                                        <PriceLoader />
-                                                    )}
-                                                </div>
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
+            {/*                        >*/}
+            {/*                            Play Rapido*/}
+            {/*                        </NavLink>*/}
+            {/*                        <small*/}
+            {/*                            style={{*/}
+            {/*                                display: 'block',*/}
+            {/*                                marginTop: '10px',*/}
+            {/*                                fontSize: '12px',*/}
+            {/*                                opacity: '0.6',*/}
+            {/*                            }}*/}
+            {/*                        >*/}
+            {/*                            /!*You can buy tickets with{' '}*!/*/}
+            {/*                            /!*<strong>UST</strong> and{' '}*!/*/}
+            {/*                            /!*<strong>ALTE</strong>*!/*/}
+            {/*                            LoTerra default lottery have been deprecated and replaced by Rapido*/}
+            {/*                        </small>*/}
+            {/*                    </div>*/}
+            {/*                    <a*/}
+            {/*                        href="https://app.valkyrieprotocol.com/campaigns/terra143kpwsuu82rtdy8jkyagmvn426q9amqsk7ftrw"*/}
+            {/*                        target="_blank"*/}
+            {/*                        className="card grey-card text-center mb-3"*/}
+            {/*                    >*/}
+            {/*                        <div className="card-body">*/}
+            {/*                            <span className="badge">Active</span>*/}
+            {/*                            <img src="/logo-vkr.png" />*/}
+            {/*                            <ul className="text-start">*/}
+            {/*                                <li>*/}
+            {/*                                    <Check*/}
+            {/*                                        size={16}*/}
+            {/*                                        color={'#fdf500'}*/}
+            {/*                                        weight={'bold'}*/}
+            {/*                                    />{' '}*/}
+            {/*                                    Participate 10 tickets and get 2*/}
+            {/*                                    $LOTA*/}
+            {/*                                </li>*/}
+            {/*                                <li>*/}
+            {/*                                    <Check*/}
+            {/*                                        size={16}*/}
+            {/*                                        color={'#fdf500'}*/}
+            {/*                                        weight={'bold'}*/}
+            {/*                                    />{' '}*/}
+            {/*                                    Share your Referral link and get*/}
+            {/*                                    24 $VKR*/}
+            {/*                                </li>*/}
+            {/*                            </ul>*/}
+            {/*                            <button className="btn btn-grey mt-3 w-100 fw-bold">*/}
+            {/*                                Join Campaign*/}
+            {/*                            </button>*/}
+            {/*                        </div>*/}
+            {/*                    </a>*/}
+            {/*                </div>*/}
+            {/*                <div className="col-xl-6 d-flex">*/}
+            {/*                    <div className="align-self-center w-100">*/}
+            {/*                        <p className="sub-title">Next draw in</p>*/}
+            {/*                        <Countdown*/}
+            {/*                            expiryTimestamp={expiryTimestamp}*/}
+            {/*                        />*/}
+            {/*                        <div className="row">*/}
+            {/*                            <div className="col-6 p-1 text-center">*/}
+            {/*                                <div className="card base-card-light">*/}
+            {/*                                    <div className="card-body">*/}
+            {/*                                        <p className="sub-title">*/}
+            {/*                                            Players*/}
+            {/*                                        </p>*/}
+            {/*                                        {players ? (*/}
+            {/*                                            <p className="amount">*/}
+            {/*                                                {players}*/}
+            {/*                                            </p>*/}
+            {/*                                        ) : (*/}
+            {/*                                            <PriceLoader />*/}
+            {/*                                        )}*/}
+            {/*                                    </div>*/}
+            {/*                                </div>*/}
+            {/*                            </div>*/}
+            {/*                            <div className="col-6 p-1 text-center">*/}
+            {/*                                <div className="card base-card-light">*/}
+            {/*                                    <div className="card-body">*/}
+            {/*                                        <p className="sub-title">*/}
+            {/*                                            Tickets*/}
+            {/*                                        </p>*/}
+            {/*                                        {tickets ? (*/}
+            {/*                                            <p className="amount">*/}
+            {/*                                                {tickets}*/}
+            {/*                                            </p>*/}
+            {/*                                        ) : (*/}
+            {/*                                            <PriceLoader />*/}
+            {/*                                        )}*/}
+            {/*                                    </div>*/}
+            {/*                                </div>*/}
+            {/*                            </div>*/}
+            {/*                        </div>*/}
+            {/*                    </div>*/}
+            {/*                </div>*/}
+            {/*            </div>*/}
+            {/*        </div>*/}
+            {/*    </div>*/}
 
-                <div className="row">
-                    {/* <div className="col-lg-12 text-center">
-                          
-                                <div className="jackpot">                              
-                            
-                               <h1>Decentralized Loterry</h1>
-                               <p className="slogan">Next Jackpot</p>
-                                { jackpot ? (
-                                    <>                          
-                                <h2>
-                                    {numeral(jackpot)
-                                        .format('0,0.00')}<span>UST</span>
-                                    
-                                </h2>                    
-                                <h2 className="alte-jackpot">
-                                    {numeral(jackpotAltered)
-                                        .format('0,0.00')
-                                        // .split('')
-                                        // .map((obj) => {
-                                        //     return (
-                                        //         <div className="roller">
-                                        //             {obj}
-                                        //         </div>
-                                        //     )
-                                        }<span>ALTE</span>                                
-                                </h2>
-                            </>
-                            )
+            {/*    <div className="row">*/}
+            {/*        /!* <div className="col-lg-12 text-center">*/}
+            {/*              */}
+            {/*                    <div className="jackpot">                              */}
+            {/*                */}
+            {/*                   <h1>Decentralized Loterry</h1>*/}
+            {/*                   <p className="slogan">Next Jackpot</p>*/}
+            {/*                    { jackpot ? (*/}
+            {/*                        <>                          */}
+            {/*                    <h2>*/}
+            {/*                        {numeral(jackpot)*/}
+            {/*                            .format('0,0.00')}<span>UST</span>*/}
+            {/*                        */}
+            {/*                    </h2>                    */}
+            {/*                    <h2 className="alte-jackpot">*/}
+            {/*                        {numeral(jackpotAltered)*/}
+            {/*                            .format('0,0.00')*/}
+            {/*                            // .split('')*/}
+            {/*                            // .map((obj) => {*/}
+            {/*                            //     return (*/}
+            {/*                            //         <div className="roller">*/}
+            {/*                            //             {obj}*/}
+            {/*                            //         </div>*/}
+            {/*                            //     )*/}
+            {/*                            }<span>ALTE</span>                                */}
+            {/*                    </h2>*/}
+            {/*                </>*/}
+            {/*                )*/}
 
-                            :
-                            (
-                                <div className="d-flex w-100" style={{height:'200px'}}>
-                                    <div class="spinner-border text-primary align-self-center mx-auto" 
-                                    style={{
-                                        width:'6rem',
-                                        height:'6rem',
-                                        borderWidth:'9px'
-                                    }}
-                                    role="status">
-                                    <span class="visually-hidden">Loading...</span>
-                                </div>
-                                </div>
-                            )
+            {/*                :*/}
+            {/*                (*/}
+            {/*                    <div className="d-flex w-100" style={{height:'200px'}}>*/}
+            {/*                        <div class="spinner-border text-primary align-self-center mx-auto" */}
+            {/*                        style={{*/}
+            {/*                            width:'6rem',*/}
+            {/*                            height:'6rem',*/}
+            {/*                            borderWidth:'9px'*/}
+            {/*                        }}*/}
+            {/*                        role="status">*/}
+            {/*                        <span class="visually-hidden">Loading...</span>*/}
+            {/*                    </div>*/}
+            {/*                    </div>*/}
+            {/*                )*/}
 
-                            }
-                             </div>
-                            <div className="row">
-                                <div className="col-md-8 mx-auto">
-                                    <div className="countdown-holder">
-                                        <div className="row">
-                                            <div className="col-6">
-                                                <div className="card stats-card">
-                                                    <div className="card-body">
-                                                        <div className="row">
-                                                            <div className="col-4 text-center svg-rotate">
-                                                                <UserFocus
-                                                                    size={42}
-                                                                />
-                                                            </div>
-                                                            <div className="col-8 text-center d-flex text-md-start">
-                                                                <h3 className="align-self-center">
-                                                                    <span>
-                                                                        PLAYERS
-                                                                        PLAYING
-                                                                    </span>
-                                                                    {players ? (
-                                                                        players
-                                                                    ) : (
-                                                                        <PriceLoader />
-                                                                    )}
-                                                                </h3>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
+            {/*                }*/}
+            {/*                 </div>*/}
+            {/*                <div className="row">*/}
+            {/*                    <div className="col-md-8 mx-auto">*/}
+            {/*                        <div className="countdown-holder">*/}
+            {/*                            <div className="row">*/}
+            {/*                                <div className="col-6">*/}
+            {/*                                    <div className="card stats-card">*/}
+            {/*                                        <div className="card-body">*/}
+            {/*                                            <div className="row">*/}
+            {/*                                                <div className="col-4 text-center svg-rotate">*/}
+            {/*                                                    <UserFocus*/}
+            {/*                                                        size={42}*/}
+            {/*                                                    />*/}
+            {/*                                                </div>*/}
+            {/*                                                <div className="col-8 text-center d-flex text-md-start">*/}
+            {/*                                                    <h3 className="align-self-center">*/}
+            {/*                                                        <span>*/}
+            {/*                                                            PLAYERS*/}
+            {/*                                                            PLAYING*/}
+            {/*                                                        </span>*/}
+            {/*                                                        {players ? (*/}
+            {/*                                                            players*/}
+            {/*                                                        ) : (*/}
+            {/*                                                            <PriceLoader />*/}
+            {/*                                                        )}*/}
+            {/*                                                    </h3>*/}
+            {/*                                                </div>*/}
+            {/*                                            </div>*/}
+            {/*                                        </div>*/}
+            {/*                                    </div>*/}
+            {/*                                </div>*/}
 
-                                            <div className="col-6">
-                                                <div className="card stats-card">
-                                                    <div className="card-body">
-                                                        <div className="row">
-                                                            <div className="col-4 text-center svg-rotate">
-                                                                <Ticket
-                                                                    size={42}
-                                                                />
-                                                            </div>
-                                                            <div className="col-8 text-center d-flex text-md-start">
-                                                                <h3 className="align-self-center">
-                                                                    <span>
-                                                                        TICKETS
-                                                                        SOLD
-                                                                    </span>
-                                                                    {tickets ? (
-                                                                        tickets
-                                                                    ) : (
-                                                                        <PriceLoader />
-                                                                    )}
-                                                                </h3>
-                                                            </div>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div className="col-lg-8 mx-auto">
-                                                <Countdown
-                                                    expiryTimestamp={
-                                                        expiryTimestamp
-                                                    }
-                                                />
-                                            </div>
-                                            <div className="col-12 text-center mt-4 mb-4">
-                                                <button
-                                                    className={
-                                                        'btn btn-special'
-                                                    }
-                                                    onClick={() =>
-                                                        setBuyNow(!buyNow)
-                                                    }
-                                                >
-                                                    Buy Tickets
-                                                </button>
-                                                <small
-                                                    style={{
-                                                        display: 'block',
-                                                        marginTop: '10px',
-                                                        fontSize: '12px',
-                                                        opacity: '0.6',
-                                                    }}
-                                                >
-                                                    You can buy tickets with{' '}
-                                                    <strong>UST</strong> and{' '}
-                                                    <strong>ALTE</strong>
-                                                </small>
-                                            </div>                                          
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> */}
-                    {/* 
-                        <div className="col-12 col-md-8 mx-auto">
-                            <div className="row">
-                                <div className="col-12 col-md-8 mx-auto">
-                                    <div className="card stats-card-special latest-draw">
-                                        <div className="card-header text-center">
-                                            <h3 style={{ fontSize: '21px' }}>
-                                                Latest draw
-                                            </h3>
-                                        </div>
-                                        <div className="card-body text-center">
-                                            <p className="players">
-                                                <strong>
-                                                    {recentPlayers}{' '}
-                                                    <UsersThree
-                                                        size={38}
-                                                        style={{
-                                                            marginTop: '-5px',
-                                                        }}
-                                                    />
-                                                </strong>
-                                            </p>
-                                            <p className="sub">
-                                                <strong>
-                                                    {totalNrPrizes()} prizes
-                                                </strong>{' '}
-                                                and{' '}
-                                                <strong>
-                                                    {
-                                                        state.allRecentWinners
-                                                            .length
-                                                    }{' '}
-                                                    winners!
-                                                </strong>
-                                            </p>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div> */}
-                    {/* </div> */}
-                </div>
+            {/*                                <div className="col-6">*/}
+            {/*                                    <div className="card stats-card">*/}
+            {/*                                        <div className="card-body">*/}
+            {/*                                            <div className="row">*/}
+            {/*                                                <div className="col-4 text-center svg-rotate">*/}
+            {/*                                                    <Ticket*/}
+            {/*                                                        size={42}*/}
+            {/*                                                    />*/}
+            {/*                                                </div>*/}
+            {/*                                                <div className="col-8 text-center d-flex text-md-start">*/}
+            {/*                                                    <h3 className="align-self-center">*/}
+            {/*                                                        <span>*/}
+            {/*                                                            TICKETS*/}
+            {/*                                                            SOLD*/}
+            {/*                                                        </span>*/}
+            {/*                                                        {tickets ? (*/}
+            {/*                                                            tickets*/}
+            {/*                                                        ) : (*/}
+            {/*                                                            <PriceLoader />*/}
+            {/*                                                        )}*/}
+            {/*                                                    </h3>*/}
+            {/*                                                </div>*/}
+            {/*                                            </div>*/}
+            {/*                                        </div>*/}
+            {/*                                    </div>*/}
+            {/*                                </div>*/}
+            {/*                                <div className="col-lg-8 mx-auto">*/}
+            {/*                                    <Countdown*/}
+            {/*                                        expiryTimestamp={*/}
+            {/*                                            expiryTimestamp*/}
+            {/*                                        }*/}
+            {/*                                    />*/}
+            {/*                                </div>*/}
+            {/*                                <div className="col-12 text-center mt-4 mb-4">*/}
+            {/*                                    <button*/}
+            {/*                                        className={*/}
+            {/*                                            'btn btn-special'*/}
+            {/*                                        }*/}
+            {/*                                        onClick={() =>*/}
+            {/*                                            setBuyNow(!buyNow)*/}
+            {/*                                        }*/}
+            {/*                                    >*/}
+            {/*                                        Buy Tickets*/}
+            {/*                                    </button>*/}
+            {/*                                    <small*/}
+            {/*                                        style={{*/}
+            {/*                                            display: 'block',*/}
+            {/*                                            marginTop: '10px',*/}
+            {/*                                            fontSize: '12px',*/}
+            {/*                                            opacity: '0.6',*/}
+            {/*                                        }}*/}
+            {/*                                    >*/}
+            {/*                                        You can buy tickets with{' '}*/}
+            {/*                                        <strong>UST</strong> and{' '}*/}
+            {/*                                        <strong>ALTE</strong>*/}
+            {/*                                    </small>*/}
+            {/*                                </div>                                          */}
+            {/*                            </div>*/}
+            {/*                        </div>*/}
+            {/*                    </div>*/}
+            {/*                </div>*/}
+            {/*            </div> *!/*/}
+            {/*        /!* */}
+            {/*            <div className="col-12 col-md-8 mx-auto">*/}
+            {/*                <div className="row">*/}
+            {/*                    <div className="col-12 col-md-8 mx-auto">*/}
+            {/*                        <div className="card stats-card-special latest-draw">*/}
+            {/*                            <div className="card-header text-center">*/}
+            {/*                                <h3 style={{ fontSize: '21px' }}>*/}
+            {/*                                    Latest draw*/}
+            {/*                                </h3>*/}
+            {/*                            </div>*/}
+            {/*                            <div className="card-body text-center">*/}
+            {/*                                <p className="players">*/}
+            {/*                                    <strong>*/}
+            {/*                                        {recentPlayers}{' '}*/}
+            {/*                                        <UsersThree*/}
+            {/*                                            size={38}*/}
+            {/*                                            style={{*/}
+            {/*                                                marginTop: '-5px',*/}
+            {/*                                            }}*/}
+            {/*                                        />*/}
+            {/*                                    </strong>*/}
+            {/*                                </p>*/}
+            {/*                                <p className="sub">*/}
+            {/*                                    <strong>*/}
+            {/*                                        {totalNrPrizes()} prizes*/}
+            {/*                                    </strong>{' '}*/}
+            {/*                                    and{' '}*/}
+            {/*                                    <strong>*/}
+            {/*                                        {*/}
+            {/*                                            state.allRecentWinners*/}
+            {/*                                                .length*/}
+            {/*                                        }{' '}*/}
+            {/*                                        winners!*/}
+            {/*                                    </strong>*/}
+            {/*                                </p>*/}
+            {/*                            </div>*/}
+            {/*                        </div>*/}
+            {/*                    </div>*/}
+            {/*                </div>*/}
+            {/*            </div> *!/*/}
+            {/*        /!* </div> *!/*/}
+            {/*    </div>*/}
 
-                {/*
-             <div className="mt-4">contract-v2.0.1</div>
-                <div className="text-sm">terra14mevcmeqt0n4myggt7c56l5fl0xw2hwa2mhlg0</div> */}
-            </div>
-            <div className="container">
-                <div className="row">
-                    <div className="col-12">
-                        <div
-                            className={
-                                'card amount-block' + (buyNow ? ' active' : '')
-                            }
-                        >
-                            <div className="card-header">
-                                <button
-                                    className="toggle"
-                                    onClick={() => setBuyNow(!buyNow)}
-                                >
-                                    <X size={36} />
-                                </button>
-                            </div>
-                            <div className="card-body d-flex">
-                                <div className="align-self-center card-body-wrapper">
-                                    <h3>Book Your Tickets</h3>
-                                    <p
-                                        style={{
-                                            marginBottom: 0,
-                                        }}
-                                    >
-                                        Pay with:
-                                    </p>
-                                    <div className="btn-group w-100 mb-2">
-                                        <button
-                                            className={
-                                                'btn btn-default' +
-                                                (payWith == 'ust'
-                                                    ? ' active'
-                                                    : ' inactive')
-                                            }
-                                            onClick={() => setPayWith('ust')}
-                                        >
-                                            <img
-                                                src={'/UST.svg'}
-                                                className="me-2"
-                                                width="20px"
-                                            />
-                                            UST
-                                        </button>
-                                        <button
-                                            className={
-                                                'btn btn-default' +
-                                                (payWith == 'alte'
-                                                    ? ' active'
-                                                    : ' inactive')
-                                            }
-                                            onClick={() => setPayWith('alte')}
-                                        >
-                                            <img
-                                                src={'/ALTE.png'}
-                                                className="me-2"
-                                                width="20px"
-                                            />
-                                            ALTE
-                                        </button>
-                                    </div>
-                                    <small>
-                                        <span>HINT</span> Increase your odds!
-                                        Average buying ticket is{' '}
-                                        {parseInt(tickets / players)}
-                                    </small>
-                                    <div className="input-group mt-3 mb-2">
-                                        <button
-                                            className="btn btn-default"
-                                            onClick={() => amountChange('down')}
-                                        >
-                                            <MinusCircle
-                                                size={31}
-                                                color={'#9183d4'}
-                                            />
-                                        </button>
-                                        <input
-                                            type="number"
-                                            className="form-control amount-control"
-                                            value={amount}
-                                            min="1"
-                                            max="200"
-                                            step="1"
-                                            onChange={(e) => inputChange(e)}
-                                        />
-                                        <button
-                                            className="btn btn-default"
-                                            onClick={() => amountChange('up')}
-                                        >
-                                            <PlusCircle
-                                                size={31}
-                                                color={'#9183d4'}
-                                            />
-                                        </button>
-                                    </div>
-                                    {/* <p className="mb-2">Total: <strong>{numeral((amount * price) / 1000000).format("0,0.00")} UST</strong></p> */}
-                                    {!alteBonus || payWith == 'alte' ? (
-                                        <p className="mb-2">
-                                            Total:{' '}
-                                            <strong>
-                                                {numeral(
-                                                    (amount * price) / 1000000,
-                                                ).format('0,0.00')}{' '}
-                                                {payWith == 'ust'
-                                                    ? 'UST'
-                                                    : 'ALTE'}
-                                            </strong>
-                                        </p>
-                                    ) : (
-                                        <>
-                                            <p
-                                                className="mb-0"
-                                                style={{
-                                                    textDecoration:
-                                                        'line-through',
-                                                }}
-                                            >
-                                                Total:{' '}
-                                                <strong>
-                                                    {numeral(
-                                                        (amount * price) /
-                                                            1000000,
-                                                    ).format('0,0.00')}{' '}
-                                                    UST
-                                                </strong>
-                                            </p>
-                                            <p
-                                                className="mb-2"
-                                                style={{ color: '#4ee19b' }}
-                                            >
-                                                Total:{' '}
-                                                <strong>
-                                                    {' '}
-                                                    {numeral(
-                                                        (amount * price) /
-                                                            1000000 -
-                                                            (amount * price) /
-                                                                1000000 /
-                                                                state.config
-                                                                    .bonus_burn_rate,
-                                                    ).format('0,0.00')}{' '}
-                                                    UST{' '}
-                                                    <span>
-                                                        +{' '}
-                                                        {numeral(
-                                                            (amount * price) /
-                                                                1000000 /
-                                                                state.config
-                                                                    .bonus_burn_rate,
-                                                        ).format('0,0.00')}{' '}
-                                                        ALTE
-                                                    </span>
-                                                </strong>
-                                            </p>
-                                            <span className="info mb-2">
-                                                <Info
-                                                    size={14}
-                                                    style={{
-                                                        marginTop: '-2px',
-                                                    }}
-                                                    weight="fill"
-                                                    className="me-1"
-                                                />
-                                                No ALTE? you can buy ALTE on the{' '}
-                                                <a
-                                                    href="https://app.alteredprotocol.com"
-                                                    target="_blank"
-                                                >
-                                                    Altered website
-                                                </a>
-                                            </span>
-                                        </>
-                                    )}
+            {/*    /!**/}
+            {/* <div className="mt-4">contract-v2.0.1</div>*/}
+            {/*    <div className="text-sm">terra14mevcmeqt0n4myggt7c56l5fl0xw2hwa2mhlg0</div> *!/*/}
+            {/*</div>*/}
+            {/*<div className="container">*/}
+            {/*    <div className="row">*/}
+            {/*        <div className="col-12">*/}
+            {/*            <div*/}
+            {/*                className={*/}
+            {/*                    'card amount-block' + (buyNow ? ' active' : '')*/}
+            {/*                }*/}
+            {/*            >*/}
+            {/*                <div className="card-header">*/}
+            {/*                    <button*/}
+            {/*                        className="toggle"*/}
+            {/*                        onClick={() => setBuyNow(!buyNow)}*/}
+            {/*                    >*/}
+            {/*                        <X size={36} />*/}
+            {/*                    </button>*/}
+            {/*                </div>*/}
+            {/*                <div className="card-body d-flex">*/}
+            {/*                    <div className="align-self-center card-body-wrapper">*/}
+            {/*                        <h3>Book Your Tickets</h3>*/}
+            {/*                        <p*/}
+            {/*                            style={{*/}
+            {/*                                marginBottom: 0,*/}
+            {/*                            }}*/}
+            {/*                        >*/}
+            {/*                            Pay with:*/}
+            {/*                        </p>*/}
+            {/*                        <div className="btn-group w-100 mb-2">*/}
+            {/*                            <button*/}
+            {/*                                className={*/}
+            {/*                                    'btn btn-default' +*/}
+            {/*                                    (payWith == 'ust'*/}
+            {/*                                        ? ' active'*/}
+            {/*                                        : ' inactive')*/}
+            {/*                                }*/}
+            {/*                                onClick={() => setPayWith('ust')}*/}
+            {/*                            >*/}
+            {/*                                <img*/}
+            {/*                                    src={'/UST.svg'}*/}
+            {/*                                    className="me-2"*/}
+            {/*                                    width="20px"*/}
+            {/*                                />*/}
+            {/*                                UST*/}
+            {/*                            </button>*/}
+            {/*                            <button*/}
+            {/*                                className={*/}
+            {/*                                    'btn btn-default' +*/}
+            {/*                                    (payWith == 'alte'*/}
+            {/*                                        ? ' active'*/}
+            {/*                                        : ' inactive')*/}
+            {/*                                }*/}
+            {/*                                onClick={() => setPayWith('alte')}*/}
+            {/*                            >*/}
+            {/*                                <img*/}
+            {/*                                    src={'/ALTE.png'}*/}
+            {/*                                    className="me-2"*/}
+            {/*                                    width="20px"*/}
+            {/*                                />*/}
+            {/*                                ALTE*/}
+            {/*                            </button>*/}
+            {/*                        </div>*/}
+            {/*                        <small>*/}
+            {/*                            <span>HINT</span> Increase your odds!*/}
+            {/*                            Average buying ticket is{' '}*/}
+            {/*                            {parseInt(tickets / players)}*/}
+            {/*                        </small>*/}
+            {/*                        <div className="input-group mt-3 mb-2">*/}
+            {/*                            <button*/}
+            {/*                                className="btn btn-default"*/}
+            {/*                                onClick={() => amountChange('down')}*/}
+            {/*                            >*/}
+            {/*                                <MinusCircle*/}
+            {/*                                    size={31}*/}
+            {/*                                    color={'#9183d4'}*/}
+            {/*                                />*/}
+            {/*                            </button>*/}
+            {/*                            <input*/}
+            {/*                                type="number"*/}
+            {/*                                className="form-control amount-control"*/}
+            {/*                                value={amount}*/}
+            {/*                                min="1"*/}
+            {/*                                max="200"*/}
+            {/*                                step="1"*/}
+            {/*                                onChange={(e) => inputChange(e)}*/}
+            {/*                            />*/}
+            {/*                            <button*/}
+            {/*                                className="btn btn-default"*/}
+            {/*                                onClick={() => amountChange('up')}*/}
+            {/*                            >*/}
+            {/*                                <PlusCircle*/}
+            {/*                                    size={31}*/}
+            {/*                                    color={'#9183d4'}*/}
+            {/*                                />*/}
+            {/*                            </button>*/}
+            {/*                        </div>*/}
+            {/*                        /!* <p className="mb-2">Total: <strong>{numeral((amount * price) / 1000000).format("0,0.00")} UST</strong></p> *!/*/}
+            {/*                        {!alteBonus || payWith == 'alte' ? (*/}
+            {/*                            <p className="mb-2">*/}
+            {/*                                Total:{' '}*/}
+            {/*                                <strong>*/}
+            {/*                                    {numeral(*/}
+            {/*                                        (amount * price) / 1000000,*/}
+            {/*                                    ).format('0,0.00')}{' '}*/}
+            {/*                                    {payWith == 'ust'*/}
+            {/*                                        ? 'UST'*/}
+            {/*                                        : 'ALTE'}*/}
+            {/*                                </strong>*/}
+            {/*                            </p>*/}
+            {/*                        ) : (*/}
+            {/*                            <>*/}
+            {/*                                <p*/}
+            {/*                                    className="mb-0"*/}
+            {/*                                    style={{*/}
+            {/*                                        textDecoration:*/}
+            {/*                                            'line-through',*/}
+            {/*                                    }}*/}
+            {/*                                >*/}
+            {/*                                    Total:{' '}*/}
+            {/*                                    <strong>*/}
+            {/*                                        {numeral(*/}
+            {/*                                            (amount * price) /*/}
+            {/*                                                1000000,*/}
+            {/*                                        ).format('0,0.00')}{' '}*/}
+            {/*                                        UST*/}
+            {/*                                    </strong>*/}
+            {/*                                </p>*/}
+            {/*                                <p*/}
+            {/*                                    className="mb-2"*/}
+            {/*                                    style={{ color: '#4ee19b' }}*/}
+            {/*                                >*/}
+            {/*                                    Total:{' '}*/}
+            {/*                                    <strong>*/}
+            {/*                                        {' '}*/}
+            {/*                                        {numeral(*/}
+            {/*                                            (amount * price) /*/}
+            {/*                                                1000000 -*/}
+            {/*                                                (amount * price) /*/}
+            {/*                                                    1000000 /*/}
+            {/*                                                    state.config*/}
+            {/*                                                        .bonus_burn_rate,*/}
+            {/*                                        ).format('0,0.00')}{' '}*/}
+            {/*                                        UST{' '}*/}
+            {/*                                        <span>*/}
+            {/*                                            +{' '}*/}
+            {/*                                            {numeral(*/}
+            {/*                                                (amount * price) /*/}
+            {/*                                                    1000000 /*/}
+            {/*                                                    state.config*/}
+            {/*                                                        .bonus_burn_rate,*/}
+            {/*                                            ).format('0,0.00')}{' '}*/}
+            {/*                                            ALTE*/}
+            {/*                                        </span>*/}
+            {/*                                    </strong>*/}
+            {/*                                </p>*/}
+            {/*                                <span className="info mb-2">*/}
+            {/*                                    <Info*/}
+            {/*                                        size={14}*/}
+            {/*                                        style={{*/}
+            {/*                                            marginTop: '-2px',*/}
+            {/*                                        }}*/}
+            {/*                                        weight="fill"*/}
+            {/*                                        className="me-1"*/}
+            {/*                                    />*/}
+            {/*                                    No ALTE? you can buy ALTE on the{' '}*/}
+            {/*                                    <a*/}
+            {/*                                        href="https://app.alteredprotocol.com"*/}
+            {/*                                        target="_blank"*/}
+            {/*                                    >*/}
+            {/*                                        Altered website*/}
+            {/*                                    </a>*/}
+            {/*                                </span>*/}
+            {/*                            </>*/}
+            {/*                        )}*/}
 
-                                    {payWith == 'ust' && (
-                                        <>
-                                            <p
-                                                style={{
-                                                    marginBottom: '7px',
-                                                    fontSize: '14px',
-                                                    opacity: '0.3',
-                                                }}
-                                            >
-                                                Earn extra bonus while burning{' '}
-                                                <a
-                                                    style={{ color: '#fff' }}
-                                                    href="https://app.alteredprotocol.com"
-                                                    target="_blank"
-                                                >
-                                                    Altered
-                                                </a>
-                                            </p>
-                                            <label className="bonus-label">
-                                                <input
-                                                    type="checkbox"
-                                                    ref={bonusToggle}
-                                                    checked={alteBonus}
-                                                    className="switch"
-                                                    name="alte_bonus"
-                                                    onChange={(e, checked) =>
-                                                        bonusCheckbox(
-                                                            e,
-                                                            checked,
-                                                        )
-                                                    }
-                                                />
-                                                <label
-                                                    className="switch-label"
-                                                    onClick={() =>
-                                                        clickElement(
-                                                            bonusToggle,
-                                                        )
-                                                    }
-                                                ></label>
-                                                <Fire size={24} weight="fill" />{' '}
-                                                BURN
-                                                <span
-                                                    style={{
-                                                        color: '#d0e027',
-                                                        fontFamily: 'Cosmos',
-                                                        fontSize: '1.2em',
-                                                        padding: '4px 8px',
-                                                        background:
-                                                            'linear-gradient(228.88deg,rgba(0,0,0,.2) 18.2%,hsla(0,0%,69%,.107292) 77.71%,rgba(0,0,0,.0885417) 99.78%,transparent 146.58%),#171717',
-                                                        borderRadius: '25px',
-                                                    }}
-                                                >
-                                                    ALTE
-                                                </span>
-                                                <span className="badge rounded-pill">
-                                                    Bonus
-                                                </span>
-                                            </label>
-                                        </>
-                                    )}
-                                    {payWith !== 'ust' && (
-                                        <span className="info mb-2">
-                                            <Info
-                                                size={14}
-                                                style={{ marginTop: '-2px' }}
-                                                weight="fill"
-                                                className="me-1"
-                                            />
-                                            No ALTE? you can buy ALTE on the{' '}
-                                            <a
-                                                href="https://app.alteredprotocol.com"
-                                                target="_blank"
-                                            >
-                                                Altered website
-                                            </a>
-                                        </span>
-                                    )}
+            {/*                        {payWith == 'ust' && (*/}
+            {/*                            <>*/}
+            {/*                                <p*/}
+            {/*                                    style={{*/}
+            {/*                                        marginBottom: '7px',*/}
+            {/*                                        fontSize: '14px',*/}
+            {/*                                        opacity: '0.3',*/}
+            {/*                                    }}*/}
+            {/*                                >*/}
+            {/*                                    Earn extra bonus while burning{' '}*/}
+            {/*                                    <a*/}
+            {/*                                        style={{ color: '#fff' }}*/}
+            {/*                                        href="https://app.alteredprotocol.com"*/}
+            {/*                                        target="_blank"*/}
+            {/*                                    >*/}
+            {/*                                        Altered*/}
+            {/*                                    </a>*/}
+            {/*                                </p>*/}
+            {/*                                <label className="bonus-label">*/}
+            {/*                                    <input*/}
+            {/*                                        type="checkbox"*/}
+            {/*                                        ref={bonusToggle}*/}
+            {/*                                        checked={alteBonus}*/}
+            {/*                                        className="switch"*/}
+            {/*                                        name="alte_bonus"*/}
+            {/*                                        onChange={(e, checked) =>*/}
+            {/*                                            bonusCheckbox(*/}
+            {/*                                                e,*/}
+            {/*                                                checked,*/}
+            {/*                                            )*/}
+            {/*                                        }*/}
+            {/*                                    />*/}
+            {/*                                    <label*/}
+            {/*                                        className="switch-label"*/}
+            {/*                                        onClick={() =>*/}
+            {/*                                            clickElement(*/}
+            {/*                                                bonusToggle,*/}
+            {/*                                            )*/}
+            {/*                                        }*/}
+            {/*                                    ></label>*/}
+            {/*                                    <Fire size={24} weight="fill" />{' '}*/}
+            {/*                                    BURN*/}
+            {/*                                    <span*/}
+            {/*                                        style={{*/}
+            {/*                                            color: '#d0e027',*/}
+            {/*                                            fontFamily: 'Cosmos',*/}
+            {/*                                            fontSize: '1.2em',*/}
+            {/*                                            padding: '4px 8px',*/}
+            {/*                                            background:*/}
+            {/*                                                'linear-gradient(228.88deg,rgba(0,0,0,.2) 18.2%,hsla(0,0%,69%,.107292) 77.71%,rgba(0,0,0,.0885417) 99.78%,transparent 146.58%),#171717',*/}
+            {/*                                            borderRadius: '25px',*/}
+            {/*                                        }}*/}
+            {/*                                    >*/}
+            {/*                                        ALTE*/}
+            {/*                                    </span>*/}
+            {/*                                    <span className="badge rounded-pill">*/}
+            {/*                                        Bonus*/}
+            {/*                                    </span>*/}
+            {/*                                </label>*/}
+            {/*                            </>*/}
+            {/*                        )}*/}
+            {/*                        {payWith !== 'ust' && (*/}
+            {/*                            <span className="info mb-2">*/}
+            {/*                                <Info*/}
+            {/*                                    size={14}*/}
+            {/*                                    style={{ marginTop: '-2px' }}*/}
+            {/*                                    weight="fill"*/}
+            {/*                                    className="me-1"*/}
+            {/*                                />*/}
+            {/*                                No ALTE? you can buy ALTE on the{' '}*/}
+            {/*                                <a*/}
+            {/*                                    href="https://app.alteredprotocol.com"*/}
+            {/*                                    target="_blank"*/}
+            {/*                                >*/}
+            {/*                                    Altered website*/}
+            {/*                                </a>*/}
+            {/*                            </span>*/}
+            {/*                        )}*/}
 
-                                    <label className="gift-label">
-                                        <input
-                                            type="checkbox"
-                                            ref={friendsToggle}
-                                            checked={giftFriend.active}
-                                            className="switch"
-                                            name="gift_friend"
-                                            onChange={(e, checked) =>
-                                                giftCheckbox(e, checked)
-                                            }
-                                        />
-                                        <label
-                                            className="switch-label"
-                                            onClick={() =>
-                                                clickElement(friendsToggle)
-                                            }
-                                        ></label>
-                                        <Gift size={24} weight="fill" /> Gift
-                                        tickets to friends
-                                        <span className="badge rounded-pill">
-                                            GIFTS
-                                        </span>
-                                    </label>
-                                    {giftFriend.active && (
-                                        <>
-                                            <p className="m-0">
-                                                Friends wallet address:
-                                            </p>
-                                            <input
-                                                type="text"
-                                                className="form-control"
-                                                placeholder="yourfriendswalletaddress"
-                                                name="gift_wallet"
-                                                onChange={(e) => giftAddress(e)}
-                                            />
-                                        </>
-                                    )}
-                                    <div className="text-sm">{result}</div>
+            {/*                        <label className="gift-label">*/}
+            {/*                            <input*/}
+            {/*                                type="checkbox"*/}
+            {/*                                ref={friendsToggle}*/}
+            {/*                                checked={giftFriend.active}*/}
+            {/*                                className="switch"*/}
+            {/*                                name="gift_friend"*/}
+            {/*                                onChange={(e, checked) =>*/}
+            {/*                                    giftCheckbox(e, checked)*/}
+            {/*                                }*/}
+            {/*                            />*/}
+            {/*                            <label*/}
+            {/*                                className="switch-label"*/}
+            {/*                                onClick={() =>*/}
+            {/*                                    clickElement(friendsToggle)*/}
+            {/*                                }*/}
+            {/*                            ></label>*/}
+            {/*                            <Gift size={24} weight="fill" /> Gift*/}
+            {/*                            tickets to friends*/}
+            {/*                            <span className="badge rounded-pill">*/}
+            {/*                                GIFTS*/}
+            {/*                            </span>*/}
+            {/*                        </label>*/}
+            {/*                        {giftFriend.active && (*/}
+            {/*                            <>*/}
+            {/*                                <p className="m-0">*/}
+            {/*                                    Friends wallet address:*/}
+            {/*                                </p>*/}
+            {/*                                <input*/}
+            {/*                                    type="text"*/}
+            {/*                                    className="form-control"*/}
+            {/*                                    placeholder="yourfriendswalletaddress"*/}
+            {/*                                    name="gift_wallet"*/}
+            {/*                                    onChange={(e) => giftAddress(e)}*/}
+            {/*                                />*/}
+            {/*                            </>*/}
+            {/*                        )}*/}
+            {/*                        <div className="text-sm">{result}</div>*/}
 
-                                    <button
-                                        onClick={() =>
-                                            setTicketModal(!ticketModal)
-                                        }
-                                        className="btn btn-default w-100 mb-3 mt-3"
-                                        style={{
-                                            fontSize: '18px',
-                                            fontWeight: 'bold',
-                                            padding: '11px 5px',
-                                        }}
-                                    >
-                                        <PencilLine
-                                            size={24}
-                                            color={'#ff36ff'}
-                                            style={{
-                                                marginTop: '-1px',
-                                                marginRight: '5px',
-                                            }}
-                                        />
-                                        Personalize tickets
-                                    </button>
-                                    <button
-                                        onClick={(e) => execute(e)}
-                                        className="btn btn-special w-100"
-                                        disabled={amount <= 0}
-                                    >
-                                        {!buyLoader ? (
-                                            <>Buy {amount} tickets</>
-                                        ) : (
-                                            <div
-                                                className="spinner-border spinner-border-sm"
-                                                role="status"
-                                                style={{
-                                                    position: 'relative',
-                                                    top: '-3px',
-                                                }}
-                                            >
-                                                <span className="visually-hidden">
-                                                    Loading...
-                                                </span>
-                                            </div>
-                                        )}
-                                    </button>
-                                </div>
-                            </div>
-                        </div>
-                        <div
-                            className={'backdrop' + (buyNow ? ' show' : '')}
-                            onClick={() => setBuyNow(!buyNow)}
-                        ></div>
-                        {/* <SocialShare /> */}
-                    </div>
-                </div>
-            </div>
+            {/*                        <button*/}
+            {/*                            onClick={() =>*/}
+            {/*                                setTicketModal(!ticketModal)*/}
+            {/*                            }*/}
+            {/*                            className="btn btn-default w-100 mb-3 mt-3"*/}
+            {/*                            style={{*/}
+            {/*                                fontSize: '18px',*/}
+            {/*                                fontWeight: 'bold',*/}
+            {/*                                padding: '11px 5px',*/}
+            {/*                            }}*/}
+            {/*                        >*/}
+            {/*                            <PencilLine*/}
+            {/*                                size={24}*/}
+            {/*                                color={'#ff36ff'}*/}
+            {/*                                style={{*/}
+            {/*                                    marginTop: '-1px',*/}
+            {/*                                    marginRight: '5px',*/}
+            {/*                                }}*/}
+            {/*                            />*/}
+            {/*                            Personalize tickets*/}
+            {/*                        </button>*/}
+            {/*                        <button*/}
+            {/*                            onClick={(e) => execute(e)}*/}
+            {/*                            className="btn btn-special w-100"*/}
+            {/*                            disabled={amount <= 0}*/}
+            {/*                        >*/}
+            {/*                            {!buyLoader ? (*/}
+            {/*                                <>Buy {amount} tickets</>*/}
+            {/*                            ) : (*/}
+            {/*                                <div*/}
+            {/*                                    className="spinner-border spinner-border-sm"*/}
+            {/*                                    role="status"*/}
+            {/*                                    style={{*/}
+            {/*                                        position: 'relative',*/}
+            {/*                                        top: '-3px',*/}
+            {/*                                    }}*/}
+            {/*                                >*/}
+            {/*                                    <span className="visually-hidden">*/}
+            {/*                                        Loading...*/}
+            {/*                                    </span>*/}
+            {/*                                </div>*/}
+            {/*                            )}*/}
+            {/*                        </button>*/}
+            {/*                    </div>*/}
+            {/*                </div>*/}
+            {/*            </div>*/}
+            {/*            <div*/}
+            {/*                className={'backdrop' + (buyNow ? ' show' : '')}*/}
+            {/*                onClick={() => setBuyNow(!buyNow)}*/}
+            {/*            ></div>*/}
+            {/*            /!* <SocialShare /> *!/*/}
+            {/*        </div>*/}
+            {/*    </div>*/}
+            {/*</div>*/}
 
-            <div className="how">
-                <div className="container">
-                    <div className="row">
-                        <div className="col-md-12">
-                            <MonitorPlay
-                                size={48}
-                                color={'#20ff93'}
-                                className="mx-auto d-block mb-2"
-                            />
-                            <h2>How it works</h2>
-                        </div>
-                        <div className="col-md-4 my-2">
-                            <div className="step">
-                                <label>Step 1</label>
-                                <h3>Participate In Lottery</h3>
-                                <p>Buy max 200 tickets per transaction</p>
-                            </div>
-                        </div>
-                        <div className="col-md-4 my-2">
-                            <div className="step">
-                                <label>Step 2</label>
-                                <h3>Wait For Draw</h3>
-                                <p>The contract draw a lottery every 3 days</p>
-                            </div>
-                        </div>
-                        <div className="col-md-4 my-2">
-                            <div className="step">
-                                <label>Step 3</label>
-                                <h3>Check Your Prizes</h3>
-                                <p>
-                                    Prizes automatically deposited into wallet
-                                </p>
-                            </div>
-                        </div>
-                        {/* <div className="col-12 text-center">
-                            <h5 className="mt-4 mb-1">Learn more?</h5>
-                            <a
-                                className="btn btn-plain"
-                                href="https://docs.loterra.io/products/lottery"
-                                style={{
-                                    color: 'rgb(166, 159, 187)',
-                                    fontSize: '16px',
-                                }}
-                                target="_blank"
-                            >
-                                <Files
-                                    size={21}
-                                    style={{
-                                        position: 'relative',
-                                        top: '-2px',
-                                    }}
-                                />{' '}
-                                LoTerra lottery documentation
-                            </a>
-                        </div> */}
-                    </div>
-                </div>
-            </div>
+            {/*<div className="how">*/}
+            {/*    <div className="container">*/}
+            {/*        <div className="row">*/}
+            {/*            <div className="col-md-12">*/}
+            {/*                <MonitorPlay*/}
+            {/*                    size={48}*/}
+            {/*                    color={'#20ff93'}*/}
+            {/*                    className="mx-auto d-block mb-2"*/}
+            {/*                />*/}
+            {/*                <h2>How it works</h2>*/}
+            {/*            </div>*/}
+            {/*            <div className="col-md-4 my-2">*/}
+            {/*                <div className="step">*/}
+            {/*                    <label>Step 1</label>*/}
+            {/*                    <h3>Participate In Lottery</h3>*/}
+            {/*                    <p>Buy max 200 tickets per transaction</p>*/}
+            {/*                </div>*/}
+            {/*            </div>*/}
+            {/*            <div className="col-md-4 my-2">*/}
+            {/*                <div className="step">*/}
+            {/*                    <label>Step 2</label>*/}
+            {/*                    <h3>Wait For Draw</h3>*/}
+            {/*                    <p>The contract draw a lottery every 3 days</p>*/}
+            {/*                </div>*/}
+            {/*            </div>*/}
+            {/*            <div className="col-md-4 my-2">*/}
+            {/*                <div className="step">*/}
+            {/*                    <label>Step 3</label>*/}
+            {/*                    <h3>Check Your Prizes</h3>*/}
+            {/*                    <p>*/}
+            {/*                        Prizes automatically deposited into wallet*/}
+            {/*                    </p>*/}
+            {/*                </div>*/}
+            {/*            </div>*/}
+            {/*            /!* <div className="col-12 text-center">*/}
+            {/*                <h5 className="mt-4 mb-1">Learn more?</h5>*/}
+            {/*                <a*/}
+            {/*                    className="btn btn-plain"*/}
+            {/*                    href="https://docs.loterra.io/products/lottery"*/}
+            {/*                    style={{*/}
+            {/*                        color: 'rgb(166, 159, 187)',*/}
+            {/*                        fontSize: '16px',*/}
+            {/*                    }}*/}
+            {/*                    target="_blank"*/}
+            {/*                >*/}
+            {/*                    <Files*/}
+            {/*                        size={21}*/}
+            {/*                        style={{*/}
+            {/*                            position: 'relative',*/}
+            {/*                            top: '-2px',*/}
+            {/*                        }}*/}
+            {/*                    />{' '}*/}
+            {/*                    LoTerra lottery documentation*/}
+            {/*                </a>*/}
+            {/*            </div> *!/*/}
+            {/*        </div>*/}
+            {/*    </div>*/}
+            {/*</div>*/}
 
             {/* <QuickStats lotaPrice={lotaPrice} marketCap={marketCap} circulatingSupply={circulatingSupply}/> */}
 
-            <JackpotResults />
+            {/*<JackpotResults />*/}
 
             <div
                 ref={loterraStats}
