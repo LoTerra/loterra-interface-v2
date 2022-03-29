@@ -55,21 +55,6 @@ export default function NormalNav() {
                 <img src="/logo.png" className="img-fluid d-inline-block" />                
                 <span className="d-inline-block">LoTerra</span>
             </a>
-
-            <li className="nav-item">
-                <NavLink exact to="/" className={'nav-link'}>
-                    <Ticket
-                        size={24}
-                        style={{
-                            marginRight: '3px',
-                            position: 'relative',
-                            top: '-1px',
-                        }}
-                    />{' '}
-                    Lottery
-                    <span className="item-label">Jackpot Lottery</span>
-                </NavLink>
-            </li>
             <li className="nav-item">
                 <NavLink
                     exact
