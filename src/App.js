@@ -186,8 +186,7 @@ class App extends Component {
                         </div>
                     </div>
                 </StoreProvider>
-
-                {/*<Footer/>*/}
+                {/* <Footer/> */}
             </Root>
         )
     }

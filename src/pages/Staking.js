@@ -280,7 +280,6 @@ export default () => {
             </div>
         </section> */}
 
-            <Footer />
             <ProposalModal open={modal} toggleModal={() => setModal(!modal)} />
             <Notification
                 notification={notification}

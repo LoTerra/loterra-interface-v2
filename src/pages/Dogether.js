@@ -79,7 +79,7 @@ export default () => {
                 notification={notification}
                 close={() => hideNotification()}
             />
-            <Footer />
+            {/* <Footer /> */}
         </>
     )
 }
