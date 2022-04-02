@@ -39,6 +39,7 @@ SwiperCore.use([Navigation, Pagination, Autoplay, EffectFade])
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/swiper-bundle.min.css'
 import 'swiper/swiper.min.css'
+import {Head} from "react-static";
 
 let useConnectedWallet = {}
 if (typeof document !== 'undefined') {
@@ -764,6 +765,56 @@ export default () => {
                     backgroundPosition: 'center center',
                 }}
             > */}
+            <Head>
+                <meta charSet="UTF-8" />
+                <meta
+                    name="viewport"
+                    content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
+                />
+                <title>
+                    LoTerra - Decentralized lottery on Terra blockchain
+                </title>
+                <link
+                    rel="icon"
+                    type="image/x-icon"
+                    href="https://loterra.io/favicon.ico"
+                />
+                <link
+                    data-hid="shortcut-icon"
+                    rel="shortcut icon"
+                    href="https://loterra.io/favicon.ico"
+                />
+                <meta property="og:title" content="LoTerra" />
+                <meta
+                    property="og:image"
+                    content="https://loterra.io/loterra.png"
+                />
+                <meta property="og:image:alt" content="LoTerra icon" />
+                <meta property="og:type" content="website" />
+                <meta property="og:site_name" content="LoTerra interface" />
+                <meta
+                    property="og:description"
+                    content="LoTerra is a lottery contract, buy tickets as a player or join the governance! DAO allows making decisions together! Manage the casino 🎰 Set the prize 🏆 Up the ticket price or go cheap 🏷 Extract max profits 🤑 Keep the vault secure at all times!"
+                />
+                <meta name="twitter:card" content="summary" />
+                <meta name="twitter:site" content="LoTerra" />
+                <meta
+                    name="twitter:title "
+                    content="LoTerra - Decentralized lottery on Terra blockchain"
+                />
+                <meta
+                    name="twitter:description"
+                    content="LoTerra is a lottery contract, buy tickets as a player or join the governance! DAO allows making decisions together! Manage the casino 🎰 Set the prize 🏆 Up the ticket price or go cheap 🏷 Extract max profits 🤑 Keep the vault secure at all times!"
+                />
+                <meta
+                    name="twitter:image"
+                    content="https://loterra.io/loterra.png"
+                />
+                <script
+                    src="https://widgets.coingecko.com/coingecko-coin-price-chart-widget.js"
+                    async
+                />
+            </Head>
             <div style={{background:'linear-gradient(360deg, #16073e, transparent)', paddingBottom:'35px', paddingBottom:'50px'}}>
                 <div className="container-fluid">
                 <div className="row px-md-5">
