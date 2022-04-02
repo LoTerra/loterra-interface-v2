@@ -581,7 +581,6 @@ export default () => {
                 <SpaceWagerGameView />
                 <Toaster position="top-center" reverseOrder={false} />
             </div>
-            <Footer />
         </>
     )
 }

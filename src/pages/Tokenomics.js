@@ -9,6 +9,8 @@ const BURNED_LOTA = 4301383550000
 
 export default () => {
     const { state, dispatch } = useStore()
+    const [daoFundsAmount, setdaoFundsAmount] = useState(0)
+    const [stakingBalance, setStakingBalance] = useState(0)
     const [lotaPriceOnTerraswap, setlotaPriceOnTerraswap] = useState(0)
     const [lotaPriceOnAstroport, setLotaPriceOnAstroport] = useState(0)
     const [lotaPriceOnLoop, setLotaPriceOnLoop] = useState(0)
@@ -16,20 +18,31 @@ export default () => {
     const [loopPrice, setLoopPrice] = useState(0)
     const terra = state.lcd_client
     const api = new WasmAPI(terra.apiRequester)
-    const loterra_contract_address =
-        'terra1q2k29wwcz055q4ftx4eucsq6tg9wtulprjg75w'
-    const loterra_terraswap_pool_address =
-        'terra1pn20mcwnmeyxf68vpt3cyel3n57qm9mp289jta'
-    const loterra_astroport_pool_address =
-        'terra1z7634s8kyyvjjuv7lcgkfy49hamxssxq9f9xw6'
-    const loterra_loop_pool_address =
-        'terra15568nqrqcawm263yqcuuuvj5mh763tp8jyscq3'
-    const loterraLoop_loop_pool_address =
-        'terra1kw95x0l3qw5y7jw3j0h3fy83y56rj68wd8w7rc'
+    const loterra_cw20_address = 'terra1ez46kxtulsdv07538fh5ra5xj8l68mu8eg24vr'
+    const loterra_dao_address = 'terra1s4twvkqy0eel5saah64wxezpckm7v9535jjshy'
+    const staking_contract = 'terra1342fp86c3z3q0lksq92lncjxpkfl9hujwh6xfn'
+    const loterra_terraswap_pool_address = 'terra1pn20mcwnmeyxf68vpt3cyel3n57qm9mp289jta'
+    const loterra_astroport_pool_address = 'terra1z7634s8kyyvjjuv7lcgkfy49hamxssxq9f9xw6'
+    const loterra_loop_pool_address = 'terra15568nqrqcawm263yqcuuuvj5mh763tp8jyscq3'
+    const loterraLoop_loop_pool_address = 'terra1kw95x0l3qw5y7jw3j0h3fy83y56rj68wd8w7rc'
     const loopUst_pool_address = 'terra106a00unep7pvwvcck4wylt4fffjhgkf9a0u6eu'
 
     const fetchContractQuery = useCallback(async () => {
         try {
+            const currentDAOFunds = await api.contractQuery(
+                loterra_cw20_address,
+                {
+                    balance: {address: loterra_dao_address},
+                },
+            )
+            setdaoFundsAmount(currentDAOFunds.balance)
+            const stakingBalance = await api.contractQuery(
+                loterra_cw20_address,
+                {
+                    balance: {address: staking_contract},
+                },
+            )
+            setStakingBalance(stakingBalance.balance)
             //Get current lota price
             const currentLotaPriceOnTerraswap = await api.contractQuery(
                 loterra_terraswap_pool_address,
@@ -75,14 +88,9 @@ export default () => {
     function circulatingSupply() {
         let total =
             (parseInt(state.tokenInfo.total_supply) - BURNED_LOTA) / 1000000
-        let daoFunds = parseInt(state.daoFunds / 1000000)
+        let daoFunds = parseInt(daoFundsAmount / 1000000)
         let sum = total - daoFunds
         return sum
-    }
-
-    function daoFunds() {
-        let daoFunds = parseInt(state.daoFunds / 1000000)
-        return daoFunds
     }
 
     function totalSupply() {
@@ -239,7 +247,7 @@ export default () => {
                             <div className="lota-stats">
                                 <p>DAO funds</p>
                                 <h5>
-                                    {numeral(daoFunds()).format('0,0.00')}
+                                    {numeral(daoFundsAmount / 1_000_000).format('0,0.00')}
                                     <span>LOTA</span>
                                 </h5>
                             </div>
@@ -257,17 +265,28 @@ export default () => {
                         </div>
                         <div className="col-md-6 mb-3">
                             <div className="lota-stats">
-                                <p>Market Cap</p>
+                                <p>Staking Balance</p>
                                 <h5>
-                                    {numeral(marketCap()).format('0,0.00')}
-                                    <span>UST</span>
+                                    {numeral(stakingBalance / 1_000_000).format('0,0.00')}
+                                    <span>LOTA</span>
                                 </h5>
                             </div>
                         </div>
                         <div className="col-md-12 mb-3">
+                            <div className="lota-stats"> 
+                                <p>Market Cap</p>
+                                    <h5>
+                                        {numeral(
+                                            marketCap()
+                                        ).format('0,0.000')}
+                                        <span>UST</span>
+                                    </h5>  
+                                </div>
+                        </div>
+                        <div className="col-md-12 mb-3">
                             <div className="lota-stats">
                                 {lotaPriceOnTerraswap.assets && (
-                                    <>
+                                    <>                                        
                                         <p>Price</p>
                                         <h5>
                                             {numeral(

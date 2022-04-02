@@ -56,6 +56,9 @@ const HomeCard = {
 const loterra_contract_address = 'terra1q2k29wwcz055q4ftx4eucsq6tg9wtulprjg75w'
 const loterra_pool_address = 'terra1pn20mcwnmeyxf68vpt3cyel3n57qm9mp289jta'
 
+const aust_contract_address = 'terra1hzh9vpxhsk8253se0vv5jj6etdvxu3nv8z07zu'
+const loterra_dao_address = 'terra1s4twvkqy0eel5saah64wxezpckm7v9535jjshy'
+
 const BURNED_LOTA = 4301383550000
 
 export default () => {
@@ -71,6 +74,7 @@ export default () => {
     const [alteBonus, setAlteBonus] = useState(false)
     const [randomnizing, setRandomnizing] = useState(false)
     const [giftFriend, setGiftFriend] = useState({ active: false, wallet: '' })
+    const [austBalance, setAustBalance] = useState(0)
     const [notification, setNotification] = useState({
         type: 'success',
         message: '',
@@ -117,6 +121,15 @@ export default () => {
                 setJackpot(parseInt(contractJackpotInfo) / 1000000)
             })
 
+            const austBalanceAmount = await api.contractQuery(
+                aust_contract_address,
+                {
+                    balance: {
+                        address: loterra_dao_address,
+                    },
+                },
+            )
+            setAustBalance(austBalanceAmount.balance)
             const jackpotAltered = await api.contractQuery(
                 state.alteredContractAddress,
                 {
@@ -1650,14 +1663,14 @@ export default () => {
                                 <div className="lota-stats">
                                     <p>Current lottery balance</p>
                                     <h5>
-                                        {numeral(contractBalance).format(
+                                        {numeral(austBalance / 1_000_000).format(
                                             '0,0.00',
                                         )}
-                                        <span>UST</span>
+                                        <span>aUST</span>
                                     </h5>
                                 </div>
                             </div>
-                            <div className="col-md-6 mb-3">
+                            {/* <div className="col-md-6 mb-3">
                                 <div className="lota-stats">
                                     <p>Circulating SUPPLY</p>
                                     <h5>
@@ -1667,8 +1680,8 @@ export default () => {
                                         <span>LOTA</span>
                                     </h5>
                                 </div>
-                            </div>
-                            <div className="col-md-6 mb-3">
+                            </div> */}
+                            {/* <div className="col-md-6 mb-3">
                                 <div className="lota-stats">
                                     <p>Total SUPPLY</p>
                                     <h5>
@@ -1678,8 +1691,8 @@ export default () => {
                                         <span>LOTA</span>
                                     </h5>
                                 </div>
-                            </div>
-                            <div className="col-md-12 mb-3">
+                            </div> */}
+                            {/* <div className="col-md-12 mb-3">
                                 <div className="lota-stats">
                                     {lotaPrice.assets && (
                                         <>
@@ -1693,7 +1706,7 @@ export default () => {
                                         </>
                                     )}
                                 </div>
-                            </div>
+                            </div> */}
                             <div className="col-md-12 text-center">
                                 <a
                                     href="https://coinhall.org/charts/terra/terra1pn20mcwnmeyxf68vpt3cyel3n57qm9mp289jta"

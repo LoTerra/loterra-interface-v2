@@ -80,7 +80,7 @@ export default () => {
                     </div>
                 </div>
             </section>
-            <Footer />
+            {/* <Footer /> */}
         </>
     )
 }
