@@ -622,11 +622,13 @@ export default () => {
     async function resolve_all() {
         setLoaderResolveAll(true)
         let all_games = []
-        let game_stats_promise = new Promise(async (resolve, reject) => {
+        let game_stats_promise = await new Promise(async (resolve, reject) => {
             try {
                 let start_after = ''
                 let loop = true
+
                 while (loop) {
+                    await new Promise(function(re, reject) {setInterval(re, 1000);})
                     // Prepare query
                     let query = {
                         game_stats: {
@@ -657,15 +659,17 @@ export default () => {
                     }
                 }
                 resolve(all_games)
+
             } catch (e) {
                 console.log(e)
             }
-        })
-
-        let all_promises = []
-        let all_msgs = []
-        Promise.all([game_stats_promise]).then((res) => {
-            res[0].map(async (game) => {
+        }).then((res) => {
+            //let all_promises = []
+            let data_prom = []
+            //let all_msgs = []
+            let all_promises_go = []
+            //let all_promises = new Promise((resolve, reject) => {
+            res.map(async (game) => {
                 if (game.game_stats_id < state.rapidoCurrentRound) {
                     // Prepare query
                     let query = {
@@ -680,9 +684,10 @@ export default () => {
                         let start_after = null
                         let loop = true
 
-                        let games_promise = new Promise(
+                        let games_promise = await new Promise(
                             async (resolve, reject) => {
                                 while (loop) {
+                                    await new Promise( function(re, reject) {setInterval(re, 1000)})
                                     // Add start after to get pagination
                                     if (start_after != null) {
                                         query.games.start_after = start_after
@@ -712,6 +717,8 @@ export default () => {
                                         loop = false
                                         start_after = null
                                     }
+
+
                                 }
                                 if (data_game.length != 0) {
                                     let msg = new MsgExecuteContract(
@@ -720,36 +727,54 @@ export default () => {
                                         {
                                             collect: {
                                                 round: game.game_stats_id,
-                                                player: state.wallet
-                                                    .walletAddress,
+                                                player: state.wallet.walletAddress,
                                                 game_id: data_game,
                                             },
                                         },
                                     )
                                     resolve(msg)
-                                    console.log(msg)
+                                    //resolve(msg)
                                 }
                                 resolve()
                             },
                         )
+                        //console.log(data_game)
 
-                        all_promises.push(games_promise)
+                        //data_prom.push(games_promise)
+                        console.log(games_promise)
+                        //return games_promise
+                        //data_prom.push(games_promise)
+                        if (games_promise !== undefined) {
+                            all_promises_go.push(games_promise)
+                        }
+                        //console.log(games_promise)
                     } catch (e) {
                         console.log(e)
                     }
                 }
             })
 
-            Promise.all(all_promises).then((result) => {
-                let new_arr = result
-                let filtered = new_arr.filter((element) => {
-                    return element !== undefined
-                })
+                //resolve(filtered)
+            //})
+            Promise.all([all_promises_go]).then( async (result) => {
+                await new Promise( function(re, reject) {setInterval(re, 10000)})
+                console.log(result)
+                let new_arr = result[0]
+                console.log("result")
+                console.log(result[0])
 
-                if (filtered.length > 0) {
+                // let filtered = new_arr.filter((element) => {
+                //     console.log("element")
+                //     console.log(element)
+                //     return element !== undefined
+                // })
+
+                // console.log(filtered)
+                console.log(result.length)
+                if (result.length > 0) {
                     state.wallet
                         .post({
-                            msgs: filtered,
+                            msgs: result[0],
                         })
                         .then((e) => {
                             if (e.success) {
@@ -778,7 +803,144 @@ export default () => {
                     setLoaderResolveAll(false)
                 }, 6000)
             })
+
         })
+
+        // //let all_promises = []
+        // let data_prom = []
+        // //let all_msgs = []
+        // Promise.all([game_stats_promise]).then((res) => {
+        //     let all_promises = new Promise((resolve, reject) => {
+        //         let prom = res[0].map(async (game) => {
+        //             await new Promise(function(re, reject) {setInterval(re, 1000);})
+        //             if (game.game_stats_id < state.rapidoCurrentRound) {
+        //                 // Prepare query
+        //                 let query = {
+        //                     games: {
+        //                         limit: 30,
+        //                         round: game.game_stats_id,
+        //                         player: "terra1r2s4yakf2pp3qzut0lm5lqk6twx8rj3jrucgrp",
+        //                     },
+        //                 }
+        //                 try {
+        //                     let data_game = []
+        //                     let start_after = null
+        //                     let loop = true
+        //
+        //                     let games_promise = await new Promise(
+        //                         async (resolve, reject) => {
+        //                             while (loop) {
+        //                                 await new Promise(function(re, reject) {setInterval(re, 1000)})
+        //                                 // Add start after to get pagination
+        //                                 if (start_after != null) {
+        //                                     query.games.start_after = start_after
+        //                                 }
+        //
+        //                                 // Query to state smart contract
+        //                                 let res_games = await api.contractQuery(
+        //                                     state.rapidoAddress,
+        //                                     query,
+        //                                 )
+        //
+        //                                 if (res_games.length > 0) {
+        //                                     let new_res_games = []
+        //                                     res_games.map((g) => {
+        //                                         if (!g.resolved)
+        //                                             new_res_games.push(g.game_id)
+        //                                     })
+        //                                     data_game = [
+        //                                         ...data_game,
+        //                                         ...new_res_games,
+        //                                     ]
+        //                                     start_after =
+        //                                         res_games[res_games.length - 1]
+        //                                             .game_id
+        //                                     // get_user_combination(lotteries_state)
+        //                                 } else {
+        //                                     loop = false
+        //                                     start_after = null
+        //                                 }
+        //                             }
+        //                             if (data_game.length != 0) {
+        //                                 let msg = new MsgExecuteContract(
+        //                                     state.wallet.walletAddress,
+        //                                     state.rapidoAddress,
+        //                                     {
+        //                                         collect: {
+        //                                             round: game.game_stats_id,
+        //                                             player: "terra1r2s4yakf2pp3qzut0lm5lqk6twx8rj3jrucgrp",
+        //                                             game_id: data_game,
+        //                                         },
+        //                                     },
+        //                                 )
+        //                                 resolve(msg)
+        //                                 //resolve(msg)
+        //                             }
+        //                             resolve()
+        //                         },
+        //                     )
+        //                     //console.log(data_game)
+        //
+        //                     //data_prom.push(games_promise)
+        //                     console.log(games_promise)
+        //                     //return games_promise
+        //                     data_prom.push(games_promise)
+        //                     //console.log(games_promise)
+        //                 } catch (e) {
+        //                     console.log(e)
+        //                 }
+        //             }
+        //         })
+        //         let filtered = data_prom.filter((element) => {
+        //             console.log("element")
+        //             console.log(element)
+        //             return element !== undefined
+        //         })
+        //         resolve(filtered)
+        //     })
+        //     Promise.all([all_promises]).then( (result) => {
+        //
+        //         let new_arr = result[0]
+        //         console.log("result")
+        //         console.log(result)
+        //
+        //         // console.log(filtered)
+        //
+        //         if (new_arr.length > 0) {
+        //             state.wallet
+        //                 .post({
+        //                     msgs: new_arr,
+        //                 })
+        //                 .then((e) => {
+        //                     if (e.success) {
+        //                         toast.success('Successfully resolved!')
+        //                     } else {
+        //                         toast.error(
+        //                             'Something went wrong, please try again',
+        //                         )
+        //                         console.log(e)
+        //                     }
+        //                     dispatch({
+        //                         type: 'setLoaderResolveLottoNumber',
+        //                         message: true,
+        //                     })
+        //                 })
+        //                 .catch((e) => {
+        //                     console.log(e)
+        //                 })
+        //         }else {
+        //             toast.error(
+        //                 'Nothing to resolve, enter in lottery before trying again',
+        //             )
+        //         }
+        //         // time the transaction to be approved on blockchain
+        //         setTimeout(() => {
+        //             setLoaderResolveAll(false)
+        //         }, 6000)
+        //     })
+        // })
+
+
         // state.wallet
         //     .post({
         //         msgs: _all_msgs,
