@@ -2,7 +2,7 @@ import { Head } from 'react-static'
 import React, { useState, useEffect, useCallback, useRef, useMemo } from 'react'
 import { useStore } from '../store'
 import RapidoCard from '../components/Rapido/RapidoCard'
-import { ArrowsClockwise, Clock, HourglassSimpleHigh, Lightning, Star, Warning } from 'phosphor-react'
+import { ArrowsClockwise, CheckCircle, Clock, Gear, HourglassSimpleHigh, Lightning, Star, Wallet, Warning, X } from 'phosphor-react'
 
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/swiper-bundle.min.css'
@@ -27,6 +27,10 @@ export default () => {
     const [loaderResolveAll, setLoaderResolveAll] = useState(false)
     const [lotteryStats, setLotteryStats] = useState(null)
     const [loaderUserGames, setLoaderUserGames] = useState(false)
+
+    //Custom wallet address for resolve_all
+    const [customWalletAddress, setCustomWalletAddress] = useState('');
+    const [customWalletField, setCustomWalletField] = useState(false);
 
     const [config, setConfig] = useState({
         denom: 'uusd',
@@ -622,6 +626,13 @@ export default () => {
     async function resolve_all() {
         setLoaderResolveAll(true)
         let all_games = []
+
+        //Check if custom wallet address
+        let resolveWallet = state.wallet.walletAddress;
+        if(customWalletAddress !== ''){
+            resolveWallet = customWalletAddress
+        }
+        
         let game_stats_promise = await new Promise(async (resolve, reject) => {
             try {
                 let start_after = ''
@@ -632,7 +643,7 @@ export default () => {
                     // Prepare query
                     let query = {
                         game_stats: {
-                            player: state.wallet.walletAddress,
+                            player: resolveWallet,
                             limit: 30,
                         },
                     }
@@ -676,7 +687,7 @@ export default () => {
                         games: {
                             limit: 30,
                             round: game.game_stats_id,
-                            player: state.wallet.walletAddress,
+                            player: resolveWallet,
                         },
                     }
                     try {
@@ -727,7 +738,7 @@ export default () => {
                                         {
                                             collect: {
                                                 round: game.game_stats_id,
-                                                player: state.wallet.walletAddress,
+                                                player: resolveWallet,
                                                 game_id: data_game,
                                             },
                                         },
@@ -1210,7 +1221,32 @@ export default () => {
                             Get all your games
                         </h4>
                     </div>
-                    <div className="col-md-6 text-center text-md-end pt-2 pt-md-5">
+                    <div className="col-md-6 text-center text-md-end pt-2 pt-md-5">                       
+                        <button className="btn btn-default btn-sm position-relative" onClick={() => setCustomWalletField(!customWalletField)}>
+                            { customWalletField ?
+                                <X size={18}/>
+                                :
+                                <> 
+                                <Gear size={18}/>
+                                { customWalletAddress !== '' ?
+                                    <span className="badge" 
+                                    style={{
+                                        position:'absolute',
+                                        top:-8,
+                                        left:-15
+                                        }}>
+                                        <CheckCircle 
+                                        size={'16'}
+                                        weight={'fill'}
+                                        color={'#f035f0'}
+                                        />
+                                    </span>
+                                    :
+                                    ''
+                                }                                 
+                                </>
+                            }
+                        </button>
                         <button
                             disabled={loaderResolveAll}
                             className="btn btn-default btn-sm"
@@ -1226,9 +1262,15 @@ export default () => {
 
                             Try resolve all games
                         </button>
-                        <span className="small d-block text-muted">
-                            Can take some minutes
-                        </span>
+                        { customWalletField &&
+                        <div class="input-group mt-1">
+                            <span class="input-group-text" id="basic-addon1"><Wallet size={18} color={'#8372bf'}/></span>
+                            <input class="form-control" defaultValue={customWalletAddress} placeholder={'Custom resolve wallet address'} onChange={(e) => setCustomWalletAddress(e.target.value)}/>
+                        </div>
+                        }
+                        <span className="small d-block text-muted mt-1">
+                            Resolving all can take some minutes
+                        </span>                        
                     </div>
                     <div className="table-responsive">
                         <table className="table text-white">
