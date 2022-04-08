@@ -2,7 +2,7 @@ import { Head } from 'react-static'
 import React, { useState, useEffect, useCallback, useRef, useMemo } from 'react'
 import { useStore } from '../store'
 import RapidoCard from '../components/Rapido/RapidoCard'
-import { ArrowsClockwise, Clock, HourglassSimpleHigh, Lightning, Star, Warning } from 'phosphor-react'
+import { ArrowsClockwise, CheckCircle, Clock, Gear, HourglassSimpleHigh, Lightning, Star, Wallet, Warning, X } from 'phosphor-react'
 
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/swiper-bundle.min.css'
@@ -27,6 +27,10 @@ export default () => {
     const [loaderResolveAll, setLoaderResolveAll] = useState(false)
     const [lotteryStats, setLotteryStats] = useState(null)
     const [loaderUserGames, setLoaderUserGames] = useState(false)
+
+    //Custom wallet address for resolve_all
+    const [customWalletAddress, setCustomWalletAddress] = useState('');
+    const [customWalletField, setCustomWalletField] = useState(false);
 
     const [config, setConfig] = useState({
         denom: 'uusd',
@@ -622,6 +626,13 @@ export default () => {
     async function resolve_all() {
         setLoaderResolveAll(true)
         let all_games = []
+
+        //Check if custom wallet address
+        let resolveWallet = state.wallet.walletAddress;
+        if(customWalletAddress !== ''){
+            resolveWallet = customWalletAddress
+        }
+        
         let game_stats_promise = await new Promise(async (resolve, reject) => {
             try {
                 let start_after = ''
@@ -632,7 +643,7 @@ export default () => {
                     // Prepare query
                     let query = {
                         game_stats: {
-                            player: state.wallet.walletAddress,
+                            player: resolveWallet,
                             limit: 30,
                         },
                     }
@@ -676,7 +687,7 @@ export default () => {
                         games: {
                             limit: 30,
                             round: game.game_stats_id,
-                            player: state.wallet.walletAddress,
+                            player: resolveWallet,
                         },
                     }
                     try {
@@ -727,7 +738,7 @@ export default () => {
                                         {
                                             collect: {
                                                 round: game.game_stats_id,
-                                                player: state.wallet.walletAddress,
+                                                player: resolveWallet,
                                                 game_id: data_game,
                                             },
                                         },
@@ -758,20 +769,8 @@ export default () => {
             //})
             Promise.all([all_promises_go]).then( async (result) => {
                 await new Promise( function(re, reject) {setInterval(re, 10000)})
-                console.log(result)
-                let new_arr = result[0]
-                console.log("result")
-                console.log(result[0])
 
-                // let filtered = new_arr.filter((element) => {
-                //     console.log("element")
-                //     console.log(element)
-                //     return element !== undefined
-                // })
-
-                // console.log(filtered)
-                console.log(result.length)
-                if (result.length > 0) {
+                if (result[0].length > 0) {
                     state.wallet
                         .post({
                             msgs: result[0],
@@ -1210,7 +1209,21 @@ export default () => {
                             Get all your games
                         </h4>
                     </div>
-                    <div className="col-md-6 text-center text-md-end pt-2 pt-md-5">
+                    <div className="col-md-6 text-center text-md-end pt-2 pt-md-5">                       
+                        <button className="btn btn-default btn-sm position-relative me-2" onClick={
+                            () => {
+                                setCustomWalletField(!customWalletField)
+                                setCustomWalletAddress('')
+                            }
+                            }>
+                            { customWalletField ?
+                                <X size={18}/>
+                                :
+                                <> 
+                                <span><Gear size={18}/> Custom address</span>                                                                                                
+                                </>
+                            }
+                        </button>
                         <button
                             disabled={loaderResolveAll}
                             className="btn btn-default btn-sm"
@@ -1226,9 +1239,18 @@ export default () => {
 
                             Try resolve all games
                         </button>
-                        <span className="small d-block text-muted">
-                            Can take some minutes
-                        </span>
+                        { customWalletField &&
+                        <div className="input-group mt-1">
+                            <span className="input-group-text" id="basic-addon1"><Wallet size={18} color={'#8372bf'}/></span>
+                            <input className="form-control" value={customWalletAddress} placeholder={'Custom resolve wallet address'} onChange={(e) => setCustomWalletAddress(e.target.value)}/>
+                            { customWalletAddress != '' &&
+                                <span className="input-group-text" style={{backgroundColor:'#10003b'}} id="basic-addon1" onClick={() => setCustomWalletAddress('')}><X size={18} color={'#8372bf'}/></span>
+                            }
+                        </div>
+                        }
+                        <span className="small d-block text-muted mt-1">
+                            Resolving all can take some minutes
+                        </span>                        
                     </div>
                     <div className="table-responsive">
                         <table className="table text-white">
