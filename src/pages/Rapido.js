@@ -1222,28 +1222,17 @@ export default () => {
                         </h4>
                     </div>
                     <div className="col-md-6 text-center text-md-end pt-2 pt-md-5">                       
-                        <button className="btn btn-default btn-sm position-relative" onClick={() => setCustomWalletField(!customWalletField)}>
+                        <button className="btn btn-default btn-sm position-relative me-2" onClick={
+                            () => {
+                                setCustomWalletField(!customWalletField)
+                                setCustomWalletAddress('')
+                            }
+                            }>
                             { customWalletField ?
                                 <X size={18}/>
                                 :
                                 <> 
-                                <Gear size={18}/>
-                                { customWalletAddress !== '' ?
-                                    <span className="badge" 
-                                    style={{
-                                        position:'absolute',
-                                        top:-8,
-                                        left:-15
-                                        }}>
-                                        <CheckCircle 
-                                        size={'16'}
-                                        weight={'fill'}
-                                        color={'#f035f0'}
-                                        />
-                                    </span>
-                                    :
-                                    ''
-                                }                                 
+                                <span><Gear size={18}/> Custom address</span>                                                                                                
                                 </>
                             }
                         </button>
@@ -1263,9 +1252,12 @@ export default () => {
                             Try resolve all games
                         </button>
                         { customWalletField &&
-                        <div class="input-group mt-1">
-                            <span class="input-group-text" id="basic-addon1"><Wallet size={18} color={'#8372bf'}/></span>
-                            <input class="form-control" defaultValue={customWalletAddress} placeholder={'Custom resolve wallet address'} onChange={(e) => setCustomWalletAddress(e.target.value)}/>
+                        <div className="input-group mt-1">
+                            <span className="input-group-text" id="basic-addon1"><Wallet size={18} color={'#8372bf'}/></span>
+                            <input className="form-control" value={customWalletAddress} placeholder={'Custom resolve wallet address'} onChange={(e) => setCustomWalletAddress(e.target.value)}/>
+                            { customWalletAddress != '' &&
+                                <span className="input-group-text" style={{backgroundColor:'#10003b'}} id="basic-addon1" onClick={() => setCustomWalletAddress('')}><X size={18} color={'#8372bf'}/></span>
+                            }
                         </div>
                         }
                         <span className="small d-block text-muted mt-1">
