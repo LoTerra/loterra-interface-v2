@@ -23,7 +23,7 @@ export default function RapidoCard(props) {
     const { state, dispatch } = useStore()
 
     //Sounds
-    const [playMultiplier] = useSound(multiplierSfx);   
+    const [playMultiplier] = useSound(buttonSfx);   
     const [playButtonClick] = useSound(buttonSfx);
 
     const [fourNumbers, setFourNumbers] = useState([])
