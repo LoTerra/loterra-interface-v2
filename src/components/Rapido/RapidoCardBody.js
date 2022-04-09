@@ -136,7 +136,15 @@ export default function RapidoCardBody(props) {
                 <div className="row px-2">
                     <div className="col-12 text-center">
                         <div className="col-12 mb-2">
-                            <div className={'rapido-winning-combination'}>
+                            <div className={'rapido-winning-combination'}
+                            hidden={
+                                !numberBonus &&
+                                !numberOne &&
+                                !numberTwo &&
+                                !numberThree &&
+                                !numberFour
+                            }
+                            >
                                 <button
                                     type="button"
                                     className="rapido-combi-nr big text-white"
@@ -282,8 +290,7 @@ export default function RapidoCardBody(props) {
                         className="col-12 p-2 mb-3"
                         style={{
                             border: '3px solid #048ABF',
-                            borderRadius: '10px',
-                            background: '#210a5c69',
+                            borderRadius: '10px',   
                         }}
                     >
                         <p className="fs-6 fw-bold text-center mb-0 label-four">
@@ -319,8 +326,7 @@ export default function RapidoCardBody(props) {
                         className="col-12 p-2"
                         style={{
                             border: '3px solid #F2D230',
-                            borderRadius: '10px',
-                            background: '#210a5c69',
+                            borderRadius: '10px',                   
                         }}
                     >
                         <p className="fs-6 fw-bold text-center mb-0 label-one">

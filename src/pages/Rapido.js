@@ -466,25 +466,25 @@ export default () => {
                 {/*    </> : <></> }*/}
                 {/*    </td>*/}
 
-                <td className='text-center'>
+                <td className='text-center rapido-table-results'>
                 { winningNumber[game_stats.game_stats_id] ?
 
                     <div className="btn-holder">
                         <span className={
                             'nr-btn smaller'
-                        } style={{padding: "10px"}}>{winningNumber[game_stats.game_stats_id][0]}</span>
+                        }>{winningNumber[game_stats.game_stats_id][0]}</span>
                         <span className={
                             'nr-btn smaller'
-                        } style={{padding: "10px"}}>{winningNumber[game_stats.game_stats_id][1]}</span>
+                        }>{winningNumber[game_stats.game_stats_id][1]}</span>
                         <span className={
                             'nr-btn smaller'
-                        } style={{padding: "10px"}}>{winningNumber[game_stats.game_stats_id][2]}</span>
+                        }>{winningNumber[game_stats.game_stats_id][2]}</span>
                         <span className={
                             'nr-btn smaller'
-                        } style={{padding: "10px"}}>{winningNumber[game_stats.game_stats_id][3]}</span>
+                        }>{winningNumber[game_stats.game_stats_id][3]}</span>
                         <span className={
-                            'nr-btn smaller'
-                        } style={{padding: "10px"}}>{winningNumber[game_stats.game_stats_id][4]}</span>
+                            'nr-btn smaller bonus'
+                        }>{winningNumber[game_stats.game_stats_id][4]}</span>
                     </div> : game_stats.game_stats_id >= state.rapidoCurrentRound ? <> <span>Lotto still in progress...</span></> : <></>
 
                  }
@@ -519,35 +519,35 @@ export default () => {
                                         <span className="multiplier-table">
                                             x{game.multiplier}
                                         </span>
-                                        <span className="nr-btn smaller">
+                                        <span className={"nr-btn smaller " + (!winningNumber[game_stats.game_stats_id] || game.number[0] != winningNumber[game_stats.game_stats_id][0] ? 'normal' : 'active')}>
                                             {!winningNumber[game_stats.game_stats_id] || game.number[0] != winningNumber[game_stats.game_stats_id][0] ?
                                                 game.number[0]
                                                 :
                                                 <p>{game.number[0]} <Lightning size={18} fill={'#f2d230'} weight={'fill'}/></p>
                                             }
                                         </span>
-                                        <span className="nr-btn smaller">
+                                        <span className={"nr-btn smaller " + (!winningNumber[game_stats.game_stats_id] || game.number[1] != winningNumber[game_stats.game_stats_id][1] ? 'normal' : 'active')}>
                                         {!winningNumber[game_stats.game_stats_id] || game.number[1] != winningNumber[game_stats.game_stats_id][1] ?
                                                 game.number[1]
                                                 :
                                                 <p>{game.number[1]} <Lightning size={18} fill={'#f2d230'} weight={'fill'}/></p>
                                             }
                                         </span>
-                                        <span className="nr-btn smaller">
+                                        <span className={"nr-btn smaller " + (!winningNumber[game_stats.game_stats_id] || game.number[2] != winningNumber[game_stats.game_stats_id][2] ? 'normal' : 'active')}>
                                         {!winningNumber[game_stats.game_stats_id] || game.number[2] != winningNumber[game_stats.game_stats_id][2] ?
                                                 game.number[2]
                                                 :
                                                 <p>{game.number[2]} <Lightning size={18} fill={'#f2d230'} weight={'fill'}/></p>
                                             }
                                         </span>
-                                        <span className="nr-btn smaller">
+                                        <span className={"nr-btn smaller " + (!winningNumber[game_stats.game_stats_id] || game.number[3] != winningNumber[game_stats.game_stats_id][3] ? 'normal' : 'active')}>
                                         {!winningNumber[game_stats.game_stats_id] || game.number[3] != winningNumber[game_stats.game_stats_id][3] ?
                                                 game.number[3]
                                                 :
                                                 <p>{game.number[3]} <Lightning size={18} fill={'#f2d230'} weight={'fill'}/></p>
                                             }
                                         </span>
-                                        <span className="nr-btn smaller bonus">
+                                        <span className={"nr-btn smaller bonus " + (!winningNumber[game_stats.game_stats_id] || game.number[4] != winningNumber[game_stats.game_stats_id][4] ? 'normal' : 'active')}>
                                         {!winningNumber[game_stats.game_stats_id] || game.bonus != winningNumber[game_stats.game_stats_id][4] ?
                                                 game.bonus
                                                 :
@@ -1056,10 +1056,10 @@ export default () => {
                     your actions are your own responsibility.
                 </p>
             </div>
-            <div className="w-100 py-3 pt-md-5 text-center mb-2">
+            <div className="w-100 py-1 py-md-3 pt-md-5 text-center mb-0 mb-md-2">
 
                 <img src="/Rapido-logo.svg"  className={'img-fluid'} style={{maxHeight: ' 135px', marginBottom: '-11px'}}/>
-                <h2 className="mb-2 mb-0 text-10xl xs:text-13xl xs:-mt-0 font-semibold" style={{color: "#048ABF"}}>
+                <h2 className="mb-0 text-10xl xs:text-13xl xs:-mt-0 font-semibold" style={{color: "#048ABF"}}>
                     Win up to <span style={{color: '#F2D230', fontWeight: 700}}>$<CountUp
                     start={0}
                     end={50000}
@@ -1088,12 +1088,12 @@ export default () => {
                         <div className="col-12 overflow-hidden mb-4">
                             <div className="w-100 order-4 mb-2">
                                 <div className="row">
-                                    <div className="col-6 text-end">
+                                    <div className="col-6 text-start text-md-end">
                                         <button className="swiper-prev btn-rapido-nav pb-2">
                                             <ArrowLeft size={24} />
                                         </button>
                                     </div>
-                                    <div className="col-6 text-start">
+                                    <div className="col-6 text-end text-md-start">
                                         <button className="swiper-next btn-rapido-nav pb-2">
                                             <ArrowRight size={24} />
                                         </button>
