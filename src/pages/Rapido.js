@@ -769,20 +769,8 @@ export default () => {
             //})
             Promise.all([all_promises_go]).then( async (result) => {
                 await new Promise( function(re, reject) {setInterval(re, 10000)})
-                console.log(result)
-                let new_arr = result[0]
-                console.log("result")
-                console.log(result[0])
 
-                // let filtered = new_arr.filter((element) => {
-                //     console.log("element")
-                //     console.log(element)
-                //     return element !== undefined
-                // })
-
-                // console.log(filtered)
-                console.log(result.length)
-                if (result.length > 0) {
+                if (result[0].length > 0) {
                     state.wallet
                         .post({
                             msgs: result[0],
