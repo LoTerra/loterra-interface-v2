@@ -6,6 +6,10 @@ import RapidoCardFooter from './RapidoCardFooter'
 import RapidoCardHeader from './RapidoCardHeader'
 import { WasmAPI } from '@terra-money/terra.js'
 
+import useSound from 'use-sound'
+import multiplierSfx from './sounds/navigation_selection-complete-celebration.mp3';
+import buttonSfx from './sounds/ui_tap-variant-01.mp3';
+
 export default function RapidoCard(props) {
     const {
         lotteryId,
@@ -17,6 +21,10 @@ export default function RapidoCard(props) {
         lotteryStats
     } = props
     const { state, dispatch } = useStore()
+
+    //Sounds
+    const [playMultiplier] = useSound(multiplierSfx);   
+    const [playButtonClick] = useSound(buttonSfx);
 
     const [fourNumbers, setFourNumbers] = useState([])
     const [oneNumber, setOneNumber] = useState([])
@@ -44,10 +52,12 @@ export default function RapidoCard(props) {
     }
 
     const selectMultiplier = (multiplier) => {
+        playMultiplier()
         setMultiplier(multiplier)
     }
 
     const selectNrOfDraws = (nr) => {
+        playButtonClick()
         setNrOfDraws(nr)
     }
     async function get_user_combination(last_element) {
