@@ -8,7 +8,7 @@ import numeral from 'numeral'
 const addToGas = 5800
 const obj = new Fee(700_000, { uusd: 319200 + addToGas })
 
-export default function Staking(props) {
+export default function NewStaking(props) {
     const { showNotification, heightBlock } = props
     const { state, dispatch } = useStore()
 
@@ -211,7 +211,7 @@ export default function Staking(props) {
         <div className="row">
             <div className="col-md-12">
                 { showStakingForm ?
-                    <button className="btn btn-primary fw-bold text-white" onClick={() => setShowStakingForm(!showStakingForm)}>Unstake LOTA</button>
+                    <button className="btn btn-primary fw-bold text-white" onClick={() => setShowStakingForm(!showStakingForm)}>Stake LOTA</button>
                     :
                     <button className="btn btn-default fw-bold text-white" onClick={() => setShowStakingForm(!showStakingForm)}><X size={18}/></button>
                 }
@@ -221,7 +221,7 @@ export default function Staking(props) {
             <div className="col-md-6 p-md-4">
                 <div className="row">
                 <div className="col-md-12">
-                <p className="input-heading mb-2">The amount you want to unstake</p>
+                <p className="input-heading mb-2">The amount you want to stake</p>
                 {/* <span
                     className="info"
                     style={{
@@ -268,10 +268,10 @@ export default function Staking(props) {
                     </div>
                 </div>
             </div>*/}
-            {/* <div className="col-6 my-3">
-                <p className="shortcut float-end" onClick={()=> setInputAmount(parseInt(state.LotaBalance.balance))}>MAX
-                </p>
-                 <button
+            <div className="col-6 my-3">
+                {/* <p className="shortcut float-end" onClick={()=> setInputAmount(parseInt(state.LotaBalance.balance))}>MAX
+                </p> */}
+                <button
                     className="btn btn-normal-lg w-100"
                     onClick={() => stakeOrUnstake('stake')}
                 >
@@ -295,12 +295,12 @@ export default function Staking(props) {
                         )}
                         LOTA
                     </strong>
-                </small> 
-            </div>*/}
-            <div className="col-12 my-3">
+                </small>
+            </div>
+            <div className="col-6 my-3">
                 {/* <p className="shortcut float-end" onClick={()=> setInputAmount(state.allHolder.balance)}>MAX</p> */}
                 <button
-                    className="btn btn-normal-lg w-100"
+                    className="btn btn-plain-lg w-100"
                     onClick={() => stakeOrUnstake('unstake')}
                 >
                     Unstake

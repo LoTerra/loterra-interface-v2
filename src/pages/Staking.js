@@ -111,10 +111,9 @@ export default () => {
 
     return (
         <>
-            <div className="hero staking">
                 <div className="container">
                     <div className="row">
-                        <div className="col-md-6">
+                        <div className="col-md-12 my-5">
                             {/* <img
                                 src="/van.png"
                                 className="van img-fluid mx-auto d-block"
@@ -127,17 +126,20 @@ export default () => {
                                 }
                             />
                         </div>
-                        <div className="col-md-6">
+                        {/* <div className="col-md-12">
                             <div
-                                className="card lota-card staking-rewards"
+                                className="card lota-card staking-rewards border-0"
                                 style={{ background: 'transparent' }}
                             >
                                 <div className="card-body">
                                     <div className="row">
-                                        <div className="col-lg-12 d-flex">
+                                        <div className="col-lg-12" style={{minHeight:500}}>
                                             {state.tokenInfo.total_supply &&
                                             state.poolInfo.total_share ? (
+                                                <div className="row">
+                                                <div className="col-md-6 d-flex h-100">
                                                 <div className="align-self-center w-100">
+                                                    <h3>Loterra distribution</h3>
                                                     <div className="pie-stats">
                                                         <div className="row">
                                                             <div className="col-6 text-white">
@@ -212,47 +214,52 @@ export default () => {
                                                             </div>
                                                         </div>
                                                     </div>
-                                                    <Pie
-                                                        data={pieData}
-                                                        data-staked={
-                                                            state.tokenInfo
-                                                                .total_supply
-                                                                ? getStakedNr()
-                                                                : '0'
-                                                        }
-                                                        data-total={
-                                                            state.tokenInfo
-                                                                .total_supply
-                                                                ? getNotStaked()
-                                                                : '0'
-                                                        }
-                                                        data-dao={
-                                                            state.tokenInfo
-                                                                .total_supply
-                                                                ? getDaoFunds()
-                                                                : '0'
-                                                        }
-                                                        data-lpfunds={
-                                                            state.tokenInfo
-                                                                .total_supply
-                                                                ? getLPFunds()
-                                                                : '0'
-                                                        }
-                                                        data-lpstaked={
-                                                            state.poolInfo
-                                                                .total_share
-                                                                ? getTotalStakedLP()
-                                                                : '0'
-                                                        }
-                                                        options={{
-                                                            animation: {
-                                                                duration: 0,
-                                                            },
-                                                        }}
-                                                        style={{
-                                                            maxHeight: '400px',
-                                                        }}
-                                                    />
+                                                    
+                                                </div>
+                                                </div>
+                                                <div className="col-md-6">
+                                                <Pie
+                                                data={pieData}
+                                                data-staked={
+                                                    state.tokenInfo
+                                                        .total_supply
+                                                        ? getStakedNr()
+                                                        : '0'
+                                                }
+                                                data-total={
+                                                    state.tokenInfo
+                                                        .total_supply
+                                                        ? getNotStaked()
+                                                        : '0'
+                                                }
+                                                data-dao={
+                                                    state.tokenInfo
+                                                        .total_supply
+                                                        ? getDaoFunds()
+                                                        : '0'
+                                                }
+                                                data-lpfunds={
+                                                    state.tokenInfo
+                                                        .total_supply
+                                                        ? getLPFunds()
+                                                        : '0'
+                                                }
+                                                data-lpstaked={
+                                                    state.poolInfo
+                                                        .total_share
+                                                        ? getTotalStakedLP()
+                                                        : '0'
+                                                }
+                                                options={{
+                                                    animation: {
+                                                        duration: 0,
+                                                    },
+                                                }}
+                                                style={{
+                                                    maxHeight: '400px',
+                                                }}
+                                            />
+                                                </div>
                                                 </div>
                                             ) : (
                                                 <PieLoader />
@@ -263,14 +270,14 @@ export default () => {
                                     10.00<span>UST</span>
                                 </div>
                             <Line data={lineData} options={lineOptions} style={{background:'#10003b', borderRadius:'10px'}}/>
-                            </div> */}
+                            </div> 
                                     </div>
                                 </div>
                             </div>
-                        </div>
+                        </div> */}
                     </div>
                 </div>
-            </div>
+      
 
             {/* <section className="apystats my-5">
             <div className="container">
