@@ -105,7 +105,9 @@ export default function StakingForm(props) {
         
 
         <>
+        
         <h1 className="fw-bold fs-1 mb-0 text-center text-md-start">
+           
             <Coin 
             size={55}
             color={'rgb(139, 246, 194)'}
@@ -116,7 +118,11 @@ export default function StakingForm(props) {
             />
             Staking
         </h1>
-        <p className="mb-4 fs-5 fw-normal text-muted text-center text-md-start">Earn interests and be part of our DAO</p>
+        <p className="mb-4 fs-5 fw-normal text-muted text-center text-md-start">Earn interests and be part of our DAO</p>       
+        <div className="w-100 float-end text-end">
+            <p className="text-muted small mb-0">Current block height</p>
+            <p className="">{heightBlock}</p>
+        </div>
             <h2 className="fw-medium mt-4 fs-4 fw-bolder"
             style={{
                 borderTop:'1px solid #8978b33d',
