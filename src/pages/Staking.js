@@ -124,6 +124,7 @@ export default () => {
                                 showNotification={(message, type, dur) =>
                                     showNotification(message, type, dur)
                                 }
+                                stakedNr={getStakedNr}
                             />
                         </div>
                         {/* <div className="col-md-12">

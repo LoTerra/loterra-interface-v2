@@ -7,7 +7,7 @@ import { Coin } from 'phosphor-react'
 import NewStaking from './StakingForm/NewStaking'
 
 export default function StakingForm(props) {
-    const { showNotification } = props
+    const { showNotification, stakedNr } = props
     const [heightBlock, setBlockHeight] = useState(0)
     const { state, dispatch } = useStore()
 
@@ -142,9 +142,11 @@ export default function StakingForm(props) {
                 </span> 
                 Single asset staking
             </h2>
+            <p className="small text-primary">Migrating to new contract, unstake and stake your LOTA on the new contract.</p>
             <Staking
             showNotification={showNotification}
             heightBlock={heightBlock}
+            stakedNr={stakedNr}
             />    
             <h2 className="fw-medium mt-5 fs-4 fw-bolder"
              style={{

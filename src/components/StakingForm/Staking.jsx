@@ -9,7 +9,7 @@ const addToGas = 5800
 const obj = new Fee(700_000, { uusd: 319200 + addToGas })
 
 export default function Staking(props) {
-    const { showNotification, heightBlock } = props
+    const { showNotification, heightBlock, stakedNr } = props
     const { state, dispatch } = useStore()
 
     const [amount, setAmount] = useState(0)
@@ -202,12 +202,12 @@ export default function Staking(props) {
                     </button>
                     </div>
                 </div>
-                <div className="col-md-3">
+                {/* <div className="col-md-3">
                     <div className="staking-rewards-info">
                         <h2>Current APR</h2>
                         <p className="fs-6">0.00<span className="text-muted ms-1">%</span></p>
                     </div>
-                </div>
+                </div> */}
                 <div className="col-md-3">
                     <div className="staking-rewards-info">                
                         <h2>Total staked LOTA</h2>
