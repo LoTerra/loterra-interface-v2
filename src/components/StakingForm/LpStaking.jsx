@@ -238,8 +238,8 @@ export default function LpStaking(props) {
                                     '0',
                                 )
                             ) : (
-                                <div
-                                    className="spinner-border spinner-border-sm"
+                                <span
+                                    className="spinner-border spinner-border-sm d-inline-block"
                                     role="status"
                                     style={{
                                         position: 'relative',
@@ -249,7 +249,7 @@ export default function LpStaking(props) {
                                     <span className="visually-hidden">
                                         Loading...
                                     </span>
-                                </div>
+                                </span>
                             )}<span className="text-muted ms-1">%</span></p>
                     </div>
                 </div>
@@ -259,8 +259,8 @@ export default function LpStaking(props) {
                         <p className="fs-6">{total_staked() ? (
                             numeral(total_staked()).format('0,0.000000')                             
                         ) : (
-                            <div
-                                className="spinner-border spinner-border-sm"
+                            <span
+                                className="spinner-border spinner-border-sm d-inline-block"
                                 role="status"
                                 style={{
                                     position: 'relative',
@@ -270,7 +270,7 @@ export default function LpStaking(props) {
                                 <span className="visually-hidden">
                                     Loading...
                                 </span>
-                            </div>
+                            </span>
                         )}<span className="text-muted ms-1">LOTA</span></p>
                     </div>
                 </div>
@@ -307,8 +307,8 @@ export default function LpStaking(props) {
                                     '0',
                                 )
                             ) : (
-                                <div
-                                    className="spinner-border spinner-border-sm"
+                                <span
+                                    className="spinner-border spinner-border-sm d-inline-block"
                                     role="status"
                                     style={{
                                         position: 'relative',
@@ -318,7 +318,7 @@ export default function LpStaking(props) {
                                     <span className="visually-hidden">
                                         Loading...
                                     </span>
-                                </div>
+                                </span>
                             )}
                             %
                         </strong>

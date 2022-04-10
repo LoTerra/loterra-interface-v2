@@ -12,17 +12,24 @@ export default function Staking(props) {
     const { showNotification, heightBlock } = props
     const { state, dispatch } = useStore()
 
+    const [amount, setAmount] = useState(0)
     const [showStakingForm, setShowStakingForm] = useState(true)
 
-    function setInputAmount(amount) {
-        const input = document.querySelector('.amount-input-staking')
-        input.value = amount / 1000000
+    // function setInputAmount(amount) {
+    //     const input = document.querySelector('.amount-input-staking')
+    //     input.value = amount / 1000000
+    // }
+
+    function getNotStaked() {
+        let staked = parseInt(state.staking.total_balance) / 1000000
+        let sum = staked
+        return sum
     }
 
     function stakeOrUnstake(type) {
-        var input = document.querySelector('.amount-input-staking')
-        //console.log(type,input.value);
-        const amount = parseInt(input.value * 1000000)
+        // var input = document.querySelector('.amount-input-staking')
+        // //console.log(type,input.value);
+        // const amount = parseInt(input.value * 1000000)
         if (amount <= 0) {
             showNotification('Input amount empty', 'error', 4000)
             return
@@ -158,7 +165,7 @@ export default function Staking(props) {
         <div className="row my-4">
             <div className="col-md-3">
                     <div className="staking-rewards-info">
-                    <h2>Staked LOTA</h2>
+                    <h2>Your staked LOTA</h2>
                     <p className="fs-6">
                         {state.wallet && state.wallet.walletAddress && (
                             <>
@@ -204,7 +211,14 @@ export default function Staking(props) {
                 <div className="col-md-3">
                     <div className="staking-rewards-info">                
                         <h2>Total staked LOTA</h2>
-                        <p className="fs-6">0.00<span className="text-muted ms-1">LOTA</span></p>
+                        <p className="fs-6">{state.tokenInfo
+                        .total_supply
+                        ? numeral(
+                        getNotStaked(),
+                        ).format(
+                        '0.0,00',
+                        )
+                        : '0'}<span className="text-muted ms-1">LOTA</span></p>
                     </div>
                 </div>
         </div>
@@ -247,6 +261,8 @@ export default function Staking(props) {
                         autoComplete="off"
                         placeholder="0.00"
                         name="amount"
+                        onChange={(e) => setAmount(parseFloat(e.target.value))}
+                        value={amount}
                     />
                 </div>
             </div>
@@ -310,7 +326,7 @@ export default function Staking(props) {
                     Available:
                     <strong
                         style={{ textDecoration: 'underline' }}
-                        onClick={() => setInputAmount(state.allHolder.balance)}
+                        onClick={() => setAmount(state.allHolder.balance)}
                     >
                         {state.wallet && state.wallet.walletAddress && (
                             <>

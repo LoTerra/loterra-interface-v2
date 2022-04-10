@@ -13,16 +13,23 @@ export default function NewStaking(props) {
     const { state, dispatch } = useStore()
 
     const [showStakingForm, setShowStakingForm] = useState(true)
+    const [amount,setAmount] = useState(0)
 
-    function setInputAmount(amount) {
-        const input = document.querySelector('.amount-input-staking')
-        input.value = amount / 1000000
+    // function setInputAmount(amount) {
+    //     const input = document.querySelector('.amount-input-staking')
+    //     input.value = amount / 1000000
+    // }
+
+    function getNotStaked() {
+        let staked = parseInt(state.newStaking.total_balance) / 1000000
+        let sum = staked
+        return sum
     }
 
     function stakeOrUnstake(type) {
-        var input = document.querySelector('.amount-input-staking')
-        //console.log(type,input.value);
-        const amount = parseInt(input.value * 1000000)
+        // var input = document.querySelector('.amount-input-staking')
+        // //console.log(type,input.value);
+        // const amount = parseInt(input.value * 1000000)
         if (amount <= 0) {
             showNotification('Input amount empty', 'error', 4000)
             return
@@ -34,7 +41,7 @@ export default function NewStaking(props) {
                 state.loterraContractAddressCw20,
                 {
                     send: {
-                        contract: state.loterraStakingAddress,
+                        contract: state.loterraNewStakingAddress,
                         amount: amount.toString(),
                         msg: 'eyAiYm9uZF9zdGFrZSI6IHt9IH0=',
                     },
@@ -43,7 +50,7 @@ export default function NewStaking(props) {
         } else {
             msg = new MsgExecuteContract(
                 state.wallet.walletAddress,
-                state.loterraStakingAddress,
+                state.loterraNewStakingAddress,
                 {
                     unbond_stake: { amount: amount.toString() },
                 },
@@ -73,9 +80,9 @@ export default function NewStaking(props) {
     }
 
     function claimInfo() {
-        if (state.holderClaims.length > 0) {
+        if (state.newHolderClaims.length > 0) {
             let total_amount_claimable = 0
-            state.holderClaims.map((e) => {
+            state.newHolderClaims.map((e) => {
                 if (e.release_at.at_height < heightBlock) {
                     total_amount_claimable += parseInt(e.amount)
                 }
@@ -85,9 +92,9 @@ export default function NewStaking(props) {
         return 0
     }
     function pendingClaim() {
-        if (state.holderClaims.length > 0) {
+        if (state.newHolderClaims.length > 0) {
             let total_amount_pending = 0
-            state.holderClaims.map((e) => {
+            state.newHolderClaims.map((e) => {
                 if (e.release_at.at_height > heightBlock) {
                     total_amount_pending += parseInt(e.amount)
                 }
@@ -100,7 +107,7 @@ export default function NewStaking(props) {
     function claimUnstake() {
         const msg = new MsgExecuteContract(
             state.wallet.walletAddress,
-            state.loterraStakingAddress,
+            state.loterraNewStakingAddress,
             {
                 withdraw_stake: {},
             },
@@ -128,7 +135,7 @@ export default function NewStaking(props) {
     function claimRewards() {
         const msg = new MsgExecuteContract(
             state.wallet.walletAddress,
-            state.loterraStakingAddress,
+            state.loterraNewStakingAddress,
             {
                 claim_rewards: {},
             },
@@ -158,7 +165,7 @@ export default function NewStaking(props) {
         <div className="row my-4">
             <div className="col-md-3">
                     <div className="staking-rewards-info">
-                    <h2>Staked LOTA</h2>
+                    <h2>Your staked LOTA</h2>
                     <p className="fs-6">
                         {state.wallet && state.wallet.walletAddress && (
                             <>
@@ -178,14 +185,14 @@ export default function NewStaking(props) {
                     {state.wallet && state.wallet.walletAddress && (
                         <p className="fs-6">
                             {numeral(
-                                parseInt(state.holderAccruedRewards) / 1000000,
+                                parseInt(state.newHolderAccruedRewards) / 1000000,
                             ).format('0.00')}
                             <span className="text-muted ms-1">UST</span>
                         </p>
                     )}
                     <button
                         className=" btn btn-outline-primary btn-sm mt-2"
-                        disabled={state.holderAccruedRewards <= 0 ? true : false}
+                        disabled={state.newHolderAccruedRewards <= 0 ? true : false}
                         onClick={() => claimRewards()}
                         style={{
                             boxShadow: 'none',
@@ -204,7 +211,14 @@ export default function NewStaking(props) {
                 <div className="col-md-3">
                     <div className="staking-rewards-info">                
                         <h2>Total staked LOTA</h2>
-                        <p className="fs-6">0.00<span className="text-muted ms-1">LOTA</span></p>
+                        <p className="fs-6">{state.tokenInfo
+                        .total_supply
+                        ? numeral(
+                        getNotStaked(),
+                        ).format(
+                        '0.0,00',
+                        )
+                        : '0'}<span className="text-muted ms-1">LOTA</span></p>
                     </div>
                 </div>
         </div>
@@ -247,6 +261,8 @@ export default function NewStaking(props) {
                         autoComplete="off"
                         placeholder="0.00"
                         name="amount"
+                        value={amount}
+                        onChange={(e) => setAmount(parseFloat(e.target.value))}
                     />
                 </div>
             </div>
@@ -282,7 +298,7 @@ export default function NewStaking(props) {
                     <strong
                         style={{ textDecoration: 'underline' }}
                         onClick={() =>
-                            setInputAmount(parseInt(state.LotaBalance.balance))
+                            setAmount(parseInt(state.LotaBalance.balance))
                         }
                     >
                         {state.wallet && state.wallet.walletAddress && (
@@ -310,12 +326,12 @@ export default function NewStaking(props) {
                     Available:
                     <strong
                         style={{ textDecoration: 'underline' }}
-                        onClick={() => setInputAmount(state.allHolder.balance)}
+                        onClick={() => setAmount(state.allNewHolder.balance)}
                     >
                         {state.wallet && state.wallet.walletAddress && (
                             <>
                                 {numeral(
-                                    parseInt(state.allHolder.balance) / 1000000,
+                                    parseInt(state.allNewHolder.balance) / 1000000,
                                 ).format('0.00')}
                             </>
                         )}
@@ -358,8 +374,8 @@ export default function NewStaking(props) {
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    {state.holderClaims ? (
-                                        state.holderClaims.map((e) => {
+                                    {state.newHolderClaims ? (
+                                        state.newHolderClaims.map((e) => {
                                             if (
                                                 e.release_at.at_height >
                                                 heightBlock
