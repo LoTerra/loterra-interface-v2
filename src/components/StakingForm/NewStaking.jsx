@@ -345,15 +345,7 @@ export default function NewStaking(props) {
 
             {(claimInfo() > 0 || pendingClaim() > 0) && (
                 <div className="col-md-6 my-3">
-                    <div className="claim-unstake">
-                        <button
-                            className="btn btn-default-lg w-100"
-                            disabled={claimInfo() > 0 ? false : true}
-                            onClick={() => claimUnstake()}
-                            style={{ marginTop: '21px' }}
-                        >
-                            Claim unstake
-                        </button>
+                    <div className="claim-unstake">                        
                         {/* If unstake claiming condition */}
                         <span className="info">
                             <Info size={14} weight="fill" className="me-1" />
@@ -420,8 +412,16 @@ export default function NewStaking(props) {
                                 </tbody>
                             </table>
                         </span>
+                        <button
+                            className="btn btn-default-lg w-100"
+                            disabled={claimInfo() > 0 ? false : true}
+                            onClick={() => claimUnstake()}
+                            style={{ marginTop: '21px' }}
+                        >
+                            Claim unstake
+                        </button>
                         <small className="float-end text-muted mt-2">
-                            Available:
+                            Available for claim:
                             <strong>
                                 {state.wallet &&
                                     state.wallet.walletAddress &&
