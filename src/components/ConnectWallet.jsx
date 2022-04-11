@@ -191,34 +191,35 @@ export default function ConnectWallet() {
             message: jackpotAltered.balance,
         })
 
+        //DISABLED OLD DAO CODE
         //console.log('config',contractConfigInfo)
-        console.log(window.location.href.indexOf('dao'))
-        if (window.location.href.indexOf('dao') > -1) {
-            let pollCount = contractConfigInfo.poll_count
-            //console.log('count',pollCount)
-            let allPromise = []
-            for (let index = 1; index < pollCount + 1; index++) {
-                let promise = new Promise(async (resolve, reject ) => {
-                    const proposal = await api.contractQuery(
-                        state.loterraContractAddress,
-                        {
-                            get_poll: { poll_id: index },
-                        },
-                    )
-                    proposal.nr = index
-                    //allProposals.push(proposal)
-                    resolve(proposal)
-                })
-                allPromise.push(promise)
+        // console.log(window.location.href.indexOf('dao'))
+        // if (window.location.href.indexOf('dao') > -1) {
+        //     let pollCount = contractConfigInfo.poll_count
+        //     //console.log('count',pollCount)
+        //     let allPromise = []
+        //     for (let index = 1; index < pollCount + 1; index++) {
+        //         let promise = new Promise(async (resolve, reject ) => {
+        //             const proposal = await api.contractQuery(
+        //                 state.loterraContractAddress,
+        //                 {
+        //                     get_poll: { poll_id: index },
+        //                 },
+        //             )
+        //             proposal.nr = index
+        //             //allProposals.push(proposal)
+        //             resolve(proposal)
+        //         })
+        //         allPromise.push(promise)
 
-            }
+        //     }
 
-            Promise.all(allPromise).then((e) => {
-                dispatch({ type: 'setAllProposals', message: e })
-            })
+        //     Promise.all(allPromise).then((e) => {
+        //         dispatch({ type: 'setAllProposals', message: e })
+        //     })
 
-            //console.log('proposals',allProposals)
-        }
+        //     //console.log('proposals',allProposals)
+        // }
 
         const staking = await api.contractQuery(state.loterraStakingAddress, {
             state: {},

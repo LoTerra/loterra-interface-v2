@@ -1,8 +1,22 @@
+.proposal-item-link {    
+    text-decoration: none;
+    color: inherit;
+    &:hover,&:active,&:focus {
+        text-decoration: none;
+        color: inherit;
+    }
+    &:hover {
+        .proposal-item {
+            background:#342364 !important;
+        }
+    }
+}
 .proposal-item {
     padding: 25px;
     background: #180943;
     border-radius: 4px;
     margin-bottom: 15px;
+    transition:all 150ms linear;
     &.op {
         opacity: 0.6;
     }
@@ -13,9 +27,9 @@
     }
     p {
         font-weight: normal;
-        font-size: 16px;
-        line-height: 21px;
-        color: rgba(255, 255, 255, 0.55);
+
+
+ 
     }
     table {
         tr {

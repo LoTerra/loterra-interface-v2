@@ -1,6 +1,8 @@
 import React from 'react'
 import { useStore } from '../store'
 import { MsgExecuteContract } from '@terra-money/terra.js'
+import { Switch, Route, Link, useLocation, NavLink } from 'react-router-dom'
+
 import { Info, Circle, CheckCircle, XCircle } from 'phosphor-react'
 
 export default function ProposalItem(props) {
@@ -50,6 +52,7 @@ export default function ProposalItem(props) {
     }
 
     return (
+        <Link to={'/poll/'+i} className="proposal-item-link">
         <div
             className={
                 data.status == 'InProgress'
@@ -61,7 +64,7 @@ export default function ProposalItem(props) {
             <div className="row">
                 <div className="col-12">
                     <h4>
-                        Proposal number {data.nr}
+                        
                         {data.status == 'InProgress' && (
                             <span className="badge progress-badge active">
                                 <p>
@@ -85,7 +88,27 @@ export default function ProposalItem(props) {
                             </span>
                         )}
                     </h4>
-                    <p className="desc">{data.description}</p>
+                    <h4>Proposal number {data.nr}</h4>
+                    <div className="progress">
+                        <div className="progress-bar" role="progressbar" style={{width: '25%'}} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                    </div>
+                    <div className="row">
+                        <div className="col-6 text-start">
+                            <p><strong>Voted</strong> 10%</p>
+                        </div>
+                        <div className="col-6 text-end d-flex">
+                            <p className="ms-auto">
+                                <span><strong>Yes</strong> 10% </span>
+                                <span><strong>No</strong> 10% </span>
+                            </p>
+                          
+                        </div>
+                    </div>
+                    <p className="small"><strong>Estimated endtime:</strong> <span className="text-muted">12-12-2022</span></p>
+                    <div>
+
+                    </div>
+                    {/* <p className="desc">{data.description}</p>
                     {data.status !== 'InProgress' && (
                         <button
                             className="btn btn-plain float-end"
@@ -97,16 +120,16 @@ export default function ProposalItem(props) {
                         >
                             <Info size={24} /> Show info
                         </button>
-                    )}
+                    )} */}
                 </div>
-                <div
+                {/* <div
                     className={
                         'col-12 collapse' +
                         (data.status !== 'InProgress' ? '' : ' show')
                     }
                     id={'collapseProposal' + i}
-                >
-                    <div className="row">
+                > */}
+                    {/* <div className="row">
                         <div className="col-md-8">
                             <div className="table-responsive">
                                 <table className="table">
@@ -284,9 +307,10 @@ export default function ProposalItem(props) {
                                 )}
                             </div>
                         </div>
-                    </div>
-                </div>
+                    </div> */}
+                {/* </div> */}
             </div>
         </div>
+        </Link>
     )
 }

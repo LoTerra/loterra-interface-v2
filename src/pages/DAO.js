@@ -1,19 +1,115 @@
-import React from 'react'
+import React, { useCallback, useEffect, useState } from 'react'
 import ProposalItem from '../components/ProposalItem'
 import { useStore } from '../store'
-import { Fee } from '@terra-money/terra.js'
+import { Fee, WasmAPI } from '@terra-money/terra.js'
 import Footer from '../components/Footer'
 import BodyLoader from '../components/BodyLoader'
 import { Bank, Info } from 'phosphor-react'
+import numeral from 'numeral'
+import { Link } from 'react-router-dom'
 
 export default () => {
     const { state, dispatch } = useStore()
+    const [lotaPrice, setLotaPrice] = useState(0)
+
     const addToGas = 5800
     const obj = new Fee(700_000, { uusd: 319200 + addToGas })
-    console.log(state.allProposals)
+
+    const terra = state.lcd_client
+    const api = new WasmAPI(terra.apiRequester)
+
+    const fetchData = useCallback(async () => {
+    const currentLotaPrice = await api.contractQuery(
+        state.loterraPoolAddress,
+        {
+            pool: {},
+        },
+    )
+    setLotaPrice(currentLotaPrice)
+    });
+
+    function getStaked() {
+        let staked = parseInt(state.staking.total_balance) / 1000000
+        let sum = staked
+        return sum
+    }
+
+    useEffect(() => {
+        fetchData()
+    }, [fetchData])
+  
     return (
         <>
-            <section className="proposals" style={{ marginTop: '90px' }}>
+
+        <div className="container">
+            <div className="row">
+                <div className="col-md-12 my-5">
+                    <div className="row">
+                        <div className="col-md-6">
+                            <h1 className="fw-bold fs-1 mb-0 text-center text-md-start">           
+                                <Bank 
+                                size={55}
+                                color={'rgb(139, 246, 194)'}
+                                style={{
+                                marginRight:5,
+                                }}
+                                />
+                                DAO
+                            </h1>
+                            <p className="mb-4 fs-5 fw-normal text-muted text-center text-md-start">Together we decide</p>     
+                        </div>
+                        <div className="col-md-6 text-end d-flex">
+                            <Link to={'/poll/create'} className="btn btn-default align-self-center ms-auto">Create proposal</Link>
+                        </div>
+                    </div>
+
+                    <div className="row mb-4">
+                        <div className="col-md-6">
+                            <div className="staking-rewards-info">                
+                                <h2>Current LOTA price</h2>
+                                <p className="fs-6">{lotaPrice.assets && numeral(
+                                                    lotaPrice.assets[1].amount /
+                                                        lotaPrice.assets[0]
+                                                            .amount,
+                                                ).format('0.000')}<span className="text-muted ms-1">UST</span></p>
+                            </div>
+                        </div>
+                        <div className="col-md-6">
+                            <div className="staking-rewards-info">                
+                                <h2>Total staked LOTA</h2>
+                                <p className="fs-6">{state.tokenInfo
+                                .total_supply
+                                ? numeral(
+                                getStaked(),
+                                ).format(
+                                '0.0,00',
+                                )
+                                : '0'}<span className="text-muted ms-1">LOTA</span></p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div className="row">
+                        <div className="col-md-12">
+                            <h4>Polls</h4>
+                        </div>
+                        <ProposalItem 
+                        data={{
+                            nr: 1,
+                            status:'InProgress',
+                            prize_per_rank: 0
+                        }}
+                        i={0}
+                        fees={0}
+                        />
+                    </div>
+
+                </div>
+            </div>
+        </div>
+
+
+            {/* <section className="proposals" style={{ marginTop: '90px' }}>
                 <div className="container">
                     <div className="card lota-card proposals">
                         <div className="card-header text-center">
@@ -79,7 +175,7 @@ export default () => {
                         </div>
                     </div>
                 </div>
-            </section>
+            </section> */}
             {/* <Footer /> */}
         </>
     )
