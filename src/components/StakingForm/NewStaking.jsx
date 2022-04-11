@@ -165,13 +165,12 @@ export default function NewStaking(props) {
         <div className="row my-4">
             <div className="col-md-3">
                     <div className="staking-rewards-info">
-                    <h2>Your staked LOTA</h2>
-                    <p className="fs-6">
+                    <h2 className="text-muted">Your staked LOTA</h2>
+                    <p className="fs-5 mt-1">
                         {state.wallet && state.wallet.walletAddress && (
                             <>
                                 {numeral(
-                                    parseInt(state.LotaBalance.balance) /
-                                        1000000,
+                                    parseInt(state.allNewHolder.balance) / 1000000,
                                 ).format('0.00')}
                             </>
                         )}
@@ -181,9 +180,9 @@ export default function NewStaking(props) {
                 </div>
                 <div className="col-md-3">
                     <div className="staking-rewards-info">
-                    <h2>Staking rewards</h2>
+                    <h2 className="text-muted">Staking rewards</h2>
                     {state.wallet && state.wallet.walletAddress && (
-                        <p className="fs-6">
+                        <p className="fs-5 mt-1">
                             {numeral(
                                 parseInt(state.newHolderAccruedRewards) / 1000000,
                             ).format('0.00')}
@@ -204,14 +203,14 @@ export default function NewStaking(props) {
                 </div>
                 <div className="col-md-3">
                     <div className="staking-rewards-info">
-                        <h2>Current APR</h2>
-                        <p className="fs-6">0.00<span className="text-muted ms-1">%</span></p>
+                        <h2 className="text-muted">Current APR</h2>
+                        <p className="fs-5 mt-1">0.00<span className="text-muted ms-1">%</span></p>
                     </div>
                 </div>
                 <div className="col-md-3">
                     <div className="staking-rewards-info">                
-                        <h2>Total staked LOTA</h2>
-                        <p className="fs-6">{state.tokenInfo
+                        <h2 className="text-muted">Total staked LOTA</h2>
+                        <p className="fs-5 mt-1">{state.tokenInfo
                         .total_supply
                         ? numeral(
                         getNotStaked(),
@@ -225,7 +224,7 @@ export default function NewStaking(props) {
         <div className="row">
             <div className="col-md-12">
                 { showStakingForm ?
-                    <button className="btn btn-primary fw-bold text-white" onClick={() => setShowStakingForm(!showStakingForm)}>Stake LOTA</button>
+                    <button className="btn btn-primary fw-bold text-white" onClick={() => setShowStakingForm(!showStakingForm)}>Manage</button>
                     :
                     <button className="btn btn-default fw-bold text-white" onClick={() => setShowStakingForm(!showStakingForm)}><X size={18}/></button>
                 }

@@ -184,8 +184,8 @@ export default function LpStaking(props) {
                 <div className="row my-4">
             <div className="col-md-3">
                     <div className="staking-rewards-info">
-                    <h2>Staked LP LOTA</h2>
-                    <p className="fs-6">
+                    <h2 className="text-muted">Staked LP LOTA</h2>
+                    <p className="fs-5 mt-1">
                     {state.wallet && state.wallet.walletAddress && (
                             <>
                                 {numeral(
@@ -199,23 +199,24 @@ export default function LpStaking(props) {
                 </div>
                 <div className="col-md-3">
                     <div className="staking-rewards-info">
-                    <h2>Staking rewards</h2>
+                    <h2 className="text-muted">Staking rewards</h2>
                     {state.wallet &&
                     state.wallet.walletAddress &&
                     state.poolInfo.assets.length > 0 && (
-                        <p className="fs-6">
+                        <p className="fs-5 mt-1">
                             {numeral(
                                 parseInt(state.LPHolderAccruedRewards) /
                                     1000000,
                             ).format('0,0.000000')}{' '}
-                            LOTA ={' '}
-                            {numeral(
+                            <span className="text-muted">LOTA</span>{' '}
+                            <small style={{fontSize:14}}>= {numeral(
                                 (state.LPHolderAccruedRewards *
                                     state.poolInfo.assets[1].amount) /
                                     state.poolInfo.assets[0].amount /
                                     1000000,
-                            ).format('0,0.00')}{' '}
+                            ).format('0,0.00')}
                              <span className="text-muted ms-1">UST</span>
+                             </small>
                         </p>
                     )}
                     <button
@@ -232,8 +233,8 @@ export default function LpStaking(props) {
                 </div>
                 <div className="col-md-3">
                     <div className="staking-rewards-info">
-                        <h2>Current APR</h2>
-                        <p className="fs-6">{total_staked() ? (
+                        <h2 className="text-muted">Current APR</h2>
+                        <p className="fs-5 mt-1">{total_staked() ? (
                                 numeral((100000 / total_staked()) * 100).format(
                                     '0',
                                 )
@@ -255,8 +256,8 @@ export default function LpStaking(props) {
                 </div>
                 <div className="col-md-3">
                     <div className="staking-rewards-info">                
-                        <h2>Total staked LOTA</h2>
-                        <p className="fs-6">{total_staked() ? (
+                        <h2 className="text-muted">Total staked LOTA</h2>
+                        <p className="fs-5 mt-1">{total_staked() ? (
                             numeral(total_staked()).format('0,0.000000')                             
                         ) : (
                             <span
@@ -278,7 +279,7 @@ export default function LpStaking(props) {
         <div className="row">
             <div className="col-md-12">               
                 { showLPStakingForm ?
-                    <button className="btn btn-primary fw-bold text-white" onClick={() => setShowLPStakingForm(!showLPStakingForm)}>Stake LP LOTA</button>
+                    <button className="btn btn-primary fw-bold text-white" onClick={() => setShowLPStakingForm(!showLPStakingForm)}>Manage</button>
                     :
                     <button className="btn btn-default fw-bold text-white" onClick={() => setShowLPStakingForm(!showLPStakingForm)}><X size={18}/></button>
                 }

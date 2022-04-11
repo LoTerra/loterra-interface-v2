@@ -165,13 +165,12 @@ export default function Staking(props) {
         <div className="row my-4">
             <div className="col-md-3">
                     <div className="staking-rewards-info">
-                    <h2>Your staked LOTA</h2>
-                    <p className="fs-6">
+                    <h2 className="text-muted">Your staked LOTA</h2>
+                    <p className="fs-5 mt-1">
                         {state.wallet && state.wallet.walletAddress && (
                             <>
                                 {numeral(
-                                    parseInt(state.LotaBalance.balance) /
-                                        1000000,
+                                    parseInt(state.allHolder.balance) / 1000000,
                                 ).format('0.00')}
                             </>
                         )}
@@ -181,9 +180,9 @@ export default function Staking(props) {
                 </div>
                 <div className="col-md-3">
                     <div className="staking-rewards-info">
-                    <h2>Staking rewards</h2>
+                    <h2 className="text-muted">Staking rewards</h2>
                     {state.wallet && state.wallet.walletAddress && (
-                        <p className="fs-6">
+                        <p className="fs-5 mt-1">
                             {numeral(
                                 parseInt(state.holderAccruedRewards) / 1000000,
                             ).format('0.00')}
@@ -210,8 +209,8 @@ export default function Staking(props) {
                 </div> */}
                 <div className="col-md-3">
                     <div className="staking-rewards-info">                
-                        <h2>Total staked LOTA</h2>
-                        <p className="fs-6">{state.tokenInfo
+                        <h2 className="text-muted">Total staked LOTA</h2>
+                        <p className="fs-5 mt-1">{state.tokenInfo
                         .total_supply
                         ? numeral(
                         getNotStaked(),

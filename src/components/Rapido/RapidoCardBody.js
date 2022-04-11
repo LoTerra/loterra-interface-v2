@@ -136,15 +136,7 @@ export default function RapidoCardBody(props) {
                 <div className="row px-2">
                     <div className="col-12 text-center">
                         <div className="col-12 mb-2">
-                            <div className={'rapido-winning-combination'}
-                            hidden={
-                                !numberBonus &&
-                                !numberOne &&
-                                !numberTwo &&
-                                !numberThree &&
-                                !numberFour
-                            }
-                            >
+                            <div className={'rapido-winning-combination'}>
                                 <button
                                     type="button"
                                     className="rapido-combi-nr big text-white"
