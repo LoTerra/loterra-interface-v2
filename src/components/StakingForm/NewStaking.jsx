@@ -29,8 +29,8 @@ export default function NewStaking(props) {
     function stakeOrUnstake(type) {
         // var input = document.querySelector('.amount-input-staking')
         // //console.log(type,input.value);
-        // const amount = parseInt(input.value * 1000000)
-        if (amount <= 0) {
+        const amountVar = parseInt(amount) * 1000000
+        if (amountVar <= 0) {
             showNotification('Input amount empty', 'error', 4000)
             return
         }
@@ -42,7 +42,7 @@ export default function NewStaking(props) {
                 {
                     send: {
                         contract: state.loterraNewStakingAddress,
-                        amount: amount.toString(),
+                        amount: amountVar.toString(),
                         msg: 'eyAiYm9uZF9zdGFrZSI6IHt9IH0=',
                     },
                 },
@@ -52,7 +52,7 @@ export default function NewStaking(props) {
                 state.wallet.walletAddress,
                 state.loterraNewStakingAddress,
                 {
-                    unbond_stake: { amount: amount.toString() },
+                    unbond_stake: { amount: amountVar.toString() },
                 },
             )
         }
