@@ -30,7 +30,7 @@ export default function Staking(props) {
         // var input = document.querySelector('.amount-input-staking')
         // //console.log(type,input.value);
         // const amount = parseInt(input.value * 1000000)
-        const amountVar = parseInt(amount) * 1000000
+        const amountVar = parseInt(amount * 1000000) 
         if (amountVar <= 0) {
             showNotification('Input amount empty', 'error', 4000)
             return
