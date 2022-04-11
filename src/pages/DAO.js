@@ -59,11 +59,22 @@ export default () => {
                             <p className="mb-4 fs-5 fw-normal text-muted text-center text-md-start">Together we decide</p>     
                         </div>
                         <div className="col-md-6 text-end d-flex">
-                            <Link to={'/poll/create'} className="btn btn-default align-self-center ms-auto">Create proposal</Link>
+                            {/* <Link to={'/poll/create'} className="btn btn-default align-self-center ms-auto">Create proposal</Link> */}
                         </div>
                     </div>
 
-                    <div className="row mb-4">
+                    <div className="row mt-5">
+                        <div className="col-12 text-center">
+                            <div className="card lota-card">
+                                <div className="card-body">
+                                    <p className="fs-1 fw-bold mb-0">Coming soon</p>
+                                    <p className="text-muted">We are currently working on the new DAO page</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    {/* <div className="row mb-4">
                         <div className="col-md-6">
                             <div className="staking-rewards-info">                
                                 <h2>Current LOTA price</h2>
@@ -102,7 +113,7 @@ export default () => {
                         i={0}
                         fees={0}
                         />
-                    </div>
+                    </div> */}
 
                 </div>
             </div>
