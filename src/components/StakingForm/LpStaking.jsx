@@ -16,7 +16,7 @@ export default function LpStaking(props) {
 
     function setInputAmount(amount) {
         const input = document.querySelector('.amount-input-lpstaking')
-        input.value = amount / 1000000
+        input.value = amount
     }
 
     function stakeOrUnstake(type) {
