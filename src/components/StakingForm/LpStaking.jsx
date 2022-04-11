@@ -1,5 +1,5 @@
 import React, { useState } from 'react'
-import { TelegramLogo, Info } from 'phosphor-react'
+import { TelegramLogo, Info, X } from 'phosphor-react'
 import { useStore } from '../../store'
 import { MsgExecuteContract, Fee } from '@terra-money/terra.js'
 
@@ -12,9 +12,11 @@ export default function LpStaking(props) {
     const { showNotification } = props
     const { state, dispatch } = useStore()
 
+    const [showLPStakingForm,setShowLPStakingForm] = useState(true)
+
     function setInputAmount(amount) {
         const input = document.querySelector('.amount-input-lpstaking')
-        input.value = amount / 1000000
+        input.value = amount
     }
 
     function stakeOrUnstake(type) {
@@ -178,9 +180,116 @@ export default function LpStaking(props) {
     }
 
     return (
+        <>
+                <div className="row my-4">
+            <div className="col-md-3">
+                    <div className="staking-rewards-info">
+                    <h2 className="text-muted">Staked LP LOTA</h2>
+                    <p className="fs-5 mt-1">
+                    {state.wallet && state.wallet.walletAddress && (
+                            <>
+                                {numeral(
+                                    parseInt(state.LPBalance.balance) / 1000000,
+                                ).format('0.00')}
+                            </>
+                        )}                        
+                        <span className="text-muted ms-1">LP</span>
+                    </p>
+                    </div>
+                </div>
+                <div className="col-md-3">
+                    <div className="staking-rewards-info">
+                    <h2 className="text-muted">Staking rewards</h2>
+                    {state.wallet &&
+                    state.wallet.walletAddress &&
+                    state.poolInfo.assets.length > 0 && (
+                        <p className="fs-5 mt-1">
+                            {numeral(
+                                parseInt(state.LPHolderAccruedRewards) /
+                                    1000000,
+                            ).format('0,0.000000')}{' '}
+                            <span className="text-muted">LOTA</span>{' '}
+                            <small style={{fontSize:14}}>= {numeral(
+                                (state.LPHolderAccruedRewards *
+                                    state.poolInfo.assets[1].amount) /
+                                    state.poolInfo.assets[0].amount /
+                                    1000000,
+                            ).format('0,0.00')}
+                             <span className="text-muted ms-1">UST</span>
+                             </small>
+                        </p>
+                    )}
+                    <button
+                        className=" btn btn-outline-primary btn-sm mt-2"
+                        disabled={state.holderAccruedRewards <= 0 ? true : false}
+                        onClick={() => claimRewards()}
+                        style={{
+                            boxShadow: 'none',
+                        }}
+                    >
+                        Claim
+                    </button>
+                    </div>
+                </div>
+                <div className="col-md-3">
+                    <div className="staking-rewards-info">
+                        <h2 className="text-muted">Current APR</h2>
+                        <p className="fs-5 mt-1">{total_staked() ? (
+                                numeral((100000 / total_staked()) * 100).format(
+                                    '0',
+                                )
+                            ) : (
+                                <span
+                                    className="spinner-border spinner-border-sm d-inline-block"
+                                    role="status"
+                                    style={{
+                                        position: 'relative',
+                                        top: '0px',
+                                    }}
+                                >
+                                    <span className="visually-hidden">
+                                        Loading...
+                                    </span>
+                                </span>
+                            )}<span className="text-muted ms-1">%</span></p>
+                    </div>
+                </div>
+                <div className="col-md-3">
+                    <div className="staking-rewards-info">                
+                        <h2 className="text-muted">Total staked LOTA</h2>
+                        <p className="fs-5 mt-1">{total_staked() ? (
+                            numeral(total_staked()).format('0,0.000000')                             
+                        ) : (
+                            <span
+                                className="spinner-border spinner-border-sm d-inline-block"
+                                role="status"
+                                style={{
+                                    position: 'relative',
+                                    top: '0px',
+                                }}
+                            >
+                                <span className="visually-hidden">
+                                    Loading...
+                                </span>
+                            </span>
+                        )}<span className="text-muted ms-1">LOTA</span></p>
+                    </div>
+                </div>
+        </div>
         <div className="row">
-            <div className="col-md-12">
-                <p className="input-heading">
+            <div className="col-md-12">               
+                { showLPStakingForm ?
+                    <button className="btn btn-primary fw-bold text-white" onClick={() => setShowLPStakingForm(!showLPStakingForm)}>Manage</button>
+                    :
+                    <button className="btn btn-default fw-bold text-white" onClick={() => setShowLPStakingForm(!showLPStakingForm)}><X size={18}/></button>
+                }
+            </div>
+        </div>
+        <div className="row p-4 my-3" style={{background:'#18054b'}} hidden={showLPStakingForm}>
+            <div className="col-md-6 p-md-4">
+                <div className="row">
+                <div className="col-md-12">
+                <p className="input-heading mb-2">
                     The amount you want to LP Stake
                     <span
                         className="badge"
@@ -199,8 +308,8 @@ export default function LpStaking(props) {
                                     '0',
                                 )
                             ) : (
-                                <div
-                                    className="spinner-border spinner-border-sm"
+                                <span
+                                    className="spinner-border spinner-border-sm d-inline-block"
                                     role="status"
                                     style={{
                                         position: 'relative',
@@ -210,7 +319,7 @@ export default function LpStaking(props) {
                                     <span className="visually-hidden">
                                         Loading...
                                     </span>
-                                </div>
+                                </span>
                             )}
                             %
                         </strong>
@@ -230,7 +339,7 @@ export default function LpStaking(props) {
                         100,000.00 LOTA year rewards
                     </p>
                 }
-                <span
+                {/* <span
                     className="info"
                     style={{
                         color: '#ff36ff',
@@ -257,7 +366,7 @@ export default function LpStaking(props) {
                             </div>
                         )}
                     </strong>
-                </span>
+                </span> */}
                 <div className="input-group mb-3">
                     <span className="input-group-text" id="basic-addon1">
                         <img
@@ -305,7 +414,8 @@ export default function LpStaking(props) {
                     <strong
                         style={{ textDecoration: 'underline' }}
                         onClick={() =>
-                            setInputAmount(parseInt(state.LPBalance.balance))
+                            setInputAmount(parseInt(state.LPBalance.balance) /
+                            1000000)
                         }
                     >
                         {state.wallet && state.wallet.walletAddress && (
@@ -332,7 +442,8 @@ export default function LpStaking(props) {
                     <strong
                         style={{ textDecoration: 'underline' }}
                         onClick={() =>
-                            setInputAmount(state.allHolderLP.balance)
+                            setInputAmount(parseInt(state.allHolderLP.balance) /
+                            1000000)
                         }
                     >
                         {state.wallet && state.wallet.walletAddress && (
@@ -347,7 +458,9 @@ export default function LpStaking(props) {
                     </strong>
                 </small>
             </div>
-
+                </div>
+            </div>
+{/* 
             <div className="col-md-12 staking-rewards-info">
                 <h2>Staking LP rewards</h2>
                 {state.wallet &&
@@ -376,13 +489,13 @@ export default function LpStaking(props) {
                         boxShadow: 'none',
                     }}
                 >
-                    Claim rewards
+                    Claim
                 </button>
-            </div>
+            </div> */}
 
             {pendingClaim() > 0 ||
                 (claimInfo() > 0 && (
-                    <div className="col-md-12 my-3">
+                    <div className="col-md-6 my-3">
                         <div className="claim-unstake">
                             <p className="input-heading">Claim unstake</p>
                             <p className="input-slogan">
@@ -410,5 +523,6 @@ export default function LpStaking(props) {
                     </div>
                 ))}
         </div>
+        </>
     )
 }

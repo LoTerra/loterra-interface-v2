@@ -11,6 +11,8 @@ import { popper } from '@popperjs/core'
 import Index from './pages/Index'
 import Rapido from './pages/Rapido'
 import Dogether from './pages/Dogether'
+import Poll from './pages/poll/Index' 
+import CreateProposal from './pages/poll/create' 
 import Dao from './pages/DAO'
 import Staking from './pages/Staking'
 import SpaceWager from './pages/SpaceWager'
@@ -174,11 +176,13 @@ class App extends Component {
                                         path="/staking"
                                         component={Staking}
                                     />
-                                    <Route exact path="/dao" component={Dao} />
+                                    <Route exact path="/dao" component={Dao} />                                    
+                                    <Route exact path="/poll/create" component={CreateProposal} />
+                                    <Route exact path="/poll/:pollid" component={Poll} />
                                     <Route
                                         exact
                                         path="/tokenomics"
-                                        component={Tokenomics}
+                                        component={Tokenomics} 
                                     />
                                     <Route render={() => <Routes />} />
                                 </Switch>

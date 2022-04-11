@@ -247,23 +247,7 @@ h4,
         .van {
             margin-top: -70px;
         }
-        h1 {
-            color: #fff;
-            text-transform: uppercase;
-            font-size: 61px;
-            line-height: 30px;
-            margin-top: -20px;
-            margin-bottom: 5px;
-            position: relative;
-            text-align: center;
-            z-index: 9;
-            font-weight: 300;
-            text-shadow: 0px 0px 26px #160150;
-            font-family: 'Monoton', cursive;
-            text-shadow: 0 0 10px #fff, 0 0 20px #fff, 0 0 30px #fff,
-                0 0 40px #f038f0, 0 0 70px #f038f0, 0 0 80px #f038f0,
-                0 0 120px #f038f0, 0 0 200px #f038f0;
-        }
+      
         @media (max-width: 990px) {
         }
         @media (max-width: 510px) {
@@ -877,7 +861,6 @@ h4,
         color: #fff;
         border: 1px solid #8b8ba67a;
         border-radius: 100px;
-        margin-left: 14px;
         p {
             margin: 0;
             font-size: 14px;
@@ -1330,14 +1313,20 @@ h4,
     padding: 15px;
     background: #10003b82;
     border-radius: 5px;
+    position:relative;
     h2 {
-        font-size: 18px;
+        font-size: 14px;
         font-weight: 600;
         margin-bottom: 0;
     }
     p {
         margin: 0;
         font-size: 24px;
+    }
+    .btn {
+        position: absolute;
+        right: 10px;
+        top: 0;
     }
 }
 .trading-competition-body {

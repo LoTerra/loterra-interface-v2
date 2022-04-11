@@ -1,4 +1,4 @@
-import { Trash } from 'phosphor-react'
+import { Check, Trash } from 'phosphor-react'
 import React, { useState } from 'react'
 import { useStore } from '../../store'
 
@@ -15,12 +15,13 @@ export default function RapidoCardHeader(props) {
                         <p
                             className="mb-0 rounded"
                             style={{
-                                background: '#bf046b',
+                                background: 'rgb(191 4 107)',
                                 padding: '5px',
                                 marginTop: '-23px',
                                 width: '100px',
                                 textAlign: 'center',
                                 fontWeight: 700,
+                                fontSize:14
                             }}
                         >
                             <span style={{color:"#F2D230"}}>Active</span>
@@ -30,13 +31,14 @@ export default function RapidoCardHeader(props) {
                                 <p
                                     className="mb-0 rounded"
                                     style={{
-                                        background: 'rgb(122 94 199)',
+                                        background: 'rgb(37 12 103)',
                                         padding: '5px',
-                                        color: 'rgb(255 255 255 / 47%)',
+                                        color: 'rgb(255 255 255 / 26%)',
                                         marginTop: '-23px',
                                         width: '100px',
                                         textAlign: 'center',
                                         fontWeight: 700,
+                                        fontSize:14
                                     }}
                                 >
                                     Canceled
@@ -47,12 +49,13 @@ export default function RapidoCardHeader(props) {
                             className="mb-0 rounded"
                             style={{
                                 background: '#f2d230',
-                                padding: '5px',
-                                color: '#fff',
+                                padding: '5px', 
+                                color: 'rgb(33 10 92)',
                                 marginTop: '-23px',
                                 width: '100px',
                                 textAlign: 'center',
                                 fontWeight: 700,
+                                fontSize:14
                             }}
                         >
                             <span style={{color:"#048ABF"}}>Resolving</span>
@@ -61,16 +64,17 @@ export default function RapidoCardHeader(props) {
                         <p
                             className="mb-0 rounded"
                             style={{
-                                background: 'rgb(122 94 199)',
+                                background: 'rgb(40 12 114)',
                                 padding: '5px',
-                                color: 'rgb(255 255 255 / 47%)',
+                                color: 'rgb(155 129 225)',
                                 marginTop: '-23px',
                                 width: '100px',
                                 textAlign: 'center',
                                 fontWeight: 700,
+                                fontSize:14
                             }}
                         >
-                            Finished
+                          <Check size={16} style={{position:'relative',top:-2}} color="rgb(242, 210, 48)"/>  Finished
                         </p>
                     )}
                     <p

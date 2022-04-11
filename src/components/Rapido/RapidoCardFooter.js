@@ -9,9 +9,18 @@ import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/swiper-bundle.min.css'
 import 'swiper/swiper.min.css'
 
+import useSound from 'use-sound'
+import successSfx from './sounds/hero_decorative-celebration-02.mp3';
+import buttonSfx from './sounds/ui_tap-variant-01.mp3';
+
 export default function RapidoCardFooter(props) {
 
     const { state, dispatch } = useStore()
+
+    //Sounds
+    const [playSuccess] = useSound(successSfx);   
+    const [playButtonClick] = useSound(buttonSfx);
+
     const {
         enterDraw,
         multiplier,
@@ -30,6 +39,7 @@ export default function RapidoCardFooter(props) {
     } = props
 
     const validateTheTicket = (round) => {
+        playButtonClick()
         let fourNumbersFilter = fourNumbers.filter(e => e != "")
         let oneNumberFilter = oneNumber.filter(e => e != "")
         if (fourNumbersFilter.length < 4) {
@@ -69,6 +79,7 @@ export default function RapidoCardFooter(props) {
             })
             .then((e) => {
                 if (e.success) {
+                    playSuccess()
                     toast.success('Ticket succesfully validated!')
                     switchToDefault(true)
                     dispatch({

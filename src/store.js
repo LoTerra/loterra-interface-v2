@@ -107,6 +107,10 @@ const initialState = {
         'terra1udwh63czgtnpqdfzzmvz0v8flskuqyd0892khy',
     loterraPoolAddress: 'terra1pn20mcwnmeyxf68vpt3cyel3n57qm9mp289jta',
     loterraStakingAddress: 'terra1342fp86c3z3q0lksq92lncjxpkfl9hujwh6xfn',
+
+    loterraNewPoolAddress: 'terra1l7ryw0rs4n88a4kglcvzex208qrhca25jng0ee',
+    loterraNewStakingAddress: 'terra1qkvrf79gvew3f0vl02qjxar4lkqmyaxhkulhe4',
+
     alteredContractAddress: 'terra15tztd7v9cmv0rhyh37g843j8vfuzp8kw0k5lqv',
     loterraLPAddress: 'terra1t4xype7nzjxrzttuwuyh9sglwaaeszr8l78u6e',
     loterraStakingLPAddress: 'terra1pdslh858spzqrtx2gwr69pzm9m2wrv55aeh742',
@@ -127,6 +131,7 @@ const initialState = {
     allProposals: [],
     allNativeCoins: [],
     staking: {},
+    newStaking: {},
     wallet: {},
     LotaBalance: {},
     LPBalance: {},
@@ -139,12 +144,15 @@ const initialState = {
     holderPercentageFee: 0,
     allCombinations: [],
     allHolder: {},
+    allNewHolder: {},
     allHolderLP: {},
     winningCombination: 0,
     holderClaims: [],
+    newHolderClaims: [],
     youWon: false,
     holderClaimsLP: [],
     holderAccruedRewards: 0,
+    newHolderAccruedRewards: 0,
     LPHolderAccruedRewards: 0,
     combination: '',
     modal: false,
@@ -368,6 +376,11 @@ const reducer = (state, action) => {
                 ...state,
                 staking: action.message,
             }
+        case 'setNewStaking':
+            return {
+                ...state,
+                newStaking: action.message,
+            }
         case 'setTokenInfo':
             return {
                 ...state,
@@ -392,6 +405,11 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 holderAccruedRewards: action.message,
+            }
+        case 'setNewHolderAccruedRewards':
+            return {
+                ...state,
+                newHolderAccruedRewards: action.message,
             }
         case 'setLPHolderAccruedRewards':
             return {
@@ -423,6 +441,11 @@ const reducer = (state, action) => {
                 ...state,
                 allHolder: action.message,
             }
+        case 'setAllNewHolder':
+            return {
+                ...state,
+                allNewHolder: action.message,
+            }
         case 'setAllHolderLP':
             return {
                 ...state,
@@ -432,6 +455,11 @@ const reducer = (state, action) => {
             return {
                 ...state,
                 holderClaims: action.message,
+            }
+        case 'setNewHolderClaims':
+            return {
+                ...state,
+                newHolderClaims: action.message,
             }
         case 'setHolderClaimsLP':
             return {

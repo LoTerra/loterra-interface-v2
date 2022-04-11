@@ -191,39 +191,45 @@ export default function ConnectWallet() {
             message: jackpotAltered.balance,
         })
 
+        //DISABLED OLD DAO CODE
         //console.log('config',contractConfigInfo)
-        console.log(window.location.href.indexOf('dao'))
-        if (window.location.href.indexOf('dao') > -1) {
-            let pollCount = contractConfigInfo.poll_count
-            //console.log('count',pollCount)
-            let allPromise = []
-            for (let index = 1; index < pollCount + 1; index++) {
-                let promise = new Promise(async (resolve, reject ) => {
-                    const proposal = await api.contractQuery(
-                        state.loterraContractAddress,
-                        {
-                            get_poll: { poll_id: index },
-                        },
-                    )
-                    proposal.nr = index
-                    //allProposals.push(proposal)
-                    resolve(proposal)
-                })
-                allPromise.push(promise)
+        // console.log(window.location.href.indexOf('dao'))
+        // if (window.location.href.indexOf('dao') > -1) {
+        //     let pollCount = contractConfigInfo.poll_count
+        //     //console.log('count',pollCount)
+        //     let allPromise = []
+        //     for (let index = 1; index < pollCount + 1; index++) {
+        //         let promise = new Promise(async (resolve, reject ) => {
+        //             const proposal = await api.contractQuery(
+        //                 state.loterraContractAddress,
+        //                 {
+        //                     get_poll: { poll_id: index },
+        //                 },
+        //             )
+        //             proposal.nr = index
+        //             //allProposals.push(proposal)
+        //             resolve(proposal)
+        //         })
+        //         allPromise.push(promise)
 
-            }
+        //     }
 
-            Promise.all(allPromise).then((e) => {
-                dispatch({ type: 'setAllProposals', message: e })
-            })
+        //     Promise.all(allPromise).then((e) => {
+        //         dispatch({ type: 'setAllProposals', message: e })
+        //     })
 
-            //console.log('proposals',allProposals)
-        }
+        //     //console.log('proposals',allProposals)
+        // }
 
         const staking = await api.contractQuery(state.loterraStakingAddress, {
             state: {},
         })
         dispatch({ type: 'setStaking', message: staking })
+
+        const new_staking = await api.contractQuery(state.loterraNewStakingAddress, {
+            state: {},
+        })
+        dispatch({ type: 'setNewStaking', message: new_staking })
         //console.log('staking',staking)
 
         const token_info = await api.contractQuery(
@@ -381,6 +387,14 @@ export default function ConnectWallet() {
                     },
                 )
                 dispatch({ type: 'setAllHolder', message: holder })
+
+                const new_holder = await api.contractQuery(
+                    state.loterraNewStakingAddress,
+                    {
+                        holder: { address: connectedWallet.walletAddress },
+                    },
+                )
+                dispatch({ type: 'setAllNewHolder', message: new_holder })
                 //console.log(holder)
 
                 const holderAccruedRewards = await api.contractQuery(
@@ -394,6 +408,19 @@ export default function ConnectWallet() {
                 dispatch({
                     type: 'setHolderAccruedRewards',
                     message: holderAccruedRewards.rewards,
+                })
+
+                const new_holderAccruedRewards = await api.contractQuery(
+                    state.loterraNewStakingAddress,
+                    {
+                        accrued_rewards: {
+                            address: connectedWallet.walletAddress,
+                        },
+                    },
+                )
+                dispatch({
+                    type: 'setNewHolderAccruedRewards',
+                    message: new_holderAccruedRewards.rewards,
                 })
                 //console.log(holder)
 
@@ -411,10 +438,17 @@ export default function ConnectWallet() {
                     {
                         claims: { address: connectedWallet.walletAddress },
                     },
-                )
-                //console.log("claims")
-                //console.log(claims)
+                )                
                 dispatch({ type: 'setHolderClaims', message: claims.claims })
+
+                //new integration
+                const new_claims = await api.contractQuery(
+                    state.loterraNewStakingAddress,
+                    {
+                        claims: { address: connectedWallet.walletAddress },
+                    },
+                )                
+                dispatch({ type: 'setNewHolderClaims', message: new_claims.claims })
 
                 const tokenLP = await api.contractQuery(
                     state.loterraLPAddress,

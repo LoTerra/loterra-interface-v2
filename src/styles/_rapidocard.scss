@@ -98,6 +98,10 @@
                 background: #f2d230;
                 color: #16073e;
             }
+            &.normal {
+                background:#442790 !important;
+                color:#fff !important;
+            }
         }
     }
 }
@@ -225,7 +229,7 @@
 }
 
 .nr-btn {
-    background: #7a5ec740;
+    background: #2d1178;
     box-shadow: inset 0px 3px 0px rgba(3, 26, 66, 0.35);
     border-radius: 7px;
     color: #fff;
@@ -238,7 +242,7 @@
     transition: all 150ms linear;
 
     &.smaller {
-        width: 55px;
+        width: 21%;
         height: 44px;
         margin: 2%;
         font-size: 1.4rem;
