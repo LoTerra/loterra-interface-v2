@@ -414,7 +414,8 @@ export default function LpStaking(props) {
                     <strong
                         style={{ textDecoration: 'underline' }}
                         onClick={() =>
-                            setInputAmount(parseInt(state.LPBalance.balance))
+                            setInputAmount(parseInt(state.LPBalance.balance) /
+                            1000000)
                         }
                     >
                         {state.wallet && state.wallet.walletAddress && (
@@ -441,7 +442,8 @@ export default function LpStaking(props) {
                     <strong
                         style={{ textDecoration: 'underline' }}
                         onClick={() =>
-                            setInputAmount(state.allHolderLP.balance)
+                            setInputAmount(parseInt(state.allHolderLP.balance) /
+                            1000000)
                         }
                     >
                         {state.wallet && state.wallet.walletAddress && (

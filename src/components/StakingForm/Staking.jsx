@@ -325,7 +325,8 @@ export default function Staking(props) {
                     Available:
                     <strong
                         style={{ textDecoration: 'underline' }}
-                        onClick={() => setAmount(state.allHolder.balance)}
+                        onClick={() => setAmount(parseInt(state.allHolder.balance) /
+                        1000000)}
                     >
                         {state.wallet && state.wallet.walletAddress && (
                             <>

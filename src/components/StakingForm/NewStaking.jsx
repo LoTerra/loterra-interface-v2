@@ -297,7 +297,8 @@ export default function NewStaking(props) {
                     <strong
                         style={{ textDecoration: 'underline' }}
                         onClick={() =>
-                            setAmount(parseInt(state.LotaBalance.balance))
+                            setAmount(parseInt(state.LotaBalance.balance) /
+                            1000000)
                         }
                     >
                         {state.wallet && state.wallet.walletAddress && (
@@ -325,7 +326,8 @@ export default function NewStaking(props) {
                     Available:
                     <strong
                         style={{ textDecoration: 'underline' }}
-                        onClick={() => setAmount(state.allNewHolder.balance)}
+                        onClick={() => setAmount(parseInt(state.allNewHolder.balance) /
+                        1000000)}
                     >
                         {state.wallet && state.wallet.walletAddress && (
                             <>
