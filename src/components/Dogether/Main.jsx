@@ -573,11 +573,11 @@ export default function Main(props) {
                                         fontSize: '13px',
                                         opacity: 0.6,
                                     }}
-                                    onClick={() => setAmount(state.ustBalance)}
+                                    onClick={() => setAmount(state.ustBalance.balance)}
                                 >
                                     MAX:{' '}
-                                    {state.ustBalance
-                                        ? state.ustBalance.toFixed(2)
+                                    {state.ustBalance.balance
+                                        ? state.ustBalance.balance.toFixed(2)
                                         : 0}{' '}
                                     UST
                                 </strong>
