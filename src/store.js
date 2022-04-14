@@ -156,7 +156,7 @@ const initialState = {
     LPHolderAccruedRewards: 0,
     combination: '',
     modal: false,
-    ustBalance: 0,
+    ustBalance: {},
     daoFunds: 0,
     lcd_client: new LCDClient({
         URL: 'https://lcd.terra.dev/',

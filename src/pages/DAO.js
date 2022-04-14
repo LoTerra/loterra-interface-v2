@@ -4,7 +4,7 @@ import { useStore } from '../store'
 import { Fee, WasmAPI } from '@terra-money/terra.js'
 import Footer from '../components/Footer'
 import BodyLoader from '../components/BodyLoader'
-import { Bank, Info } from 'phosphor-react'
+import { Bank, Info, Plus } from 'phosphor-react'
 import numeral from 'numeral'
 import { Link } from 'react-router-dom'
 
@@ -29,7 +29,7 @@ export default () => {
     });
 
     function getStaked() {
-        let staked = parseInt(state.staking.total_balance) / 1000000
+        let staked = parseInt(state.newStaking.total_balance) / 1000000
         let sum = staked
         return sum
     }
@@ -59,11 +59,13 @@ export default () => {
                             <p className="mb-4 fs-5 fw-normal text-muted text-center text-md-start">Together we decide</p>     
                         </div>
                         <div className="col-md-6 text-end d-flex">
-                            {/* <Link to={'/poll/create'} className="btn btn-default align-self-center ms-auto">Create proposal</Link> */}
+                            <Link to={'/poll/create'} className="btn btn-default align-self-center ms-auto">
+                            <Plus size={18} weight="bold"/>    Create proposal
+                            </Link>
                         </div>
                     </div>
 
-                    <div className="row mt-5">
+                     {/* <div className="row mt-5">
                         <div className="col-12 text-center">
                             <div className="card lota-card">
                                 <div className="card-body">
@@ -72,9 +74,9 @@ export default () => {
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>  */}
 
-                    {/* <div className="row mb-4">
+                     <div className="row mb-4">
                         <div className="col-md-6">
                             <div className="staking-rewards-info">                
                                 <h2>Current LOTA price</h2>
@@ -113,7 +115,7 @@ export default () => {
                         i={0}
                         fees={0}
                         />
-                    </div> */}
+                    </div> 
 
                 </div>
             </div>
