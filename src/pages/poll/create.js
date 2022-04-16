@@ -1,5 +1,8 @@
-import { Article } from 'phosphor-react';
+import { ArrowLeft, Article } from 'phosphor-react';
 import React, { useState, useEffect } from 'react'
+import {  
+    Link
+  } from "react-router-dom";
 import { useStore } from '../../store';
 
 export default () => {
@@ -64,6 +67,9 @@ useEffect(() => {
             <div className="container">
                 <div className="row">
                     <div className="col-md-12 my-5">
+                    <Link to="/dao" className="btn btn-default float-end mt-md-2">
+                            <ArrowLeft size={14} style={{top:0}}/> Overview
+                        </Link>
                     <h1 className="fw-bold fs-1 mb-0 text-center text-md-start">           
                     <Article 
                     size={55}

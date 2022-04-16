@@ -420,7 +420,8 @@ export default function ConnectWallet() {
                     type: 'setNewHolderAccruedRewards',
                     message: new_holderAccruedRewards.rewards,
                 })
-                //console.log(holder)
+                
+                // console.log('rewards query new staking',new_holderAccruedRewards)
 
                 const token = await api.contractQuery(
                     state.loterraContractAddressCw20,
