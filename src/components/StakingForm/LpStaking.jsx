@@ -222,7 +222,7 @@ export default function LpStaking(props) {
                     <button
                         className=" btn btn-outline-primary btn-sm mt-2"
                         disabled={state.holderAccruedRewards <= 0 ? true : false}
-                        onClick={() => claimRewards()}
+                        onClick={() => claimLPRewards())}
                         style={{
                             boxShadow: 'none',
                         }}
