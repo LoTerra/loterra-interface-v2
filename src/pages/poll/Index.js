@@ -4,7 +4,7 @@ import {
     Link,
     useParams
   } from "react-router-dom";
-import ProgressBar from '../../components/Proposal/ProgressBar';
+import ProposalProgress from '../../components/Proposal/ProposalProgress';
 import VoteForm from '../../components/Proposal/VoteForm';
 
 export default (props) => {
@@ -46,7 +46,7 @@ export default (props) => {
                             <p className="fs-6 fw-normal text-muted text-uppercase mb-0">Predefined option</p>
                             <p>Selected option title here</p>          
                             <p className="fs-6 fw-normal text-muted text-uppercase mb-1">Details</p>
-                            <ProgressBar />                  
+                            <ProposalProgress />                  
                             <p className="fs-3 fw-normal mb-2 py-3 mt-3" style={{borderTop:'1px solid #40337a'}}>Vote on proposal</p>
                             <VoteForm proposalId={1}/>
                         </div>

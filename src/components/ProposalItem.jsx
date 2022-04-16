@@ -4,6 +4,7 @@ import { MsgExecuteContract } from '@terra-money/terra.js'
 import { Switch, Route, Link, useLocation, NavLink } from 'react-router-dom'
 
 import { Info, Circle, CheckCircle, XCircle } from 'phosphor-react'
+import SimpleProposalProgress from './Proposal/SimpleProposalProgress'
 
 export default function ProposalItem(props) {
     const { data, i, fees } = props
@@ -89,21 +90,7 @@ export default function ProposalItem(props) {
                         )}
                     </h4>
                     <h4>Proposal number {data.nr}</h4>
-                    <div className="progress">
-                        <div className="progress-bar" role="progressbar" style={{width: '25%'}} aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
-                    </div>
-                    <div className="row">
-                        <div className="col-6 text-start">
-                            <p><strong>Voted</strong> 10%</p>
-                        </div>
-                        <div className="col-6 text-end d-flex">
-                            <p className="ms-auto">
-                                <span><strong>Yes</strong> 10% </span>
-                                <span><strong>No</strong> 10% </span>
-                            </p>
-                          
-                        </div>
-                    </div>
+                    <SimpleProposalProgress/>
                     <p className="small"><strong>Estimated endtime:</strong> <span className="text-muted">12-12-2022</span></p>
                     <div>
 
