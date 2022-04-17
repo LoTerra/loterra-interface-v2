@@ -4,11 +4,22 @@ import {
     Link
   } from "react-router-dom";
 import { useStore } from '../../store';
+import moment from 'moment';
 
 export default () => {
 
 const {state,dispatch} = useStore()
 const [ustBalance,setUstBalance] = useState(0)
+
+const timelocalFormat = 'YYYY-MM-DDTHH:mm';
+
+//Add one month
+let maxEndDate = moment().add(1,'M')
+maxEndDate = moment(maxEndDate).format(timelocalFormat);
+
+//Add 1 day
+let maxMinDate = moment().add(1,'D')
+maxMinDate = moment(maxMinDate).format(timelocalFormat);
 
 //Predefined user options for creating proposal
 const predefined_options = [
@@ -91,8 +102,8 @@ useEffect(() => {
                             <textarea name="description" placeholder={'Description of your proposal'} className="form-control" required></textarea>
                         </div>
                         <div className="form-group mb-4">
-                            <p className="mb-0 fs-6 fw-bold">Predefined options</p>
-                            <select name="predefined_option" className="form-control" required>
+                            <p className="mb-0 fs-6 fw-bold">Predefined options <small className="small fw-normal text-muted">(Optional)</small></p>
+                            <select name="predefined_option" className="form-control">
                                 <option value="">Select option</option>
                                 {predefined_options.map((o,k) => {
                                     return (
@@ -112,6 +123,11 @@ useEffect(() => {
                             <input type="number" name="deposit" min="1000" max="1000" value={1000} className="form-control" required/>
                             <span className="input-group-text text-muted" id="basic-addon1">UST</span>
                             </div>
+                        </div>
+                        <div className="form-group mb-4">
+                            <p className="mb-0 fs-6 fw-bold">End date <small className="small fw-normal text-muted">(Optional)</small></p>
+                            
+                            <input type="datetime-local" name="end_date" min={maxMinDate} max={maxEndDate} className="form-control" placeholder={'Title'}/>
                         </div>
                         <div className="form-group mt-4">
                             <button 

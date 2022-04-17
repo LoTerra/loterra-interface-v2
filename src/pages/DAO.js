@@ -113,7 +113,7 @@ export default () => {
                             prize_per_rank: 0
                         }}
                         i={0}
-                        fees={0}
+                        fees={obj}
                         />
                     </div> 
 
