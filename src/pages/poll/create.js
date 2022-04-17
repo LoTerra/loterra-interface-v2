@@ -12,14 +12,11 @@ const {state,dispatch} = useStore()
 const [ustBalance,setUstBalance] = useState(0)
 
 const timelocalFormat = 'YYYY-MM-DDTHH:mm';
-
 //Add one month
-let maxEndDate = moment().add(1,'M')
-maxEndDate = moment(maxEndDate).format(timelocalFormat);
+let maxEndDate = moment().add(1,'M').format(timelocalFormat)
 
 //Add 1 day
-let maxMinDate = moment().add(1,'D')
-maxMinDate = moment(maxMinDate).format(timelocalFormat);
+let maxMinDate = moment().add(1,'D').format(timelocalFormat);
 
 //Predefined user options for creating proposal
 const predefined_options = [
