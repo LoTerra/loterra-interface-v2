@@ -53,7 +53,7 @@ export default function ProposalItem(props) {
     }
 
     return (
-        <Link to={'/poll/'+i} className="proposal-item-link">
+        <Link to={'/poll/'+data.id} className="proposal-item-link">
         <div
             className={
                 data.status == 'InProgress'

@@ -7,6 +7,7 @@ import BodyLoader from '../components/BodyLoader'
 import { Bank, Info, Plus } from 'phosphor-react'
 import numeral from 'numeral'
 import { Link } from 'react-router-dom'
+import SimpleSpinner from '../components/SimpleSpinner'
 
 export default () => {
     const { state, dispatch } = useStore()
@@ -38,8 +39,8 @@ export default () => {
             'terra1s4twvkqy0eel5saah64wxezpckm7v9535jjshy',
             {
                 list_proposals: {
-                    // limit:itemsPerPage,
-                    // offset:pagination
+                    limit:itemsPerPage,
+                    offset:pagination
                 },
             },
         )
@@ -139,15 +140,18 @@ export default () => {
                         <div className="col-md-12 mb-3">
                             <h4>Polls</h4>
                         </div>
-                        { proposals.length > 0 && proposals.map((a,k) => {
+                        { proposals.length > 0 ? proposals.map((a,k) => {
                             return (
                                 <ProposalItem 
                                 data={a}
                                 i={0}
                                 fees={obj}
+                                key={k}
                                 />
                             )
                         })
+                        :
+                        <SimpleSpinner/>
                         }
 
                         { proposals.length > 0 &&
