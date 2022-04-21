@@ -89,7 +89,7 @@ export default function ProposalItem(props) {
                             </span>
                         )}
                     </h4>
-                    <h4>Proposal number {data.nr}</h4>
+                    <h4>{data.title}</h4>
                     <SimpleProposalProgress/>
                     <p className="small"><strong>Estimated endtime:</strong> <span className="text-muted">12-12-2022</span></p>
                     <div>

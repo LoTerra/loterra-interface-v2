@@ -11,12 +11,16 @@ import { Link } from 'react-router-dom'
 export default () => {
     const { state, dispatch } = useStore()
     const [lotaPrice, setLotaPrice] = useState(0)
+    const [proposals,setProposals] = useState([])
+    const [pagination,setPagination] = useState(0)
 
     const addToGas = 5800
     const obj = new Fee(700_000, { uusd: 319200 + addToGas })
 
     const terra = state.lcd_client
     const api = new WasmAPI(terra.apiRequester)
+
+    const itemsPerPage = 5;
 
     const fetchData = useCallback(async () => {
     const currentLotaPrice = await api.contractQuery(
@@ -26,7 +30,36 @@ export default () => {
         },
     )
     setLotaPrice(currentLotaPrice)
+    getProposalData()
     });
+
+    const getProposalData = async () => {
+        const proposals_data = await api.contractQuery(
+            'terra1s4twvkqy0eel5saah64wxezpckm7v9535jjshy',
+            {
+                list_proposals: {
+                    // limit:itemsPerPage,
+                    // offset:pagination
+                },
+            },
+        )
+        console.log(pagination, proposals_data)
+        setProposals(proposals_data.proposals)
+    }
+
+    const setPaginationNumber = (type) => {
+        if(type == 'prev'){
+            if(pagination > 0){
+                setPagination(pagination - 1)
+                getProposalData()
+            }
+        } else {
+                setPagination(pagination + 1)
+                getProposalData()
+        }
+
+    }
+    
 
     function getStaked() {
         let staked = parseInt(state.newStaking.total_balance) / 1000000
@@ -36,7 +69,7 @@ export default () => {
 
     useEffect(() => {
         fetchData()
-    }, [fetchData])
+    }, [])
   
     return (
         <>
@@ -103,18 +136,26 @@ export default () => {
                     </div>
 
                     <div className="row">
-                        <div className="col-md-12">
+                        <div className="col-md-12 mb-3">
                             <h4>Polls</h4>
                         </div>
-                        <ProposalItem 
-                        data={{
-                            nr: 1,
-                            status:'InProgress',
-                            prize_per_rank: 0
-                        }}
-                        i={0}
-                        fees={obj}
-                        />
+                        { proposals.length > 0 && proposals.map((a,k) => {
+                            return (
+                                <ProposalItem 
+                                data={a}
+                                i={0}
+                                fees={obj}
+                                />
+                            )
+                        })
+                        }
+
+                        { proposals.length > 0 &&
+                        <div className="col-md-12">
+                            <button type="button" className="btn btn-default" onClick={() => setPaginationNumber('prev')} disabled={pagination == 0 ? true : false}>Previous</button>
+                            <button type="button" className="btn btn-default ms-2" onClick={() => setPaginationNumber('next')}>Next</button>
+                        </div>
+                        }
                     </div> 
 
                 </div>

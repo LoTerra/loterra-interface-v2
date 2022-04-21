@@ -1,4 +1,5 @@
 //Helpers
+import { Fee } from "@terra-money/terra.js";
 import numeral from "numeral";
 
 export default function formatMoney(nr,divide = false){
