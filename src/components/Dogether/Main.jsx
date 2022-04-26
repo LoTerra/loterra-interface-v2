@@ -333,7 +333,7 @@ export default function Main(props) {
                         >
                             <Info size={24} style={{ marginTop: '-4px' }} />{' '}
                             Dogether will automatically buy tickets for LoTerra
-                            Lottery, enjoy the possibility to win thousands of
+                            Rapido Lottery, enjoy the possibility to win thousands of
                             $UST prizes every week!
                         </p>
 

@@ -1,6 +1,6 @@
 import React, { useState } from 'react'
 
-import { TwitterLogo, TelegramLogo, Files } from 'phosphor-react'
+import { TwitterLogo, TelegramLogo, Files, DiscordLogo } from 'phosphor-react'
 
 export default function Footer() {
     return (
@@ -22,8 +22,11 @@ export default function Footer() {
                         </a>
                     </li>
                     <li>
-                        <a target="_blank" href="https://t.me/LoTerra">
-                            <TelegramLogo size={31} />
+                        <a
+                            target="_blank"
+                            href="https://discord.gg/t3rvcfjD"
+                        >
+                            <DiscordLogo size={31} />
                         </a>
                     </li>
                 </ul>

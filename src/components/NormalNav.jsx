@@ -14,6 +14,7 @@ import {
     Planet,
     FileText,
     Lightning,
+    Fire,
 } from 'phosphor-react'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 
@@ -157,6 +158,41 @@ export default function NormalNav() {
                         }}
                     >
                         BETA
+                    </span>
+                </NavLink>
+            </li>
+            <li className="nav-item">
+                <NavLink
+                    exact
+                    to="/scoobydao"
+                    className="nav-link"
+                    style={{ position: 'relative' }}
+                >
+                    <Fire
+                        size={24}
+                        style={{
+                            marginRight: '3px',
+                            position: 'relative',
+                            top: '-1px',
+                        }}
+                    />{' '}
+                    Scooby DAO
+                    <span className="item-label">Create your own lottery</span>
+                    <span
+                        className="badge"
+                        style={{
+                            position: 'absolute',
+                            right: 0,
+                            top: '-9px',
+                            fontSize: '10px',
+                            lineHeight: '10px',
+                            padding: '3px',
+                            textTransform: 'uppercase',
+                            color: '#10003b',
+                            background: '#8bf6c2',
+                        }}
+                    >
+                        Coming soon
                     </span>
                 </NavLink>
             </li>

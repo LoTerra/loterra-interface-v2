@@ -8,7 +8,7 @@ import { Bank, Info } from 'phosphor-react'
 import numeral from 'numeral'
 import { Link } from 'react-router-dom'
 
-export default () => {
+export default ()  => {
     const { state, dispatch } = useStore()
     const [lotaPrice, setLotaPrice] = useState(0)
 

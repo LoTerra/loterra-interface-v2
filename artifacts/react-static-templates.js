@@ -9,6 +9,7 @@ export default {
 '__react_static_root__/src/pages/DAO': require('__react_static_root__/src/pages/DAO').default,
 '__react_static_root__/src/pages/Dogether': require('__react_static_root__/src/pages/Dogether').default,
 '__react_static_root__/src/pages/SpaceWager': require('__react_static_root__/src/pages/SpaceWager').default,
+'__react_static_root__/src/pages/ScoobyDao': require('__react_static_root__/src/pages/ScoobyDao').default,
 '__react_static_root__/src/pages/Rapido': require('__react_static_root__/src/pages/Rapido').default
 }
 

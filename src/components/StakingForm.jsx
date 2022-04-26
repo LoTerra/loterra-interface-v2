@@ -169,6 +169,7 @@ export default function StakingForm(props) {
             </h2>
             <NewStaking 
             showNotification={showNotification} 
+            heightBlock={heightBlock}
             />    
             <h2 className="fw-medium mt-5 fs-4 fw-bolder"
              style={{

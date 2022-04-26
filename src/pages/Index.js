@@ -858,7 +858,7 @@ export default () => {
                              
                             },
                             1500: {
-                                slidesPerView: 2,
+                                slidesPerView: 3,
                             
                             },
                         }}                  
@@ -896,6 +896,22 @@ export default () => {
                             </div>
                         </div>
                             </SwiperSlide>
+                            <SwiperSlide key={3}>
+                            <div className="card lota-card lota-card-glass text-center">
+                            <div className="card-body" style={{minHeight:76}}>
+                                <NavLink to="/dogether" className="btn btn-default text-white float-end fw-bold btn-sm w-100"
+                                style={{
+                                    position:'absolute',
+                                    right:0,
+                                    bottom:-10
+                                }}
+                                >Play Now</NavLink>
+                                <img src={'/dogether-7.png'} style={{maxHeight:'60px'}} className="img-fluid"/>
+                                <p className="text-muted d-none d-md-block">No Loss Rapido Lottery</p>
+                             
+                            </div>
+                        </div>
+                            </SwiperSlide>                      
                         </Swiper>
                     </div>                     
                 </div>
