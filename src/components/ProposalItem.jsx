@@ -5,6 +5,7 @@ import { Switch, Route, Link, useLocation, NavLink } from 'react-router-dom'
 
 import { Info, Circle, CheckCircle, XCircle } from 'phosphor-react'
 import SimpleProposalProgress from './Proposal/SimpleProposalProgress'
+import { formatTimestamp } from '../helpers/Helpers'
 
 export default function ProposalItem(props) {
     const { data, i, fees } = props
@@ -73,7 +74,7 @@ export default function ProposalItem(props) {
                                 </p>
                             </span>
                         )}
-                        {data.status == 'Passed' && (
+                        {data.status == 'executed' && (
                             <span className="badge progress-badge passed">
                                 <p>
                                     <CheckCircle size={18} weight="fill" />{' '}
@@ -90,8 +91,9 @@ export default function ProposalItem(props) {
                         )}
                     </h4>
                     <h4>{data.title}</h4>
+                    <p>{data.description}</p>
                     <SimpleProposalProgress/>
-                    <p className="small"><strong>Estimated endtime:</strong> <span className="text-muted">12-12-2022</span></p>
+                    <p className="small"><strong>Estimated endtime:</strong> <span className="text-muted">{formatTimestamp(data.expires.at_time)}</span></p>
                     <div>
 
                     </div>
