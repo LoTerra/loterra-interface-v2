@@ -13,6 +13,7 @@ export default () => {
     const { state, dispatch } = useStore()
     const [lotaPrice, setLotaPrice] = useState(0)
     const [proposals,setProposals] = useState([])
+    const [filter,setFilter] = useState('all');
     const [pagination,setPagination] = useState(0)
 
     const addToGas = 5800
@@ -137,10 +138,37 @@ export default () => {
                     </div>
 
                     <div className="row">
-                        <div className="col-md-12 mb-3">
+                        <div className="col-md-12 mb-1">
                             <h4>Polls</h4>
                         </div>
-                        { proposals.length > 0 ? proposals.map((a,k) => {
+                        <div className="col-md-12 mb-3 dao-filter">
+                            <div className="row">
+                                <div className="col-4 pe-0">
+                                    <button className={"btn btn-plain w-100 " + (filter == 'all' ? 'active' : '')} onClick={() => setFilter('all')}>All</button>
+                                </div>
+                                <div className="col-4 p-0">
+                                    <button className={"btn btn-plain w-100 " + (filter == 'active' ? 'active' : '')} onClick={() => setFilter('active')}>Active</button>
+                                </div>
+                                <div className="col-4 ps-0">
+                                    <button className={"btn btn-plain w-100 " + (filter == 'finished' ? 'active' : '')} onClick={() => setFilter('finished')}>Finished</button>
+                                </div>
+                            </div>
+                        </div>
+                        { proposals.length > 0 ? proposals.filter(a => {
+                            switch (filter) {
+                                case 'all':
+                                    return a;
+                                    break;
+                                case 'active':
+                                    return a.status == 'InProgress'
+                                    break;
+                                case 'finished':
+                                    return a.status == 'executed'
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }).map((a,k) => {
                             return (
                                 <ProposalItem 
                                 data={a}

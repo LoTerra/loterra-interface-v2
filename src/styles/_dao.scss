@@ -1,0 +1,12 @@
+.dao-filter {
+    .btn-plain {
+        border-radius:0;
+        opacity:0.5;
+        transition:all 150ms linear;
+        border:1px solid #210a5c;
+        font-size:14px;
+        &.active {
+            opacity:1;
+        }
+    }
+}
