@@ -41,6 +41,10 @@ export default {
             template: 'src/pages/SpaceWager',
         },
         {
+            path: 'scoobydao',
+            template: 'src/pages/ScoobyDao',
+        },
+        {
             path: 'rapido',
             template: 'src/pages/Rapido',
         },
