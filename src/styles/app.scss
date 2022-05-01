@@ -175,15 +175,15 @@ h4,
 }
 
 .form-control {
-    background: #10003b;
+    background: #331093;
     border: 1px solid #44377e;
     box-sizing: border-box;
     box-shadow: inset 0px 4px 4px rgba(0, 0, 0, 0.25);
     border-radius: 10px;
     color: #fff;
     &:focus {
-        background: #10003b;
-        border: 1px solid $primary;
+        background: #331093;
+        border: 1px solid #F2D230;
         color: #fff;
     }
     &::placeholder {
@@ -323,6 +323,7 @@ h4,
 
 .input-heading {
     margin-bottom: 0;
+    color: #fff;
     font-size: 21px;
     font-weight: 600;
 }
@@ -487,11 +488,8 @@ h4,
 }
 
 .dogether-card {
-    background: linear-gradient(
-        328.75deg,
-        #10003ba6 -5.49%,
-        #0f0038f2 104.44%
-    ) !important;
+    background: linear-gradient(45deg, #4d2bab, #2e0e85) !important;
+    border-radius: 20px;
     @media (max-width: 1100px) {
     }
     h3 {
@@ -542,7 +540,7 @@ h4,
         text-shadow: 1px 1px 20px #10003b, 1px 2px 0px #8c6910;
     }
     .stats-card {
-        background: linear-gradient(45deg, #30d9876e, #160842);
+        background: #281b59;
         border-radius: 10px;
         color: #fff;
         padding: 5px;
@@ -566,8 +564,7 @@ h4,
             font-size: 20px;
             font-weight: 700;
             border-radius: 6px;
-            box-shadow: 0px 5px 6px #ff36ff63;
-            background: linear-gradient(45deg, #ee26f1, #9a23a8);
+            background: #F2D230;
         }
     }
 }
@@ -598,10 +595,8 @@ h4,
 
 .dogether-settings-info {
     .title {
-        font-family: 'Sigmar One';
         font-size: 22px;
-        color: #f5c753;
-        text-shadow: 1px 1px 20px #10003b, 1px 2px 0px #8c6910;
+        color: #fff;
     }
     small {
         font-size: 10px;
