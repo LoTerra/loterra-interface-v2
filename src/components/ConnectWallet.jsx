@@ -318,7 +318,7 @@ export default function ConnectWallet() {
             let token
             try {
                 const api = new WasmAPI(lcd.apiRequester)
-                if (connectedWallet) {
+            
                     lcd.bank
                         .balance(connectedWallet.walletAddress)
                         .then(([coins]) => {
@@ -329,12 +329,10 @@ export default function ConnectWallet() {
                             setBank(ustBalance.amount / 1000000)
                             dispatch({
                                 type: 'setUstBalance',
-                                message: ustBalance.amount / 1000000,
+                                message: ustBalance.amount,
                             })
                         })
-                } else {
-                    setBank(null)
-                }
+             
 
                 const contractConfigInfo = await api.contractQuery(
                     state.loterraContractAddress,
@@ -422,7 +420,8 @@ export default function ConnectWallet() {
                     type: 'setNewHolderAccruedRewards',
                     message: new_holderAccruedRewards.rewards,
                 })
-                //console.log(holder)
+                
+                // console.log('rewards query new staking',new_holderAccruedRewards)
 
                 const token = await api.contractQuery(
                     state.loterraContractAddressCw20,

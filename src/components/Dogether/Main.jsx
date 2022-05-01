@@ -541,6 +541,7 @@ export default function Main(props) {
                 </div>
                 </div>
                 </div> */}
+
                         <div className="col-md-12">
                             <label
                                 className="info"
@@ -629,6 +630,7 @@ export default function Main(props) {
                             <div className="col-md-12 my-3">
                                 <div
                                     className="current-dogether-stats"
+
                                     style={{
                                         color: '#fff',
                                         padding: '7px',

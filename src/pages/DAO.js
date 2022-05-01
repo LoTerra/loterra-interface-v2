@@ -4,19 +4,25 @@ import { useStore } from '../store'
 import { Fee, WasmAPI } from '@terra-money/terra.js'
 import Footer from '../components/Footer'
 import BodyLoader from '../components/BodyLoader'
-import { Bank, Info } from 'phosphor-react'
+import { Bank, Info, Plus } from 'phosphor-react'
 import numeral from 'numeral'
 import { Link } from 'react-router-dom'
+import SimpleSpinner from '../components/SimpleSpinner'
 
 export default ()  => {
     const { state, dispatch } = useStore()
     const [lotaPrice, setLotaPrice] = useState(0)
+    const [proposals,setProposals] = useState([])
+    const [filter,setFilter] = useState('all');
+    const [pagination,setPagination] = useState(0)
 
     const addToGas = 5800
     const obj = new Fee(700_000, { uusd: 319200 + addToGas })
 
     const terra = state.lcd_client
     const api = new WasmAPI(terra.apiRequester)
+
+    const itemsPerPage = 5;
 
     const fetchData = useCallback(async () => {
     const currentLotaPrice = await api.contractQuery(
@@ -26,17 +32,46 @@ export default ()  => {
         },
     )
     setLotaPrice(currentLotaPrice)
+    getProposalData()
     });
 
+    const getProposalData = async () => {
+        const proposals_data = await api.contractQuery(
+            'terra1s4twvkqy0eel5saah64wxezpckm7v9535jjshy',
+            {
+                list_proposals: {
+                    limit:itemsPerPage,
+                    offset:pagination
+                },
+            },
+        )
+        console.log(pagination, proposals_data)
+        setProposals(proposals_data.proposals)
+    }
+
+    const setPaginationNumber = (type) => {
+        if(type == 'prev'){
+            if(pagination > 0){
+                setPagination(pagination - 1)
+                getProposalData()
+            }
+        } else {
+                setPagination(pagination + 1)
+                getProposalData()
+        }
+
+    }
+    
+
     function getStaked() {
-        let staked = parseInt(state.staking.total_balance) / 1000000
+        let staked = parseInt(state.newStaking.total_balance) / 1000000
         let sum = staked
         return sum
     }
 
     useEffect(() => {
         fetchData()
-    }, [fetchData])
+    }, [])
   
     return (
         <>
@@ -59,11 +94,13 @@ export default ()  => {
                             <p className="mb-4 fs-5 fw-normal text-muted text-center text-md-start">Together we decide</p>     
                         </div>
                         <div className="col-md-6 text-end d-flex">
-                            {/* <Link to={'/poll/create'} className="btn btn-default align-self-center ms-auto">Create proposal</Link> */}
+                            <Link to={'/poll/create'} className="btn btn-default align-self-center ms-auto">
+                            <Plus size={18} weight="bold"/>    Create proposal
+                            </Link>
                         </div>
                     </div>
 
-                    <div className="row mt-5">
+                     {/* <div className="row mt-5">
                         <div className="col-12 text-center">
                             <div className="card lota-card">
                                 <div className="card-body">
@@ -72,9 +109,9 @@ export default ()  => {
                                 </div>
                             </div>
                         </div>
-                    </div>
+                    </div>  */}
 
-                    {/* <div className="row mb-4">
+                     <div className="row mb-4">
                         <div className="col-md-6">
                             <div className="staking-rewards-info">                
                                 <h2>Current LOTA price</h2>
@@ -101,19 +138,57 @@ export default ()  => {
                     </div>
 
                     <div className="row">
-                        <div className="col-md-12">
+                        <div className="col-md-12 mb-1">
                             <h4>Polls</h4>
                         </div>
-                        <ProposalItem 
-                        data={{
-                            nr: 1,
-                            status:'InProgress',
-                            prize_per_rank: 0
-                        }}
-                        i={0}
-                        fees={0}
-                        />
-                    </div> */}
+                        <div className="col-md-12 mb-3 dao-filter">
+                            <div className="row">
+                                <div className="col-4 pe-0">
+                                    <button className={"btn btn-plain w-100 " + (filter == 'all' ? 'active' : '')} onClick={() => setFilter('all')}>All</button>
+                                </div>
+                                <div className="col-4 p-0">
+                                    <button className={"btn btn-plain w-100 " + (filter == 'active' ? 'active' : '')} onClick={() => setFilter('active')}>Active</button>
+                                </div>
+                                <div className="col-4 ps-0">
+                                    <button className={"btn btn-plain w-100 " + (filter == 'finished' ? 'active' : '')} onClick={() => setFilter('finished')}>Finished</button>
+                                </div>
+                            </div>
+                        </div>
+                        { proposals.length > 0 ? proposals.filter(a => {
+                            switch (filter) {
+                                case 'all':
+                                    return a;
+                                    break;
+                                case 'active':
+                                    return a.status == 'InProgress'
+                                    break;
+                                case 'finished':
+                                    return a.status == 'executed'
+                                    break;
+                                default:
+                                    break;
+                            }
+                        }).map((a,k) => {
+                            return (
+                                <ProposalItem 
+                                data={a}
+                                i={0}
+                                fees={obj}
+                                key={k}
+                                />
+                            )
+                        })
+                        :
+                        <SimpleSpinner/>
+                        }
+
+                        { proposals.length > 0 &&
+                        <div className="col-md-12">
+                            <button type="button" className="btn btn-default" onClick={() => setPaginationNumber('prev')} disabled={pagination == 0 ? true : false}>Previous</button>
+                            <button type="button" className="btn btn-default ms-2" onClick={() => setPaginationNumber('next')}>Next</button>
+                        </div>
+                        }
+                    </div> 
 
                 </div>
             </div>
