@@ -9,7 +9,7 @@ import numeral from 'numeral'
 import { Link } from 'react-router-dom'
 import SimpleSpinner from '../components/SimpleSpinner'
 
-export default () => {
+export default ()  => {
     const { state, dispatch } = useStore()
     const [lotaPrice, setLotaPrice] = useState(0)
     const [proposals,setProposals] = useState([])
