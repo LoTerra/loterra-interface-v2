@@ -348,7 +348,7 @@ export default function RapidoCardBody(props) {
 
                     <div className="col-12 mt-2 p-0">
                         <div className="btn-holder text-end">
-                            {[1, 2, 5].map((obj, k) => {
+                            {[1, 5, 10].map((obj, k) => {
                                 return (
                                     <button
                                         key={k}

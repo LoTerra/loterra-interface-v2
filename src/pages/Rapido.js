@@ -1012,10 +1012,10 @@ export default () => {
         <>
             <Head>
                 <meta charSet="UTF-8" />
-                <title>Rapido | Win up to $50,000 every 5 minutes!</title>
+                <title>Rapido | Win up to UST 1,000,000 every 5 minutes!</title>
                 <meta
                     property="og:title"
-                    content="Rapido | Win up to $50,000 every 5 minutes!"
+                    content="Rapido | Win up to UST 1,000,000 every 5 minutes!"
                 />
                 <meta
                     property="og:description"
@@ -1028,7 +1028,7 @@ export default () => {
                 <meta property="og:type" content="website" />
                 <meta
                     property="twitter:title"
-                    content="Rapido | Win up to $50,000 every 5 minutes!"
+                    content="Rapido | Win up to UST 1,000,000 every 5 minutes!"
                 />
                 <meta property="twitter:type" content="website" />
                 <meta name="twitter:card" content="summary_large_image"/>
@@ -1038,7 +1038,7 @@ export default () => {
                 />
                 <meta
                     property="twitter:description"
-                    content="Rapido is the game of successive draws which offers a draw every 5 minutes! Try to find your 5 numbers among the combination of 4 blue and 1 yellow star numbers drawn at random and win up to $50,000!*"
+                    content="Rapido is the game of successive draws which offers a draw every 5 minutes! Try to find your 5 numbers among the combination of 4 blue and 1 yellow star numbers drawn at random and win up to UST 1,000,000!*"
                 />
             </Head>
         <div className="spacewager-beta">
@@ -1057,12 +1057,15 @@ export default () => {
                 </p>
             </div>
             <div className="w-100 py-1 py-md-3 pt-md-5 text-center mb-0 mb-md-2">
+                <h3 className="mb-0 text-10xl xs:text-13xl xs:-mt-0 font-semibold" style={{color: "#ffffff"}}>
+                    Purchased LUNA tickets from this lottery will help the burn mechanism, an initiative to support Terra v1 recovery plan by the community
+                </h3>
 
                 <img src="/Rapido-logo.svg"  className={'img-fluid'} style={{maxHeight: ' 135px', marginBottom: '-11px'}}/>
                 <h2 className="mb-0 text-10xl xs:text-13xl xs:-mt-0 font-semibold" style={{color: "#048ABF"}}>
-                    Win up to <span style={{color: '#F2D230', fontWeight: 700}}>$<CountUp
+                    Win up to UST <span style={{color: '#F2D230', fontWeight: 700}}><CountUp
                     start={0}
-                    end={50000}
+                    end={1000000}
                     separator={","}
                 /></span> every 5 minutes
                 </h2>
@@ -1315,9 +1318,9 @@ export default () => {
                                 <th style={{ minWidth: 50 }}>Rank</th>
                                 <th style={{ minWidth: 100 }} className="text-center">Score</th>
                                 <th style={{ minWidth: 100 }} className="text-center">Odds</th>
-                                <th style={{ minWidth: 50 }} className="text-center">$1</th>
-                                <th style={{ minWidth: 50 }} className="text-center">$2</th>
-                                <th style={{ minWidth: 50 }} className="text-center">$5</th>
+                                <th style={{ minWidth: 50 }} className="text-center">LUNA 5,000</th>
+                                <th style={{ minWidth: 50 }} className="text-center">LUNA 25,000</th>
+                                <th style={{ minWidth: 50 }} className="text-center">LUNA 50,000</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -1325,74 +1328,74 @@ export default () => {
                                     <td>#1</td>
                                     <td className="text-center">4 (exact position) + 1 star</td>
                                     <td className="text-center">1 / 524,288</td>
-                                    <td className="text-center">$10,000</td>
-                                    <td className="text-center">$20,000</td>
-                                    <td className="text-center">$50,000</td>
+                                    <td className="text-center">UST 100,000</td>
+                                    <td className="text-center">UST 500,000</td>
+                                    <td className="text-center">UST 1,000,000</td>
                                 </tr>
                                 <tr>
                                     <td>#2</td>
                                     <td className="text-center">4 (exact position)</td>
                                     <td className="text-center">1 / 74,898.29</td>
-                                    <td className="text-center">$1,000</td>
-                                    <td className="text-center">$2,000</td>
-                                    <td className="text-center">$5,000</td>
+                                    <td className="text-center">UST 10,000</td>
+                                    <td className="text-center">UST 50,000</td>
+                                    <td className="text-center">UST 100,000</td>
                                 </tr>
                                 <tr>
                                     <td>#3</td>
                                     <td className="text-center">3 (exact position) + 1 star </td>
                                     <td className="text-center">1 / 8,738.13</td>
-                                    <td className="text-center">$150</td>
-                                    <td className="text-center">$300</td>
-                                    <td className="text-center">$750</td>
+                                    <td className="text-center">UST 1,500</td>
+                                    <td className="text-center">UST 7,000</td>
+                                    <td className="text-center">UST 15,500</td>
                                 </tr>
                                 <tr>
                                     <td>#4</td>
                                     <td className="text-center">3 (exact position) </td>
                                     <td className="text-center">1 / 1,248.3</td>
-                                    <td className="text-center">$50</td>
-                                    <td className="text-center">$100</td>
-                                    <td className="text-center">$250</td>
+                                    <td className="text-center">UST 500</td>
+                                    <td className="text-center">UST 2,500</td>
+                                    <td className="text-center">UST 5,000</td>
                                 </tr>
                                 <tr>
                                     <td>#5</td>
                                     <td className="text-center">2 (exact position) + 1 star </td>
                                     <td className="text-center">1 / 388.36</td>
-                                    <td className="text-center">$30</td>
-                                    <td className="text-center">$60</td>
-                                    <td className="text-center">$150</td>
+                                    <td className="text-center">UST 300</td>
+                                    <td className="text-center">UST 1,500</td>
+                                    <td className="text-center">UST 3,000</td>
                                 </tr>
                                 <tr>
                                     <td>#6</td>
                                     <td className="text-center">2 (exact position)  </td>
                                     <td className="text-center">1 / 55.48</td>
-                                    <td className="text-center">$10</td>
-                                    <td className="text-center">$20</td>
-                                    <td className="text-center">$50</td>
+                                    <td className="text-center">UST 100</td>
+                                    <td className="text-center">UST 500</td>
+                                    <td className="text-center">UST 1000</td>
                                 </tr>
                                 <tr>
                                     <td>#7</td>
                                     <td className="text-center">1 (exact position) + 1 star </td>
                                     <td className="text-center">1 / 38.84</td>
-                                    <td className="text-center">$5</td>
-                                    <td className="text-center">$10</td>
-                                    <td className="text-center">$25</td>
+                                    <td className="text-center">UST 50</td>
+                                    <td className="text-center">UST 250</td>
+                                    <td className="text-center">UST 500</td>
                                 </tr>
 
                                 <tr>
                                     <td>#8</td>
                                     <td className="text-center">1 star</td>
                                     <td className="text-center">1 / 10.36</td>
-                                    <td className="text-center">$2</td>
-                                    <td className="text-center">$4</td>
-                                    <td className="text-center">$10</td>
+                                    <td className="text-center">UST 20</td>
+                                    <td className="text-center">UST 100</td>
+                                    <td className="text-center">UST 200</td>
                                 </tr>
                                 <tr>
                                     <td>#9</td>
                                     <td className="text-center">1 (exact position)</td>
                                     <td className="text-center">1 / 5.55</td>
-                                    <td className="text-center">$1</td>
-                                    <td className="text-center">$2</td>
-                                    <td className="text-center">$5</td>
+                                    <td className="text-center">UST 10</td>
+                                    <td className="text-center">UST 50</td>
+                                    <td className="text-center">UST 100</td>
                                 </tr>
 
                             </tbody>
