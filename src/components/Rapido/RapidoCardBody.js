@@ -422,7 +422,7 @@ export default function RapidoCardBody(props) {
                     <div className="col-12 text-center">
                         <div className="col-12 mb-2">
                             <div className={'rapido-winning-combination'}>
-                                <p className="small text-muted">
+                                <p className="small">
                                     This Draw’s closing transaction has been
                                     canceled because no player detected
                                 </p>
@@ -443,11 +443,11 @@ export default function RapidoCardBody(props) {
                             <h4 className="fs-5">Winning number</h4>
                             <div className="col-12 mb-2">
                                 <div className={'rapido-winning-combination'}>
-                                    <span className="rapido-combi-nr medium">{winningCombination[0]}</span>
-                                    <span className="rapido-combi-nr medium">{winningCombination[1]}</span>
-                                    <span className="rapido-combi-nr medium">{winningCombination[2]}</span>
-                                    <span className="rapido-combi-nr medium">{winningCombination[3]}</span>
-                                    <span className="rapido-combi-nr g medium">
+                                    <span className="rapido-combi-nr medium text-white">{winningCombination[0]}</span>
+                                    <span className="rapido-combi-nr medium text-white">{winningCombination[1]}</span> 
+                                    <span className="rapido-combi-nr medium text-white">{winningCombination[2]}</span>
+                                    <span className="rapido-combi-nr medium text-white">{winningCombination[3]}</span>
+                                    <span className="rapido-combi-nr g medium text-white">
                                 {bonusNumber}
                             </span>
 
@@ -471,7 +471,7 @@ export default function RapidoCardBody(props) {
                                     </div>
                                 </div>
                             </div>
-                            <p className="small text-muted">
+                            <p className="small">
                                 This Draw’s closing transaction has been
                                 submitted to the blockchain, and is awaiting
                                 confirmation. May the luck be with you!

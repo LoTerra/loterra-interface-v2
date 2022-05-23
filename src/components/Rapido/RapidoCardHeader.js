@@ -15,7 +15,7 @@ export default function RapidoCardHeader(props) {
                         <p
                             className="mb-0 rounded"
                             style={{
-                                background: 'rgb(191 4 107)',
+                                background: 'rgb(242 210 48)',
                                 padding: '5px',
                                 marginTop: '-23px',
                                 width: '100px',
@@ -24,16 +24,16 @@ export default function RapidoCardHeader(props) {
                                 fontSize:14
                             }}
                         >
-                            <span style={{color:"#F2D230"}}>Active</span>
+                            <span style={{color:"rgb(0 70 255)"}}>Active</span>
                         </p>
                     ) :
-                        winningCombination == null && lotteryStats && lotteryStats[lotteryId].counter_player == null && state.rapidoCurrentRound != lotteryId ? (
+                        winningCombination == null && lotteryStats && lotteryStats[lotteryId] !== undefined && lotteryStats[lotteryId].counter_player == null && state.rapidoCurrentRound != lotteryId ? (
                                 <p
                                     className="mb-0 rounded"
                                     style={{
-                                        background: 'rgb(37 12 103)',
+                                        background: 'rgb(175 175 175)',
                                         padding: '5px',
-                                        color: 'rgb(255 255 255 / 26%)',
+                                        color: 'rgb(18 18 18)',
                                         marginTop: '-23px',
                                         width: '100px',
                                         textAlign: 'center',
@@ -64,9 +64,9 @@ export default function RapidoCardHeader(props) {
                         <p
                             className="mb-0 rounded"
                             style={{
-                                background: 'rgb(40 12 114)',
+                                background: 'rgb(14 60 165)',
                                 padding: '5px',
-                                color: 'rgb(155 129 225)',
+                                color: '#fff',
                                 marginTop: '-23px',
                                 width: '100px',
                                 textAlign: 'center',
@@ -74,7 +74,7 @@ export default function RapidoCardHeader(props) {
                                 fontSize:14
                             }}
                         >
-                          <Check size={16} style={{position:'relative',top:-2}} color="rgb(242, 210, 48)"/>  Finished
+                          <Check size={16} weight={'bold'} style={{position:'relative',top:-2}} color="rgb(242, 210, 48)"/>  Finished
                         </p>
                     )}
                     <p

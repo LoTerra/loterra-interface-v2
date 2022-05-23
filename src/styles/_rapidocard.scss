@@ -24,9 +24,10 @@
   
                 box-shadow: inset 0px 4px 4px rgb(33 10 92 / 9%);
                 border-radius: 5px;
-                color: #fff;
-                border: 1px solid #2a0f73;
+                color: #111;
+                border: 1px solid #c5c5c5;
                 padding: 7px;
+                background: #fff;
             }
         }
         .card-header {
@@ -106,7 +107,7 @@
 }
 
 .btn-rapido-nav {
-    background: #311189;
+    background: #0a2c7a;
     border: 0;
     color: #fff;
     border-radius: 6px;
@@ -161,7 +162,7 @@
     }
     &.big {
         font-size: 2.3rem;
-        background: #afafaf;
+        background: #fff;
         position: relative;
         border-radius: 50%;
 

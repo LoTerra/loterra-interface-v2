@@ -645,7 +645,6 @@ h4,
 .wallet-info {
     font-size: 13px;
     width: 100%;
-    background: #0003;
     padding: 6px 0;
     margin-top: -10px;
 }
@@ -979,14 +978,14 @@ h4,
 }
 
 .dropdown-menu {
-    background: linear-gradient(328.75deg, #493c85 -5.49%, #0f0038 104.44%);
-    border-radius: 10px;
+    background: #fff;
+    border-radius: 5px;
     box-shadow: 0px 28px 48px #0f0038;
-    color: #fff;
+    color: #111;
     .dropdown-item {
-        color: #fff;
+        color: #111;
         &:hover {
-            background: #0f0038;
+            color:rgb(0, 70, 255);
         }
     }
 }
