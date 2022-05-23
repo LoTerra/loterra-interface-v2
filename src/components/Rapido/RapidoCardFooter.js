@@ -220,7 +220,7 @@ export default function RapidoCardFooter(props) {
                             </p>
                         </div>
                         <div col-8 text-start>
-                            <p>Before starting take a look at <a href="https://docs.loterra.io/save-luna">https://docs.loterra.io/save-luna</a></p>
+                            <p>By buying tickets, you agree you have read our <a href="https://docs.loterra.io/save-luna">Data use policy</a> and the risk factors</p>
                         </div>
 
                         <div className="col-12">
