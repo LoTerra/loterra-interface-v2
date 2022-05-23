@@ -59,43 +59,34 @@ class App extends Component {
                         content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no"
                     />
                     <title>
-                        LoTerra - Decentralized lottery on Terra blockchain
+                        #SaveLuna
                     </title>
                     <link
                         rel="icon"
                         type="image/x-icon"
-                        href="https://loterra.io/favicon.ico"
+                        href="https://save-luna.netlify.app/favicon.ico"
                     />
                     <link
                         data-hid="shortcut-icon"
                         rel="shortcut icon"
-                        href="https://loterra.io/favicon.ico"
+                        href="https://save-luna.netlify.app/favicon.ico"
                     />
-                    <meta property="og:title" content="LoTerra" />
-                    <meta
-                        property="og:image"
-                        content="https://loterra.io/loterra.png"
-                    />
-                    <meta property="og:image:alt" content="LoTerra icon" />
+                    <meta property="og:title" content="#SaveLuna" />
                     <meta property="og:type" content="website" />
-                    <meta property="og:site_name" content="LoTerra interface" />
+                    <meta property="og:site_name" content="#SaveLuna interface" />
                     <meta
                         property="og:description"
-                        content="LoTerra is a lottery contract, buy tickets as a player or join the governance! DAO allows making decisions together! Manage the casino 🎰 Set the prize 🏆 Up the ticket price or go cheap 🏷 Extract max profits 🤑 Keep the vault secure at all times!"
+                        content="#SaveLuna is a community initiative to burn LUNA token and save Terra blockchain"
                     />
                     <meta name="twitter:card" content="summary" />
                     <meta name="twitter:site" content="LoTerra" />
                     <meta
                         name="twitter:title "
-                        content="LoTerra - Decentralized lottery on Terra blockchain"
+                        content="#SaveLuna"
                     />
                     <meta
                         name="twitter:description"
-                        content="LoTerra is a lottery contract, buy tickets as a player or join the governance! DAO allows making decisions together! Manage the casino 🎰 Set the prize 🏆 Up the ticket price or go cheap 🏷 Extract max profits 🤑 Keep the vault secure at all times!"
-                    />
-                    <meta
-                        name="twitter:image"
-                        content="https://loterra.io/loterra.png"
+                        content="#SaveLuna is a community initiative to burn LUNA token and save Terra blockchain"
                     />
                     <script
                         src="https://widgets.coingecko.com/coingecko-coin-price-chart-widget.js"
