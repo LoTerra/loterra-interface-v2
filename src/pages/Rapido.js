@@ -1012,14 +1012,14 @@ export default () => {
         <>
             <Head>
                 <meta charSet="UTF-8" />
-                <title>Rapido | Win up to UST 1,000,000 every 5 minutes!</title>
+                <title>#SaveLuna | Burn LUNA and win up to UST 1,000,000 every 5 minutes!</title>
                 <meta
                     property="og:title"
-                    content="Rapido | Win up to UST 1,000,000 every 5 minutes!"
+                    content="#SaveLuna | Burn LUNA and win up to UST 1,000,000 every 5 minutes!"
                 />
                 <meta
                     property="og:description"
-                    content="Rapido is the game of successive draws which offers a draw every 5 minutes! Try to find your 5 numbers among the combination of 4 blue and 1 yellow star numbers drawn at random and win up to $50,000!*"
+                    content="#SaveLuna is the game of successive draws which offers a draw every 5 minutes! Try to find your 5 numbers among the combination of 4 blue and 1 yellow star numbers drawn at random and win up to UST 1,000,000!*"
                 />
                 <meta
                     property="og:image"
@@ -1028,7 +1028,7 @@ export default () => {
                 <meta property="og:type" content="website" />
                 <meta
                     property="twitter:title"
-                    content="Rapido | Win up to UST 1,000,000 every 5 minutes!"
+                    content="#SaveLuna | Burn LUNA and win up to UST 1,000,000 every 5 minutes!"
                 />
                 <meta property="twitter:type" content="website" />
                 <meta name="twitter:card" content="summary_large_image"/>
@@ -1038,7 +1038,7 @@ export default () => {
                 />
                 <meta
                     property="twitter:description"
-                    content="Rapido is the game of successive draws which offers a draw every 5 minutes! Try to find your 5 numbers among the combination of 4 blue and 1 yellow star numbers drawn at random and win up to UST 1,000,000!*"
+                    content="#SaveLuna is the game of successive draws which offers a draw every 5 minutes! Try to find your 5 numbers among the combination of 4 blue and 1 yellow star numbers drawn at random and win up to UST 1,000,000!*"
                 />
             </Head>
         <div className="spacewager-beta">
@@ -1057,10 +1057,7 @@ export default () => {
                 </p>
             </div>
             <div className="w-100 py-1 py-md-3 pt-md-5 text-center mb-0 mb-md-2">
-
-                <h3 className="mb-0 text-10xl xs:text-13xl xs:-mt-0 font-semibold" style={{color: "#ffffff"}}>
-                    Purchased LUNA tickets from this lottery will help the burn mechanism, an initiative to support Terra v1 recovery plan by the community
-                </h3>
+                <h2>#SaveLuna</h2>
                 <p>Before starting take a look at <a href="https://docs.loterra.io/save-luna">https://docs.loterra.io/save-luna</a></p>
                 <p>How it works?</p>
 
@@ -1071,7 +1068,7 @@ export default () => {
                     <li>pay in LUNA and contribute to save LUNA community initiative. *50% burn 🔥 / 50% swap 🔁 to UST for jackpot </li>
                 </ol>
 
-                <img src="/Rapido-logo.svg"  className={'img-fluid'} style={{maxHeight: ' 135px', marginBottom: '-11px'}}/>
+                {/*<img src="/Rapido-logo.svg"  className={'img-fluid'} style={{maxHeight: ' 135px', marginBottom: '-11px'}}/>*/}
 <h2 className="mb-0 text-10xl xs:text-13xl xs:-mt-0 font-semibold" style={{color: "#fff"}}>
 
                     Win up to UST <span style={{color: '#F2D230', fontWeight: 700}}><CountUp
@@ -1320,13 +1317,13 @@ export default () => {
             <div className="container py-5">
                 <div className="row">
                     <div className="col-md-6 p-md-4 text-center text-md-start">
-                        <h2 className="fs-1 fw-bold">Paytable</h2>
-                        <h3 className="fs-1 fw-bold">How it works? #SaveLuna</h3>
-                        <p>50% of the tickets sales in LUNA are sent to the burn address *<a href="https://twitter.com/stablekwon/status/1528004028851859456?s=21&t=NuW2CVd96aLPKZ18nbVu5w">terra1sk06e3dyexuq4shw77y3dsv480xv42mq73anxu</a>
+
+                        <h3 className="fs-3 fw-bold">How prize works? #SaveLuna</h3>
+                        <p>50% of the tickets sales in LUNA are sent to the burn address *<a href="https://twitter.com/stablekwon/status/1528004028851859456?s=21&t=NuW2CVd96aLPKZ18nbVu5w">terra1sk06e3dyexuq4shw77y3dsv480xv42mq73anxu </a>
                         50% are swapped to UST for jackpot solvency. When you win a prize there is a 50% tax for LOTA stakers, this tax can be flattened staking LOTA.
                         </p>
-
                         <p className="fs-4 fw-normal text-muted">*The process is transparent and the transaction can be find on blockchain</p>
+                        <h2 className="fs-1 fw-bold">Paytable</h2>
                         <h4 className="fs-4 fw-normal text-muted">
                             List of payouts
                         </h4>
