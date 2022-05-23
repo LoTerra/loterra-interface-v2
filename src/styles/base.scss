@@ -13,7 +13,11 @@ $theme-colors: (
 @import '../../node_modules/bootstrap/scss/bootstrap';
 
 a {
-    color: $primary;
+    color: rgb(242, 210, 48);
+    text-decoration:none;
+    &:hover {
+        color:rgb(242, 210, 48);
+    }
 }
 
 //Coingecko widget styling
