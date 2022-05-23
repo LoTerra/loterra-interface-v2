@@ -1052,11 +1052,12 @@ export default () => {
                             marginRight: 4,
                         }}
                     />
-                    Rapido is currently in BETA, any losses incurred due
+                    This contract is currently in BETA, any losses incurred due
                     your actions are your own responsibility.
                 </p>
             </div>
             <div className="w-100 py-1 py-md-3 pt-md-5 text-center mb-0 mb-md-2">
+
                 <h3 className="mb-0 text-10xl xs:text-13xl xs:-mt-0 font-semibold" style={{color: "#ffffff"}}>
                     Purchased LUNA tickets from this lottery will help the burn mechanism, an initiative to support Terra v1 recovery plan by the community
                 </h3>
@@ -1071,13 +1072,17 @@ export default () => {
                 </ol>
 
                 <img src="/Rapido-logo.svg"  className={'img-fluid'} style={{maxHeight: ' 135px', marginBottom: '-11px'}}/>
-                <h2 className="mb-0 text-10xl xs:text-13xl xs:-mt-0 font-semibold" style={{color: "#048ABF"}}>
+<h2 className="mb-0 text-10xl xs:text-13xl xs:-mt-0 font-semibold" style={{color: "#fff"}}>
+
                     Win up to UST <span style={{color: '#F2D230', fontWeight: 700}}><CountUp
                     start={0}
                     end={1000000}
                     separator={","}
                 /></span> every 5 minutes
                 </h2>
+                <p className="mb-0" style={{color: "#ffffff"}}>
+                    Purchased LUNA tickets from this lottery will help the burn mechanism, an initiative to support Terra v1 recovery plan by the community
+                </p>
             </div>
             <div className="container">
                 <div className="row">
@@ -1216,8 +1221,8 @@ export default () => {
             <div className="container py-5">
                 <div className="row">
                     <div className="col-md-6 p-md-4 text-center text-md-start">
-                        <h2 className="fs-1 fw-bold">Rapido games</h2>
-                        <h4 className="fs-4 fw-normal text-muted">
+                        <h2 className="fs-1 fw-bold">Burn games</h2>
+                        <h4 className="fs-4 fw-normal">
                             Get all your games
                         </h4>
                     </div>
@@ -1260,7 +1265,7 @@ export default () => {
                             }
                         </div>
                         }
-                        <span className="small d-block text-muted mt-1">
+                        <span className="small d-block mt-1">
                             Resolving all can take some minutes
                         </span>                        
                     </div>
@@ -1298,7 +1303,7 @@ export default () => {
                             <tbody>{ resultHistory()}</tbody>
                         </table>
                         <button
-                            className="w-100 mt-2 btn btn-sm btn-default text-muted"
+                            className="w-100 mt-2 btn btn-sm btn-default"
                             onClick={() =>
                                 getGameStatsPagination(
                                     gameStats[gameStats.length - 1]

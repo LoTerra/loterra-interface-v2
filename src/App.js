@@ -120,14 +120,14 @@ class App extends Component {
                                         {' '}
                                         <List size={31} weight={'bold'} />
                                     </button> */}
-                                    <NavLink to={'/'} style={{
+                                    {/* <NavLink to={'/'} style={{
                                             width:50,
                                             left:'50%',
                                             marginLeft:-30,
                                             position:'absolute'
                                     }}>
                                     <img src="/logo.png" className="d-block d-md-none img-fluid"  />       
-                                    </NavLink>  
+                                    </NavLink>   */}
                                     <div className="navbar ms-auto">
                                         <ConnectWallet />
                                     </div>

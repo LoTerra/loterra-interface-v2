@@ -547,14 +547,14 @@ export default function ConnectWallet() {
             <>
                 <Wallet
                     size={24}
-                    color="#0F0038"
+                    color="#fff"
                     style={{ display: 'inline-block', marginTop: '-3px' }}
                 />{' '}
                 {bank && alteBank ? (
                     <>
                         <Check
                             size={16}
-                            color="#0F0038"
+                            color="#fff"
                             weight="bold"
                             style={{
                                 display: 'inline-block',
@@ -690,7 +690,7 @@ export default function ConnectWallet() {
             )}
             {connected && (
                 <>
-                    <button
+                    {/* <button
                         className={
                             'btn btn-default nav-item' +
                             (state.youWon ? ' winner' : '')
@@ -715,7 +715,7 @@ export default function ConnectWallet() {
                                 }}
                             />
                         )}
-                    </button>
+                    </button> */}
                     <button
                         className="btn btn-green nav-item dropdown-toggle"
                         data-bs-toggle="dropdown"
@@ -740,11 +740,7 @@ export default function ConnectWallet() {
                                     style={{ marginBottom: '-5px' }}
                                 >
                                     {bank} <span className="text-sm">UST</span>
-                                </span>
-                                <span className="d-block">
-                                    {alteBank}{' '}
-                                    <span className="text-sm">ALTE</span>
-                                </span>
+                                </span>                               
                             </div>
                         )}
                         <button
@@ -760,13 +756,13 @@ export default function ConnectWallet() {
 
             {/*<button onClick={() => display()}>Connect Wallet</button>
         {renderDialog()}*/}
-            {connected && connectedWallet && (
+            {/* {connected && connectedWallet && (
                 <UserModal
                     open={isModal}
                     toggleModal={() => setIsModal(!isModal)}
                     connectedWallet={connectedWallet}
                 />
-            )}
+            )} */}
         </>
     )
 }

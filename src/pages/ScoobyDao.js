@@ -31,7 +31,7 @@ export default () => {
                                     />
                                     Scooby DAO
                                 </h1>
-                                <p className="mb-4 fs-5 fw-normal text-muted text-center text-md-start">
+                                <p className="mb-4 fs-5 fw-normal text-center text-md-start">
                                     Create your own decentralized lottery
                                 </p>
                             </div>

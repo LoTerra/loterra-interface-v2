@@ -140,8 +140,7 @@ export default function RapidoCardFooter(props) {
             {(fourNumbers.length > 0 || oneNumber.length > 0) &&
             isLotteryLive ? (
                 <div
-                    className="card-footer pb-3"
-                    style={{ background: '#27498C' }}
+                    className="card-footer pb-3"                   
                 >
                     <div className="row">
                         <div className="col-12 text-start mt-1">
@@ -204,7 +203,7 @@ export default function RapidoCardFooter(props) {
                                 })}
                             </div>
                         </div> */}
-                        <div className="col-6 text-start text-muted">
+                        <div className="col-6 text-start">
                             <p>Cost</p>
                         </div>
                         <div className="col-6 text-end">
@@ -212,7 +211,7 @@ export default function RapidoCardFooter(props) {
                                 {numeral((multiplier * 5000)  * nrOfDraws).format('0,0')} LUNA
                             </p>
                         </div>
-                        <div className="col-8 text-start text-muted">
+                        <div className="col-8 text-start">
                             <p>Potential winnings per draw</p>
                         </div>
                         <div className="col-4 text-end">
@@ -229,7 +228,7 @@ export default function RapidoCardFooter(props) {
                                         onClick={() => validateTheTicket(1)}
                                         className="btn btn-special w-100"
                                         style={{
-                                            background: 'rgb(119 87 209)',
+                                            background: '#0046ff',
                                         }}
                                     >
                                         Enter To Win
@@ -240,7 +239,7 @@ export default function RapidoCardFooter(props) {
                                 winningCombination == null && (
                                     <button
                                         className="btn btn-special w-100"
-                                        style={{ background: '#7a5ec7' }}
+                                        style={{ background: '#0046ff' }}
                                         onClick={() =>
                                             toast.error(
                                                 'Please connect your wallet',
@@ -269,9 +268,9 @@ export default function RapidoCardFooter(props) {
                             "resolved": false,
                             "game_id": 0
                         }*/}
-                    {userGames.length != 0 && winningCombination != null && lotteryStats && lotteryStats[lotteryId].counter_player != null? (
+                    {userGames.length != 0 && winningCombination != null && lotteryStats && lotteryStats[lotteryId] !== undefined && lotteryStats[lotteryId].counter_player != null? (
                         <>
-                            <p className="fs-6 fw-bold text-center mb-2 text-muted">
+                            <p className="fs-6 fw-bold text-center mb-2">
                                 Your plays
                             </p>
                             <div style={{height: "150px", overflow:'hidden'}}>

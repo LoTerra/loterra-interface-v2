@@ -3,13 +3,10 @@
     background-position: center;
 
     &.btn-green {
-        background: linear-gradient(
-                92.8deg,
-                rgba(255, 255, 255, 0.6) -1.42%,
-                rgba(10, 176, 96, 0.6) 102.82%
-            ),
-            #20ff93;
-        border-radius: 7px;
+        background:traransparent;
+        border:1px solid #fff;
+        color:#fff;
+        border-radius: 7px !important;
     }
     &.btn-green-simple {
         color:#72ffc1;
@@ -59,8 +56,8 @@
         padding: 8px 35px;
     }
     &.btn-default {
-        background: #15073c;
-        border: 1px solid #40337a;
+        background: #0a2c7a;
+        border: 1px solid #0a2c7a;
         box-sizing: border-box;
         border-radius: 7px;
         color: #fff;

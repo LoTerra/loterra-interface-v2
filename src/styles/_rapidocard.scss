@@ -1,14 +1,13 @@
 .rapido-card {
-    background: linear-gradient(45deg, #210a5c, #2e0e85);
-    color: #fff;
+    background: #fff;
+    color: #111;
     border: 0;
     border-radius: 20px;
 
     &.active {
-        background: linear-gradient(45deg, #4d2bab, #2e0e85) !important;
-
-        border-radius: 20px;
-        color: #fff;
+        background: #fff;
+    border-radius: 20px;
+    color: #111;
         .label-four,
         .label-one {
             color: #fff;
@@ -22,28 +21,29 @@
         }
         .card-body {
             .form-control {
-                background: #2e1379;
+  
                 box-shadow: inset 0px 4px 4px rgb(33 10 92 / 9%);
                 border-radius: 5px;
-                color: #fff;
-                border: 1px solid #2a0f73;
+                color: #111;
+                border: 1px solid #c5c5c5;
                 padding: 7px;
+                background: #fff;
             }
         }
         .card-header {
             background: transparent !important;
             border: 0;
-            color: #fff;
+            
             .text-muted {
                 color: #000 !important;
             }
         }
         .card-footer {
-            border-top: 2px dashed #2a0f73 !important;
-            background: linear-gradient(45deg, #4d2bab, #2e0e85) !important;
+       
+           
             border-bottom-right-radius: 20px;
             border-bottom-left-radius: 20px;
-            color: #fff !important;
+            
         }
     }
 }
@@ -107,7 +107,7 @@
 }
 
 .btn-rapido-nav {
-    background: #311189;
+    background: #0a2c7a;
     border: 0;
     color: #fff;
     border-radius: 6px;
@@ -129,7 +129,7 @@
     line-height: 3.5rem;
     font-size: 1.2rem;
 
-    background: #7a5ec7;
+    background: #afafaf;
     border-radius: 100px;
     box-shadow: inset 0px 0px 0px 3px #048abf;
     margin: 1%;
@@ -162,7 +162,7 @@
     }
     &.big {
         font-size: 2.3rem;
-        background: #210a5c7d;
+        background: #fff;
         position: relative;
         border-radius: 50%;
 
@@ -229,7 +229,7 @@
 }
 
 .nr-btn {
-    background: #2d1178;
+    background: #afafaf;
     box-shadow: inset 0px 3px 0px rgba(3, 26, 66, 0.35);
     border-radius: 7px;
     color: #fff;
@@ -252,15 +252,14 @@
         width: 29.2%;
         margin: 2%;
         &.multiplier {
-            background: #32147f;
-            color: #fff;
-            box-shadow: inset 0px 3px 0px #0000002e;
-            border-top: 0;
+            background: #ffffff;
+            box-shadow: none;
+            border: 1px solid #0e3ca5;
+            color: #0e3ca5;
         
             &.active-i {
-                background: #bf046b;
-                color: #fff;
-                border-bottom: 0px solid #30137c;
+                background: #0e3ca5;
+                color: #fff;                
             }
         }
     }
