@@ -139,7 +139,7 @@ export default function RapidoCardBody(props) {
                             <div className={'rapido-winning-combination'}>
                                 <button
                                     type="button"
-                                    className="rapido-combi-nr big text-white"
+                                    className="rapido-combi-nr big"
                                     style={{
                                         padding: '0',
                                         border: 'none',                                        
@@ -166,7 +166,7 @@ export default function RapidoCardBody(props) {
                                 </button>
                                 <button
                                     type="button"
-                                    className="rapido-combi-nr big text-white"
+                                    className="rapido-combi-nr big"
                                     style={{
                                         padding: '0',
                                         border: 'none',                              
@@ -193,7 +193,7 @@ export default function RapidoCardBody(props) {
                                 </button>
                                 <button
                                     type="button"
-                                    className="rapido-combi-nr big text-white"
+                                    className="rapido-combi-nr big"
                                     style={{
                                         padding: '0',
                                         border: 'none',                                       
@@ -220,7 +220,7 @@ export default function RapidoCardBody(props) {
                                 </button>
                                 <button
                                     type="button"
-                                    className="rapido-combi-nr big text-white"
+                                    className="rapido-combi-nr big"
                                     style={{
                                         padding: '0',
                                         border: 'none',                            
@@ -247,7 +247,7 @@ export default function RapidoCardBody(props) {
                                 </button>
                                 <button
                                     type="button"
-                                    className="rapido-combi-nr g big text-white"
+                                    className="rapido-combi-nr g big"
                                     style={{
                                         padding: '0',
                                         border: 'none',                                      

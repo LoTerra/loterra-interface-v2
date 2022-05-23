@@ -3,13 +3,10 @@
     background-position: center;
 
     &.btn-green {
-        background: linear-gradient(
-                92.8deg,
-                rgba(255, 255, 255, 0.6) -1.42%,
-                rgba(10, 176, 96, 0.6) 102.82%
-            ),
-            #20ff93;
-        border-radius: 7px;
+        background:traransparent;
+        border:1px solid #fff;
+        color:#fff;
+        border-radius: 7px !important;
     }
     &.btn-green-simple {
         color:#72ffc1;

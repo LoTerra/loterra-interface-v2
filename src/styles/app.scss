@@ -22,10 +22,10 @@ body {
     -moz-osx-font-smoothing: grayscale;
     /*background-color: var(--bg);*/
     color: var(--color);
-    box-sizing: border-box;
-    background: #210a5c;
+    box-sizing: border-box;    
     background-size: cover;
     background-repeat: no-repeat;
+    background-color: #0e3ca5;
     color: #fff;
     height: 100vh;
 
@@ -54,7 +54,7 @@ body {
 }
 
 #smallNav {
-    background: #00000047;
+    
     padding:10px 5px;
     .btn {
         height: 38px;

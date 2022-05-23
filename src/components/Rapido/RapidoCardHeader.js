@@ -89,7 +89,7 @@ export default function RapidoCardHeader(props) {
                         <>
                             <p
                                 className="small mb-0"
-                                style={{ color: '#fff', opacity: 0.5 }}
+                                style={{ opacity: 0.5 }}
                             >
                                 Round ends in
                             </p>
