@@ -1058,28 +1058,23 @@ export default () => {
             </div>
             <div className="w-100 py-1 py-md-3 pt-md-5 text-center mb-0 mb-md-2">
                 <h2>#SaveLuna</h2>
-                <p>Before starting take a look at <a href="https://docs.loterra.io/save-luna">https://docs.loterra.io/save-luna</a></p>
-                <p>How it works?</p>
+                <h2 className="mb-0 text-10xl xs:text-13xl xs:-mt-0 font-semibold" style={{color: "#fff"}}>
 
-                <ol>
-                    <li>chose 4 repeatable numbers and 1 bonus</li>
-                    <li>chose the multiplier to increase your prizes</li>
-                    <li>chose how much round you want your ticket live</li>
-                    <li>pay in LUNA and contribute to save LUNA community initiative. *50% burn 🔥 / 50% swap 🔁 to UST for jackpot </li>
-                </ol>
-
-                {/*<img src="/Rapido-logo.svg"  className={'img-fluid'} style={{maxHeight: ' 135px', marginBottom: '-11px'}}/>*/}
-<h2 className="mb-0 text-10xl xs:text-13xl xs:-mt-0 font-semibold" style={{color: "#fff"}}>
-
-                    Win up to UST <span style={{color: '#F2D230', fontWeight: 700}}><CountUp
+                    Burn 🔥 LUNA and win up to UST <span style={{color: '#F2D230', fontWeight: 700}}><CountUp
                     start={0}
                     end={1000000}
                     separator={","}
                 /></span> every 5 minutes
                 </h2>
-                <p className="mb-0" style={{color: "#ffffff"}}>
-                    Purchased LUNA tickets from this lottery will help the burn mechanism, an initiative to support Terra v1 recovery plan by the community
-                </p>
+                <p>How it works?</p>
+                <ol>
+                    <li>chose 4 repeatable numbers and 1 bonus</li>
+                    <li>chose the multiplier to increase your prizes</li>
+                    <li>chose how much round you want your ticket live</li>
+                    <li>pay in LUNA and contribute to save LUNA community initiative. *50% burn 🔥 / 50% swap 🔁 to UST for jackpot solvency</li>
+                </ol>
+
+                {/*<img src="/Rapido-logo.svg"  className={'img-fluid'} style={{maxHeight: ' 135px', marginBottom: '-11px'}}/>*/}
             </div>
             <div className="container">
                 <div className="row">

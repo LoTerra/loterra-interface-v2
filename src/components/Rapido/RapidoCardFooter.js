@@ -219,6 +219,9 @@ export default function RapidoCardFooter(props) {
                                 {numeral(100_000 * multiplier).format('0,0')} UST
                             </p>
                         </div>
+                        <div col-8 text-start>
+                            <p>Before starting take a look at <a href="https://docs.loterra.io/save-luna">https://docs.loterra.io/save-luna</a></p>
+                        </div>
 
                         <div className="col-12">
                             {state.wallet &&
@@ -233,6 +236,7 @@ export default function RapidoCardFooter(props) {
                                     >
                                         Enter To Win
                                     </button>
+
                                 )}
                             {state.wallet &&
                                 !state.wallet.hasOwnProperty('walletAddress') &&
@@ -250,6 +254,7 @@ export default function RapidoCardFooter(props) {
                                     </button>
                                 )}
                         </div>
+
                     </div>
                 </div>
             ) : (
