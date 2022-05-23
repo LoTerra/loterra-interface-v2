@@ -1023,7 +1023,7 @@ export default () => {
                 />
                 <meta
                     property="og:image"
-                    content="https://loterry.io/rapido-preview-og.JPG"
+                    content="https://save-luna.netlify.app/SaveLuna.png"
                 />
                 <meta property="og:type" content="website" />
                 <meta
@@ -1034,7 +1034,7 @@ export default () => {
                 <meta name="twitter:card" content="summary_large_image"/>
                 <meta
                     property="twitter:image"
-                    content="https://loterra.io/rapido-preview-og.JPG"
+                    content="https://save-luna.netlify.app/SaveLuna.png"
                 />
                 <meta
                     property="twitter:description"
@@ -1057,7 +1057,7 @@ export default () => {
                 </p>
             </div>
             <div className="w-100 py-1 py-md-3 pt-md-5 text-center mb-0 mb-md-2">
-                <h2>#SaveLuna</h2>
+                <img src="/SaveLuna.png"  className={'img-fluid'} style={{maxHeight: '300px', marginBottom: '20px'}}/>
                 <h2 className="mb-0 text-10xl xs:text-13xl xs:-mt-0 font-semibold" style={{color: "#fff"}}>
 
                     Burn 🔥 LUNA and win up to UST <span style={{color: '#F2D230', fontWeight: 700}}><CountUp
@@ -1067,14 +1067,17 @@ export default () => {
                 /></span> every 5 minutes
                 </h2>
                 <p>How it works?</p>
-                <ol>
-                    <li>chose 4 repeatable numbers and 1 bonus</li>
-                    <li>chose the multiplier to increase your prizes</li>
-                    <li>chose how much round you want your ticket live</li>
-                    <li>pay in LUNA and contribute to save LUNA community initiative. *50% burn 🔥 / 50% swap 🔁 to UST for jackpot solvency</li>
-                </ol>
+                <div style={{display: "flex", justifyContent: "center" }}>
+                    <div className="w-50 align-items-start">
+                        <ol>
+                            <li>chose 4 repeatable numbers and 1 bonus</li>
+                            <li>chose the multiplier to increase your prizes</li>
+                            <li>chose how much round you want your ticket live</li>
+                            <li>pay in LUNA and contribute to save LUNA community initiative. *50% burn 🔥 / 50% swap 🔁 to UST for jackpot solvency</li>
+                        </ol>
+                    </div>
+                </div>
 
-                {/*<img src="/Rapido-logo.svg"  className={'img-fluid'} style={{maxHeight: ' 135px', marginBottom: '-11px'}}/>*/}
             </div>
             <div className="container">
                 <div className="row">
