@@ -104,22 +104,22 @@ class App extends Component {
                 </Head>
                 <StoreProvider>
                     <div className={'d-flex'} id="wrapper">
-                        <div id="sidebar-wrapper" className="sticky-top">
+                        {/* <div id="sidebar-wrapper" className="sticky-top">
                             <NormalNav />
-                        </div>
+                        </div> */}
                         <div id="page-content-wrapper">
                             <nav
                                 className="navbar navbar-expand navbar-light sticky-top"            
                                 id="smallNav"
                             >
                                 <div className="container-fluid px-0">
-                                    <button
+                                    {/* <button
                                         className="btn btn-default"
                                         id="sidebarToggle"
                                     >
                                         {' '}
                                         <List size={31} weight={'bold'} />
-                                    </button>
+                                    </button> */}
                                     <NavLink to={'/'} style={{
                                             width:50,
                                             left:'50%',
@@ -128,7 +128,7 @@ class App extends Component {
                                     }}>
                                     <img src="/logo.png" className="d-block d-md-none img-fluid"  />       
                                     </NavLink>  
-                                    <div className="navbar">
+                                    <div className="navbar ms-auto">
                                         <ConnectWallet />
                                     </div>
                                 </div>
@@ -155,8 +155,8 @@ class App extends Component {
                                 }
                             >
                                 <Switch>
-                                    <Route exact path="/" component={Index} />
-                                    <Route
+                                    <Route exact path="/" component={Rapido} />
+                                    {/* <Route
                                         exact
                                         path="/rapido"
                                         component={Rapido}
@@ -183,7 +183,7 @@ class App extends Component {
                                         exact
                                         path="/tokenomics"
                                         component={Tokenomics} 
-                                    />
+                                    /> */}
                                     <Route render={() => <Routes />} />
                                 </Switch>
                             </Suspense>

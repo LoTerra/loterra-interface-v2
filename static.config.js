@@ -22,32 +22,32 @@ export default {
         // A simple route
         {
             path: '/',
-            template: 'src/pages/Index',
-        },
-        {
-            path: 'staking',
-            template: 'src/pages/Staking',
-        },
-        {
-            path: 'dao',
-            template: 'src/pages/DAO',
-        },
-        {
-            path: 'dogether',
-            template: 'src/pages/Dogether',
-        },
-        {
-            path: 'spacewager',
-            template: 'src/pages/SpaceWager',
-        },
-        {
-            path: 'scoobydao',
-            template: 'src/pages/ScoobyDao',
-        },
-        {
-            path: 'rapido',
             template: 'src/pages/Rapido',
         },
+        // {
+        //     path: 'staking',
+        //     template: 'src/pages/Staking',
+        // },
+        // {
+        //     path: 'dao',
+        //     template: 'src/pages/DAO',
+        // },
+        // {
+        //     path: 'dogether',
+        //     template: 'src/pages/Dogether',
+        // },
+        // {
+        //     path: 'spacewager',
+        //     template: 'src/pages/SpaceWager',
+        // },
+        // {
+        //     path: 'scoobydao',
+        //     template: 'src/pages/ScoobyDao',
+        // },
+        // {
+        //     path: 'rapido',
+        //     template: 'src/pages/Rapido',
+        // },
         // A 404 component
         {
             path: '404',
