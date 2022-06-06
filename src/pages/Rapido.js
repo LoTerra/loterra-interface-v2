@@ -1163,16 +1163,16 @@ export default () => {
             <Head>
                 <meta charSet="UTF-8" />
                 <title>
-                    #SaveLuna | Burn LUNC and win up to LUNC 50,000,000 every 5
+                    #SaveLuna | Burn LUNC and win up to LUNC 100,000,000 every 5
                     minutes!
                 </title>
                 <meta
                     property="og:title"
-                    content="#SaveLuna | Burn LUNC and win up to LUNC 50,000,000 every 5 minutes!"
+                    content="#SaveLuna | Burn LUNC and win up to LUNC 100,000,000 every 5 minutes!"
                 />
                 <meta
                     property="og:description"
-                    content="#SaveLuna is the game of successive draws which offers a draw every 5 minutes! Try to find your 5 numbers among the combination of 4 blue and 1 yellow star numbers drawn at random and win up to LUNC 50,000,000!*"
+                    content="#SaveLuna is the game of successive draws which offers a draw every 5 minutes! Try to find your 5 numbers among the combination of 4 blue and 1 yellow star numbers drawn at random and win up to LUNC 100,000,000!*"
                 />
                 <meta
                     property="og:image"
@@ -1181,7 +1181,7 @@ export default () => {
                 <meta property="og:type" content="website" />
                 <meta
                     property="twitter:title"
-                    content="#SaveLuna | Burn LUNC and win up to LUNC 50,000,000 every 5 minutes!"
+                    content="#SaveLuna | Burn LUNC and win up to LUNC 100,000,000 every 5 minutes!"
                 />
                 <meta property="twitter:type" content="website" />
                 <meta name="twitter:card" content="summary_large_image" />
@@ -1191,7 +1191,7 @@ export default () => {
                 />
                 <meta
                     property="twitter:description"
-                    content="#SaveLuna is the game of successive draws which offers a draw every 5 minutes! Try to find your 5 numbers among the combination of 4 blue and 1 yellow star numbers drawn at random and win up to LUNC 50,000,000!*"
+                    content="#SaveLuna is the game of successive draws which offers a draw every 5 minutes! Try to find your 5 numbers among the combination of 4 blue and 1 yellow star numbers drawn at random and win up to LUNC 100,000,000!*"
                 />
             </Head>
 
@@ -1207,7 +1207,7 @@ export default () => {
                             <span style={{ color: '#F2D230', fontWeight: 700 }}>
                                 <CountUp
                                     start={0}
-                                    end={50000000}
+                                    end={100000000}
                                     separator={','}
                                 />
                             </span>{' '}
@@ -1237,7 +1237,7 @@ export default () => {
                                         ticket live
                                     </li>
                                     <li>
-                                        pay in LUNA and contribute to save LUNA
+                                        pay in LUNC and contribute to save LUNC
                                         community initiative. *50% burn 🔥 / 25% jackpot 🤑 / 25% tax for LOTA stakers
                                     </li>
                                 </ol>
@@ -1517,7 +1517,7 @@ export default () => {
                             How prize works? #SaveLuna
                         </h3>
                         <p>
-                            50% of the tickets sales in LUNA are sent to the
+                            50% of the tickets sales in LUNC are sent to the
                             burn address *
                             <a href="https://twitter.com/stablekwon/status/1528004028851859456?s=21&t=NuW2CVd96aLPKZ18nbVu5w">
                                 terra1sk06e3dyexuq4shw77y3dsv480xv42mq73anxu{' '}
