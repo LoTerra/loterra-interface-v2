@@ -1563,9 +1563,9 @@ export default () => {
                                     <td>#2</td>
                                     <td className="text-center">4 (exact position)</td>
                                     <td className="text-center">1 / 74,898.29</td>
-                                    <td className="text-center">LUNAC 100,000</td>
-                                    <td className="text-center">LUNAC 500,000</td>
                                     <td className="text-center">LUNAC 1,000,000</td>
+                                    <td className="text-center">LUNAC 5,000,000</td>
+                                    <td className="text-center">LUNAC 10,000,000</td>
                                 </tr>
                                 <tr>
                                     <td>#3</td>
@@ -1601,9 +1601,9 @@ export default () => {
                                         2 (exact position){' '}
                                     </td>
                                     <td className="text-center">1 / 55.48</td>
-                                    <td className="text-center">LUNAC 1,000</td>
-                                    <td className="text-center">LUNAC 5,000</td>
                                     <td className="text-center">LUNAC 10,000</td>
+                                    <td className="text-center">LUNAC 50,000</td>
+                                    <td className="text-center">LUNAC 100,000</td>
                                 </tr>
                                 <tr>
                                     <td>#7</td>
@@ -1611,18 +1611,18 @@ export default () => {
                                         1 (exact position) + 1 star{' '}
                                     </td>
                                     <td className="text-center">1 / 38.84</td>
-                                    <td className="text-center">LUNAC 500</td>
-                                    <td className="text-center">LUNAC 2,500</td>
                                     <td className="text-center">LUNAC 5,000</td>
+                                    <td className="text-center">LUNAC 25,000</td>
+                                    <td className="text-center">LUNAC 50,000</td>
                                 </tr>
 
                                 <tr>
                                     <td>#8</td>
                                     <td className="text-center">1 star</td>
                                     <td className="text-center">1 / 10.36</td>
-                                    <td className="text-center">LUNAC 200</td>
-                                    <td className="text-center">LUNAC 1,000</td>
                                     <td className="text-center">LUNAC 2,000</td>
+                                    <td className="text-center">LUNAC 10,000</td>
+                                    <td className="text-center">LUNAC 50,000</td>
                                 </tr>
                                 <tr>
                                     <td>#9</td>
