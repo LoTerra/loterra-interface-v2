@@ -1163,16 +1163,16 @@ export default () => {
             <Head>
                 <meta charSet="UTF-8" />
                 <title>
-                    #SaveLuna | Burn LUNAC and win up to LUNAC 50,000,000 every 5
+                    #SaveLuna | Burn LUNC and win up to LUNC 50,000,000 every 5
                     minutes!
                 </title>
                 <meta
                     property="og:title"
-                    content="#SaveLuna | Burn LUNAC and win up to LUNAC 50,000,000 every 5 minutes!"
+                    content="#SaveLuna | Burn LUNC and win up to LUNC 50,000,000 every 5 minutes!"
                 />
                 <meta
                     property="og:description"
-                    content="#SaveLuna is the game of successive draws which offers a draw every 5 minutes! Try to find your 5 numbers among the combination of 4 blue and 1 yellow star numbers drawn at random and win up to LUNAC 50,000,000!*"
+                    content="#SaveLuna is the game of successive draws which offers a draw every 5 minutes! Try to find your 5 numbers among the combination of 4 blue and 1 yellow star numbers drawn at random and win up to LUNC 50,000,000!*"
                 />
                 <meta
                     property="og:image"
@@ -1181,7 +1181,7 @@ export default () => {
                 <meta property="og:type" content="website" />
                 <meta
                     property="twitter:title"
-                    content="#SaveLuna | Burn LUNAC and win up to LUNAC 50,000,000 every 5 minutes!"
+                    content="#SaveLuna | Burn LUNC and win up to LUNC 50,000,000 every 5 minutes!"
                 />
                 <meta property="twitter:type" content="website" />
                 <meta name="twitter:card" content="summary_large_image" />
@@ -1191,7 +1191,7 @@ export default () => {
                 />
                 <meta
                     property="twitter:description"
-                    content="#SaveLuna is the game of successive draws which offers a draw every 5 minutes! Try to find your 5 numbers among the combination of 4 blue and 1 yellow star numbers drawn at random and win up to LUNAC 50,000,000!*"
+                    content="#SaveLuna is the game of successive draws which offers a draw every 5 minutes! Try to find your 5 numbers among the combination of 4 blue and 1 yellow star numbers drawn at random and win up to LUNC 50,000,000!*"
                 />
             </Head>
 
@@ -1203,7 +1203,7 @@ export default () => {
                             className="mb-0 text-10xl xs:text-13xl xs:-mt-0 font-semibold mb-3"
                             style={{ color: '#fff' }}
                         >
-                            Burn 🔥 LUNAC and win up to LUNAC{' '}
+                            Burn 🔥 LUNC and win up to LUNC{' '}
                             <span style={{ color: '#F2D230', fontWeight: 700 }}>
                                 <CountUp
                                     start={0}
@@ -1424,7 +1424,7 @@ export default () => {
                                     </span>
                                 </div>
                             )}
-                            Try resolve all games
+                            Resolve all games
                         </button>
                         {customWalletField && (
                             <div className="input-group mt-1">
@@ -1459,7 +1459,7 @@ export default () => {
                             </div>
                         )}
                         <span className="small d-block mt-1">
-                            Resolving all can take some minutes
+                            Resolving all can take several minutes
                         </span>
                     </div>
                     <div className="table-responsive">
@@ -1542,9 +1542,9 @@ export default () => {
                                 <th style={{ minWidth: 50 }}>Rank</th>
                                 <th style={{ minWidth: 100 }} className="text-center">Score</th>
                                 <th style={{ minWidth: 100 }} className="text-center">Odds</th>
-                                <th style={{ minWidth: 50 }} className="text-center">LUNAC 1,000</th>
-                                <th style={{ minWidth: 50 }} className="text-center">LUNAC 5,000</th>
-                                <th style={{ minWidth: 50 }} className="text-center">LUNAC 10,000</th>
+                                <th style={{ minWidth: 50 }} className="text-center">LUNC 1,000</th>
+                                <th style={{ minWidth: 50 }} className="text-center">LUNC 5,000</th>
+                                <th style={{ minWidth: 50 }} className="text-center">LUNC 10,000</th>
                                 </tr>
                             </thead>
                             <tbody>
@@ -1554,25 +1554,25 @@ export default () => {
                                         4 (exact position) + 1 star
                                     </td>
                                     <td className="text-center">1 / 524,288</td>
-                                    <td className="text-center">LUNAC 10,000,000</td>
-                                    <td className="text-center">LUNAC 50,000,000</td>
-                                    <td className="text-center">LUNAC 100,000,000</td>
+                                    <td className="text-center">LUNC 10,000,000</td>
+                                    <td className="text-center">LUNC 50,000,000</td>
+                                    <td className="text-center">LUNC 100,000,000</td>
                                 </tr>
                                 <tr>
                                     <td>#2</td>
                                     <td className="text-center">4 (exact position)</td>
                                     <td className="text-center">1 / 74,898.29</td>
-                                    <td className="text-center">LUNAC 1,000,000</td>
-                                    <td className="text-center">LUNAC 5,000,000</td>
-                                    <td className="text-center">LUNAC 10,000,000</td>
+                                    <td className="text-center">LUNC 1,000,000</td>
+                                    <td className="text-center">LUNC 5,000,000</td>
+                                    <td className="text-center">LUNC 10,000,000</td>
                                 </tr>
                                 <tr>
                                     <td>#3</td>
                                     <td className="text-center">3 (exact position) + 1 star </td>
                                     <td className="text-center">1 / 8,738.13</td>
-                                    <td className="text-center">LUNAC 150,000</td>
-                                    <td className="text-center">LUNAC 750,000</td>
-                                    <td className="text-center">LUNAC 1,500,000</td>
+                                    <td className="text-center">LUNC 150,000</td>
+                                    <td className="text-center">LUNC 750,000</td>
+                                    <td className="text-center">LUNC 1,500,000</td>
                                 </tr>
                                 <tr>
                                     <td>#4</td>
@@ -1580,9 +1580,9 @@ export default () => {
                                         3 (exact position){' '}
                                     </td>
                                     <td className="text-center">1 / 1,248.3</td>
-                                    <td className="text-center">LUNAC 50,000</td>
-                                    <td className="text-center">LUNAC 250,000</td>
-                                    <td className="text-center">LUNAC 500,000</td>
+                                    <td className="text-center">LUNC 50,000</td>
+                                    <td className="text-center">LUNC 250,000</td>
+                                    <td className="text-center">LUNC 500,000</td>
                                 </tr>
                                 <tr>
                                     <td>#5</td>
@@ -1590,9 +1590,9 @@ export default () => {
                                         2 (exact position) + 1 star{' '}
                                     </td>
                                     <td className="text-center">1 / 388.36</td>
-                                    <td className="text-center">LUNAC 30,000</td>
-                                    <td className="text-center">LUNAC 150,000</td>
-                                    <td className="text-center">LUNAC 300,000</td>
+                                    <td className="text-center">LUNC 30,000</td>
+                                    <td className="text-center">LUNC 150,000</td>
+                                    <td className="text-center">LUNC 300,000</td>
                                 </tr>
                                 <tr>
                                     <td>#6</td>
@@ -1600,9 +1600,9 @@ export default () => {
                                         2 (exact position){' '}
                                     </td>
                                     <td className="text-center">1 / 55.48</td>
-                                    <td className="text-center">LUNAC 10,000</td>
-                                    <td className="text-center">LUNAC 50,000</td>
-                                    <td className="text-center">LUNAC 100,000</td>
+                                    <td className="text-center">LUNC 10,000</td>
+                                    <td className="text-center">LUNC 50,000</td>
+                                    <td className="text-center">LUNC 100,000</td>
                                 </tr>
                                 <tr>
                                     <td>#7</td>
@@ -1610,18 +1610,18 @@ export default () => {
                                         1 (exact position) + 1 star{' '}
                                     </td>
                                     <td className="text-center">1 / 38.84</td>
-                                    <td className="text-center">LUNAC 5,000</td>
-                                    <td className="text-center">LUNAC 25,000</td>
-                                    <td className="text-center">LUNAC 50,000</td>
+                                    <td className="text-center">LUNC 5,000</td>
+                                    <td className="text-center">LUNC 25,000</td>
+                                    <td className="text-center">LUNC 50,000</td>
                                 </tr>
 
                                 <tr>
                                     <td>#8</td>
                                     <td className="text-center">1 star</td>
                                     <td className="text-center">1 / 10.36</td>
-                                    <td className="text-center">LUNAC 2,000</td>
-                                    <td className="text-center">LUNAC 10,000</td>
-                                    <td className="text-center">LUNAC 50,000</td>
+                                    <td className="text-center">LUNC 2,000</td>
+                                    <td className="text-center">LUNC 10,000</td>
+                                    <td className="text-center">LUNC 50,000</td>
                                 </tr>
                                 <tr>
                                     <td>#9</td>
@@ -1629,9 +1629,9 @@ export default () => {
                                         1 (exact position)
                                     </td>
                                     <td className="text-center">1 / 5.55</td>
-                                    <td className="text-center">LUNAC 500</td>
-                                    <td className="text-center">LUNAC 2,500</td>
-                                    <td className="text-center">LUNAC 5,000</td>
+                                    <td className="text-center">LUNC 500</td>
+                                    <td className="text-center">LUNC 2,500</td>
+                                    <td className="text-center">LUNC 5,000</td>
                                 </tr>
                             </tbody>
                         </table>
