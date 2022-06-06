@@ -2,7 +2,18 @@ import { Head } from 'react-static'
 import React, { useState, useEffect, useCallback, useRef, useMemo } from 'react'
 import { useStore } from '../store'
 import RapidoCard from '../components/Rapido/RapidoCard'
-import { ArrowsClockwise, CheckCircle, Clock, Gear, HourglassSimpleHigh, Lightning, Star, Wallet, Warning, X } from 'phosphor-react'
+import {
+    ArrowsClockwise,
+    CheckCircle,
+    Clock,
+    Gear,
+    HourglassSimpleHigh,
+    Lightning,
+    Star,
+    Wallet,
+    Warning,
+    X,
+} from 'phosphor-react'
 
 import { Swiper, SwiperSlide } from 'swiper/react'
 import 'swiper/swiper-bundle.min.css'
@@ -12,7 +23,7 @@ import { MsgExecuteContract, WasmAPI } from '@terra-money/terra.js'
 import Pusher from 'pusher-js'
 import toast, { Toaster } from 'react-hot-toast'
 import CountUp from 'react-countup'
-import axios from "axios";
+import axios from 'axios'
 
 export default () => {
     const { state, dispatch } = useStore()
@@ -29,8 +40,8 @@ export default () => {
     const [loaderUserGames, setLoaderUserGames] = useState(false)
 
     //Custom wallet address for resolve_all
-    const [customWalletAddress, setCustomWalletAddress] = useState('');
-    const [customWalletField, setCustomWalletField] = useState(false);
+    const [customWalletAddress, setCustomWalletAddress] = useState('')
+    const [customWalletField, setCustomWalletField] = useState(false)
 
     const [config, setConfig] = useState({
         denom: 'uusd',
@@ -94,25 +105,24 @@ export default () => {
             // Set the array of lotteries
             setlotteries([...lotteries_state])
 
-            let promiseMap = lotteries_state.map(async lottery => {
-                    let query = {
-                        lottery_stats: { round: lottery.lottery_id },
-                    }
-                    let lottery_stats = await api.contractQuery(
-                        state.rapidoAddress,
-                        query,
-                    )
+            let promiseMap = lotteries_state.map(async (lottery) => {
+                let query = {
+                    lottery_stats: { round: lottery.lottery_id },
+                }
+                let lottery_stats = await api.contractQuery(
+                    state.rapidoAddress,
+                    query,
+                )
                 return lottery_stats
             })
 
-            Promise.all(promiseMap).then(e => {
+            Promise.all(promiseMap).then((e) => {
                 let stats = {}
-                e.map(d => {
+                e.map((d) => {
                     stats[d.lottery_stats_id] = d
                 })
                 setLotteryStats(stats)
             })
-
         } catch (e) {
             console.log(e)
         }
@@ -206,104 +216,110 @@ export default () => {
                 // get_user_combination(lotteries_state)
 
                 let resolve_promise = []
-                game_stats.map(game => {
-
+                game_stats.map((game) => {
                     let start_after = null
                     let loop = true
                     let games_el = []
-                    let promise_copy_games = new Promise(async (resolve, reject) => {
+                    let promise_copy_games = new Promise(
+                        async (resolve, reject) => {
+                            while (loop) {
+                                // Prepare query
+                                let query = {
+                                    games: {
+                                        limit: 5,
+                                        round: game.game_stats_id,
+                                        player: state.wallet.walletAddress,
+                                    },
+                                }
+                                // Add start after to get pagination
+                                if (start_after != null) {
+                                    query.games.start_after = start_after
+                                }
+                                console.log(start_after)
 
-                        while (loop) {
-                            // Prepare query
-                            let query = {
-                                games: {
-                                    limit: 5,
-                                    round: game.game_stats_id,
-                                    player: state.wallet.walletAddress,
-                                },
+                                // Query to state smart contract
+                                let res_games = await api.contractQuery(
+                                    state.rapidoAddress,
+                                    query,
+                                )
+
+                                if (res_games.length > 0) {
+                                    games_el = [...games_el, ...res_games]
+                                    start_after =
+                                        res_games[res_games.length - 1].game_id
+                                    // get_user_combination(lotteries_state)
+                                } else {
+                                    loop = false
+                                    start_after = null
+                                }
                             }
-                            // Add start after to get pagination
-                            if (start_after != null) {
-                                query.games.start_after = start_after
-                            }
-                            console.log(start_after)
-
-                            // Query to state smart contract
-                            let res_games = await api.contractQuery(
-                                state.rapidoAddress,
-                                query,
-                            )
-
-                            if (res_games.length > 0) {
-                                games_el = [...games_el, ...res_games]
-                                start_after = res_games[res_games.length - 1].game_id
-                                // get_user_combination(lotteries_state)
-                            } else {
-
-                                loop = false
-                                start_after = null
-                            }
-                        }
-                        resolve(games_el)
-                    })
+                            resolve(games_el)
+                        },
+                    )
 
                     resolve_promise.push(promise_copy_games)
 
-                    let promise_lottery_winning = new Promise(async (resolve, reject )=> {
-                        //Get lottery info
-                        let lottery_query = {
-                            lottery_state: {
-                                round: game.game_stats_id
+                    let promise_lottery_winning = new Promise(
+                        async (resolve, reject) => {
+                            //Get lottery info
+                            let lottery_query = {
+                                lottery_state: {
+                                    round: game.game_stats_id,
+                                },
                             }
-                        }
-                        let lottery_info = await api.contractQuery(
-                            state.rapidoAddress,
-                            lottery_query,
-                        )
+                            let lottery_info = await api.contractQuery(
+                                state.rapidoAddress,
+                                lottery_query,
+                            )
 
-                        if (lottery_info){
-                            //setWinningNumber(new_arr)
-                            resolve(lottery_info)
-                        }
-                    })
+                            if (lottery_info) {
+                                //setWinningNumber(new_arr)
+                                resolve(lottery_info)
+                            }
+                        },
+                    )
                     resolve_promise.push(promise_lottery_winning)
                 })
                 Promise.all(resolve_promise).then((w) => {
                     console.log(w)
-                   let new_games_arr = []
-                   let new_winning_obj = {}
-                    let dataPromise = w.map(async e => {
-                       if (Array.isArray(e)){
-                           new_games_arr = [...new_games_arr, ...e]
-                           return new_games_arr
-                       }else {
-                           if (e.winning_number) {
-                               const res2 = await axios.get(`https://drand.cloudflare.com/public/${e.terrand_round}`)
-                               const {randomness} = res2.data
-                               let newWinningNumber = [...e.winning_number, e.bonus_number, e.terrand_round, randomness]
-                               console.log(newWinningNumber)
-                               let new_arr = {
-                                   ...winningNumber,
-                                   ...new_winning_obj
-                               }
-                               new_arr[e.lottery_id] = newWinningNumber
-                               new_winning_obj = new_arr
-                               return new_winning_obj
-                           }
-                       }
+                    let new_games_arr = []
+                    let new_winning_obj = {}
+                    let dataPromise = w.map(async (e) => {
+                        if (Array.isArray(e)) {
+                            new_games_arr = [...new_games_arr, ...e]
+                            return new_games_arr
+                        } else {
+                            if (e.winning_number) {
+                                const res2 = await axios.get(
+                                    `https://drand.cloudflare.com/public/${e.terrand_round}`,
+                                )
+                                const { randomness } = res2.data
+                                let newWinningNumber = [
+                                    ...e.winning_number,
+                                    e.bonus_number,
+                                    e.terrand_round,
+                                    randomness,
+                                ]
+                                console.log(newWinningNumber)
+                                let new_arr = {
+                                    ...winningNumber,
+                                    ...new_winning_obj,
+                                }
+                                new_arr[e.lottery_id] = newWinningNumber
+                                new_winning_obj = new_arr
+                                return new_winning_obj
+                            }
+                        }
+                    })
 
-                   })
-
-                    Promise.all(dataPromise).then((data) =>{
+                    Promise.all(dataPromise).then((data) => {
                         setGames([...games, ...new_games_arr])
                         setWinningNumber(new_winning_obj)
                     })
 
                     //console.log(games)
-
                 })
             }
-
         } catch (e) {
             console.log(e)
         }
@@ -412,19 +428,17 @@ export default () => {
     function formatTime() {
         const seconds = Math.floor((timeBetween / 1000) % 60)
         const minutes = Math.floor((timeBetween / 1000 / 60) % 60)
-        
+
         let format_minutes = minutes < 10 ? '0' + minutes : minutes
         let format_seconds = seconds < 10 ? '0' + seconds : seconds
 
         let format_message = 'Closing...'
         if (state.rapidoCurrentTimeRound * 1000 > Date.now()) {
-            
-            if (seconds < 0 && minutes < 0){
+            if (seconds < 0 && minutes < 0) {
                 format_message = '00:00'
-            }else {
+            } else {
                 format_message = format_minutes + ':' + format_seconds
             }
-            
 
             return (
                 <>
@@ -445,7 +459,6 @@ export default () => {
     }
 
     function resultHistory() {
-
         let render = gameStats.map((game_stats, k) => (
             <tr key={k}>
                 <td>
@@ -466,28 +479,33 @@ export default () => {
                 {/*    </> : <></> }*/}
                 {/*    </td>*/}
 
-                <td className='text-center rapido-table-results'>
-                { winningNumber[game_stats.game_stats_id] ?
-
-                    <div className="btn-holder">
-                        <span className={
-                            'nr-btn smaller'
-                        }>{winningNumber[game_stats.game_stats_id][0]}</span>
-                        <span className={
-                            'nr-btn smaller'
-                        }>{winningNumber[game_stats.game_stats_id][1]}</span>
-                        <span className={
-                            'nr-btn smaller'
-                        }>{winningNumber[game_stats.game_stats_id][2]}</span>
-                        <span className={
-                            'nr-btn smaller'
-                        }>{winningNumber[game_stats.game_stats_id][3]}</span>
-                        <span className={
-                            'nr-btn smaller bonus'
-                        }>{winningNumber[game_stats.game_stats_id][4]}</span>
-                    </div> : game_stats.game_stats_id >= state.rapidoCurrentRound ? <> <span>Lotto still in progress...</span></> : <></>
-
-                 }
+                <td className="text-center rapido-table-results">
+                    {winningNumber[game_stats.game_stats_id] ? (
+                        <div className="btn-holder">
+                            <span className={'nr-btn smaller'}>
+                                {winningNumber[game_stats.game_stats_id][0]}
+                            </span>
+                            <span className={'nr-btn smaller'}>
+                                {winningNumber[game_stats.game_stats_id][1]}
+                            </span>
+                            <span className={'nr-btn smaller'}>
+                                {winningNumber[game_stats.game_stats_id][2]}
+                            </span>
+                            <span className={'nr-btn smaller'}>
+                                {winningNumber[game_stats.game_stats_id][3]}
+                            </span>
+                            <span className={'nr-btn smaller bonus'}>
+                                {winningNumber[game_stats.game_stats_id][4]}
+                            </span>
+                        </div>
+                    ) : game_stats.game_stats_id >= state.rapidoCurrentRound ? (
+                        <>
+                            {' '}
+                            <span>Lotto still in progress...</span>
+                        </>
+                    ) : (
+                        <></>
+                    )}
                 </td>
                 <td className="text-center">
                     <div
@@ -511,50 +529,182 @@ export default () => {
                         {/*        Show details*/}
                         {/*    </button>*/}
                         {/*)}*/}
-                        
+
                         {games.map((game, k) => {
                             if (game.lottery_id == game_stats.game_stats_id) {
                                 return (
-                                    <div key={k} style={{marginBottom: '5px'}}>
+                                    <div
+                                        key={k}
+                                        style={{ marginBottom: '5px' }}
+                                    >
                                         <span className="multiplier-table">
                                             x{game.multiplier}
                                         </span>
-                                        <span className={"nr-btn smaller " + (!winningNumber[game_stats.game_stats_id] || game.number[0] != winningNumber[game_stats.game_stats_id][0] ? 'normal' : 'active')}>
-                                            {!winningNumber[game_stats.game_stats_id] || game.number[0] != winningNumber[game_stats.game_stats_id][0] ?
+                                        <span
+                                            className={
+                                                'nr-btn smaller ' +
+                                                (!winningNumber[
+                                                    game_stats.game_stats_id
+                                                ] ||
+                                                game.number[0] !=
+                                                    winningNumber[
+                                                        game_stats.game_stats_id
+                                                    ][0]
+                                                    ? 'normal'
+                                                    : 'active')
+                                            }
+                                        >
+                                            {!winningNumber[
+                                                game_stats.game_stats_id
+                                            ] ||
+                                            game.number[0] !=
+                                                winningNumber[
+                                                    game_stats.game_stats_id
+                                                ][0] ? (
                                                 game.number[0]
-                                                :
-                                                <p>{game.number[0]} <Lightning size={18} fill={'#f2d230'} weight={'fill'}/></p>
-                                            }
+                                            ) : (
+                                                <p>
+                                                    {game.number[0]}{' '}
+                                                    <Lightning
+                                                        size={18}
+                                                        fill={'#f2d230'}
+                                                        weight={'fill'}
+                                                    />
+                                                </p>
+                                            )}
                                         </span>
-                                        <span className={"nr-btn smaller " + (!winningNumber[game_stats.game_stats_id] || game.number[1] != winningNumber[game_stats.game_stats_id][1] ? 'normal' : 'active')}>
-                                        {!winningNumber[game_stats.game_stats_id] || game.number[1] != winningNumber[game_stats.game_stats_id][1] ?
+                                        <span
+                                            className={
+                                                'nr-btn smaller ' +
+                                                (!winningNumber[
+                                                    game_stats.game_stats_id
+                                                ] ||
+                                                game.number[1] !=
+                                                    winningNumber[
+                                                        game_stats.game_stats_id
+                                                    ][1]
+                                                    ? 'normal'
+                                                    : 'active')
+                                            }
+                                        >
+                                            {!winningNumber[
+                                                game_stats.game_stats_id
+                                            ] ||
+                                            game.number[1] !=
+                                                winningNumber[
+                                                    game_stats.game_stats_id
+                                                ][1] ? (
                                                 game.number[1]
-                                                :
-                                                <p>{game.number[1]} <Lightning size={18} fill={'#f2d230'} weight={'fill'}/></p>
-                                            }
+                                            ) : (
+                                                <p>
+                                                    {game.number[1]}{' '}
+                                                    <Lightning
+                                                        size={18}
+                                                        fill={'#f2d230'}
+                                                        weight={'fill'}
+                                                    />
+                                                </p>
+                                            )}
                                         </span>
-                                        <span className={"nr-btn smaller " + (!winningNumber[game_stats.game_stats_id] || game.number[2] != winningNumber[game_stats.game_stats_id][2] ? 'normal' : 'active')}>
-                                        {!winningNumber[game_stats.game_stats_id] || game.number[2] != winningNumber[game_stats.game_stats_id][2] ?
+                                        <span
+                                            className={
+                                                'nr-btn smaller ' +
+                                                (!winningNumber[
+                                                    game_stats.game_stats_id
+                                                ] ||
+                                                game.number[2] !=
+                                                    winningNumber[
+                                                        game_stats.game_stats_id
+                                                    ][2]
+                                                    ? 'normal'
+                                                    : 'active')
+                                            }
+                                        >
+                                            {!winningNumber[
+                                                game_stats.game_stats_id
+                                            ] ||
+                                            game.number[2] !=
+                                                winningNumber[
+                                                    game_stats.game_stats_id
+                                                ][2] ? (
                                                 game.number[2]
-                                                :
-                                                <p>{game.number[2]} <Lightning size={18} fill={'#f2d230'} weight={'fill'}/></p>
-                                            }
+                                            ) : (
+                                                <p>
+                                                    {game.number[2]}{' '}
+                                                    <Lightning
+                                                        size={18}
+                                                        fill={'#f2d230'}
+                                                        weight={'fill'}
+                                                    />
+                                                </p>
+                                            )}
                                         </span>
-                                        <span className={"nr-btn smaller " + (!winningNumber[game_stats.game_stats_id] || game.number[3] != winningNumber[game_stats.game_stats_id][3] ? 'normal' : 'active')}>
-                                        {!winningNumber[game_stats.game_stats_id] || game.number[3] != winningNumber[game_stats.game_stats_id][3] ?
+                                        <span
+                                            className={
+                                                'nr-btn smaller ' +
+                                                (!winningNumber[
+                                                    game_stats.game_stats_id
+                                                ] ||
+                                                game.number[3] !=
+                                                    winningNumber[
+                                                        game_stats.game_stats_id
+                                                    ][3]
+                                                    ? 'normal'
+                                                    : 'active')
+                                            }
+                                        >
+                                            {!winningNumber[
+                                                game_stats.game_stats_id
+                                            ] ||
+                                            game.number[3] !=
+                                                winningNumber[
+                                                    game_stats.game_stats_id
+                                                ][3] ? (
                                                 game.number[3]
-                                                :
-                                                <p>{game.number[3]} <Lightning size={18} fill={'#f2d230'} weight={'fill'}/></p>
-                                            }
+                                            ) : (
+                                                <p>
+                                                    {game.number[3]}{' '}
+                                                    <Lightning
+                                                        size={18}
+                                                        fill={'#f2d230'}
+                                                        weight={'fill'}
+                                                    />
+                                                </p>
+                                            )}
                                         </span>
-                                        <span className={"nr-btn smaller bonus " + (!winningNumber[game_stats.game_stats_id] || game.number[4] != winningNumber[game_stats.game_stats_id][4] ? 'normal' : 'active')}>
-                                        {!winningNumber[game_stats.game_stats_id] || game.bonus != winningNumber[game_stats.game_stats_id][4] ?
+                                        <span
+                                            className={
+                                                'nr-btn smaller bonus ' +
+                                                (!winningNumber[
+                                                    game_stats.game_stats_id
+                                                ] ||
+                                                game.number[4] !=
+                                                    winningNumber[
+                                                        game_stats.game_stats_id
+                                                    ][4]
+                                                    ? 'normal'
+                                                    : 'active')
+                                            }
+                                        >
+                                            {!winningNumber[
+                                                game_stats.game_stats_id
+                                            ] ||
+                                            game.bonus !=
+                                                winningNumber[
+                                                    game_stats.game_stats_id
+                                                ][4] ? (
                                                 game.bonus
-                                                :
-                                                <p>{game.bonus} <Star size={18} fill={'#048abf'} weight={'fill'}/></p>
-                                            }
+                                            ) : (
+                                                <p>
+                                                    {game.bonus}{' '}
+                                                    <Star
+                                                        size={18}
+                                                        fill={'#048abf'}
+                                                        weight={'fill'}
+                                                    />
+                                                </p>
+                                            )}
                                         </span>
-
                                     </div>
                                 )
                             }
@@ -596,7 +746,7 @@ export default () => {
                 <td>$ 50,000</td>
             </tr>
         )
-        
+
         return <>{render}</>
     }
 
@@ -628,18 +778,20 @@ export default () => {
         let all_games = []
 
         //Check if custom wallet address
-        let resolveWallet = state.wallet.walletAddress;
-        if(customWalletAddress !== ''){
+        let resolveWallet = state.wallet.walletAddress
+        if (customWalletAddress !== '') {
             resolveWallet = customWalletAddress
         }
-        
+
         let game_stats_promise = await new Promise(async (resolve, reject) => {
             try {
                 let start_after = ''
                 let loop = true
 
                 while (loop) {
-                    await new Promise(function(re, reject) {setInterval(re, 1000);})
+                    await new Promise(function (re, reject) {
+                        setInterval(re, 1000)
+                    })
                     // Prepare query
                     let query = {
                         game_stats: {
@@ -670,7 +822,6 @@ export default () => {
                     }
                 }
                 resolve(all_games)
-
             } catch (e) {
                 console.log(e)
             }
@@ -698,7 +849,9 @@ export default () => {
                         let games_promise = await new Promise(
                             async (resolve, reject) => {
                                 while (loop) {
-                                    await new Promise( function(re, reject) {setInterval(re, 1000)})
+                                    await new Promise(function (re, reject) {
+                                        setInterval(re, 1000)
+                                    })
                                     // Add start after to get pagination
                                     if (start_after != null) {
                                         query.games.start_after = start_after
@@ -728,8 +881,6 @@ export default () => {
                                         loop = false
                                         start_after = null
                                     }
-
-
                                 }
                                 if (data_game.length != 0) {
                                     let msg = new MsgExecuteContract(
@@ -765,10 +916,12 @@ export default () => {
                 }
             })
 
-                //resolve(filtered)
+            //resolve(filtered)
             //})
-            Promise.all([all_promises_go]).then( async (result) => {
-                await new Promise( function(re, reject) {setInterval(re, 10000)})
+            Promise.all([all_promises_go]).then(async (result) => {
+                await new Promise(function (re, reject) {
+                    setInterval(re, 10000)
+                })
 
                 if (result[0].length > 0) {
                     state.wallet
@@ -792,7 +945,7 @@ export default () => {
                         .catch((e) => {
                             console.log(e)
                         })
-                }else {
+                } else {
                     toast.error(
                         'Nothing to resolve, enter in lottery before trying again',
                     )
@@ -802,7 +955,6 @@ export default () => {
                     setLoaderResolveAll(false)
                 }, 6000)
             })
-
         })
 
         // //let all_promises = []
@@ -939,7 +1091,6 @@ export default () => {
         //     })
         // })
 
-
         // state.wallet
         //     .post({
         //         msgs: _all_msgs,
@@ -973,7 +1124,6 @@ export default () => {
     }, [timeBetween])
 
     useEffect(() => {
-
         if (rapidoState.round) {
             getRapidoLotteries()
         }
@@ -1012,7 +1162,10 @@ export default () => {
         <>
             <Head>
                 <meta charSet="UTF-8" />
-                <title>#SaveLuna | Burn LUNA and win up to UST 1,000,000 every 5 minutes!</title>
+                <title>
+                    #SaveLuna | Burn LUNA and win up to UST 1,000,000 every 5
+                    minutes!
+                </title>
                 <meta
                     property="og:title"
                     content="#SaveLuna | Burn LUNA and win up to UST 1,000,000 every 5 minutes!"
@@ -1031,7 +1184,7 @@ export default () => {
                     content="#SaveLuna | Burn LUNA and win up to UST 1,000,000 every 5 minutes!"
                 />
                 <meta property="twitter:type" content="website" />
-                <meta name="twitter:card" content="summary_large_image"/>
+                <meta name="twitter:card" content="summary_large_image" />
                 <meta
                     property="twitter:image"
                     content="https://save-luna.netlify.app/SaveLuna.png"
@@ -1041,47 +1194,62 @@ export default () => {
                     content="#SaveLuna is the game of successive draws which offers a draw every 5 minutes! Try to find your 5 numbers among the combination of 4 blue and 1 yellow star numbers drawn at random and win up to UST 1,000,000!*"
                 />
             </Head>
-        <div className="spacewager-beta">
-                <p className="mb-0">
-                    <Warning
-                        size={'13px'}
-                        weight="fill"
-                        style={{
-                            position: 'relative',
-                            top: '-1px',
-                            marginRight: 4,
-                        }}
-                    />
-                    This contract is currently in BETA, any losses incurred due
-                    your actions are your own responsibility.
-                </p>
-            </div>
-            <div className="w-100 py-1 py-md-3 pt-md-5 text-center mb-0 mb-md-2">
-                <img src="/SaveLuna.png"  className={'img-fluid'} style={{maxHeight: '300px', marginBottom: '20px'}}/>
-                <h2 className="mb-0 text-10xl xs:text-13xl xs:-mt-0 font-semibold" style={{color: "#fff"}}>
 
-                    Burn 🔥 LUNA and win up to UST <span style={{color: '#F2D230', fontWeight: 700}}><CountUp
-                    start={0}
-                    end={1000000}
-                    separator={","}
-                /></span> every 5 minutes
-                </h2>
-                <p>How it works?</p>
-                <div style={{display: "flex", justifyContent: "center" }}>
-                    <div className="w-50 align-items-start">
-                        <ol>
-                            <li>chose 4 repeatable numbers and 1 bonus</li>
-                            <li>chose the multiplier to increase your prizes</li>
-                            <li>chose how much round you want your ticket live</li>
-                            <li>pay in LUNA and contribute to save LUNA community initiative. *50% burn 🔥 / 50% swap 🔁 to UST for jackpot solvency</li>
-                        </ol>
+            <div className="w-100 py-1 py-md-5 text-center mb-0 mb-md-2" style={{background:'linear-gradient(45deg, #2559db, transparent)'}}>
+                <div className="container">
+                <div className="row">
+                    <div className="col-md-6">
+                        <h2
+                            className="mb-0 text-10xl xs:text-13xl xs:-mt-0 font-semibold mb-3"
+                            style={{ color: '#fff' }}
+                        >
+                            Burn 🔥 LUNA and win up to UST{' '}
+                            <span style={{ color: '#F2D230', fontWeight: 700 }}>
+                                <CountUp
+                                    start={0}
+                                    end={1000000}
+                                    separator={','}
+                                />
+                            </span>{' '}
+                            every 5 minutes
+                        </h2>
+                        <img src="/SaveLuna.png" className={'img-fluid'} style={{height:'250px'}}/>
+                    </div>
+                    <div className="col-md-6">
+                        <p className='fw-bold fs-3'>How it works?</p>
+                        <div
+                            style={{
+                                display: 'flex',
+                                justifyContent: 'center',
+                            }}
+                        >
+                            <div className="w-50 align-items-start text-start">
+                                <ol>
+                                    <li>
+                                        chose 4 repeatable numbers and 1 bonus
+                                    </li>
+                                    <li>
+                                        chose the multiplier to increase your
+                                        prizes
+                                    </li>
+                                    <li>
+                                        chose how much round you want your
+                                        ticket live
+                                    </li>
+                                    <li>
+                                        pay in LUNA and contribute to save LUNA
+                                        community initiative. *50% burn 🔥 / 50%
+                                        swap 🔁 to UST for jackpot solvency
+                                    </li>
+                                </ol>
+                            </div>
+                        </div>
                     </div>
                 </div>
-
+                </div>
             </div>
             <div className="container">
                 <div className="row">
-                    
                     <div className="col-12">
                         {/* <div className="col-12 text-center">
                             <div className="card rapido-card h-100">
@@ -1115,7 +1283,7 @@ export default () => {
                             {lotteries.length <= 1 && !lotteryStats && (
                                 <div className="w-100 py-5 text-center">
                                     <div
-                                        style={{color:"#BF046B"}}
+                                        style={{ color: '#BF046B' }}
                                         className="spinner-grow"
                                         role="status"
                                     >
@@ -1125,11 +1293,14 @@ export default () => {
                                     </div>
                                 </div>
                             )}
-                            {lotteries.length > 0  && lotteryStats && (
+                            {lotteries.length > 0 && lotteryStats && (
                                 <Swiper
                                     threshold={10}
                                     spaceBetween={35}
-                                    style={{ padding: '10px 15px', marginTop: '25px' }}
+                                    style={{
+                                        padding: '10px 15px',
+                                        marginTop: '25px',
+                                    }}
                                     navigation={{
                                         nextEl: '.swiper-next',
                                         prevEl: '.swiper-prev',
@@ -1190,7 +1361,9 @@ export default () => {
                                                         }
                                                         formatTime={formatTime}
                                                         drawTime={obj.draw_time}
-                                                        lotteryStats={lotteryStats}
+                                                        lotteryStats={
+                                                            lotteryStats
+                                                        }
                                                     />
                                                 </SwiperSlide>
                                             )
@@ -1217,52 +1390,78 @@ export default () => {
                 <div className="row">
                     <div className="col-md-6 p-md-4 text-center text-md-start">
                         <h2 className="fs-1 fw-bold">Burn games</h2>
-                        <h4 className="fs-4 fw-normal">
-                            Get all your games
-                        </h4>
+                        <h4 className="fs-4 fw-normal">Get all your games</h4>
                     </div>
-                    <div className="col-md-6 text-center text-md-end pt-2 pt-md-5">                       
-                        <button className="btn btn-default btn-sm position-relative me-2" onClick={
-                            () => {
+                    <div className="col-md-6 text-center text-md-end pt-2 pt-md-5">
+                        <button
+                            className="btn btn-default btn-sm position-relative me-2"
+                            onClick={() => {
                                 setCustomWalletField(!customWalletField)
                                 setCustomWalletAddress('')
-                            }
-                            }>
-                            { customWalletField ?
-                                <X size={18}/>
-                                :
-                                <> 
-                                <span><Gear size={18}/> Custom address</span>                                                                                                
+                            }}
+                        >
+                            {customWalletField ? (
+                                <X size={18} />
+                            ) : (
+                                <>
+                                    <span>
+                                        <Gear size={18} /> Custom address
+                                    </span>
                                 </>
-                            }
+                            )}
                         </button>
                         <button
                             disabled={loaderResolveAll}
                             className="btn btn-default btn-sm"
                             onClick={() => resolve_all()}
                         >
-                            { loaderResolveAll &&
-                                <div className="spinner-border spinner-sm" role="status">
-                                   <span className="visually-hidden">
-                                            Loading...
-                                        </span>
+                            {loaderResolveAll && (
+                                <div
+                                    className="spinner-border spinner-sm"
+                                    role="status"
+                                >
+                                    <span className="visually-hidden">
+                                        Loading...
+                                    </span>
                                 </div>
-                            }
-
+                            )}
                             Try resolve all games
                         </button>
-                        { customWalletField &&
-                        <div className="input-group mt-1">
-                            <span className="input-group-text" id="basic-addon1"><Wallet size={18} color={'#8372bf'}/></span>
-                            <input className="form-control" value={customWalletAddress} placeholder={'Custom resolve wallet address'} onChange={(e) => setCustomWalletAddress(e.target.value)}/>
-                            { customWalletAddress != '' &&
-                                <span className="input-group-text" style={{backgroundColor:'#10003b'}} id="basic-addon1" onClick={() => setCustomWalletAddress('')}><X size={18} color={'#8372bf'}/></span>
-                            }
-                        </div>
-                        }
+                        {customWalletField && (
+                            <div className="input-group mt-1">
+                                <span
+                                    className="input-group-text"
+                                    id="basic-addon1"
+                                >
+                                    <Wallet size={18} color={'#8372bf'} />
+                                </span>
+                                <input
+                                    className="form-control"
+                                    value={customWalletAddress}
+                                    placeholder={
+                                        'Custom resolve wallet address'
+                                    }
+                                    onChange={(e) =>
+                                        setCustomWalletAddress(e.target.value)
+                                    }
+                                />
+                                {customWalletAddress != '' && (
+                                    <span
+                                        className="input-group-text"
+                                        style={{ backgroundColor: '#10003b' }}
+                                        id="basic-addon1"
+                                        onClick={() =>
+                                            setCustomWalletAddress('')
+                                        }
+                                    >
+                                        <X size={18} color={'#8372bf'} />
+                                    </span>
+                                )}
+                            </div>
+                        )}
                         <span className="small d-block mt-1">
                             Resolving all can take some minutes
-                        </span>                        
+                        </span>
                     </div>
                     <div className="table-responsive">
                         <table className="table text-white">
@@ -1295,7 +1494,7 @@ export default () => {
                                     </th>
                                 </tr>
                             </thead>
-                            <tbody>{ resultHistory()}</tbody>
+                            <tbody>{resultHistory()}</tbody>
                         </table>
                         <button
                             className="w-100 mt-2 btn btn-sm btn-default"
@@ -1315,17 +1514,27 @@ export default () => {
             <div className="container py-5">
                 <div className="row">
                     <div className="col-md-6 p-md-4 text-center text-md-start">
-
-                        <h3 className="fs-3 fw-bold">How prize works? #SaveLuna</h3>
-                        <p>50% of the tickets sales in LUNA are sent to the burn address *<a href="https://twitter.com/stablekwon/status/1528004028851859456?s=21&t=NuW2CVd96aLPKZ18nbVu5w">terra1sk06e3dyexuq4shw77y3dsv480xv42mq73anxu </a>
-                        50% are swapped to UST for jackpot solvency. On prize winning there is a 50% tax for LOTA stakers, this tax can be flattened staking LOTA.
+                        <h3 className="fs-3 fw-bold">
+                            How prize works? #SaveLuna
+                        </h3>
+                        <p>
+                            50% of the tickets sales in LUNA are sent to the
+                            burn address *
+                            <a href="https://twitter.com/stablekwon/status/1528004028851859456?s=21&t=NuW2CVd96aLPKZ18nbVu5w">
+                                terra1sk06e3dyexuq4shw77y3dsv480xv42mq73anxu{' '}
+                            </a>
+                            50% are swapped to UST for jackpot solvency. On
+                            prize winning there is a 50% tax for LOTA stakers,
+                            this tax can be flattened staking LOTA.
                         </p>
-                        <p className="fs-4 fw-normal text-muted">*The process is transparent and the transaction can be find on blockchain</p>
+                        <p className="fs-4 fw-normal text-muted mb-5">
+                            *The process is transparent and the transaction can
+                            be find on blockchain
+                        </p>
                         <h2 className="fs-1 fw-bold">Paytable</h2>
                         <h4 className="fs-4 fw-normal text-muted">
                             List of payouts
                         </h4>
-
                     </div>
                     <div className="table-responsive">
                         <table className="table text-white">
@@ -1342,7 +1551,9 @@ export default () => {
                             <tbody>
                                 <tr>
                                     <td>#1</td>
-                                    <td className="text-center">4 (exact position) + 1 star</td>
+                                    <td className="text-center">
+                                        4 (exact position) + 1 star
+                                    </td>
                                     <td className="text-center">1 / 524,288</td>
                                     <td className="text-center">LUNAC 10,000,000</td>
                                     <td className="text-center">LUNAC 50,000,000</td>
@@ -1366,7 +1577,9 @@ export default () => {
                                 </tr>
                                 <tr>
                                     <td>#4</td>
-                                    <td className="text-center">3 (exact position) </td>
+                                    <td className="text-center">
+                                        3 (exact position){' '}
+                                    </td>
                                     <td className="text-center">1 / 1,248.3</td>
                                     <td className="text-center">LUNAC 50,000</td>
                                     <td className="text-center">LUNAC 250,000</td>
@@ -1374,7 +1587,9 @@ export default () => {
                                 </tr>
                                 <tr>
                                     <td>#5</td>
-                                    <td className="text-center">2 (exact position) + 1 star </td>
+                                    <td className="text-center">
+                                        2 (exact position) + 1 star{' '}
+                                    </td>
                                     <td className="text-center">1 / 388.36</td>
                                     <td className="text-center">LUNAC 30,000</td>
                                     <td className="text-center">LUNAC 150,000</td>
@@ -1382,7 +1597,9 @@ export default () => {
                                 </tr>
                                 <tr>
                                     <td>#6</td>
-                                    <td className="text-center">2 (exact position)  </td>
+                                    <td className="text-center">
+                                        2 (exact position){' '}
+                                    </td>
                                     <td className="text-center">1 / 55.48</td>
                                     <td className="text-center">LUNAC 1,000</td>
                                     <td className="text-center">LUNAC 5,000</td>
@@ -1390,7 +1607,9 @@ export default () => {
                                 </tr>
                                 <tr>
                                     <td>#7</td>
-                                    <td className="text-center">1 (exact position) + 1 star </td>
+                                    <td className="text-center">
+                                        1 (exact position) + 1 star{' '}
+                                    </td>
                                     <td className="text-center">1 / 38.84</td>
                                     <td className="text-center">LUNAC 500</td>
                                     <td className="text-center">LUNAC 2,500</td>
@@ -1407,13 +1626,14 @@ export default () => {
                                 </tr>
                                 <tr>
                                     <td>#9</td>
-                                    <td className="text-center">1 (exact position)</td>
+                                    <td className="text-center">
+                                        1 (exact position)
+                                    </td>
                                     <td className="text-center">1 / 5.55</td>
                                     <td className="text-center">LUNAC 500</td>
                                     <td className="text-center">LUNAC 2,500</td>
                                     <td className="text-center">LUNAC 5,000</td>
                                 </tr>
-
                             </tbody>
                         </table>
                     </div>

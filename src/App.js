@@ -25,7 +25,7 @@ if (typeof document !== 'undefined') {
 import { StoreProvider } from './store'
 import ConnectWallet from './components/ConnectWallet'
 import NormalNav from './components/NormalNav'
-import { List } from 'phosphor-react'
+import { List, Warning } from 'phosphor-react'
 
 if (typeof window !== 'undefined') {
     window.addEventListener('DOMContentLoaded', (event) => {
@@ -99,6 +99,21 @@ class App extends Component {
                             <NormalNav />
                         </div> */}
                         <div id="page-content-wrapper">
+                        <div className="spacewager-beta">
+                <p className="mb-0">
+                    <Warning
+                        size={'13px'}
+                        weight="fill"
+                        style={{
+                            position: 'relative',
+                            top: '-1px',
+                            marginRight: 4,
+                        }}
+                    />
+                    This contract is currently in BETA, any losses incurred due
+                    your actions are your own responsibility.
+                </p>
+            </div>
                             <nav
                                 className="navbar navbar-expand navbar-light sticky-top"            
                                 id="smallNav"
