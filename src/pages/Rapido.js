@@ -1517,14 +1517,22 @@ export default () => {
                             How prize works? #SaveLuna
                         </h3>
                         <p>
-                            50% of the tickets sales in LUNC are sent to the
-                            burn address *
-                            <a href="https://twitter.com/stablekwon/status/1528004028851859456?s=21&t=NuW2CVd96aLPKZ18nbVu5w">
-                                terra1sk06e3dyexuq4shw77y3dsv480xv42mq73anxu{' '}
-                            </a>
-                            25% are for jackpot solvency. 25% Tax are only applied on ticket purchase fees for LOTA stakers,
-                            this tax can be flattened staking LOTA.
-
+                            How the contract split the ticket value?
+                            <ul>
+                                <li>
+                                    50% of the tickets sales in LUNC are sent to the
+                                    burn address *
+                                    <a href="https://twitter.com/stablekwon/status/1528004028851859456?s=21&t=NuW2CVd96aLPKZ18nbVu5w">
+                                        terra1sk06e3dyexuq4shw77y3dsv480xv42mq73anxu{' '}
+                                    </a>
+                                </li>
+                                <li>
+                                    25% are for jackpot solvency
+                                </li>
+                                <li>
+                                    25% tax applied on ticket purchase collected by LOTA stakers. This tax can be flattened staking LOTA.
+                                </li>
+                            </ul>
                         </p>
                         <p className="fs-4 fw-normal text-muted mb-5">
                             *The process is transparent and the transaction can
