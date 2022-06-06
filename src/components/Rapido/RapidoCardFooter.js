@@ -71,7 +71,7 @@ export default function RapidoCardFooter(props) {
                     //address: None
                 },
             },
-            { uluna: (multiplier * 5000) * nrOfDraws * 1000000 },
+            { uluna: (multiplier * 1000) * nrOfDraws * 1000000 },
         )
         state.wallet
             .post({
@@ -208,7 +208,7 @@ export default function RapidoCardFooter(props) {
                         </div>
                         <div className="col-6 text-end">
                             <p className="fw-bold">
-                                {numeral((multiplier * 5000)  * nrOfDraws).format('0,0')} LUNA
+                                {numeral((multiplier * 1000)  * nrOfDraws).format('0,0')} LUNAC
                             </p>
                         </div>
                         <div className="col-8 text-start">
@@ -216,7 +216,7 @@ export default function RapidoCardFooter(props) {
                         </div>
                         <div className="col-4 text-end">
                             <p className="fw-bold">
-                                {numeral(100_000 * multiplier).format('0,0')} UST
+                                {numeral(10_000_000 * multiplier).format('0,0')} LUNAC
                             </p>
                         </div>
                         <div col-8 text-start>
