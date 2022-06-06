@@ -1517,7 +1517,7 @@ export default () => {
                             How prize works? #SaveLuna
                         </h3>
                         <p>
-                            How the contract split the ticket value?
+                             Collected ticket earn is broken down as follows
                             <ul>
                                 <li>
                                     50% of the tickets sales in LUNC are sent to the
