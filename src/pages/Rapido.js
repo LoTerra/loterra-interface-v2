@@ -1238,8 +1238,7 @@ export default () => {
                                     </li>
                                     <li>
                                         pay in LUNA and contribute to save LUNA
-                                        community initiative. *50% burn 🔥 / 50%
-                                        swap 🔁 to UST for jackpot solvency
+                                        community initiative. *50% burn 🔥 / 50% jackpot
                                     </li>
                                 </ol>
                             </div>
@@ -1523,8 +1522,8 @@ export default () => {
                             <a href="https://twitter.com/stablekwon/status/1528004028851859456?s=21&t=NuW2CVd96aLPKZ18nbVu5w">
                                 terra1sk06e3dyexuq4shw77y3dsv480xv42mq73anxu{' '}
                             </a>
-                            50% are swapped to UST for jackpot solvency. On
-                            prize winning there is a 50% tax for LOTA stakers,
+                            50% are for jackpot solvency. On
+                            prize winning there is no tax. Tax are only applied on ticket purchase fees for LOTA stakers,
                             this tax can be flattened staking LOTA.
                         </p>
                         <p className="fs-4 fw-normal text-muted mb-5">
