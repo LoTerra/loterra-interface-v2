@@ -1203,11 +1203,11 @@ export default () => {
                             className="mb-0 text-10xl xs:text-13xl xs:-mt-0 font-semibold mb-3"
                             style={{ color: '#fff' }}
                         >
-                            Burn 🔥 LUNA and win up to UST{' '}
+                            Burn 🔥 LUNAC and win up to LUNAC{' '}
                             <span style={{ color: '#F2D230', fontWeight: 700 }}>
                                 <CountUp
                                     start={0}
-                                    end={1000000}
+                                    end={50000000}
                                     separator={','}
                                 />
                             </span>{' '}
