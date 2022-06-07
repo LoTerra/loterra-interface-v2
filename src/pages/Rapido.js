@@ -1233,11 +1233,11 @@ export default () => {
                                         prizes
                                     </li>
                                     <li>
-                                        chose how much round you want your
+                                        chose how many rounds you want your
                                         ticket live
                                     </li>
                                     <li>
-                                        pay in LUNC and contribute to save LUNC
+                                        pay in LUNC and burn LUNC a
                                         community initiative. *50% burn 🔥 / 25% jackpot 🤑 / 25% tax for LOTA stakers
                                     </li>
                                 </ol>
