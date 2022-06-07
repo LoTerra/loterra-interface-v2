@@ -1389,7 +1389,7 @@ export default () => {
                 <div className="row">
                     <div className="col-md-6 p-md-4 text-center text-md-start">
                         <h2 className="fs-1 fw-bold">Burn games</h2>
-                        <h4 className="fs-4 fw-normal">Get all your games</h4>
+                        <h4 className="fs-4 fw-normal">Games overview</h4>
                     </div>
                     <div className="col-md-6 text-center text-md-end pt-2 pt-md-5">
                         <button
