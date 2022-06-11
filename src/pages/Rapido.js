@@ -1216,6 +1216,8 @@ export default () => {
                         <img src="/SaveLuna.png" className={'img-fluid'} style={{height:'250px'}}/>
                     </div>
                     <div className="col-md-6">
+                        <p className='fw-bold fs-3'>Join the group on Telegram</p>
+                        <a href="https://t.me/savelunc">https://t.me/savelunc</a>
                         <p className='fw-bold fs-3'>How it works?</p>
                         <div
                             style={{
